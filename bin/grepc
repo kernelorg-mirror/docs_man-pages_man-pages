@@ -23,7 +23,7 @@ function grepc_macro_simple()
 {
 	grepc_helper '\.[ch]$' \
 	  "#\s*define\s+$1\b[^(]" \
-	  "." \
+	  '.' \
 	  "(?s)#\s*define\s+$1\b(?!\().*?[^\\\\]$";
 }
 
@@ -32,7 +32,7 @@ function grepc_macro_func()
 {
 	grepc_helper '\.[ch]$' \
 	  "#\s*define\s+$1\(" \
-	  "." \
+	  '.' \
 	  "(?s)#\s*define\s+$1\(.*?[^\\\\]$";
 }
 
@@ -47,7 +47,7 @@ function grepc_macro()
 function grepc_enum_constant()
 {
 	grepc_helper '\.[ch]$' \
-	  "^enum\s" \
+	  '^enum\s' \
 	  "^\s*$1\s*[,=]" \
 	  "(?s)\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*$1\s*[=,].*?^}.*?;";
 }
@@ -57,7 +57,7 @@ function grepc_func_decl()
 {
 	grepc_helper '\.[ch]$' \
 	  "\b$1\s*\(" \
-	  "." \
+	  '.' \
 	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**$1\s*\([\w\s\(,\)[\]*]+?(...)?\)[\w\s\(,\)[:\]]*;";
 }
 
@@ -66,7 +66,7 @@ function grepc_func_def()
 {
 	grepc_helper '\.[ch]$' \
 	  "\b$1\s*\(" \
-	  "." \
+	  '.' \
 	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**$1\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{.*?^}";
 }
 
@@ -82,7 +82,7 @@ function grepc_linux_syscall_decl()
 {
 	grepc_helper '\.[ch]$' \
 	  "^asmlinkage\s+[\w\s]+\**sys_$1\s*\(" \
-	  "." \
+	  '.' \
 	  "(?s)^asmlinkage\s+[\w\s]+\**sys_$1\s*\(.*?\)";
 }
 
@@ -91,7 +91,7 @@ function grepc_linux_syscall_def()
 {
 	grepc_helper '\.c$' \
 	  "SYSCALL_DEFINE.\($1\b" \
-	  "." \
+	  '.' \
 	  "(?s)^\w*SYSCALL_DEFINE.\($1\b.*?^}";
 }
 
@@ -119,7 +119,7 @@ function grepc_type_struct_union_enum()
 {
 	grepc_helper '\.[ch]$' \
 	  "\b(struct|union|enum)\s+$1\b" \
-	  "." \
+	  '.' \
 	  "(?s)^(?!^\s*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
 }
 
@@ -127,7 +127,7 @@ function grepc_type_struct_union_enum()
 function grepc_type_typedef_simple()
 {
 	grepc_helper '\.[ch]$' \
-	  "^\s*typedef\s" \
+	  '^\s*typedef\s' \
 	  "\b$1;" \
 	  "(?s)^\s*typedef\s+[^{};]+$1;";
 }
@@ -136,7 +136,7 @@ function grepc_type_typedef_simple()
 function grepc_type_typedef_struct_union_enum()
 {
 	grepc_helper '\.[ch]$' \
-	  "^\s*typedef\s+(struct|union|enum)\b[^;]*$" \
+	  '^\s*typedef\s+(struct|union|enum)\b[^;]*$' \
 	  "^(\s\s)?}\s*$1;" \
 	  "(?s)^\s*typedef\s+(struct|union|enum)\s+(?:(?!^(\s\s)?}|^\s*typedef).)*^(\s\s)?}\s*$1;";
 }
