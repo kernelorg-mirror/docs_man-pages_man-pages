@@ -137,8 +137,8 @@ function grepc_type_typedef_struct_union_enum()
 {
 	grepc_helper '\.[ch]$' \
 	  '^\s*typedef\s+(struct|union|enum)\b[^;]*$' \
-	  "^(\s\s)?}\s*$1;" \
-	  "(?s)^\s*typedef\s+(struct|union|enum)\s+(?:(?!^(\s\s)?}|^\s*typedef).)*^(\s\s)?}\s*$1;";
+	  "^(  )?}\s*$1;" \
+	  "(?s)^\s*typedef\s+(struct|union|enum)\s+(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*$1;";
 }
 
 
