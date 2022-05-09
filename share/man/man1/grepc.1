@@ -14,6 +14,32 @@ in all .c and .h files under
 is normally a C identifier,
 but it is actually a PCRE pattern,
 so it can be used to find complex patterns.
+.SH EXAMPLES
+.EX
+.RB \(ti/src/nginx/unit$ " grepc nxt_sprintf;"
+
+
+\&./src/nxt_sprintf.h:15:
+
+NXT_EXPORT u_char *nxt_cdecl nxt_sprintf(u_char *buf, u_char *end,
+    const char *fmt, ...);
+
+
+\&./src/nxt_sprintf.c:58:
+
+u_char * nxt_cdecl
+nxt_sprintf(u_char *buf, u_char *end, const char *fmt, ...)
+{
+    u_char   *p;
+    va_list  args;
+
+    va_start(args, fmt);
+    p = nxt_vsprintf(buf, end, fmt, args);
+    va_end(args);
+
+    return p;
+}
+.EE
 .SH AUTHORS
 Originally written by
 .MT alx.manpages@gmail.com
