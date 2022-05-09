@@ -24,7 +24,7 @@ function grepc_macro_simple()
 	grepc_helper '\.[ch]$' \
 	  "#\s*define\s+$1\b[^(]" \
 	  "." \
-	  "(?s)#\s*define\s+$1\b[^(].*?[^\\\\]$";
+	  "(?s)#\s*define\s+$1\b(?!\().*?[^\\\\]$";
 }
 
 
