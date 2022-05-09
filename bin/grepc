@@ -95,6 +95,18 @@ function grepc_syscall()
 }
 
 
+function grepc_glibc_math()
+{
+	grepc_func_def "M_DECL_FUNC \(__$1\)";
+}
+
+
+function grepc_glibc()
+{
+	grepc_glibc_math "$1";
+}
+
+
 function grepc_type_struct_union_enum()
 {
 	grepc_helper '\.[ch]$' \
@@ -154,6 +166,7 @@ function main()
 	grepc_enum_constant "$1";
 	grepc_func "$1";
 	grepc_syscall "$1";
+	grepc_glibc "$1";
 	grepc_type "$1";
 }
 
