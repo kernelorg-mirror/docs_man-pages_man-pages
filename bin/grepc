@@ -44,8 +44,8 @@ function grepc_macro()
 function grepc_enum_constant()
 {
 	grepc_helper '\.[ch]$' \
-	  "\b$1\s*[,=]" \
-	  "(?s)\benum\b\s*[\w\s[\]]*{[^}]*\b$1\s*[=,].*?^}.*?;";
+	  "^\s*$1\s*[,=]" \
+	  "(?s)\benum\b\s*[\w\s[\]]*{[^}]*^\s*$1\s*[=,].*?^}.*?;";
 }
 
 
@@ -119,7 +119,7 @@ function grepc_type_typedef_simple()
 {
 	grepc_helper '\.[ch]$' \
 	  "\b$1;" \
-	  "(?s)^typedef\s+[^;]+$1;";
+	  "(?s)^typedef\s+[^{};]+$1;";
 }
 
 
