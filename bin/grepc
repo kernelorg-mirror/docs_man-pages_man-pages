@@ -72,7 +72,7 @@ function grepc_func()
 }
 
 
-function grepc_syscall_decl()
+function grepc_linux_syscall_decl()
 {
 	grepc_helper '\.[ch]$' \
 	  "\bsys_$1\s*\(" \
@@ -80,7 +80,7 @@ function grepc_syscall_decl()
 }
 
 
-function grepc_syscall_def()
+function grepc_linux_syscall_def()
 {
 	grepc_helper '\.c$' \
 	  "SYSCALL_DEFINE.\($1\b" \
@@ -88,10 +88,10 @@ function grepc_syscall_def()
 }
 
 
-function grepc_syscall()
+function grepc_linux()
 {
-	grepc_syscall_decl "$1";
-	grepc_syscall_def "$1";
+	grepc_linux_syscall_decl "$1";
+	grepc_linux_syscall_def "$1";
 }
 
 
@@ -165,7 +165,7 @@ function main()
 	grepc_macro "$1";
 	grepc_enum_constant "$1";
 	grepc_func "$1";
-	grepc_syscall "$1";
+	grepc_linux "$1";
 	grepc_glibc "$1";
 	grepc_type "$1";
 }
