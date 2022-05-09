@@ -111,7 +111,7 @@ function grepc_type_struct_union_enum()
 {
 	grepc_helper '\.[ch]$' \
 	  "\b(struct|union|enum)\s+$1\b" \
-	  "(?s)^([\w[][\w\s(,)[:\]*]+\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
+	  "(?s)^(?!^typedef\b)([\w[][\w\s(,)[:\]*]+\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
 }
 
 
