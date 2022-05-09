@@ -120,25 +120,25 @@ function grepc_type_struct_union_enum()
 	grepc_helper '\.[ch]$' \
 	  "\b(struct|union|enum)\s+$1\b" \
 	  "." \
-	  "(?s)^(?!^typedef\b)([\w[][\w\s(,)[:\]*]+\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
+	  "(?s)^(?!^\s*typedef\b)([\w[][\w\s(,)[:\]*]+\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
 }
 
 
 function grepc_type_typedef_simple()
 {
 	grepc_helper '\.[ch]$' \
-	  "^typedef\s" \
+	  "^\s*typedef\s" \
 	  "\b$1;" \
-	  "(?s)^typedef\s+[^{};]+$1;";
+	  "(?s)^\s*typedef\s+[^{};]+$1;";
 }
 
 
 function grepc_type_typedef_struct_union_enum()
 {
 	grepc_helper '\.[ch]$' \
-	  "^typedef\s[^;]+$" \
-	  "^}\s*$1;" \
-	  "(?s)^typedef\s(?:(?!^}).)*^}\s*$1;";
+	  "^\s*typedef\s+(struct|union|enum)\b[^;]*$" \
+	  "^(\s\s)?}\s*$1;" \
+	  "(?s)^\s*typedef\s+(struct|union|enum)\s+(?:(?!^(\s\s)?}|^\s*typedef).)*^(\s\s)?}\s*$1;";
 }
 
 
@@ -146,8 +146,8 @@ function grepc_type_typedef_underlying_struct_union_enum()
 {
 	find . -type f \
 	| grep '\.[ch]$' \
-	| xargs grep -hP "^typedef\s+.*\b$1;" \
-	| sed -E -e 's/^typedef\s+//' -e "s/\s*\**\b$1;.*//" \
+	| xargs grep -hP "^\s*typedef\s+(struct|union|enum)\s+.*\b$1;" \
+	| sed -E -e 's/^\s*typedef\s+//' -e "s/\s*\**\b$1;.*//" \
 	| sed -E -e 's/^struct\s+//' -e 's/^union\s+//' -e 's/^enum\s+//' \
 	| while read t; do
 		test "$1" != "$t" \
