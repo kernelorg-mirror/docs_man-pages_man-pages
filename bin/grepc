@@ -7,21 +7,30 @@ if (($# != 1)); then
 fi;
 
 
+function grepc_find_files()
+{
+	files="$(mktemp -t 'grepc.XXXXXX')";
+
+	find . -type f \
+	| grep -P '\.[ch]' \
+	| xargs grep -lPI "$1\b" \
+	>"$files";
+}
+
+
 function grepc_helper()
 {
-	find . -type f \
-	| grep "$1" \
-	| xargs grep -lPI "$2" \
-	| xargs grep -lP  "$3" \
+	xargs grep -lPI "$1" <"$files" \
+	| xargs grep -lP  "$2" \
 	| sort \
-	| xargs pcregrep -Mn "$4" /dev/null \
+	| xargs pcregrep -Mn "$3" /dev/null \
 	| sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n\n/';
 }
 
 
 function grepc_macro_simple()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  "#\s*define\s+$1\b[^(]" \
 	  '.' \
 	  "(?s)#\s*define\s+$1\b(?!\().*?[^\\\\]$";
@@ -30,7 +39,7 @@ function grepc_macro_simple()
 
 function grepc_macro_func()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  "#\s*define\s+$1\(" \
 	  '.' \
 	  "(?s)#\s*define\s+$1\(.*?[^\\\\]$";
@@ -46,7 +55,7 @@ function grepc_macro()
 
 function grepc_enum_constant()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  '^enum\s' \
 	  "^\s*$1\s*[,=]" \
 	  "(?s)\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*$1\s*[=,].*?^}.*?;";
@@ -55,7 +64,7 @@ function grepc_enum_constant()
 
 function grepc_func_decl()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  "\b$1\s*\(" \
 	  '.' \
 	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**$1\s*\([\w\s\(,\)[\]*]+?(...)?\)[\w\s\(,\)[:\]]*;";
@@ -64,7 +73,7 @@ function grepc_func_decl()
 
 function grepc_func_def()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  "\b$1\s*\(" \
 	  '.' \
 	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**$1\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{.*?^}";
@@ -80,7 +89,7 @@ function grepc_func()
 
 function grepc_linux_syscall_decl()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  "^asmlinkage\s+[\w\s]+\**sys_$1\s*\(" \
 	  '.' \
 	  "(?s)^asmlinkage\s+[\w\s]+\**sys_$1\s*\(.*?\)";
@@ -89,7 +98,7 @@ function grepc_linux_syscall_decl()
 
 function grepc_linux_syscall_def()
 {
-	grepc_helper '\.c$' \
+	grepc_helper \
 	  "SYSCALL_DEFINE.\($1\b" \
 	  '.' \
 	  "(?s)^\w*SYSCALL_DEFINE.\($1\b.*?^}";
@@ -117,7 +126,7 @@ function grepc_glibc()
 
 function grepc_type_struct_union_enum()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  "\b(struct|union|enum)\s+$1\b" \
 	  '.' \
 	  "(?s)^(?!^\s*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
@@ -126,7 +135,7 @@ function grepc_type_struct_union_enum()
 
 function grepc_type_typedef_simple()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  '^\s*typedef\s' \
 	  "\b$1;" \
 	  "(?s)^\s*typedef\s+[^{};]+$1;";
@@ -135,7 +144,7 @@ function grepc_type_typedef_simple()
 
 function grepc_type_typedef_struct_union_enum()
 {
-	grepc_helper '\.[ch]$' \
+	grepc_helper \
 	  '^\s*typedef\s+(struct|union|enum)\b[^;]*$' \
 	  "^(  )?}\s*$1;" \
 	  "(?s)^\s*typedef\s+(struct|union|enum)\s+(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*$1;";
@@ -144,9 +153,7 @@ function grepc_type_typedef_struct_union_enum()
 
 function grepc_type_typedef_underlying_struct_union_enum()
 {
-	find . -type f \
-	| grep '\.[ch]$' \
-	| xargs grep -hP "^\s*typedef\s+(struct|union|enum)\s+.*\b$1;" \
+	xargs grep -hP "^\s*typedef\s+(struct|union|enum)\s+.*\b$1;" <"$files" \
 	| sed -E -e 's/^\s*typedef\s+//' -e "s/\s*\**\b$1;.*//" \
 	| sed -E -e 's/^struct\s+//' -e 's/^union\s+//' -e 's/^enum\s+//' \
 	| while read t; do
@@ -173,6 +180,8 @@ function grepc_type()
 
 function main()
 {
+	grepc_find_files "$1";
+
 	grepc_macro "$1";
 	grepc_enum_constant "$1";
 	grepc_func "$1";
