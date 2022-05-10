@@ -101,7 +101,7 @@ function grepc_linux_syscall_def()
 	grepc_helper \
 	  "SYSCALL_DEFINE.\($1\b" \
 	  '.' \
-	  "(?s)^\w*SYSCALL_DEFINE.\($1\b.*?^}";
+	  "(?s)^(COMPAT_)?SYSCALL_DEFINE.\($1\b.*?^}";
 }
 
 
