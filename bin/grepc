@@ -57,8 +57,8 @@ function grepc_enum_constant()
 {
 	grepc_helper \
 	  '^enum\s' \
-	  "^\s*$1\s*[,=]" \
-	  "(?s)\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*$1\s*[=,].*?^}.*?;";
+	  "^[ \t]*$1\s*[,=]" \
+	  "(?s)\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^[ \t]*$1\s*[=,].*?^}.*?;";
 }
 
 
@@ -129,25 +129,25 @@ function grepc_type_struct_union_enum()
 	grepc_helper \
 	  "\b(struct|union|enum)\s+$1\b" \
 	  '.' \
-	  "(?s)^(?!^\s*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
+	  "(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
 }
 
 
 function grepc_type_typedef_simple()
 {
 	grepc_helper \
-	  '^\s*typedef\s' \
+	  '^[ \t]*typedef\s' \
 	  "\b$1;" \
-	  "(?s)^\s*typedef\s+[^{};]+$1;";
+	  "(?s)^[ \t]*typedef\s+[^{};]+$1;";
 }
 
 
 function grepc_type_typedef_struct_union_enum()
 {
 	grepc_helper \
-	  '^\s*typedef\s+(struct|union|enum)\b[^;]*$' \
+	  '^[ \t]*typedef\s+(struct|union|enum)\b[^;]*$' \
 	  "^(  )?}\s*$1;" \
-	  "(?s)^\s*typedef\s+(struct|union|enum)\s+(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*$1;";
+	  "(?s)^[ \t]*typedef\s+(struct|union|enum)\s+(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*$1;";
 }
 
 
