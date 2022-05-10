@@ -33,7 +33,7 @@ grepc_macro_simple()
 	grepc_helper \
 	  "#\s*define\s+$1\b[^(]" \
 	  '.' \
-	  "(?s)#\s*define\s+$1\b(?!\().*?[^\\\\]$";
+	  '(?s)#\s*define\s+'"$1"'\b(?!\().*?[^\\]$';
 }
 
 
@@ -42,7 +42,7 @@ grepc_macro_func()
 	grepc_helper \
 	  "#\s*define\s+$1\(" \
 	  '.' \
-	  "(?s)#\s*define\s+$1\(.*?[^\\\\]$";
+	  '(?s)#\s*define\s+'"$1"'\(.*?[^\\]$';
 }
 
 
