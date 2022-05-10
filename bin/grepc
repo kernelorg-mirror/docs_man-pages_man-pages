@@ -24,7 +24,7 @@ function grepc_helper()
 	| xargs grep -lP  "$2" \
 	| sort \
 	| xargs pcregrep -Mn "$3" /dev/null \
-	| sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n\n/';
+	| sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n/';
 }
 
 
