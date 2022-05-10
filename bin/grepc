@@ -156,7 +156,7 @@ grepc_type_typedef_underlying_struct_union_enum()
 	xargs grep -hP "^\s*typedef\s+(struct|union|enum)\s+.*\b$1;" <"$files" \
 	| sed -E -e 's/^\s*typedef\s+//' -e "s/\s*\**\b$1;.*//" \
 	| sed -E -e 's/^struct\s+//' -e 's/^union\s+//' -e 's/^enum\s+//' \
-	| while read t; do
+	| while read -r t; do
 		test "$1" != "$t" \
 		&& grepc_type_struct_union_enum "$t";
 	done;
