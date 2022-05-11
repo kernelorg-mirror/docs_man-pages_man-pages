@@ -2,7 +2,7 @@
 
 
 if [ $# -ne 1 ]; then
-	>&2 echo "Usage: $0 <identifier>";
+	>&2 echo "Usage: $0 IDENTIFIER";
 	exit 1;
 fi;
 
