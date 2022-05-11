@@ -5,15 +5,33 @@ grepc \- find C declarations and definitions in source code
 .B grepc
 .RI [ option " ...]"
 .I identifier
+.RI [ file " ...]"
 .SH DESCRIPTION
 .MR grepc 1
-searches for all C declarations and definitions of
+searches for C declarations and definitions of
 .I identifier
-in all .c and .h files under the current working directory.
+in each
+.IR file .
+.PP
 .I identifier
 is normally a C identifier,
 but it is actually a PCRE pattern,
 so it can be used to find complex patterns.
+.PP
+If
+.I file
+is a directory,
+the search is recursive within that directory.
+If
+.I file
+doesn't match a certain extension, it is skipped
+(see
+.B \-x
+in OPTIONS).
+If no
+.I file
+is given,
+the working directory is searched.
 .SH OPTIONS
 .TP
 .B \-g

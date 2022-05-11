@@ -4,11 +4,12 @@
 # Defaults:
 git='no';
 ext='\.[ch]$';
+FILES='.';
 
 
 grepc_usage()
 {
-	echo "Usage: $0 [OPTION ...] IDENTIFIER";
+	echo "Usage: $0 [OPTION ...] IDENTIFIER [FILE ...]";
 }
 
 
@@ -34,11 +35,16 @@ grepc_parse_cmd()
 	done;
 	shift $(($OPTIND-1));
 
-	if [ $# -ne 1 ]; then
+	if [ $# -lt 1 ]; then
 		grepc_usage >&2;
 		exit 1;
 	fi;
 	identifier=$1;
+	shift;
+
+	if [ $# -gt 0 ]; then
+		FILES=$@;
+	fi;
 }
 
 
@@ -47,9 +53,9 @@ grepc_find_files()
 	files="$(mktemp -t 'grepc.XXXXXX')";
 
 	if [ "$git" = 'yes' ]; then
-		git ls-files .;
+		git ls-files $FILES;
 	else
-		find . -type f;
+		find $FILES -type f;
 	fi \
 	| grep -P "$ext" \
 	| xargs grep -lPI "$1\b" \
