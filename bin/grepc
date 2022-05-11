@@ -1,19 +1,26 @@
 #!/bin/sh
 
 
+# Defaults:
+ext='\.[ch]$';
+
+
 grepc_usage()
 {
-	echo "Usage: $0 [OPTION] IDENTIFIER";
+	echo "Usage: $0 [OPTION ...] IDENTIFIER";
 }
 
 
 grepc_parse_cmd()
 {
-	while getopts "h" opt; do
+	while getopts "hx:" opt; do
 		case "$opt" in
 		h)
 			grepc_usage;
 			exit 0;
+			;;
+		x)
+			ext="$OPTARG";
 			;;
 		?)
 			grepc_usage >&2;
@@ -36,7 +43,7 @@ grepc_find_files()
 	files="$(mktemp -t 'grepc.XXXXXX')";
 
 	find . -type f \
-	| grep -P '\.[ch]' \
+	| grep -P "$ext" \
 	| xargs grep -lPI "$1\b" \
 	>"$files";
 }
