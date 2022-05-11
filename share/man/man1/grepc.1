@@ -3,6 +3,7 @@
 grepc \- find C declarations and definitions in source code
 .SH SYNOPSIS
 .B grepc
+.RI [ option ]
 .I identifier
 .SH DESCRIPTION
 .MR grepc 1
@@ -13,6 +14,10 @@ in all .c and .h files under the current working directory.
 is normally a C identifier,
 but it is actually a PCRE pattern,
 so it can be used to find complex patterns.
+.SH OPTIONS
+.TP
+.B \-h
+Output a help message and exit.
 .SH EXAMPLES
 .EX
 .RB \(ti/src/nginx/unit$ " grepc nxt_sprintf;"
