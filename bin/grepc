@@ -2,6 +2,7 @@
 
 
 # Defaults:
+git='no';
 ext='\.[ch]$';
 
 
@@ -13,8 +14,11 @@ grepc_usage()
 
 grepc_parse_cmd()
 {
-	while getopts "hx:" opt; do
+	while getopts "ghx:" opt; do
 		case "$opt" in
+		g)
+			git='yes';
+			;;
 		h)
 			grepc_usage;
 			exit 0;
@@ -42,7 +46,11 @@ grepc_find_files()
 {
 	files="$(mktemp -t 'grepc.XXXXXX')";
 
-	find . -type f \
+	if [ "$git" = 'yes' ]; then
+		git ls-files .;
+	else
+		find . -type f;
+	fi \
 	| grep -P "$ext" \
 	| xargs grep -lPI "$1\b" \
 	>"$files";

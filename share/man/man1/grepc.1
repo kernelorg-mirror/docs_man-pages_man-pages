@@ -16,6 +16,9 @@ but it is actually a PCRE pattern,
 so it can be used to find complex patterns.
 .SH OPTIONS
 .TP
+.B \-g
+Restrict the search to files tracked by git.
+.TP
 .B \-h
 Output a help message and exit.
 .TP
@@ -57,6 +60,7 @@ Originally written by
 Alejandro Colomar
 .ME .
 .SH SEE ALSO
+.MR git-ls-files 1 ,
 .MR pcregrep 1 ,
 .MR pcresyntax 3 ,
 .MR pcrepattern 3
