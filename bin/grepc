@@ -223,18 +223,23 @@ grepc_type()
 }
 
 
+grepc_grepc()
+{
+	grepc_macro "$1";
+	grepc_enum_constant "$1";
+	grepc_func "$1";
+	grepc_linux "$1";
+	grepc_glibc "$1";
+	grepc_type "$1";
+}
+
+
 main()
 {
 	grepc_parse_cmd $@;
-
 	grepc_find_files "$identifier";
-
-	grepc_macro "$identifier";
-	grepc_enum_constant "$identifier";
-	grepc_func "$identifier";
-	grepc_linux "$identifier";
-	grepc_glibc "$identifier";
-	grepc_type "$identifier";
+	grepc_grepc "$identifier" \
+	| tail -n+3;
 }
 
 
