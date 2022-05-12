@@ -73,31 +73,6 @@ grepc_helper()
 }
 
 
-grepc_macro_simple()
-{
-	grepc_helper \
-	  "#\s*define\s+$1\b[^(]" \
-	  '.' \
-	  '(?s)#\s*define\s+'"$1"'\b(?!\().*?[^\\]$';
-}
-
-
-grepc_macro_func()
-{
-	grepc_helper \
-	  "#\s*define\s+$1\(" \
-	  '.' \
-	  '(?s)#\s*define\s+'"$1"'\(.*?[^\\]$';
-}
-
-
-grepc_macro()
-{
-	grepc_macro_simple "$1";
-	grepc_macro_func "$1";
-}
-
-
 grepc_enum_constant()
 {
 	grepc_helper \
@@ -125,14 +100,7 @@ grepc_func_def()
 }
 
 
-grepc_func()
-{
-	grepc_func_decl "$1";
-	grepc_func_def "$1";
-}
-
-
-grepc_linux_syscall_decl()
+grepc_linux_func_syscall_decl()
 {
 	grepc_helper \
 	  "^asmlinkage\s+[\w\s]+\**sys_$1\s*\(" \
@@ -141,7 +109,7 @@ grepc_linux_syscall_decl()
 }
 
 
-grepc_linux_syscall_def()
+grepc_linux_func_syscall_def()
 {
 	grepc_helper \
 	  "SYSCALL_DEFINE.\($1\b" \
@@ -150,22 +118,56 @@ grepc_linux_syscall_def()
 }
 
 
-grepc_linux()
+grepc_linux_func()
 {
-	grepc_linux_syscall_decl "$1";
-	grepc_linux_syscall_def "$1";
+	grepc_linux_func_syscall_decl "$1";
+	grepc_linux_func_syscall_def "$1";
 }
 
 
-grepc_glibc_math()
+grepc_glibc_func_math()
 {
 	grepc_func_def "M_DECL_FUNC \(__$1\)";
 }
 
 
-grepc_glibc()
+grepc_glibc_func()
 {
-	grepc_glibc_math "$1";
+	grepc_glibc_func_math "$1";
+}
+
+
+grepc_func()
+{
+	grepc_func_decl "$1";
+	grepc_func_def "$1";
+	grepc_linux_func "$1";
+	grepc_glibc_func "$1";
+}
+
+
+grepc_macro_simple()
+{
+	grepc_helper \
+	  "#\s*define\s+$1\b[^(]" \
+	  '.' \
+	  '(?s)#\s*define\s+'"$1"'\b(?!\().*?[^\\]$';
+}
+
+
+grepc_macro_func()
+{
+	grepc_helper \
+	  "#\s*define\s+$1\(" \
+	  '.' \
+	  '(?s)#\s*define\s+'"$1"'\(.*?[^\\]$';
+}
+
+
+grepc_macro()
+{
+	grepc_macro_simple "$1";
+	grepc_macro_func "$1";
 }
 
 
@@ -225,11 +227,9 @@ grepc_type()
 
 grepc_grepc()
 {
-	grepc_macro "$1";
 	grepc_enum_constant "$1";
 	grepc_func "$1";
-	grepc_linux "$1";
-	grepc_glibc "$1";
+	grepc_macro "$1";
 	grepc_type "$1";
 }
 
