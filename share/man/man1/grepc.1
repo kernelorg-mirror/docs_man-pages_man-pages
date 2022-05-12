@@ -32,6 +32,24 @@ If no
 .I file
 is given,
 the working directory is searched.
+.SS Types of code
+This program can search for several types of code.
+The following arguments can be passed to the
+.B \-t
+option
+to select the types of code that will be searched.
+.TP
+.B e
+enum constant definitions.
+.TP
+.B f
+Function declarations and definitions.
+.TP
+.B m
+Macro definitions.
+.TP
+.B t
+Type definitions.
 .SH OPTIONS
 .TP
 .B \-g
@@ -39,6 +57,15 @@ Restrict the search to files tracked by git.
 .TP
 .B \-h
 Output a help message and exit.
+.TP
+.BI \-t " type"
+Restrict the search to a specific
+.I type
+of code (see Types of code under DESCRIPTION).
+This option can be passed multiple times
+to search for various types of code.
+Default:
+.BR "e f m t" .
 .TP
 .BI \-x " extension"
 Restrict the search to files ending with

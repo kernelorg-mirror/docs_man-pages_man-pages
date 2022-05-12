@@ -5,6 +5,11 @@
 git='no';
 ext='\.[ch]$';
 FILES='.';
+tflag='no';
+t_enum='no';
+t_func='no';
+t_macro='no';
+t_type='no';
 
 
 grepc_usage()
@@ -15,7 +20,7 @@ grepc_usage()
 
 grepc_parse_cmd()
 {
-	while getopts "ghx:" opt; do
+	while getopts "ght:x:" opt; do
 		case "$opt" in
 		g)
 			git='yes';
@@ -23,6 +28,27 @@ grepc_parse_cmd()
 		h)
 			grepc_usage;
 			exit 0;
+			;;
+		t)
+			case "$OPTARG" in
+			e)
+				t_enum='yes';
+				;;
+			f)
+				t_func='yes';
+				;;
+			m)
+				t_macro='yes';
+				;;
+			t)
+				t_type='yes';
+				;;
+			*)
+				grepc_usage;
+				exit 1;
+				;;
+			esac;
+			tflag='yes';
 			;;
 		x)
 			ext="$OPTARG";
@@ -225,7 +251,7 @@ grepc_type()
 }
 
 
-grepc_grepc()
+grepc_search_default()
 {
 	grepc_enum_constant "$1";
 	grepc_func "$1";
@@ -234,11 +260,33 @@ grepc_grepc()
 }
 
 
+grepc_search()
+{
+	if [ "$tflag" = 'no' ]; then
+		grepc_search_default "$1";
+
+	else
+		if [ "$t_enum" = 'yes' ]; then
+			grepc_enum_constant "$1";
+		fi;
+		if [ "$t_func" = 'yes' ]; then
+			grepc_func "$1";
+		fi;
+		if [ "$t_macro" = 'yes' ]; then
+			grepc_macro "$1";
+		fi;
+		if [ "$t_type" = 'yes' ]; then
+			grepc_type "$1";
+		fi;
+	fi;
+}
+
+
 main()
 {
 	grepc_parse_cmd $@;
 	grepc_find_files "$identifier";
-	grepc_grepc "$identifier" \
+	grepc_search "$identifier" \
 	| tail -n+3;
 }
 
