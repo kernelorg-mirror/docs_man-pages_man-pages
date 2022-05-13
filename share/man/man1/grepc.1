@@ -50,6 +50,13 @@ Macro definitions.
 .TP
 .B t
 Type definitions.
+.TP
+.B u
+Uses.
+Searches occurences of
+.BI \eb identifier \eb
+within function bodies and macro replacements,
+and prints the whole functions and/or macros.
 .SH OPTIONS
 .TP
 .B \-g
@@ -70,7 +77,7 @@ of code (see Types of code under DESCRIPTION).
 This option can be passed multiple times
 to search for various types of code.
 Default:
-.BR "e f m t" .
+.BR "e f m t u" .
 .TP
 .BI \-x " extension"
 Restrict the search to files ending with

@@ -11,6 +11,7 @@ t_enum='no';
 t_func='no';
 t_macro='no';
 t_type='no';
+t_use='no';
 
 
 grepc_usage()
@@ -46,6 +47,9 @@ grepc_parse_cmd()
 				;;
 			t)
 				t_type='yes';
+				;;
+			u)
+				t_use='yes';
 				;;
 			*)
 				grepc_usage;
@@ -259,12 +263,60 @@ grepc_type()
 }
 
 
+grepc_use_func_def()
+{
+	grepc_helper \
+	  "\b$1\b" \
+	  '.' \
+	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\w+\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{(?:(?!^}).)*\b$1\b.*?^}";
+}
+
+
+grepc_linux_use_func_syscall_def()
+{
+	grepc_helper \
+	  "SYSCALL_DEFINE.\(" \
+	  "\b$1\b" \
+	  "(?s)^(COMPAT_)?SYSCALL_DEFINE.\(\w+\b(?:(?!^}).)*\b$1\b.?^}";
+}
+
+
+grepc_linux_use_func()
+{
+	grepc_linux_use_func_syscall_def "$1";
+}
+
+
+grepc_use_func()
+{
+	grepc_use_func_def "$1";
+	grepc_linux_use_func "$1";
+}
+
+
+grepc_use_macro()
+{
+	grepc_helper \
+	  "\b$1\b" \
+	  'define' \
+	  '(?s)^[ \t]*#\s*define\s+\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*'"$1"'.*?[^\\]$';
+}
+
+
+grepc_use()
+{
+	grepc_use_func "$1";
+	grepc_use_macro "$1";
+}
+
+
 grepc_search_default()
 {
 	grepc_enum_constant "$1";
 	grepc_func "$1";
 	grepc_macro "$1";
 	grepc_type "$1";
+	grepc_use "$1";
 }
 
 
@@ -285,6 +337,9 @@ grepc_search()
 		fi;
 		if [ "$t_type" = 'yes' ]; then
 			grepc_type "$1";
+		fi;
+		if [ "$t_use" = 'yes' ]; then
+			grepc_use "$1";
 		fi;
 	fi;
 }
