@@ -134,6 +134,18 @@ grepc_func_def()
 }
 
 
+grepc_glibc_func_math()
+{
+	grepc_func_def "M_DECL_FUNC \(__$1\)";
+}
+
+
+grepc_glibc_func()
+{
+	grepc_glibc_func_math "$1";
+}
+
+
 grepc_linux_func_syscall_decl()
 {
 	grepc_helper \
@@ -159,24 +171,12 @@ grepc_linux_func()
 }
 
 
-grepc_glibc_func_math()
-{
-	grepc_func_def "M_DECL_FUNC \(__$1\)";
-}
-
-
-grepc_glibc_func()
-{
-	grepc_glibc_func_math "$1";
-}
-
-
 grepc_func()
 {
 	grepc_func_decl "$1";
 	grepc_func_def "$1";
-	grepc_linux_func "$1";
 	grepc_glibc_func "$1";
+	grepc_linux_func "$1";
 }
 
 
