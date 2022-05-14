@@ -125,7 +125,7 @@ grepc_enum_constant()
 }
 
 
-grepc_func_decl()
+grepc_func_proto()
 {
 	grepc_helper \
 	  "\b$1\s*\(" \
@@ -155,7 +155,7 @@ grepc_glibc_func()
 }
 
 
-grepc_linux_func_syscall_decl()
+grepc_linux_func_syscall_proto()
 {
 	grepc_helper \
 	  "^asmlinkage\s+[\w\s]+\**sys_$1\s*\(" \
@@ -175,26 +175,17 @@ grepc_linux_func_syscall_def()
 
 grepc_linux_func()
 {
-	grepc_linux_func_syscall_decl "$1";
+	grepc_linux_func_syscall_proto "$1";
 	grepc_linux_func_syscall_def "$1";
 }
 
 
 grepc_func()
 {
-	grepc_func_decl "$1";
+	grepc_func_proto "$1";
 	grepc_func_def "$1";
 	grepc_glibc_func "$1";
 	grepc_linux_func "$1";
-}
-
-
-grepc_macro_simple()
-{
-	grepc_helper \
-	  "#\s*define\s+$1\b[^(]" \
-	  '.' \
-	  '(?s)^[ \t]*#\s*define\s+'"$1"'\b(?!\().*?[^\\]$';
 }
 
 
@@ -207,10 +198,19 @@ grepc_macro_func()
 }
 
 
+grepc_macro_object()
+{
+	grepc_helper \
+	  "#\s*define\s+$1\b[^(]" \
+	  '.' \
+	  '(?s)^[ \t]*#\s*define\s+'"$1"'\b(?!\().*?[^\\]$';
+}
+
+
 grepc_macro()
 {
-	grepc_macro_simple "$1";
 	grepc_macro_func "$1";
+	grepc_macro_object "$1";
 }
 
 
