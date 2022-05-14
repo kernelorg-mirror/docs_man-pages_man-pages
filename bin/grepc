@@ -119,9 +119,9 @@ grepc_helper()
 grepc_enum_constant()
 {
 	grepc_helper \
-	  '^enum\s' \
-	  "^[ \t]*$1\s*[,=]" \
-	  "(?s)\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^[ \t]*$1\s*[=,].*?^}.*?;";
+	  '\benum\b' \
+	  "^[ \t]*$1\b\s*[,=]" \
+	  "(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^[ \t]*$1\b\s*[=,].*?^}.*?;";
 }
 
 
