@@ -5,6 +5,7 @@
 git='no';
 ext='\.[ch]$';
 FILES='.';
+lflag='';
 kflag='no';
 tflag='no';
 t_enum='no';
@@ -22,7 +23,7 @@ grepc_usage()
 
 grepc_parse_cmd()
 {
-	while getopts "ghkt:x:" opt; do
+	while getopts "lghkt:x:" opt; do
 		case "$opt" in
 		g)
 			git='yes';
@@ -32,6 +33,10 @@ grepc_parse_cmd()
 			exit 0;
 			;;
 		k)
+			kflag='yes';
+			;;
+		l)
+			lflag='-l';
 			kflag='yes';
 			;;
 		t)
@@ -102,7 +107,7 @@ grepc_helper()
 	xargs grep -lPI "$1" <"$files" \
 	| xargs grep -lP  "$2" \
 	| sort \
-	| xargs pcregrep -Mn "$3" /dev/null \
+	| xargs pcregrep $lflag -Mn "$3" /dev/null \
 	| if [ "$kflag" = 'no' ]; then
 		sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n/';
 	else
@@ -350,7 +355,12 @@ main()
 	grepc_parse_cmd $@;
 	grepc_find_files "$identifier";
 	grepc_search "$identifier" \
-	| sed -n '/./,$p';
+	| if [ -n "$lflag" ]; then
+		sort \
+		| uniq;
+	else
+		sed -n '/./,$p';
+	fi;
 }
 
 
