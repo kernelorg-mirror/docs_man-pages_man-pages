@@ -44,6 +44,27 @@ enum constant definitions.
 .TP
 .B f
 Function prototypes and definitions.
+This can be further subdivided into:
+.RS
+.TP
+.B fp
+Function prototypes.
+.TP
+.B fd
+Function definitions.
+.TP
+.B fs
+Linux kernel system calls.
+This can be further subdivided into:
+.RS
+.TP
+.B fsp
+Linux kernel system call prototypes.
+.TP
+.B fsd
+Linux kernel system call definitions.
+.RE
+.RE
 .TP
 .B m
 Macro definitions.
@@ -55,11 +76,28 @@ Type definitions.
 Uses.
 Searches occurences of
 .BI \eb identifier \eb
-within enums (except as an enum constant),
+within enums,
 function bodies,
 macro replacements,
 and type definitions,
 and prints the whole enum, function, macro, and/or type definitions.
+.IP
+This can be further subdivided into:
+.RS
+.TP
+.B ue
+Uses within enum definitions (except as an enum constant).
+.TP
+.B uf
+Uses within function definition bodies.
+.TP
+.B um
+Uses within macro replacements.
+.TP
+.B ut
+Uses within type definitions
+(except enum; that is: typedef, struct, or union).
+.RE
 .SH OPTIONS
 .TP
 .B \-g

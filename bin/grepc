@@ -10,9 +10,18 @@ kflag='no';
 tflag='no';
 t_enum='no';
 t_func='no';
+t_func_proto='no';
+t_func_def='no';
+t_func_syscall='no';
+t_func_syscall_proto='no';
+t_func_syscall_def='no';
 t_macro='no';
 t_type='no';
 t_use='no';
+t_use_enum='yes';
+t_use_func='no';
+t_use_macro='no';
+t_use_type='no';
 
 
 grepc_usage()
@@ -47,6 +56,21 @@ grepc_parse_cmd()
 			f)
 				t_func='yes';
 				;;
+			fp)
+				t_func_proto='yes';
+				;;
+			fd)
+				t_func_def='yes';
+				;;
+			fs)
+				t_func_syscall='yes';
+				;;
+			fsp)
+				t_func_syscall_proto='yes';
+				;;
+			fsd)
+				t_func_syscall_def='yes';
+				;;
 			m)
 				t_macro='yes';
 				;;
@@ -55,6 +79,18 @@ grepc_parse_cmd()
 				;;
 			u)
 				t_use='yes';
+				;;
+			ue)
+				t_use_enum='yes';
+				;;
+			uf)
+				t_use_func='yes';
+				;;
+			um)
+				t_use_macro='yes';
+				;;
+			ut)
+				t_use_type='yes';
 				;;
 			*)
 				grepc_usage;
@@ -375,13 +411,29 @@ grepc_search()
 {
 	if [ "$tflag" = 'no' ]; then
 		grepc_search_default "$1";
-
 	else
 		if [ "$t_enum" = 'yes' ]; then
 			grepc_enum_constant "$1";
 		fi;
 		if [ "$t_func" = 'yes' ]; then
 			grepc_func "$1";
+		else
+			if [ "$t_func_proto" = 'yes' ]; then
+				grepc_func_proto "$1";
+			fi;
+			if [ "$t_func_def" = 'yes' ]; then
+				grepc_func_def "$1";
+			fi;
+			if [ "$t_func_syscall" = 'yes' ]; then
+				grepc_linux_func "$1";
+			else
+				if [ "$t_func_syscall_proto" = 'yes' ]; then
+					grepc_linux_func_syscall_proto "$1";
+				fi;
+				if [ "$t_func_syscall_def" = 'yes' ]; then
+					grepc_linux_func_syscall_def "$1";
+				fi;
+			fi;
 		fi;
 		if [ "$t_macro" = 'yes' ]; then
 			grepc_macro "$1";
@@ -391,6 +443,19 @@ grepc_search()
 		fi;
 		if [ "$t_use" = 'yes' ]; then
 			grepc_use "$1";
+		else
+			if [ "$t_use_enum" = 'yes' ]; then
+				grepc_use_enum "$1";
+			fi;
+			if [ "$t_use_func" = 'yes' ]; then
+				grepc_use_func "$1";
+			fi;
+			if [ "$t_use_macro" = 'yes' ]; then
+				grepc_use_macro "$1";
+			fi;
+			if [ "$t_use_type" = 'yes' ]; then
+				grepc_use_type "$1";
+			fi;
 		fi;
 	fi;
 }
