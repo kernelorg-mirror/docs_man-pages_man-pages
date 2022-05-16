@@ -32,7 +32,7 @@ grepc_usage()
 
 grepc_parse_cmd()
 {
-	while getopts "lghkt:x:" opt; do
+	while getopts "ghklt:x:" opt; do
 		case "$opt" in
 		g)
 			git='yes';
