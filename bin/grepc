@@ -289,11 +289,21 @@ grepc_type_typedef_underlying_struct_union_enum()
 }
 
 
+grepc_type_typedef_func()
+{
+	grepc_helper \
+	  '^[ \t]*typedef\s' \
+	  "\(\**$1\)\s*\(" \
+	  "(?s)^[ \t]*typedef\s+[^{};]+\(\**$1\)\s*\([^{};]+;";
+}
+
+
 grepc_type_typedef()
 {
 	grepc_type_typedef_simple "$1";
 	grepc_type_typedef_struct_union_enum "$1";
 	grepc_type_typedef_underlying_struct_union_enum "$1";
+	grepc_type_typedef_func "$1";
 }
 
 
