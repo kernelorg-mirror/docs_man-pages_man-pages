@@ -125,22 +125,19 @@ grepc_parse_cmd()
 
 grepc_find_files()
 {
-	files="$(mktemp -t 'grepc.XXXXXX')";
-
 	if [ "$git" = 'yes' ]; then
 		git ls-files $FILES;
 	else
 		find $FILES -type f;
 	fi \
 	| grep -P -- "$ext" \
-	| xargs grep -lPI -- "$1\b" \
-	>"$files";
+	| xargs grep -lPI -- "$1\b";
 }
 
 
 grepc_helper()
 {
-	xargs grep -lPI -- "$1" <"$files" \
+	xargs grep -lPI -- "$1" \
 	| xargs grep -lP -- "$2" \
 	| sort \
 	| xargs pcregrep $lflag -Mn -- "$3" /dev/null \
@@ -157,7 +154,8 @@ grepc_enum_constant()
 	grepc_helper \
 	  '\benum\b' \
 	  "^[ \t]*$1\b\s*[,=]" \
-	  "(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^[ \t]*$1\b\s*[=,].*?^}.*?;";
+	  '(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^}.*?;' \
+	  <"$files";
 }
 
 
@@ -166,7 +164,8 @@ grepc_func_proto()
 	grepc_helper \
 	  "\b$1\s*\(" \
 	  '.' \
-	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**$1\s*\([\w\s\(,\)[\]*]+?(...)?\)[\w\s\(,\)[:\]]*;";
+	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'"$1"'\s*\([\w\s\(,\)[\]*]+?(...)?\)[\w\s\(,\)[:\]]*;' \
+	  <"$files";
 }
 
 
@@ -175,7 +174,8 @@ grepc_func_def()
 	grepc_helper \
 	  "\b$1\s*\(" \
 	  '.' \
-	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**$1\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{.*?^}";
+	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**'"$1"'\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{.*?^}' \
+	  <"$files";
 }
 
 
@@ -196,7 +196,8 @@ grepc_linux_func_syscall_proto()
 	grepc_helper \
 	  "^asmlinkage\s+[\w\s]+\**sys_$1\s*\(" \
 	  '.' \
-	  "(?s)^asmlinkage\s+[\w\s]+\**sys_$1\s*\(.*?\)";
+	  '(?s)^asmlinkage\s+[\w\s]+\**'"sys_$1"'\s*\(.*?\)' \
+	  <"$files";
 }
 
 
@@ -205,7 +206,8 @@ grepc_linux_func_syscall_def()
 	grepc_helper \
 	  "SYSCALL_DEFINE.\($1\b" \
 	  '.' \
-	  "(?s)^(COMPAT_)?SYSCALL_DEFINE.\($1\b.*?^}";
+	  '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}' \
+	  <"$files";
 }
 
 
@@ -230,7 +232,8 @@ grepc_macro_func()
 	grepc_helper \
 	  "#\s*define\s+$1\(" \
 	  '.' \
-	  '(?s)^[ \t]*#\s*define\s+'"$1"'\(.*?[^\\]$';
+	  '(?s)^[ \t]*#\s*define\s+'"$1"'\(.*?[^\\]$' \
+	  <"$files";
 }
 
 
@@ -239,7 +242,8 @@ grepc_macro_object()
 	grepc_helper \
 	  "#\s*define\s+$1\b[^(]" \
 	  '.' \
-	  '(?s)^[ \t]*#\s*define\s+'"$1"'\b(?!\().*?[^\\]$';
+	  '(?s)^[ \t]*#\s*define\s+'"$1"'\b(?!\().*?[^\\]$' \
+	  <"$files";
 }
 
 
@@ -255,7 +259,7 @@ grepc_type_struct_union_enum()
 	grepc_helper \
 	  "\b(struct|union|enum)\s+$1\b" \
 	  '.' \
-	  "(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\s+$1\b\s*[\w\s[\]]*{.*?^}.*?;";
+	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\s+'"$1"'\b\s*[\w\s[\]]*{.*?^}.*?;';
 }
 
 
@@ -264,7 +268,8 @@ grepc_type_typedef_simple()
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
 	  "\b$1;" \
-	  "(?s)^[ \t]*typedef\s+[^{};]+$1;";
+	  '(?s)^[ \t]*typedef\s+[^{};]+'"$1"';' \
+	  <"$files";
 }
 
 
@@ -273,7 +278,8 @@ grepc_type_typedef_struct_union_enum()
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union|enum)\b[^;]*$' \
 	  "^(  )?}\s*$1;" \
-	  "(?s)^[ \t]*typedef\s+(struct|union|enum)\s+(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*$1;";
+	  '(?s)^[ \t]*typedef\s+(struct|union|enum)\s+(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*'"$1"';' \
+	  <"$files";
 }
 
 
@@ -284,7 +290,8 @@ grepc_type_typedef_underlying_struct_union_enum()
 	| sed -E -e 's/^struct\s+//' -e 's/^union\s+//' -e 's/^enum\s+//' \
 	| while read -r t; do
 		test "$1" != "$t" \
-		&& grepc_type_struct_union_enum "$t";
+		&& grepc_find_files "$t" \
+		| grepc_type_struct_union_enum "$t";
 	done;
 }
 
@@ -294,7 +301,8 @@ grepc_type_typedef_func()
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
 	  "\(\**$1\)\s*\(" \
-	  "(?s)^[ \t]*typedef\s+[^{};]+\(\**$1\)\s*\([^{};]+;";
+	  '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;' \
+	  <"$files";
 }
 
 
@@ -309,7 +317,7 @@ grepc_type_typedef()
 
 grepc_type()
 {
-	grepc_type_struct_union_enum "$1";
+	grepc_type_struct_union_enum "$1" <"$files";
 	grepc_type_typedef "$1";
 }
 
@@ -319,7 +327,8 @@ grepc_use_enum()
 	grepc_helper \
 	  '\benum\b' \
 	  "\b$1\b" \
-	  "(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*\w+[\w\s[\]=]*\b$1\b.*?^}.*?;";
+	  '(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*\w+[\w\s[\]=]*\b'"$1"'\b.*?^}.*?;' \
+	  <"$files";
 }
 
 
@@ -328,7 +337,8 @@ grepc_use_func_def()
 	grepc_helper \
 	  "\b$1\b" \
 	  '.' \
-	  "(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\w+\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{(?:(?!^}).)*\b$1\b.*?^}";
+	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\w+\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{(?:(?!^}).)*\b'"$1"'\b.*?^}' \
+	  <"$files";
 }
 
 
@@ -337,7 +347,8 @@ grepc_linux_use_func_syscall_def()
 	grepc_helper \
 	  "SYSCALL_DEFINE.\(" \
 	  "\b$1\b" \
-	  "(?s)^(COMPAT_)?SYSCALL_DEFINE.\(\w+\b(?:(?!^}).)*\b$1\b.?^}";
+	  '(?s)^(COMPAT_)?SYSCALL_DEFINE.\(\w+\b(?:(?!^}).)*\b'"$1"'\b.?^}' \
+	  <"$files";
 }
 
 
@@ -359,7 +370,8 @@ grepc_use_macro()
 	grepc_helper \
 	  "\b$1\b" \
 	  'define' \
-	  '(?s)^[ \t]*#\s*define\s+\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*'"\b$1\b"'.*?[^\\]$';
+	  '(?s)^[ \t]*#\s*define\s+\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*\b'"$1"'\b.*?[^\\]$' \
+	  <"$files";
 }
 
 
@@ -368,7 +380,8 @@ grepc_use_type_struct_union()
 	grepc_helper \
 	  "\b(struct|union)\b" \
 	  "\b$1\b" \
-	  "(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\s+\w+\s*[\w\s[\]]*{(?:(?!^}).)*?\b$1\b.*?^}.*?;";
+	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\s+\w+\s*[\w\s[\]]*{(?:(?!^}).)*?\b'"$1"'\b.*?^}.*?;' \
+	  <"$files";
 }
 
 
@@ -377,7 +390,8 @@ grepc_use_type_typedef_simple()
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
 	  "\b$1\b" \
-	  "(?s)^[ \t]*typedef\s+[^{};]*\b$1\b[^{};]+;";
+	  '(?s)^[ \t]*typedef\s+[^{};]*\b'"$1"'\b[^{};]+;' \
+	  <"$files";
 }
 
 
@@ -386,7 +400,8 @@ grepc_use_type_typedef_struct_union()
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union)\b[^;]*$' \
 	  "\b$1\b" \
-	  "(?s)^[ \t]*typedef\s+(struct|union)\s+[\w\s[\]]*{(?:(?!^(  )?}|^\s*typedef).)*\b$1\b(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*\w+;";
+	  '(?s)^[ \t]*typedef\s+(struct|union)\s+[\w\s[\]]*{(?:(?!^(  )?}|^\s*typedef).)*\b'"$1"'\b(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*\w+;' \
+	  <"$files";
 }
 
 
@@ -473,8 +488,10 @@ grepc_search()
 
 main()
 {
+	files="$(mktemp -t 'grepc.XXXXXX')";
+
 	grepc_parse_cmd $@;
-	grepc_find_files "$identifier";
+	grepc_find_files "$identifier" >"$files";
 	grepc_search "$identifier" \
 	| if [ -n "$lflag" ]; then
 		sort \
