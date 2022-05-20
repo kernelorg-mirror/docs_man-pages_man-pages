@@ -4,19 +4,19 @@ grepc \- find C declarations, definitions, and uses in source code
 .SH SYNOPSIS
 .B grepc
 .RI [ option\~ .\|.\|.\&]
-.I identifier
+.I pattern
 .RI [ file\~ .\|.\|.]
 .SH DESCRIPTION
 .MR grepc 1
 searches for C declarations, definitions, and uses of
-.I identifier
+.I pattern
 in each
 .IR file .
 .PP
-.I identifier
-is normally a C identifier,
-but it is actually a PCRE pattern,
-so it can be used to find complex patterns.
+.I pattern
+is a PCRE pattern.
+It normally represents a C identifier,
+and word boundaries are implicitly added to it in most cases.
 .PP
 If
 .I file
@@ -75,12 +75,20 @@ Type definitions.
 .B u
 Uses.
 Searches occurences of
-.BI \eb identifier \eb
+.I pattern
 within enums,
 function bodies,
 macro replacements,
 and type definitions,
 and prints the whole enum, function, macro, and/or type definitions.
+In this case there are no word boundaries set by default,
+so if
+.I pattern
+is
+.BR open ,
+.B fopen
+will also be found;
+that's to allow searching for patterns containing any sequence of characters.
 .IP
 This can be further subdivided into:
 .RS

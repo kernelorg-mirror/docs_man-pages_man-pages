@@ -327,7 +327,7 @@ grepc_use_enum()
 	grepc_helper \
 	  '\benum\b' \
 	  "\b$1\b" \
-	  '(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*\w+[\w\s[\]=]*\b'"$1"'\b.*?^}.*?;' \
+	  '(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^}.*?;' \
 	  <"$files";
 }
 
@@ -337,7 +337,7 @@ grepc_use_func_def()
 	grepc_helper \
 	  "\b$1\b" \
 	  '.' \
-	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\w+\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{(?:(?!^}).)*\b'"$1"'\b.*?^}' \
+	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\w+\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{(?:(?!^}).)*'"$1"'.*?^}' \
 	  <"$files";
 }
 
@@ -347,7 +347,7 @@ grepc_linux_use_func_syscall_def()
 	grepc_helper \
 	  "SYSCALL_DEFINE.\(" \
 	  "\b$1\b" \
-	  '(?s)^(COMPAT_)?SYSCALL_DEFINE.\(\w+\b(?:(?!^}).)*\b'"$1"'\b.?^}' \
+	  '(?s)^(COMPAT_)?SYSCALL_DEFINE.\(\w+\b(?:(?!^}).)*'"$1"'.?^}' \
 	  <"$files";
 }
 
@@ -370,7 +370,7 @@ grepc_use_macro()
 	grepc_helper \
 	  "\b$1\b" \
 	  'define' \
-	  '(?s)^[ \t]*#\s*define\s+\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*\b'"$1"'\b.*?[^\\]$' \
+	  '(?s)^[ \t]*#\s*define\s+\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*'"$1"'.*?[^\\]$' \
 	  <"$files";
 }
 
@@ -380,7 +380,7 @@ grepc_use_type_struct_union()
 	grepc_helper \
 	  "\b(struct|union)\b" \
 	  "\b$1\b" \
-	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\s+\w+\s*[\w\s[\]]*{(?:(?!^}).)*?\b'"$1"'\b.*?^}.*?;' \
+	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\s+\w+\s*[\w\s[\]]*{(?:(?!^}).)*?'"$1"'.*?^}.*?;' \
 	  <"$files";
 }
 
@@ -390,7 +390,7 @@ grepc_use_type_typedef_simple()
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
 	  "\b$1\b" \
-	  '(?s)^[ \t]*typedef\s+[^{};]*\b'"$1"'\b[^{};]+;' \
+	  '(?s)^[ \t]*typedef\s+[^{};]*'"$1"'[^{};]+;' \
 	  <"$files";
 }
 
@@ -400,7 +400,7 @@ grepc_use_type_typedef_struct_union()
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union)\b[^;]*$' \
 	  "\b$1\b" \
-	  '(?s)^[ \t]*typedef\s+(struct|union)\s+[\w\s[\]]*{(?:(?!^(  )?}|^\s*typedef).)*\b'"$1"'\b(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*\w+;' \
+	  '(?s)^[ \t]*typedef\s+(struct|union)\s+[\w\s[\]]*{(?:(?!^(  )?}|^\s*typedef).)*'"$1"'(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*\w+;' \
 	  <"$files";
 }
 
