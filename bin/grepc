@@ -428,7 +428,6 @@ grepc_search_default()
 	grepc_func "$1";
 	grepc_macro "$1";
 	grepc_type "$1";
-	grepc_use "$1";
 }
 
 

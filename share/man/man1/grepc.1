@@ -8,7 +8,7 @@ grepc \- find C declarations, definitions, and uses in source code
 .RI [ file\~ .\|.\|.]
 .SH DESCRIPTION
 .MR grepc 1
-searches for C declarations, definitions, and uses of
+searches for C declarations, definitions, and/or uses of
 .I pattern
 in each
 .IR file .
@@ -132,7 +132,7 @@ of code (see Types of code under DESCRIPTION).
 This option can be passed multiple times
 to search for various types of code.
 Default:
-.BR "e f m t u" .
+.BR "e f m t" .
 .TP
 .BI \-x " extension"
 Restrict the search to files ending with
