@@ -493,7 +493,7 @@ main()
 {
 	files="$(mktemp -t 'grepc.XXXXXX')";
 
-	grepc_parse_cmd $@;
+	grepc_parse_cmd "$@";
 	grepc_find_files "$identifier" >"$files";
 	grepc_search "$identifier" \
 	| if [ -n "$lflag" ]; then
@@ -505,4 +505,4 @@ main()
 }
 
 
-main $@;
+main "$@";
