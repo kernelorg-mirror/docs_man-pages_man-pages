@@ -5,6 +5,7 @@
 git='no';
 ext='\.[ch]$';
 FILES='.';
+iflag='';
 lflag='';
 kflag='no';
 tflag='no';
@@ -32,7 +33,7 @@ grepc_usage()
 
 grepc_parse_cmd()
 {
-	while getopts "ghklt:x:" opt; do
+	while getopts "ghiklt:x:" opt; do
 		case "$opt" in
 		g)
 			git='yes';
@@ -41,11 +42,14 @@ grepc_parse_cmd()
 			grepc_usage;
 			exit 0;
 			;;
+		i)
+			iflag='i';
+			;;
 		k)
 			kflag='yes';
 			;;
 		l)
-			lflag='-l';
+			lflag='l';
 			kflag='yes';
 			;;
 		t)
@@ -131,16 +135,16 @@ grepc_find_files()
 		find $FILES -type f;
 	fi \
 	| grep -P -- "$ext" \
-	| xargs grep -lPI -- "$1\b";
+	| xargs grep -${iflag}lPI -- "$1\b";
 }
 
 
 grepc_helper()
 {
-	xargs grep -lPI -- "$1" \
-	| xargs grep -lP -- "$2" \
+	xargs grep -${iflag}lPI -- "$1" \
+	| xargs grep -${iflag}lP -- "$2" \
 	| sort \
-	| xargs pcregrep $lflag -Mn -- "$3" /dev/null \
+	| xargs pcregrep -${iflag}${lflag}Mn -- "$3" /dev/null \
 	| if [ "$kflag" = 'no' ]; then
 		sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n/';
 	else
@@ -285,8 +289,8 @@ grepc_type_typedef_struct_union_enum()
 
 grepc_type_typedef_underlying_struct_union_enum()
 {
-	xargs grep -hP "^\s*typedef\s+(struct|union|enum)\s+.*\b$1;" <"$files" \
-	| sed -E -e 's/^\s*typedef\s+//' -e "s/\s*\**\b$1;.*//" \
+	xargs grep -${iflag}hP "^\s*typedef\s+(struct|union|enum)\s+.*\b$1;" <"$files" \
+	| sed -E -e 's/^\s*typedef\s+//' -e "s/\s*\**\b$1;.*//${iflag}" \
 	| sed -E -e 's/^struct\s+//' -e 's/^union\s+//' -e 's/^enum\s+//' \
 	| while read -r t; do
 		test "$1" != "$t" \
