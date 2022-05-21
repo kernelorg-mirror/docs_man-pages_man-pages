@@ -122,7 +122,7 @@ grepc_parse_cmd()
 	shift;
 
 	if [ $# -gt 0 ]; then
-		FILES=$@;
+		FILES=$*;
 	fi;
 }
 
