@@ -263,7 +263,7 @@ grepc_type_struct_union_enum()
 	grepc_helper \
 	  '\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b' \
 	  '.' \
-	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b[ \t]*\n*([ \t]*){.*?^\5}.*?;';
+	  '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b[ \t]*\n*([ \t]*){.*?^\5}.*?;';
 }
 
 
@@ -281,8 +281,8 @@ grepc_type_typedef_struct_union_enum()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union|enum)\b[^;]*$' \
-	  "^[ \t]*}\s*$1;" \
-	  '(?s)^[ \t]*typedef\s+(struct|union|enum)\b([\w \t[\]]|::)*\n*([ \t]*){(?:(?!^\3}).)*?^\3}\s*'"$1"';' \
+	  "^[ \t]*}\s*$1(\[[\w\(,\)]\])*;" \
+	  '(?s)^[ \t]*typedef\s+(struct|union|enum)\b(?:(?!\W'"$1"'\W)([\w \t[\]]|::))*\n*([ \t]*){(?:(?!^\3}).)*?^\3}\s*'"$1"'(\[[\w\(,\)]\])*;' \
 	  <"$files";
 }
 
