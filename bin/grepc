@@ -158,7 +158,7 @@ grepc_enum_constant()
 	grepc_helper \
 	  '\benum\b' \
 	  "^[ \t]*$1\b\s*[,=]" \
-	  '(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^}.*?;' \
+	  '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;' \
 	  <"$files";
 }
 
@@ -168,7 +168,7 @@ grepc_func_proto()
 	grepc_helper \
 	  "\b$1\s*\(" \
 	  '.' \
-	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'"$1"'\s*\([\w\s\(,\)[\]*]+?(...)?\)[\w\s\(,\)[:\]]*;' \
+	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'"$1"'\s*\(([\w\s\(,\)[\]*]|::)+?(\.\.\.)?\)([\w\s\(,\)[\]]|::)*;' \
 	  <"$files";
 }
 
@@ -178,7 +178,7 @@ grepc_func_def()
 	grepc_helper \
 	  "\b$1\s*\(" \
 	  '.' \
-	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**'"$1"'\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{.*?^}' \
+	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**'"$1"'\s*\(([\w\s\(,\)[\]*]|::)+?(\.\.\.)?\)[ \t]*\n([ \t]*){.*?^\4}' \
 	  <"$files";
 }
 
@@ -236,7 +236,7 @@ grepc_macro_func()
 	grepc_helper \
 	  "#\s*define\s+$1\(" \
 	  '.' \
-	  '(?s)^[ \t]*#\s*define\s+'"$1"'\(.*?[^\\]$' \
+	  '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\(.*?[^\\]$' \
 	  <"$files";
 }
 
@@ -246,7 +246,7 @@ grepc_macro_object()
 	grepc_helper \
 	  "#\s*define\s+$1\b[^(]" \
 	  '.' \
-	  '(?s)^[ \t]*#\s*define\s+'"$1"'\b(?!\().*?[^\\]$' \
+	  '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?[^\\]$' \
 	  <"$files";
 }
 
@@ -261,9 +261,9 @@ grepc_macro()
 grepc_type_struct_union_enum()
 {
 	grepc_helper \
-	  "\b(struct|union|enum)\s+$1\b" \
+	  '\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b' \
 	  '.' \
-	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\s+'"$1"'\b\s*[\w\s[\]]*{.*?^}.*?;';
+	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b[ \t]*\n*([ \t]*){.*?^\5}.*?;';
 }
 
 
@@ -281,16 +281,16 @@ grepc_type_typedef_struct_union_enum()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union|enum)\b[^;]*$' \
-	  "^(  )?}\s*$1;" \
-	  '(?s)^[ \t]*typedef\s+(struct|union|enum)\s+(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*'"$1"';' \
+	  "^[ \t]*}\s*$1;" \
+	  '(?s)^[ \t]*typedef\s+(struct|union|enum)\b([\w \t[\]]|::)*\n*([ \t]*){(?:(?!^\3}).)*?^\3}\s*'"$1"';' \
 	  <"$files";
 }
 
 
 grepc_type_typedef_underlying_struct_union_enum()
 {
-	xargs grep -${iflag}hP "^\s*typedef\s+(struct|union|enum)\s+.*\b$1;" <"$files" \
-	| sed -E -e 's/^\s*typedef\s+//' -e "s/\s*\**\b$1;.*//${iflag}" \
+	xargs grep -${iflag}hP '^[ \t]*typedef\s+(struct|union|enum)\s+.*\b'"$1;" <"$files" \
+	| sed -E -e 's/^[ \t]*typedef\s+//' -e "s/\s*\**\b$1;.*//${iflag}" \
 	| sed -E -e 's/^struct\s+//' -e 's/^union\s+//' -e 's/^enum\s+//' \
 	| while read -r t; do
 		test "$1" != "$t" \
@@ -331,7 +331,7 @@ grepc_use_enum()
 	grepc_helper \
 	  '\benum\b' \
 	  "\b$1\b" \
-	  '(?s)^([\w[]+[\w\s]*)?\benum\b\s*([\w\s[\]]|::)*\s*{[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^}.*?;' \
+	  '(?s)^([\w[]+[\w\s]*)?\benum\b([\w \t[\]]|::)*\n*([ \t]*){[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^\3}.*?;' \
 	  <"$files";
 }
 
@@ -341,7 +341,7 @@ grepc_use_func_def()
 	grepc_helper \
 	  "\b$1\b" \
 	  '.' \
-	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\w+\s*\([\w\s\(,\)[\]*]+?(...)?\)\s*{(?:(?!^}).)*'"$1"'.*?^}' \
+	  '(?s)^[\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\w+\s*\(([\w\s\(,\)[\]*]|::)+?(\.\.\.)?\)[ \t]*\n*([ \t]*){(?:(?!^\4}).)*'"$1"'.*?^\4}' \
 	  <"$files";
 }
 
@@ -374,7 +374,7 @@ grepc_use_macro()
 	grepc_helper \
 	  "\b$1\b" \
 	  'define' \
-	  '(?s)^[ \t]*#\s*define\s+\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*'"$1"'.*?[^\\]$' \
+	  '(?s)^[ \t]*#\s*define\s[\s\\]*\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*'"$1"'.*?[^\\]$' \
 	  <"$files";
 }
 
@@ -384,7 +384,7 @@ grepc_use_type_struct_union()
 	grepc_helper \
 	  "\b(struct|union)\b" \
 	  "\b$1\b" \
-	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\s+\w+\s*[\w\s[\]]*{(?:(?!^}).)*?'"$1"'.*?^}.*?;' \
+	  '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\b([\w \t[\]]|::)*\w+\n*([ \t]*){(?:(?!^\5}).)*?'"$1"'.*?^\5}.*?;' \
 	  <"$files";
 }
 
@@ -404,7 +404,7 @@ grepc_use_type_typedef_struct_union()
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union)\b[^;]*$' \
 	  "\b$1\b" \
-	  '(?s)^[ \t]*typedef\s+(struct|union)\s+[\w\s[\]]*{(?:(?!^(  )?}|^\s*typedef).)*'"$1"'(?:(?!^(  )?}|^\s*typedef).)*^(  )?}\s*\w+;' \
+	  '(?s)^[ \t]*typedef\s+(struct|union)\b([\w \t[\]]|::)*\n*([ \t]*){(?:(?!^\3}|^\s*typedef).)*'"$1"'(?:(?!^\3}|^\s*typedef).)*^\3}\s*\w+;' \
 	  <"$files";
 }
 
