@@ -135,7 +135,7 @@ grepc_find_files()
 		find $FILES -type f;
 	fi \
 	| grep -P -- "$ext" \
-	| xargs grep -${iflag}lPI -- "$1\b";
+	| xargs grep -${iflag}lPI -- "$1";
 }
 
 
