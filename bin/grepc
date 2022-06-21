@@ -265,9 +265,9 @@ grepc_macro_func()
 grepc_macro_object()
 {
 	grepc_helper \
-	  "#\s*define\s+$1\b[^(]" \
+	  "#\s*define\s+$1\b(?!\()" \
 	  '.' \
-	  '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?[^\\]$';
+	  '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$';
 }
 
 
