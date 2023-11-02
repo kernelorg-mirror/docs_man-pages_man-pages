@@ -24,7 +24,8 @@ t_type_td_simple='no';
 t_type_td_braced='no';
 t_type_td_func='no';
 t_use_enum='no';
-t_use_func='no';
+t_use_func_def='no';
+t_use_func_linux_def='no';
 t_use_macro='no';
 t_use_type_su='no';
 t_use_type_td_simple='no';
@@ -116,7 +117,8 @@ grepc_parse_cmd()
 				;;
 			u)
 				t_use_enum='yes';
-				t_use_func='yes';
+				t_use_func_def='yes';
+				t_use_func_linux_def='yes';
 				t_use_macro='yes';
 				t_use_type_su='yes';
 				t_use_type_td_simple='yes';
@@ -126,7 +128,8 @@ grepc_parse_cmd()
 				t_use_enum='yes';
 				;;
 			uf)
-				t_use_func='yes';
+				t_use_func_def='yes';
+				t_use_func_linux_def='yes';
 				;;
 			um)
 				t_use_macro='yes';
@@ -361,14 +364,7 @@ grepc_linux_use_func_syscall_def()
 }
 
 
-grepc_linux_use_func() { grepc_linux_use_func_syscall_def "$1"; }
-
-
-grepc_use_func()
-{
-	grepc_use_func_def "$1";
-	grepc_linux_use_func "$1";
-}
+grepc_use_func_linux_def() { grepc_linux_use_func_syscall_def "$1"; }
 
 
 grepc_use_macro()
@@ -439,8 +435,10 @@ grepc_search()
 		&& grepc_type_td_func "$1";
 	test "$t_use_enum" = 'yes' \
 		&& grepc_use_enum "$1";
-	test "$t_use_func" = 'yes' \
-		&& grepc_use_func "$1";
+	test "$t_use_func_def" = 'yes' \
+		&& grepc_use_func_def "$1";
+	test "$t_use_func_linux_def" = 'yes' \
+		&& grepc_use_func_linux_def "$1";
 	test "$t_use_macro" = 'yes' \
 		&& grepc_use_macro "$1";
 	test "$t_use_type_su" = 'yes' \
