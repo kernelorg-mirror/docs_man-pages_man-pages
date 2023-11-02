@@ -448,45 +448,32 @@ grepc_use_type()
 
 grepc_search()
 {
-	if [ "$t_enum" = 'yes' ]; then
-		grepc_enum_constant "$1";
-	fi;
-	if [ "$t_func_proto" = 'yes' ]; then
-		grepc_func_proto "$1";
-	fi;
-	if [ "$t_func_def" = 'yes' ]; then
-		grepc_func_def "$1";
-	fi;
-	if [ "$t_func_syscall_proto" = 'yes' ]; then
-		grepc_linux_func_syscall_proto "$1";
-	fi;
-	if [ "$t_func_syscall_def" = 'yes' ]; then
-		grepc_linux_func_syscall_def "$1";
-	fi;
-	if [ "$t_func_glibc_proto" = 'yes' ]; then
-		grepc_glibc_func_proto "$1";
-	fi;
-	if [ "$t_func_glibc_def" = 'yes' ]; then
-		grepc_glibc_func_def "$1";
-	fi;
-	if [ "$t_macro" = 'yes' ]; then
-		grepc_macro "$1";
-	fi;
-	if [ "$t_type" = 'yes' ]; then
-		grepc_type "$1";
-	fi;
-	if [ "$t_use_enum" = 'yes' ]; then
-		grepc_use_enum "$1";
-	fi;
-	if [ "$t_use_func" = 'yes' ]; then
-		grepc_use_func "$1";
-	fi;
-	if [ "$t_use_macro" = 'yes' ]; then
-		grepc_use_macro "$1";
-	fi;
-	if [ "$t_use_type" = 'yes' ]; then
-		grepc_use_type "$1";
-	fi;
+	test "$t_enum" = 'yes' \
+		&& grepc_enum_constant "$1";
+	test "$t_func_proto" = 'yes' \
+		&& grepc_func_proto "$1";
+	test "$t_func_def" = 'yes' \
+		&& grepc_func_def "$1";
+	test "$t_func_syscall_proto" = 'yes' \
+		&& grepc_linux_func_syscall_proto "$1";
+	test "$t_func_syscall_def" = 'yes' \
+		&& grepc_linux_func_syscall_def "$1";
+	test "$t_func_glibc_proto" = 'yes' \
+		&& grepc_glibc_func_proto "$1";
+	test "$t_func_glibc_def" = 'yes' \
+		&& grepc_glibc_func_def "$1";
+	test "$t_macro" = 'yes' \
+		&& grepc_macro "$1";
+	test "$t_type" = 'yes' \
+		&& grepc_type "$1";
+	test "$t_use_enum" = 'yes' \
+		&& grepc_use_enum "$1";
+	test "$t_use_func" = 'yes' \
+		&& grepc_use_func "$1";
+	test "$t_use_macro" = 'yes' \
+		&& grepc_use_macro "$1";
+	test "$t_use_type" = 'yes' \
+		&& grepc_use_type "$1";
 }
 
 
