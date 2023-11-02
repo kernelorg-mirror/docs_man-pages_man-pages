@@ -15,7 +15,8 @@ t_func_def='no';
 t_func_syscall_proto='no';
 t_func_syscall_def='no';
 t_func_glibc_proto='no';
-t_func_glibc_def='no';
+t_func_glibc_libm_def='no';
+t_func_glibc_libio_def='no';
 t_macro='no';
 t_type='no';
 t_use_enum='no';
@@ -66,7 +67,8 @@ grepc_parse_cmd()
 				t_func_syscall_proto='yes';
 				t_func_syscall_def='yes';
 				t_func_glibc_proto='yes';
-				t_func_glibc_def='yes';
+				t_func_glibc_libm_def='yes';
+				t_func_glibc_libio_def='yes';
 				;;
 			fp)
 				t_func_proto='yes';
@@ -86,13 +88,15 @@ grepc_parse_cmd()
 				;;
 			fg)
 				t_func_glibc_proto='yes';
-				t_func_glibc_def='yes';
+				t_func_glibc_libm_def='yes';
+				t_func_glibc_libio_def='yes';
 				;;
 			fgp)
 				t_func_glibc_proto='yes';
 				;;
 			fgd)
-				t_func_glibc_def='yes';
+				t_func_glibc_libm_def='yes';
+				t_func_glibc_libio_def='yes';
 				;;
 			m)
 				t_macro='yes';
@@ -149,7 +153,8 @@ grepc_parse_cmd()
 		t_func_syscall_proto='yes';
 		t_func_syscall_def='yes';
 		t_func_glibc_proto='yes';
-		t_func_glibc_def='yes';
+		t_func_glibc_libm_def='yes';
+		t_func_glibc_libio_def='yes';
 		t_macro='yes';
 		t_type='yes';
 	fi;
@@ -254,13 +259,6 @@ grepc_glibc_func_libio_def()
 grepc_glibc_func_proto()
 {
 	grepc_glibc_func_libio_proto "$1";
-}
-
-
-grepc_glibc_func_def()
-{
-	grepc_glibc_func_libm_def "$1";
-	grepc_glibc_func_libio_def "$1";
 }
 
 
@@ -456,8 +454,10 @@ grepc_search()
 		&& grepc_linux_func_syscall_def "$1";
 	test "$t_func_glibc_proto" = 'yes' \
 		&& grepc_glibc_func_proto "$1";
-	test "$t_func_glibc_def" = 'yes' \
-		&& grepc_glibc_func_def "$1";
+	test "$t_func_glibc_libm_def" = 'yes' \
+		&& grepc_glibc_func_libm_def "$1";
+	test "$t_func_glibc_libio_def" = 'yes' \
+		&& grepc_glibc_func_libio_def "$1";
 	test "$t_macro" = 'yes' \
 		&& grepc_macro "$1";
 	test "$t_type" = 'yes' \
