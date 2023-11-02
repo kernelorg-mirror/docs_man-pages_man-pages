@@ -319,18 +319,12 @@ grepc_type_typedef_func()
 }
 
 
-grepc_type_typedef()
-{
-	grepc_type_typedef_simple "$1";
-	grepc_type_typedef_struct_union_enum "$1";
-	grepc_type_typedef_func "$1";
-}
-
-
 grepc_type()
 {
 	grepc_type_struct_union_enum "$1";
-	grepc_type_typedef "$1";
+	grepc_type_typedef_simple "$1";
+	grepc_type_typedef_struct_union_enum "$1";
+	grepc_type_typedef_func "$1";
 }
 
 
