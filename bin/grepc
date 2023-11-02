@@ -238,28 +238,10 @@ grepc_func_def()
 }
 
 
-grepc_glibc_func_libm_def()
-{
-	grepc_func_def "M_DECL_FUNC \(__$1\)";
-}
-
-
-grepc_glibc_func_libio_proto()
-{
-	grepc_func_proto "_IO_$1";
-}
-
-
-grepc_glibc_func_libio_def()
-{
-	grepc_func_def "_IO_$1";
-}
-
-
-grepc_glibc_func_proto()
-{
-	grepc_glibc_func_libio_proto "$1";
-}
+grepc_glibc_func_libm_def()    { grepc_func_def "M_DECL_FUNC \(__$1\)"; }
+grepc_glibc_func_libio_proto() { grepc_func_proto "_IO_$1"; }
+grepc_glibc_func_libio_def()   { grepc_func_def "_IO_$1"; }
+grepc_glibc_func_proto()       { grepc_glibc_func_libio_proto "$1"; }
 
 
 grepc_linux_func_syscall_proto()
@@ -383,10 +365,7 @@ grepc_linux_use_func_syscall_def()
 }
 
 
-grepc_linux_use_func()
-{
-	grepc_linux_use_func_syscall_def "$1";
-}
+grepc_linux_use_func() { grepc_linux_use_func_syscall_def "$1"; }
 
 
 grepc_use_func()
