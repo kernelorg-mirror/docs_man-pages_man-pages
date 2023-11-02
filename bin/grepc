@@ -163,7 +163,7 @@ grepc_helper()
 	xargs grep -${iflag}lP -- "$1" \
 	| xargs grep -${iflag}lP -- "$2" \
 	| sort \
-	| xargs pcregrep -${iflag}${lflag}Mn -- "$3" /dev/null \
+	| xargs pcre2grep -${iflag}${lflag}Mn -- "$3" /dev/null \
 	| if [ "$kflag" = 'no' ]; then
 		sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n/';
 	else
@@ -178,7 +178,7 @@ grepc_helper_use()
 	xargs grep -${iflag}lP -- "$1" \
 	| xargs grep -${iflag}lP -- "$2" \
 	| sort \
-	| xargs pcregrep -${iflag}${lflag}Mn -- "$3" /dev/null \
+	| xargs pcre2grep -${iflag}${lflag}Mn -- "$3" /dev/null \
 	| if [ "$kflag" = 'no' ]; then
 		sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n/';
 	else
