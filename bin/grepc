@@ -19,7 +19,10 @@ t_func_glibc_libm_def='no';
 t_func_glibc_libio_def='no';
 t_macro_func='no';
 t_macro_obj='no';
-t_type='no';
+t_type_braced='no';
+t_type_td_simple='no';
+t_type_td_braced='no';
+t_type_td_func='no';
 t_use_enum='no';
 t_use_func='no';
 t_use_macro='no';
@@ -104,7 +107,10 @@ grepc_parse_cmd()
 				t_macro_obj='yes';
 				;;
 			t)
-				t_type='yes';
+				t_type_braced='yes';
+				t_type_td_simple='yes';
+				t_type_td_braced='yes';
+				t_type_td_func='yes';
 				;;
 			u)
 				t_use_enum='yes';
@@ -159,7 +165,10 @@ grepc_parse_cmd()
 		t_func_glibc_libio_def='yes';
 		t_macro_func='yes';
 		t_macro_obj='yes';
-		t_type='yes';
+		t_type_braced='yes';
+		t_type_td_simple='yes';
+		t_type_td_braced='yes';
+		t_type_td_func='yes';
 	fi;
 }
 
@@ -283,7 +292,7 @@ grepc_macro_object()
 }
 
 
-grepc_type_struct_union_enum()
+grepc_type_braced()
 {
 	grepc_helper \
 	  '\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b' \
@@ -292,7 +301,7 @@ grepc_type_struct_union_enum()
 }
 
 
-grepc_type_typedef_simple()
+grepc_type_td_simple()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
@@ -301,7 +310,7 @@ grepc_type_typedef_simple()
 }
 
 
-grepc_type_typedef_struct_union_enum()
+grepc_type_td_braced()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union|enum)\b[^;]*$' \
@@ -310,21 +319,12 @@ grepc_type_typedef_struct_union_enum()
 }
 
 
-grepc_type_typedef_func()
+grepc_type_td_func()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
 	  "\(\**$1\)\s*\(" \
 	  '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;';
-}
-
-
-grepc_type()
-{
-	grepc_type_struct_union_enum "$1";
-	grepc_type_typedef_simple "$1";
-	grepc_type_typedef_struct_union_enum "$1";
-	grepc_type_typedef_func "$1";
 }
 
 
@@ -431,8 +431,14 @@ grepc_search()
 		&& grepc_macro_func "$1";
 	test "$t_macro_obj" = 'yes' \
 		&& grepc_macro_object "$1";
-	test "$t_type" = 'yes' \
-		&& grepc_type "$1";
+	test "$t_type_braced" = 'yes' \
+		&& grepc_type_braced "$1";
+	test "$t_type_td_simple" = 'yes' \
+		&& grepc_type_td_simple "$1";
+	test "$t_type_td_braced" = 'yes' \
+		&& grepc_type_td_braced "$1";
+	test "$t_type_td_func" = 'yes' \
+		&& grepc_type_td_func "$1";
 	test "$t_use_enum" = 'yes' \
 		&& grepc_use_enum "$1";
 	test "$t_use_func" = 'yes' \
