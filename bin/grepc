@@ -12,7 +12,6 @@ tflag='no';
 t_enum='no';
 t_func_proto='no';
 t_func_def='no';
-t_func_syscall='no';
 t_func_syscall_proto='no';
 t_func_syscall_def='no';
 t_func_glibc='no';
@@ -65,7 +64,8 @@ grepc_parse_cmd()
 			f)
 				t_func_proto='yes';
 				t_func_def='yes';
-				t_func_syscall='yes';
+				t_func_syscall_proto='yes';
+				t_func_syscall_def='yes';
 				t_func_glibc='yes';
 				;;
 			fp)
@@ -75,7 +75,8 @@ grepc_parse_cmd()
 				t_func_def='yes';
 				;;
 			fs)
-				t_func_syscall='yes';
+				t_func_syscall_proto='yes';
+				t_func_syscall_def='yes';
 				;;
 			fsp)
 				t_func_syscall_proto='yes';
@@ -146,7 +147,8 @@ grepc_parse_cmd()
 		t_enum='yes';
 		t_func_proto='yes';
 		t_func_def='yes';
-		t_func_syscall='yes';
+		t_func_syscall_proto='yes';
+		t_func_syscall_def='yes';
 		t_func_glibc='yes';
 		t_macro='yes';
 		t_type='yes';
@@ -284,13 +286,6 @@ grepc_linux_func_syscall_def()
 	  "SYSCALL_DEFINE.\($1\b" \
 	  '.' \
 	  '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}';
-}
-
-
-grepc_linux_func()
-{
-	grepc_linux_func_syscall_proto "$1";
-	grepc_linux_func_syscall_def "$1";
 }
 
 
@@ -474,15 +469,11 @@ grepc_search()
 	if [ "$t_func_def" = 'yes' ]; then
 		grepc_func_def "$1";
 	fi;
-	if [ "$t_func_syscall" = 'yes' ]; then
-		grepc_linux_func "$1";
-	else
-		if [ "$t_func_syscall_proto" = 'yes' ]; then
-			grepc_linux_func_syscall_proto "$1";
-		fi;
-		if [ "$t_func_syscall_def" = 'yes' ]; then
-			grepc_linux_func_syscall_def "$1";
-		fi;
+	if [ "$t_func_syscall_proto" = 'yes' ]; then
+		grepc_linux_func_syscall_proto "$1";
+	fi;
+	if [ "$t_func_syscall_def" = 'yes' ]; then
+		grepc_linux_func_syscall_def "$1";
 	fi;
 	if [ "$t_func_glibc" = 'yes' ]; then
 		grepc_glibc_func "$1";
