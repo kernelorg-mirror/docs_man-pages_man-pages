@@ -22,12 +22,6 @@ If
 .I file
 is a directory,
 the search is recursive within that directory.
-If
-.I file
-doesn't match a certain extension, it is skipped
-(see
-.B \-x
-in OPTIONS).
 If no
 .I file
 is given,
@@ -164,13 +158,6 @@ This option can be passed multiple times
 to search for various types of code.
 Default:
 .BR "e f m t" .
-.TP
-.BI \-x " extension"
-Restrict the search to files ending with
-.IR extension .
-It is interpreted as a PCRE pattern.
-Default:
-.BR \e.[ch]$ .
 .SH EXAMPLES
 .EX
 .RB \(ti/src/nginx/unit$ " grepc nxt_sprintf;"

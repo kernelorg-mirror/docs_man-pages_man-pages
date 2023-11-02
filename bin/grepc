@@ -3,7 +3,6 @@
 
 # Defaults:
 git='no';
-ext='\.[ch]$';
 FILES='.';
 iflag='';
 lflag='';
@@ -41,7 +40,7 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "cghiklt:x:" opt; do
+	while getopts "cghiklt:" opt; do
 		case "$opt" in
 		c)
 			cflag='yes';
@@ -151,9 +150,6 @@ grepc_parse_cmd()
 			esac;
 			tflag='yes';
 			;;
-		x)
-			ext="$OPTARG";
-			;;
 		?)
 			exit 1;  # getopts(1) prints an error msg.
 			;;
@@ -195,7 +191,6 @@ grepc_find_files()
 	else
 		find $FILES -type f;
 	fi \
-	| grep -P -- "$ext" \
 	| xargs grep -${iflag}lPI -- "$1" \
 	| tee "$files_use" \
 	| xargs grep -${iflag}lP -- "$1\b" \
