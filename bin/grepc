@@ -2,7 +2,6 @@
 
 
 # Defaults:
-git='no';
 FILES='.';
 iflag='';
 lflag='';
@@ -40,13 +39,10 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "cghiklt:" opt; do
+	while getopts "chiklt:" opt; do
 		case "$opt" in
 		c)
 			cflag='yes';
-			;;
-		g)
-			git='yes';
 			;;
 		h)
 			echo "Usage: $0 [OPTION ...] IDENTIFIER [FILE ...]";
@@ -186,11 +182,7 @@ grepc_parse_cmd()
 
 grepc_find_files()
 {
-	if [ "$git" = 'yes' ]; then
-		git ls-files $FILES;
-	else
-		find $FILES -type f;
-	fi \
+	find $FILES -type f \
 	| xargs grep -${iflag}lPI -- "$1" \
 	| tee "$files_use" \
 	| xargs grep -${iflag}lP -- "$1\b" \
