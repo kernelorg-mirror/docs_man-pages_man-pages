@@ -17,7 +17,8 @@ t_func_syscall_def='no';
 t_func_glibc_proto='no';
 t_func_glibc_libm_def='no';
 t_func_glibc_libio_def='no';
-t_macro='no';
+t_macro_func='no';
+t_macro_obj='no';
 t_type='no';
 t_use_enum='no';
 t_use_func='no';
@@ -99,7 +100,8 @@ grepc_parse_cmd()
 				t_func_glibc_libio_def='yes';
 				;;
 			m)
-				t_macro='yes';
+				t_macro_func='yes';
+				t_macro_obj='yes';
 				;;
 			t)
 				t_type='yes';
@@ -155,7 +157,8 @@ grepc_parse_cmd()
 		t_func_glibc_proto='yes';
 		t_func_glibc_libm_def='yes';
 		t_func_glibc_libio_def='yes';
-		t_macro='yes';
+		t_macro_func='yes';
+		t_macro_obj='yes';
 		t_type='yes';
 	fi;
 }
@@ -277,13 +280,6 @@ grepc_macro_object()
 	  "#\s*define\s+$1\b(?!\()" \
 	  '.' \
 	  '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$';
-}
-
-
-grepc_macro()
-{
-	grepc_macro_func "$1";
-	grepc_macro_object "$1";
 }
 
 
@@ -437,8 +433,10 @@ grepc_search()
 		&& grepc_glibc_func_libm_def "$1";
 	test "$t_func_glibc_libio_def" = 'yes' \
 		&& grepc_glibc_func_libio_def "$1";
-	test "$t_macro" = 'yes' \
-		&& grepc_macro "$1";
+	test "$t_macro_func" = 'yes' \
+		&& grepc_macro_func "$1";
+	test "$t_macro_obj" = 'yes' \
+		&& grepc_macro_object "$1";
 	test "$t_type" = 'yes' \
 		&& grepc_type "$1";
 	test "$t_use_enum" = 'yes' \
