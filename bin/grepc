@@ -24,9 +24,10 @@ t_use_macro='no';
 t_use_type='no';
 
 
-grepc_usage()
+grepc_err()
 {
-	echo "Usage: $0 [OPTION ...] IDENTIFIER [FILE ...]";
+	>&2 echo "$(basename "$0"): error: $*";
+	exit 1;
 }
 
 
@@ -41,7 +42,7 @@ grepc_parse_cmd()
 			git='yes';
 			;;
 		h)
-			grepc_usage;
+			echo "Usage: $0 [OPTION ...] IDENTIFIER [FILE ...]";
 			exit 0;
 			;;
 		i)
@@ -118,8 +119,7 @@ grepc_parse_cmd()
 				t_use_type='yes';
 				;;
 			*)
-				grepc_usage;
-				exit 1;
+				grepc_err "-$opt: $OPTARG: Unknown argument.";
 				;;
 			esac;
 			tflag='yes';
@@ -128,17 +128,13 @@ grepc_parse_cmd()
 			ext="$OPTARG";
 			;;
 		?)
-			grepc_usage >&2;
-			exit 1;
+			exit 1;  # getopts(1) prints an error msg.
 			;;
 		esac;
 	done;
 	shift $((OPTIND-1));
 
-	if [ $# -lt 1 ]; then
-		grepc_usage >&2;
-		exit 1;
-	fi;
+	test $# -lt 1 && grepc_err "Missing identifier.";
 	identifier=$1;
 	shift;
 
