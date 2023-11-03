@@ -156,12 +156,7 @@ grepc_parse_cmd()
 	identifier=$1;
 	shift;
 
-	if [ $# -gt 0 ]; then
-		file="$1";
-		shift;
-	fi;
-
-	test $# -gt 1 && grepc_err "Trailing unknown arguments.";
+	files=$*;
 
 	if [ "$tflag" = 'no' ]; then
 		t_e='yes';
@@ -237,7 +232,7 @@ main()
 {
 	grepc_parse_cmd "$@" </dev/null;
 
-	pcre2grep -${iflag}${lflag}HMn -f <(grepc_patterns "$identifier") $file \
+	pcre2grep -${iflag}${lflag}HMn -f <(grepc_patterns "$identifier") $files \
 	| sed -E -f <(test "$kflag" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
 	| perl -pe "$(test "$cflag" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
 	| if [ -n "$lflag" ]; then
