@@ -151,6 +151,13 @@ This option can be passed multiple times
 to search for various types of code.
 Default:
 .BR "e f m t" .
+.SH CAVEATS
+In some cases,
+internal calls to
+.MR pcre2grep 1
+may fail after consuming too much resources.
+To solve that,
+restrict the "types of code" of your search.
 .SH EXAMPLES
 .EX
 .RB \(ti/src/nginx/unit$ " grepc nxt_sprintf;"
