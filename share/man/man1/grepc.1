@@ -5,7 +5,7 @@ grepc \- find C declarations, definitions, and uses in source code
 .B grepc
 .RI [ option\~ .\|.\|.\&]
 .I pattern
-.RI [ file\~ .\|.\|.]
+.RI [ file ]
 .SH DESCRIPTION
 .MR grepc 1
 searches for C declarations, definitions, and/or uses of
@@ -18,14 +18,10 @@ is a PCRE pattern.
 It normally represents a C identifier,
 and word boundaries are implicitly added to it in most cases.
 .PP
-If
-.I file
-is a directory,
-the search is recursive within that directory.
 If no
 .I file
 is given,
-the working directory is searched.
+the program reads the standard input.
 .SS Types of code
 This program can search for several types of code.
 The following arguments can be passed to the
@@ -158,6 +154,8 @@ Default:
 .SH EXAMPLES
 .EX
 .RB \(ti/src/nginx/unit$ " grepc nxt_sprintf;"
+\&
+\&
 \&./src/nxt_sprintf.h:15:
 NXT_EXPORT u_char *nxt_cdecl nxt_sprintf(u_char *buf, u_char *end,
     const char *fmt, ...);
