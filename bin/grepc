@@ -232,7 +232,7 @@ grepc_helper_use()
 }
 
 
-grepc_enum_constant()
+grepc_e()
 {
 	grepc_helper \
 	  '\benum\b' \
@@ -241,7 +241,7 @@ grepc_enum_constant()
 }
 
 
-grepc_func_proto()
+grepc_fp()
 {
 	grepc_helper \
 	  "(\($1\)|\b$1)\s*\(" \
@@ -250,7 +250,7 @@ grepc_func_proto()
 }
 
 
-grepc_func_def()
+grepc_fd()
 {
 	grepc_helper \
 	  "(\($1\)|\b$1)\s*\(" \
@@ -259,13 +259,13 @@ grepc_func_def()
 }
 
 
-grepc_glibc_func_libm_def()    { grepc_func_def "M_DECL_FUNC \(__$1\)"; }
-grepc_glibc_func_libio_proto() { grepc_func_proto "_IO_$1"; }
-grepc_glibc_func_libio_def()   { grepc_func_def "_IO_$1"; }
-grepc_glibc_func_proto()       { grepc_glibc_func_libio_proto "$1"; }
+grepc_fgd_libm()  { grepc_fd "M_DECL_FUNC \(__$1\)"; }
+grepc_fgp_libio() { grepc_fp "_IO_$1"; }
+grepc_fgd_libio() { grepc_fd "_IO_$1"; }
+grepc_fgp()       { grepc_fgp_libio "$1"; }
 
 
-grepc_linux_func_syscall_proto()
+grepc_fsp()
 {
 	grepc_helper \
 	  "^asmlinkage\s+[\w\s]+\**sys_$1\s*\(" \
@@ -274,7 +274,7 @@ grepc_linux_func_syscall_proto()
 }
 
 
-grepc_linux_func_syscall_def()
+grepc_fsd()
 {
 	grepc_helper \
 	  "SYSCALL_DEFINE.\($1\b" \
@@ -283,7 +283,7 @@ grepc_linux_func_syscall_def()
 }
 
 
-grepc_macro_func()
+grepc_m_func()
 {
 	grepc_helper \
 	  "#\s*define\s+$1\(" \
@@ -292,7 +292,7 @@ grepc_macro_func()
 }
 
 
-grepc_macro_object()
+grepc_m_object()
 {
 	grepc_helper \
 	  "#\s*define\s+$1\b(?!\()" \
@@ -301,7 +301,7 @@ grepc_macro_object()
 }
 
 
-grepc_type_braced()
+grepc_t_braced()
 {
 	grepc_helper \
 	  '\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b' \
@@ -310,7 +310,7 @@ grepc_type_braced()
 }
 
 
-grepc_type_td_simple()
+grepc_t_td_simple()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
@@ -319,7 +319,7 @@ grepc_type_td_simple()
 }
 
 
-grepc_type_td_braced()
+grepc_t_td_braced()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s+(struct|union|enum)\b[^;]*$' \
@@ -328,7 +328,7 @@ grepc_type_td_braced()
 }
 
 
-grepc_type_td_func()
+grepc_t_td_func()
 {
 	grepc_helper \
 	  '^[ \t]*typedef\s' \
@@ -337,7 +337,7 @@ grepc_type_td_func()
 }
 
 
-grepc_use_enum()
+grepc_ue()
 {
 	grepc_helper_use \
 	  '\benum\b' \
@@ -346,7 +346,7 @@ grepc_use_enum()
 }
 
 
-grepc_use_func_def()
+grepc_uf_def()
 {
 	grepc_helper_use \
 	  "\b$1\b" \
@@ -364,10 +364,10 @@ grepc_linux_use_func_syscall_def()
 }
 
 
-grepc_use_func_linux_def() { grepc_linux_use_func_syscall_def "$1"; }
+grepc_uf_linux_def() { grepc_linux_use_func_syscall_def "$1"; }
 
 
-grepc_use_macro()
+grepc_um()
 {
 	grepc_helper_use \
 	  "\b$1\b" \
@@ -376,7 +376,7 @@ grepc_use_macro()
 }
 
 
-grepc_use_type_su()
+grepc_ut_su()
 {
 	grepc_helper_use \
 	  "\b(struct|union)\b" \
@@ -385,7 +385,7 @@ grepc_use_type_su()
 }
 
 
-grepc_use_type_td_simple()
+grepc_ut_td_simple()
 {
 	grepc_helper_use \
 	  '^[ \t]*typedef\s' \
@@ -394,7 +394,7 @@ grepc_use_type_td_simple()
 }
 
 
-grepc_use_type_td_su()
+grepc_ut_td_su()
 {
 	grepc_helper_use \
 	  '^[ \t]*typedef\s+(struct|union)\b[^;]*$' \
@@ -405,27 +405,27 @@ grepc_use_type_td_su()
 
 grepc_search()
 {
-	test "$t_e" = 'yes' && grepc_enum_constant "$1";
-	test "$t_fp" = 'yes' && grepc_func_proto "$1";
-	test "$t_fd" = 'yes' && grepc_func_def "$1";
-	test "$t_fsp" = 'yes' && grepc_linux_func_syscall_proto "$1";
-	test "$t_fsd" = 'yes' && grepc_linux_func_syscall_def "$1";
-	test "$t_fgp" = 'yes' && grepc_glibc_func_proto "$1";
-	test "$t_fgd_libm" = 'yes' && grepc_glibc_func_libm_def "$1";
-	test "$t_fgd_libio" = 'yes' && grepc_glibc_func_libio_def "$1";
-	test "$t_m_func" = 'yes' && grepc_macro_func "$1";
-	test "$t_m_obj" = 'yes' && grepc_macro_object "$1";
-	test "$t_t_braced" = 'yes' && grepc_type_braced "$1";
-	test "$t_t_td_simple" = 'yes' && grepc_type_td_simple "$1";
-	test "$t_t_td_braced" = 'yes' && grepc_type_td_braced "$1";
-	test "$t_t_td_func" = 'yes' && grepc_type_td_func "$1";
-	test "$t_ue" = 'yes' && grepc_use_enum "$1";
-	test "$t_uf_def" = 'yes' && grepc_use_func_def "$1";
-	test "$t_uf_linux_def" = 'yes' && grepc_use_func_linux_def "$1";
-	test "$t_um" = 'yes' && grepc_use_macro "$1";
-	test "$t_ut_su" = 'yes' && grepc_use_type_su "$1";
-	test "$t_ut_td_simple" = 'yes' && grepc_use_type_td_simple "$1";
-	test "$t_ut_td_su" = 'yes' && grepc_use_type_td_su "$1";
+	test "$t_e" = 'yes' && grepc_e "$1";
+	test "$t_fp" = 'yes' && grepc_fp "$1";
+	test "$t_fd" = 'yes' && grepc_fd "$1";
+	test "$t_fsp" = 'yes' && grepc_fsp "$1";
+	test "$t_fsd" = 'yes' && grepc_fsd "$1";
+	test "$t_fgp" = 'yes' && grepc_fgp "$1";
+	test "$t_fgd_libm" = 'yes' && grepc_fgd_libm "$1";
+	test "$t_fgd_libio" = 'yes' && grepc_fgd_libio "$1";
+	test "$t_m_func" = 'yes' && grepc_m_func "$1";
+	test "$t_m_obj" = 'yes' && grepc_m_object "$1";
+	test "$t_t_braced" = 'yes' && grepc_t_braced "$1";
+	test "$t_t_td_simple" = 'yes' && grepc_t_td_simple "$1";
+	test "$t_t_td_braced" = 'yes' && grepc_t_td_braced "$1";
+	test "$t_t_td_func" = 'yes' && grepc_t_td_func "$1";
+	test "$t_ue" = 'yes' && grepc_ue "$1";
+	test "$t_uf_def" = 'yes' && grepc_uf_def "$1";
+	test "$t_uf_linux_def" = 'yes' && grepc_uf_linux_def "$1";
+	test "$t_um" = 'yes' && grepc_um "$1";
+	test "$t_ut_su" = 'yes' && grepc_ut_su "$1";
+	test "$t_ut_td_simple" = 'yes' && grepc_ut_td_simple "$1";
+	test "$t_ut_td_su" = 'yes' && grepc_ut_td_su "$1";
 }
 
 
