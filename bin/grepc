@@ -5,6 +5,7 @@
 iflag='';
 lflag='';
 kflag='no';
+rflag='no';
 tflag='no';
 t_e='no';
 t_fp='no';
@@ -38,7 +39,7 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "chiklt:" opt; do
+	while getopts "chiklrt:" opt; do
 		case "$opt" in
 		c)
 			cflag='yes';
@@ -56,6 +57,9 @@ grepc_parse_cmd()
 		l)
 			lflag='l';
 			kflag='yes';
+			;;
+		r)
+			rflag='yes';
 			;;
 		t)
 			case "$OPTARG" in
@@ -228,11 +232,27 @@ grepc_patterns()
 }
 
 
+grepc_search()
+{
+	p="$(mktemp -u -t grepc.p.XXXXXX)";
+
+	grepc_patterns "$identifier" >"$p";
+
+	if test "$rflag" = 'no'; then
+		pcre2grep -${iflag}${lflag}HMn -f "$p" $files;
+	else
+		find $files -type f \
+		| xargs grep -${iflag}lPI -- "$identifier" \
+		| xargs pcre2grep -${iflag}${lflag}HMn -f "$p";
+	fi;
+}
+
+
 main()
 {
 	grepc_parse_cmd "$@" </dev/null;
 
-	pcre2grep -${iflag}${lflag}HMn -f <(grepc_patterns "$identifier") $files \
+	grepc_search \
 	| sed -E -f <(test "$kflag" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
 	| perl -pe "$(test "$cflag" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
 	| if [ -n "$lflag" ]; then

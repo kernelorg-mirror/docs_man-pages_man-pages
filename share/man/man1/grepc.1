@@ -21,7 +21,8 @@ and word boundaries are implicitly added to it in most cases.
 If no
 .I file
 is given,
-the program reads the standard input.
+nonrecursive searches read standard input,
+and recursive searches examine the working directory.
 .SS Types of code
 This program can search for several types of code.
 The following arguments can be passed to the
@@ -142,6 +143,14 @@ Suppress normal output;
 instead print the name of each input file
 from which output would normally have been printed.
 Each file is only printed once.
+.TP
+.B \-r
+Recursive search.
+If an input file is a directory,
+read all files under such directory, recursively,
+without following symbolic links.
+This is useful even if specific files are specified in the command line
+as it enables certain optimizations that cannot be enabled in filter mode.
 .TP
 .BI \-t " type"
 Restrict the search to a specific
