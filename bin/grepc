@@ -17,8 +17,8 @@ t_fsd='no';
 t_fgp='no';
 t_fgd_libm='no';
 t_fgd_libio='no';
-t_m_func='no';
-t_m_obj='no';
+t_mf='no';
+t_mo='no';
 t_t_braced='no';
 t_t_td_simple='no';
 t_t_td_braced='no';
@@ -106,8 +106,14 @@ grepc_parse_cmd()
 				t_fgd_libio='yes';
 				;;
 			m)
-				t_m_func='yes';
-				t_m_obj='yes';
+				t_mf='yes';
+				t_mo='yes';
+				;;
+			mf)
+				t_mf='yes';
+				;;
+			mo)
+				t_mo='yes';
 				;;
 			t)
 				t_t_braced='yes';
@@ -172,8 +178,8 @@ grepc_parse_cmd()
 		t_fgp='yes';
 		t_fgd_libm='yes';
 		t_fgd_libio='yes';
-		t_m_func='yes';
-		t_m_obj='yes';
+		t_mf='yes';
+		t_mo='yes';
 		t_t_braced='yes';
 		t_t_td_simple='yes';
 		t_t_td_braced='yes';
@@ -283,7 +289,7 @@ grepc_fsd()
 }
 
 
-grepc_m_func()
+grepc_mf()
 {
 	grepc_helper \
 	  "#\s*define\s+$1\(" \
@@ -292,7 +298,7 @@ grepc_m_func()
 }
 
 
-grepc_m_object()
+grepc_mo()
 {
 	grepc_helper \
 	  "#\s*define\s+$1\b(?!\()" \
@@ -413,8 +419,8 @@ grepc_search()
 	test "$t_fgp" = 'yes' && grepc_fgp "$1";
 	test "$t_fgd_libm" = 'yes' && grepc_fgd_libm "$1";
 	test "$t_fgd_libio" = 'yes' && grepc_fgd_libio "$1";
-	test "$t_m_func" = 'yes' && grepc_m_func "$1";
-	test "$t_m_obj" = 'yes' && grepc_m_object "$1";
+	test "$t_mf" = 'yes' && grepc_mf "$1";
+	test "$t_mo" = 'yes' && grepc_mo "$1";
 	test "$t_t_braced" = 'yes' && grepc_t_braced "$1";
 	test "$t_t_td_simple" = 'yes' && grepc_t_td_simple "$1";
 	test "$t_t_td_braced" = 'yes' && grepc_t_td_braced "$1";
