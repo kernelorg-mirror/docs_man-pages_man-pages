@@ -237,16 +237,8 @@ grepc_patterns()
 grepc_search()
 {
 	pcre2grep -${iflag}${lflag}HMn --label="$file" -f <(grepc_patterns "$identifier") \
-	| if [ "$kflag" = 'no' ]; then
-		sed -E 's/^[^: ]+:[0-9]+:/\n\n&\n/';
-	else
-		cat;
-	fi \
-	| if [ "$cflag" = 'yes' ]; then
-		perl -pe 's/('"$identifier"')/\033[32m\1\033[0m/';
-	else
-		cat;
-	fi;
+	| sed -E -f <(test "$kflag" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
+	| perl -pe "$(test "$cflag" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')";
 }
 
 
