@@ -38,14 +38,10 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "chiklt:" opt; do
+	while getopts "ciklt:" opt; do
 		case "$opt" in
 		c)
 			c='yes';
-			;;
-		h)
-			echo "Usage: $0 [OPTION ...] IDENTIFIER [FILE ...]";
-			exit 0;
 			;;
 		i)
 			i='i';
