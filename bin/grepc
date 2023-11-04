@@ -3,10 +3,10 @@
 
 # Defaults:
 c='no';
-h='H';
+h='-H';
 i='';
-l='';
 k='no';
+l='';
 t='no';
 t_e='no';
 t_fp='no';
@@ -46,16 +46,16 @@ grepc_parse_cmd()
 			c='yes';
 			;;
 		h)
-			h='h';
+			h='-h';
 			;;
 		i)
-			i='i';
+			i='-i';
 			;;
 		k)
 			k='yes';
 			;;
 		l)
-			l='l';
+			l='-l';
 			k='yes';
 			;;
 		t)
@@ -232,15 +232,22 @@ grepc_patterns()
 grepc_search()
 {
 	local patterns="$(mktemp -u -t grepc.patterns.XXXXXX)";
+	local opts='';
 
 	grepc_patterns "$identifier" >"$patterns";
 
+	opts="$opts $h";
+	opts="$opts $i";
+	opts="$opts $l";
+	opts="$opts -M";
+	opts="$opts -n";
+
 	if test -z "$files"; then
-		pcre2grep -${h}${i}${l}HMn -f "$patterns";
+		pcre2grep $opts -f "$patterns";
 	else
 		find $files -type f \
 		| xargs grep -${i}lPI -- "$identifier" \
-		| xargs pcre2grep -${h}${i}${l}HMn -f "$patterns";
+		| xargs pcre2grep $opts -f "$patterns";
 	fi;
 }
 
