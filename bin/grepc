@@ -2,10 +2,10 @@
 
 
 # Defaults:
-iflag='';
-lflag='';
-kflag='no';
-tflag='no';
+i='';
+l='';
+k='no';
+t='no';
 t_e='no';
 t_fp='no';
 t_fd='no';
@@ -41,21 +41,21 @@ grepc_parse_cmd()
 	while getopts "chiklt:" opt; do
 		case "$opt" in
 		c)
-			cflag='yes';
+			c='yes';
 			;;
 		h)
 			echo "Usage: $0 [OPTION ...] IDENTIFIER [FILE ...]";
 			exit 0;
 			;;
 		i)
-			iflag='i';
+			i='i';
 			;;
 		k)
-			kflag='yes';
+			k='yes';
 			;;
 		l)
-			lflag='l';
-			kflag='yes';
+			l='l';
+			k='yes';
 			;;
 		t)
 			case "$OPTARG" in
@@ -143,7 +143,7 @@ grepc_parse_cmd()
 				grepc_err "-$opt: $OPTARG: Unknown argument.";
 				;;
 			esac;
-			tflag='yes';
+			t='yes';
 			;;
 		?)
 			exit 1;  # getopts(1) prints an error msg.
@@ -158,7 +158,7 @@ grepc_parse_cmd()
 
 	files=$*;
 
-	if [ "$tflag" = 'no' ]; then
+	if [ "$t" = 'no' ]; then
 		t_e='yes';
 		t_fp='yes';
 		t_fd='yes';
@@ -230,16 +230,16 @@ grepc_patterns()
 
 grepc_search()
 {
-	p="$(mktemp -u -t grepc.p.XXXXXX)";
+	local patterns="$(mktemp -u -t grepc.patterns.XXXXXX)";
 
-	grepc_patterns "$identifier" >"$p";
+	grepc_patterns "$identifier" >"$patterns";
 
 	if test -z "$files"; then
-		pcre2grep -${iflag}${lflag}HMn -f "$p";
+		pcre2grep -${i}${l}HMn -f "$patterns";
 	else
 		find $files -type f \
-		| xargs grep -${iflag}lPI -- "$identifier" \
-		| xargs pcre2grep -${iflag}${lflag}HMn -f "$p";
+		| xargs grep -${i}lPI -- "$identifier" \
+		| xargs pcre2grep -${i}${l}HMn -f "$patterns";
 	fi;
 }
 
@@ -249,9 +249,9 @@ main()
 	grepc_parse_cmd "$@" </dev/null;
 
 	grepc_search \
-	| sed -E -f <(test "$kflag" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
-	| perl -pe "$(test "$cflag" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
-	| if [ -n "$lflag" ]; then
+	| sed -E -f <(test "$k" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
+	| perl -pe "$(test "$c" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
+	| if [ -n "$l" ]; then
 		sort \
 		| uniq;
 	else
