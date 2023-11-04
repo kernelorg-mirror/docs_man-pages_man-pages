@@ -2,6 +2,7 @@
 
 
 # Defaults:
+c='no';
 i='';
 l='';
 k='no';
