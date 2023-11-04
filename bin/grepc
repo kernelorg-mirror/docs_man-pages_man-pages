@@ -2,6 +2,9 @@
 
 
 # Defaults:
+A='';
+B='';
+C='';
 c='no';
 h='-H';
 i='';
@@ -40,8 +43,17 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "chiklt:" opt; do
+	while getopts "A:B:C:chiklt:" opt; do
 		case "$opt" in
+		A)
+			A="-A$OPTARG";
+			;;
+		B)
+			B="-B$OPTARG";
+			;;
+		C)
+			C="-C$OPTARG";
+			;;
 		c)
 			c='yes';
 			;;
@@ -236,6 +248,9 @@ grepc_search()
 
 	grepc_patterns "$identifier" >"$patterns";
 
+	opts="$opts $A";
+	opts="$opts $B";
+	opts="$opts $C";
 	opts="$opts $h";
 	opts="$opts $i";
 	opts="$opts $l";
