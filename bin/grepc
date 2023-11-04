@@ -3,6 +3,7 @@
 
 # Defaults:
 c='no';
+h='H';
 i='';
 l='';
 k='no';
@@ -39,10 +40,13 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "ciklt:" opt; do
+	while getopts "chiklt:" opt; do
 		case "$opt" in
 		c)
 			c='yes';
+			;;
+		h)
+			h='h';
 			;;
 		i)
 			i='i';
@@ -232,11 +236,11 @@ grepc_search()
 	grepc_patterns "$identifier" >"$patterns";
 
 	if test -z "$files"; then
-		pcre2grep -${i}${l}HMn -f "$patterns";
+		pcre2grep -${h}${i}${l}HMn -f "$patterns";
 	else
 		find $files -type f \
 		| xargs grep -${i}lPI -- "$identifier" \
-		| xargs pcre2grep -${i}${l}HMn -f "$patterns";
+		| xargs pcre2grep -${h}${i}${l}HMn -f "$patterns";
 	fi;
 }
 
