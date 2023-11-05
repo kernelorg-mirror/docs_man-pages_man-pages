@@ -5,6 +5,7 @@
 A='';
 B='';
 C='';
+c='';
 h='-H';
 i='';
 k='no';
@@ -44,7 +45,7 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "A:B:C:hiklnrt:" opt; do
+	while getopts "A:B:C:chiklnrt:" opt; do
 		case "$opt" in
 		A)
 			A="-A$OPTARG";
@@ -54,6 +55,9 @@ grepc_parse_cmd()
 			;;
 		C)
 			C="-C$OPTARG";
+			;;
+		c)
+			c='-c';
 			;;
 		h)
 			h='-h';
@@ -254,6 +258,7 @@ grepc_search()
 	opts="$opts $A";
 	opts="$opts $B";
 	opts="$opts $C";
+	opts="$opts $c";
 	opts="$opts $h";
 	opts="$opts $i";
 	opts="$opts $l";
@@ -264,7 +269,11 @@ grepc_search()
 		pcre2grep $opts -f "$patterns";
 	else
 		find $files -type f \
-		| xargs grep -${i}lPI -- "$identifier" \
+		| if test -z "$c"; then
+			xargs grep -${i}lPI -- "$identifier";
+		else
+			cat;
+		fi \
 		| xargs pcre2grep $opts -f "$patterns";
 	fi;
 }
