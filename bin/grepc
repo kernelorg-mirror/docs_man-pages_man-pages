@@ -15,8 +15,8 @@ t='no';
 t_e='no';
 t_fp='no';
 t_fd='no';
-t_fsp='no';
-t_fsd='no';
+t_flp='no';
+t_fld='no';
 t_fgp='no';
 t_fgd_libm='no';
 t_fgd_libio='no';
@@ -82,8 +82,8 @@ grepc_parse_cmd()
 			f)
 				t_fp='yes';
 				t_fd='yes';
-				t_fsp='yes';
-				t_fsd='yes';
+				t_flp='yes';
+				t_fld='yes';
 				t_fgp='yes';
 				t_fgd_libm='yes';
 				t_fgd_libio='yes';
@@ -94,15 +94,15 @@ grepc_parse_cmd()
 			fd)
 				t_fd='yes';
 				;;
-			fs)
-				t_fsp='yes';
-				t_fsd='yes';
+			fl)
+				t_flp='yes';
+				t_fld='yes';
 				;;
-			fsp)
-				t_fsp='yes';
+			flp)
+				t_flp='yes';
 				;;
-			fsd)
-				t_fsd='yes';
+			fld)
+				t_fld='yes';
 				;;
 			fg)
 				t_fgp='yes';
@@ -179,8 +179,8 @@ grepc_parse_cmd()
 		t_e='yes';
 		t_fp='yes';
 		t_fd='yes';
-		t_fsp='yes';
-		t_fsd='yes';
+		t_flp='yes';
+		t_fld='yes';
 		t_fgp='yes';
 		t_fgd_libm='yes';
 		t_fgd_libio='yes';
@@ -201,8 +201,8 @@ grepc_fgd_libm()	{ grepc_fd "M_DECL_FUNC \(__$1\)"; }
 grepc_fgd_libio()	{ grepc_fd "_IO_$1"; }
 grepc_fgp_libio()	{ grepc_fp "_IO_$1"; }
 grepc_fgp()		{ grepc_fgp_libio "$1"; }
-grepc_fsp()		{ echo '(?s)^asmlinkage\s+[\w\s]+\**sys_'"$1"'\s*\(.*?\)'; }
-grepc_fsd()		{ echo '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}'; }
+grepc_flp()		{ echo '(?s)^asmlinkage\s+[\w\s]+\**sys_'"$1"'\s*\(.*?\)'; }
+grepc_fld()		{ echo '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}'; }
 grepc_mf()		{ echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\(.*?[^\\]$'; }
 grepc_mo()		{ echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$'; }
 grepc_t_braced()	{ echo '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b[ \t]*\n*([ \t]*){.*?^\5}.*?;'; }
@@ -223,8 +223,8 @@ grepc_patterns()
 	test $t_e = yes			&& grepc_e "$1";
 	test $t_fp = yes		&& grepc_fp "$1";
 	test $t_fd = yes		&& grepc_fd "$1";
-	test $t_fsp = yes		&& grepc_fsp "$1";
-	test $t_fsd = yes		&& grepc_fsd "$1";
+	test $t_flp = yes		&& grepc_flp "$1";
+	test $t_fld = yes		&& grepc_fld "$1";
 	test $t_fgp = yes		&& grepc_fgp "$1";
 	test $t_fgd_libm = yes		&& grepc_fgd_libm "$1";
 	test $t_fgd_libio = yes		&& grepc_fgd_libio "$1";
