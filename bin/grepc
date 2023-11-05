@@ -95,7 +95,7 @@ while getopts "A:B:C:chiklnrt:" opt; do
 		esac;
 		;;
 	\?)
-		exit 1;  # getopts(1) prints an error msg.
+		exit 1;
 		;;
 	esac;
 done;
