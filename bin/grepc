@@ -128,7 +128,7 @@ grepc_parse_cmd()
 			esac;
 			t='yes';
 			;;
-		?)
+		\?)
 			exit 1;  # getopts(1) prints an error msg.
 			;;
 		esac;
