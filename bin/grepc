@@ -47,86 +47,54 @@ grepc_parse_cmd()
 {
 	while getopts "A:B:C:chiklnrt:" opt; do
 		case "$opt" in
-		A)	A="-A$OPTARG";	;;
-		B)	B="-B$OPTARG";	;;
-		C)	C="-C$OPTARG";	;;
-		c)	c='-c';		;;
-		h)	h='-h';		;;
-		i)	i='-i';		;;
-		k)	k='yes';	;;
-		l)
-			l='-l';
-			k='yes';
-			;;
-		n)	n='-n';		;;
-		r)	r='yes';	;;
+		A)	A="-A$OPTARG";	;;&
+		B)	B="-B$OPTARG";	;;&
+		C)	C="-C$OPTARG";	;;&
+		c)	c='-c';		;;&
+		h)	h='-h';		;;&
+		i)	i='-i';		;;&
+		k | l)	k='yes';	;;&
+		l)	l='-l';		;;&
+		n)	n='-n';		;;&
+		r)	r='yes';	;;&
 		t)
 			case "$OPTARG" in
-			e)	t_e='yes';		;;
-			f)
-				t_fp='yes';
-				t_fd='yes';
-				t_flp='yes';
-				t_fld='yes';
-				t_fgp='yes';
-				t_fgd_libm='yes';
-				t_fgd_libio='yes';
-				;;
-			fp)	t_fp='yes';		;;
-			fd)	t_fd='yes';		;;
-			fl)
-				t_flp='yes';
-				t_fld='yes';
-				;;
-			flp)	t_flp='yes';		;;
-			fld)	t_fld='yes';		;;
-			fg)
-				t_fgp='yes';
-				t_fgd_libm='yes';
-				t_fgd_libio='yes';
-				;;
-			fgp)	t_fgp='yes';		;;
-			fgd)
-				t_fgd_libm='yes';
-				t_fgd_libio='yes';
-				;;
-			m)
-				t_mf='yes';
-				t_mo='yes';
-				;;
-			mf)	t_mf='yes';		;;
-			mo)	t_mo='yes';		;;
+			e)		t_e='yes';		;;&
+			f | fp)		t_fp='yes';		;;&
+			f | fd)		t_fd='yes';		;;&
+			f | fl | flp)	t_flp='yes';		;;&
+			f | fl | fld)	t_fld='yes';		;;&
+			f | fg | fgp)	t_fgp='yes';		;;&
+			f | fg | fgd)
+					t_fgd_libm='yes';
+					t_fgd_libio='yes';
+								;;&
+			m | mf)		t_mf='yes';		;;&
+			m | mo)		t_mo='yes';		;;&
 			t)
-				t_t_braced='yes';
-				t_t_td_simple='yes';
-				t_t_td_braced='yes';
-				t_t_td_func='yes';
-				;;
-			u)
-				t_ue='yes';
-				t_uf_def='yes';
-				t_uf_linux_def='yes';
-				t_um='yes';
-				t_ut_su='yes';
-				t_ut_td_simple='yes';
-				t_ut_td_su='yes';
-				;;
-			ue)	t_ue='yes';		;;
-			uf)
-				t_uf_def='yes';
-				t_uf_linux_def='yes';
-				;;
-			um)	t_um='yes';		;;
-			ut)
-				t_ut_su='yes';
-				t_ut_td_simple='yes';
-				t_ut_td_su='yes';
-				;;
+					t_t_braced='yes';
+					t_t_td_simple='yes';
+					t_t_td_braced='yes';
+					t_t_td_func='yes';
+								;;&
+			u | ue)		t_ue='yes';		;;&
+			u | uf)
+					t_uf_def='yes';
+					t_uf_linux_def='yes';
+								;;&
+			u | um)		t_um='yes';		;;&
+			u | ut)
+					t_ut_su='yes';
+					t_ut_td_simple='yes';
+					t_ut_td_su='yes';
+					;;&
+			[efmtu] | f[pdlg] | fl[pd] | fg[pd] | m[fo] | u[efmt])
+					t='yes';
+					;;
 			*)
-				grepc_err "-$opt: $OPTARG: Unknown argument.";
-				;;
+					grepc_err "-$opt: $OPTARG: Unknown argument.";
+					;;
 			esac;
-			t='yes';
 			;;
 		\?)
 			exit 1;  # getopts(1) prints an error msg.
