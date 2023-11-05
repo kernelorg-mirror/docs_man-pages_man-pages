@@ -105,8 +105,6 @@ test $# -lt 1 && grepc_err "Missing identifier.";
 identifier=$1;
 shift;
 
-files=$*;
-
 if [ "$t" = 'no' ]; then
 	t_e='yes';
 	t_fp='yes';
@@ -177,46 +175,34 @@ patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 ) >"$patterns";
 
 
-grepc_search()
-{
-	local opts='';
-
-	opts="$opts $A";
-	opts="$opts $B";
-	opts="$opts $C";
-	opts="$opts $c";
-	opts="$opts $h";
-	opts="$opts $i";
-	opts="$opts $l";
-	opts="$opts -M";
-	opts="$opts $n";
-
-	if test -z "$files"; then
-		pcre2grep $opts -f "$patterns";
-	else
-		find $files -type f \
-		| if test -z "$c"; then
-			xargs grep -${i}lPI -- "$identifier";
-		else
-			cat;
-		fi \
-		| xargs pcre2grep $opts -f "$patterns";
-	fi;
-}
+opts='';
+opts="$opts $A";
+opts="$opts $B";
+opts="$opts $C";
+opts="$opts $c";
+opts="$opts $h";
+opts="$opts $i";
+opts="$opts $l";
+opts="$opts -M";
+opts="$opts $n";
 
 
-main()
-{
-	grepc_search \
-	| sed -E -f <(test "$k" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
-	| perl -pe "$(test "$r" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
-	| if [ -n "$l" ]; then
-		sort \
-		| uniq;
+if test -z "$*"; then
+	pcre2grep $opts -f "$patterns";
+else
+	find "$@" -type f \
+	| if test -z "$c"; then
+		xargs grep -${i}lPI -- "$identifier";
 	else
 		cat;
-	fi;
-}
-
-
-main;
+	fi \
+	| xargs pcre2grep $opts -f "$patterns";
+fi \
+| sed -E -f <(test "$k" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
+| perl -pe "$(test "$r" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
+| if [ -n "$l" ]; then
+	sort \
+	| uniq;
+else
+	cat;
+fi;
