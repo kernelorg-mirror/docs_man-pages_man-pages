@@ -198,8 +198,8 @@ grepc_e()		{ echo '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*
 grepc_fp()		{ echo '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**\(?'"$1"'\)?\s*(\((?:[\w\s,[\]*]|::|(?1))*(?:\.\.\.)?\))(?:[\w\s\(,\)[\]]|::)*;'; }
 grepc_fd()		{ echo '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+\**\(?'"$1"'\)?\s*(\((?:[\w\s,[\]*]|::|(?1))*(?:\.\.\.)?\))[ \t]*\n([ \t]*){.*?^\2}'; }
 grepc_fgd_libm()	{ grepc_fd "M_DECL_FUNC \(__$1\)"; }
-grepc_fgp_libio()	{ grepc_fp "_IO_$1"; }
 grepc_fgd_libio()	{ grepc_fd "_IO_$1"; }
+grepc_fgp_libio()	{ grepc_fp "_IO_$1"; }
 grepc_fgp()		{ grepc_fgp_libio "$1"; }
 grepc_fsp()		{ echo '(?s)^asmlinkage\s+[\w\s]+\**sys_'"$1"'\s*\(.*?\)'; }
 grepc_fsd()		{ echo '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}'; }
