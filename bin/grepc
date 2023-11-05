@@ -63,29 +63,21 @@ while getopts "A:B:C:chiklnrt:" opt; do
 		f | fl | flp)	t_flp='yes';		;;&
 		f | fl | fld)	t_fld='yes';		;;&
 		f | fg | fgp)	t_fgp='yes';		;;&
-		f | fg | fgd)
-				t_fgd_libm='yes';
-				t_fgd_libio='yes';
-							;;&
+		f | fg | fgd)	t_fgd_libm='yes';
+				t_fgd_libio='yes';	;;&
 		m | mf)		t_mf='yes';		;;&
 		m | mo)		t_mo='yes';		;;&
-		t)
-				t_t_braced='yes';
+		t)		t_t_braced='yes';
 				t_t_td_simple='yes';
 				t_t_td_braced='yes';
-				t_t_td_func='yes';
-							;;&
+				t_t_td_func='yes';	;;&
 		u | ue)		t_ue='yes';		;;&
-		u | uf)
-				t_uf_def='yes';
-				t_uf_linux_def='yes';
-							;;&
+		u | uf)		t_uf_def='yes';
+				t_uf_linux_def='yes';	;;&
 		u | um)		t_um='yes';		;;&
-		u | ut)
-				t_ut_su='yes';
+		u | ut)		t_ut_su='yes';
 				t_ut_td_simple='yes';
-				t_ut_td_su='yes';
-				;;&
+				t_ut_td_su='yes';	;;&
 		[efmtu] | f[pdlg] | fl[pd] | fg[pd] | m[fo] | u[efmt])
 				t='yes';
 				;;
