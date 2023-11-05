@@ -5,12 +5,12 @@
 A='';
 B='';
 C='';
-c='no';
 h='-H';
 i='';
 k='no';
 l='';
 n='';
+r='no';
 t='no';
 t_e='no';
 t_fp='no';
@@ -44,7 +44,7 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "A:B:C:chiklnt:" opt; do
+	while getopts "A:B:C:hiklnrt:" opt; do
 		case "$opt" in
 		A)
 			A="-A$OPTARG";
@@ -54,9 +54,6 @@ grepc_parse_cmd()
 			;;
 		C)
 			C="-C$OPTARG";
-			;;
-		c)
-			c='yes';
 			;;
 		h)
 			h='-h';
@@ -73,6 +70,9 @@ grepc_parse_cmd()
 			;;
 		n)
 			n='-n';
+			;;
+		r)
+			r='yes';
 			;;
 		t)
 			case "$OPTARG" in
@@ -276,7 +276,7 @@ main()
 
 	grepc_search \
 	| sed -E -f <(test "$k" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
-	| perl -pe "$(test "$c" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
+	| perl -pe "$(test "$r" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
 	| if [ -n "$l" ]; then
 		sort \
 		| uniq;
