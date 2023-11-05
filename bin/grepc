@@ -43,89 +43,86 @@ grepc_err()
 }
 
 
-grepc_parse_cmd()
-{
-	while getopts "A:B:C:chiklnrt:" opt; do
-		case "$opt" in
-		A)	A="-A$OPTARG";	;;&
-		B)	B="-B$OPTARG";	;;&
-		C)	C="-C$OPTARG";	;;&
-		c)	c='-c';		;;&
-		h)	h='-h';		;;&
-		i)	i='-i';		;;&
-		k | l)	k='yes';	;;&
-		l)	l='-l';		;;&
-		n)	n='-n';		;;&
-		r)	r='yes';	;;&
+while getopts "A:B:C:chiklnrt:" opt; do
+	case "$opt" in
+	A)	A="-A$OPTARG";	;;&
+	B)	B="-B$OPTARG";	;;&
+	C)	C="-C$OPTARG";	;;&
+	c)	c='-c';		;;&
+	h)	h='-h';		;;&
+	i)	i='-i';		;;&
+	k | l)	k='yes';	;;&
+	l)	l='-l';		;;&
+	n)	n='-n';		;;&
+	r)	r='yes';	;;&
+	t)
+		case "$OPTARG" in
+		e)		t_e='yes';		;;&
+		f | fp)		t_fp='yes';		;;&
+		f | fd)		t_fd='yes';		;;&
+		f | fl | flp)	t_flp='yes';		;;&
+		f | fl | fld)	t_fld='yes';		;;&
+		f | fg | fgp)	t_fgp='yes';		;;&
+		f | fg | fgd)
+				t_fgd_libm='yes';
+				t_fgd_libio='yes';
+							;;&
+		m | mf)		t_mf='yes';		;;&
+		m | mo)		t_mo='yes';		;;&
 		t)
-			case "$OPTARG" in
-			e)		t_e='yes';		;;&
-			f | fp)		t_fp='yes';		;;&
-			f | fd)		t_fd='yes';		;;&
-			f | fl | flp)	t_flp='yes';		;;&
-			f | fl | fld)	t_fld='yes';		;;&
-			f | fg | fgp)	t_fgp='yes';		;;&
-			f | fg | fgd)
-					t_fgd_libm='yes';
-					t_fgd_libio='yes';
-								;;&
-			m | mf)		t_mf='yes';		;;&
-			m | mo)		t_mo='yes';		;;&
-			t)
-					t_t_braced='yes';
-					t_t_td_simple='yes';
-					t_t_td_braced='yes';
-					t_t_td_func='yes';
-								;;&
-			u | ue)		t_ue='yes';		;;&
-			u | uf)
-					t_uf_def='yes';
-					t_uf_linux_def='yes';
-								;;&
-			u | um)		t_um='yes';		;;&
-			u | ut)
-					t_ut_su='yes';
-					t_ut_td_simple='yes';
-					t_ut_td_su='yes';
-					;;&
-			[efmtu] | f[pdlg] | fl[pd] | fg[pd] | m[fo] | u[efmt])
-					t='yes';
-					;;
-			*)
-					grepc_err "-$opt: $OPTARG: Unknown argument.";
-					;;
-			esac;
-			;;
-		\?)
-			exit 1;  # getopts(1) prints an error msg.
-			;;
+				t_t_braced='yes';
+				t_t_td_simple='yes';
+				t_t_td_braced='yes';
+				t_t_td_func='yes';
+							;;&
+		u | ue)		t_ue='yes';		;;&
+		u | uf)
+				t_uf_def='yes';
+				t_uf_linux_def='yes';
+							;;&
+		u | um)		t_um='yes';		;;&
+		u | ut)
+				t_ut_su='yes';
+				t_ut_td_simple='yes';
+				t_ut_td_su='yes';
+				;;&
+		[efmtu] | f[pdlg] | fl[pd] | fg[pd] | m[fo] | u[efmt])
+				t='yes';
+				;;
+		*)
+				grepc_err "-$opt: $OPTARG: Unknown argument.";
+				;;
 		esac;
-	done;
-	shift $((OPTIND-1));
+		;;
+	\?)
+		exit 1;  # getopts(1) prints an error msg.
+		;;
+	esac;
+done;
+shift $((OPTIND-1));
 
-	test $# -lt 1 && grepc_err "Missing identifier.";
-	identifier=$1;
-	shift;
+test $# -lt 1 && grepc_err "Missing identifier.";
+identifier=$1;
+shift;
 
-	files=$*;
+files=$*;
 
-	if [ "$t" = 'no' ]; then
-		t_e='yes';
-		t_fp='yes';
-		t_fd='yes';
-		t_flp='yes';
-		t_fld='yes';
-		t_fgp='yes';
-		t_fgd_libm='yes';
-		t_fgd_libio='yes';
-		t_mf='yes';
-		t_mo='yes';
-		t_t_braced='yes';
-		t_t_td_simple='yes';
-		t_t_td_braced='yes';
-		t_t_td_func='yes';
-	fi;
-}
+if [ "$t" = 'no' ]; then
+	t_e='yes';
+	t_fp='yes';
+	t_fd='yes';
+	t_flp='yes';
+	t_fld='yes';
+	t_fgp='yes';
+	t_fgd_libm='yes';
+	t_fgd_libio='yes';
+	t_mf='yes';
+	t_mo='yes';
+	t_t_braced='yes';
+	t_t_td_simple='yes';
+	t_t_td_braced='yes';
+	t_t_td_func='yes';
+fi;
 
 
 grepc_e()		{ echo '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
@@ -211,8 +208,6 @@ grepc_search()
 
 main()
 {
-	grepc_parse_cmd "$@" </dev/null;
-
 	grepc_search \
 	| sed -E -f <(test "$k" = 'no'  && echo 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
 	| perl -pe "$(test "$r" = 'yes' && echo 's/('"$identifier"')/\033[32m\1\033[0m/' || echo 's///')" \
@@ -225,4 +220,4 @@ main()
 }
 
 
-main "$@";
+main;
