@@ -167,6 +167,7 @@ patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 ) >"$patterns";
 
 
+# shellcheck disable=SC2206  # We want only non-empty variables in the array.
 opts=($A $B $C $c $h $i $l -M $n);
 
 
