@@ -242,7 +242,7 @@ grepc_patterns()
 
 grepc_search()
 {
-	local patterns="$(mktemp -u -t grepc.patterns.XXXXXX)";
+	local patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 	local opts='';
 
 	grepc_patterns "$identifier" >"$patterns";
