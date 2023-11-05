@@ -10,6 +10,7 @@ h='-H';
 i='';
 k='no';
 l='';
+n='';
 t='no';
 t_e='no';
 t_fp='no';
@@ -43,7 +44,7 @@ grepc_err()
 
 grepc_parse_cmd()
 {
-	while getopts "A:B:C:chiklt:" opt; do
+	while getopts "A:B:C:chiklnt:" opt; do
 		case "$opt" in
 		A)
 			A="-A$OPTARG";
@@ -69,6 +70,9 @@ grepc_parse_cmd()
 		l)
 			l='-l';
 			k='yes';
+			;;
+		n)
+			n='-n';
 			;;
 		t)
 			case "$OPTARG" in
@@ -254,7 +258,7 @@ grepc_search()
 	opts="$opts $i";
 	opts="$opts $l";
 	opts="$opts -M";
-	opts="$opts -n";
+	opts="$opts $n";
 
 	if test -z "$files"; then
 		pcre2grep $opts -f "$patterns";

@@ -162,6 +162,10 @@ instead print the name of each input file
 from which output would normally have been printed.
 Each file is only printed once.
 .TP
+.B \-n
+Prefix each line of output with the
+1-based line number within its input file.
+.TP
 .BI \-t " type"
 Restrict the search to a specific
 .I type
@@ -185,7 +189,7 @@ If you need to read a non-seekable file,
 redirect it to the standard input.
 .SH EXAMPLES
 .EX
-.RB \(ti/src/nginx/unit$ " grepc nxt_sprintf .;"
+.RB \(ti/src/nginx/unit$ " grepc \-n nxt_sprintf .;"
 \&
 \&
 \&./src/nxt_sprintf.h:15:
