@@ -233,7 +233,7 @@ if test -z "$*"; then
 else
 	find "$@" -type f \
 	| if test -z "$c"; then
-		xargs grep -${i}lPI -- "$identifier";
+		xargs grep -lPI $i -- "$identifier";
 	else
 		cat;
 	fi \
