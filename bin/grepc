@@ -10,6 +10,7 @@ h='-H';
 i='';
 k='no';
 l='';
+m='';
 n='';
 r='no';
 t='no';
@@ -46,7 +47,7 @@ grepc_err()
 }
 
 
-while getopts "A:B:C:chiklnrt:x:" opt; do
+while getopts "A:B:C:chiklm:nrt:x:" opt; do
 	case "$opt" in
 	A)	A="-A$OPTARG";	;;&
 	B)	B="-B$OPTARG";	;;&
@@ -56,6 +57,7 @@ while getopts "A:B:C:chiklnrt:x:" opt; do
 	i)	i='-i';		;;&
 	k | l)	k='yes';	;;&
 	l)	l='-l';		;;&
+	m)	m="-m$OPTARG";	;;&
 	n)	n='-n';		;;&
 	r)	r='yes';	;;&
 	t)
@@ -223,7 +225,7 @@ patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 
 
 # shellcheck disable=SC2206  # We want only non-empty variables in the array.
-opts=($A $B $C $c $h $i $l -M $n);
+opts=($A $B $C $c $h $i $l -M $m $n);
 
 
 if test -z "$*"; then
