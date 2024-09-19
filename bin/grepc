@@ -8,7 +8,6 @@ C='';
 c='';
 h='-H';
 i='';
-k='no';
 l='';
 m='';
 n='';
@@ -47,7 +46,7 @@ grepc_err()
 }
 
 
-while getopts "A:B:C:chiklm:nrt:x:" opt; do
+while getopts "A:B:C:chilm:nrt:x:" opt; do
 	case "$opt" in
 	A)	A="-A$OPTARG";	;;&
 	B)	B="-B$OPTARG";	;;&
@@ -55,7 +54,6 @@ while getopts "A:B:C:chiklm:nrt:x:" opt; do
 	c)	c='-c';		;;&
 	h)	h='-h';		;;&
 	i)	i='-i';		;;&
-	k | l)	k='yes';	;;&
 	l)	l='-l';		;;&
 	m)	m="-m$OPTARG";	;;&
 	n)	n='-n';		;;&
@@ -239,7 +237,6 @@ else
 	fi \
 	| xargs pcre2grep "${opts[@]}" -f "$patterns";
 fi \
-| sed -E -f <(test "$k" = 'no' && printf '%s\n' 's/^[^: ]+:[0-9]+:/\n\n&\n/') \
 | perl -pe "$(test "$r" = 'yes' && printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/' || printf '%s\n' 's///')" \
 | if [ -n "$l" ]; then
 	sort \

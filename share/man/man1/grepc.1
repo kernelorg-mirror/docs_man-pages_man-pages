@@ -148,11 +148,6 @@ Suppress the prefixing of file names on output.
 Ignore case distinctions in
 .IR pattern .
 .TP
-.B \-k
-Compact (kurz) output.
-Don't print extra newlines
-(the header is printed in the same line as the first line of a match).
-.TP
 .B \-l
 Suppress normal output;
 instead print the name of each input file
@@ -197,15 +192,9 @@ redirect it to the standard input.
 .SH EXAMPLES
 .EX
 .RB \(ti/src/nginx/unit$ " grepc \-n nxt_sprintf .;"
-\&
-\&
-\&./src/nxt_sprintf.h:15:
-NXT_EXPORT u_char *nxt_cdecl nxt_sprintf(u_char *buf, u_char *end,
+\&./src/nxt_sprintf.h:15:NXT_EXPORT u_char *nxt_cdecl nxt_sprintf(u_char *buf, u_char *end,
     const char *fmt, ...);
-\&
-\&
-\&./src/nxt_sprintf.c:58:
-u_char * nxt_cdecl
+\&./src/nxt_sprintf.c:58:u_char * nxt_cdecl
 nxt_sprintf(u_char *buf, u_char *end, const char *fmt, ...)
 {
     u_char   *p;
