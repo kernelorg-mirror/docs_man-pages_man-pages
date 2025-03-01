@@ -237,7 +237,11 @@ else
 	fi \
 	| xargs pcre2grep "${opts[@]}" -f "$patterns";
 fi \
-| perl -pe "$(test "$r" = 'yes' && printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/' || printf '%s\n' 's///')" \
+| perl -p <(
+	test "$r" = 'yes' \
+	&& printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/' \
+	|| printf '%s\n' 's///';
+) \
 | if [ -n "$l" ]; then
 	sort \
 	| uniq;
