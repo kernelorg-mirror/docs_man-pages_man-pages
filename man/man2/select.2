@@ -21,7 +21,7 @@ Standard C library
 .BI "           struct timeval *_Nullable restrict " timeout );
 .P
 .BI "void FD_CLR(int " fd ", fd_set *" set );
-.BI "int  FD_ISSET(int " fd ", fd_set *" set );
+.BI "int  FD_ISSET(int " fd ", const fd_set *" set );
 .BI "void FD_SET(int " fd ", fd_set *" set );
 .BI "void FD_ZERO(fd_set *" set );
 .P
@@ -436,7 +436,7 @@ Portable programs may wish to check for
 and loop, just as with
 .BR EINTR .
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 .TP
 .BR select ()

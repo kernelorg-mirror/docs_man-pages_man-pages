@@ -436,17 +436,10 @@ POSIX.1-2024 specifies
 .BR SOCK_CLOFORK ,
 but Linux doesn't support it.
 .SH STANDARDS
-POSIX.1-2008.
-.P
-.B SOCK_NONBLOCK
-and
-.B SOCK_CLOEXEC
-are Linux-specific.
+POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001, 4.4BSD.
+POSIX.1-2001, 4.2BSD.
 .P
-.BR socket ()
-appeared in 4.2BSD.
 It is generally portable to/from
 non-BSD systems supporting clones of the BSD socket layer (including
 System\ V variants).
@@ -463,6 +456,11 @@ families.
 However, already the BSD man page promises: "The protocol
 family generally is the same as the address family", and subsequent
 standards use AF_* everywhere.
+.TP
+.B SOCK_NONBLOCK
+.TQ
+.B SOCK_CLOEXEC
+POSIX.1-2024.
 .SH EXAMPLES
 An example of the use of
 .BR socket ()

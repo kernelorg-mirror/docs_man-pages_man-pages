@@ -173,23 +173,20 @@ but Android does not update the kernel timezone
 based on the device timezone in Settings,
 so the kernel's timezone is typically UTC.
 .SH STANDARDS
-.TP
-.BR gettimeofday ()
-POSIX.1-2008 (obsolete).
-.TP
-.BR settimeofday ()
 None.
 .SH HISTORY
 SVr4, 4.3BSD.
-POSIX.1-2001 describes
+POSIX.1-2001 described
 .BR gettimeofday ()
 but not
 .BR settimeofday ().
-POSIX.1-2008 marks
+POSIX.1-2008 marked
 .BR gettimeofday ()
 as obsolete, recommending the use of
 .BR clock_gettime (2)
 instead.
+POSIX.1-2024 removed
+.BR gettimeofday ().
 .P
 Traditionally, the fields of
 .I struct timeval

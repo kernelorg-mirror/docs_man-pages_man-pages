@@ -147,12 +147,18 @@ capability).
 .I path
 resides on a read-only filesystem.
 .SH STANDARDS
-POSIX.1-2008.
+.TP
+.BR utime ()
+None.
+.TP
+.BR utimes ()
+POSIX.1-2024.
 .SH HISTORY
 .TP
 .BR utime ()
 SVr4, POSIX.1-2001.
-POSIX.1-2008 marks it as obsolete.
+Obsoleted in POSIX.1-2008.
+Removed in POSIX.1-2024.
 .TP
 .BR utimes ()
 4.3BSD, POSIX.1-2001.

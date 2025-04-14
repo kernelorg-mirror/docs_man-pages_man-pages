@@ -208,6 +208,12 @@ from
 .I char\ *
 into
 .IR "void\ *" .
+.P
+POSIX.1-2024
+changed the error code from
+.I (void\ *)\ \-1
+to
+.BR SHM_FAILED .
 .SH NOTES
 After a
 .BR fork (2),

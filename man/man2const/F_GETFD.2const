@@ -60,7 +60,7 @@ is set to indicate the error.
 See
 .BR fcntl (2).
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 SVr4, 4.3BSD, POSIX.1-2001.
 .SH CAVEATS

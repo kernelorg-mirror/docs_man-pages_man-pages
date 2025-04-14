@@ -418,16 +418,7 @@ See
 for a discussion on the differences between the kernel and the libc
 notion of the sigset.
 .SH STANDARDS
-.TP
-.BR poll ()
-POSIX.1-2008.
-.TP
-.BR ppoll ()
-Linux.
-.\" FIXME .
-.\" ppoll() is proposed for inclusion in POSIX:
-.\" https://www.austingroupbugs.net/view.php?id=1263
-.\" NetBSD 3.0 has a pollts() which is like Linux ppoll().
+POSIX.1-2024.
 .SH HISTORY
 .TP
 .BR poll ()
@@ -441,6 +432,7 @@ wrapper function provides emulation using
 .BR select (2).
 .TP
 .BR ppoll ()
+POSIX.1-2024.
 Linux 2.6.16,
 glibc 2.4.
 .SH NOTES

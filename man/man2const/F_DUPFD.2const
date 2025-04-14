@@ -76,7 +76,7 @@ POSIX.1-2024 specifies
 .BR F_DUPFD_CLOFORK ,
 but Linux doesn't support it.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 .TP
 .B F_DUPFD

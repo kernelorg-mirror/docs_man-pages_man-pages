@@ -208,12 +208,17 @@ The server may be too
 busy to accept new connections.
 Note that for IP sockets the timeout may
 be very long when syncookies are enabled on the server.
+.SH VERSIONS
+Portable programs must ensure that
+.I addr.sun_path
+is a null-terminated string
+for
+.B AF_UNIX
+sockets.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001, SVr4, 4.4BSD,
-.RB ( connect ()
-first appeared in 4.2BSD).
+POSIX.1-2001, SVr4, 4.2BSD.
 .\" SVr4 documents the additional
 .\" general error codes
 .\" .BR EADDRNOTAVAIL ,
