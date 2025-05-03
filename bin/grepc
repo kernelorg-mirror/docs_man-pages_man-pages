@@ -229,13 +229,13 @@ opts=($A $B $C $c $h $i $l -M $m $n);
 if test -z "$*"; then
 	pcre2grep "${opts[@]}" -f "$patterns";
 else
-	find "$@" -type f \
+	find "$@" -type f -print0 \
 	| if test -z "$c"; then
-		xargs grep -lPI $i -- "$identifier";
+		xargs -0 grep -lZPI $i -- "$identifier";
 	else
 		cat;
 	fi \
-	| xargs pcre2grep "${opts[@]}" -f "$patterns";
+	| xargs -0 pcre2grep "${opts[@]}" -f "$patterns";
 fi \
 | perl -p <(
 	test "$r" = 'yes' \
