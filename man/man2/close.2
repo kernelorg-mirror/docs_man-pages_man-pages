@@ -192,10 +192,7 @@ Many other implementations similarly always close the file descriptor
 meaning that the file descriptor was invalid)
 even if they subsequently report an error on return from
 .BR close ().
-POSIX.1 is currently silent on this point,
-but there are plans to mandate this behavior in the next major release
-.\" Issue 8
-of the standard.
+POSIX.1-2008 was silent on this point.
 .P
 A careful programmer who wants to know about I/O errors may precede
 .BR close ()
@@ -207,7 +204,7 @@ The
 error is a somewhat special case.
 Regarding the
 .B EINTR
-error, POSIX.1-2008 says:
+error, POSIX.1-2008 said:
 .P
 .RS
 If
@@ -244,16 +241,10 @@ must not be called again after an
 error, and on at least one,
 .BR close ()
 must be called again.
-There are plans to address this conundrum for
-the next major release of the POSIX.1 standard.
-.\" FIXME . for later review when Issue 8 is one day released...
-.\" POSIX proposes further changes for EINTR
-.\" http://austingroupbugs.net/tag_view_page.php?tag_id=8
-.\" http://austingroupbugs.net/view.php?id=529
-.\"
-.\" FIXME .
-.\" Review the following glibc bug later
-.\" https://sourceware.org/bugzilla/show_bug.cgi?id=14627
+.P
+POSIX.1-2024 standardized the behavior of HP-UX,
+making Linux and many other implementations non-conforming.
+There are no plans to change the behavior on Linux.
 .SH SEE ALSO
 .BR close_range (2),
 .BR fcntl (2),
