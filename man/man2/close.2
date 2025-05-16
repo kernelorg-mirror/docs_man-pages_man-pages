@@ -75,7 +75,7 @@ subsequent
 or
 .BR close ().
 .P
-See NOTES for a discussion of why
+See CAVEATS for a discussion of why
 .BR close ()
 should not be retried after an error.
 .SH STANDARDS
@@ -84,6 +84,13 @@ POSIX.1-2008.
 POSIX.1-2001, SVr4, 4.3BSD.
 .\" SVr4 documents an additional ENOLINK error condition.
 .SH NOTES
+The close-on-exec file descriptor flag can be used to ensure
+that a file descriptor is automatically closed upon a successful
+.BR execve (2);
+see
+.BR fcntl (2)
+for details.
+.SH CAVEATS
 A successful close does not guarantee that the data has been successfully
 saved to disk, as the kernel uses the buffer cache to defer writes.
 Typically, filesystems do not flush buffers when a file is closed.
@@ -91,13 +98,6 @@ If you need to be sure that
 the data is physically stored on the underlying disk, use
 .BR fsync (2).
 (It will depend on the disk hardware at this point.)
-.P
-The close-on-exec file descriptor flag can be used to ensure
-that a file descriptor is automatically closed upon a successful
-.BR execve (2);
-see
-.BR fcntl (2)
-for details.
 .\"
 .SS Multithreaded processes and close()
 It is probably unwise to close file descriptors while
