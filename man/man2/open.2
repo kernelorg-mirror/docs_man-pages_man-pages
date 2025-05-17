@@ -1419,35 +1419,18 @@ but Linux doesn't support it.
 .TQ
 .BR openat ()
 POSIX.1-2008.
-.P
+.TP
 .BR openat2 (2)
 Linux.
-.P
-The
-.BR O_DIRECT ,
-.BR O_NOATIME ,
-.BR O_PATH ,
-and
+.TP
+.B O_DIRECT
+.TQ
+.B O_NOATIME
+.TQ
+.B O_PATH
+.TQ
 .B O_TMPFILE
-flags are Linux-specific.
-One must define
-.B _GNU_SOURCE
-to obtain their definitions.
-.P
-The
-.BR O_CLOEXEC ,
-.BR O_DIRECTORY ,
-and
-.B O_NOFOLLOW
-flags are not specified in POSIX.1-2001,
-but are specified in POSIX.1-2008.
-Since glibc 2.12, one can obtain their definitions by defining either
-.B _POSIX_C_SOURCE
-with a value greater than or equal to 200809L or
-.B _XOPEN_SOURCE
-with a value greater than or equal to 700.
-In glibc 2.11 and earlier, one obtains the definitions by defining
-.BR _GNU_SOURCE .
+Linux.
 .SH HISTORY
 .TP
 .BR open ()
@@ -1459,6 +1442,13 @@ SVr4, 4.3BSD, POSIX.1-2001.
 POSIX.1-2008.
 Linux 2.6.16,
 glibc 2.4.
+.TP
+.B O_CLOEXEC
+.TQ
+.B O_DIRECTORY
+.TQ
+.B O_NOFOLLOW
+POSIX.1-2008.
 .SH NOTES
 Under Linux, the
 .B O_NONBLOCK
