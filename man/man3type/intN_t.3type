@@ -154,7 +154,7 @@ for scanning
 .I uint8_t
 values.
 .SH STANDARDS
-C11, POSIX.1-2008.
+C11, POSIX.1-2024.
 .SH HISTORY
 C99, POSIX.1-2001.
 .P

@@ -107,7 +107,7 @@ stored in network byte order.
 .I sockaddr_un
 Describes a UNIX domain socket address.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001.
 .P
@@ -120,7 +120,8 @@ These structures were invented before modern ISO C strict-aliasing rules.
 If aliasing rules are applied strictly,
 these structures would be extremely difficult to use
 without invoking undefined behavior.
-POSIX Issue 8 will fix this by requiring that implementations
+POSIX.1-2024 fixed this
+by requiring that implementations
 make sure that these structures
 can be safely used as they were designed.
 .SH NOTES

@@ -38,7 +38,7 @@ It is an integer type that can be used to contain a
 or
 .IR gid_t .
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001.
 .SH NOTES

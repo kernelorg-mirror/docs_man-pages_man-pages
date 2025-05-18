@@ -20,7 +20,7 @@ Standard C library
 represents a null pointer constant,
 that is, a pointer that does not point to anything.
 .SH STANDARDS
-C11, POSIX.1-2008.
+C11, POSIX.1-2024.
 .SH HISTORY
 C89, POSIX.1-2001.
 .SH NOTES

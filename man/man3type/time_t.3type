@@ -46,7 +46,7 @@ capable of storing values at least in the range
 C11, POSIX.1-2024.
 .TP
 .I suseconds_t
-POSIX.1-2008.
+POSIX.1-2024.
 .TP
 .I useconds_t
 None.

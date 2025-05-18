@@ -25,7 +25,7 @@ and can be used as arguments to the
 .BR exit (3)
 function.
 .SH STANDARDS
-C11, POSIX.1-2008.
+C11, POSIX.1-2024.
 .SH HISTORY
 C89, POSIX.1-2001.
 .SH EXAMPLES

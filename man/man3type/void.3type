@@ -63,7 +63,7 @@ The POSIX requirement about compatibility between
 and function pointers was added in
 POSIX.1-2008 Technical Corrigendum 1 (2013).
 .SH STANDARDS
-C11, POSIX.1-2008.
+C11, POSIX.1-2024.
 .SH HISTORY
 C89, POSIX.1-2001.
 .SH SEE ALSO
