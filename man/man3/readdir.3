@@ -58,7 +58,24 @@ The fields of the
 structure are as follows:
 .TP
 .I .d_ino
-This is the inode number of the file.
+This is the inode number of the file
+in the filesystem containing
+the directory on which
+.BR readdir ()
+was called.
+If the directory entry is a mount point,
+then
+.I .d_ino
+differs from
+.I .st_ino
+returned by
+.BR stat (2)
+on this file:
+.I .d_ino
+is the inode number of the mount point,
+while
+.I .st_ino
+is the inode number of the root directory of the mounted filesystem.
 .TP
 .I .d_off
 The value returned in

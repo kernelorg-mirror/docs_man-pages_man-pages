@@ -66,7 +66,25 @@ and
 macros may be useful to decompose the device ID in this field.)
 .TP
 .I .st_ino
-This field contains the file's inode number.
+This field contains the file's inode number
+in the filesystem on
+.IR .st_dev .
+If
+.BR stat (2)
+was called on the mount point,
+then
+.I .st_ino
+differs from
+.I .d_ino
+returned by
+.BR readdir (3)
+for the corresponding directory entry in the parent directory.
+In this case,
+.I .st_ino
+is the inode number of the root directory of the mounted filesystem,
+while
+.I .d_ino
+is the inode number of the mount point in the parent filesystem.
 .TP
 .I .st_mode
 This field contains the file type and mode.
