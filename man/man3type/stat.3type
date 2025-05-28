@@ -43,9 +43,9 @@ Feature Test Macro Requirements for glibc (see
 .BR feature_test_macros (7)):
 .RE
 .P
-.IR st_atim ,
-.IR st_mtim ,
-.IR st_ctim :
+.IR .st_atim ,
+.IR .st_mtim ,
+.IR .st_ctim :
 .nf
     Since glibc 2.12:
         _POSIX_C_SOURCE >= 200809L || _XOPEN_SOURCE >= 700
@@ -57,7 +57,7 @@ Describes information about a file.
 .P
 The fields are as follows:
 .TP
-.I st_dev
+.I .st_dev
 This field describes the device on which this file resides.
 (The
 .BR major (3)
@@ -65,50 +65,50 @@ and
 .BR minor (3)
 macros may be useful to decompose the device ID in this field.)
 .TP
-.I st_ino
+.I .st_ino
 This field contains the file's inode number.
 .TP
-.I st_mode
+.I .st_mode
 This field contains the file type and mode.
 See
 .BR inode (7)
 for further information.
 .TP
-.I st_nlink
+.I .st_nlink
 This field contains the number of hard links to the file.
 .TP
-.I st_uid
+.I .st_uid
 This field contains the user ID of the owner of the file.
 .TP
-.I st_gid
+.I .st_gid
 This field contains the ID of the group owner of the file.
 .TP
-.I st_rdev
+.I .st_rdev
 This field describes the device that this file (inode) represents.
 .TP
-.I st_size
+.I .st_size
 This field gives the size of the file (if it is a regular
 file or a symbolic link) in bytes.
 The size of a symbolic link is the length of the pathname
 it contains, without a terminating null byte.
 .TP
-.I st_blksize
+.I .st_blksize
 This field gives the "preferred" block size for efficient filesystem I/O.
 .TP
-.I st_blocks
+.I .st_blocks
 This field indicates the number of blocks allocated to the file,
 in 512-byte units.
 (This may be smaller than
-.IR st_size /512
+.IR .st_size /512
 when the file has holes.)
 .TP
-.I st_atime
+.I .st_atime
 This is the time of the last access of file data.
 .TP
-.I st_mtime
+.I .st_mtime
 This is the time of last modification of file data.
 .TP
-.I st_ctime
+.I .st_ctime
 This is the file's last status change timestamp
 (time of last change to the inode).
 .P
@@ -120,11 +120,12 @@ POSIX.1-2024.
 POSIX.1-2001.
 .P
 Old kernels and old standards did not support nanosecond timestamp fields.
-Instead, there were three timestamp
-.RI fields\[em] st_atime ,
-.IR st_mtime ,
+Instead, there were three timestamp fields
+.RI \[em] .st_atime ,
+.IR .st_mtime ,
 and
-.IR st_ctime \[em]typed
+.IR .st_ctime \[em]
+typed
 as
 .I time_t
 that recorded timestamps with one-second precision.
@@ -134,7 +135,7 @@ Since Linux 2.5.48, the
 structure supports nanosecond resolution for the three file timestamp fields.
 The nanosecond components of each timestamp are available
 via names of the form
-.IR st_atim.tv_nsec ,
+.IR .st_atim.tv_nsec ,
 if suitable test macros are defined.
 Nanosecond timestamps were standardized in POSIX.1-2008,
 and, starting with glibc 2.12,
@@ -151,7 +152,7 @@ or
 is defined.
 If none of the aforementioned macros are defined,
 then the nanosecond values are exposed with names of the form
-.IR st_atimensec .
+.IR .st_atimensec .
 .SH NOTES
 The following header also provides this type:
 .IR <ftw.h> .
