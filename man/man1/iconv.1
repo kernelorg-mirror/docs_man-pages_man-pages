@@ -55,6 +55,8 @@ is appended to
 .IR to-encoding ,
 characters that cannot be converted are discarded and an error is
 printed after conversion.
+(Characters that cannot be decoded are treated as an error
+with or without this flag.)
 .IP
 If the string
 .B //TRANSLIT
@@ -73,8 +75,11 @@ transliterated are replaced with a question mark (?) in the output.
 List all known character set encodings.
 .TP
 .B \-c
-Silently discard characters that cannot be converted instead of
+Discard characters that cannot be converted instead of
 terminating when encountering such characters.
+.\" glibc commit 6cbf845fcdc76131d0e674cee454fe738b69c69d
+POSIX requires that this option does not change
+the exit status of the program.
 .TP
 .BI \-\-output= outputfile
 .TQ
