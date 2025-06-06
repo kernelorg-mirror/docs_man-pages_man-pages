@@ -33,20 +33,20 @@ Standard C library
 /* GNU extension */
 .B #include <shadow.h>
 .P
-.BI "int getspent_r(size_t " size ;
+.BR "int getspent_r(" "size_t size;"
 .BI "               struct spwd *" spbuf ,
 .BI "               char " buf [ size "], size_t " size ", \
 struct spwd **" spbufp );
-.BI "int getspnam_r(size_t " size ;
+.BR "int getspnam_r(" "size_t size;"
 .BI "               const char *" name ", struct spwd *" spbuf ,
 .BI "               char " buf [ size "], size_t " size ", \
 struct spwd **" spbufp );
 .P
-.BI "int fgetspent_r(size_t " size ;
+.BR "int fgetspent_r(" "size_t size;"
 .BI "               FILE *" stream ", struct spwd *" spbuf ,
 .BI "               char " buf [ size "], size_t " size ", \
 struct spwd **" spbufp );
-.BI "int sgetspent_r(size_t " size ;
+.BR "int sgetspent_r(" "size_t size;"
 .BI "               const char *" s ", struct spwd *" spbuf ,
 .BI "               char " buf [ size "], size_t " size ", \
 struct spwd **" spbufp );

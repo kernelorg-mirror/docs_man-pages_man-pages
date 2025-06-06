@@ -13,11 +13,11 @@ Standard C library
 .nf
 .B #include <grp.h>
 .P
-.BI "int getgrent_r(size_t " size ;
+.BR "int getgrent_r(" "size_t size;"
 .BI "               struct group *restrict " gbuf ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct group **restrict " gbufp );
-.BI "int fgetgrent_r(size_t " size ;
+.BR "int fgetgrent_r(" "size_t size;"
 .BI "               FILE *restrict " stream ", struct group *restrict " gbuf ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct group **restrict " gbufp );

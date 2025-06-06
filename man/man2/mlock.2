@@ -12,12 +12,12 @@ Standard C library
 .nf
 .B #include <sys/mman.h>
 .P
-.BI "int mlock(size_t " size ;
+.BR "int mlock(" "size_t size;"
 .BI "          const void " addr [ size "], size_t " size );
-.BI "int mlock2(size_t " size ;
+.BR "int mlock2(" "size_t size;"
 .BI "          const void " addr [ size "], size_t " size ", \
 unsigned int " flags );
-.BI "int munlock(size_t " size ;
+.BR "int munlock(" "size_t size;"
 .BI "          const void " addr [ size "], size_t " size );
 .P
 .BI "int mlockall(int " flags );

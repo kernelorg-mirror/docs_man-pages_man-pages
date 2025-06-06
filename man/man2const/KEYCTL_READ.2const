@@ -16,7 +16,7 @@ Standard C library
 .BR "#include <sys/syscall.h>" "   /* Definition of " SYS_* " constants */"
 .B #include <unistd.h>
 .P
-.BI "long syscall(size_t " size ;
+.BR "long syscall(" "size_t size;"
 .BI "             SYS_keyctl, KEYCTL_READ, key_serial_t " key ,
 .BI "             char " buf "[_Nullable " size "], size_t " size );
 .fi

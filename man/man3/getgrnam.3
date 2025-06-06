@@ -17,12 +17,12 @@ Standard C library
 .BI "struct group *getgrnam(const char *" name );
 .BI "struct group *getgrgid(gid_t " gid );
 .P
-.BI "int getgrnam_r(size_t " size ;
+.BR "int getgrnam_r(" "size_t size;"
 .BI "               const char *restrict " name \
 ", struct group *restrict " grp ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct group **restrict " result );
-.BI "int getgrgid_r(size_t " size ;
+.BR "int getgrgid_r(" "size_t size;"
 .BI "               gid_t " gid ", struct group *restrict " grp ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct group **restrict " result );

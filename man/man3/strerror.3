@@ -18,11 +18,11 @@ Standard C library
 .BI "const char *strerrorname_np(int " errnum );
 .BI "const char *strerrordesc_np(int " errnum );
 .P
-.BI "int strerror_r(size_t " size ;
+.BR "int strerror_r(" "size_t size;"
 .BI "               int " errnum ", char " buf [ size "], size_t " size );
                /* XSI-compliant */
 .P
-.BI "char *strerror_r(size_t " size ;
+.BR "char *strerror_r(" "size_t size;"
 .BI "               int " errnum ", char " buf [ size "], size_t " size );
                /* GNU-specific */
 .P

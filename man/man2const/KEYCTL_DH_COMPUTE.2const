@@ -16,7 +16,7 @@ Standard C library
 .BR "#include <sys/syscall.h>" "   /* Definition of " SYS_* " constants */"
 .B #include <unistd.h>
 .P
-.BI "long syscall(size_t " n ;
+.BR "long syscall(" "size_t n;"
 .B "             SYS_keyctl, KEYCTL_DH_COMPUTE,"
 .BI "             struct keyctl_dh_params *" dh_params ,
 .BI "             char " buf [ n "], size_t " n ,

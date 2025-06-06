@@ -12,10 +12,10 @@ Resolver library
 .nf
 .B #include <arpa/inet.h>
 .P
-.BI "int inet_net_pton(size_t " nsize ;
+.BR "int inet_net_pton(" "size_t nsize;"
 .BI "                  int " af ", const char *" pres ,
 .BI "                  void " netp [ nsize "], size_t " nsize );
-.BI "char *inet_net_ntop(int " bits ", size_t " psize ;
+.BR "char *inet_net_ntop(" "int bits, size_t psize;"
 .BI "                  int " af ,
 .BI "                  const void " netp [( bits " \- CHAR_BIT + 1) / CHAR_BIT],"
 .BI "                  int " bits ,

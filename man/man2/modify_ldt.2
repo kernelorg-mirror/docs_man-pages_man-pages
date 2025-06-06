@@ -14,7 +14,7 @@ Standard C library
 .BR "#include <sys/syscall.h>" "     /* Definition of " SYS_* " constants */"
 .B #include <unistd.h>
 .P
-.BI "int syscall(unsigned long " bytecount ;
+.BR "int syscall(" "unsigned long bytecount;"
 .BI "            SYS_modify_ldt, int " func ", void " ptr [ bytecount ],
 .BI "            unsigned long " bytecount );
 .fi

@@ -13,13 +13,13 @@ Standard C library
 .nf
 .B #include <search.h>
 .P
-.BI "void *lfind(size_t *" n ", size_t " size ;
+.BR "void *lfind(" "size_t *n, size_t size;"
 .BI "            const void " key [ size "], \
 const void " base [* n " * " size ],
 .BI "            size_t *" n ", size_t " size ,
 .BI "            typeof(int (const void [" size "], const void [" size ]))
 .BI "                *" compar );
-.BI "void *lsearch(size_t *" n ", size_t " size ;
+.BR "void *lsearch(" "size_t *n, size_t size;"
 .BI "            const void " key [ size "], \
 void " base [* n " * " size ],
 .BI "            size_t *" n ", size_t " size ,

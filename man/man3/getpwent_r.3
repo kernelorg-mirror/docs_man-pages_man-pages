@@ -13,11 +13,11 @@ Standard C library
 .nf
 .B #include <pwd.h>
 .P
-.BI "int getpwent_r(size_t " size ;
+.BR "int getpwent_r(" "size_t size;"
 .BI "               struct passwd *restrict " pwbuf ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct passwd **restrict " pwbufp );
-.BI "int fgetpwent_r(size_t " size ;
+.BR "int fgetpwent_r(" "size_t size;"
 .BI "               FILE *restrict " stream ", struct passwd *restrict " pwbuf ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct passwd **restrict " pwbufp );

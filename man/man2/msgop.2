@@ -12,12 +12,12 @@ Standard C library
 .nf
 .B #include <sys/msg.h>
 .P
-.BI "ssize_t msgrcv(size_t " msgsz ;
+.BR "ssize_t msgrcv(" "size_t msgsz;"
 .BI "               int " msqid ", void " msgp [ msgsz "], size_t " msgsz \
 ", long " msgtyp ,
 .BI "               int " msgflg );
 .P
-.BI "int msgsnd(size_t " msgsz ;
+.BR "int msgsnd(" "size_t msgsz;"
 .BI "               int " msqid ", const void " msgp [ msgsz "], size_t " msgsz ,
 .BI "               int " msgflg );
 .fi

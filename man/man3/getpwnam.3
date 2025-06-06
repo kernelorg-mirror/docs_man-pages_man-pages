@@ -17,12 +17,12 @@ Standard C library
 .BI "struct passwd *getpwnam(const char *" name );
 .BI "struct passwd *getpwuid(uid_t " uid );
 .P
-.BI "int getpwnam_r(size_t " size ;
+.BR "int getpwnam_r(" "size_t size;"
 .BI "               const char *restrict " name ", \
 struct passwd *restrict " pwd ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct passwd **restrict " result );
-.BI "int getpwuid_r(size_t " size ;
+.BR "int getpwuid_r(" "size_t size;"
 .BI "               uid_t " uid ", struct passwd *restrict " pwd ,
 .BI "               char " buf "[restrict " size "], size_t " size ,
 .BI "               struct passwd **restrict " result );

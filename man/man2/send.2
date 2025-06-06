@@ -13,10 +13,10 @@ Standard C library
 .nf
 .B #include <sys/socket.h>
 .P
-.BI "ssize_t send(size_t " size ;
+.BR "ssize_t send(" "size_t size;"
 .BI "               int " sockfd ", const void " buf [ size "], size_t " size \
 ", int " flags );
-.BI "ssize_t sendto(size_t " size ;
+.BR "ssize_t sendto(" "size_t size;"
 .BI "               int " sockfd ", const void " buf [ size "], size_t " size \
 ", int " flags ,
 .BI "               const struct sockaddr *" dest_addr ", socklen_t " addrlen );

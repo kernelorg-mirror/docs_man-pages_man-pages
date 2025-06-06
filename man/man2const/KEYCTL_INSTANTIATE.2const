@@ -19,11 +19,11 @@ Standard C library
 .BR "#include <sys/syscall.h>" "   /* Definition of " SYS_* " constants */"
 .B #include <unistd.h>
 .P
-.BI "long syscall(size_t " n ;
+.BR "long syscall(" "size_t n;"
 .BI "             SYS_keyctl, KEYCTL_INSTANTIATE, key_serial_t " key ,
 .BI "             const void " payload [ n "], size_t " n ,
 .BI "             key_serial_t " keyring );
-.BI "long syscall(size_t " n ;
+.BR "long syscall(" "size_t n;"
 .BI "             SYS_keyctl, KEYCTL_INSTANTIATE_IOV, key_serial_t " key ,
 .BI "             const struct iovec " payload [ n "], unsigned int " n ,
 .BI "             key_serial_t " keyring );

@@ -14,12 +14,12 @@ Standard C library
 .nf
 .B #include <stdio.h>
 .P
-.BI "int setvbuf(size_t " size ;
+.BR "int setvbuf(" "size_t size;"
 .BI "            FILE *restrict " stream ", char " buf "[restrict " size ],
 .BI "            int " mode ", size_t " size );
 .P
 .BI "void setbuf(FILE *restrict " stream ", char *restrict " buf );
-.BI "void setbuffer(size_t " size ;
+.BR "void setbuffer(" "size_t size;"
 .BI "            FILE *restrict " stream ", char " buf "[restrict " size ],
 .BI "            size_t "  size );
 .BI "void setlinebuf(FILE *" stream );

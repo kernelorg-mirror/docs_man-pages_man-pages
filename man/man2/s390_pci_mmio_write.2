@@ -14,10 +14,10 @@ Standard C library
 .BR "#include <sys/syscall.h>" "      /* Definition of " SYS_* " constants */"
 .B #include <unistd.h>
 .P
-.BI "int syscall(size_t " length ;
+.BR "int syscall(" "size_t length;"
 .BI "            SYS_s390_pci_mmio_write, unsigned long " mmio_addr ,
 .BI "            const void " user_buffer [ length "], size_t " length );
-.BI "int syscall(size_t " length ;
+.BR "int syscall(" "size_t length;"
 .BI "            SYS_s390_pci_mmio_read, unsigned long " mmio_addr ,
 .BI "            void " user_buffer [ length "], size_t " length );
 .fi

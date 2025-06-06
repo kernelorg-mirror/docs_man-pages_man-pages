@@ -13,11 +13,11 @@ Standard C library
 .nf
 .B #include <stdlib.h>
 .P
-.BI "void qsort(size_t " n ", size_t " size ;
+.BR "void qsort(" "size_t n, size_t size;"
 .BI "           void " base [ n " * " size "], size_t " n ", size_t " size ,
 .BI "           typeof(int (const void [" size "], const void [" size "]))"
 .BI "               *" compar );
-.BI "void qsort_r(size_t " n ", size_t " size ;
+.BR "void qsort_r(" "size_t n, size_t size;"
 .BI "           void " base [ n " * " size "], size_t " n ", size_t " size ,
 .BI "           typeof(int (const void [" size "], const void [" size "], void *))"
 .BI "               *" compar ,

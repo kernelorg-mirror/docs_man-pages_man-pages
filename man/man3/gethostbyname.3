@@ -24,7 +24,7 @@ Standard C library
 .B [[deprecated]] extern int h_errno;
 .P
 .BI "[[deprecated]] struct hostent *gethostbyname(const char *" name );
-.BI "[[deprecated]] struct hostent *gethostbyaddr(socklen_t " size ;
+.BR "[[deprecated]] struct hostent *gethostbyaddr(" "socklen_t size;"
 .BI "                                             const void " addr [ size ],
 .BI "                                             socklen_t " size ", int " type );
 .P
@@ -38,14 +38,14 @@ Standard C library
 .B [[deprecated]]
 .BI "struct hostent *gethostbyname2(const char *" name ", int " af );
 .P
-.BI "int gethostent_r(size_t " bufsize ;
+.BR "int gethostent_r(" "size_t bufsize;"
 .BI "                 struct hostent *restrict " ret ,
 .BI "                 char " buf "[restrict " bufsize "], size_t " bufsize ,
 .BI "                 struct hostent **restrict " result ,
 .BI "                 int *restrict " h_errnop );
 .P
 .B [[deprecated]]
-.BI "int gethostbyaddr_r(socklen_t " size ", size_t " bufsize ;
+.BR "int gethostbyaddr_r(" "socklen_t size, size_t bufsize;"
 .BI "                 const void " addr "[restrict " size "], socklen_t " size ,
 .BI "                 int " type ,
 .BI "                 struct hostent *restrict " ret ,
@@ -53,14 +53,14 @@ Standard C library
 .BI "                 struct hostent **restrict " result ,
 .BI "                 int *restrict " h_errnop );
 .B [[deprecated]]
-.BI "int gethostbyname_r(size_t " bufsize ;
+.BR "int gethostbyname_r(" "size_t bufsize;"
 .BI "                 const char *restrict " name ,
 .BI "                 struct hostent *restrict " ret ,
 .BI "                 char " buf "[restrict " bufsize "], size_t " bufsize ,
 .BI "                 struct hostent **restrict " result ,
 .BI "                 int *restrict " h_errnop );
 .B [[deprecated]]
-.BI "int gethostbyname2_r(size_t " bufsize ;
+.BR "int gethostbyname2_r(" "size_t bufsize;"
 .BI "                 const char *restrict " name ", int " af,
 .BI "                 struct hostent *restrict " ret ,
 .BI "                 char " buf "[restrict " bufsize "], size_t " bufsize ,

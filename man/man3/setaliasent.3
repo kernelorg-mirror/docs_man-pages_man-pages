@@ -18,13 +18,13 @@ Standard C library
 .B "void endaliasent(void);"
 .P
 .B "struct aliasent *getaliasent(void);"
-.BI "int getaliasent_r(size_t " size ;
+.BR "int getaliasent_r(" "size_t size;"
 .BI "                     struct aliasent *restrict " result ,
 .BI "                     char " buffer "[restrict " size "], size_t " size ,
 .BI "                     struct aliasent **restrict " res );
 .P
 .BI "struct aliasent *getaliasbyname(const char *" name );
-.BI "int getaliasbyname_r(size_t " size ;
+.BR "int getaliasbyname_r(" "size_t size;"
 .BI "                     const char *restrict " name ,
 .BI "                     struct aliasent *restrict " result ,
 .BI "                     char " buffer "[restrict " size "], size_t " size ,

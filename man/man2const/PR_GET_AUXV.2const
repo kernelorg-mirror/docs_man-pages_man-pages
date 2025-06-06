@@ -15,7 +15,7 @@ Standard C library
 .BR "#include <linux/prctl.h>" "  /* Definition of " PR_* " constants */"
 .B #include <sys/prctl.h>
 .P
-.BI "int prctl(size_t " size ;
+.BR "int prctl(" "size_t size;"
 .BI "          PR_GET_AUXV, void " auxv [ size "], unsigned long " size ", 0L, 0L);"
 .fi
 .SH DESCRIPTION

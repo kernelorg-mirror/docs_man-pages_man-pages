@@ -13,14 +13,14 @@ Standard C library
 .nf
 .B #include <sys/epoll.h>
 .P
-.BI "int epoll_wait(int " maxevents ;
+.BR "int epoll_wait(" "int maxevents;"
 .BI "               int " epfd ", struct epoll_event " events [ maxevents ],
 .BI "               int " maxevents ", int " timeout );
-.BI "int epoll_pwait(int " maxevents ;
+.BR "int epoll_pwait(" "int maxevents;"
 .BI "               int " epfd ", struct epoll_event " events [ maxevents ],
 .BI "               int " maxevents ", int " timeout ,
 .BI "               const sigset_t *_Nullable " sigmask );
-.BI "int epoll_pwait2(int " maxevents ;
+.BR "int epoll_pwait2(" "int maxevents;"
 .BI "               int " epfd ", struct epoll_event " events [ maxevents ],
 .BI "               int " maxevents ", \
 const struct timespec *_Nullable " timeout ,

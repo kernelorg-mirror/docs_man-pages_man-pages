@@ -30,15 +30,15 @@ strncat
 .BI "char *stpecpy(char *" dst ", char " end "[0], const char *restrict " src );
 .P
 // Copy/catenate a string with truncation.
-.BI "ssize_t strtcpy(size_t " dsize ;
+.BR "ssize_t strtcpy(" "size_t dsize;"
 .BI "               char " dst "[restrict " dsize "], \
 const char *restrict " src ,
 .BI "               size_t " dsize );
-.BI "size_t strlcpy(size_t " dsize ;
+.BR "size_t strlcpy(" "size_t dsize;"
 .BI "               char " dst "[restrict " dsize "], \
 const char *restrict " src ,
 .BI "               size_t " dsize );
-.BI "size_t strlcat(size_t " dsize ;
+.BR "size_t strlcat(" "size_t dsize;"
 .BI "               char " dst "[restrict " dsize "], \
 const char *restrict " src ,
 .BI "               size_t " dsize );
@@ -48,11 +48,11 @@ const char *restrict " src ,
 .nf
 // Fill a fixed-size buffer with characters from a string
 // and pad with null bytes.
-.BI "char *strncpy(size_t " dsize ;
+.BR "char *strncpy(" "size_t dsize;"
 .BI "              char " dst "[restrict " dsize "], \
 const char *restrict " src ,
 .BI "               size_t " dsize );
-.BI "char *stpncpy(size_t " dsize ;
+.BR "char *stpncpy(" "size_t dsize;"
 .BI "              char " dst "[restrict " dsize "], \
 const char *restrict " src ,
 .BI "               size_t " dsize );
@@ -64,19 +64,19 @@ const char *restrict " src ,
 .I stpcpy(mempcpy(dst, src, strnlen(src, NITEMS(src))), \[dq]\[dq]);
 .P
 // Catenate a null-padded character sequence into a string.
-.BI "char *strncat(size_t " ssize ;
+.BR "char *strncat(" "size_t ssize;"
 .BI "               char *restrict " dst ", const char " src "[restrict " ssize ],
 .BI "               size_t " ssize );
 .P
 // Duplicate a null-padded character sequence into a string.
-.BI "char *strndup(size_t " ssize ;
+.BR "char *strndup(" "size_t ssize;"
 .BI "               const char " src [ ssize "], size_t " ssize );
 .fi
 .\" ----- SYNOPSIS :: Length-bounded character sequences --------------/
 .SS Length-bounded character sequences
 .nf
 // Chain-copy a length-bounded character sequence.
-.BI "void *mempcpy(size_t " len ;
+.BR "void *mempcpy(" "size_t len;"
 .BI "               void " dst "[restrict " len "], \
 const void " src "[restrict " len ],
 .BI "               size_t " len );

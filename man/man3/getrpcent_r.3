@@ -14,14 +14,14 @@ Standard C library
 .nf
 .B #include <netdb.h>
 .P
-.BI "int getrpcent_r(size_t " size ;
+.BR "int getrpcent_r(" "size_t size;"
 .BI "                struct rpcent *" result_buf ", char " buf [ size ],
 .BI "                size_t " size ", struct rpcent **" result );
-.BI "int getrpcbyname_r(size_t " size ;
+.BR "int getrpcbyname_r(" "size_t size;"
 .BI "                const char *" name ,
 .BI "                struct rpcent *" result_buf ", char " buf [ size ],
 .BI "                size_t " size ", struct rpcent **" result );
-.BI "int getrpcbynumber_r(size_t " size ;
+.BR "int getrpcbynumber_r(" "size_t size;"
 .BI "                int " number ,
 .BI "                struct rpcent *" result_buf ", char " buf [ size ],
 .BI "                size_t " size ", struct rpcent **" result );
