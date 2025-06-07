@@ -156,6 +156,24 @@ Note that this does not change the videomode.
 See
 .BR resizecons (8).
 (Since Linux 1.3.3.)
+.TP
+.B VT_GETCONSIZECSRPOS
+Get console size and cursor position.
+.I argp
+points to a
+.IP
+.in +4n
+.EX
+struct vt_consizecsrpos {
+    __u16 con_rows;  /* number of console rows */
+    __u16 con_cols;  /* number of console columns */
+    __u16 csr_row;   /* current cursor's row */
+    __u16 csr_col;   /* current cursor's column */
+};
+.EE
+.in
+.IP
+(Since Linux 6.16.)
 .SH RETURN VALUE
 On success, 0 is returned (except where indicated).
 On failure, \-1 is returned, and
