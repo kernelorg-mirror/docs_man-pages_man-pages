@@ -256,6 +256,14 @@ Never used.
 .BR subcode = TIOCL_GETKMSGREDIRECT
 Returns target of kernel messages.
 (Since Linux 2.6.17.)
+.TP
+.BR subcode = TIOCL_GETBRACKETEDPASTE
+Returns
+.B 1
+if the application advertised bracketed paste compatibility to the terminal,
+.B 0
+otherwise.
+(Since Linux 6.16.)
 .SH RETURN VALUE
 On success, 0 is returned (except where indicated).
 On failure, \-1 is returned, and
