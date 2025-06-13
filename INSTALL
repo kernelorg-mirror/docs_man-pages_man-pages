@@ -80,17 +80,19 @@ Description
        targets that can be used.
 
 Files
-   GNUmakefile, share/mk/install-man.mk, share/mk/install.mk
-       Main makefiles for installing (however, others may also be used
-       by inclusion).
+   GNUmakefile, share/mk/install/*
+       Main makefiles for installing.
 
-   share/mk/cmd.mk
+   share/mk/configure/build-depends/*
        Command variables.
 
-   share/mk/install-html.mk
+   share/mk/configure/directory_variables/*
+       Directory variables.
+
+   share/mk/install/html.mk
        Makefile to install HTML manual pages.
 
-   share/mk/verbose.mk
+   share/mk/configure/verbose.mk
        Handle verbose settings.
 
    share/mk/*
