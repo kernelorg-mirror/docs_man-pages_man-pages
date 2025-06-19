@@ -12,8 +12,10 @@ Standard C library
 .nf
 .B #include <sys/time.h>
 .P
+.B [[deprecated]]
 .BI "int gettimeofday(struct timeval *restrict " tv ,
 .BI "                 struct timezone *_Nullable restrict " tz );
+.B [[deprecated]]
 .BI "int settimeofday(const struct timeval *" tv ,
 .BI "                 const struct timezone *_Nullable " tz );
 .fi
@@ -185,6 +187,10 @@ POSIX.1-2008 marked
 as obsolete, recommending the use of
 .BR clock_gettime (2)
 instead.
+Likewise,
+.BR clock_settime (2)
+should be used instead of
+.BR settimeofday ().
 POSIX.1-2024 removed
 .BR gettimeofday ().
 .P
