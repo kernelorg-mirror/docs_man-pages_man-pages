@@ -250,10 +250,48 @@ T}	Thread safety	MT-Safe
 .BR calloc ()
 .TQ
 .BR realloc ()
-C11, POSIX.1-2008.
+C23, POSIX.1-2024.
 .TP
 .BR reallocarray ()
-None.
+POSIX.1-2024.
+.SS realloc(p, 0)
+The behavior of
+.I realloc(p,\~0)
+in glibc doesn't conform to any of
+C99,
+C11,
+POSIX.1-2001,
+POSIX.1-2004,
+POSIX.1-2008,
+POSIX.1-2013,
+POSIX.1-2017,
+or POSIX.1-2024.
+The C17 specification was changed to make it conforming,
+but that specification made it
+impossible to write code that reliably
+determines if the input pointer is freed after
+.IR realloc(p,\~0) ,
+and C23 changed it again to make this undefined behavior,
+acknowledging that the C17 specification was broad enough that
+undefined behavior wasn't worse than that.
+.P
+.BR reallocarray ()
+suffers the same issues in glibc.
+.P
+musl libc and the BSDs conform to all versions of ISO C and POSIX.1.
+.P
+gnulib provides the
+.I realloc-posix
+module,
+which provides wrappers
+.BR realloc ()
+and
+.BR reallocarray ()
+that conform to all versions of ISO C and POSIX.1.
+.P
+There's a proposal to standardize the BSD behavior:
+.UR https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3621.txt
+.UE .
 .SH HISTORY
 .TP
 .BR malloc ()
@@ -278,6 +316,18 @@ starting in glibc 2.30.
 preserved
 .I errno
 starting in glibc 2.33.
+.SS realloc(p,\~0)
+C89 was ambiguous in its specification of
+.IR realloc(p,\~0) .
+C99 partially fixed this.
+.P
+The original implementation in glibc would have been conforming to C99.
+However, and ironically,
+trying to comply with C99 before the standard was released,
+glibc changed its behavior in glibc 2.1.1 into something that ended up
+not conforming to the final C99 specification
+(but this is debated,
+as the wording of the standard seems self-contradicting).
 .SH NOTES
 By default, Linux follows an optimistic memory allocation strategy.
 This means that when
@@ -391,6 +441,34 @@ as POSIX and the C standard do not allow replacement of
 .BR calloc (),
 and
 .BR realloc ().
+.SH BUGS
+Programmers would naturally expect by induction that
+.I \%realloc(p,\~size)
+is consistent with
+.I free(p)
+and
+.IR malloc(size) ,
+as that is the behavior in the general case.
+This is not explicitly required by POSIX.1-2024 or C11,
+but all conforming implementations are consistent with that.
+.P
+The glibc implementation of
+.BR realloc ()
+is not consistent with that,
+and as a consequence,
+it is dangerous to call
+.I \%realloc(p,\~0)
+in glibc.
+.P
+A trivial workaround for glibc is calling it as
+.IR \%realloc(p,\~size?size:1) .
+.P
+The workaround for
+.BR reallocarray ()
+in glibc
+\[em]which shares the same bug\[em]
+would be
+.IR \%reallocarray(p,\~n?n:1,\~size?size:1) .
 .SH EXAMPLES
 .EX
 #include <err.h>
