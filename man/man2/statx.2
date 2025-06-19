@@ -74,6 +74,9 @@ struct statx {
 \&
     /* File offset alignment for direct I/O reads */
     __u32 stx_dio_read_offset_align;
+\&
+    /* Direct I/O atomic write max opt limit */
+    __u32 stx_atomic_write_unit_max_opt;
 };
 .EE
 .in
@@ -266,7 +269,8 @@ STATX_SUBVOL	Want stx_subvol
 	(since Linux 6.10; support varies by filesystem)
 STATX_WRITE_ATOMIC	Want stx_atomic_write_unit_min,
 	stx_atomic_write_unit_max,
-	and stx_atomic_write_segments_max.
+	stx_atomic_write_segments_max,
+	and stx_atomic_write_unit_max_opt.
 	(since Linux 6.11; support varies by filesystem)
 STATX_DIO_READ_ALIGN	Want stx_dio_read_offset_align.
 	(since Linux 6.14; support varies by filesystem)
@@ -513,6 +517,21 @@ and
 is supported on block devices since Linux 6.11.
 The support on regular files varies by filesystem;
 it is supported by xfs and ext4 since Linux 6.13.
+.TP
+.I stx_atomic_write_unit_max_opt
+The maximum size (in bytes) which is
+optimised for writes issued with torn-write protection.
+If non-zero,
+this value will not exceed the value in
+.I stx_atomic_write_unit_max
+and will not be less than the value in
+.IR stx_atomic_write_unit_min .
+A value of zero indicates that
+.I stx_atomic_write_unit_max
+is the optimised limit.
+Slower writes may be experienced when the size of the write exceeds
+.I stx_atomic_write_unit_max_opt
+(when non-zero).
 .TP
 .I stx_atomic_write_segments_max
 The maximum number of elements in an array of vectors
