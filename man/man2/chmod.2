@@ -220,7 +220,6 @@ If
 .I path
 is a symbolic link, do not dereference it:
 instead operate on the link itself.
-This flag is not currently implemented.
 .P
 See
 .BR openat (2)
@@ -352,6 +351,10 @@ POSIX.1-2008.
 POSIX.1-2008.
 Linux 2.6.16,
 glibc 2.4.
+.TP
+.B AT_SYMLINK_NOFOLLOW
+glibc 2.32,
+Linux 6.5.
 .SH SEE ALSO
 .BR chmod (1),
 .BR chown (2),
