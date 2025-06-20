@@ -17,10 +17,10 @@ Standard C library
 .B #include <stdlib.h>
 .P
 .BI "void *malloc(size_t " size );
-.BI "void free(void *_Nullable " ptr );
+.BI "void free(void *_Nullable " p );
 .BI "void *calloc(size_t " n ", size_t " size );
-.BI "void *realloc(void *_Nullable " ptr ", size_t "  size );
-.BI "void *reallocarray(void *_Nullable " ptr ", size_t " n ", size_t " size );
+.BI "void *realloc(void *_Nullable " p ", size_t "  size );
+.BI "void *reallocarray(void *_Nullable " p ", size_t " n ", size_t " size );
 .fi
 .P
 .RS -4
@@ -54,15 +54,15 @@ returns a unique pointer value that can later be successfully passed to
 The
 .BR free ()
 function frees the memory space pointed to by
-.IR ptr ,
+.IR p ,
 which must have been returned by a previous call to
 .BR malloc ()
 or related functions.
 Otherwise, or if
-.I ptr
+.I p
 has already been freed, undefined behavior occurs.
 If
-.I ptr
+.I p
 is NULL, no operation is performed.
 .SS calloc()
 The
@@ -103,7 +103,7 @@ malloc(n * size);
 The
 .BR realloc ()
 function changes the size of the memory block pointed to by
-.I ptr
+.I p
 to
 .I size
 bytes.
@@ -115,7 +115,7 @@ If the new size is larger than the old size, the added memory will
 be initialized.
 .P
 If
-.I ptr
+.I p
 is NULL, then the call is equivalent to
 .IR malloc(size) ,
 for all values of
@@ -125,25 +125,25 @@ If
 .I size
 is equal to zero,
 and
-.I ptr
+.I p
 is not NULL, then the call is equivalent to
-.I free(ptr)
+.I free(p)
 (but see "Nonportable behavior" for portability issues).
 .P
 Unless
-.I ptr
+.I p
 is NULL, it must have been returned by an earlier call to
 .B malloc
 or related functions.
 If the area pointed to was moved, a
-.I free(ptr)
+.I free(p)
 is done.
 .SS reallocarray()
 The
 .BR reallocarray ()
 function changes the size of (and possibly moves)
 the memory block pointed to by
-.I ptr
+.I p
 to be large enough for an array of
 .I n
 elements, each of which is
@@ -153,7 +153,7 @@ It is equivalent to the call
 .P
 .in +4n
 .EX
-realloc(ptr, n * size);
+realloc(p, n * size);
 .EE
 .in
 .P
@@ -192,15 +192,15 @@ The
 and
 .BR reallocarray ()
 functions return NULL if
-.I ptr
+.I p
 is not NULL and the requested size is zero;
 this is not considered an error.
 (See "Nonportable behavior" for portability issues.)
 Otherwise, the returned pointer may be the same as
-.I ptr
+.I p
 if the allocation was not moved
 (e.g., there was room to expand the allocation in-place), or different from
-.I ptr
+.I p
 if the allocation was moved to a new address.
 If these functions fail,
 the original block is left untouched; it is not freed or moved.
