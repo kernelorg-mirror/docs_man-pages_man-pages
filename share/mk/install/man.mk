@@ -40,7 +40,8 @@ _manintropages_rm := $(addsuffix -rm, $(wildcard $(_manintropages)))
 $(foreach s, $(MANSECTIONS),                                                  \
 	$(eval _man$(s)pages_rm :=                                            \
 		$(addsuffix -rm,                                              \
-			$(wildcard $(_man$(s)pages)))))
+			$(subst :,\:,                                         \
+				$(wildcard $(_man$(s)pages))))))
 
 
 $(foreach s, $(MANSECTIONS),                                                  \
