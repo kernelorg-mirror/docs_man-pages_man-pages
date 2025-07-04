@@ -15,7 +15,7 @@ Standard C library
 .BR "#include <linux/prctl.h>" "  /* Definition of " PR_* " constants */"
 .B #include <sys/prctl.h>
 .P
-.B int prctl(PR_SET_TIMING);
+.B int prctl(PR_GET_TIMING);
 .fi
 .SH DESCRIPTION
 Return which process timing method is currently
