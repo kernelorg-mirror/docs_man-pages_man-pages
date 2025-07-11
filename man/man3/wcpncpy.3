@@ -79,8 +79,10 @@ characters at
 .IR dest .
 .SH RETURN VALUE
 .BR wcpncpy ()
-returns a pointer to the last wide character written, that is,
-.IR dest + n \-1.
+returns a pointer to
+one past the last non-null wide character written,
+that is,
+.IR dest\~+\~wcsnlen(src,\~n) .
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
