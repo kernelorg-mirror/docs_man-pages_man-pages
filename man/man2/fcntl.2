@@ -56,54 +56,10 @@ indicating that the kernel does not recognize this value.
 .TQ
 .BR F_SETFD (2const)
 .SS File status flags
-Each open file description has certain associated status flags,
-initialized by
-.BR open (2)
-.\" or
-.\" .BR creat (2),
-and possibly modified by
-.BR fcntl ().
-Duplicated file descriptors
-(made with
-.BR dup (2),
-.BR F_DUPFD (2const),
-.BR fork (2),
-etc.) refer to the same open file description, and thus
-share the same file status flags.
-.P
-The file status flags and their semantics are described in
-.BR open (2).
 .TP
-.BR F_GETFL \~(\f[I]void\f[])
-Return (as the function result)
-the file access mode and the file status flags;
-.I arg
-is ignored.
-.TP
-.BR F_SETFL \~(\f[I]int\f[])
-Set the file status flags to the value specified by
-.IR arg .
-File access mode
-.RB ( O_RDONLY ", " O_WRONLY ", " O_RDWR )
-and file creation flags
-(i.e.,
-.BR O_CREAT ", " O_EXCL ", " O_NOCTTY ", " O_TRUNC )
-in
-.I arg
-are ignored.
-On Linux, this operation can change only the
-.BR O_APPEND ,
-.BR O_ASYNC ,
-.BR O_DIRECT ,
-.BR O_NOATIME ,
-and
-.B O_NONBLOCK
-flags.
-It is not possible to change the
-.B O_DSYNC
-and
-.B O_SYNC
-flags; see BUGS, below.
+.BR F_GETFL (2const)
+.TQ
+.BR F_SETFL (2const)
 .SS Advisory record locking
 Linux implements traditional ("process-associated") UNIX record locks,
 as standardized by POSIX.
@@ -612,8 +568,7 @@ is specified as
 As well as setting the file descriptor owner,
 one must also enable generation of signals on the file descriptor.
 This is done by using the
-.BR fcntl ()
-.B F_SETFL
+.BR F_SETFL (2const)
 operation to set the
 .B O_ASYNC
 file status flag on the file descriptor.
@@ -1500,9 +1455,6 @@ and no individual absolute meaning should be attributed to them.
 .SH RETURN VALUE
 For a successful call, the return value depends on the operation:
 .TP
-.B F_GETFL
-Value of file status flags.
-.TP
 .B F_GETLEASE
 Type of lease held on file descriptor.
 .TP
@@ -1665,11 +1617,6 @@ and the soft or hard user pipe limit has been reached; see
 .BR pipe (7).
 .TP
 .B EPERM
-Attempted to clear the
-.B O_APPEND
-flag on a file that has the append-only attribute set.
-.TP
-.B EPERM
 .I op
 was
 .BR F_ADD_SEALS ,
@@ -1722,8 +1669,6 @@ are Linux-specific.
 SVr4, 4.3BSD, POSIX.1-2001.
 .P
 Only the operations
-.BR F_GETFL ,
-.BR F_SETFL ,
 .BR F_GETLK ,
 .BR F_SETLK ,
 and
@@ -1849,18 +1794,6 @@ Because of the attendant risk of data corruption,
 .\" commit f6de7a39c181dfb8a2c534661a53c73afb3081cd
 this parameter defaults to 0 (disabled).
 .SH BUGS
-.SS F_SETFL
-It is not possible to use
-.B F_SETFL
-to change the state of the
-.B O_DSYNC
-and
-.B O_SYNC
-flags.
-.\" FIXME . According to POSIX.1-2001, O_SYNC should also be modifiable
-.\" via fcntl(2), but currently Linux does not permit this
-.\" See http://bugzilla.kernel.org/show_bug.cgi?id=5994
-Attempts to change the state of these flags are silently ignored.
 .SS F_GETOWN
 A limitation of the Linux system call conventions on some
 architectures (notably i386) means that if a (negative)
