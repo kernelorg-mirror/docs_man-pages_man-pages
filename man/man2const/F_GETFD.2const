@@ -19,7 +19,7 @@ Standard C library
 .BI "int fcntl(int " fd ", F_SETFD, int " arg );
 .fi
 .SH DESCRIPTION
-The following operations manipulate the flags associated with
+These operations manipulate the flags associated with
 a file descriptor.
 Currently, only one such flag is defined:
 .BR FD_CLOEXEC ,
@@ -65,7 +65,7 @@ POSIX.1-2008.
 SVr4, 4.3BSD, POSIX.1-2001.
 .SH CAVEATS
 In multithreaded programs, using
-.BR fcntl ()
+.BR fcntl (2)
 .B F_SETFD
 to set the close-on-exec flag at the same time as another thread performs a
 .BR fork (2)
