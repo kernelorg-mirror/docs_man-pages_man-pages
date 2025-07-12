@@ -19,9 +19,8 @@ Standard C library
 .BI "int fcntl(int " fd ", F_DUPFD_CLOEXEC, int " arg );
 .fi
 .SH DESCRIPTION
-.SS Duplicating a file descriptor
 .TP
-.BR F_DUPFD \~(\f[I]int\f[])
+.B F_DUPFD
 Duplicate the file descriptor
 .I fd
 using the lowest-numbered available file descriptor greater than or equal to
@@ -36,14 +35,13 @@ See
 .BR dup (2)
 for further details.
 .TP
-.BR F_DUPFD_CLOEXEC "\~(\f[I]int\f[]; since Linux 2.6.24)"
+.B F_DUPFD_CLOEXEC
 As for
 .BR F_DUPFD ,
 but additionally set the
 close-on-exec flag for the duplicate file descriptor.
 Specifying this flag permits a program to avoid an additional
-.BR fcntl ()
-.B F_SETFD
+.BR F_SETFD (2const)
 operation to set the
 .B FD_CLOEXEC
 flag.
@@ -63,10 +61,6 @@ See
 .BR fcntl (2).
 .TP
 .B EINVAL
-.I op
-is
-.B F_DUPFD
-and
 .I arg
 is negative or is greater than the maximum allowable value
 (see the discussion of
@@ -75,15 +69,12 @@ in
 .BR getrlimit (2)).
 .TP
 .B EMFILE
-.I op
-is
-.B F_DUPFD
-and the per-process limit on the number of open file descriptors
+The per-process limit on the number of open file descriptors
 has been reached.
 .SH VERSIONS
 POSIX.1-2024 specifies
 .BR F_DUPFD_CLOFORK ,
-but Linux doesn't support them.
+but Linux doesn't support it.
 .SH STANDARDS
 POSIX.1-2008.
 .SH HISTORY
@@ -92,13 +83,14 @@ POSIX.1-2008.
 SVr4, 4.3BSD, POSIX.1-2001.
 .TP
 .B F_DUPFD_CLOEXEC
+Linux 2.6.24.
 POSIX.1-2008.
 (To get this definition, define
 .B _POSIX_C_SOURCE
 with the value 200809L or greater, or
 .B _XOPEN_SOURCE
 with the value 700 or greater.)
-.SH NOTES
+.SH CAVEATS
 The errors returned by
 .BR dup2 (2)
 are different from those returned by
