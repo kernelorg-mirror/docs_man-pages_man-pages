@@ -47,37 +47,9 @@ value and then test whether the call failed with
 indicating that the kernel does not recognize this value.
 .SS Duplicating a file descriptor
 .TP
-.BR F_DUPFD \~(\f[I]int\f[])
-Duplicate the file descriptor
-.I fd
-using the lowest-numbered available file descriptor greater than or equal to
-.IR arg .
-This is different from
-.BR dup2 (2),
-which uses exactly the file descriptor specified.
-.IP
-On success, the new file descriptor is returned.
-.IP
-See
-.BR dup (2)
-for further details.
-.TP
-.BR F_DUPFD_CLOEXEC "\~(\f[I]int\f[]; since Linux 2.6.24)"
-As for
-.BR F_DUPFD ,
-but additionally set the
-close-on-exec flag for the duplicate file descriptor.
-Specifying this flag permits a program to avoid an additional
-.BR fcntl ()
-.B F_SETFD
-operation to set the
-.B FD_CLOEXEC
-flag.
-For an explanation of why this flag is useful,
-see the description of
-.B O_CLOEXEC
-in
-.BR open (2).
+.BR F_DUPFD (2const)
+.TQ
+.BR F_DUPFD_CLOEXEC (2const)
 .SS File descriptor flags
 The following operations manipulate the flags associated with
 a file descriptor.
@@ -131,7 +103,7 @@ and possibly modified by
 Duplicated file descriptors
 (made with
 .BR dup (2),
-.BR fcntl (F_DUPFD),
+.BR F_DUPFD (2const),
 .BR fork (2),
 etc.) refer to the same open file description, and thus
 share the same file status flags.
@@ -462,8 +434,7 @@ Open file description locks placed via the same open file description
 or via a duplicate of the file descriptor created by
 .BR fork (2),
 .BR dup (2),
-.BR fcntl ()
-.BR F_DUPFD ,
+.BR F_DUPFD (2const),
 and so on) are always compatible:
 if a new lock is placed on an already locked region,
 then the existing lock is converted to the new lock type.
@@ -1566,9 +1537,6 @@ and no individual absolute meaning should be attributed to them.
 .SH RETURN VALUE
 For a successful call, the return value depends on the operation:
 .TP
-.B F_DUPFD
-The new file descriptor.
-.TP
 .B F_GETFD
 Value of file descriptor flags.
 .TP
@@ -1701,18 +1669,6 @@ does not support sealing.
 .B EINVAL
 .I op
 is
-.B F_DUPFD
-and
-.I arg
-is negative or is greater than the maximum allowable value
-(see the discussion of
-.B RLIMIT_NOFILE
-in
-.BR getrlimit (2)).
-.TP
-.B EINVAL
-.I op
-is
 .B F_SETSIG
 and
 .I arg
@@ -1728,13 +1684,6 @@ or
 and
 .I l_pid
 was not specified as zero.
-.TP
-.B EMFILE
-.I op
-is
-.B F_DUPFD
-and the per-process limit on the number of open file descriptors
-has been reached.
 .TP
 .B ENOLCK
 Too many segment locks open, lock table is full, or a remote locking
@@ -1813,7 +1762,6 @@ are Linux-specific.
 SVr4, 4.3BSD, POSIX.1-2001.
 .P
 Only the operations
-.BR F_DUPFD ,
 .BR F_GETFD ,
 .BR F_SETFD ,
 .BR F_GETFL ,
@@ -1835,20 +1783,7 @@ are specified in POSIX.1-2001.
 with the value 500 or greater, or
 .B _POSIX_C_SOURCE
 with the value 200809L or greater.)
-.P
-.B F_DUPFD_CLOEXEC
-is specified in POSIX.1-2008.
-(To get this definition, define
-.B _POSIX_C_SOURCE
-with the value 200809L or greater, or
-.B _XOPEN_SOURCE
-with the value 700 or greater.)
 .SH NOTES
-The errors returned by
-.BR dup2 (2)
-are different from those returned by
-.BR F_DUPFD .
-.\"
 .SS File locking
 The original Linux
 .BR fcntl ()
