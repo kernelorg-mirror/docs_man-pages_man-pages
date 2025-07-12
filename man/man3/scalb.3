@@ -15,9 +15,9 @@ Math library
 .nf
 .B #include <math.h>
 .P
-.BI "[[deprecated]] double scalb(double " x ", double " exp );
-.BI "[[deprecated]] float scalbf(float " x ", float " exp );
-.BI "[[deprecated]] long double scalbl(long double " x ", long double " exp );
+.BI "[[deprecated]] double scalb(double " x ", double " e );
+.BI "[[deprecated]] float scalbf(float " x ", float " e );
+.BI "[[deprecated]] long double scalbl(long double " x ", long double " e );
 .fi
 .P
 .RS -4
@@ -47,11 +47,11 @@ by
 .B FLT_RADIX
 (probably 2)
 to the power of
-.IR exp ,
+.IR e ,
 that is:
 .P
 .nf
-    x * FLT_RADIX ** exp
+    x * FLT_RADIX ** e
 .fi
 .P
 The definition of
@@ -65,32 +65,32 @@ On success, these functions return
 *
 .B FLT_RADIX
 **
-.IR exp .
+.IR e .
 .P
 If
 .I x
 or
-.I exp
+.I e
 is a NaN, a NaN is returned.
 .P
 If
 .I x
 is positive infinity (negative infinity),
 and
-.I exp
+.I e
 is not negative infinity,
 positive infinity (negative infinity) is returned.
 .P
 If
 .I x
 is +0 (\-0), and
-.I exp
+.I e
 is not positive infinity, +0 (\-0) is returned.
 .P
 If
 .I x
 is zero, and
-.I exp
+.I e
 is positive infinity,
 a domain error occurs, and
 a NaN is returned.
@@ -99,7 +99,7 @@ If
 .I x
 is an infinity,
 and
-.I exp
+.I e
 is negative infinity,
 a domain error occurs, and
 a NaN is returned.
@@ -126,8 +126,8 @@ when calling these functions.
 .P
 The following errors can occur:
 .TP
-Domain error: \f[I]x\f[] is 0, and \f[I]exp\f[] is positive infinity, \
-or \f[I]x\f[] is positive infinity and \f[I]exp\f[] is negative infinity \
+Domain error: \f[I]x\f[] is 0, and \f[I]e\f[] is positive infinity, \
+or \f[I]x\f[] is positive infinity and \f[I]e\f[] is negative infinity \
 and the other argument is not a NaN
 .I errno
 is set to

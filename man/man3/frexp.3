@@ -14,9 +14,9 @@ Math library
 .nf
 .B #include <math.h>
 .P
-.BI "double frexp(double " x ", int *" exp );
-.BI "float frexpf(float " x ", int *" exp );
-.BI "long double frexpl(long double " x ", int *" exp );
+.BI "double frexp(double " x ", int *" e );
+.BI "float frexpf(float " x ", int *" e );
+.BI "long double frexpl(long double " x ", int *" e );
 .fi
 .P
 .RS -4
@@ -36,7 +36,7 @@ These functions are used to split the number
 .I x
 into a
 normalized fraction and an exponent which is stored in
-.IR exp .
+.IR e .
 .SH RETURN VALUE
 These functions return the normalized fraction.
 If the argument
@@ -52,20 +52,20 @@ If
 .I x
 is zero, then the normalized fraction is
 zero and zero is stored in
-.IR exp .
+.IR e .
 .P
 If
 .I x
 is a NaN,
 a NaN is returned, and the value of
-.I *exp
+.I *e
 is unspecified.
 .P
 If
 .I x
 is positive infinity (negative infinity),
 positive infinity (negative infinity) is returned, and the value of
-.I *exp
+.I *e
 is unspecified.
 .SH ERRORS
 No errors occur.
@@ -118,12 +118,12 @@ int
 main(int argc, char *argv[])
 {
     double x, r;
-    int exp;
+    int e;
 \&
     x = strtod(argv[1], NULL);
-    r = frexp(x, &exp);
+    r = frexp(x, &e);
 \&
-    printf("frexp(%g, &e) = %g: %g * %d\[ha]%d = %g\[rs]n", x, r, r, 2, exp, x);
+    printf("frexp(%g, &e) = %g: %g * %d\[ha]%d = %g\[rs]n", x, r, r, 2, e, x);
     exit(EXIT_SUCCESS);
 }
 .EE

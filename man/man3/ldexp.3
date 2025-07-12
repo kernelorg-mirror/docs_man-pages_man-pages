@@ -13,9 +13,9 @@ Math library
 .nf
 .B #include <math.h>
 .P
-.BI "double ldexp(double " x ", int " exp );
-.BI "float ldexpf(float " x ", int " exp );
-.BI "long double ldexpl(long double " x ", int " exp );
+.BI "double ldexp(double " x ", int " e );
+.BI "float ldexpf(float " x ", int " e );
+.BI "long double ldexpl(long double " x ", int " e );
 .fi
 .P
 .RS -4
@@ -34,13 +34,13 @@ Feature Test Macro Requirements for glibc (see
 These functions return the result of multiplying the floating-point number
 .I x
 by 2 raised to the power
-.IR exp .
+.IR e .
 .SH RETURN VALUE
 On success, these functions return
-.IR "x * (2\[ha]exp)" .
+.IR "x * (2\[ha]e)" .
 .P
 If
-.I exp
+.I e
 is zero, then
 .I x
 is returned.

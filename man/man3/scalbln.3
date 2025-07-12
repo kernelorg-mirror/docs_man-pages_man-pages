@@ -14,13 +14,13 @@ Math library
 .nf
 .B #include <math.h>
 .P
-.BI "double scalbln(double " x ", long " exp );
-.BI "float scalblnf(float " x ", long " exp );
-.BI "long double scalblnl(long double " x ", long " exp );
+.BI "double scalbln(double " x ", long " e );
+.BI "float scalblnf(float " x ", long " e );
+.BI "long double scalblnl(long double " x ", long " e );
 .P
-.BI "double scalbn(double " x ", int " exp );
-.BI "float scalbnf(float " x ", int " exp );
-.BI "long double scalbnl(long double " x ", int " exp );
+.BI "double scalbn(double " x ", int " e );
+.BI "float scalbnf(float " x ", int " e );
+.BI "long double scalbnl(long double " x ", int " e );
 .fi
 .P
 .RS -4
@@ -51,11 +51,11 @@ by
 .B FLT_RADIX
 (probably 2)
 to the power of
-.IR exp ,
+.IR e ,
 that is:
 .P
 .nf
-    x * FLT_RADIX ** exp
+    x * FLT_RADIX ** e
 .fi
 .P
 The definition of
@@ -69,7 +69,7 @@ On success, these functions return
 *
 .B FLT_RADIX
 **
-.IR exp .
+.IR e .
 .P
 If
 .I x

@@ -639,12 +639,12 @@ main(int argc, char *argv[])
 {
     int                fd;
     ssize_t            s;
-    uint64_t           exp, tot_exp, max_exp;
+    uint64_t           expir, tot_expir, max_expir;
     struct timespec    now;
     struct itimerspec  new_value;
 \&
     if (argc != 2 && argc != 4) {
-        fprintf(stderr, "%s init\-secs [interval\-secs max\-exp]\[rs]n",
+        fprintf(stderr, "%s init\-secs [interval\-secs max\-num\-expir]\[rs]n",
                 argv[0]);
         exit(EXIT_FAILURE);
     }
@@ -659,10 +659,10 @@ main(int argc, char *argv[])
     new_value.it_value.tv_nsec = now.tv_nsec;
     if (argc == 2) {
         new_value.it_interval.tv_sec = 0;
-        max_exp = 1;
+        max_expir = 1;
     } else {
         new_value.it_interval.tv_sec = atoi(argv[2]);
-        max_exp = atoi(argv[3]);
+        max_expir = atoi(argv[3]);
     }
     new_value.it_interval.tv_nsec = 0;
 \&
@@ -676,14 +676,15 @@ main(int argc, char *argv[])
     print_elapsed_time();
     printf("timer started\[rs]n");
 \&
-    for (tot_exp = 0; tot_exp < max_exp;) {
-        s = read(fd, &exp, sizeof(uint64_t));
+    for (tot_expir = 0; tot_expir < max_expir;) {
+        s = read(fd, &expir, sizeof(uint64_t));
         if (s != sizeof(uint64_t))
             err(EXIT_FAILURE, "read");
 \&
-        tot_exp += exp;
+        tot_expir += expir;
         print_elapsed_time();
-        printf("read: %" PRIu64 "; total=%" PRIu64 "\[rs]n", exp, tot_exp);
+        printf("read: %" PRIu64 "; total=%" PRIu64 "\[rs]n",
+               expir, tot_expir);
     }
 \&
     exit(EXIT_SUCCESS);
