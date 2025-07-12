@@ -21,7 +21,7 @@ Standard C library
 .fi
 .SH DESCRIPTION
 .TP
-.BR F_SETPIPE_SZ "\~(\f[I]int\f[]; since Linux 2.6.35)"
+.B F_SETPIPE_SZ
 Change the capacity of the pipe referred to by
 .I fd
 to be at least
@@ -31,7 +31,7 @@ An unprivileged process can adjust the pipe capacity to any value
 between the system page size and the limit defined in
 .I /proc/sys/fs/pipe\-max\-size
 (see
-.BR proc (5)).
+.BR proc_sys_fs (5)).
 Attempts to set the pipe capacity below the page size are silently
 rounded up to the page size.
 Attempts by an unprivileged process to set the pipe capacity above the limit in
@@ -60,7 +60,7 @@ are employed when data is written to the pipe,
 the number of bytes that can be written may be less than the nominal size,
 depending on the size of the writes.
 .TP
-.BR F_GETPIPE_SZ "\~(\f[I]void\f[]; since Linux 2.6.35)"
+.B F_GETPIPE_SZ
 Return (as the function result) the capacity of the pipe referred to by
 .IR fd .
 .SH RETURN VALUE
@@ -91,6 +91,6 @@ and the soft or hard user pipe limit has been reached; see
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.6.35.
 .SH SEE ALSO
 .BR fcntl (2)
