@@ -25,7 +25,7 @@ initialized by
 .\" or
 .\" .BR creat (2),
 and possibly modified by
-.BR fcntl ().
+.BR fcntl (2).
 Duplicated file descriptors
 (made with
 .BR dup (2),
@@ -37,13 +37,13 @@ share the same file status flags.
 The file status flags and their semantics are described in
 .BR open (2).
 .TP
-.BR F_GETFL \~(\f[I]void\f[])
+.B F_GETFL
 Return (as the function result)
 the file access mode and the file status flags;
 .I arg
 is ignored.
 .TP
-.BR F_SETFL \~(\f[I]int\f[])
+.B F_SETFL
 Set the file status flags to the value specified by
 .IR arg .
 File access mode
