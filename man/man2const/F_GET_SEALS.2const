@@ -16,7 +16,7 @@ Standard C library
 .B #include <fcntl.h>
 .P
 .BI "int fcntl(int " fd ", F_ADD_SEALS, int " arg );
-.BI "int fcntl(int " fd ", F_GET_SEALS);
+.BI "int fcntl(int " fd ", F_GET_SEALS);"
 .fi
 .SH DESCRIPTION
 File seals limit the set of allowed operations on a given file.
@@ -47,7 +47,7 @@ Thus, all open file descriptors referring to the same inode share
 the same set of seals.
 Furthermore, seals can never be removed, only added.
 .TP
-.BR F_ADD_SEALS "\~(\f[I]int\f[]; since Linux 3.17)"
+.B F_ADD_SEALS
 Add the seals given in the bit-mask argument
 .I arg
 to the set of seals of the inode referred to by the file descriptor
@@ -65,7 +65,7 @@ In order to place a seal, the file descriptor
 .I fd
 must be writable.
 .TP
-.BR F_GET_SEALS "\~(\f[I]void\f[]; since Linux 3.17)"
+.B F_GET_SEALS
 Return (as the function result) the current set of seals
 of the inode referred to by
 .IR fd .
@@ -212,12 +212,7 @@ and
 includes an unrecognized sealing bit.
 .TP
 .B EINVAL
-.I op
-is
-.B F_ADD_SEALS
-or
-.B F_GET_SEALS
-and the filesystem containing the inode referred to by
+The filesystem containing the inode referred to by
 .I fd
 does not support sealing.
 .TP
@@ -234,6 +229,6 @@ or the current set of seals on the file already includes
 Linux.
 .\" FIXME . Once glibc adds support, add a note about FTM requirements
 .SH HISTORY
-Linux.
+Linux 3.17.
 .SH SEE ALSO
 .BR fcntl (2)
