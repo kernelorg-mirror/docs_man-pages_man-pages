@@ -51,47 +51,10 @@ indicating that the kernel does not recognize this value.
 .TQ
 .BR F_DUPFD_CLOEXEC (2const)
 .SS File descriptor flags
-The following operations manipulate the flags associated with
-a file descriptor.
-Currently, only one such flag is defined:
-.BR FD_CLOEXEC ,
-the close-on-exec flag.
-If the
-.B FD_CLOEXEC
-bit is set,
-the file descriptor will automatically be closed during a successful
-.BR execve (2).
-(If the
-.BR execve (2)
-fails, the file descriptor is left open.)
-If the
-.B FD_CLOEXEC
-bit is not set, the file descriptor will remain open across an
-.BR execve (2).
 .TP
-.BR F_GETFD \~(\f[I]void\f[])
-Return (as the function result) the file descriptor flags;
-.I arg
-is ignored.
-.TP
-.BR F_SETFD \~(\f[I]int\f[])
-Set the file descriptor flags to the value specified by
-.IR arg .
-.P
-In multithreaded programs, using
-.BR fcntl ()
-.B F_SETFD
-to set the close-on-exec flag at the same time as another thread performs a
-.BR fork (2)
-plus
-.BR execve (2)
-is vulnerable to a race condition that may unintentionally leak
-the file descriptor to the program executed in the child process.
-See the discussion of the
-.B O_CLOEXEC
-flag in
-.BR open (2)
-for details and a remedy to the problem.
+.BR F_GETFD (2const)
+.TQ
+.BR F_SETFD (2const)
 .SS File status flags
 Each open file description has certain associated status flags,
 initialized by
@@ -1537,9 +1500,6 @@ and no individual absolute meaning should be attributed to them.
 .SH RETURN VALUE
 For a successful call, the return value depends on the operation:
 .TP
-.B F_GETFD
-Value of file descriptor flags.
-.TP
 .B F_GETFL
 Value of file status flags.
 .TP
@@ -1762,8 +1722,6 @@ are Linux-specific.
 SVr4, 4.3BSD, POSIX.1-2001.
 .P
 Only the operations
-.BR F_GETFD ,
-.BR F_SETFD ,
 .BR F_GETFL ,
 .BR F_SETFL ,
 .BR F_GETLK ,
