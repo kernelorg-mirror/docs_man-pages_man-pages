@@ -18,9 +18,6 @@ Standard C library
 .BI "int fcntl(int " fd ", F_NOTIFY, int " arg );
 .fi
 .SH DESCRIPTION
-.TP
-.BR F_NOTIFY \~(\f[I]int\f[])
-(Linux 2.4 onward)
 Provide notification when the directory referred to by
 .I fd
 or any of the files that it contains is changed.
@@ -28,9 +25,6 @@ The events to be notified are specified in
 .IR arg ,
 which is a bit mask specified by ORing together zero or more of
 the following bits:
-.P
-.RS
-.PD 0
 .TP
 .B DN_ACCESS
 A file was accessed
@@ -77,15 +71,13 @@ The attributes of a file were changed
 .BR utime (2),
 .BR utimensat (2),
 and similar).
-.PD
-.RE
-.IP
+.P
 (In order to obtain these definitions, the
 .B _GNU_SOURCE
 feature test macro must be defined before including
 .I any
 header files.)
-.IP
+.P
 Directory notifications are normally "one-shot", and the application
 must reregister to receive further notifications.
 Alternatively, if
@@ -93,7 +85,7 @@ Alternatively, if
 is included in
 .IR arg ,
 then notification will remain in effect until explicitly removed.
-.IP
+.P
 .\" The following does seem a poor API-design choice...
 A series of
 .B F_NOTIFY
@@ -105,7 +97,7 @@ To disable notification of all events, make an
 call specifying
 .I arg
 as 0.
-.IP
+.P
 Notification occurs via delivery of a signal.
 The default signal is
 .BR SIGIO ,
@@ -128,12 +120,12 @@ and the
 field of this structure contains the file descriptor which
 generated the notification (useful when establishing notification
 on multiple directories).
-.IP
+.P
 Especially when using
 .BR DN_MULTISHOT ,
 a real time signal should be used for notification,
 so that multiple notifications can be queued.
-.IP
+.P
 .B NOTE:
 New applications should use the
 .I inotify
@@ -153,15 +145,11 @@ See
 .BR fcntl (2).
 .TP
 .B ENOTDIR
-.B F_NOTIFY
-was specified in
-.IR op ,
-but
 .I fd
 does not refer to a directory.
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.4.
 .SH SEE ALSO
 .BR fcntl (2)
