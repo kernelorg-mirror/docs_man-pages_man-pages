@@ -44,24 +44,24 @@ in arbitrary ways, so long as the hints are used consistently.
 The following operations can be applied to the file descriptor,
 .IR fd :
 .TP
-.BR F_GET_RW_HINT "\~(\f[I]uint64_t\~*\f[]; since Linux 4.13)"
+.B F_GET_RW_HINT
 Returns the value of the read/write hint associated with the underlying inode
 referred to by
 .IR fd .
 .TP
-.BR F_SET_RW_HINT "\~(\f[I]uint64_t\~*\f[]; since Linux 4.13)"
+.B F_SET_RW_HINT
 Sets the read/write hint value associated with the
 underlying inode referred to by
 .IR fd .
 This hint persists until either it is explicitly modified or
 the underlying filesystem is unmounted.
 .TP
-.BR F_GET_FILE_RW_HINT "\~(\f[I]uint64_t\~*\f[]; since Linux 4.13)"
+.B F_GET_FILE_RW_HINT
 Returns the value of the read/write hint associated with
 the open file description referred to by
 .IR fd .
 .TP
-.BR F_SET_FILE_RW_HINT "\~(\f[I]uint64_t\~*\f[]; since Linux 4.13)"
+.B F_SET_FILE_RW_HINT
 Sets the read/write hint value associated with the open file description
 referred to by
 .IR fd .
@@ -70,7 +70,7 @@ If an open file description has not been assigned a read/write hint,
 then it shall use the value assigned to the inode, if any.
 .P
 The following read/write
-hints are valid since Linux 4.13:
+hints are supported:
 .TP
 .B RWH_WRITE_LIFE_NOT_SET
 No specific hint has been set.
@@ -115,6 +115,6 @@ See
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 4.13.
 .SH SEE ALSO
 .BR fcntl (2)
