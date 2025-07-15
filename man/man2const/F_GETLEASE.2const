@@ -24,7 +24,7 @@ Standard C library
 .B F_SETLEASE
 and
 .B F_GETLEASE
-(Linux 2.4 onward) are used to establish a new lease,
+are used to establish a new lease,
 and retrieve the current lease, on the open file description
 referred to by the file descriptor
 .IR fd .
@@ -36,7 +36,7 @@ or
 .BR truncate (2)
 the file referred to by that file descriptor.
 .TP
-.BR F_SETLEASE \~(\f[I]int\f[])
+.B F_SETLEASE
 Set or remove a file lease according to which of the following
 values is specified in the integer
 .IR arg :
@@ -82,7 +82,7 @@ A process with the
 .B CAP_LEASE
 capability may take out leases on arbitrary files.
 .TP
-.BR F_GETLEASE \~(\f[I]void\f[])
+.B F_GETLEASE
 Indicates what type of lease is associated with the file descriptor
 .I fd
 by returning either
@@ -199,6 +199,6 @@ See
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.4.
 .SH SEE ALSO
 .BR fcntl (2)
