@@ -1644,6 +1644,36 @@ an additional argument is supplied:
 The argument-passing conventions on
 blackfin, m68k, and sparc are different from the descriptions above.
 For details, see the kernel (and glibc) source.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+.TP
+.BR clone3 ()
+Linux 5.3.
+.\" There is no entry for
+.\" .BR clone ()
+.\" in libc5.
+.\" glibc2 provides
+.\" .BR clone ()
+.\" as described in this manual page.
+.SS Linux 2.4 and earlier
+In the Linux 2.4.x series,
+.B CLONE_THREAD
+generally does not make the parent of the new thread the same
+as the parent of the calling process.
+However, from Linux 2.4.7 to Linux 2.4.18 the
+.B CLONE_THREAD
+flag implied the
+.B CLONE_PARENT
+flag (as in Linux 2.6.0 and later).
+.P
+In Linux 2.4 and earlier,
+.BR clone ()
+does not take arguments
+.IR parent_tid ,
+.IR tls ,
+and
+.IR child_tid .
 .SS ia64
 On ia64, a different interface is used:
 .P
@@ -1682,36 +1712,6 @@ and
 .I stack_size
 specifies the size of the stack pointed to by
 .IR stack_base .
-.SH STANDARDS
-Linux.
-.SH HISTORY
-.TP
-.BR clone3 ()
-Linux 5.3.
-.\" There is no entry for
-.\" .BR clone ()
-.\" in libc5.
-.\" glibc2 provides
-.\" .BR clone ()
-.\" as described in this manual page.
-.SS Linux 2.4 and earlier
-In the Linux 2.4.x series,
-.B CLONE_THREAD
-generally does not make the parent of the new thread the same
-as the parent of the calling process.
-However, from Linux 2.4.7 to Linux 2.4.18 the
-.B CLONE_THREAD
-flag implied the
-.B CLONE_PARENT
-flag (as in Linux 2.6.0 and later).
-.P
-In Linux 2.4 and earlier,
-.BR clone ()
-does not take arguments
-.IR parent_tid ,
-.IR tls ,
-and
-.IR child_tid .
 .SH NOTES
 One use of these system calls
 is to implement threads: multiple flows of control in a program that
