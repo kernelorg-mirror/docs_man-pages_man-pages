@@ -40,7 +40,7 @@ and
 .B F_SETSIG
 are used to manage I/O availability signals:
 .TP
-.BR F_GETOWN \~(\f[I]void\f[])
+.B F_GETOWN
 Return (as the function result)
 the process ID or process group ID currently receiving
 .B SIGIO
@@ -53,7 +53,7 @@ process group IDs are returned as negative values (but see BUGS below).
 .I arg
 is ignored.
 .TP
-.BR F_SETOWN \~(\f[I]int\f[])
+.B F_SETOWN
 Set the process ID or process group ID that will receive
 .B SIGIO
 and
@@ -181,7 +181,7 @@ and
 .B SIGURG
 signals at a particular thread.
 .TP
-.BR F_GETOWN_EX "\~(\f[I]struct\~f_owner_ex\~*\f[]; since Linux 2.6.32)"
+.B F_GETOWN_EX
 Return the current file descriptor owner settings
 as defined by a previous
 .B F_SETOWN_EX
@@ -214,7 +214,7 @@ See
 .B F_SETOWN_EX
 for more details.
 .TP
-.BR F_SETOWN_EX "\~(\f[I]struct\~f_owner_ex\~*\f[]; since Linux 2.6.32)"
+.B F_SETOWN_EX
 This operation performs a similar task to
 .BR F_SETOWN .
 It allows the caller to direct I/O availability signals
@@ -254,7 +254,7 @@ is specified in
 a process group ID is specified as a positive value here.)
 .RE
 .TP
-.BR F_GETSIG \~(\f[I]void\f[])
+.B F_GETSIG
 Return (as the function result)
 the signal sent when input or output becomes possible.
 A value of zero means
@@ -269,7 +269,7 @@ the signal handler if installed with
 .I arg
 is ignored.
 .TP
-.BR F_SETSIG \~(\f[I]int\f[])
+.B F_SETSIG
 Set the signal sent when input or output becomes possible
 to the value given in
 .IR arg .
@@ -422,24 +422,31 @@ and
 .I arg
 is not an allowable signal number.
 .SH STANDARDS
+.TP
+.B F_GETOWN
+.TQ
+.B F_SETOWN
 POSIX.1-2008.
-.P
-.BR F_GETOWN_EX ,
-.BR F_SETOWN_EX ,
-.BR F_GETSIG ,
-and
-.BR F_SETSIG ,
-are Linux-specific.
+.TP
+.B F_GETOWN_EX
+.TQ
+.B F_SETOWN_EX
+.TQ
+.B F_GETSIG
+.TQ
+.B F_SETSIG
+Linux.
 (Define the
 .B _GNU_SOURCE
 macro to obtain these definitions.)
 .\" .P
 .\" SVr4 documents additional EIO, ENOLINK and EOVERFLOW error conditions.
 .SH HISTORY
+.TP
 .B F_GETOWN
-and
+.TQ
 .B F_SETOWN
-are specified in POSIX.1-2001.
+POSIX.1-2001.
 (To get their definitions, define either
 .\" .BR _BSD_SOURCE ,
 .\" or
@@ -447,6 +454,16 @@ are specified in POSIX.1-2001.
 with the value 500 or greater, or
 .B _POSIX_C_SOURCE
 with the value 200809L or greater.)
+.TP
+.B F_GETOWN_EX
+.TQ
+.B F_GETOWN_EX
+Linux 2.6.32.
+.TP
+.B F_GETSIG
+.TQ
+.B F_GETSIG
+Linux.
 .SH BUGS
 .SS F_GETOWN
 A limitation of the Linux system call conventions on some
