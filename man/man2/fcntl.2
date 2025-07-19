@@ -12,7 +12,7 @@ Standard C library
 .nf
 .B #include <fcntl.h>
 .P
-.BI "int fcntl(int " fd ", int " op ", ... /* " arg " */ );"
+.BI "int fcntl(int " fd ", int " op ", ...);"
 .fi
 .SH DESCRIPTION
 .BR fcntl ()
@@ -20,20 +20,6 @@ performs one of the operations described below on the open file descriptor
 .IR fd .
 The operation is determined by
 .IR op .
-.P
-.BR fcntl ()
-can take an optional third argument.
-Whether or not this argument is required is determined by
-.IR op .
-The required argument type is indicated in parentheses after each
-.I op
-name (in most cases, the required type is
-.IR int ,
-and we identify the argument using the name
-.IR arg ),
-or
-.I void
-is specified if the argument is not required.
 .P
 Certain of the operations below are supported only since a particular
 Linux kernel version.
