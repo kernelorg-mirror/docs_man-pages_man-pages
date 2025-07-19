@@ -135,7 +135,7 @@ then the existing lock is converted to the new lock type.
 an existing lock if the byte range specified by the new lock does not
 precisely coincide with the range of the existing lock.)
 .TP
-.BR F_SETLK \~(\f[I]struct\~flock\~*\f[])
+.B F_SETLK
 Acquire a lock (when
 .I l_type
 is
@@ -160,7 +160,7 @@ or
 (The error returned in this case differs across implementations,
 so POSIX requires a portable application to check for both errors.)
 .TP
-.BR F_SETLKW \~(\f[I]struct\~flock\~*\f[])
+.B F_SETLKW
 As for
 .BR F_SETLK ,
 but if a conflicting lock is held on the file, then wait for that
@@ -174,7 +174,7 @@ set to
 see
 .BR signal (7)).
 .TP
-.BR F_GETLK \~(\f[I]struct\~flock\~*\f[])
+.B F_GETLK
 On input to this call,
 .I lock
 describes a lock we would like to place on the file.
@@ -350,7 +350,7 @@ when using the operations described below.
 The operations for working with open file description locks are analogous
 to those used with traditional locks:
 .TP
-.BR F_OFD_SETLK \~(\f[I]struct\~flock\~*\f[])
+.B F_OFD_SETLK
 Acquire an open file description lock (when
 .I l_type
 is
@@ -371,7 +371,7 @@ this call returns \-1 and sets
 to
 .BR EAGAIN .
 .TP
-.BR F_OFD_SETLKW \~(\f[I]struct\~flock\~*\f[])
+.B F_OFD_SETLKW
 As for
 .BR F_OFD_SETLK ,
 but if a conflicting lock is held on the file, then wait for that lock to be
@@ -385,7 +385,7 @@ set to
 see
 .BR signal (7)).
 .TP
-.BR F_OFD_GETLK \~(\f[I]struct\~flock\~*\f[])
+.B F_OFD_GETLK
 On input to this call,
 .I lock
 describes an open file description lock we would like to place on the file.
