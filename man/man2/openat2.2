@@ -478,7 +478,20 @@ Linux 5.6.
 The semantics of
 .B RESOLVE_BENEATH
 were modeled after FreeBSD's
+.BR O_BENEATH ,
+but avoided a well-known correctness bug in FreeBSD's implementation that
+rendered it effectively insecure.
+Later, FreeBSD 13 introduced
+.B O_RESOLVE_BENEATH
+to replace the insecure
 .BR O_BENEATH .
+.\" https://reviews.freebsd.org/D25886
+.\" https://reviews.freebsd.org/D28907
+FreeBSD's
+.B O_RESOLVE_BENEATH
+semantics are based on Linux's
+.B RESOLVE_BENEATH
+and the two are now functionally equivalent.
 .SH NOTES
 .SS Extensibility
 In order to allow for future extensibility,
