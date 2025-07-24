@@ -371,7 +371,8 @@ a system pathname that is used by an application is modified
 (e.g., in a new distribution release)
 so that a pathname component (now) contains a bind mount.
 .TP
-.B RESOLVE_CACHED
+.BR RESOLVE_CACHED " (since Linux 5.12)"
+.\" commit 99668f618062816ca7ba639b007eb145b9d3d41e
 Make the open operation fail unless all path components are already present
 in the kernel's lookup cache.
 If any kind of revalidation or I/O is needed to satisfy the lookup,
