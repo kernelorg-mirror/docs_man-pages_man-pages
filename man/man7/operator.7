@@ -14,8 +14,9 @@ This manual page lists C operators and their precedence in evaluation.
 lb lb lb
 l l l.
 Operator	Associativity	Notes
-[] () . \-> ++ \-\-	left to right	[1]
-++ \-\- & * + \- \[ti] ! sizeof	right to left	[2]
+() _Generic()	-	[1]
+[] () . \-> ++ \-\-	left to right	[2] [3]
+++ \-\- & * + \- \[ti] ! sizeof	right to left	[4]
 (type)	right to left
 * / %	left to right
 + \-	left to right
@@ -36,9 +37,13 @@ The following notes provide further information to the above table:
 .P
 .PD 0
 .IP [1] 5
+The () at this precedence is the parenthesized expression.
+.IP [2]
+The () at this precedence is the function call operator.
+.IP [3]
 The ++ and \-\- operators at this precedence level are
 the postfix flavors of the operators.
-.IP [2]
+.IP [4]
 The ++ and \-\- operators at this precedence level are
 the prefix flavors of the operators.
 .PD
