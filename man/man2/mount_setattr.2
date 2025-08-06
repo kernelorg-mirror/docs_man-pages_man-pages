@@ -10,21 +10,12 @@ Standard C library
 .RI ( libc ,\~ \-lc )
 .SH SYNOPSIS
 .nf
-.BR "#include <linux/fcntl.h>" " /* Definition of " AT_* " constants */"
-.BR "#include <linux/mount.h>" " /* Definition of " MOUNT_ATTR_* " constants */"
-.BR "#include <sys/syscall.h>" " /* Definition of " SYS_* " constants */"
-.B #include <unistd.h>
+.BR "#include <fcntl.h>" "       /* Definition of " AT_* " constants */"
+.B #include <sys/mount.h>
 .P
-.BI "int syscall(SYS_mount_setattr, int " dirfd ", const char *" path ,
-.BI "            unsigned int " flags ", struct mount_attr *" attr \
-", size_t " size );
+.BI "int mount_setattr(int " dirfd ", const char *" path ", unsigned int " flags ","
+.BI "                  struct mount_attr *" attr ", size_t " size );"
 .fi
-.P
-.IR Note :
-glibc provides no wrapper for
-.BR mount_setattr (),
-necessitating the use of
-.BR syscall (2).
 .SH DESCRIPTION
 The
 .BR mount_setattr ()
@@ -586,6 +577,7 @@ Linux 5.12.
 .\" commit 7d6beb71da3cc033649d641e1e608713b8220290
 .\" commit 2a1867219c7b27f928e2545782b86daaf9ad50bd
 .\" commit 9caccd41541a6f7d6279928d9f971f6642c361af
+glibc 2.36.
 .SH NOTES
 .SS ID-mapped mounts
 Creating an ID-mapped mount makes it possible to
@@ -914,36 +906,13 @@ with a structure which has every byte nonzero
 #include <err.h>
 #include <fcntl.h>
 #include <getopt.h>
-#include <linux/mount.h>
-#include <linux/types.h>
+#include <sys/mount.h>
+#include <sys/types.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/syscall.h>
 #include <unistd.h>
-\&
-static inline int
-mount_setattr(int dirfd, const char *path, unsigned int flags,
-              struct mount_attr *attr, size_t size)
-{
-    return syscall(SYS_mount_setattr, dirfd, path, flags,
-                   attr, size);
-}
-\&
-static inline int
-open_tree(int dirfd, const char *filename, unsigned int flags)
-{
-    return syscall(SYS_open_tree, dirfd, filename, flags);
-}
-\&
-static inline int
-move_mount(int from_dirfd, const char *from_path,
-           int to_dirfd, const char *to_path, unsigned int flags)
-{
-    return syscall(SYS_move_mount, from_dirfd, from_path,
-                   to_dirfd, to_path, flags);
-}
 \&
 static const struct option longopts[] = {
     {"map\-mount",       required_argument,  NULL,  \[aq]a\[aq]},
