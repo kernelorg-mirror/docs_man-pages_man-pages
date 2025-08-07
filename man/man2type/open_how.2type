@@ -37,14 +37,14 @@ components of a pathname will be resolved
 (see
 .BR path_resolution (7)
 for background information).
-.SH VERSIONS
+.SH STANDARDS
+Linux.
+.SH HISTORY
 Extra fields may be appended to the structure,
 with a zero value in a new field resulting in
 the kernel behaving as though that extension field was not present.
 Therefore, a user
 .I must
 zero-fill this structure on initialization.
-.SH STANDARDS
-Linux.
 .SH SEE ALSO
 .BR openat2 (2)
