@@ -16,7 +16,7 @@ Standard C library
 .P
 .B #include <grp.h>
 .P
-.BI "int setgroups(size_t " size ", const gid_t " list "[_Nullable " size ]);
+.BI "int setgroups(size_t " size ", const gid_t " list [ size ]);
 .fi
 .P
 .RS -4
@@ -75,7 +75,7 @@ A process can drop all of its supplementary groups with the call:
 .P
 .in +4n
 .EX
-setgroups(0, NULL);
+setgroups(0, (gid_t [0]){});
 .EE
 .in
 .SH RETURN VALUE
