@@ -47,8 +47,37 @@ The
 .B MREMAP_DONTUNMAP
 flag may also be specified.
 .P
-If the operation is not
-simply moving mappings,
+Similarly,
+if the operation performs a shrink,
+that is,
+if
+.I old_size
+is greater than
+.IR new_size ,
+then
+.I old_size
+may also span multiple mappings,
+which do not have to be
+adjacent to one another.
+If this shrink is performed
+in-place,
+that is,
+neither
+.BR MREMAP_FIXED ,
+nor
+.B MREMAP_DONTUNMAP
+are specified,
+.I new_size
+may also span multiple VMAs.
+However, if the range is moved,
+then
+.I new_size
+must span only a single mapping.
+.P
+If the operation is neither a
+.B MREMAP_FIXED
+move
+nor a shrink,
 then
 .I old_size
 must span only a single mapping.
