@@ -25,6 +25,20 @@ moving it at the same time (controlled by the
 argument and
 the available virtual address space).
 .P
+Mappings can also simply be moved
+(without any resizing)
+by specifying equal
+.I old_size
+and
+.I new_size
+and using the
+.B MREMAP_FIXED
+flag
+(see below).
+The
+.B MREMAP_DONTUNMAP
+flag may also be specified.
+.P
 .I old_address
 is the old address of the virtual memory block that you
 want to expand (or shrink).
