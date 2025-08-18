@@ -740,6 +740,11 @@ main(int argc, char *argv[])
     time_t t;
     struct tm *tmp;
 \&
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s: <format\-string>\[rs]n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+\&
     t = time(NULL);
     tmp = localtime(&t);
     if (tmp == NULL) {
