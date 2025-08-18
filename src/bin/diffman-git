@@ -55,7 +55,7 @@ esac \
 	*)  git show "$new";  ;;
 	esac \
 	| man /dev/stdin \
-	| diff --label "$old" --label "$new" "${opts[@]}" \
+	| diff -F'^[^ ]' --label "$old" --label "$new" "${opts[@]}" \
 		<(git show "$old" | man /dev/stdin) \
 		/dev/stdin \
 	|| true;
