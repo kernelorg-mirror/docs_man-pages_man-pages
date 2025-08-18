@@ -38,7 +38,8 @@ is not a valid semaphore.
 .TP
 .B EOVERFLOW
 .\" Added in POSIX.1-2008 TC1 (Austin Interpretation 213)
-The maximum allowable value for a semaphore would be exceeded.
+The value would exceed
+.BR SEM_VALUE_MAX .
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
