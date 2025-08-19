@@ -10,6 +10,7 @@ MAKEFILE_LINT_MAN_INCLUDED := 1
 lint-man: \
 	lint-man-blank \
 	lint-man-mandoc \
+	lint-man-poems \
 	lint-man-quote \
 	lint-man-so \
 	lint-man-tbl \
