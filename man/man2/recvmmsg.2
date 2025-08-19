@@ -18,8 +18,9 @@ Standard C library
 .BR "#define _GNU_SOURCE" "         /* See feature_test_macros(7) */"
 .B #include <sys/socket.h>
 .P
-.BI "int recvmmsg(int " sockfd \
-", struct mmsghdr " msgvec [. n "], unsigned int " n ,
+.BR "int recvmmsg(" "unsigned int n;"
+.BI "             int " sockfd \
+", struct mmsghdr " msgvec [ n "], unsigned int " n ,
 .BI "             int " flags ", struct timespec *" timeout ");"
 .fi
 .SH DESCRIPTION
