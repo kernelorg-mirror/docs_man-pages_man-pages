@@ -275,13 +275,11 @@ Te Paraire, te 07 o Poutū\-te\-rangi, 2014 00:38:44 CET
 .\" SRC BEGIN (newlocale.c)
 .EX
 #define _XOPEN_SOURCE 700
+#include <err.h>
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-\&
-#define errExit(msg)    do { perror(msg); exit(EXIT_FAILURE); \[rs]
-                        } while (0)
 \&
 int
 main(int argc, char *argv[])
@@ -302,7 +300,7 @@ main(int argc, char *argv[])
 \&
     loc = newlocale(LC_NUMERIC_MASK, argv[1], (locale_t) 0);
     if (loc == (locale_t) 0)
-        errExit("newlocale");
+        err(EXIT_FAILURE, "newlocale");
 \&
     /* If a second command\-line argument was specified, modify the
        locale object to take the LC_TIME settings from the locale
@@ -313,7 +311,7 @@ main(int argc, char *argv[])
     if (argc > 2) {
         nloc = newlocale(LC_TIME_MASK, argv[2], loc);
         if (nloc == (locale_t) 0)
-            errExit("newlocale");
+            err(EXIT_FAILURE, "newlocale");
         loc = nloc;
     }
 \&
@@ -330,11 +328,11 @@ main(int argc, char *argv[])
     t = time(NULL);
     tm = localtime(&t);
     if (tm == NULL)
-        errExit("time");
+        err(EXIT_FAILURE, "time");
 \&
     s = strftime(buf, sizeof(buf), "%c", tm);
     if (s == 0)
-        errExit("strftime");
+        err(EXIT_FAILURE, "strftime");
 \&
     printf("%s\[rs]n", buf);
 \&

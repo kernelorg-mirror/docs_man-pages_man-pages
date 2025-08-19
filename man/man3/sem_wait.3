@@ -165,6 +165,7 @@ sem_timedwait() timed out
 \&
 .\" SRC BEGIN (sem_wait.c)
 .EX
+#include <err.h>
 #include <errno.h>
 #include <semaphore.h>
 #include <signal.h>
@@ -176,9 +177,6 @@ sem_timedwait() timed out
 #include <assert.h>
 \&
 sem_t sem;
-\&
-#define handle_error(msg) \[rs]
-    do { perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 static void
 handler(int sig)
@@ -204,7 +202,7 @@ main(int argc, char *argv[])
     }
 \&
     if (sem_init(&sem, 0, 0) == \-1)
-        handle_error("sem_init");
+        err(EXIT_FAILURE, "sem_init");
 \&
     /* Establish SIGALRM handler; set alarm timer using argv[1]. */
 \&
@@ -212,7 +210,7 @@ main(int argc, char *argv[])
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
     if (sigaction(SIGALRM, &sa, NULL) == \-1)
-        handle_error("sigaction");
+        err(EXIT_FAILURE, "sigaction");
 \&
     alarm(atoi(argv[1]));
 \&
@@ -220,7 +218,7 @@ main(int argc, char *argv[])
        number of seconds given argv[2]. */
 \&
     if (clock_gettime(CLOCK_REALTIME, &ts) == \-1)
-        handle_error("clock_gettime");
+        err(EXIT_FAILURE, "clock_gettime");
 \&
     ts.tv_sec += atoi(argv[2]);
 \&

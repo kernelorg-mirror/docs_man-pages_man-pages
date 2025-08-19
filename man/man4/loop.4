@@ -308,15 +308,13 @@ loopname = /dev/loop5
 .SS Program source
 \&
 .EX
+#include <err.h>
 #include <fcntl.h>
 #include <linux/loop.h>
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-\&
-#define errExit(msg)    do { perror(msg); exit(EXIT_FAILURE); \[rs]
-                        } while (0)
 \&
 int
 main(int argc, char *argv[])
@@ -332,25 +330,25 @@ main(int argc, char *argv[])
 \&
     loopctlfd = open("/dev/loop\-control", O_RDWR);
     if (loopctlfd == \-1)
-        errExit("open: /dev/loop\-control");
+        err(EXIT_FAILURE, "open: /dev/loop\-control");
 \&
     devnr = ioctl(loopctlfd, LOOP_CTL_GET_FREE);
     if (devnr == \-1)
-        errExit("ioctl\-LOOP_CTL_GET_FREE");
+        err(EXIT_FAILURE, "ioctl\-LOOP_CTL_GET_FREE");
 \&
     sprintf(loopname, "/dev/loop%ld", devnr);
     printf("loopname = %s\[rs]n", loopname);
 \&
     loopfd = open(loopname, O_RDWR);
     if (loopfd == \-1)
-        errExit("open: loopname");
+        err(EXIT_FAILURE, "open: loopname");
 \&
     backingfile = open(argv[1], O_RDWR);
     if (backingfile == \-1)
-        errExit("open: backing\-file");
+        err(EXIT_FAILURE, "open: backing\-file");
 \&
     if (ioctl(loopfd, LOOP_SET_FD, backingfile) == \-1)
-        errExit("ioctl\-LOOP_SET_FD");
+        err(EXIT_FAILURE, "ioctl\-LOOP_SET_FD");
 \&
     exit(EXIT_SUCCESS);
 }

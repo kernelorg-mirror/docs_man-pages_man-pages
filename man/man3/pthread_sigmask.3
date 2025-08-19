@@ -95,6 +95,7 @@ Signal handling thread got signal 10
 \&
 .\" SRC BEGIN (pthread_sigmask.c)
 .EX
+#include <err.h>
 #include <errno.h>
 #include <pthread.h>
 #include <signal.h>
@@ -103,9 +104,6 @@ Signal handling thread got signal 10
 #include <unistd.h>
 \&
 /* Simple error handling functions */
-\&
-#define handle_error_en(en, msg) \[rs]
-        do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 static void *
 sig_thread(void *arg)
@@ -116,7 +114,7 @@ sig_thread(void *arg)
     for (;;) {
         s = sigwait(set, &sig);
         if (s != 0)
-            handle_error_en(s, "sigwait");
+            errc(EXIT_FAILURE, s, "sigwait");
         printf("Signal handling thread got signal %d\[rs]n", sig);
     }
 }
@@ -136,11 +134,11 @@ main(void)
     sigaddset(&set, SIGUSR1);
     s = pthread_sigmask(SIG_BLOCK, &set, NULL);
     if (s != 0)
-        handle_error_en(s, "pthread_sigmask");
+        errc(EXIT_FAILURE, s, "pthread_sigmask");
 \&
     s = pthread_create(&thread, NULL, &sig_thread, &set);
     if (s != 0)
-        handle_error_en(s, "pthread_create");
+        errc(EXIT_FAILURE, s, "pthread_create");
 \&
     /* Main thread carries on to create other threads and/or do
        other work. */

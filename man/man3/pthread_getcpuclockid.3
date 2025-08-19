@@ -98,6 +98,7 @@ Subthread CPU time:        0.992
 .EX
 /* Link with "\-lrt" */
 \&
+#include <err.h>
 #include <errno.h>
 #include <pthread.h>
 #include <stdint.h>
@@ -107,12 +108,6 @@ Subthread CPU time:        0.992
 #include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
-\&
-#define handle_error(msg) \[rs]
-        do { perror(msg); exit(EXIT_FAILURE); } while (0)
-\&
-#define handle_error_en(en, msg) \[rs]
-        do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 static void *
 thread_start(void *arg)
@@ -129,7 +124,7 @@ pclock(char *msg, clockid_t cid)
 \&
     printf("%s", msg);
     if (clock_gettime(cid, &ts) == \-1)
-        handle_error("clock_gettime");
+        err(EXIT_FAILURE, "clock_gettime");
     printf("%4jd.%03ld\[rs]n", (intmax_t) ts.tv_sec, ts.tv_nsec / 1000000);
 }
 \&
@@ -142,7 +137,7 @@ main(void)
 \&
     s = pthread_create(&thread, NULL, thread_start, NULL);
     if (s != 0)
-        handle_error_en(s, "pthread_create");
+        errc(EXIT_FAILURE, s, "pthread_create");
 \&
     printf("Main thread sleeping\[rs]n");
     sleep(1);
@@ -155,7 +150,7 @@ main(void)
 \&
     s = pthread_getcpuclockid(pthread_self(), &cid);
     if (s != 0)
-        handle_error_en(s, "pthread_getcpuclockid");
+        errc(EXIT_FAILURE, s, "pthread_getcpuclockid");
     pclock("Main thread CPU time:   ", cid);
 \&
     /* The preceding 4 lines of code could have been replaced by:
@@ -163,7 +158,7 @@ main(void)
 \&
     s = pthread_getcpuclockid(thread, &cid);
     if (s != 0)
-        handle_error_en(s, "pthread_getcpuclockid");
+        errc(EXIT_FAILURE, s, "pthread_getcpuclockid");
     pclock("Subthread CPU time: 1    ", cid);
 \&
     exit(EXIT_SUCCESS);         /* Terminates both threads */

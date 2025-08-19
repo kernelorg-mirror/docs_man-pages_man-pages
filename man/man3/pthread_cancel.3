@@ -148,14 +148,12 @@ main(): thread was canceled
 \&
 .\" SRC BEGIN (pthread_cancel.c)
 .EX
+#include <err.h>
 #include <errno.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-\&
-#define handle_error_en(en, msg) \[rs]
-        do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 static void *
 thread_func(void *ignored_argument)
@@ -167,7 +165,7 @@ thread_func(void *ignored_argument)
 \&
     s = pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
     if (s != 0)
-        handle_error_en(s, "pthread_setcancelstate");
+        errc(EXIT_FAILURE, s, "pthread_setcancelstate");
 \&
     printf("%s(): started; cancelation disabled\[rs]n", __func__);
     sleep(5);
@@ -175,7 +173,7 @@ thread_func(void *ignored_argument)
 \&
     s = pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     if (s != 0)
-        handle_error_en(s, "pthread_setcancelstate");
+        errc(EXIT_FAILURE, s, "pthread_setcancelstate");
 \&
     /* sleep() is a cancelation point. */
 \&
@@ -198,20 +196,20 @@ main(void)
 \&
     s = pthread_create(&thr, NULL, &thread_func, NULL);
     if (s != 0)
-        handle_error_en(s, "pthread_create");
+        errc(EXIT_FAILURE, s, "pthread_create");
 \&
     sleep(2);           /* Give thread a chance to get started */
 \&
     printf("%s(): sending cancelation request\[rs]n", __func__);
     s = pthread_cancel(thr);
     if (s != 0)
-        handle_error_en(s, "pthread_cancel");
+        errc(EXIT_FAILURE, s, "pthread_cancel");
 \&
     /* Join with thread to see what its exit status was. */
 \&
     s = pthread_join(thr, &res);
     if (s != 0)
-        handle_error_en(s, "pthread_join");
+        errc(EXIT_FAILURE, s, "pthread_join");
 \&
     if (res == PTHREAD_CANCELED)
         printf("%s(): thread was canceled\[rs]n", __func__);

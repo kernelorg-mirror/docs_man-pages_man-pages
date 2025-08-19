@@ -251,6 +251,7 @@ Joined with thread 3; returned value was SERVUS
 .\" SRC BEGIN (pthread_create.c)
 .EX
 #include <ctype.h>
+#include <err.h>
 #include <errno.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -258,12 +259,6 @@ Joined with thread 3; returned value was SERVUS
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
-\&
-#define handle_error_en(en, msg) \[rs]
-        do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
-\&
-#define handle_error(msg) \[rs]
-        do { perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 struct thread_info {    /* Used as argument to thread_start() */
     pthread_t thread_id;        /* ID returned by pthread_create() */
@@ -285,7 +280,7 @@ thread_start(void *arg)
 \&
     uargv = strdup(tinfo\->argv_string);
     if (uargv == NULL)
-        handle_error("strdup");
+        err(EXIT_FAILURE, "strdup");
 \&
     for (char *p = uargv; *p != \[aq]\[rs]0\[aq]; p++)
         *p = toupper(*p);
@@ -325,19 +320,19 @@ main(int argc, char *argv[])
 \&
     s = pthread_attr_init(&attr);
     if (s != 0)
-        handle_error_en(s, "pthread_attr_init");
+        errc(EXIT_FAILURE, s, "pthread_attr_init");
 \&
     if (stack_size > 0) {
         s = pthread_attr_setstacksize(&attr, stack_size);
         if (s != 0)
-            handle_error_en(s, "pthread_attr_setstacksize");
+            errc(EXIT_FAILURE, s, "pthread_attr_setstacksize");
     }
 \&
     /* Allocate memory for pthread_create() arguments. */
 \&
     tinfo = calloc(num_threads, sizeof(*tinfo));
     if (tinfo == NULL)
-        handle_error("calloc");
+        err(EXIT_FAILURE, "calloc");
 \&
     /* Create one thread for each command\-line argument. */
 \&
@@ -351,7 +346,7 @@ main(int argc, char *argv[])
         s = pthread_create(&tinfo[tnum].thread_id, &attr,
                            &thread_start, &tinfo[tnum]);
         if (s != 0)
-            handle_error_en(s, "pthread_create");
+            errc(EXIT_FAILURE, s, "pthread_create");
     }
 \&
     /* Destroy the thread attributes object, since it is no
@@ -359,14 +354,14 @@ main(int argc, char *argv[])
 \&
     s = pthread_attr_destroy(&attr);
     if (s != 0)
-        handle_error_en(s, "pthread_attr_destroy");
+        errc(EXIT_FAILURE, s, "pthread_attr_destroy");
 \&
     /* Now join with each thread, and display its returned value. */
 \&
     for (size_t tnum = 0; tnum < num_threads; tnum++) {
         s = pthread_join(tinfo[tnum].thread_id, &res);
         if (s != 0)
-            handle_error_en(s, "pthread_join");
+            errc(EXIT_FAILURE, s, "pthread_join");
 \&
         printf("Joined with thread %d; returned value was %s\[rs]n",
                tinfo[tnum].thread_num, (char *) res);

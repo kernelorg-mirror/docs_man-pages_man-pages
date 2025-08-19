@@ -224,14 +224,12 @@ is the default for the inherit scheduler attribute.
 .EX
 /* pthreads_sched_test.c */
 \&
+#include <err.h>
 #include <errno.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-\&
-#define handle_error_en(en, msg) \[rs]
-        do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 [[noreturn]]
 static void
@@ -287,7 +285,7 @@ display_thread_sched_attr(char *msg)
 \&
     s = pthread_getschedparam(pthread_self(), &policy, &param);
     if (s != 0)
-        handle_error_en(s, "pthread_getschedparam");
+        errc(EXIT_FAILURE, s, "pthread_getschedparam");
 \&
     printf("%s\[rs]n", msg);
     display_sched_attr(policy, &param);
@@ -344,7 +342,7 @@ main(int argc, char *argv[])
 \&
         s = pthread_setschedparam(pthread_self(), policy, &param);
         if (s != 0)
-            handle_error_en(s, "pthread_setschedparam");
+            errc(EXIT_FAILURE, s, "pthread_setschedparam");
     }
 \&
     display_thread_sched_attr("Scheduler settings of main thread");
@@ -357,7 +355,7 @@ main(int argc, char *argv[])
     if (!use_null_attrib) {
         s = pthread_attr_init(&attr);
         if (s != 0)
-            handle_error_en(s, "pthread_attr_init");
+            errc(EXIT_FAILURE, s, "pthread_attr_init");
         attrp = &attr;
     }
 \&
@@ -371,7 +369,7 @@ main(int argc, char *argv[])
 \&
         s = pthread_attr_setinheritsched(&attr, inheritsched);
         if (s != 0)
-            handle_error_en(s, "pthread_attr_setinheritsched");
+            errc(EXIT_FAILURE, s, "pthread_attr_setinheritsched");
     }
 \&
     if (attr_sched_str != NULL) {
@@ -381,10 +379,10 @@ main(int argc, char *argv[])
 \&
         s = pthread_attr_setschedpolicy(&attr, policy);
         if (s != 0)
-            handle_error_en(s, "pthread_attr_setschedpolicy");
+            errc(EXIT_FAILURE, s, "pthread_attr_setschedpolicy");
         s = pthread_attr_setschedparam(&attr, &param);
         if (s != 0)
-            handle_error_en(s, "pthread_attr_setschedparam");
+            errc(EXIT_FAILURE, s, "pthread_attr_setschedparam");
     }
 \&
     /* If we initialized a thread attributes object, display
@@ -393,10 +391,10 @@ main(int argc, char *argv[])
     if (attrp != NULL) {
         s = pthread_attr_getschedparam(&attr, &param);
         if (s != 0)
-            handle_error_en(s, "pthread_attr_getschedparam");
+            errc(EXIT_FAILURE, s, "pthread_attr_getschedparam");
         s = pthread_attr_getschedpolicy(&attr, &policy);
         if (s != 0)
-            handle_error_en(s, "pthread_attr_getschedpolicy");
+            errc(EXIT_FAILURE, s, "pthread_attr_getschedpolicy");
 \&
         printf("Scheduler settings in \[aq]attr\[aq]\[rs]n");
         display_sched_attr(policy, &param);
@@ -413,19 +411,19 @@ main(int argc, char *argv[])
 \&
     s = pthread_create(&thread, attrp, &thread_start, NULL);
     if (s != 0)
-        handle_error_en(s, "pthread_create");
+        errc(EXIT_FAILURE, s, "pthread_create");
 \&
     /* Destroy unneeded thread attributes object. */
 \&
     if (!use_null_attrib) {
       s = pthread_attr_destroy(&attr);
       if (s != 0)
-          handle_error_en(s, "pthread_attr_destroy");
+          errc(EXIT_FAILURE, s, "pthread_attr_destroy");
     }
 \&
     s = pthread_join(thread, NULL);
     if (s != 0)
-        handle_error_en(s, "pthread_join");
+        errc(EXIT_FAILURE, s, "pthread_join");
 \&
     exit(EXIT_SUCCESS);
 }

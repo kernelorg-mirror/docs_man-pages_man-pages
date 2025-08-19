@@ -655,6 +655,7 @@ Child status: exited, status=127
 \&
 .\" SRC BEGIN (posix_spawn.c)
 .EX
+#include <err.h>
 #include <errno.h>
 #include <spawn.h>
 #include <stdint.h>
@@ -663,13 +664,6 @@ Child status: exited, status=127
 #include <string.h>
 #include <unistd.h>
 #include <wait.h>
-\&
-#define errExit(msg)    do { perror(msg); \[rs]
-                             exit(EXIT_FAILURE); } while (0)
-\&
-#define errExitEN(en, msg) \[rs]
-                        do { errno = en; perror(msg); \[rs]
-                             exit(EXIT_FAILURE); } while (0)
 \&
 char **environ;
 \&
@@ -699,12 +693,12 @@ main(int argc, char *argv[])
 \&
             s = posix_spawn_file_actions_init(&file_actions);
             if (s != 0)
-                errExitEN(s, "posix_spawn_file_actions_init");
+                errc(EXIT_FAILURE, s, "posix_spawn_file_actions_init");
 \&
             s = posix_spawn_file_actions_addclose(&file_actions,
                                                   STDOUT_FILENO);
             if (s != 0)
-                errExitEN(s, "posix_spawn_file_actions_addclose");
+                errc(EXIT_FAILURE, s, "posix_spawn_file_actions_addclose");
 \&
             file_actionsp = &file_actions;
             break;
@@ -716,15 +710,15 @@ main(int argc, char *argv[])
 \&
             s = posix_spawnattr_init(&attr);
             if (s != 0)
-                errExitEN(s, "posix_spawnattr_init");
+                errc(EXIT_FAILURE, s, "posix_spawnattr_init");
             s = posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK);
             if (s != 0)
-                errExitEN(s, "posix_spawnattr_setflags");
+                errc(EXIT_FAILURE, s, "posix_spawnattr_setflags");
 \&
             sigfillset(&mask);
             s = posix_spawnattr_setsigmask(&attr, &mask);
             if (s != 0)
-                errExitEN(s, "posix_spawnattr_setsigmask");
+                errc(EXIT_FAILURE, s, "posix_spawnattr_setsigmask");
 \&
             attrp = &attr;
             break;
@@ -744,20 +738,20 @@ main(int argc, char *argv[])
     s = posix_spawnp(&child_pid, argv[optind], file_actionsp, attrp,
                      &argv[optind], environ);
     if (s != 0)
-        errExitEN(s, "posix_spawn");
+        errc(EXIT_FAILURE, s, "posix_spawn");
 \&
     /* Destroy any objects that we created earlier. */
 \&
     if (attrp != NULL) {
         s = posix_spawnattr_destroy(attrp);
         if (s != 0)
-            errExitEN(s, "posix_spawnattr_destroy");
+            errc(EXIT_FAILURE, s, "posix_spawnattr_destroy");
     }
 \&
     if (file_actionsp != NULL) {
         s = posix_spawn_file_actions_destroy(file_actionsp);
         if (s != 0)
-            errExitEN(s, "posix_spawn_file_actions_destroy");
+            errc(EXIT_FAILURE, s, "posix_spawn_file_actions_destroy");
     }
 \&
     printf("PID of child: %jd\[rs]n", (intmax_t) child_pid);
@@ -767,7 +761,7 @@ main(int argc, char *argv[])
     do {
         s = waitpid(child_pid, &status, WUNTRACED | WCONTINUED);
         if (s == \-1)
-            errExit("waitpid");
+            err(EXIT_FAILURE, "waitpid");
 \&
         printf("Child status: ");
         if (WIFEXITED(status)) {

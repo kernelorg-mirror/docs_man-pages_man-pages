@@ -209,6 +209,7 @@ domain, and accept connections:
 .P
 .\" SRC BEGIN (bind.c)
 .EX
+#include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -219,9 +220,6 @@ domain, and accept connections:
 #define MY_SOCK_PATH "/somepath"
 #define LISTEN_BACKLOG 50
 \&
-#define handle_error(msg) \[rs]
-    do { perror(msg); exit(EXIT_FAILURE); } while (0)
-\&
 int
 main(void)
 {
@@ -231,7 +229,7 @@ main(void)
 \&
     sfd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (sfd == \-1)
-        handle_error("socket");
+        err(EXIT_FAILURE, "socket");
 \&
     memset(&my_addr, 0, sizeof(my_addr));
     my_addr.sun_family = AF_UNIX;
@@ -240,10 +238,10 @@ main(void)
 \&
     if (bind(sfd, (struct sockaddr *) &my_addr,
              sizeof(my_addr)) == \-1)
-        handle_error("bind");
+        err(EXIT_FAILURE, "bind");
 \&
     if (listen(sfd, LISTEN_BACKLOG) == \-1)
-        handle_error("listen");
+        err(EXIT_FAILURE, "listen");
 \&
     /* Now we can accept incoming connections one
        at a time using accept(2). */
@@ -252,15 +250,15 @@ main(void)
     cfd = accept(sfd, (struct sockaddr *) &peer_addr,
                  &peer_addr_size);
     if (cfd == \-1)
-        handle_error("accept");
+        err(EXIT_FAILURE, "accept");
 \&
     /* Code to deal with incoming connection(s)... */
 \&
     if (close(sfd) == \-1)
-        handle_error("close");
+        err(EXIT_FAILURE, "close");
 \&
     if (unlink(MY_SOCK_PATH) == \-1)
-        handle_error("unlink");
+        err(EXIT_FAILURE, "unlink");
 }
 .EE
 .\" SRC END

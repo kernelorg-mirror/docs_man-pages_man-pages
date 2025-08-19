@@ -948,6 +948,7 @@ to output the desired bytes.
 .SS Program source
 .\" SRC BEGIN (mmap.c)
 .EX
+#include <err.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -955,9 +956,6 @@ to output the desired bytes.
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-\&
-#define handle_error(msg) \[rs]
-    do { perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 int
 main(int argc, char *argv[])
@@ -976,10 +974,10 @@ main(int argc, char *argv[])
 \&
     fd = open(argv[1], O_RDONLY);
     if (fd == \-1)
-        handle_error("open");
+        err(EXIT_FAILURE, "open");
 \&
     if (fstat(fd, &sb) == \-1)           /* To obtain file size */
-        handle_error("fstat");
+        err(EXIT_FAILURE, "fstat");
 \&
     offset = atoi(argv[2]);
     pa_offset = offset & \[ti](sysconf(_SC_PAGE_SIZE) \- 1);
@@ -1003,12 +1001,12 @@ main(int argc, char *argv[])
     addr = mmap(NULL, length + offset \- pa_offset, PROT_READ,
                 MAP_PRIVATE, fd, pa_offset);
     if (addr == MAP_FAILED)
-        handle_error("mmap");
+        err(EXIT_FAILURE, "mmap");
 \&
     s = write(STDOUT_FILENO, addr + offset \- pa_offset, length);
     if (s != length) {
         if (s == \-1)
-            handle_error("write");
+            err(EXIT_FAILURE, "write");
 \&
         fprintf(stderr, "partial write");
         exit(EXIT_FAILURE);

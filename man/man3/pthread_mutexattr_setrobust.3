@@ -189,14 +189,12 @@ The following shell session shows what we see when running this program:
 .SS Program source
 .\" SRC BEGIN (pthread_mutexattr_setrobust.c)
 .EX
+#include <err.h>
 #include <errno.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-\&
-#define handle_error_en(en, msg) \[rs]
-        do { errno = en; perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 static pthread_mutex_t mtx;
 \&
@@ -235,11 +233,11 @@ main(void)
         printf("[main] Now make the mutex consistent\[rs]n");
         s = pthread_mutex_consistent(&mtx);
         if (s != 0)
-            handle_error_en(s, "pthread_mutex_consistent");
+            errc(EXIT_FAILURE, s, "pthread_mutex_consistent");
         printf("[main] Mutex is now consistent; unlocking\[rs]n");
         s = pthread_mutex_unlock(&mtx);
         if (s != 0)
-            handle_error_en(s, "pthread_mutex_unlock");
+            errc(EXIT_FAILURE, s, "pthread_mutex_unlock");
 \&
         exit(EXIT_SUCCESS);
     } else if (s == 0) {
@@ -247,7 +245,7 @@ main(void)
         exit(EXIT_FAILURE);
     } else {
         printf("[main] pthread_mutex_lock() unexpectedly failed\[rs]n");
-        handle_error_en(s, "pthread_mutex_lock");
+        errc(EXIT_FAILURE, s, "pthread_mutex_lock");
     }
 }
 .EE

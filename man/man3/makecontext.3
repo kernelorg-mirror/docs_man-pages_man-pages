@@ -179,14 +179,12 @@ main: exiting
 \&
 .\" SRC BEGIN (makecontext.c)
 .EX
+#include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ucontext.h>
 \&
 static ucontext_t uctx_main, uctx_func1, uctx_func2;
-\&
-#define handle_error(msg) \[rs]
-    do { perror(msg); exit(EXIT_FAILURE); } while (0)
 \&
 static void
 func1(void)
@@ -194,7 +192,7 @@ func1(void)
     printf("%s: started\[rs]n", __func__);
     printf("%s: swapcontext(&uctx_func1, &uctx_func2)\[rs]n", __func__);
     if (swapcontext(&uctx_func1, &uctx_func2) == \-1)
-        handle_error("swapcontext");
+        err(EXIT_FAILURE, "swapcontext");
     printf("%s: returning\[rs]n", __func__);
 }
 \&
@@ -204,7 +202,7 @@ func2(void)
     printf("%s: started\[rs]n", __func__);
     printf("%s: swapcontext(&uctx_func2, &uctx_func1)\[rs]n", __func__);
     if (swapcontext(&uctx_func2, &uctx_func1) == \-1)
-        handle_error("swapcontext");
+        err(EXIT_FAILURE, "swapcontext");
     printf("%s: returning\[rs]n", __func__);
 }
 \&
@@ -215,14 +213,14 @@ main(int argc, char *argv[])
     char func2_stack[16384];
 \&
     if (getcontext(&uctx_func1) == \-1)
-        handle_error("getcontext");
+        err(EXIT_FAILURE, "getcontext");
     uctx_func1.uc_stack.ss_sp = func1_stack;
     uctx_func1.uc_stack.ss_size = sizeof(func1_stack);
     uctx_func1.uc_link = &uctx_main;
     makecontext(&uctx_func1, func1, 0);
 \&
     if (getcontext(&uctx_func2) == \-1)
-        handle_error("getcontext");
+        err(EXIT_FAILURE, "getcontext");
     uctx_func2.uc_stack.ss_sp = func2_stack;
     uctx_func2.uc_stack.ss_size = sizeof(func2_stack);
     /* Successor context is f1(), unless argc > 1 */
@@ -231,7 +229,7 @@ main(int argc, char *argv[])
 \&
     printf("%s: swapcontext(&uctx_main, &uctx_func2)\[rs]n", __func__);
     if (swapcontext(&uctx_main, &uctx_func2) == \-1)
-        handle_error("swapcontext");
+        err(EXIT_FAILURE, "swapcontext");
 \&
     printf("%s: exiting\[rs]n", __func__);
     exit(EXIT_SUCCESS);
