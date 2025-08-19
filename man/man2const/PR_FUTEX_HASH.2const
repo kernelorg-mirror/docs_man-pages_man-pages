@@ -44,7 +44,7 @@ since random processes can
 share in-kernel locks
 and it is not deterministic which process will be involved.
 .P
-Linux 6.16 implements a process-wide private hash which is used by all
+Linux 6.17 implements a process-wide private hash which is used by all
 .BR futex (2)
 operations that specify the
 .B FUTEX_PRIVATE_FLAG
@@ -68,8 +68,6 @@ The value in
 .I op
 is one of the options below.
 .TP
-.B PR_FUTEX_HASH_GET_IMMUTABLE
-.TQ
 .B PR_FUTEX_HASH_GET_SLOTS
 .TQ
 .B PR_FUTEX_HASH_SET_SLOTS
@@ -82,10 +80,9 @@ is set to indicate the error.
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux 6.16.
+Linux 6.17.
 .SH SEE ALSO
 .BR prctl (2),
 .BR futex (2),
-.BR PR_FUTEX_HASH_GET_IMMUTABLE (2const),
 .BR PR_FUTEX_HASH_GET_SLOTS (2const),
 .BR PR_FUTEX_HASH_SET_SLOTS (2const)
