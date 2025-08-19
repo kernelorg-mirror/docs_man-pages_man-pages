@@ -90,13 +90,16 @@ value.
 .TP
 .I lorder
 is the byte order for integers in the stored database metadata.
-The number should represent the order as an integer; for example,
+The number should represent the order as an integer;
+for example,
 big endian order would be the number 4,321.
 If
 .I lorder
-is 0 (no order is specified), the current host order is used.
-If the file already exists, the specified value is ignored and the
-value specified when the tree was created is used.
+is 0 (no order is specified),
+the current host order is used.
+If the file already exists,
+the specified value is ignored
+and the value specified when the tree was created is used.
 .P
 If the file already exists (and the
 .B O_TRUNC

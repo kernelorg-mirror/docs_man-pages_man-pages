@@ -20,14 +20,19 @@ Standard C library
 .SH DESCRIPTION
 Return the secure computing mode of the calling thread.
 .P
-If the caller is not in secure computing mode, this operation returns 0;
-if the caller is in strict secure computing mode, then the
+If the caller is not in secure computing mode,
+this operation returns 0;
+if the caller is in strict secure computing mode,
+then the
 .BR prctl ()
 call will cause a
 .B SIGKILL
 signal to be sent to the process.
-If the caller is in filter mode, and this system call is allowed by the
-seccomp filters, it returns 2; otherwise, the process is killed with a
+If the caller is in filter mode,
+and this system call is allowed by the seccomp filters,
+it returns 2;
+otherwise,
+the process is killed with a
 .B SIGKILL
 signal.
 .P
@@ -62,7 +67,8 @@ Since Linux 3.8, the
 .I Seccomp
 field of this file
 provides a method of obtaining the same information,
-without the risk that the process is killed; see
+without the risk that the process is killed;
+see
 .BR proc_pid_status (5).
 .SH STANDARDS
 Linux.

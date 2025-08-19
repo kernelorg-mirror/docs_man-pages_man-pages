@@ -63,17 +63,20 @@ which can be indexed by
 can be used to obtain the error message without the newline.
 The largest message number provided in the table is
 .IR sys_nerr "\-1."
-Be careful when directly accessing this list, because new error values
+Be careful when directly accessing this list,
+because new error values
 may not have been added to
-.IR sys_errlist "[]."
+.IR sys_errlist [].
 The use of
-.IR sys_errlist "[]"
-is nowadays deprecated; use
+.IR sys_errlist []
+is nowadays deprecated;
+use
 .BR strerror (3)
 instead.
 .P
-When a system call fails, it usually returns \-1 and sets the
-variable
+When a system call fails,
+it usually returns \-1
+and sets the variable
 .I errno
 to a value describing what went wrong.
 (These values can be found in

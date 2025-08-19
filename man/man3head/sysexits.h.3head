@@ -58,7 +58,8 @@ T}
 input/output error */
 T}
 #define EX_TEMPFAIL	75	/*	T{
-temp failure; user is invited to retry */
+temp failure;
+user is invited to retry */
 T}
 #define EX_PROTOCOL	76	/*	T{
 remote error in protocol */

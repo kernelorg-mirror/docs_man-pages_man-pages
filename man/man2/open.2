@@ -74,7 +74,8 @@ By default, the new file descriptor is set to remain open across an
 .B FD_CLOEXEC
 file descriptor flag described in
 .BR fcntl (2)
-is initially disabled); the
+is initially disabled);
+the
 .B O_CLOEXEC
 flag, described below, can be used to change this default.
 The file offset is set to the beginning of the file (see
@@ -137,7 +138,8 @@ The distinction between these two groups of flags is that
 the file creation flags affect the semantics of the open operation itself,
 while the file status flags affect the semantics of subsequent I/O operations.
 The file status flags can be retrieved and (in some cases)
-modified; see
+modified;
+see
 .BR fcntl (2)
 for details.
 .P
@@ -278,10 +280,11 @@ created file is
 Note that
 .I mode
 applies only to future accesses of the
-newly created file; the
+newly created file;
+the
 .BR open ()
-call that creates a read-only file may well return a read/write
-file descriptor.
+call that creates a read-only file
+may well return a read/write file descriptor.
 .IP
 The following symbolic constants are provided for
 .IR mode :
@@ -789,7 +792,7 @@ char path[PATH_MAX];
 fd = open("/path/to/dir", O_TMPFILE | O_RDWR,
                         S_IRUSR | S_IWUSR);
 \&
-/* File I/O on \[aq]fd\[aq]... */
+/* File I/O on \[aq]fd\[aq]...  */
 \&
 linkat(fd, "", AT_FDCWD, "/path/for/file", AT_EMPTY_PATH);
 \&
@@ -834,7 +837,8 @@ Improved
 functionality: race-free creation of temporary files that
 (1) are automatically deleted when closed;
 (2) can never be reached via any pathname;
-(3) are not subject to symlink attacks; and
+(3) are not subject to symlink attacks;
+and
 (4) do not require the caller to devise unique names.
 .IP \[bu]
 Creating a file that is initially invisible, which is then populated
@@ -1041,9 +1045,11 @@ See
 .TP
 .B EINTR
 While blocked waiting to complete an open of a slow device
-(e.g., a FIFO; see
+(e.g., a FIFO;
+see
 .BR fifo (7)),
-the call was interrupted by a signal handler; see
+the call was interrupted by a signal handler;
+see
 .BR signal (7).
 .TP
 .B EINVAL
@@ -1147,7 +1153,8 @@ The system-wide limit on the total number of open files has been reached.
 .B ENODEV
 .I path
 refers to a device special file and no corresponding device exists.
-(This is a Linux kernel bug; in this situation
+(This is a Linux kernel bug;
+in this situation
 .B ENXIO
 must be returned.)
 .TP
@@ -1178,7 +1185,8 @@ functionality.
 The named file is a FIFO,
 but memory for the FIFO buffer can't be allocated because
 the per-user hard limit on memory allocation for pipes has been reached
-and the caller is not privileged; see
+and the caller is not privileged;
+see
 .BR pipe (7).
 .TP
 .B ENOMEM
@@ -1247,11 +1255,12 @@ for this case.
 The
 .B O_NOATIME
 flag was specified, but the effective user ID of the caller
-.\" Strictly speaking, it's the filesystem UID... (MTK)
+.\" Strictly speaking, it's the filesystem UID...  (MTK)
 did not match the owner of the file and the caller was not privileged.
 .TP
 .B EPERM
-The operation was prevented by a file seal; see
+The operation was prevented by a file seal;
+see
 .BR fcntl (2).
 .TP
 .B EROFS
@@ -1464,7 +1473,8 @@ Note that
 .BR open ()
 can open device special files, but
 .BR creat ()
-cannot create them; use
+cannot create them;
+use
 .BR mknod (2)
 instead.
 .P
@@ -1474,7 +1484,8 @@ If the file is newly created, its
 .I st_mtime
 fields
 (respectively, time of last access, time of last status change, and
-time of last modification; see
+time of last modification;
+see
 .BR stat (2))
 are set
 to the current time, and so are the
@@ -1677,7 +1688,8 @@ The use of the
 file descriptor also has other benefits:
 .IP \[bu] 3
 the file descriptor is a stable reference to the directory,
-even if the directory is renamed; and
+even if the directory is renamed;
+and
 .IP \[bu]
 the open file descriptor prevents the underlying filesystem from
 being dismounted,
@@ -1855,16 +1867,17 @@ Older kernels, or
 kernels configured in certain ways, may not support this combination.
 The NFS protocol does not support passing the flag to the server, so
 .B O_DIRECT
-I/O will bypass the page cache only on the client; the server may
-still cache the I/O.
+I/O will bypass the page cache only on the client;
+the server may still
+cache the I/O.
 The client asks the server to make the I/O
 synchronous to preserve the synchronous semantics of
 .BR O_DIRECT .
 Some servers will perform poorly under these circumstances, especially
 if the I/O size is small.
 Some servers may also be configured to
-lie to clients about the I/O having reached stable storage; this
-will avoid the performance penalty at some risk to data integrity
+lie to clients about the I/O having reached stable storage;
+this will avoid the performance penalty at some risk to data integrity
 in the event of server power failure.
 The Linux NFS client places no alignment restrictions on
 .B O_DIRECT

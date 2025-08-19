@@ -19,7 +19,8 @@ Standard C library
 .BI "              unsigned long " fd ", unsigned long " pgoffset );
 .fi
 .SH DESCRIPTION
-This is probably not the system call that you are interested in; instead, see
+This is probably not the system call that you are interested in;
+instead, see
 .BR mmap (2),
 which describes the glibc wrapper function that invokes this system call.
 .P
@@ -68,7 +69,7 @@ On ia64, the unit for
 is actually the system page size, rather than 4096 bytes.
 .\" ia64 can have page sizes ranging from 4 kB to 64 kB.
 .\" On cris, it looks like the unit might also be the page size,
-.\" which is 8192 bytes. -- mtk, June 2007
+.\" which is 8192 bytes.  -- mtk, June 2007
 .SH STANDARDS
 Linux.
 .SH HISTORY

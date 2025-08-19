@@ -26,11 +26,13 @@ function takes the same arguments, and performs the same task, as
 .P
 However
 .BR sysv_signal ()
-provides the System V unreliable signal semantics, that is:
+provides the System V unreliable signal semantics,
+that is:
 a) the disposition of the signal is reset to the default
 when the handler is invoked;
-b) delivery of further instances of the signal is not blocked while
-the signal handler is executing; and
+b) delivery of further instances of the signal
+is not blocked while the signal handler is executing;
+and
 c) if the handler interrupts (certain) blocking system calls,
 then the system call is not automatically restarted.
 .SH RETURN VALUE
@@ -59,7 +61,8 @@ T}	Thread safety	MT-Safe
 .SH VERSIONS
 Use of
 .BR sysv_signal ()
-should be avoided; use
+should be avoided;
+use
 .BR sigaction (2)
 instead.
 .P
@@ -70,7 +73,8 @@ and
 were equivalent.
 But on newer systems,
 .BR signal (2)
-provides reliable signal semantics; see
+provides reliable signal semantics;
+see
 .BR signal (2)
 for details.
 .P

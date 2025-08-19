@@ -118,7 +118,8 @@ or the text of the following
 in
 .IR optarg .
 Two colons mean an option takes
-an optional arg; if there is text in the current
+an optional arg;
+if there is text in the current
 .IR argv -element
 (i.e., in the same word as the option name itself, for example, "\-oarg"),
 then it is returned in
@@ -260,7 +261,8 @@ is:
 .B no_argument
 (or 0) if the option does not take an argument;
 .B required_argument
-(or 1) if the option requires an argument; or
+(or 1) if the option requires an argument;
+or
 .B optional_argument
 (or 2) if the option takes an optional argument.
 .TP
@@ -459,8 +461,9 @@ The following trivial example program uses
 .BR getopt ()
 to handle two program options:
 .IR \-n ,
-with no associated value; and
-.IR "\-t val" ,
+with no associated value;
+and
+.IR \-t\~val ,
 which expects an associated value.
 .P
 .\" SRC BEGIN (getopt.c)

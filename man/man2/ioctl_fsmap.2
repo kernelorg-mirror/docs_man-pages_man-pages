@@ -44,7 +44,7 @@ struct fsmap {
 struct fsmap_head {
     __u32 fmh_iflags;       /* Control flags */
     __u32 fmh_oflags;       /* Output flags */
-    __u32 fmh_count;        /* # of entries in array incl. input */
+    __u32 fmh_count;        /* # of entries in array including input */
     __u32 fmh_entries;      /* # of entries filled in (output) */
     __u64 fmh_reserved[6];  /* Must be zero */
 \&
@@ -57,13 +57,17 @@ struct fsmap_head {
 .P
 The two
 .I fmh_keys
-array elements specify the lowest and highest reverse-mapping
-key for which the application would like physical mapping
-information.
-A reverse mapping key consists of the tuple (device, block, owner, offset).
-The owner and offset fields are part of the key because some filesystems
-support sharing physical blocks between multiple files and
-therefore may return multiple mappings for a given physical block.
+array elements
+specify the lowest and highest reverse-mapping key
+for which the application would like physical mapping information.
+A reverse mapping key consists of the tuple
+(device, block, owner, offset).
+The owner and offset fields
+are part of the key
+because some filesystems
+support sharing physical blocks between multiple files
+and therefore may return multiple mappings
+for a given physical block.
 .P
 Filesystem mappings are copied into the
 .I fmh_recs

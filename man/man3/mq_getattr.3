@@ -36,8 +36,8 @@ This structure is defined as:
 .EX
 struct mq_attr {
     long mq_flags;       /* Flags: 0 or O_NONBLOCK */
-    long mq_maxmsg;      /* Max. # of messages on queue */
-    long mq_msgsize;     /* Max. message size (bytes) */
+    long mq_maxmsg;      /* Max.\& # of messages on queue */
+    long mq_msgsize;     /* Max.\& message size (bytes) */
     long mq_curmsgs;     /* # of messages currently in queue */
 };
 .EE
@@ -100,7 +100,8 @@ On success
 .BR mq_getattr ()
 and
 .BR mq_setattr ()
-return 0; on error, \-1 is returned, with
+return 0;
+on error, \-1 is returned, with
 .I errno
 set to indicate the error.
 .SH ERRORS

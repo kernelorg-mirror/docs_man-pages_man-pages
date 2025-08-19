@@ -461,7 +461,7 @@ as described above in
 .BR LD_LIBRARY_PATH .)
 .\" Tested with the following:
 .\"
-.\"	LD_PRELOAD='$LIB/libmod.so' LD_LIBRARY_PATH=. ./prog
+.\"	LD_PRELOAD='$LIB/libmod.so' LD_LIBRARY_PATH=.\& ./prog
 .\"
 .\" which will preload the libmod.so in 'lib' or 'lib64', using it
 .\" in preference to the version in '.'.
@@ -708,7 +708,8 @@ then the default is
 .IR /var/tmp .
 .IP
 .B LD_PROFILE_OUTPUT
-is ignored in secure-execution mode; instead
+is ignored in secure-execution mode;
+instead
 .I /var/profile
 is always used.
 .TP

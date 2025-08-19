@@ -118,10 +118,12 @@ which is not greater than
 .IR size .
 If the return value is less than
 .IR size ,
-then the full backtrace was stored; if it is equal to
+then the full backtrace was stored;
+if it is equal to
 .IR size ,
-then it may have been truncated, in which case the addresses of the
-oldest stack frames are not returned.
+then it may have been truncated,
+in which case,
+the addresses of the oldest stack frames are not returned.
 .P
 On success,
 .BR backtrace_symbols ()
@@ -245,7 +247,7 @@ myfunc3(void)
     free(strings);
 }
 \&
-static void   /* "static" means don\[aq]t export the symbol... */
+static void   /* "static" means don\[aq]t export the symbol.  */
 myfunc2(void)
 {
     myfunc3();

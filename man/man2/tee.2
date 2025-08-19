@@ -47,14 +47,16 @@ see
 .BR splice (2).
 .TP
 .B SPLICE_F_NONBLOCK
-Do not block on I/O; see
+Do not block on I/O;
+see
 .BR splice (2)
 for further details.
 .TP
 .B SPLICE_F_MORE
 Currently has no effect for
 .BR tee (),
-but may be implemented in the future; see
+but may be implemented in the future;
+see
 .BR splice (2).
 .TP
 .B SPLICE_F_GIFT
@@ -91,7 +93,8 @@ and the operation would block.
 .I fd_in
 or
 .I fd_out
-does not refer to a pipe; or
+does not refer to a pipe;
+or
 .I fd_in
 and
 .I fd_out

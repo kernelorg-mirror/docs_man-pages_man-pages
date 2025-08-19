@@ -33,7 +33,7 @@ or
 .I setattr
 permission on the key.
 .\" Keys with the KEY_FLAG_KEEP bit set cause an EPERM
-.\" error for KEYCTL_REVOKE. Does this need to be documented?
+.\" error for KEYCTL_REVOKE.  Does this need to be documented?
 .\" David Howells: No significance for user space.
 .SH RETURN VALUE
 On success,

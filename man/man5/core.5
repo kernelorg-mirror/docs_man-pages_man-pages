@@ -19,8 +19,10 @@ A list of the signals which cause a process to dump core can be found in
 .P
 A process can set its soft
 .B RLIMIT_CORE
-resource limit to place an upper limit on the size of the core dump file
-that will be produced if it receives a "core dump" signal; see
+resource limit to place
+an upper limit on the size of the core dump file
+that will be produced if it receives a "core dump" signal;
+see
 .BR getrlimit (2)
 for details.
 .P
@@ -49,7 +51,8 @@ core dump already exists, but there is more than one hard link to that
 file.
 .IP \[bu]
 The filesystem where the core dump file would be created is full;
-or has run out of inodes; or is mounted read-only;
+or has run out of inodes;
+or is mounted read-only;
 or the user has reached their quota for the filesystem.
 .IP \[bu]
 The directory in which the core dump file is to be created does
@@ -59,7 +62,8 @@ The
 .B RLIMIT_CORE
 (core file size) or
 .B RLIMIT_FSIZE
-(file size) resource limits for the process are set to zero; see
+(file size) resource limits for the process are set to zero;
+see
 .BR getrlimit (2)
 and the documentation of the shell's
 .I ulimit
@@ -391,8 +395,10 @@ process with the corresponding process ID.
 .P
 The value in the file is a bit mask of memory mapping types (see
 .BR mmap (2)).
-If a bit is set in the mask, then memory mappings of the
-corresponding type are dumped; otherwise they are not dumped.
+If a bit is set in the mask,
+then memory mappings of the corresponding type are dumped;
+otherwise,
+they are not dumped.
 The bits in this file have the following meanings:
 .P
 .PD 0
@@ -594,7 +600,7 @@ where each thread of a process has a different PID.)
 .\" Probably the behavior is maintained so that applications using
 .\" LinuxThreads continue appending the PID (the kernel has no easy
 .\" way of telling which threading implementation the user-space
-.\" application is using). -- mtk, April 2006
+.\" application is using).  -- mtk, April 2006
 .SH EXAMPLES
 The program below can be used to demonstrate the use of the
 pipe syntax in the
@@ -649,25 +655,25 @@ main(int argc, char *argv[])
     char cwd[PATH_MAX];
 \&
     /* Change our current working directory to that of the
-       crashing process. */
+       crashing process.  */
 \&
     snprintf(cwd, PATH_MAX, "/proc/%s/cwd", argv[1]);
     chdir(cwd);
 \&
-    /* Write output to file "core.info" in that directory. */
+    /* Write output to file "core.info" in that directory.  */
 \&
     fp = fopen("core.info", "w+");
     if (fp == NULL)
         exit(EXIT_FAILURE);
 \&
     /* Display command\-line arguments given to core_pattern
-       pipe program. */
+       pipe program.  */
 \&
     fprintf(fp, "argc=%d\[rs]n", argc);
     for (size_t j = 0; j < argc; j++)
         fprintf(fp, "argc[%zu]=<%s>\[rs]n", j, argv[j]);
 \&
-    /* Count bytes in standard input (the core dump). */
+    /* Count bytes in standard input (the core dump).  */
 \&
     tot = 0;
     while ((nread = read(STDIN_FILENO, buf, BUF_SIZE)) > 0)

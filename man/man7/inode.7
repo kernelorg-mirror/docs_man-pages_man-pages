@@ -159,10 +159,12 @@ in
 .BR mount (8),
 and related information in
 .BR mount (2).)
-In addition, the atime timestamp
+In addition,
+the atime timestamp
 is not updated if a file is opened with the
 .B O_NOATIME
-flag; see
+flag;
+see
 .BR open (2).
 .TP
 File creation (birth) timestamp (btime)

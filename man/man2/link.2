@@ -115,7 +115,8 @@ are an exception).
 The caller must have the
 .B CAP_DAC_READ_SEARCH
 capability in order to use this flag.
-This flag is Linux-specific; define
+This flag is Linux-specific;
+define
 .B _GNU_SOURCE
 .\" Before glibc 2.16, defining _ATFILE_SOURCE sufficed
 to obtain its definition.
@@ -197,7 +198,9 @@ For example, on an
 .BR ext4 (5)
 filesystem that does not employ the
 .I dir_index
-feature, the limit on the number of hard links to a file is 65,000; on
+feature,
+the limit on the number of hard links to a file is 65,000;
+on
 .BR btrfs (5),
 the limit is 65,535 links.
 .TP

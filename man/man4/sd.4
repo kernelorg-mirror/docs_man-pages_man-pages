@@ -39,13 +39,16 @@ partitions 5\[en]8 are the DOS "extended" (or "logical") partitions
 .P
 For example,
 .I /dev/sda
-will have major 8, minor 0, and will refer to all of the first SCSI drive
-in the system; and
+will have major 8, minor 0,
+and will refer to all of the first SCSI drive in the system;
+and
 .I /dev/sdb3
-will have major 8, minor 19, and will refer to the third DOS "primary"
-partition on the second SCSI drive in the system.
+will have major 8, minor 19,
+and will refer to the third DOS "primary" partition
+on the second SCSI drive in the system.
 .P
-At this time, only block devices are provided.
+At this time,
+only block devices are provided.
 Raw devices have not yet been implemented.
 .SH DESCRIPTION
 The following

@@ -115,7 +115,9 @@ is defined with the value 64, which has been the limit since Linux 1.0
 .SS C library/kernel differences
 The GNU C library does not employ the
 .BR gethostname ()
-system call; instead, it implements
+system call;
+instead,
+it implements
 .BR gethostname ()
 as a library function that calls
 .BR uname (2)

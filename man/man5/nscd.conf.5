@@ -11,12 +11,13 @@ The file
 is read from
 .BR nscd (8)
 at startup.
-Each line specifies either an attribute and a value, or an
-attribute, service, and a value.
-Fields are separated either by SPACE
-or TAB characters.
-A \[aq]#\[aq] (number sign) indicates the beginning of a
-comment; following characters, up to the end of the line,
+Each line specifies either
+an attribute and a value,
+or an attribute, service, and a value.
+Fields are separated either by SPACE or TAB characters.
+A \[aq]#\[aq] (number sign) indicates the beginning of a comment;
+following characters,
+up to the end of the line,
 are not interpreted by nscd.
 .P
 Valid services are
@@ -151,10 +152,11 @@ in the specified cache for
 .IR service .
 .I Value
 is in seconds.
-Can result in significant performance improvements if there
-are several files owned by UIDs (user IDs) not in system databases (for
-example untarring the Linux kernel sources as root); should be kept small
-to reduce cache coherency problems.
+Can result in significant performance improvements
+if there are several files owned by UIDs (user IDs) not in system databases
+(for example,
+untarring the Linux kernel sources as root);
+should be kept small to reduce cache coherency problems.
 .RE
 .P
 .B suggested\-size
@@ -191,7 +193,8 @@ The default is yes.
 .RS
 Keep the content of the cache for
 .I service
-over server restarts; useful when
+over server restarts;
+useful when
 .B paranoia
 mode is set.
 The default is no.

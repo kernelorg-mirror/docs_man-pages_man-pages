@@ -44,31 +44,35 @@ may be set to one of the following:
 .TP
 .B PTHREAD_RWLOCK_PREFER_READER_NP
 This is the default.
-A thread may hold multiple read locks; that is, read locks are recursive.
-According to The Single Unix Specification, the behavior is unspecified when a
-reader tries to place a lock, and there is no write lock but writers are
-waiting.
-Giving preference to the reader, as is set by
+A thread may hold multiple read locks;
+that is,
+read locks are recursive.
+According to The Single Unix Specification,
+the behavior is unspecified
+when a reader tries to place a lock,
+and there is no write lock but writers are waiting.
+Giving preference to the reader,
+as is set by
 .BR PTHREAD_RWLOCK_PREFER_READER_NP ,
-implies that the reader will receive the requested lock, even if
-a writer is waiting.
-As long as there are readers, the writer will be
-starved.
+implies that the reader will receive the requested lock,
+even if a writer is waiting.
+As long as there are readers,
+the writer will be starved.
 .TP
 .B PTHREAD_RWLOCK_PREFER_WRITER_NP
 This is intended as the write lock analog of
 .BR PTHREAD_RWLOCK_PREFER_READER_NP .
 This is ignored by glibc because the POSIX requirement to support
-recursive read locks would cause this option to create trivial
-deadlocks; instead use
+recursive read locks would cause this option to create trivial deadlocks;
+instead use
 .B PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP
-which ensures the application developer will not take recursive
-read locks thus avoiding deadlocks.
+which ensures the application developer will not take recursive read locks
+thus avoiding deadlocks.
 .\" ---
 .\" Here is the relevant wording:
 .\"
 .\"     A thread may hold multiple concurrent read locks on rwlock (that is,
-.\"     successfully call the pthread_rwlock_rdlock() function n times). If
+.\"     successfully call the pthread_rwlock_rdlock() function n times).  If
 .\"     so, the thread must perform matching unlocks (that is, it must call
 .\"     the pthread_rwlock_unlock() function n times).
 .\"
@@ -77,7 +81,7 @@ read locks thus avoiding deadlocks.
 .\"
 .\" If a thread which holds a read lock tries to acquire another read lock,
 .\" and now one or more writers is waiting for a write lock, then the algorithm
-.\" will lead to an obvious deadlock. The reader will be suspended, waiting for
+.\" will lead to an obvious deadlock.  The reader will be suspended, waiting for
 .\" the writers to acquire and release the lock, and the writers will be
 .\" suspended waiting for every existing read lock to be released.
 .\" ---

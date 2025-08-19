@@ -176,13 +176,17 @@ Before glibc 2.1.3, the check for the availability of
 .I /bin/sh
 was not actually performed if
 .I command
-was NULL; instead it was always assumed to be available, and
+was NULL;
+instead it was always assumed to be available,
+and
 .BR system ()
 always returned 1 in this case.
-Since glibc 2.1.3, this check is performed because, even though
-POSIX.1-2001 requires a conforming implementation to provide
-a shell, that shell may not be available or executable if
-the calling program has previously called
+Since glibc 2.1.3,
+this check is performed because,
+even though
+POSIX.1-2001 requires a conforming implementation to provide a shell,
+that shell may not be available or executable
+if the calling program has previously called
 .BR chroot (2)
 (which is not specified by POSIX.1-2001).
 .P

@@ -64,11 +64,14 @@ If
 .I string
 is not a null pointer, it should be an array that can hold at least
 .B L_cuserid
-characters; the string is returned in this array.
-Otherwise, a pointer to a string in a static area is returned.
-This
-string is statically allocated and might be overwritten on subsequent
-calls to this function or to
+characters;
+the string is returned in this array.
+Otherwise,
+a pointer to a string in a static area is returned.
+This string is statically allocated
+and might be overwritten
+on subsequent calls to this function
+or to
 .BR getlogin ().
 .P
 The macro
@@ -256,11 +259,13 @@ is redirected.)
 .P
 Nobody knows precisely what
 .BR cuserid ()
-does; avoid it in portable programs.
-Or avoid it altogether: use
+does;
+avoid it in portable programs.
+Or avoid it altogether:
+use
 .I getpwuid(geteuid())
-instead, if that is
-what you meant.
+instead,
+if that is what you meant.
 .B Do not use
 .BR cuserid ().
 .SH SEE ALSO

@@ -66,7 +66,7 @@ If the implementation detects that
 the version of the data structure referred to by
 .I state
 is a more recent version than this implementation knows about,
-.\" /* Must fail if the major version is too high. */
+.\" /* Must fail if the major version is too high.  */
 .\" if((ms->version & ~0xffl) > (MALLOC_STATE_VERSION & ~0xffl)) return -2;
 .BR malloc_set_state ()
 returns \-2.

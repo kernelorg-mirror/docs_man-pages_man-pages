@@ -15,12 +15,13 @@ Standard C library
 .P
 .BR "void *mremap(" "size_t old_size;"
 .BI "             void " old_address [ old_size "], size_t " old_size ,
-.BI "             size_t " new_size ", int " flags ", ... /* void *" new_address " */);"
+.BI "             size_t " new_size ", int " flags ", ...  /* void *" new_address " */);"
 .fi
 .SH DESCRIPTION
 .BR mremap ()
-expands (or shrinks) an existing memory mapping, potentially
-moving it at the same time (controlled by the
+expands (or shrinks) an existing memory mapping,
+potentially moving it at the same time
+(controlled by the
 .I flags
 argument and
 the available virtual address space).
@@ -96,7 +97,8 @@ is the requested size of the
 virtual memory blocks after the resize.
 An optional fifth argument,
 .IR new_address ,
-may be provided; see the description of
+may be provided;
+see the description of
 .B MREMAP_FIXED
 below.
 .P

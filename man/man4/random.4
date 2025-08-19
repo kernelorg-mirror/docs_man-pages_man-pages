@@ -139,10 +139,13 @@ faster.
 .SS Usage
 The
 .I /dev/random
-interface is considered a legacy interface, and
+interface is considered a legacy interface,
+and
 .I /dev/urandom
-is preferred and sufficient in all use cases, with the exception of
-applications which require randomness during early boot time; for
+is preferred and sufficient in all use cases,
+with the exception of
+applications which require randomness during early boot time;
+for
 these applications,
 .BR getrandom (2)
 must be used instead,

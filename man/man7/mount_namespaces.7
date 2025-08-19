@@ -102,7 +102,8 @@ events that take place under
 peer mounts will propagate to this mount.
 .TP
 .B MS_PRIVATE
-This mount is private; it does not have a peer group.
+This mount is private;
+it does not have a peer group.
 .BR mount (2)
 and
 .BR umount (2)
@@ -175,7 +176,8 @@ Members are added to a
 .I peer group
 when a mount is marked as shared and either:
 .IP (a) 5
-the mount is replicated during the creation of a new mount namespace; or
+the mount is replicated during the creation of a new mount namespace;
+or
 .IP (b)
 a new bind mount is created from the mount.
 .P
@@ -867,8 +869,8 @@ mount is a shared mount in a new peer group (with no peers):
 .RB # " mount \-\-make\-private /mnt" "  # Isolate from any previous peer group"
 .RB # " mount \-\-make\-shared /mnt"
 .RB # " cat /proc/self/mountinfo | grep \[aq]/mnt\[aq] | sed \[aq]s/ \- .*//\[aq]"
-239 61 8:2 / /mnt ... shared:102
-248 239 0:4 / /mnt/proc ... shared:5
+239 61 8:2 / /mnt ...\& shared:102
+248 239 0:4 / /mnt/proc ...\& shared:5
 .EE
 .in
 .P
@@ -882,9 +884,9 @@ onto
 .RB # " mkdir \-p /tmp/etc"
 .RB # " mount \-\-bind /mnt/etc /tmp/etc"
 .RB # " cat /proc/self/mountinfo | egrep \[aq]/mnt|/tmp/\[aq] | sed \[aq]s/ \- .*//\[aq]"
-239 61 8:2 / /mnt ... shared:102
-248 239 0:4 / /mnt/proc ... shared:5
-267 40 8:2 /etc /tmp/etc ... shared:102
+239 61 8:2 / /mnt ...\& shared:102
+248 239 0:4 / /mnt/proc ...\& shared:5
+267 40 8:2 /etc /tmp/etc ...\& shared:102
 .EE
 .in
 .P
@@ -903,9 +905,9 @@ so that it can propagate events to the next slave in the chain:
 .RB # " mount \-\-make\-slave /tmp/etc"
 .RB # " mount \-\-make\-shared /tmp/etc"
 .RB # " cat /proc/self/mountinfo | egrep \[aq]/mnt|/tmp/\[aq] | sed \[aq]s/ \- .*//\[aq]"
-239 61 8:2 / /mnt ... shared:102
-248 239 0:4 / /mnt/proc ... shared:5
-267 40 8:2 /etc /tmp/etc ... shared:105 master:102
+239 61 8:2 / /mnt ...\& shared:102
+248 239 0:4 / /mnt/proc ...\& shared:5
+267 40 8:2 /etc /tmp/etc ...\& shared:105 master:102
 .EE
 .in
 .P
@@ -925,10 +927,10 @@ a slave of
 .RB # " mount \-\-bind /tmp/etc /mnt/tmp/etc"
 .RB # " mount \-\-make\-slave /mnt/tmp/etc"
 .RB # " cat /proc/self/mountinfo | egrep \[aq]/mnt|/tmp/\[aq] | sed \[aq]s/ \- .*//\[aq]"
-239 61 8:2 / /mnt ... shared:102
-248 239 0:4 / /mnt/proc ... shared:5
-267 40 8:2 /etc /tmp/etc ... shared:105 master:102
-273 239 8:2 /etc /mnt/tmp/etc ... master:105
+239 61 8:2 / /mnt ...\& shared:102
+248 239 0:4 / /mnt/proc ...\& shared:5
+267 40 8:2 /etc /tmp/etc ...\& shared:105 master:102
+273 239 8:2 /etc /mnt/tmp/etc ...\& master:105
 .EE
 .in
 .P
@@ -958,9 +960,9 @@ we see the following:
 .in +4n
 .EX
 .RB # " cat /proc/self/mountinfo | sed \[aq]s/ \- .*//\[aq]"
-239 61 8:2 / / ... shared:102
-248 239 0:4 / /proc ... shared:5
-273 239 8:2 /etc /tmp/etc ... master:105 propagate_from:102
+239 61 8:2 / / ...\& shared:102
+248 239 0:4 / /proc ...\& shared:5
+273 239 8:2 /etc /tmp/etc ...\& master:105 propagate_from:102
 .EE
 .in
 .P

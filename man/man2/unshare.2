@@ -5,11 +5,11 @@
 .\" Patch Justification:
 .\" unshare system call is needed to implement, using PAM,
 .\" per-security_context and/or per-user namespace to provide
-.\" polyinstantiated directories. Using unshare and bind mounts, a
+.\" polyinstantiated directories.  Using unshare and bind mounts, a
 .\" PAM module can create private namespace with appropriate
 .\" directories(based on user's security context) bind mounted on
 .\" public directories such as /tmp, thus providing an instance of
-.\" /tmp that is based on user's security context. Without the
+.\" /tmp that is based on user's security context.  Without the
 .\" unshare system call, namespace separation can only be achieved
 .\" by clone, which would require porting and maintaining all commands
 .\" such as login, and su, that establish a user session.
@@ -198,7 +198,8 @@ with the
 flag, the caller obtains a full set of capabilities in the new namespace.
 .IP
 .B CLONE_NEWUSER
-requires that the calling process is not threaded; specifying
+requires that the calling process is not threaded;
+specifying
 .B CLONE_NEWUSER
 automatically implies
 .BR CLONE_THREAD .
@@ -364,7 +365,8 @@ context that need to be unshared.
 .B CLONE_NEWPID
 was specified in flags,
 but the limit on the nesting depth of PID namespaces
-would have been exceeded; see
+would have been exceeded;
+see
 .BR pid_namespaces (7).
 .TP
 .BR ENOSPC " (since Linux 4.9; beforehand " EUSERS )
@@ -449,9 +451,9 @@ Such functionality may be added in the future, if required.
 .\"9) Future Work
 .\"--------------
 .\"The current implementation of unshare does not allow unsharing of
-.\"signals and signal handlers. Signals are complex to begin with and
+.\"signals and signal handlers.  Signals are complex to begin with and
 .\"to unshare signals and/or signal handlers of a currently running
-.\"process is even more complex. If in the future there is a specific
+.\"process is even more complex.  If in the future there is a specific
 .\"need to allow unsharing of signals and/or signal handlers, it can
 .\"be incrementally added to unshare without affecting legacy
 .\"applications using unshare.

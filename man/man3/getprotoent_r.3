@@ -84,7 +84,7 @@ and the caller must try again with a larger buffer.
 (A buffer of size 1024 bytes should be sufficient for most applications.)
 .\" I can find no information on the required/recommended buffer size;
 .\" the nonreentrant functions use a 1024 byte buffer.
-.\" The 1024 byte value is also what the Solaris man page suggests. -- mtk
+.\" The 1024 byte value is also what the Solaris man page suggests.  -- mtk
 .P
 If the function call successfully obtains a protocol record, then
 .I *result
@@ -210,7 +210,7 @@ main(int argc, char *argv[])
             erange_cnt++;
 \&
             /* Increment a byte at a time so we can see exactly
-               what size buffer was required. */
+               what size buffer was required.  */
 \&
             size++;
 \&

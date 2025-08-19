@@ -127,7 +127,8 @@ even if the signal is being ignored.
 which has its usual effect.)
 The tracer will be notified at its next call to
 .BR waitpid (2)
-(or one of the related "wait" system calls); that call will return a
+(or one of the related "wait" system calls);
+that call will return a
 .I status
 value containing information that indicates
 the cause of the stop in the tracee.
@@ -191,7 +192,8 @@ call.
 Linux does not have separate text and data address spaces,
 so these two operations are currently equivalent.
 .RI ( data
-is ignored; but see NOTES.)
+is ignored;
+but see NOTES.)
 .TP
 .B PTRACE_PEEKUSER
 .\" PTRACE_PEEKUSR in kernel source, but glibc uses PTRACE_PEEKUSER,
@@ -209,7 +211,8 @@ Typically, the offset must be word-aligned, though this might vary by
 architecture.
 See NOTES.
 .RI ( data
-is ignored; but see NOTES.)
+is ignored;
+but see NOTES.)
 .TP
 .B PTRACE_POKETEXT
 .TQ
@@ -257,7 +260,8 @@ Note that SPARC systems have the meaning of
 .I data
 and
 .I addr
-reversed; that is,
+reversed;
+that is,
 .I data
 is ignored and the registers are copied to the address
 .IR addr .
@@ -305,9 +309,11 @@ Note that SPARC systems have the meaning of
 .I data
 and
 .I addr
-reversed; that is,
+reversed;
+that is,
 .I data
-is ignored and the registers are copied from the address
+is ignored
+and the registers are copied from the address
 .IR addr .
 .B PTRACE_SETREGS
 and
@@ -478,7 +484,8 @@ flag,
 will be delivered instead
 if
 .B PTRACE_O_TRACEVFORK
-is set; otherwise if the tracee calls
+is set;
+otherwise if the tracee calls
 .BR clone (2)
 with the exit signal set to
 .BR SIGCHLD ,
@@ -787,7 +794,7 @@ By contrast, sending a
 .B SIGKILL
 directly has no such limitation.
 .\" [Note from Denys Vlasenko:
-.\"     deprecation suggested by Oleg Nesterov. He prefers to deprecate it
+.\"     deprecation suggested by Oleg Nesterov.  He prefers to deprecate it
 .\"     instead of describing (and needing to support) PTRACE_KILL's quirks.]
 .TP
 .BR PTRACE_INTERRUPT " (since Linux 3.4)"
@@ -825,7 +832,7 @@ making it a tracee of the calling process.
 .\" No longer true (removed by Denys Vlasenko, 2011, who remarks:
 .\"        "I think it isn't true in non-ancient 2.4 and in Linux 2.6/3.x.
 .\"         Basically, it's not true for any Linux in practical use.
-.\" ; the behavior of the tracee is as if it had done a
+.\" the behavior of the tracee is as if it had done a
 .\" .BR PTRACE_TRACEME .
 .\" The calling process actually becomes the parent of the tracee
 .\" process for most purposes (e.g., it will receive
@@ -837,7 +844,8 @@ making it a tracee of the calling process.
 The tracee is sent a
 .BR SIGSTOP ,
 but will not necessarily have stopped
-by the completion of this call; use
+by the completion of this call;
+use
 .BR waitpid (2)
 to wait for the tracee to stop.
 See the "Attaching and detaching" subsection for additional information.
@@ -850,7 +858,8 @@ Permission to perform a
 .B PTRACE_ATTACH
 is governed by a ptrace access mode
 .B PTRACE_MODE_ATTACH_REALCREDS
-check; see below.
+check;
+see below.
 .TP
 .BR PTRACE_SEIZE " (since Linux 3.4)"
 .\"
@@ -910,7 +919,8 @@ Permission to perform a
 .B PTRACE_SEIZE
 is governed by a ptrace access mode
 .B PTRACE_MODE_ATTACH_REALCREDS
-check; see below.
+check;
+see below.
 .\"
 .TP
 .BR PTRACE_SECCOMP_GET_FILTER " (since Linux 4.4)"
@@ -999,7 +1009,8 @@ the
 .I entry_number
 of the
 .I struct user_desc
-is ignored; in other words,
+is ignored;
+in other words,
 this ptrace operation can't be used to allocate a free TLS entry.)
 .TP
 .BR PTRACE_GET_SYSCALL_INFO " (since Linux 5.3)"
@@ -1065,7 +1076,8 @@ The
 and
 .I stack_pointer
 fields are defined for all kinds of ptrace system call stops.
-The rest of the structure is a union; one should read only those fields
+The rest of the structure is a union;
+one should read only those fields
 that are meaningful for the kind of system call stop specified by the
 .I op
 field.
@@ -1160,7 +1172,8 @@ This applies to exits via
 .BR exit_group (2),
 and signal deaths (except
 .BR SIGKILL ,
-depending on the kernel version; see BUGS below),
+depending on the kernel version;
+see BUGS below),
 and when threads are torn down on
 .BR execve (2)
 in a multithreaded process.
@@ -1354,7 +1367,9 @@ this may be a different kind of ptrace-stop;
 see the "Syscall-stops" and "execve" sections below for details.
 If
 .I WSTOPSIG(status)
-returns a stopping signal, this may be a group-stop; see below.
+returns a stopping signal,
+this may be a group-stop;
+see below.
 .SS Signal injection and suppression
 After signal-delivery-stop is observed by the tracer,
 the tracer should restart the tracee with the call
@@ -1404,10 +1419,12 @@ Restarting ptrace commands issued in ptrace-stops other than
 signal-delivery-stop are not guaranteed to inject a signal, even if
 .I sig
 is nonzero.
-No error is reported; a nonzero
+No error is reported;
+a nonzero
 .I sig
 may simply be ignored.
-Ptrace users should not try to "create a new signal" this way: use
+Ptrace users should not try to "create a new signal" this way:
+use
 .BR tgkill (2)
 instead.
 .P
@@ -1662,7 +1679,8 @@ in a multithreaded process.
 returns the exit status.
 Registers can be examined
 (unlike when "real" exit happens).
-The tracee is still alive; it needs to be
+The tracee is still alive;
+it needs to be
 .BR PTRACE_CONT ed
 or
 .BR PTRACE_DETACH ed
@@ -1715,8 +1733,10 @@ if the tracer restarts the tracee with
 .BR PTRACE_SYSCALL ,
 the tracee enters syscall-exit-stop when the system call is finished,
 or if it is interrupted by a signal.
-(That is, signal-delivery-stop never happens between syscall-enter-stop
-and syscall-exit-stop; it happens
+(That is,
+signal-delivery-stop never happens
+between syscall-enter-stop and syscall-exit-stop;
+it happens
 .I after
 syscall-exit-stop.).
 If the tracee is continued using any other method (including
@@ -2289,7 +2309,7 @@ PID2 execve("/bin/bar", "bar" <unfinished ...>
 *** we issue PTRACE_SYSCALL for thread 2 **
 *** we get PTRACE_EVENT_EXEC for PID0, we issue PTRACE_SYSCALL **
 *** we get syscall-exit-stop for PID0: **
-PID0 <... execve resumed> )             = 0
+PID0 <...\& execve resumed> )             = 0
 .fi
 .P
 If the
@@ -2348,7 +2368,8 @@ several kinds of
 notifications when the child process is traced by some other process.
 .P
 Many of these bugs have been fixed, but as of Linux 2.6.38 several still
-exist; see BUGS below.
+exist;
+see BUGS below.
 .P
 As of Linux 2.6.38, the following is believed to work correctly:
 .IP \[bu] 3
@@ -2522,7 +2543,7 @@ was effectively the default before Linux 2.6.27.)
 .\" PTRACE_MODE_READ and PTRACE_MODE_ATTACH, Stephen Smalley notes:
 .\"
 .\"     That was the intent when the distinction was introduced, but it doesn't
-.\"     appear to have been properly maintained, e.g. there is now a common
+.\"     appear to have been properly maintained, e.g., there is now a common
 .\"     helper lock_trace() that is used for
 .\"     /proc/pid/{stack,syscall,personality} but checks PTRACE_MODE_ATTACH, and
 .\"     PTRACE_MODE_ATTACH is also used in timerslack_ns_write/show().  Likely
@@ -2831,10 +2852,10 @@ If a thread group leader is traced and exits by calling
 .BR _exit (2),
 .\" Note from Denys Vlasenko:
 .\"     Here "exits" means any kind of death - _exit, exit_group,
-.\"     signal death. Signal death and exit_group cases are trivial,
+.\"     signal death.  Signal death and exit_group cases are trivial,
 .\"     though: since signal death and exit_group kill all other threads
 .\"     too, "until all other threads exit" thing happens rather soon
-.\"     in these cases. Therefore, only _exit presents observably
+.\"     in these cases.  Therefore, only _exit presents observably
 .\"     puzzling behavior to ptrace users: thread leader _exit's,
 .\"     but WIFEXITED isn't reported! We are trying to explain here
 .\"     why it is so.
@@ -2897,7 +2918,7 @@ and expected one-line output such as
 .P
 .in +4n
 .EX
-restart_syscall(<... resuming interrupted call ...>_
+restart_syscall(<...\& resuming interrupted call ...>_
 .EE
 .in
 .P

@@ -158,7 +158,7 @@ and then list the dynamic dependencies of the program:
 .P
 .in +4n
 .EX
-.RB $ " cc \-g \-o prog prog.c \-L. \-ldemo" ;
+.RB $ " cc \-g \-o prog prog.c \-L.\& \-ldemo" ;
 .RB $ " ldd prog" ;
 	linux\-vdso.so.1 =>  (0x00007fff86d66000)
 	libdemo.so.1 => not found
@@ -208,7 +208,7 @@ which is written to a file in the directory specified in
 .P
 .in +4n
 .EX
-.RB $ " LD_LIBRARY_PATH=. ./prog" ;
+.RB $ " LD_LIBRARY_PATH=.\& ./prog" ;
 .RB $ " ls prof_data" ;
 libdemo.so.1.profile
 .EE

@@ -112,14 +112,17 @@ struct keyctl_kdf_params {
 The
 .I hashname
 field is a null-terminated string which specifies a hash name
-(available in the kernel's crypto API; the list of the hashes available
-is rather tricky to observe; please refer to the
+(available in the kernel's crypto API;
+the list of the hashes available
+is rather tricky to observe;
+please refer to the
 .UR https://www.kernel.org\:/doc\:/html\:/latest\:/crypto\:/architecture.html
 "Kernel Crypto API Architecture"
 .UE
-documentation for the information regarding how hash names are constructed and
-your kernel's source and configuration regarding what ciphers
-and templates with type
+documentation
+for the information regarding how hash names are constructed
+and your kernel's source and configuration
+regarding what ciphers and templates with type
 .B CRYPTO_ALG_TYPE_SHASH
 are available)
 to be applied to DH result in KDF operation.

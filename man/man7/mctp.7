@@ -89,9 +89,9 @@ memset(&addr, 0, sizeof(addr));
 /* set message destination */
 addr.smctp_family = AF_MCTP;
 addr.smctp_network = 0;
-addr.smctp_addr.s_addr = 8; /* remote EID */
+addr.smctp_addr.s_addr = 8;  /* remote EID */
 addr.smctp_tag = MCTP_TAG_OWNER;
-addr.smctp_type = MYPROGRAM_MCTP_TYPE_ECHO; /* example type */
+addr.smctp_type = MYPROGRAM_MCTP_TYPE_ECHO;  /* example type */
 \&
 buf = "hello, world!"
 \&
@@ -100,7 +100,8 @@ n = sendto(sd, buf, 13, 0,
 .EE
 .in
 .P
-Here, the sender owns the message tag; so
+Here, the sender owns the message tag;
+so
 .B MCTP_TAG_OWNER
 is used as the tag data.
 The kernel will allocate a specific tag value for this message.
@@ -149,7 +150,7 @@ struct sockaddr_mctp  addr;
 addr.smctp_family = AF_MCTP;
 addr.smctp_network = MCTP_NET_ANY;
 addr.smctp_addr.s_addr = MCTP_ADDR_ANY;
-addr.smctp_type = MYPROGRAM_MCTP_TYPE_ECHO; /* our 'echo' type */
+addr.smctp_type = MYPROGRAM_MCTP_TYPE_ECHO;  /* our 'echo' type */
 \&
 int rc = bind(sd, (struct sockaddr *) &addr, sizeof(addr));
 .EE

@@ -155,15 +155,18 @@ See
 for details.
 .TP
 .B MSG_DONTROUTE
-Don't use a gateway to send out the packet, send to hosts only on
-directly connected networks.
+Don't use a gateway to send out the packet,
+send to hosts only
+on directly connected networks.
 This is usually used only
 by diagnostic or routing programs.
-This is defined only for protocol
-families that route; packet sockets don't.
+This is defined only for
+protocol families that route;
+packet sockets don't.
 .TP
 .BR MSG_DONTWAIT " (since Linux 2.2)"
-Enables nonblocking operation; if the operation would block,
+Enables nonblocking operation;
+if the operation would block,
 .B EAGAIN
 or
 .B EWOULDBLOCK
@@ -286,9 +289,10 @@ struct msghdr {
 .P
 The
 .I msg_name
-field is used on an unconnected socket to specify the target
-address for a datagram.
-It points to a buffer containing the address; the
+field is used on an unconnected socket to specify
+the target address for a datagram.
+It points to a buffer containing the address;
+the
 .I msg_namelen
 field should be set to the size of the address.
 For a connected socket, these fields should be specified as NULL and 0,
@@ -383,7 +387,8 @@ The socket is not connection-mode, and no peer address is set.
 An invalid user space address was specified for an argument.
 .TP
 .B EINTR
-A signal occurred before any data was transmitted; see
+A signal occurred before any data was transmitted;
+see
 .BR signal (7).
 .TP
 .B EINVAL

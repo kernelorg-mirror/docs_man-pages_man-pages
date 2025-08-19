@@ -50,7 +50,8 @@ The stream is opened for reading.
 The stream is opened for writing.
 .TP
 .I a
-Append; open the stream for writing,
+Append;
+open the stream for writing,
 with the initial buffer position set to the first null byte.
 .TP
 .I r+
@@ -62,7 +63,8 @@ The buffer contents are truncated
 (i.e., \[aq]\[rs]0\[aq] is placed in the first byte of the buffer).
 .TP
 .I a+
-Append; open the stream for reading and writing,
+Append;
+open the stream for reading and writing,
 with the initial buffer position set to the first null byte.
 .P
 The stream maintains the notion of a current position,
@@ -206,7 +208,8 @@ This is inconsistent with the treatment of
 by
 .BR fopen (3).
 .P
-Binary mode was removed in glibc 2.22; a \[aq]b\[aq] specified in
+Binary mode was removed in glibc 2.22;
+a \[aq]b\[aq] specified in
 .I mode
 has no effect.
 .SH NOTES

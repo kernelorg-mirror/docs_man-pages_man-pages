@@ -121,7 +121,8 @@ the caller must have write access to the file;
 .\" not on whether the caller's effective UID has write
 .\" permission for the file referred to by the descriptor.
 .IP \[bu]
-the caller's effective user ID must match the owner of the file; or
+the caller's effective user ID must match the owner of the file;
+or
 .IP \[bu]
 the caller must have appropriate privileges.
 .P
@@ -204,7 +205,8 @@ If
 is
 .BR AT_FDCWD ,
 the call operates on the current working directory.
-This flag is Linux-specific; define
+This flag is Linux-specific;
+define
 .B _GNU_SOURCE
 to obtain its definition.
 .TP
@@ -279,7 +281,8 @@ nor a valid file descriptor.
 .TP
 .B EFAULT
 .I times
-pointed to an invalid address; or,
+pointed to an invalid address;
+or,
 .I dirfd
 was
 .BR AT_FDCWD ,
@@ -367,7 +370,8 @@ the caller's effective user ID does not match the owner of file,
 and the caller is not privileged
 (Linux: does not have the
 .B CAP_FOWNER
-capability); or,
+capability);
+or,
 .IP \[bu]
 .\" Linux 2.6.22 was broken here:
 .\" it was not consistent with the old utimes() implementation,
@@ -519,7 +523,8 @@ As a result, in some cases:
 a) file timestamps can be updated by a process that shouldn't have
 permission to perform updates;
 b) file timestamps can't be updated by a process that should have
-permission to perform updates; and
+permission to perform updates;
+and
 c) the wrong
 .I errno
 value is returned in case of an error.

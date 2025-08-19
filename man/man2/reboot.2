@@ -86,7 +86,8 @@ the action associated with
 .TP
 .B LINUX_REBOOT_CMD_HALT
 .RB ( RB_HALT_SYSTEM ,
-0xcdef0123; since Linux 1.1.76).
+0xcdef0123;
+since Linux 1.1.76).
 The message "System halted." is printed, and the system is halted.
 Control is given to the ROM monitor, if there is one.
 If not preceded by a
@@ -103,7 +104,8 @@ This option is available only if the kernel was configured with
 .TP
 .B LINUX_REBOOT_CMD_POWER_OFF
 .RB ( RB_POWER_OFF ,
-0x4321fedc; since Linux 2.1.30).
+0x4321fedc;
+since Linux 2.1.30).
 The message "Power down." is printed, the system is stopped,
 and all power is removed from the system, if possible.
 If not preceded by a
@@ -120,7 +122,8 @@ If not preceded by a
 data will be lost.
 .TP
 .B LINUX_REBOOT_CMD_RESTART2
-(0xa1b2c3d4; since Linux 2.1.30).
+(0xa1b2c3d4;
+since Linux 2.1.30).
 The message "Restarting system with command \[aq]%s\[aq]" is printed,
 and a restart (using the command string given in
 .IR arg )
@@ -131,7 +134,8 @@ data will be lost.
 .TP
 .B LINUX_REBOOT_CMD_SW_SUSPEND
 .RB ( RB_SW_SUSPEND ,
-0xd000fce1; since Linux 2.5.18).
+0xd000fce1;
+since Linux 2.5.18).
 The system is suspended (hibernated) to disk.
 This option is available only if the kernel was configured with
 .BR CONFIG_HIBERNATION .

@@ -21,7 +21,8 @@ Standard C library
 .fi
 .P
 .IR Note :
-There are no glibc wrappers for these system calls; see NOTES.
+There are no glibc wrappers for these system calls;
+see NOTES.
 .SH DESCRIPTION
 The
 .BR rt_sigqueueinfo ()
@@ -176,7 +177,8 @@ Linux 2.2.
 Linux 2.6.31.
 .SH NOTES
 Since these system calls are not intended for application use,
-there are no glibc wrapper functions; use
+there are no glibc wrapper functions;
+use
 .BR syscall (2)
 in the unlikely case that you want to call them directly.
 .P

@@ -40,7 +40,7 @@ in their low (7-bit) half, invisible control characters in positions
 128 to 159, and 96 fixed-width graphics in positions 160\[en]255.
 .P
 Of these, the most important is ISO/IEC\~8859-1
-("Latin Alphabet No. 1" / Latin-1).
+("Latin Alphabet No.\& 1" / Latin-1).
 It was widely adopted and supported by different systems,
 and is gradually being replaced with Unicode.
 The ISO/IEC\~8859-1 characters are also the first 256 characters of Unicode.
@@ -92,31 +92,33 @@ letter forms, but a proper display engine should combine these
 using the proper initial, medial, and final forms.
 .TP
 ISO/IEC\~8859-7
-Was created for Modern Greek in 1987, updated in 2003.
+Was created for Modern Greek in 1987,
+updated in 2003.
 .TP
 ISO/IEC\~8859-8
 Supports Modern Hebrew without niqud (punctuation signs).
-Niqud and full-fledged Biblical Hebrew were outside the scope of this
-character set.
+Niqud and full-fledged Biblical Hebrew were
+outside the scope of this character set.
 .TP
 ISO/IEC\~8859-9 (Latin-5)
-This is a variant of Latin-1 that replaces Icelandic letters with
-Turkish ones.
+This is a variant of Latin-1
+that replaces Icelandic letters with Turkish ones.
 .TP
 ISO/IEC\~8859-10 (Latin-6)
-Latin-6 added the Inuit (Greenlandic) and Sami (Lappish) letters that were
-missing in Latin-4 to cover the entire Nordic area.
+Latin-6 added the Inuit (Greenlandic) and Sami (Lappish) letters
+that were missing in Latin-4
+to cover the entire Nordic area.
 .TP
 ISO/IEC\~8859-11
-Supports the Thai alphabet and is nearly identical to the TIS-620
-standard.
+Supports the Thai alphabet and is nearly identical to the TIS-620 standard.
 .TP
 ISO/IEC\~8859-12
 This character set does not exist.
 .TP
 ISO/IEC\~8859-13 (Latin-7)
-Supports the Baltic Rim languages; in particular, it includes Latvian
-characters not found in Latin-4.
+Supports the Baltic Rim languages;
+in particular,
+it includes Latvian characters not found in Latin-4.
 .TP
 ISO/IEC\~8859-14 (Latin-8)
 This is the Celtic character set, covering Old Irish, Manx, Gaelic,
@@ -251,7 +253,7 @@ set, and so on.
 A 96-character set is designated as
 .RI G n
 character set
-by an escape sequence ESC \- xx (for G1), ESC . xx (for G2)
+by an escape sequence ESC \- xx (for G1), ESC .\& xx (for G2)
 or ESC / xx (for G3).
 For example, ESC \- G selects the Hebrew alphabet as G1.
 .P
@@ -273,57 +275,63 @@ and
 .B \[ha]O
 are not used anymore, ESC ( xx
 can be used only with xx=B, and ESC ) xx, ESC * xx, ESC + xx
-are equivalent to ESC \- xx, ESC . xx, ESC / xx, respectively.
+are equivalent to ESC \- xx, ESC .\& xx, ESC / xx, respectively.
 .SS TIS-620
-TIS-620 is a Thai national standard character set and a superset
-of ASCII.
-In the same fashion as the ISO/IEC\~8859 series, Thai characters are mapped into
-0xa1\[en]0xfe.
+TIS-620 is a Thai national standard character set
+and a superset of ASCII.
+In the same fashion as the ISO/IEC\~8859 series,
+Thai characters are mapped into 0xa1\[en]0xfe.
 .SS Unicode
-Unicode (ISO/IEC 10646) is a standard which aims to unambiguously represent
-every character in every human language.
+Unicode (ISO/IEC 10646) is a standard which aims to
+unambiguously represent every character in every human language.
 Unicode's structure permits 20.1 bits to encode every character.
-Since most computers don't include 20.1-bit integers, Unicode is
-usually encoded as 32-bit integers internally and either a series of
-16-bit integers (UTF-16) (needing two 16-bit integers only when
-encoding certain rare characters) or a series of 8-bit bytes (UTF-8).
+Since most computers don't include 20.1-bit integers,
+Unicode is usually encoded as 32-bit integers internally
+and either a series of 16-bit integers (UTF-16)
+(needing two 16-bit integers only when encoding certain rare characters)
+or a series of 8-bit bytes (UTF-8).
 .P
 Linux represents Unicode using the 8-bit Unicode Transformation Format
 (UTF-8).
 UTF-8 is a variable length encoding of Unicode.
-It uses 1
-byte to code 7 bits, 2 bytes for 11 bits, 3 bytes for 16 bits, 4 bytes
-for 21 bits, 5 bytes for 26 bits, 6 bytes for 31 bits.
+It uses
+1 byte to code 7 bits,
+2 bytes for 11 bits,
+3 bytes for 16 bits,
+4 bytes for 21 bits,
+5 bytes for 26 bits,
+6 bytes for 31 bits.
 .P
 Let 0,1,x stand for a zero, one, or arbitrary bit.
 A byte 0xxxxxxx
-stands for the Unicode 00000000 0xxxxxxx which codes the same symbol
-as the ASCII 0xxxxxxx.
-Thus, ASCII goes unchanged into UTF-8, and
-people using only ASCII do not notice any change: not in code, and not
-in file size.
+stands for the Unicode 00000000 0xxxxxxx
+which codes the same symbol as the ASCII 0xxxxxxx.
+Thus,
+ASCII goes unchanged into UTF-8,
+and people using only ASCII do not notice any change:
+not in code,
+and not in file size.
 .P
-A byte 110xxxxx is the start of a 2-byte code, and 110xxxxx 10yyyyyy
-is assembled into 00000xxx xxyyyyyy.
-A byte 1110xxxx is the start
-of a 3-byte code, and 1110xxxx 10yyyyyy 10zzzzzz is assembled
-into xxxxyyyy yyzzzzzz.
+A byte 110xxxxx is the start of a 2-byte code,
+and 110xxxxx 10yyyyyy is assembled into 00000xxx xxyyyyyy.
+A byte 1110xxxx is the start of a 3-byte code,
+and 1110xxxx 10yyyyyy 10zzzzzz is assembled into xxxxyyyy yyzzzzzz.
 (When UTF-8 is used to code the 31-bit ISO/IEC 10646
 then this progression continues up to 6-byte codes.)
 .P
-For most texts in ISO/IEC\~8859 character sets, this means that the
-characters outside of ASCII are now coded with two bytes.
-This tends
-to expand ordinary text files by only one or two percent.
-For Russian
-or Greek texts, this expands ordinary text files by 100%, since text in
-those languages is mostly outside of ASCII.
-For Japanese users this means
-that the 16-bit codes now in common use will take three bytes.
+For most texts in ISO/IEC\~8859 character sets,
+this means that the characters outside of ASCII are now coded with two bytes.
+This tends to expand ordinary text files by only one or two percent.
+For Russian or Greek texts,
+this expands ordinary text files by 100%,
+since text in those languages is mostly outside of ASCII.
+For Japanese users this means that
+the 16-bit codes now in common use will take three bytes.
 While there are algorithmic conversions from some character sets
-(especially ISO/IEC\~8859-1) to Unicode, general conversion requires
-carrying around conversion tables, which can be quite large for 16-bit
-codes.
+(especially ISO/IEC\~8859-1)
+to Unicode,
+general conversion requires carrying around conversion tables,
+which can be quite large for 16-bit codes.
 .P
 Note that UTF-8 is self-synchronizing:
 10xxxxxx is a tail,
@@ -334,19 +342,19 @@ In particular,
 there are no embedded NULs (\[aq]\[rs]0\[aq]) or \[aq]/\[aq]s
 that form part of some larger code.
 .P
-Since ASCII, and, in particular, NUL and \[aq]/\[aq], are unchanged, the
-kernel does not notice that UTF-8 is being used.
-It does not care at
-all what the bytes it is handling stand for.
+Since ASCII, and, in particular, NUL and \[aq]/\[aq], are unchanged,
+the kernel does not notice that UTF-8 is being used.
+It does not care at all what the bytes it is handling stand for.
 .P
-Rendering of Unicode data streams is typically handled through
-"subfont" tables which map a subset of Unicode to glyphs.
-Internally
+Rendering of Unicode data streams is
+typically handled through "subfont" tables
+which map a subset of Unicode to glyphs.
+Internally,
 the kernel uses Unicode to describe the subfont loaded in video RAM.
-This means that in the Linux console in UTF-8 mode, one can use a character
-set with 512 different symbols.
-This is not enough for Japanese, Chinese, and
-Korean, but it is enough for most other purposes.
+This means that in the Linux console in UTF-8 mode,
+one can use a character set with 512 different symbols.
+This is not enough for Japanese, Chinese, and Korean,
+but it is enough for most other purposes.
 .SH SEE ALSO
 .BR iconv (1),
 .BR ascii (7),

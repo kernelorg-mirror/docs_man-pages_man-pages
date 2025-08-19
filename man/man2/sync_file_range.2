@@ -27,7 +27,8 @@ with disk.
 .I offset
 is the starting byte of the file range to be synchronized.
 .I nbytes
-specifies the length of the range to be synchronized, in bytes; if
+specifies the length of the range to be synchronized, in bytes;
+if
 .I nbytes
 is zero, then all bytes from
 .I offset
@@ -120,7 +121,8 @@ was called are committed to disk.
 .SH RETURN VALUE
 On success,
 .BR sync_file_range ()
-returns 0; on failure \-1 is returned and
+returns 0;
+on failure \-1 is returned and
 .I errno
 is set to indicate the error.
 .SH ERRORS
@@ -131,7 +133,8 @@ is not a valid file descriptor.
 .TP
 .B EINVAL
 .I flags
-specifies an invalid bit; or
+specifies an invalid bit;
+or
 .I offset
 or
 .I nbytes

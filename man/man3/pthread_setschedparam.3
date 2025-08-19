@@ -79,7 +79,7 @@ and
 .BR pthread_mutexattr_setprotocol (3)).
 .\" FIXME . nptl/pthread_setschedparam.c has the following
 .\"   /* If the thread should have higher priority because of some
-.\"      PTHREAD_PRIO_PROTECT mutexes it holds, adjust the priority. */
+.\"      PTHREAD_PRIO_PROTECT mutexes it holds, adjust the priority.  */
 .\" Eventually (perhaps after writing the mutexattr pages), we
 .\" may want to add something on the topic to this page.
 .SH RETURN VALUE
@@ -309,7 +309,7 @@ main(int argc, char *argv[])
     char *attr_sched_str, *main_sched_str, *inheritsched_str;
     struct sched_param param;
 \&
-    /* Process command\-line options. */
+    /* Process command\-line options.  */
 \&
     use_null_attrib = 0;
     attr_sched_str = NULL;
@@ -333,7 +333,7 @@ main(int argc, char *argv[])
     }
 \&
     /* Optionally set scheduling attributes of main thread,
-       and display the attributes. */
+       and display the attributes.  */
 \&
     if (main_sched_str != NULL) {
         if (!get_policy(main_sched_str[0], &policy))
@@ -348,7 +348,7 @@ main(int argc, char *argv[])
     display_thread_sched_attr("Scheduler settings of main thread");
     printf("\[rs]n");
 \&
-    /* Initialize thread attributes object according to options. */
+    /* Initialize thread attributes object according to options.  */
 \&
     attrp = NULL;
 \&
@@ -386,7 +386,7 @@ main(int argc, char *argv[])
     }
 \&
     /* If we initialized a thread attributes object, display
-       the scheduling attributes that were set in the object. */
+       the scheduling attributes that were set in the object.  */
 \&
     if (attrp != NULL) {
         s = pthread_attr_getschedparam(&attr, &param);
@@ -407,13 +407,13 @@ main(int argc, char *argv[])
         printf("\[rs]n");
     }
 \&
-    /* Create a thread that will display its scheduling attributes. */
+    /* Create a thread that will display its scheduling attributes.  */
 \&
     s = pthread_create(&thread, attrp, &thread_start, NULL);
     if (s != 0)
         errc(EXIT_FAILURE, s, "pthread_create");
 \&
-    /* Destroy unneeded thread attributes object. */
+    /* Destroy unneeded thread attributes object.  */
 \&
     if (!use_null_attrib) {
       s = pthread_attr_destroy(&attr);

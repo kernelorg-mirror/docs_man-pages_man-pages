@@ -127,8 +127,10 @@ The routine
 .BR clnt_perrno ()
 is handy for translating failure statuses into messages.
 .IP
-Warning: calling remote procedures with this routine
-uses UDP/IP as a transport; see
+Warning:
+calling remote procedures with this routine
+uses UDP/IP as a transport;
+see
 .BR clntudp_create ()
 for restrictions.
 You do not have control of timeouts or authentication using this routine.
@@ -168,11 +170,14 @@ If
 .BR eachresult ()
 returns zero,
 .BR clnt_broadcast ()
-waits for more replies; otherwise it returns with appropriate status.
+waits for more replies;
+otherwise it returns with appropriate status.
 .IP
-Warning: broadcast sockets are limited in size to the
+Warning:
+broadcast sockets are limited in size to the
 maximum transfer unit of the data link.
-For ethernet, this value is 1500 bytes.
+For ethernet,
+this value is 1500 bytes.
 .P
 .nf
 .BI "enum clnt_stat clnt_call(CLIENT *" clnt ", unsigned long " procnum ,
@@ -230,10 +235,11 @@ and \[lq]tcp\[rq].
 Default timeouts are set, but can be modified using
 .BR clnt_control ().
 .IP
-Warning: using UDP has its shortcomings.
+Warning:
+using UDP has its shortcomings.
 Since UDP-based RPC messages can hold only up to 8 Kbytes of encoded data,
-this transport cannot be used for procedures that take
-large arguments or return huge results.
+this transport cannot be used for
+procedures that take large arguments or return huge results.
 .P
 .nf
 .BI "bool_t clnt_control(CLIENT *" cl ", int " req ", char *" info );
@@ -403,12 +409,15 @@ This routine creates a toy RPC client for the remote program
 .IR prognum ,
 version
 .IR versnum .
-The transport used to pass messages to the service is
-actually a buffer within the process's address space, so the
-corresponding RPC server should live in the same address space; see
+The transport used to pass messages to the service
+is actually a buffer within the process's address space,
+so the corresponding RPC server
+should live in the same address space;
+see
 .BR svcraw_create ().
-This allows simulation of RPC and acquisition of RPC
-overheads, such as round trip times, without any kernel interference.
+This allows simulation of RPC and acquisition of RPC overheads,
+such as round trip times,
+without any kernel interference.
 This routine returns NULL if it fails.
 .P
 .nf
@@ -434,7 +443,8 @@ program is listening on (the remote
 service is consulted for this information).
 The parameter
 .I sockp
-is a socket; if it is
+is a socket;
+if it is
 .BR RPC_ANYSOCK ,
 then this routine opens a new one and sets
 .IR sockp .
@@ -468,7 +478,8 @@ program is listening on (the remote
 service is consulted for this information).
 The parameter
 .I sockp
-is a socket; if it is
+is a socket;
+if it is
 .BR RPC_ANYSOCK ,
 then this routine opens a new one and sets
 .IR sockp .
@@ -478,9 +489,11 @@ time until a response is received or until the call times out.
 The total time for the call to time out is specified by
 .BR clnt_call ().
 .IP
-Warning: since UDP-based RPC messages can hold only up to 8 Kbytes
-of encoded data, this transport cannot be used for procedures
-that take large arguments or return huge results.
+Warning:
+since UDP-based RPC messages can hold only
+up to 8 Kbytes of encoded data,
+this transport cannot be used for
+procedures that take large arguments or return huge results.
 .P
 .nf
 .BI "CLIENT *clntudp_bufcreate(struct sockaddr_in *" addr ,
@@ -504,7 +517,8 @@ program is listening on (the remote
 service is consulted for this information).
 The parameter
 .I sockp
-is a socket; if it is
+is a socket;
+if it is
 .BR RPC_ANYSOCK ,
 then this routine opens a new one and sets
 .IR sockp .
@@ -663,8 +677,10 @@ is used to decode the parameters while
 is used to encode the results.
 This routine returns zero if the registration succeeded, \-1 otherwise.
 .IP
-Warning: remote procedures registered in this form
-are accessed using the UDP/IP transport; see
+Warning:
+remote procedures registered in this form
+are accessed using the UDP/IP transport;
+see
 .BR svcudp_create ()
 for restrictions.
 .P
@@ -697,13 +713,17 @@ is undefined after calling this routine.
 .fi
 .IP
 A global variable reflecting the RPC service side's
-read file descriptor bit mask; it is suitable as a parameter to the
+read file descriptor bit mask;
+it is suitable as a parameter to the
 .BR select (2)
 system call.
-This is of interest only if a service implementor does their own
-asynchronous event processing, instead of calling
+This is of interest
+only if a service implementor does their own
+asynchronous event processing,
+instead of calling
 .BR svc_run ().
-This variable is read-only (do not pass its address to
+This variable is read-only
+(do not pass its address to
 .BR select (2)!),
 yet it may change after calls to
 .BR svc_getreqset ()
@@ -848,7 +868,8 @@ The parameter
 .I xprt
 is the request's associated transport handle;
 .I outproc
-is the XDR routine which is used to encode the results; and
+is the XDR routine which is used to encode the results;
+and
 .I out
 is the address of the results.
 This routine returns one if it succeeds, zero otherwise.
@@ -941,10 +962,12 @@ If they are zero, a reasonable default is chosen.
 This routine creates a toy RPC
 service transport, to which it returns a pointer.
 The transport is really a buffer within the process's address space,
-so the corresponding RPC client should live in the same address space; see
+so the corresponding RPC client should live in the same address space;
+see
 .BR clntraw_create ().
-This routine allows simulation of RPC and acquisition of RPC
-overheads (such as round trip times), without any kernel interference.
+This routine allows simulation of RPC and acquisition of RPC overheads
+(such as round trip times),
+without any kernel interference.
 This routine returns NULL if it fails.
 .P
 .nf
@@ -959,16 +982,18 @@ The transport is associated with the socket
 which may be
 .BR RPC_ANYSOCK ,
 in which case a new socket is created.
-If the socket is not bound to a local TCP
-port, then this routine binds it to an arbitrary port.
+If the socket is not bound to a local TCP port,
+then this routine binds it to an arbitrary port.
 Upon completion,
 .I xprt\->xp_sock
-is the transport's socket descriptor, and
+is the transport's socket descriptor,
+and
 .I xprt\->xp_port
 is the transport's port number.
 This routine returns NULL if it fails.
 Since TCP-based RPC uses buffered I/O,
-users may specify the size of buffers; values of zero
+users may specify the size of buffers;
+values of zero
 choose suitable defaults.
 .P
 .nf

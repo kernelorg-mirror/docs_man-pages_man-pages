@@ -28,9 +28,8 @@ and
 .BR setsockopt ()
 manipulate options for the socket referred to by the file descriptor
 .IR sockfd .
-Options may exist at multiple
-protocol levels; they are always present at the uppermost
-socket level.
+Options may exist at multiple protocol levels;
+they are always present at the uppermost socket level.
 .P
 When manipulating socket options, the level at which the
 option resides and the name of the option must be specified.
@@ -78,10 +77,10 @@ and any specified options are passed uninterpreted to the appropriate
 protocol module for interpretation.
 The include file
 .I <sys/socket.h>
-contains definitions for socket level options, described below.
-Options at
-other protocol levels vary in format and name; consult the appropriate
-entries in section 4 of the manual.
+contains definitions for socket level options,
+described below.
+Options at other protocol levels vary in format and name;
+consult the appropriate entries in section 4 of the manual.
 .P
 Most socket-level options utilize an
 .I int
@@ -102,8 +101,9 @@ On error, \-1 is returned, and
 is set to indicate the error.
 .P
 Netfilter allows the programmer
-to define custom socket options with associated handlers; for such
-options, the return value on success is the value returned by the handler.
+to define custom socket options with associated handlers;
+for such options,
+the return value on success is the value returned by the handler.
 .SH ERRORS
 .TP
 .B EBADF

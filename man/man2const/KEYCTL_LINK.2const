@@ -65,7 +65,9 @@ The keyring is full.
 (Before Linux 3.13,
 .\" commit b2a4df200d570b2c33a57e1ebfa5896e4bc81b69
 the available space for storing keyring links was limited to
-a single page of memory; since Linux 3.13, there is no fixed limit.)
+a single page of memory;
+since Linux 3.13,
+there is no fixed limit.)
 .SH VERSIONS
 A wrapper is provided in the
 .I libkeyutils

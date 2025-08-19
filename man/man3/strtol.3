@@ -313,7 +313,7 @@ main(int argc, char *argv[])
     errno = 0;    /* To distinguish success/failure after call */
     val = strtol(str, &endptr, base);
 \&
-    /* Check for various possible errors. */
+    /* Check for various possible errors.  */
 \&
     if (errno == ERANGE) {
         perror("strtol");
@@ -325,11 +325,11 @@ main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 \&
-    /* If we got here, strtol() successfully parsed a number. */
+    /* If we got here, strtol() successfully parsed a number.  */
 \&
     printf("strtol() returned %ld\[rs]n", val);
 \&
-    if (*endptr != \[aq]\[rs]0\[aq])        /* Not necessarily an error... */
+    if (*endptr != \[aq]\[rs]0\[aq])        /* Not necessarily an error.  */
         printf("Further characters after number: \[rs]"%s\[rs]"\[rs]n", endptr);
 \&
     exit(EXIT_SUCCESS);

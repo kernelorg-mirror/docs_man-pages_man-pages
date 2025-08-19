@@ -44,7 +44,7 @@ other process will be searched next,
 using that other process's user ID, group ID,
 supplementary group IDs, and security context to determine access.
 .\" David Howells: we can then have an arbitrarily long sequence
-.\" of "recursive" request-key upcalls. There is no limit, other
+.\" of "recursive" request-key upcalls.  There is no limit, other
 .\" than number of PIDs, etc.
 .P
 The search of the keyring tree is breadth-first:
@@ -120,7 +120,7 @@ since Linux 2.6.29).
 .\" Actually, is the preceding point correct?
 .\" If I understand correctly, we'll only get here if
 .\" 'dest_keyring' is zero, in which case KEY_REQKEY_DEFL_REQUESTOR_KEYRING
-.\" won't refer to a keyring. Have I misunderstood?
+.\" won't refer to a keyring.  Have I misunderstood?
 .IP \[bu]
 The thread-specific keyring
 .RB ( KEY_REQKEY_DEFL_THREAD_KEYRING ;
@@ -254,7 +254,7 @@ The kernel creates a process that executes a user-space service such as
 .BR request\-key (8)
 with a new session keyring that contains a link to the authorization key, V.
 .\" The request\-key(8) program can be invoked in circumstances *other* than
-.\" when triggered by request_key(2). For example, upcalls from places such
+.\" when triggered by request_key(2).  For example, upcalls from places such
 .\" as the DNS resolver.
 .IP
 This program is supplied with the following command-line arguments:
@@ -389,7 +389,8 @@ or
 points outside the process's accessible address space.
 .TP
 .B EINTR
-The request was interrupted by a signal; see
+The request was interrupted by a signal;
+see
 .BR signal (7).
 .TP
 .B EINVAL

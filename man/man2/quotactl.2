@@ -126,7 +126,8 @@ The
 .I addr
 argument points to the pathname of a file containing the quotas for
 the filesystem.
-The quota file must exist; it is normally created with the
+The quota file must exist;
+it is normally created with the
 .BR quotacheck (8)
 program
 .IP
@@ -209,7 +210,7 @@ struct dqblk {      /* Definition since Linux 2.4.22 */
 };
 \&
 /* Flags in dqb_valid that indicate which fields in
-   dqblk structure are valid. */
+   dqblk structure are valid.  */
 \&
 #define QIF_BLIMITS   1
 #define QIF_SPACE     2
@@ -335,7 +336,7 @@ struct dqinfo {         /* Defined since Linux 2.4.22 */
                                        a system file */
 \&
 /* Flags in dqi_valid that indicate which fields in
-   dqinfo structure are valid. */
+   dqinfo structure are valid.  */
 \&
 #define IIF_BGRACE  1
 #define IIF_IGRACE  2
@@ -485,7 +486,7 @@ as follows:
 .in +4n
 .EX
 /* All the blk units are in BBs (Basic Blocks) of
-   512 bytes. */
+   512 bytes.  */
 \&
 #define FS_DQUOT_VERSION  1  /* fs_disk_quota.d_version */
 \&
@@ -717,8 +718,10 @@ arguments are ignored.
 .SH RETURN VALUE
 On success,
 .BR quotactl ()
-returns 0; on error \-1
-is returned, and
+returns 0;
+on error,
+\-1 is returned,
+and
 .I errno
 is set to indicate the error.
 .SH ERRORS
@@ -839,7 +842,8 @@ header file defines its own
 .BR XQM_GRPQUOTA ,
 and
 .B XQM_PRJQUOTA
-constants for the available quota types, but their values are the same as for
+constants for the available quota types,
+but their values are the same as for
 constants without the
 .B XQM_
 prefix.
@@ -849,16 +853,20 @@ The original
 variant of this system call requires specifying
 the block device containing the filesystem to operate on.
 This makes it impossible to use
-in cases where the filesystem has no backing block device (e.g. tmpfs).
-Even when the block device does exist, it might be difficult to locate
+in cases where the filesystem has no backing block device
+(e.g., tmpfs).
+Even when the block device does exist,
+it might be difficult to locate
 (requires scanning
 .I /proc/self/mounts
-and even some filesystem-specific parsing in the case of e.g. bcachefs).
+and even some filesystem-specific parsing in the case of,
+for example,
+bcachefs).
 .BR quotactl_fd ()
 instead works on the mount point,
 which avoids this limitation and is simpler to use
-(since the filesystem to manipulate is typically specified by its mount
-point anyway).
+(since the filesystem to manipulate
+is typically specified by its mount point anyway).
 .SH STANDARDS
 Linux.
 .SH HISTORY

@@ -205,9 +205,11 @@ the internal kernel flags holding the status of the socket.
 the socket type.
 For
 .B SOCK_STREAM
-sockets, this is 0001; for
+sockets, this is 0001;
+for
 .B SOCK_DGRAM
-sockets, it is 0002; and for
+sockets, it is 0002;
+and for
 .B SOCK_SEQPACKET
 sockets, it is 0005.
 .TP
@@ -267,26 +269,27 @@ It is either 1 (metadata only) or 2
 (also copy payload data to user space).
 .TP
 (5)
-Copy range; that is, how many bytes of packet payload should be copied to
-user space at most.
+Copy range;
+that is,
+how many bytes of packet payload should be copied to user space at most.
 .TP
 (6)
 queue dropped.
-Number of packets that had to be dropped by the kernel because
-too many packets are already waiting for user space to send back the mandatory
-accept/drop verdicts.
+Number of packets that had to be dropped by the kernel
+because too many packets are already
+waiting for user space to send back the mandatory accept/drop verdicts.
 .TP
 (7)
 queue user dropped.
-Number of packets that were dropped within the netlink
-subsystem.
-Such drops usually happen when the corresponding socket buffer is
-full; that is, user space is not able to read messages fast enough.
+Number of packets that were dropped within the netlink subsystem.
+Such drops usually happen when the corresponding socket buffer is full;
+that is,
+user space is not able to read messages fast enough.
 .TP
 (8)
 sequence number.
-Every queued packet is associated with a (32-bit)
-monotonically increasing sequence number.
+Every queued packet is associated with
+a (32-bit) monotonically increasing sequence number.
 This shows the ID of the most recent packet queued.
 .RE
 .IP

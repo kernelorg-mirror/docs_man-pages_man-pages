@@ -123,22 +123,27 @@ for more information.
 .TP
 .I lorder
 The byte order for integers in the stored database metadata.
-The number should represent the order as an integer; for example,
+The number should represent the order as an integer;
+for example,
 big endian order would be the number 4,321.
 If
 .I lorder
-is 0 (no order is specified), the current host order is used.
+is 0 (no order is specified),
+the current host order is used.
 .TP
 .I reclen
 The length of a fixed-length record.
 .TP
 .I bval
-The delimiting byte to be used to mark the end of a record for
-variable-length records, and the pad character for fixed-length
-records.
-If no value is specified, newlines ("\[rs]n") are used to mark the end
-of variable-length records and fixed-length records are padded with
-spaces.
+The delimiting byte to be used to mark the end of a record
+for variable-length records,
+and the pad character
+for fixed-length records.
+If no value is specified,
+newlines ("\[rs]n") are used to mark
+the end of variable-length records
+and fixed-length records
+are padded with spaces.
 .TP
 .I bfname
 The recno access method stores the in-memory copies of its records
@@ -201,5 +206,9 @@ Only big and little endian byte order is supported.
 .BR mpool (3)
 .P
 .IR "Document Processing in a Relational Database System" ,
-Michael Stonebraker, Heidi Stettner, Joseph Kalash, Antonin Guttman,
-Nadene Lynn, Memorandum No. UCB/ERL M82/32, May 1982.
+Michael Stonebraker,
+Heidi Stettner,
+Joseph Kalash,
+Antonin Guttman,
+Nadene Lynn,
+Memorandum No.\& UCB/ERL M82/32, May 1982.

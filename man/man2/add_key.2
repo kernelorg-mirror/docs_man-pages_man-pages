@@ -19,7 +19,8 @@ Standard C library
 .fi
 .P
 .IR Note :
-There is no glibc wrapper for this system call; see NOTES.
+There is no glibc wrapper for this system call;
+see NOTES.
 .SH DESCRIPTION
 .BR add_key ()
 creates or updates a key of the given
@@ -53,7 +54,7 @@ and it will displace the link to the extant key from the keyring.
 .\" key will have a new ID, and if the old key was a keyring that
 .\" is consequently unlinked, then keys that it was anchoring
 .\" will have their reference count decreased by one (and may
-.\" consequently be garbage collected). Is this all correct?
+.\" consequently be garbage collected).  Is this all correct?
 .P
 The destination
 .I keyring

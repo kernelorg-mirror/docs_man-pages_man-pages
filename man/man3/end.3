@@ -30,7 +30,8 @@ uninitialized data segment (also known as the BSS segment).
 None.
 .SH HISTORY
 Although these symbols have long been provided on most UNIX systems,
-they are not standardized; use with caution.
+they are not standardized;
+use with caution.
 .SH NOTES
 The program must explicitly declare these symbols;
 they are not defined in any header file.
@@ -73,7 +74,7 @@ First address past:
 #include <stdio.h>
 #include <stdlib.h>
 \&
-extern char etext, edata, end; /* The symbols must have some type,
+extern char etext, edata, end;  /* The symbols must have some type,
                                    or "gcc \-Wall" complains */
 \&
 int

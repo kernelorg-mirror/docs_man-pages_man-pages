@@ -86,7 +86,8 @@ used to store data in the pipe.
 .I op
 is
 .B F_SETPIPE_SZ
-and the soft or hard user pipe limit has been reached; see
+and the soft or hard user pipe limit has been reached;
+see
 .BR pipe (7).
 .SH STANDARDS
 Linux.

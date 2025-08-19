@@ -232,7 +232,8 @@ System-wide TCP parameter settings can be accessed by files in the directory
 .IR /proc/sys/net/ipv4/ .
 In addition, most IP
 .I /proc
-interfaces also apply to TCP; see
+interfaces also apply to TCP;
+see
 .BR ip (7).
 Variables described as
 .I Boolean
@@ -286,7 +287,8 @@ Count buffering overhead as
 .IR "bytes/2\[ha]tcp_adv_win_scale" ,
 if
 .I tcp_adv_win_scale
-is greater than 0; or
+is greater than 0;
+or
 .IR "bytes\-bytes/2\[ha](\-tcp_adv_win_scale)" ,
 if
 .I tcp_adv_win_scale
@@ -471,7 +473,7 @@ option has been introduced.
 .TP
 .IR tcp_ecn_fallback " (Boolean; default: enabled; since Linux 4.1)"
 .\" commit 492135557dc090a1abb2cfbe1a412757e3ed68ab
-Enable RFC\ 3168, Section 6.1.1.1. fallback.
+Enable RFC\ 3168, Section 6.1.1.1 fallback.
 When enabled, outgoing ECN-setup SYNs that time out within the
 normal SYN retransmission timeout will be resent with CWR and
 ECE cleared.
@@ -530,7 +532,8 @@ Possible values are:
 .RS
 .TP
 .B 0
-Rate halving based; a smooth and conservative response,
+Rate halving based;
+a smooth and conservative response,
 results in halved congestion window
 .RI ( cwnd )
 and slow-start threshold
@@ -538,18 +541,21 @@ and slow-start threshold
 after one RTT.
 .TP
 .B 1
-Very conservative response; not recommended because even
-though being valid, it interacts poorly with the rest of Linux TCP; halves
+Very conservative response;
+not recommended because even though being valid,
+it interacts poorly with the rest of Linux TCP;
+halves
 .I cwnd
 and
 .I ssthresh
 immediately.
 .TP
 .B 2
-Aggressive response; undoes congestion-control measures
+Aggressive response;
+undoes congestion-control measures
 that are now known to be unnecessary
-(ignoring the possibility of a lost retransmission that would require
-TCP to be more cautious);
+(ignoring the possibility of a lost retransmission
+that would require TCP to be more cautious);
 .I cwnd
 and
 .I ssthresh
@@ -1283,7 +1289,8 @@ When this option is enabled,
 would behave differently depending on
 if a Fast Open cookie is available for the destination.
 .IP
-If a cookie is not available (i.e. first contact to the destination),
+If a cookie is not available
+(i.e., first contact to the destination),
 .BR connect (2)
 behaves as usual by sending a SYN immediately,
 except the SYN would include an empty Fast Open cookie option
@@ -1343,10 +1350,10 @@ Here is the typical call flow with this new option:
 s = socket();
 setsockopt(s, IPPROTO_TCP, TCP_FASTOPEN_CONNECT, 1, ...);
 connect(s);
-write(s); /* write() should always follow connect()
-           * in order to trigger SYN to go out. */
+write(s);  /* write() should always follow connect()
+            * in order to trigger SYN to go out.  */
 read(s)/write(s);
-/* ... */
+/* ...\& */
 close(s);
 .EE
 .in
@@ -1516,7 +1523,7 @@ Not all errors are documented.
 .P
 IPv6 is not described.
 .\" Only a single Linux kernel version is described
-.\" Info for 2.2 was lost. Should be added again,
+.\" Info for 2.2 was lost.  Should be added again,
 .\" or put into a separate page.
 .\" .SH AUTHORS
 .\" This man page was originally written by Andi Kleen.

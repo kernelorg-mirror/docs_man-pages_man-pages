@@ -154,7 +154,8 @@ is non-NULL and an invalid pointer.
 .B EINTR
 A signal occurred while
 .BR spu_run ()
-was in progress; see
+was in progress;
+see
 .BR signal (7).
 The
 .I npc
@@ -224,7 +225,7 @@ int main(void)
 \&
     /*
      * set npc to the starting instruction address of the
-     * SPU program. Since we wrote the instruction at the
+     * SPU program.  Since we wrote the instruction at the
      * start of the mem file, the entry point will be 0x0.
      */
     npc = 0;

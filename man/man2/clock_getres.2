@@ -345,9 +345,11 @@ clock via
 shall have no effect on threads that are blocked waiting for a relative time
 service based upon this clock, including the
 .BR nanosleep ()
-function; nor on the expiration of relative timers based upon this clock.
-Consequently, these time services shall expire when the requested relative
-interval elapses, independently of the new or old value of the clock.
+function;
+nor on the expiration of relative timers based upon this clock.
+Consequently,
+these time services shall expire when the requested relative interval elapses,
+independently of the new or old value of the clock.
 .RE
 .P
 According to POSIX.1-2001, a process with "appropriate privileges" may set the

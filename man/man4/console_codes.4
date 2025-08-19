@@ -133,13 +133,15 @@ ESC E	NEL	Newline.
 ESC H	HTS	Set tab stop at current column.
 ESC M	RI	Reverse linefeed.
 ESC Z	DECID	T{
-DEC private identification. The kernel
-returns the string  ESC [ ? 6 c, claiming
-that it is a VT102.
+DEC private identification.
+The kernel returns the string ESC [ ? 6 c,
+claiming that it is a VT102.
 T}
 ESC 7	DECSC	T{
-Save current state (cursor coordinates,
-attributes, character sets pointed at by G0, G1).
+Save current state
+(cursor coordinates,
+attributes,
+character sets pointed at by G0, G1).
 T}
 ESC 8	DECRC	T{
 Restore state most recently saved by ESC 7.
@@ -301,7 +303,8 @@ q	DECLL	Set keyboard LEDs.
 		ESC [ 2 q: set Num Lock LED
 		ESC [ 3 q: set Caps Lock LED
 r	DECSTBM	T{
-Set scrolling region; parameters are top and bottom row.
+Set scrolling region;
+parameters are top and bottom row.
 T}
 s	?	Save cursor location.
 u	?	Restore cursor location.
@@ -356,8 +359,10 @@ causes the high bit of a byte to be toggled
 before the mapping table translation is done.
 T}
 21	T{
-set underline; before Linux 4.17, this value
-set normal intensity (as is done in many other terminals)
+set underline;
+before Linux 4.17,
+this value set normal intensity
+(as is done in many other terminals)
 T}
 22	set normal intensity
 23	italic off (since Linux 2.6.22)
@@ -405,7 +410,7 @@ Commands 38 and 48 require further arguments:
 .TS
 l lx.
 ;5;x	T{
-256 color: values 0..15 are IBGR (black, red, green, ... white),
+256 color: values 0..15 are IBGR (black, red, green, ..., white),
 16..231 a 6x6x6 color cube, 232..255 a grayscale ramp
 T}
 ;2;r;g;b	T{
@@ -456,8 +461,8 @@ rather than ESC [.
 .TP
 ESC [ ? 3 h
 DECCOLM (default off = 80 columns): 80/132 col mode switch.
-The driver sources note that this alone does not suffice; some user-mode
-utility such as
+The driver sources note that this alone does not suffice;
+some user-mode utility such as
 .BR resizecons (8)
 has to change the hardware registers on the console video card.
 .TP
@@ -470,23 +475,26 @@ the upper left corner of the scrolling region.
 .TP
 ESC [ ? 7 h
 DECAWM (default on): Set autowrap on.
-In this mode, a graphic
-character emitted after column 80 (or column 132 if DECCOLM is on)
+In this mode,
+a graphic character emitted after column 80
+(or column 132 if DECCOLM is on)
 forces a wrap to the beginning of the following line first.
 .TP
 ESC [ ? 8 h
 DECARM (default on): Set keyboard autorepeat on.
 .TP
 ESC [ ? 9 h
-X10 Mouse Reporting (default off): Set reporting mode to 1 (or reset to
-0)\[em]see below.
+X10 Mouse Reporting (default off):
+Set reporting mode to 1 (or reset to 0)
+\[em]see below\[em].
 .TP
 ESC [ ? 25 h
 DECTECM (default on): Make cursor visible.
 .TP
 ESC [ ? 1000 h
-X11 Mouse Reporting (default off): Set reporting mode to 2 (or reset
-to 0)\[em]see below.
+X11 Mouse Reporting (default off): Set reporting mode to 2
+(or reset to 0)
+\[em]see below\[em].
 .\"
 .P
 .B Linux Console Private CSI Sequences
@@ -495,8 +503,15 @@ to 0)\[em]see below.
 The following sequences are neither ECMA-48 nor native VT102.
 They are native to the Linux console driver.
 Colors are in SGR parameters:
-0 = black, 1 = red, 2 = green, 3 = brown, 4 = blue, 5 = magenta, 6 =
-cyan, 7 = white; 8\[en]15 = bright versions of 0\[en]7.
+0 = black,
+1 = red,
+2 = green,
+3 = brown,
+4 = blue,
+5 = magenta,
+6 = cyan,
+7 = white;
+8\[en]15 = bright versions of 0\[en]7.
 .TS
 l lx.
 ESC [ 1 ; \f[I]n\f[] ]	T{
@@ -678,10 +693,12 @@ VT100 console sequences not implemented on the Linux console:
 .TS
 l l l.
 ESC N	SS2	T{
-Single shift 2. (Select G2 character set for the next character only.)
+Single shift 2.
+(Select G2 character set for the next character only.)
 T}
 ESC O	SS3	T{
-Single shift 3. (Select G3 character set for the next character only.)
+Single shift 3.
+(Select G3 character set for the next character only.)
 T}
 ESC P	DCS	T{
 Device control string (ended by ESC \[rs])
@@ -696,10 +713,10 @@ ESC + ...		Designate G3 character set
 The program
 .BR xterm (1)
 (in VT100 mode) recognizes ESC c, ESC # 8, ESC >, ESC =,
-ESC D, ESC E, ESC H, ESC M, ESC N, ESC O, ESC P ... ESC \[rs],
+ESC D, ESC E, ESC H, ESC M, ESC N, ESC O, ESC P ...\& ESC \[rs],
 ESC Z (it answers ESC [ ? 1 ; 2 c, "I am a VT100 with
 advanced video option")
-and ESC \[ha] ... ESC \[rs] with the same meanings as indicated above.
+and ESC \[ha] ...\& ESC \[rs] with the same meanings as indicated above.
 It accepts ESC (, ESC ), ESC *,  ESC + followed by 0, A, B for
 the DEC special character and line drawing set, UK, and US-ASCII,
 respectively.

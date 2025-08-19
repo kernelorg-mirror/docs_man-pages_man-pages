@@ -170,7 +170,7 @@ main(void)
 \&
     thread = pthread_self();
 \&
-    /* Set affinity mask to include CPUs 0 to 7. */
+    /* Set affinity mask to include CPUs 0 to 7.  */
 \&
     CPU_ZERO(&cpuset);
     for (size_t j = 0; j < 8; j++)
@@ -180,7 +180,7 @@ main(void)
     if (s != 0)
         errc(EXIT_FAILURE, s, "pthread_setaffinity_np");
 \&
-    /* Check the actual affinity mask assigned to the thread. */
+    /* Check the actual affinity mask assigned to the thread.  */
 \&
     s = pthread_getaffinity_np(thread, sizeof(cpuset), &cpuset);
     if (s != 0)

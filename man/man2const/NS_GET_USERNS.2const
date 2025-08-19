@@ -50,7 +50,8 @@ The new file descriptor returned by these operations is opened with the
 .B O_RDONLY
 and
 .B O_CLOEXEC
-(close-on-exec; see
+(close-on-exec;
+see
 .BR fcntl (2))
 flags.
 .P
@@ -195,14 +196,14 @@ main(int argc, char *argv[])
                 argv[0]);
         fprintf(stderr, "\[rs]nDisplay the result of one or both "
                 "of NS_GET_USERNS (u) or NS_GET_PARENT (p)\[rs]n"
-                "for the specified /proc/[pid]/ns/[file]. If neither "
+                "for the specified /proc/[pid]/ns/[file].  If neither "
                 "\[aq]p\[aq] nor \[aq]u\[aq] is specified,\[rs]n"
                 "NS_GET_USERNS is the default.\[rs]n");
         exit(EXIT_FAILURE);
     }
 \&
     /* Obtain a file descriptor for the \[aq]ns\[aq] file specified
-       in argv[1]. */
+       in argv[1].  */
 \&
     fd = open(argv[1], O_RDONLY);
     if (fd == \-1) {
@@ -211,7 +212,7 @@ main(int argc, char *argv[])
     }
 \&
     /* Obtain a file descriptor for the owning user namespace and
-       then obtain and display the inode number of that namespace. */
+       then obtain and display the inode number of that namespace.  */
 \&
     if (argc < 3 || strchr(argv[2], \[aq]u\[aq])) {
         userns_fd = ioctl(fd, NS_GET_USERNS);
@@ -239,7 +240,7 @@ main(int argc, char *argv[])
     }
 \&
     /* Obtain a file descriptor for the parent namespace and
-       then obtain and display the inode number of that namespace. */
+       then obtain and display the inode number of that namespace.  */
 \&
     if (argc > 2 && strchr(argv[2], \[aq]p\[aq])) {
         parent_fd = ioctl(fd, NS_GET_PARENT);

@@ -29,7 +29,8 @@ The following list shows the capabilities implemented on Linux,
 and the operations or behaviors that each capability permits:
 .TP
 .BR CAP_AUDIT_CONTROL " (since Linux 2.6.11)"
-Enable and disable kernel auditing; change auditing filter rules;
+Enable and disable kernel auditing;
+change auditing filter rules;
 retrieve auditing status and filtering rules.
 .TP
 .BR CAP_AUDIT_READ " (since Linux 3.16)"
@@ -48,7 +49,8 @@ Employ features that can block system suspend
 .IR /proc/sys/wake_lock ).
 .TP
 .BR CAP_BPF " (since Linux 5.8)"
-Employ privileged BPF operations; see
+Employ privileged BPF operations;
+see
 .BR bpf (2)
 and
 .BR bpf\-helpers (7).
@@ -308,8 +310,10 @@ write a group ID mapping in a user namespace (see
 Set arbitrary capabilities on a file.
 .IP
 .\" commit db2e718a47984b9d71ed890eb2ea36ecf150de18
-Since Linux 5.12, this capability is
-also needed to map user ID 0 in a new user namespace; see
+Since Linux 5.12,
+this capability is also needed
+to map user ID 0 in a new user namespace;
+see
 .BR user_namespaces (7)
 for details.
 .TP
@@ -354,7 +358,8 @@ write a user ID mapping in a user namespace (see
 .TP
 .B CAP_SYS_ADMIN
 .IR Note :
-this capability is overloaded; see
+this capability is overloaded;
+see
 .I Notes to kernel developers
 below.
 .IP
@@ -950,7 +955,8 @@ below.
 .P
 Using
 .BR capset (2),
-a thread may manipulate its own capability sets; see
+a thread may manipulate its own capability sets;
+see
 .I Programmatically adjusting capability sets
 below.
 .P
@@ -1202,8 +1208,9 @@ in the same manner as shown above for
 .P
 .IR Note :
 during the capability transitions described above,
-file capabilities may be ignored (treated as empty) for the same reasons
-that the set-user-ID and set-group-ID bits are ignored; see
+file capabilities may be ignored (treated as empty)
+for the same reasons that the set-user-ID and set-group-ID bits are ignored;
+see
 .BR execve (2).
 File capabilities are similarly ignored if the kernel was booted with the
 .I no_file_caps

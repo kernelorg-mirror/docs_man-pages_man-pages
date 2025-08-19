@@ -169,7 +169,8 @@ can be implemented on systems that lack a memory-management unit (MMU), but
 can't be implemented on such systems.
 (POSIX.1-2008 removed
 .BR vfork ()
-from the standard; the POSIX rationale for the
+from the standard;
+the POSIX rationale for the
 .BR posix_spawn (3)
 function notes that that function,
 which provides functionality equivalent to
@@ -224,7 +225,8 @@ specified as:
 .SH STANDARDS
 None.
 .SH HISTORY
-4.3BSD; POSIX.1-2001 (but marked OBSOLETE).
+4.3BSD;
+POSIX.1-2001 (but marked OBSOLETE).
 POSIX.1-2008 removes the specification of
 .BR vfork ().
 .P
@@ -293,7 +295,8 @@ are never sent
 .B SIGTTOU
 or
 .B SIGTTIN
-signals; rather, output or
+signals;
+rather, output or
 .IR ioctl s
 are allowed and input attempts result in an end-of-file indication."
 .\"

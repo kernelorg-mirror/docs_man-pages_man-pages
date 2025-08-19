@@ -86,7 +86,7 @@ that grows upwards.
 architectures\[em]for example, HP-PARISC\[em]that
 have an upwardly growing stack.)
 .\" The VMA is one that was marked with VM_GROWSUP by the kernel
-.\" when the stack was created. Note that (unlike VM_GROWSDOWN),
+.\" when the stack was created.  Note that (unlike VM_GROWSDOWN),
 .\" there is no mmap() flag (analogous to MAP_GROWSDOWN) for
 .\" creating a VMA that is marked VM_GROWSUP.
 .TP
@@ -191,7 +191,7 @@ would result in three mappings:
 two read/write mappings at each end and a read-only mapping in the middle.)
 .SH VERSIONS
 .\" SVr4 defines an additional error
-.\" code EAGAIN. The SVr4 error conditions don't map neatly onto Linux's.
+.\" code EAGAIN.  The SVr4 error conditions don't map neatly onto Linux's.
 POSIX says that the behavior of
 .BR mprotect ()
 is unspecified if it is applied to a region of memory that
@@ -310,7 +310,7 @@ handler(int sig, siginfo_t *si, void *unused)
        (and should not be done in production programs), since
        printf() is not async\-signal\-safe; see signal\-safety(7).
        Nevertheless, we use printf() here as a simple way of
-       showing that the handler was called. */
+       showing that the handler was called.  */
 \&
     printf("Got SIGSEGV at address: %p\[rs]n", si\->si_addr);
     exit(EXIT_FAILURE);
@@ -333,7 +333,7 @@ main(void)
         err(EXIT_FAILURE, "sysconf");
 \&
     /* Allocate a buffer aligned on a page boundary;
-       initial protection is PROT_READ | PROT_WRITE. */
+       initial protection is PROT_READ | PROT_WRITE.  */
 \&
     buffer = memalign(pagesize, 4 * pagesize);
     if (buffer == NULL)

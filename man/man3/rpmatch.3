@@ -93,11 +93,14 @@ can fail for any of the reasons that
 .BR regcomp (3)
 or
 .BR regexec (3)
-can fail; the error
+can fail;
+the error
 is not available from
 .I errno
-or anywhere else, but indicates a
-failure of the regex engine (but this case is indistinguishable from
+or anywhere else,
+but indicates
+a failure of the regex engine
+(but this case is indistinguishable from
 that of an unrecognized value of
 .IR response ).
 .SH ATTRIBUTES
@@ -123,7 +126,7 @@ The
 .BR YESEXPR " and " NOEXPR
 of some locales (including "C") only inspect the first character of the
 .IR response .
-This can mean that "yno" et al. resolve to
+This can mean that "yno" et al.\& resolve to
 .BR 1 .
 This is an unfortunate historical side-effect which should be fixed in time
 with proper localisation, and should not deter from

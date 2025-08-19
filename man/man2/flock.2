@@ -100,7 +100,8 @@ is not an open file descriptor.
 .TP
 .B EINTR
 While waiting to acquire a lock, the call was interrupted by
-delivery of a signal caught by a handler; see
+delivery of a signal caught by a handler;
+see
 .BR signal (7).
 .TP
 .B EINVAL
@@ -213,7 +214,8 @@ option in
 .BR nfs (5).
 .SH NOTES
 .BR flock ()
-places advisory locks only; given suitable permissions on a file,
+places advisory locks only;
+given suitable permissions on a file,
 a process is free to ignore the use of
 .BR flock ()
 and perform I/O on the file.

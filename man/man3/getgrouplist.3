@@ -118,7 +118,8 @@ The following shell session shows examples of the use of this program:
 .in +4n
 .EX
 .RB "$" " ./a.out cecilia 0"
-getgrouplist() returned \-1; ngroups = 3
+getgrouplist() returned \-1
+ngroups = 3
 .RB "$" " ./a.out cecilia 3"
 ngroups = 3
 16 (dialout)
@@ -157,7 +158,7 @@ main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 \&
-    /* Fetch passwd structure (contains first group ID for user). */
+    /* Fetch passwd structure (contains first group ID for user).  */
 \&
     errno = 0;
     pw = getpwnam(argv[1]);
@@ -169,15 +170,15 @@ main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 \&
-    /* Retrieve group list. */
+    /* Retrieve group list.  */
 \&
     if (getgrouplist(argv[1], pw\->pw_gid, groups, &ngroups) == \-1) {
-        fprintf(stderr, "getgrouplist() returned \-1; ngroups = %d\[rs]n",
-                ngroups);
+        fprintf(stderr, "getgrouplist() returned \-1\[rs]n");
+        fprintf(stderr, "ngroups = %d\[rs]n", ngroups);
         exit(EXIT_FAILURE);
     }
 \&
-    /* Display list of retrieved groups, along with group names. */
+    /* Display list of retrieved groups, along with group names.  */
 \&
     fprintf(stderr, "ngroups = %d\[rs]n", ngroups);
     for (int j = 0; j < ngroups; j++) {

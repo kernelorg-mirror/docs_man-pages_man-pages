@@ -15,13 +15,14 @@ netlink \- communication between kernel and user space (AF_NETLINK)
 .BI "netlink_socket = socket(AF_NETLINK, " socket_type ", " netlink_family );
 .fi
 .SH DESCRIPTION
-Netlink is used to transfer information between the kernel and
-user-space processes.
+Netlink is used to transfer information
+between the kernel and user-space processes.
 It consists of a standard sockets-based interface for user space
 processes and an internal kernel API for kernel modules.
 The internal kernel interface is not documented in this manual page.
 There is also an obsolete netlink interface
-via netlink character devices; this interface is not documented here
+via netlink character devices;
+this interface is not documented here,
 and is provided only for backward compatibility.
 .P
 Netlink is a datagram-oriented service.
@@ -253,7 +254,8 @@ NLM_F_ATOMIC:T{
 Return an atomic snapshot of the table.
 T}
 NLM_F_DUMP:T{
-Convenience macro; equivalent to
+Convenience macro;
+equivalent to
 (NLM_F_ROOT|NLM_F_MATCH).
 T}
 .TE

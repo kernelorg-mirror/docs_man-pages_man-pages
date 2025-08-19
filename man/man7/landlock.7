@@ -587,11 +587,11 @@ if (abi == \-1) {
      * or Landlock was not enabled at boot time.
      */
     perror("Unable to use Landlock");
-    return;  /* Graceful fallback: Do nothing. */
+    return;  /* Graceful fallback: Do nothing.  */
 }
 abi = MIN(abi, 3);
 \&
-/* Only use the available rights in the ruleset. */
+/* Only use the available rights in the ruleset.  */
 attr.handled_access_fs &= landlock_fs_access_rights[abi \- 1];
 .EE
 .in

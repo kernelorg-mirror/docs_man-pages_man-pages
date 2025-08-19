@@ -14,7 +14,7 @@ Standard C library
 .P
 .BI "ssize_t sendfile(int" " out_fd" ", int" " in_fd" ", off_t *_Nullable " offset ,
 .BI "                 size_t " count );
-.\" The below is too ugly. Comments about glibc versions belong
+.\" The below is too ugly.  Comments about glibc versions belong
 .\" in the notes, not in the header.
 .\"
 .\" .B #include <features.h>
@@ -22,7 +22,7 @@ Standard C library
 .\" .B #include <sys/sendfile.h>
 .\" #else
 .\" .B #include <sys/types.h>
-.\" .B /* No system prototype before glibc 2.1. */
+.\" .B /* No system prototype before glibc 2.1.  */
 .\" .BI "ssize_t sendfile(int" " out_fd" ", int" " in_fd" ", off_t *" \
 .\"                       offset ", size_t" " count" )
 .\" .B #endif

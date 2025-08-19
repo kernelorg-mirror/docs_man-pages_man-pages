@@ -179,16 +179,20 @@ other than the user or the superuser, is writable by anyone other
 than the owner, or is hardlinked anywhere, the check automatically fails.
 Zero is returned if the machine name is listed in the
 .I hosts.equiv
-file, or the host and remote username are found in the
+file,
+or the host and remote username are found in the
 .I .rhosts
-file; otherwise
+file;
+otherwise,
 .BR iruserok ()
 and
 .BR ruserok ()
 return \-1.
-If the local domain (as obtained from
+If the local domain
+(as obtained from
 .BR gethostname (2))
-is the same as the remote domain, only the machine name need be specified.
+is the same as the remote domain,
+only the machine name need be specified.
 .P
 If the IP address of the remote host is known,
 .BR iruserok ()

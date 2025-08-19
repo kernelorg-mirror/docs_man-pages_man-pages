@@ -84,7 +84,8 @@ command.
 Sends a broadcast to all thread siblings of the calling task.
 Every sibling that has established a broadcast guarded storage control block
 will load this control block and will be enabled for guarded storage.
-The broadcast guarded storage control block is consumed; a second broadcast
+The broadcast guarded storage control block is consumed;
+a second broadcast
 without a refresh of the stored control block with
 .B GS_SET_BC_CB
 will not have any effect.
@@ -94,7 +95,8 @@ The
 argument specifies the address of a guarded storage control block structure
 and is currently used only by the
 .B GS_SET_BC_CB
-command; all other aforementioned commands ignore this argument.
+command;
+all other aforementioned commands ignore this argument.
 .SH RETURN VALUE
 On success, the return value of
 .BR s390_guarded_storage ()

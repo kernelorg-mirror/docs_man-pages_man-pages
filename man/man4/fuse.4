@@ -60,9 +60,14 @@ The header is followed by a variable-size data portion
 (the requested operation is indicated by
 .IR opcode ).
 .P
-The daemon should then process the request and if applicable send
-a reply (almost all operations require a reply; if they do not,
-this is documented below), by performing a
+The daemon should then process the request
+and
+\[em]if applicable\[em]
+send a reply
+(almost all operations require a reply;
+if they do not,
+this is documented below),
+by performing a
 .BR write (2)
 to the file descriptor.
 All replies must start with the following header:
@@ -479,7 +484,8 @@ Among the possible incorrect uses are:
 .IP \[bu] 3
 changing
 .I mode & S_IFMT
-for an inode that has previously been reported to the kernel; or
+for an inode that has previously been reported to the kernel;
+or
 .IP \[bu]
 giving replies to the kernel that are shorter than what the kernel expected.
 .RE

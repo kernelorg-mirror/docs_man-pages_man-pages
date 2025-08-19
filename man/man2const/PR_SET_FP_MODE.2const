@@ -68,8 +68,10 @@ Applications that use the O32 FP32 ABI can operate only when this bit is
 .RB ( FR=0 ;
 or they can be used with FRE enabled, see below).
 Applications that use the O32 FP64 ABI
-(and the O32 FP64A ABI, which exists to
-provide the ability to operate with existing FP32 code; see below)
+(and the O32 FP64A ABI,
+which exists to provide the ability
+to operate with existing FP32 code;
+see below)
 can operate only when this bit is
 .I set
 .RB ( FR=1 ).

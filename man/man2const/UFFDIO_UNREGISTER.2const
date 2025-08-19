@@ -36,9 +36,11 @@ Either
 or the
 .I argp->len
 fields
-was not a multiple of the system page size; or the
+was not a multiple of the system page size;
+or the
 .I argp->len
-field was zero; or these fields were otherwise invalid.
+field was zero;
+or these fields were otherwise invalid.
 .TP
 .B EINVAL
 There as an incompatible mapping in the specified address range.

@@ -128,8 +128,9 @@ to establish a signal handler vary across systems
 .P
 POSIX.1 solved the portability mess by specifying
 .BR sigaction (2),
-which provides explicit control of the semantics when a
-signal handler is invoked; use that interface instead of
+which provides explicit control of the semantics
+when a signal handler is invoked;
+use that interface instead of
 .BR signal ().
 .SH STANDARDS
 C11, POSIX.1-2008.
@@ -198,7 +199,8 @@ feature test macro is defined:
 on glibc 2.19 and earlier or
 .B _DEFAULT_SOURCE
 in glibc 2.19 and later.
-(By default, these macros are defined; see
+(By default, these macros are defined;
+see
 .BR feature_test_macros (7)
 for details.)
 If such a feature test macro is not defined, then

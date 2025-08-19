@@ -232,7 +232,8 @@ and
 .I msgmnb
 settings can be changed via
 .I /proc
-files of the same name; see
+files of the same name;
+see
 .BR proc (5)
 for details.
 .TP
@@ -242,13 +243,16 @@ Return a
 structure containing the same information as for
 .BR IPC_INFO ,
 except that the following fields are returned with information
-about system resources consumed by message queues: the
+about system resources consumed by message queues:
+the
 .I msgpool
 field returns the number of message queues that currently exist
-on the system; the
+on the system;
+the
 .I msgmap
 field returns the total number of messages in all queues
-on the system; and the
+on the system;
+and the
 .I msgtql
 field returns the total number of bytes in all messages
 in all queues on the system.

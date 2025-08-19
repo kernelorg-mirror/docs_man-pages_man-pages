@@ -181,7 +181,8 @@ If
 is
 .BR AT_FDCWD ,
 the call operates on the current working directory.
-This flag is Linux-specific; define
+This flag is Linux-specific;
+define
 .B _GNU_SOURCE
 .\" Before glibc 2.16, defining _ATFILE_SOURCE sufficed
 to obtain its definition.
@@ -404,7 +405,7 @@ and repacking the returned information if required for old binaries.
 .\" > Is the story not rather more complicated for some calls like
 .\" > stat(2)?
 .\"
-.\" Yes and no, mostly no. See /usr/include/sys/stat.h .
+.\" Yes and no, mostly no.  See "/usr/include/sys/stat.h".
 .\"
 .\" The idea is here not so much that syscalls change, but that
 .\" the definitions of struct stat and of the types dev_t and mode_t change.
@@ -414,7 +415,7 @@ and repacking the returned information if required for old binaries.
 .\" The communication between the application and libc goes via
 .\" the include file <sys/stat.h> that defines a _STAT_VER and
 .\" _MKNOD_VER describing the layout of the data that user space
-.\" uses. Each (almost each) occurrence of stat() is replaced by
+.\" uses.  Each (almost each) occurrence of stat() is replaced by
 .\" an occurrence of xstat() where the first parameter of xstat()
 .\" is this version number _STAT_VER.
 .\"

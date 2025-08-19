@@ -138,7 +138,8 @@ one that called
 .BR fork ().
 The entire virtual address space of the parent is replicated in the child,
 including the states of mutexes, condition variables,
-and other pthreads objects; the use of
+and other pthreads objects;
+the use of
 .BR pthread_atfork (3)
 may be helpful for dealing with problems that this can cause.
 .IP \[bu]

@@ -213,7 +213,7 @@ DMAs into the page.)
 .\" and into user pages all the time.
 .\"
 .\" This patch adds madvise options to control whether memory range is
-.\" inherited across fork. Useful e.g. for when hardware is doing DMA
+.\" inherited across fork.  Useful, e.g., for when hardware is doing DMA
 .\" from/into these pages.  Could also be useful to an application
 .\" wanting to speed up its forks by cutting large areas out of
 .\" consideration.
@@ -262,7 +262,8 @@ KSM merges only private anonymous pages (see
 .IP
 The KSM feature is intended for applications that generate many
 instances of the same data (e.g., virtualization systems such as KVM).
-It can consume a lot of processing power; use with care.
+It can consume a lot of processing power;
+use with care.
 See the Linux kernel source file
 .I Documentation/admin\-guide/mm/ksm.rst
 for more details.
@@ -594,7 +595,8 @@ files with holes might or might not preallocate blocks.
 If populating fails,
 a
 .B SIGBUS
-signal is not generated; instead, an error is returned.
+signal is not generated;
+instead, an error is returned.
 .IP
 If
 .B MADV_POPULATE_READ
@@ -642,7 +644,8 @@ files with holes will preallocate blocks.
 If populating fails,
 a
 .B SIGBUS
-signal is not generated; instead, an error is returned.
+signal is not generated;
+instead, an error is returned.
 .IP
 If
 .B MADV_POPULATE_WRITE

@@ -56,7 +56,9 @@ NIS, and LDAP).
 The first time
 .BR getgrent ()
 is called,
-it returns the first entry; thereafter, it returns successive entries.
+it returns the first entry;
+thereafter,
+it returns successive entries.
 .P
 The
 .BR setgrent ()
@@ -114,13 +116,16 @@ or
 .SH ERRORS
 .TP
 .B EAGAIN
-The service was temporarily unavailable; try again later.
+The service was temporarily unavailable;
+try again later.
 For NSS backends in glibc
 this indicates a temporary error talking to the backend.
-The error may correct itself, retrying later is suggested.
+The error may correct itself;
+retrying later is suggested.
 .TP
 .B EINTR
-A signal was caught; see
+A signal was caught;
+see
 .BR signal (7).
 .TP
 .B EIO

@@ -106,7 +106,8 @@ through to the end of file, no matter how large the file grows.
 POSIX.1-2001 allows (but does not require)
 an implementation to support a negative
 .I l_len
-value; if
+value;
+if
 .I l_len
 is negative, the interval described by
 .I lock
@@ -234,7 +235,8 @@ some of its locks to allow other applications to proceed before
 attempting regain the locks that it requires.
 Circular deadlocks involving more than two processes are also detected.
 Note, however, that there are limitations to the kernel's
-deadlock-detection algorithm; see BUGS.
+deadlock-detection algorithm;
+see BUGS.
 .P
 As well as being removed by an explicit
 .BR F_UNLCK ,
@@ -248,7 +250,8 @@ but are preserved across an
 Because of the buffering performed by the
 .BR stdio (3)
 library, the use of record locking with routines in that package
-should be avoided; use
+should be avoided;
+use
 .BR read (2)
 and
 .BR write (2)
@@ -526,7 +529,8 @@ is
 .B F_SETLKW
 or
 .B F_OFD_SETLKW
-and the operation was interrupted by a signal; see
+and the operation was interrupted by a signal;
+see
 .BR signal (7).
 .TP
 .B EINTR
@@ -650,7 +654,7 @@ loses contact with the server for a period of time
 .\"
 .\" Neil Brown: With NFSv3 the failure mode is the reverse.  If
 .\"     the server loses contact with a client then any lock stays in place
-.\"     indefinitely ("why can't I read my mail"... I remember it well).
+.\"     indefinitely ("why can't I read my mail"...  I remember it well).
 .\"
 it might lose and regain a lock without ever being aware of the fact.
 (The period of time after which contact is assumed lost is known as
@@ -661,10 +665,10 @@ which expresses the period in seconds.
 The default value for this file is 90.)
 .\"
 .\" Jeff Layton:
-.\"     Note that this is not a firm timeout. The server runs a job
+.\"     Note that this is not a firm timeout.  The server runs a job
 .\"     periodically to clean out expired stateful objects, and it's likely
 .\"     that there is some time (maybe even up to another whole lease period)
-.\"     between when the timeout expires and the job actually runs. If the
+.\"     between when the timeout expires and the job actually runs.  If the
 .\"     client gets a RENEW in there within that window, its lease will be
 .\"     renewed and its state preserved.
 .\"

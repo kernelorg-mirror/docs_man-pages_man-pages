@@ -42,13 +42,15 @@ defined to be the POSIX Epoch: 1970-01-01 00:00:00 +0000 (UTC).
 per "jiffy", at a frequency of 100, 250, or 1000 Hz.)
 That is, it is supposed to report wall clock time, which RTCs also do.
 .P
-A key difference between an RTC and the system clock is that RTCs
-run even when the system is in a low power state (including "off"),
+A key difference between an RTC and the system clock is that
+RTCs run even when the system is in a low power state (including "off"),
 and the system clock can't.
-Until it is initialized, the system clock can only report time since
-system boot ... not since the POSIX Epoch.
-So at boot time, and after resuming from a system low power state, the
-system clock will often be set to the current wall clock time using an RTC.
+Until it is initialized,
+the system clock can only report time since system boot,
+not since the POSIX Epoch.
+So at boot time,
+and after resuming from a system low power state,
+the system clock will often be set to the current wall clock time using an RTC.
 Systems without an RTC need to set the system clock using another clock,
 maybe across the network or by entering that data manually.
 .SS RTC functionality
@@ -58,8 +60,8 @@ or directly with the
 .BR ioctl (2)
 requests listed below.
 .P
-Besides tracking the date and time, many RTCs can also generate
-interrupts
+Besides tracking the date and time,
+many RTCs can also generate interrupts
 .IP \[bu] 3
 on every clock update (i.e., once per second);
 .IP \[bu]
@@ -69,13 +71,15 @@ any power-of-2 multiple in the range 2 Hz to 8192 Hz;
 on reaching a previously specified alarm time.
 .P
 Each of those interrupt sources can be enabled or disabled separately.
-On many systems, the alarm interrupt can be configured as a system wakeup
-event, which can resume the system from a low power state such as
+On many systems,
+the alarm interrupt can be configured as a system wakeup event,
+which can resume the system from a low power state such as
 Suspend-to-RAM (STR, called S3 in ACPI systems),
 Hibernation (called S4 in ACPI systems),
 or even "off" (called S5 in ACPI systems).
-On some systems, the battery backed RTC can't issue
-interrupts, but another one can.
+On some systems,
+the battery backed RTC can't issue interrupts,
+but another one can.
 .P
 The
 .I /dev/rtc
@@ -88,13 +92,14 @@ On
 .BR read (2)
 and
 .BR select (2)
-the calling process is blocked until the next interrupt from that RTC
-is received.
-Following the interrupt, the process can read a long integer, of which
-the least significant byte contains a bit mask encoding
-the types of interrupt that occurred,
-while the remaining 3 bytes contain the number of interrupts since the
-last
+the calling process is blocked
+until the next interrupt from that RTC is received.
+Following the interrupt,
+the process can read a long integer,
+of which the least significant byte contains
+a bit mask encoding the types of interrupt that occurred,
+while the remaining 3 bytes
+contain the number of interrupts since the last
 .BR read (2).
 .SS ioctl(2) interface
 The following
@@ -259,7 +264,8 @@ struct rtc_wkalrm {
 The
 .I enabled
 flag is used to enable or disable the alarm interrupt,
-or to read its current status; when using these calls,
+or to read its current status;
+when using these calls,
 .BR RTC_AIE_ON " and " RTC_AIE_OFF
 are not used.
 The
@@ -267,8 +273,8 @@ The
 flag is used by
 .B RTC_WKALM_RD
 to report a pending interrupt
-(so it's mostly useless on Linux, except when talking
-to the RTC managed by EFI firmware).
+(so it's mostly useless on Linux,
+except when talking to the RTC managed by EFI firmware).
 The
 .I time
 field is as used with

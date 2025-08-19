@@ -19,7 +19,8 @@ restart_syscall \- restart a system call after interruption by a stop signal
 .fi
 .P
 .IR Note :
-There is no glibc wrapper for this system call; see NOTES.
+There is no glibc wrapper for this system call;
+see NOTES.
 .SH DESCRIPTION
 The
 .BR restart_syscall ()
@@ -52,7 +53,7 @@ and
 (since Linux 2.6.31)
 operations.
 .\" These system calls correspond to the special internal errno value
-.\" ERESTART_RESTARTBLOCK. Each of the system calls has a "restart"
+.\" ERESTART_RESTARTBLOCK.  Each of the system calls has a "restart"
 .\" helper function that is invoked by restart_syscall().
 .\" Notable (as at Linux 3.17) is that poll() has such a "restart"
 .\" function, but ppoll(), select(), and pselect() do not.

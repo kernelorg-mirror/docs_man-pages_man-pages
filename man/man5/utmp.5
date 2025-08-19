@@ -32,8 +32,8 @@ The file is a sequence of
 structures,
 declared as follows in
 .I <utmp.h>
-(note that this is only one of several definitions
-around; details depend on the version of libc):
+(note that this is only one of several definitions around;
+details depend on the version of libc):
 .P
 .in +4n
 .EX
@@ -84,7 +84,7 @@ struct utmp {
 */
     /* The ut_session and ut_tv fields must be the same size when
        compiled 32\- and 64\-bit.  This allows data files and shared
-       memory to be shared between 32\- and 64\-bit applications. */
+       memory to be shared between 32\- and 64\-bit applications.  */
 #if __WORDSIZE == 64 && defined __WORDSIZE_COMPAT32
     int32_t ut_session;           /* Session ID (\c
 .BR getsid (2)),
@@ -315,14 +315,16 @@ structure.
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux utmp entries conform neither to v7/BSD nor to System V; they are a
-mix of the two.
+Linux utmp entries conform neither to v7/BSD nor to System V;
+they are a mix of the two.
 .P
-v7/BSD has fewer fields; most importantly it lacks
+v7/BSD has fewer fields;
+most importantly it lacks
 .IR ut_type ,
-which causes native v7/BSD-like programs to display (for
-example) dead or login entries.
-Further, there is no configuration file
+which causes native v7/BSD-like programs to display
+(for example) dead or login entries.
+Further,
+there is no configuration file
 which allocates slots to sessions.
 BSD does so because it lacks
 .I ut_id

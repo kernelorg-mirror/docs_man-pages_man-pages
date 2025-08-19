@@ -123,13 +123,16 @@ the functions with the "_l" suffix differ only in using the locale object
 instead of the current locale.
 .TP
 .BR isalnum ()
-checks for an alphanumeric character; it is equivalent to
+checks for an alphanumeric character;
+it is equivalent to
 .IR "(isalpha(c)\ ||\ isdigit(c))" .
 .TP
 .BR isalpha ()
-checks for an alphabetic character; in the standard
+checks for an alphabetic character;
+in the standard
 .B \[dq]C\[dq]
-locale, it is equivalent to
+locale,
+it is equivalent to
 .IR "(isupper(c)\ ||\ islower(c))" .
 In some locales, there may be additional characters for which
 .BR isalpha ()
@@ -144,7 +147,8 @@ value that fits into
 the ASCII character set.
 .TP
 .BR isblank ()
-checks for a blank character; that is, a space or a tab.
+checks for a blank character;
+that is, a space or a tab.
 .TP
 .BR iscntrl ()
 checks for a control character.

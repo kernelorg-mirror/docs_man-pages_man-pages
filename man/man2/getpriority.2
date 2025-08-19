@@ -77,7 +77,8 @@ Traditionally, only a privileged process could lower the nice value
 However, since Linux 2.6.12, an unprivileged process can decrease
 the nice value of a target process that has a suitable
 .B RLIMIT_NICE
-soft limit; see
+soft limit;
+see
 .BR getrlimit (2)
 for details.
 .SH RETURN VALUE

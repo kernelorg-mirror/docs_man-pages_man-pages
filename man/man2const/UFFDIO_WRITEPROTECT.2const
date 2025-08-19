@@ -62,12 +62,15 @@ or the
 .I len
 field of the
 .I ufdio_range
-structure was not a multiple of the system page size; or
+structure was not a multiple of the system page size;
+or
 .I len
-was zero; or the specified range was otherwise invalid.
+was zero;
+or the specified range was otherwise invalid.
 .TP
 .B EAGAIN
-The process was interrupted; retry this call.
+The process was interrupted;
+retry this call.
 .TP
 .B ENOENT
 The range specified in

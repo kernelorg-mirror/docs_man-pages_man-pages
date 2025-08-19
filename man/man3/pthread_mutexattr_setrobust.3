@@ -179,7 +179,7 @@ The following shell session shows what we see when running this program:
 .EX
 .RB $ " ./a.out" ;
 [original owner] Setting lock...
-[original owner] Locked. Now exiting without unlocking.
+[original owner] Locked.  Now exiting without unlocking.
 [main] Attempting to lock the robust mutex.
 [main] pthread_mutex_lock() returned EOWNERDEAD
 [main] Now make the mutex consistent
@@ -203,7 +203,7 @@ original_owner_thread(void *ptr)
 {
     printf("[original owner] Setting lock...\[rs]n");
     pthread_mutex_lock(&mtx);
-    printf("[original owner] Locked. Now exiting without unlocking.\[rs]n");
+    printf("[original owner] Locked.  Now exiting without unlocking.\[rs]n");
     pthread_exit(NULL);
 }
 \&
@@ -224,7 +224,7 @@ main(void)
 \&
     sleep(2);
 \&
-    /* "original_owner_thread" should have exited by now. */
+    /* "original_owner_thread" should have exited by now.  */
 \&
     printf("[main] Attempting to lock the robust mutex.\[rs]n");
     s = pthread_mutex_lock(&mtx);

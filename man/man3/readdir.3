@@ -71,7 +71,8 @@ Be aware that despite its type and name, the
 field is seldom any kind of directory offset on modern filesystems.
 .\" https://lwn.net/Articles/544298/
 Applications should treat this field as an opaque value,
-making no assumptions about its contents; see also
+making no assumptions about its contents;
+see also
 .BR telldir (3).
 .TP
 .I d_reclen
@@ -143,7 +144,8 @@ On success,
 returns a pointer to a
 .I dirent
 structure.
-(This structure may be statically allocated; do not attempt to
+(This structure may be statically allocated;
+do not attempt to
 .BR free (3)
 it.)
 .P
@@ -241,7 +243,8 @@ characters preceding the terminating null byte (\[aq]\[rs]0\[aq]).
 POSIX.1 explicitly notes that this field should not be used as an lvalue.
 The standard also notes that the use of
 .I sizeof(d_name)
-is incorrect; use
+is incorrect;
+use
 .I strlen(d_name)
 instead.
 (On some systems, this field is defined as

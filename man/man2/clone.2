@@ -24,7 +24,7 @@ Standard C library
 .BI "             void *_Nullable " tls ,
 .BI "             pid_t *_Nullable " child_tid " \f[R]*/\f[] );"
 .P
-/* For the prototype of the raw clone() system call, see VERSIONS. */
+/* For the prototype of the raw clone() system call, see VERSIONS.  */
 .P
 .BR "#include <linux/sched.h>" "    /* Definition of " "struct clone_args" " */"
 .BR "#include <sched.h>" "          /* Definition of " CLONE_* " constants */"
@@ -234,7 +234,8 @@ li li l.
 clone()	clone3()	Notes
 	\f[I]cl_args\f[] field
 flags & \[ti]0xff	flags	T{
-For most flags; details below
+For most flags;
+details below
 T}
 parent_tid	pidfd	See CLONE_PIDFD
 child_tid	child_tid	See CLONE_CHILD_SETTID
@@ -747,9 +748,10 @@ or
 For security reasons,
 .\" commit e66eded8309ebf679d3d3c1f5820d1f2ca332c71
 .\" https://lwn.net/Articles/543273/
-.\" The fix actually went into Linux 3.9 and into Linux 3.8.3. However, user namespaces
-.\" were, for practical purposes, unusable in earlier Linux 3.8.x because of the
-.\" various filesystems that didn't support userns.
+.\" The fix actually went into Linux 3.9 and into Linux 3.8.3.
+.\" However, user namespaces were, for practical purposes,
+.\" unusable in earlier Linux 3.8.x because of the various filesystems
+.\" that didn't support userns.
 .B CLONE_NEWUSER
 cannot be specified in conjunction with
 .BR CLONE_FS .
@@ -1191,7 +1193,8 @@ on placing the child process into the version 2 cgroup referred to by
 are not met.
 .TP
 .B EAGAIN
-Too many processes are already running; see
+Too many processes are already running;
+see
 .BR fork (2).
 .TP
 .BR EBUSY " (" clone3 "() only)"
@@ -1434,7 +1437,8 @@ was specified in the
 .I flags
 mask,
 but the limit on the nesting depth of PID namespaces
-would have been exceeded; see
+would have been exceeded;
+see
 .BR pid_namespaces (7).
 .TP
 .BR ENOSPC " (since Linux 4.9; beforehand " EUSERS )
@@ -1828,12 +1832,12 @@ childFunc(void *arg)
 {
     struct utsname uts;
 \&
-    /* Change hostname in UTS namespace of child. */
+    /* Change hostname in UTS namespace of child.  */
 \&
     if (sethostname(arg, strlen(arg)) == \-1)
         err(EXIT_FAILURE, "sethostname");
 \&
-    /* Retrieve and display hostname. */
+    /* Retrieve and display hostname.  */
 \&
     if (uname(&uts) == \-1)
         err(EXIT_FAILURE, "uname");
@@ -1841,7 +1845,7 @@ childFunc(void *arg)
 \&
     /* Keep the namespace open for a while, by sleeping.
        This allows some experimentation\-\-for example, another
-       process might join the namespace. */
+       process might join the namespace.  */
 \&
     sleep(200);
 \&
@@ -1863,7 +1867,7 @@ main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
     }
 \&
-    /* Allocate memory to be used for the stack of the child. */
+    /* Allocate memory to be used for the stack of the child.  */
 \&
     stack = mmap(NULL, STACK_SIZE, PROT_READ | PROT_WRITE,
                  MAP_PRIVATE | MAP_ANONYMOUS | MAP_STACK, \-1, 0);
@@ -1873,7 +1877,7 @@ main(int argc, char *argv[])
     stackTop = stack + STACK_SIZE;  /* Assume stack grows downward */
 \&
     /* Create child that has its own UTS namespace;
-       child commences execution in childFunc(). */
+       child commences execution in childFunc().  */
 \&
     pid = clone(childFunc, stackTop, CLONE_NEWUTS | SIGCHLD, argv[1]);
     if (pid == \-1)
@@ -1886,8 +1890,8 @@ main(int argc, char *argv[])
 \&
     sleep(1);           /* Give child time to change its hostname */
 \&
-    /* Display hostname in parent\[aq]s UTS namespace. This will be
-       different from hostname in child\[aq]s UTS namespace. */
+    /* Display hostname in parent\[aq]s UTS namespace.  This will be
+       different from hostname in child\[aq]s UTS namespace.  */
 \&
     if (uname(&uts) == \-1)
         err(EXIT_FAILURE, "uname");

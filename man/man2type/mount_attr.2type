@@ -16,7 +16,7 @@ Linux kernel headers
 .BR "    u64 attr_clr;" "     /* Mount properties to clear */"
 .BR "    u64 propagation;" "  /* Mount propagation type */"
 .BR "    u64 userns_fd;" "    /* User namespace file descriptor */"
-    /* ... */
+    /* ...\& */
 .B };
 .EE
 .SH DESCRIPTION

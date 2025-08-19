@@ -247,9 +247,9 @@ calls to the sockets API.
 .P
 In addition, the sockets API provides the data type
 .IR "struct sockaddr_storage".
-This type
-is suitable to accommodate all supported domain-specific socket
-address structures; it is large enough and is aligned properly.
+This type is suitable to accommodate
+all supported domain-specific socket address structures;
+it is large enough and is aligned properly.
 (In particular, it is large enough to hold
 IPv6 socket addresses.)
 The structure includes the following field, which can be used to identify
@@ -503,13 +503,13 @@ This provides optimal NUMA behavior and keeps CPU caches hot.
 .\" From an email conversation with Eric Dumazet:
 .\" >> Note that setting the option is not supported if SO_REUSEPORT is used.
 .\" >
-.\" > Please define "not supported". Does this yield an API diagnostic?
+.\" > Please define "not supported".  Does this yield an API diagnostic?
 .\" > If so, what is it?
 .\" >
 .\" >> Socket will be selected from an array, either by a hash or BPF program
 .\" >> that has no access to this information.
 .\" >
-.\" > Sorry -- I'm lost here. How does this comment relate to the proposed
+.\" > Sorry -- I'm lost here.  How does this comment relate to the proposed
 .\" > man page text above?
 .\"
 .\" Simply that :
@@ -820,8 +820,10 @@ The argument is a
 .IR "struct timeval" .
 If an input or output function blocks for this period of time, and
 data has been sent or received, the return value of that function
-will be the amount of data transferred; if no data has been transferred
-and the timeout has been reached, then \-1 is returned with
+will be the amount of data transferred;
+if no data has been transferred
+and the timeout has been reached,
+then \-1 is returned with
 .I errno
 set to
 .B EAGAIN
@@ -1231,8 +1233,9 @@ are supported since Linux 2.3.41.
 Earlier, timeouts were fixed to
 a protocol-specific setting, and could not be read or written.
 .SH NOTES
-Linux assumes that half of the send/receive buffer is used for internal
-kernel structures; thus the values in the corresponding
+Linux assumes that
+half of the send/receive buffer is used for internal kernel structures;
+thus the values in the corresponding
 .I /proc
 files are twice what can be observed on the wire.
 .P

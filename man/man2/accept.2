@@ -61,7 +61,8 @@ is determined by the socket's address family (see
 and the respective protocol man pages).
 When
 .I addr
-is NULL, nothing is filled in; in this case,
+is NULL, nothing is filled in;
+in this case,
 .I addrlen
 is not used, and should also be NULL.
 .P
@@ -102,7 +103,8 @@ may then call
 to get a socket for that connection.
 Alternatively, you can set the socket to deliver
 .B SIGIO
-when activity occurs on a socket; see
+when activity occurs on a socket;
+see
 .BR socket (7)
 for details.
 .P
@@ -196,7 +198,8 @@ argument is not in a writable part of the user address space.
 .TP
 .B EINTR
 The system call was interrupted by a signal that was caught
-before a valid connection arrived; see
+before a valid connection arrived;
+see
 .BR signal (7).
 .TP
 .B EINVAL

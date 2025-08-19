@@ -56,16 +56,20 @@ the extended part reads as null bytes (\[aq]\[rs]0\[aq]).
 .P
 The file offset is not changed.
 .P
-If the size changed, then the st_ctime and st_mtime fields
-(respectively, time of last status change and
-time of last modification; see
+If the size changed,
+then the st_ctime and st_mtime fields
+(respectively,
+time of last status change and
+time of last modification;
+see
 .BR inode (7))
 for the file are updated,
 and the set-user-ID and set-group-ID mode bits may be cleared.
 .P
 With
 .BR ftruncate (),
-the file must be open for writing; with
+the file must be open for writing;
+with
 .BR truncate (),
 the file must be writable.
 .SH RETURN VALUE
@@ -91,11 +95,13 @@ points outside the process's allocated address space.
 .B EFBIG
 The argument
 .I length
-is larger than the maximum file size. (XSI)
+is larger than the maximum file size.
+(XSI)
 .TP
 .B EINTR
 While blocked waiting to complete,
-the call was interrupted by a signal handler; see
+the call was interrupted by a signal handler;
+see
 .BR fcntl (2)
 and
 .BR signal (7).
@@ -131,7 +137,8 @@ The underlying filesystem does not support extending
 a file beyond its current size.
 .TP
 .B EPERM
-The operation was prevented by a file seal; see
+The operation was prevented by a file seal;
+see
 .BR fcntl (2).
 .TP
 .B EROFS
@@ -220,12 +227,14 @@ Consequently, Linux 2.4 added
 and
 .BR ftruncate64 ()
 system calls that handle large files.
-However, these details can be ignored by applications using glibc, whose
-wrapper functions transparently employ the more recent system calls
+However,
+these details can be ignored by applications using glibc,
+whose wrapper functions transparently employ the more recent system calls
 where they are available.
 .SH NOTES
 .BR ftruncate ()
-can also be used to set the size of a POSIX shared memory object; see
+can also be used to set the size of a POSIX shared memory object;
+see
 .BR shm_open (3).
 .SH BUGS
 A header file bug in glibc 2.12 meant that the minimum value of

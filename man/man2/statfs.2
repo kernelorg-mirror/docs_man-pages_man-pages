@@ -163,14 +163,16 @@ Mandatory locking is permitted on the filesystem (see
 .BR fcntl (2)).
 .TP
 .B ST_NOATIME
-Do not update access times; see
+Do not update access times;
+see
 .BR mount (2).
 .TP
 .B ST_NODEV
 Disallow access to device special files on this filesystem.
 .TP
 .B ST_NODIRATIME
-Do not update directory access times; see
+Do not update directory access times;
+see
 .BR mount (2).
 .TP
 .B ST_NOEXEC
@@ -185,7 +187,8 @@ for executable files on this filesystem
 This filesystem is mounted read-only.
 .TP
 .B ST_RELATIME
-Update atime relative to mtime/ctime; see
+Update atime relative to mtime/ctime;
+see
 .BR mount (2).
 .TP
 .B ST_SYNCHRONOUS
@@ -196,7 +199,8 @@ in
 .TP
 .BR ST_NOSYMFOLLOW " (since Linux 5.10)"
 .\" dab741e0e02bd3c4f5e2e97be74b39df2523fc6e
-Symbolic links are not followed when resolving paths; see
+Symbolic links are not followed when resolving paths;
+see
 .BR mount (2).
 .P
 Nobody knows what
@@ -234,7 +238,8 @@ or
 points to an invalid address.
 .TP
 .B EINTR
-The call was interrupted by a signal; see
+The call was interrupted by a signal;
+see
 .BR signal (7).
 .TP
 .B EIO

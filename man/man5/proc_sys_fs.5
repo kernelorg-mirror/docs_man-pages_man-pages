@@ -129,21 +129,24 @@ limit.
 .I /proc/sys/fs/file\-nr
 This (read-only) file contains three numbers:
 the number of allocated file handles
-(i.e., the number of open file descriptions; see
+(i.e., the number of open file descriptions;
+see
 .BR open (2));
 the number of free file handles;
-and the maximum number of file handles (i.e., the same value as
+and the maximum number of file handles
+(i.e., the same value as
 .IR /proc/sys/fs/file\-max ).
-If the number of allocated file handles is close to the
-maximum, you should consider increasing the maximum.
+If the number of allocated file handles is close to the maximum,
+you should consider increasing the maximum.
 Before Linux 2.6,
 the kernel allocated file handles dynamically,
 but it didn't free them again.
 Instead the free file handles were kept in a list for reallocation;
 the "free file handles" value indicates the size of that list.
-A large number of free file handles indicates that there was
-a past peak in the usage of open file handles.
-Since Linux 2.6, the kernel does deallocate freed file handles,
+A large number of free file handles indicates that
+there was a past peak in the usage of open file handles.
+Since Linux 2.6,
+the kernel does deallocate freed file handles,
 and the "free file handles" value is always zero.
 .TP
 .IR /proc/sys/fs/inode\-max " (only present until Linux 2.2)"
@@ -314,12 +317,14 @@ the target is a regular file;
 .IP \[bu]
 the target file does not have its set-user-ID mode bit enabled;
 .IP \[bu]
-the target file does not have both its set-group-ID and
-group-executable mode bits enabled; and
+the target file does not have both
+its set-group-ID and group-executable mode bits
+enabled;
+and
 .IP \[bu]
 the caller has permission to read and write the target file
-(either via the file's permissions mask or because it has
-suitable capabilities).
+(either via the file's permissions mask
+or because it has suitable capabilities).
 .RE
 .RE
 .IP
@@ -378,7 +383,8 @@ the owner (UID) of the symbolic link
 .BR credentials (7),
 a process's filesystem UID is normally the same as its effective UID);
 .IP \[bu]
-the link is not in a sticky world-writable directory; or
+the link is not in a sticky world-writable directory;
+or
 .IP \[bu]
 the symbolic link and its parent directory have the same owner (UID)
 .RE

@@ -240,14 +240,16 @@ in that it accepts a set of nodes
 versus a single node.
 This policy is intended to benefit page allocations
 where specific memory types
-(i.e. non-volatile, high-bandwidth, or accelerator memory)
+(i.e., non-volatile, high-bandwidth, or accelerator memory)
 are of greater importance than node location.
 .TP
 .BR MPOL_LOCAL " (since Linux 3.8)"
 .\" commit 479e2802d09f1e18a97262c4c6f8f17ae5884bd8
 .\" commit f2a07f40dbc603c15f8b06e6ec7f768af67b424f
-This mode specifies "local allocation"; the memory is allocated on
-the node of the CPU that triggered the allocation (the "local node").
+This mode specifies "local allocation";
+the memory is allocated on
+the node of the CPU that triggered the allocation
+(the "local node").
 The
 .I nodemask
 and

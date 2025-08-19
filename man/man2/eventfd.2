@@ -157,7 +157,8 @@ The file descriptor is readable
 (the
 .BR select (2)
 .I readfds
-argument; the
+argument;
+the
 .BR poll (2)
 .B POLLIN
 flag)
@@ -167,7 +168,8 @@ The file descriptor is writable
 (the
 .BR select (2)
 .I writefds
-argument; the
+argument;
+the
 .BR poll (2)
 .B POLLOUT
 flag)
@@ -239,7 +241,7 @@ reached.
 .B ENODEV
 .\" Note from Davide:
 .\" The ENODEV error is basically never going to happen if
-.\" the kernel boots correctly. That error happen only if during
+.\" the kernel boots correctly.  That error happen only if during
 .\" the kernel initialization, some error occur in the anonymous
 .\" inode source initialization.
 Could not mount (internal) anonymous inode device.

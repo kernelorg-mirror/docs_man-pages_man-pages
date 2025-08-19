@@ -278,7 +278,7 @@ arrival/wakeup                    absolute deadline
      |        |                         |
      v        v                         v
 -----x--------xooooooooooooooooo--------x--------x---
-              |<- comp. time ->|
+              |<- comp.\& time ->|
      |<------- relative deadline ------>|
      |<-------------- period ------------------->|
 .EE
@@ -321,7 +321,8 @@ and
 .I sched_period
 fields of the
 .I sched_attr
-structure; see
+structure;
+see
 .BR sched_setattr (2).
 These fields express values in nanoseconds.
 .\" FIXME It looks as though specifying sched_period as 0 means
@@ -378,7 +379,8 @@ a thread is admitted to the
 policy,
 .B SCHED_DEADLINE
 threads are the highest priority (user controllable) threads in the
-system; if any
+system;
+if any
 .B SCHED_DEADLINE
 thread is runnable,
 it will preempt any thread scheduled under one of the other policies.
@@ -477,7 +479,8 @@ that require it (e.g., some audio applications).
 On Linux, the
 .B RLIMIT_NICE
 resource limit can be used to define a limit to which
-an unprivileged process's nice value can be raised; see
+an unprivileged process's nice value can be raised;
+see
 .BR setrlimit (2)
 for details.
 .P
@@ -648,7 +651,8 @@ Privileged
 .RB ( CAP_SYS_NICE )
 threads ignore the
 .B RLIMIT_RTPRIO
-limit; as with older kernels,
+limit;
+as with older kernels,
 they can make arbitrary changes to scheduling policy and priority.
 See
 .BR getrlimit (2)
@@ -720,8 +724,9 @@ Child processes inherit the scheduling policy and parameters across a
 The scheduling policy and parameters are preserved across
 .BR execve (2).
 .P
-Memory locking is usually needed for real-time processes to avoid
-paging delays; this can be done with
+Memory locking is usually needed for real-time processes
+to avoid paging delays;
+this can be done with
 .BR mlock (2)
 or
 .BR mlockall (2).
@@ -729,10 +734,12 @@ or
 .SS The autogroup feature
 .\" commit 5091faa449ee0b7d73bc296a93bca9540fc51d0a
 Since Linux 2.6.38,
-the kernel provides a feature known as autogrouping to improve interactive
-desktop performance in the face of multiprocess, CPU-intensive
-workloads such as building the Linux kernel with large numbers of
-parallel build processes (i.e., the
+the kernel provides a feature known as autogrouping
+to improve interactive desktop performance
+in the face of multiprocess CPU-intensive workloads
+such as building the Linux kernel
+with large numbers of parallel build processes
+(i.e., the
 .BR make (1)
 .B \-j
 flag).

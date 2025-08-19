@@ -356,7 +356,7 @@ enum bpf_map_type {
     BPF_MAP_TYPE_PERCPU_CGROUP_STORAGE,
     BPF_MAP_TYPE_QUEUE,
     BPF_MAP_TYPE_STACK,
-    /* See /usr/include/linux/bpf.h for the full list. */
+    /* See /usr/include/linux/bpf.h for the full list.  */
 };
 .EE
 .in
@@ -764,7 +764,7 @@ enum bpf_prog_type {
     BPF_PROG_TYPE_LIRC_MODE2,
     BPF_PROG_TYPE_SK_REUSEPORT,
     BPF_PROG_TYPE_FLOW_DISSECTOR,
-    /* See /usr/include/linux/bpf.h for the full list. */
+    /* See /usr/include/linux/bpf.h for the full list.  */
 };
 .EE
 .in
@@ -846,7 +846,7 @@ format of
 .\"
 .\" FIXME
 .\" Somewhere in this page we need a general introduction to the
-.\" bpf_context. For example, how does a BPF program access the
+.\" bpf_context.  For example, how does a BPF program access the
 .\" context?
 .P
 For example, a tracing program does not have the exact same
@@ -1157,37 +1157,53 @@ The JIT compiler for eBPF is currently
 .\" Documentation/sysctl/net.txt
 available for the following architectures:
 .IP \[bu] 3
-x86-64 (since Linux 3.18; cBPF since Linux 3.0);
+x86-64
+(since Linux 3.18;
+cBPF since Linux 3.0);
 .\" commit 0a14842f5a3c0e88a1e59fac5c3025db39721f74
 .PD 0
 .IP \[bu]
-ARM32 (since Linux 3.18; cBPF since Linux 3.4);
+ARM32
+(since Linux 3.18;
+cBPF since Linux 3.4);
 .\" commit ddecdfcea0ae891f782ae853771c867ab51024c2
 .IP \[bu]
-SPARC 32 (since Linux 3.18; cBPF since Linux 3.5);
+SPARC 32
+(since Linux 3.18;
+cBPF since Linux 3.5);
 .\" commit 2809a2087cc44b55e4377d7b9be3f7f5d2569091
 .IP \[bu]
-ARM-64 (since Linux 3.18);
+ARM-64
+(since Linux 3.18);
 .\" commit e54bcde3d69d40023ae77727213d14f920eb264a
 .IP \[bu]
-s390 (since Linux 4.1; cBPF since Linux 3.7);
+s390
+(since Linux 4.1;
+cBPF since Linux 3.7);
 .\" commit c10302efe569bfd646b4c22df29577a4595b4580
 .IP \[bu]
-PowerPC 64 (since Linux 4.8; cBPF since Linux 3.1);
+PowerPC 64
+(since Linux 4.8;
+cBPF since Linux 3.1);
 .\" commit 0ca87f05ba8bdc6791c14878464efc901ad71e99
 .\" commit 156d0e290e969caba25f1851c52417c14d141b24
 .IP \[bu]
-SPARC 64 (since Linux 4.12);
+SPARC 64
+(since Linux 4.12);
 .\" commit 7a12b5031c6b947cc13918237ae652b536243b76
 .IP \[bu]
-x86-32 (since Linux 4.18);
+x86-32
+(since Linux 4.18);
 .\" commit 03f5781be2c7b7e728d724ac70ba10799cc710d7
 .IP \[bu]
-MIPS 64 (since Linux 4.18; cBPF since Linux 3.16);
+MIPS 64
+(since Linux 4.18;
+cBPF since Linux 3.16);
 .\" commit c6610de353da5ca6eee5b8960e838a87a90ead0c
 .\" commit f381bf6d82f032b7410185b35d000ea370ac706b
 .IP \[bu]
-riscv (since Linux 5.1).
+riscv
+(since Linux 5.1).
 .\" commit 2353ecc6f91fd15b893fa01bf85a1c7a823ee4f2
 .PD
 .SH EXAMPLES
@@ -1196,12 +1212,12 @@ riscv (since Linux 5.1).
 #define NITEMS(a)  (sizeof(a) / sizeof(*(a)))
 \&
 /* bpf+sockets example:
- * 1. create array map of 256 elements
- * 2. load program that counts number of packets received
+ * 1.  create array map of 256 elements
+ * 2.  load program that counts number of packets received
  *    r0 = skb\->data[ETH_HLEN + offsetof(struct iphdr, protocol)]
  *    map[r0]++
- * 3. attach prog_fd to raw socket via setsockopt()
- * 4. print number of received TCP/UDP packets every second
+ * 3.  attach prog_fd to raw socket via setsockopt()
+ * 4.  print number of received TCP/UDP packets every second
  */
 int
 main(int argc, char *argv[])

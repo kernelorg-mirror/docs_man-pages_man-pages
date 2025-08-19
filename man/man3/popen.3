@@ -36,8 +36,9 @@ function opens a process by creating a pipe, forking, and invoking the
 shell.
 Since a pipe is by definition unidirectional, the
 .I type
-argument may specify only reading or writing, not both; the resulting
-stream is correspondingly read-only or write-only.
+argument may specify only reading or writing, not both;
+the resulting stream
+is correspondingly read-only or write-only.
 .P
 The
 .I command
@@ -47,7 +48,8 @@ This command is passed to
 .I /bin/sh
 using the
 .B \-c
-flag; interpretation, if any, is performed by the shell.
+flag;
+interpretation, if any, is performed by the shell.
 .P
 The
 .I type
@@ -71,13 +73,17 @@ with
 .BR pclose ()
 rather than
 .BR fclose (3).
-Writing to such a stream writes to the standard input of the command; the
-command's standard output is the same as that of the process that called
+Writing to such a stream
+writes to the standard input of the command;
+the command's standard output
+is the same as that of the process that called
 .BR popen (),
 unless this is altered by the command itself.
-Conversely, reading from
-the stream reads the command's standard output, and the command's
-standard input is the same as that of the process that called
+Conversely,
+reading from the stream
+reads the command's standard output,
+and the command's standard input
+is the same as that of the process that called
 .BR popen ().
 .P
 Note that output
@@ -101,7 +107,9 @@ calls fail, or if the function cannot allocate memory,
 NULL is returned.
 .P
 .BR pclose ():
-on success, returns the exit status of the command; if
+on success,
+returns the exit status of the command;
+if
 .\" These conditions actually give undefined results, so I commented
 .\" them out.
 .\" .I stream
@@ -109,10 +117,12 @@ on success, returns the exit status of the command; if
 .\".I stream
 .\" already "pclose()d", or if
 .BR wait4 (2)
-returns an error, or some other error is detected,
+returns an error,
+or some other error is detected,
 \-1 is returned.
 .P
-On failure, both functions set
+On failure,
+both functions set
 .I errno
 to indicate the error.
 .SH ERRORS

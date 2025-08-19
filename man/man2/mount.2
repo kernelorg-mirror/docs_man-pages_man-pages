@@ -128,7 +128,8 @@ the application employs
 or
 .BR sync (2);
 .IP \[bu]
-an undeleted inode is evicted from memory; or
+an undeleted inode is evicted from memory;
+or
 .IP \[bu]
 more than 24 hours have passed since the inode was written to disk.
 .RE
@@ -822,7 +823,8 @@ flag, or one of the "atime" flags
 .RB ( MS_NOATIME ,
 .BR MS_NODIRATIME ,
 .BR MS_RELATIME )
-of an existing mount, but the mount is locked; see
+of an existing mount, but the mount is locked;
+see
 .BR mount_namespaces (7).
 .TP
 .B EROFS

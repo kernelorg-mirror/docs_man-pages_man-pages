@@ -20,7 +20,7 @@ Standard C library
 .SH DESCRIPTION
 .\" Linus: vmsplice() system call to basically do a "write to
 .\" the buffer", but using the reference counting and VM traversal
-.\" to actually fill the buffer. This means that the user needs to
+.\" to actually fill the buffer.  This means that the user needs to
 .\" be careful not to reuse the user-space buffer it spliced into
 .\" the kernel-space one (contrast this to "write()", which copies
 .\" the actual data, and you can thus reuse the buffer immediately
@@ -71,14 +71,16 @@ see
 .B SPLICE_F_NONBLOCK
 .\" Not used for vmsplice
 .\" May be in the future -- therefore EAGAIN
-Do not block on I/O; see
+Do not block on I/O;
+see
 .BR splice (2)
 for further details.
 .TP
 .B SPLICE_F_MORE
 Currently has no effect for
 .BR vmsplice (),
-but may be implemented in the future; see
+but may be implemented in the future;
+see
 .BR splice (2).
 .TP
 .B SPLICE_F_GIFT
@@ -99,7 +101,7 @@ Data must also be properly page aligned, both in memory and length.
 .\" It looks like the page-alignment requirement went away with
 .\" commit bd1a68b59c8e3bce45fb76632c64e1e063c3962d
 .\"
-.\" .... if we expect to later SPLICE_F_MOVE to the cache.
+.\" ...if we expect to later SPLICE_F_MOVE to the cache.
 .SH RETURN VALUE
 Upon successful completion,
 .BR vmsplice ()

@@ -123,7 +123,8 @@ a signal is caught, in which case the system call fails
 with
 .I errno
 set to
-.BR EINTR ; see
+.BR EINTR ;
+see
 .BR signal (7).
 .RB ( msgsnd ()
 is never automatically restarted after being interrupted by a
@@ -168,7 +169,8 @@ If
 .B MSG_NOERROR
 is specified, then
 the message text will be truncated (and the truncated part will be
-lost); if
+lost);
+if
 .B MSG_NOERROR
 is not specified, then
 the message isn't removed from the queue and
@@ -388,7 +390,8 @@ the message queue was removed.
 .TP
 .B EINTR
 While the process was sleeping to receive a message,
-the process caught a signal; see
+the process caught a signal;
+see
 .BR signal (7).
 .TP
 .B EINVAL

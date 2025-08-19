@@ -36,7 +36,8 @@ This page describes the kernel
 .BR syslog ()
 system call, which is used to control the kernel
 .IR printk ()
-buffer; the glibc wrapper function for the system call is called
+buffer;
+the glibc wrapper function for the system call is called
 .BR klogctl ().
 .SS The kernel log buffer
 The kernel has a cyclic buffer of size
@@ -342,7 +343,8 @@ or for
 is NULL,
 or
 .I size
-is less than zero; or for
+is less than zero;
+or for
 .I type
 8, the
 .I level
@@ -367,7 +369,8 @@ or
 capability).
 .TP
 .B ERESTARTSYS
-System call was interrupted by a signal; nothing was read.
+System call was interrupted by a signal;
+nothing was read.
 (This can be seen only during a trace.)
 .SH STANDARDS
 Linux.

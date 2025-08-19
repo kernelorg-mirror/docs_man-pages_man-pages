@@ -87,7 +87,9 @@ Strings longer than
 (16) characters (including the terminating null byte) are silently truncated.
 .TP
 .I Umask
-Process umask, expressed in octal with a leading zero; see
+Process umask,
+expressed in octal with a leading zero;
+see
 .BR umask (2).
 (Since Linux 4.7.)
 .TP
@@ -107,7 +109,9 @@ or
 Thread group ID (i.e., Process ID).
 .TP
 .I Ngid
-NUMA group ID (0 if none; since Linux 3.13).
+NUMA group ID
+(0 if none;
+since Linux 3.13).
 .TP
 .I Pid
 Thread ID (see
@@ -185,7 +189,8 @@ directly access physical memory.
 .TP
 .I VmHWM
 Peak resident set size ("high water mark").
-This value is inaccurate; see
+This value is inaccurate;
+see
 .IR /proc/ pid /statm
 above.
 .TP
@@ -196,7 +201,8 @@ Note that the value here is the sum of
 .IR RssFile ,
 and
 .IR RssShmem .
-This value is inaccurate; see
+This value is inaccurate;
+see
 .IR /proc/ pid /statm
 above.
 .TP
@@ -204,7 +210,8 @@ above.
 Size of resident anonymous memory.
 .\" commit bf9683d6990589390b5178dafe8fd06808869293
 (since Linux 4.5).
-This value is inaccurate; see
+This value is inaccurate;
+see
 .IR /proc/ pid /statm
 above.
 .TP
@@ -212,7 +219,8 @@ above.
 Size of resident file mappings.
 .\" commit bf9683d6990589390b5178dafe8fd06808869293
 (since Linux 4.5).
-This value is inaccurate; see
+This value is inaccurate;
+see
 .IR /proc/ pid /statm
 above.
 .TP
@@ -230,7 +238,8 @@ and shared anonymous mappings).
 .TQ
 .I VmExe
 Size of data, stack, and text segments.
-This value is inaccurate; see
+This value is inaccurate;
+see
 .IR /proc/ pid /statm
 above.
 .TP
@@ -242,13 +251,17 @@ Page table entries size (since Linux 2.6.10).
 .TP
 .I VmPMD
 .\" commit dc6c9a35b66b520cf67e05d8ca60ebecad3b0479
-Size of second-level page tables (added in Linux 4.0; removed in Linux 4.15).
+Size of second-level page tables
+(added in Linux 4.0;
+removed in Linux 4.15).
 .TP
 .I VmSwap
 .\" commit b084d4353ff99d824d3bc5a5c2c22c70b1fba722
 Swapped-out virtual memory size by anonymous private pages;
-shmem swap usage is not included (since Linux 2.6.34).
-This value is inaccurate; see
+shmem swap usage is not included
+(since Linux 2.6.34).
+This value is inaccurate;
+see
 .IR /proc/ pid /statm
 above.
 .TP

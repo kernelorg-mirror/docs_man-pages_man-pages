@@ -316,7 +316,7 @@ system call information made available (i.e., use the
 addressing mode) as a (read-only)
 .\" Quoting Kees Cook:
 .\"     If BPF even allows changing the data, it's not copied back to
-.\"     the syscall when it runs. Anything wanting to do things like
+.\"     the syscall when it runs.  Anything wanting to do things like
 .\"     that would need to use ptrace to catch the call and directly
 .\"     modify the registers before continuing with the call.
 buffer of the following form:
@@ -467,8 +467,8 @@ avoiding a check for this uncommon case.)
 .\"     It's just because it would be an optimization that would only speed up
 .\"     the RET_KILL case, but it's the uncommon one and the one that doesn't
 .\"     benefit meaningfully from such a change (you need to kill the process
-.\"     really quickly?). We would speed up killing a program at the (albeit
-.\"     tiny) expense to all other filtered programs. Best to keep the filter
+.\"     really quickly?).  We would speed up killing a program at the (albeit
+.\"     tiny) expense to all other filtered programs.  Best to keep the filter
 .\"     execution logic clear, simple, and as fast as possible for all
 .\"     filters.
 The return value for the evaluation of a given system call is the first-seen
@@ -651,7 +651,7 @@ appear to return the value that the tracer puts in the return value register.
 .IP
 .\" This was changed in ce6526e8afa4.
 .\" A related hole, using PTRACE_SYSCALL instead of SECCOMP_RET_TRACE, was
-.\" changed in arch-specific commits, e.g. 93e35efb8de4 for X86 and
+.\" changed in arch-specific commits, e.g., 93e35efb8de4 for X86 and
 .\" 0f3912fd934c for ARM.
 Before Linux 4.8, the seccomp check will not be run again after the tracer is
 notified.
@@ -874,7 +874,8 @@ The
 .I Seccomp
 field of the
 .IR /proc/ pid /status
-file provides a method of viewing the seccomp mode of a process; see
+file provides a method of viewing the seccomp mode of a process;
+see
 .BR proc (5).
 .P
 .BR seccomp ()
@@ -892,7 +893,7 @@ operation can be used to dump a process's seccomp filters.
 .SS Architecture support for seccomp BPF
 Architecture support for seccomp BPF filtering
 .\" Check by grepping for HAVE_ARCH_SECCOMP_FILTER in Kconfig files in
-.\" kernel source. Last checked in Linux 4.16-rc source.
+.\" kernel source.  Last checked in Linux 4.16-rc source.
 is available on the following architectures:
 .IP \[bu] 3
 x86-64, i386, x32 (since Linux 3.5)
@@ -1123,44 +1124,44 @@ install_filter(int syscall_nr, unsigned int t_arch, int f_errno)
 \&
     /* Assume that AUDIT_ARCH_X86_64 means the normal x86\-64 ABI
        (in the x32 ABI, all system calls have bit 30 set in the
-       \[aq]nr\[aq] field, meaning the numbers are >= X32_SYSCALL_BIT). */
+       \[aq]nr\[aq] field, meaning the numbers are >= X32_SYSCALL_BIT).  */
     if (t_arch == AUDIT_ARCH_X86_64)
         upper_nr_limit = X32_SYSCALL_BIT \- 1;
 \&
     struct sock_filter filter[] = {
         /* [0] Load architecture from \[aq]seccomp_data\[aq] buffer into
-               accumulator. */
+               accumulator.  */
         BPF_STMT(BPF_LD | BPF_W | BPF_ABS,
                  (offsetof(struct seccomp_data, arch))),
 \&
         /* [1] Jump forward 5 instructions if architecture does not
-               match \[aq]t_arch\[aq]. */
+               match \[aq]t_arch\[aq].  */
         BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, t_arch, 0, 5),
 \&
         /* [2] Load system call number from \[aq]seccomp_data\[aq] buffer into
-               accumulator. */
+               accumulator.  */
         BPF_STMT(BPF_LD | BPF_W | BPF_ABS,
                  (offsetof(struct seccomp_data, nr))),
 \&
         /* [3] Check ABI \- only needed for x86\-64 in deny\-list use
                cases.  Use BPF_JGT instead of checking against the bit
-               mask to avoid having to reload the syscall number. */
+               mask to avoid having to reload the syscall number.  */
         BPF_JUMP(BPF_JMP | BPF_JGT | BPF_K, upper_nr_limit, 3, 0),
 \&
         /* [4] Jump forward 1 instruction if system call number
-               does not match \[aq]syscall_nr\[aq]. */
+               does not match \[aq]syscall_nr\[aq].  */
         BPF_JUMP(BPF_JMP | BPF_JEQ | BPF_K, syscall_nr, 0, 1),
 \&
         /* [5] Matching architecture and system call: don\[aq]t execute
-           the system call, and return \[aq]f_errno\[aq] in \[aq]errno\[aq]. */
+           the system call, and return \[aq]f_errno\[aq] in \[aq]errno\[aq].  */
         BPF_STMT(BPF_RET | BPF_K,
                  SECCOMP_RET_ERRNO | (f_errno & SECCOMP_RET_DATA)),
 \&
         /* [6] Destination of system call number mismatch: allow other
-               system calls. */
+               system calls.  */
         BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_ALLOW),
 \&
-        /* [7] Destination of architecture mismatch: kill process. */
+        /* [7] Destination of architecture mismatch: kill process.  */
         BPF_STMT(BPF_RET | BPF_K, SECCOMP_RET_KILL_PROCESS),
     };
 \&

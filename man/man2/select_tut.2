@@ -117,7 +117,7 @@ main(int argc, char *argv[])
 \&
     for (;;) {          /* main loop */
         /* Initialize readfds, writefds, and exceptfds
-           before the pselect() call. (Code omitted.) */
+           before the pselect() call.  (Code omitted.)  */
 \&
         r = pselect(nfds, &readfds, &writefds, &exceptfds,
                     NULL, &empty_mask);
@@ -129,7 +129,7 @@ main(int argc, char *argv[])
             got_SIGCHLD = 0;
 \&
             /* Handle signalled event here; e.g., wait() for all
-               terminated children. (Code omitted.) */
+               terminated children.  (Code omitted.)  */
         }
 \&
         /* main body of program */
@@ -484,7 +484,7 @@ main(int argc, char *argv[])
         if (fd1 > 0 && buf1_avail < BUF_SIZE)
             FD_SET(fd1, &readfds);
             /* Note: nfds is updated below, when fd1 is added to
-               exceptfds. */
+               exceptfds.  */
         if (fd2 > 0 && buf2_avail < BUF_SIZE)
             FD_SET(fd2, &readfds);
 \&
@@ -536,13 +536,13 @@ main(int argc, char *argv[])
                            inet_ntoa(client_addr.sin_addr));
 \&
                 /* Skip any events on the old, closed file
-                   descriptors. */
+                   descriptors.  */
 \&
                 continue;
             }
         }
 \&
-        /* NB: read OOB data before normal reads. */
+        /* NB: read OOB data before normal reads.  */
 \&
         if (fd1 > 0 && FD_ISSET(fd1, &exceptfds)) {
             char c;
@@ -595,7 +595,7 @@ main(int argc, char *argv[])
                 buf1_written += nbytes;
         }
 \&
-        /* Check if write data has caught read data. */
+        /* Check if write data has caught read data.  */
 \&
         if (buf1_written == buf1_avail)
             buf1_written = buf1_avail = 0;
@@ -603,7 +603,7 @@ main(int argc, char *argv[])
             buf2_written = buf2_avail = 0;
 \&
         /* One side has closed the connection, keep
-           writing to the other side until empty. */
+           writing to the other side until empty.  */
 \&
         if (fd1 < 0 && buf1_avail \- buf1_written == 0)
             SHUT_FD2;

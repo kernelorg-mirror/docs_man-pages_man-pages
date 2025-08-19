@@ -152,7 +152,8 @@ Sets
 .B RES_DEBUG
 in
 .I _res.options
-(effective only if glibc was built with debug support; see
+(effective only if glibc was built with debug support;
+see
 .BR resolver (3)).
 .TP
 .BI ndots: n
@@ -254,7 +255,8 @@ function, and of mapping IPv4 responses in IPv6 "tunneled form"
 if no AAAA records are found but an A record set exists.
 Since glibc 2.25,
 .\" b76e065991ec01299225d9da90a627ebe6c1ac97
-this option is deprecated; applications should use
+this option is deprecated;
+applications should use
 .BR getaddrinfo (3),
 rather than
 .BR gethostbyname (3).

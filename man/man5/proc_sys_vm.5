@@ -92,7 +92,8 @@ If a process has a filesystem group ID or any supplementary group ID that
 matches this group ID,
 then it can make huge-page allocations without holding the
 .B CAP_IPC_LOCK
-capability; see
+capability;
+see
 .BR memfd_create (2),
 .BR mmap (2),
 and
@@ -136,7 +137,8 @@ signal with
 .I si_code
 set to
 .BR BUS_MCEERR_AO .
-Processes can handle this if they want to; see
+Processes can handle this if they want to;
+see
 .BR sigaction (2)
 for more details.
 .IP

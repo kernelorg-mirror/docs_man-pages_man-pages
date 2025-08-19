@@ -273,13 +273,13 @@ main(int argc, char *argv[])
     }
 \&
     /* Add one to the link size, so that we can determine whether
-       the buffer returned by readlink() was truncated. */
+       the buffer returned by readlink() was truncated.  */
 \&
     bufsiz = sb.st_size + 1;
 \&
     /* Some magic symlinks under (for example) /proc and /sys
-       report \[aq]st_size\[aq] as zero. In that case, take PATH_MAX as
-       a "good enough" estimate. */
+       report \[aq]st_size\[aq] as zero.  In that case, take PATH_MAX as
+       a "good enough" estimate.  */
 \&
     if (sb.st_size == 0)
         bufsiz = PATH_MAX;
@@ -297,14 +297,14 @@ main(int argc, char *argv[])
     }
 \&
     /* Print only \[aq]nbytes\[aq] of \[aq]buf\[aq], as it doesn't contain a terminating
-       null byte (\[aq]\[rs]0\[aq]). */
+       null byte (\[aq]\[rs]0\[aq]).  */
     printf("\[aq]%s\[aq] points to \[aq]%.*s\[aq]\[rs]n", argv[1], (int) nbytes, buf);
 \&
     /* If the return value was equal to the buffer size, then
        the link target was larger than expected (perhaps because the
        target was changed between the call to lstat() and the call to
-       readlink()). Warn the user that the returned target may have
-       been truncated. */
+       readlink()).  Warn the user that the returned target may have
+       been truncated.  */
 \&
     if (nbytes == bufsiz)
         printf("(Returned buffer may have been truncated)\[rs]n");

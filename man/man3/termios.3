@@ -382,24 +382,30 @@ or
 .BR TCGET *
 and
 .BR TCSET *
-ioctls; see
+ioctls;
+see
 .BR ioctl_tty (2))
 .TP
 .B CMSPAR
 (not in POSIX)
-Use "stick" (mark/space) parity (supported on certain serial
-devices): if
+Use "stick" (mark/space) parity
+(supported on certain serial devices):
+if
 .B PARODD
-is set, the parity bit is always 1; if
+is set,
+the parity bit is always 1;
+if
 .B PARODD
-is not set, then the parity bit is always 0.
+is not set,
+then the parity bit is always 0.
 [requires
 .B _BSD_SOURCE
 or
 .BR _SVID_SOURCE ]
 .TP
 .B CRTSCTS
-(not in POSIX) Enable RTS/CTS (hardware) flow control.
+(not in POSIX)
+Enable RTS/CTS (hardware) flow control.
 [requires
 .B _BSD_SOURCE
 or
@@ -416,13 +422,17 @@ generate the corresponding signal.
 Enable canonical mode (described below).
 .TP
 .B XCASE
-(not in POSIX; not supported under Linux)
+(not in POSIX;
+not supported under Linux)
 If
 .B ICANON
-is also set, terminal is uppercase only.
-Input is converted to lowercase, except for characters preceded by \[rs].
-On output, uppercase characters are preceded by \[rs] and lowercase
-characters are converted to uppercase.
+is also set,
+terminal is uppercase only.
+Input is converted to lowercase,
+except for characters preceded by \[rs].
+On output,
+uppercase characters are preceded by \[rs]
+and lowercase characters are converted to uppercase.
 [requires
 .B _BSD_SOURCE
 or
@@ -500,11 +510,13 @@ or
 .BR _SVID_SOURCE ]
 .TP
 .B DEFECHO
-(not in POSIX) Echo only when a process is reading.
+(not in POSIX)
+Echo only when a process is reading.
 (Not implemented on Linux.)
 .TP
 .B FLUSHO
-(not in POSIX; not supported under Linux)
+(not in POSIX;
+not supported under Linux)
 Output is being flushed.
 This flag is toggled by typing
 the DISCARD character.
@@ -525,9 +537,10 @@ signal to the process group of a background process
 which tries to write to its controlling terminal.
 .TP
 .B PENDIN
-(not in POSIX; not supported under Linux)
-All characters in the input queue are reprinted when
-the next character is read.
+(not in POSIX;
+not supported under Linux)
+All characters in the input queue are reprinted
+when the next character is read.
 .RB ( bash (1)
 handles typeahead this way.)
 [requires
@@ -551,14 +564,18 @@ array defines the terminal special characters.
 The symbolic indices (initial values) and meaning are:
 .TP
 .B VDISCARD
-(not in POSIX; not supported under Linux; 017, SI, Ctrl-O)
+(not in POSIX;
+not supported under Linux;
+017, SI, Ctrl-O)
 Toggle: start/stop discarding pending output.
 Recognized when
 .B IEXTEN
 is set, and then not passed as input.
 .TP
 .B VDSUSP
-(not in POSIX; not supported under Linux; 031, EM, Ctrl-Y)
+(not in POSIX;
+not supported under Linux;
+031, EM, Ctrl-Y)
 Delayed suspend character (DSUSP):
 send
 .B SIGTSTP
@@ -567,20 +584,26 @@ Recognized when
 .B IEXTEN
 and
 .B ISIG
-are set, and the system supports
-job control, and then not passed as input.
+are set,
+and the system supports job control,
+and then not passed as input.
 .TP
 .B VEOF
 (004, EOT, Ctrl-D)
 End-of-file character (EOF).
-More precisely: this character causes the pending tty buffer to be sent
-to the waiting user program without waiting for end-of-line.
-If it is the first character of the line, the
+More precisely:
+this character causes the pending tty buffer to be sent
+to the waiting user program
+without waiting for end-of-line.
+If it is the first character of the line,
+the
 .BR read (2)
-in the user program returns 0, which signifies end-of-file.
+in the user program returns 0,
+which signifies end-of-file.
 Recognized when
 .B ICANON
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VEOL
 (0, NUL)
@@ -590,7 +613,8 @@ Recognized when
 is set.
 .TP
 .B VEOL2
-(not in POSIX; 0, NUL)
+(not in POSIX;
+0, NUL)
 Yet another end-of-line character (EOL2).
 Recognized when
 .B ICANON
@@ -603,7 +627,8 @@ This erases the previous not-yet-erased character,
 but does not erase past EOF or beginning-of-line.
 Recognized when
 .B ICANON
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VINTR
 (003, ETX, Ctrl-C, or also 0177, DEL, rubout)
@@ -613,7 +638,8 @@ Send a
 signal.
 Recognized when
 .B ISIG
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VKILL
 (025, NAK, Ctrl-U, or Ctrl-X, or also @)
@@ -621,16 +647,19 @@ Kill character (KILL).
 This erases the input since the last EOF or beginning-of-line.
 Recognized when
 .B ICANON
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VLNEXT
-(not in POSIX; 026, SYN, Ctrl-V)
+(not in POSIX;
+026, SYN, Ctrl-V)
 Literal next (LNEXT).
-Quotes the next input character, depriving it of
-a possible special meaning.
+Quotes the next input character,
+depriving it of a possible special meaning.
 Recognized when
 .B IEXTEN
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VMIN
 Minimum number of characters for noncanonical read (MIN).
@@ -643,16 +672,19 @@ Send
 signal.
 Recognized when
 .B ISIG
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VREPRINT
-(not in POSIX; 022, DC2, Ctrl-R)
+(not in POSIX;
+022, DC2, Ctrl-R)
 Reprint unread characters (REPRINT).
 Recognized when
 .B ICANON
 and
 .B IEXTEN
-are set, and then not passed as input.
+are set,
+and then not passed as input.
 .TP
 .B VSTART
 (021, DC1, Ctrl-Q)
@@ -660,17 +692,22 @@ Start character (START).
 Restarts output stopped by the Stop character.
 Recognized when
 .B IXON
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VSTATUS
-(not in POSIX; not supported under Linux;
-status request: 024, DC4, Ctrl-T).
+(not in POSIX;
+not supported under Linux;
+status request:
+024, DC4, Ctrl-T).
 Status character (STATUS).
 Display status information at terminal,
 including state of foreground process and amount of CPU time it has consumed.
 Also sends a
 .B SIGINFO
-signal (not supported on Linux) to the foreground process group.
+signal
+(not supported on Linux)
+to the foreground process group.
 .TP
 .B VSTOP
 (023, DC3, Ctrl-S)
@@ -678,7 +715,8 @@ Stop character (STOP).
 Stop output until Start character typed.
 Recognized when
 .B IXON
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VSUSP
 (032, SUB, Ctrl-Z)
@@ -688,10 +726,13 @@ Send
 signal.
 Recognized when
 .B ISIG
-is set, and then not passed as input.
+is set,
+and then not passed as input.
 .TP
 .B VSWTCH
-(not in POSIX; not supported under Linux; 0, NUL)
+(not in POSIX;
+not supported under Linux;
+0, NUL)
 Switch character (SWTCH).
 Used in System V to switch shells in
 .IR "shell layers" ,
@@ -701,29 +742,33 @@ a predecessor to shell job control.
 Timeout in deciseconds for noncanonical read (TIME).
 .TP
 .B VWERASE
-(not in POSIX; 027, ETB, Ctrl-W)
+(not in POSIX;
+027, ETB, Ctrl-W)
 Word erase (WERASE).
 Recognized when
 .B ICANON
 and
 .B IEXTEN
-are set, and then not passed as input.
+are set,
+and then not passed as input.
 .P
-An individual terminal special character can be disabled by setting
-the value of the corresponding
+An individual terminal special character can be disabled
+by setting the value of the corresponding
 .I c_cc
 element to
 .BR _POSIX_VDISABLE .
 .P
-The above symbolic subscript values are all different, except that
+The above symbolic subscript values are all different,
+except that
 .BR VTIME ,
 .B VMIN
 may have the same value as
 .BR VEOL ,
 .BR VEOF ,
 respectively.
-In noncanonical mode the special character meaning is replaced
-by the timeout meaning.
+In noncanonical mode,
+the special character meaning
+is replaced by the timeout meaning.
 For an explanation of
 .B VMIN
 and
@@ -733,19 +778,20 @@ noncanonical mode below.
 .SS Retrieving and changing terminal settings
 .BR tcgetattr ()
 gets the parameters associated with the object referred by
-.I fd
-and
-stores them in the
+.IR fd ,
+and stores them in the
 .I termios
 structure referenced by
 .IR termios_p .
 This function may be invoked from a background process;
-however, the terminal attributes may be subsequently changed by a
-foreground process.
+however,
+the terminal attributes may be subsequently changed
+by a foreground process.
 .P
 .BR tcsetattr ()
-sets the parameters associated with the terminal (unless support is
-required from the underlying hardware that is not available) from the
+sets the parameters associated with the terminal
+(unless support is required from the underlying hardware that is not available)
+from the
 .I termios
 structure referred to by
 .IR termios_p .
@@ -765,17 +811,19 @@ parameters that affect output.
 .B TCSAFLUSH
 the change occurs after all output written to the object referred by
 .I fd
-has been transmitted, and all input that has been received but not read
+has been transmitted,
+and all input that has been received but not read
 will be discarded before the change is made.
 .SS Canonical and noncanonical mode
 The setting of the
 .B ICANON
 canon flag in
 .I c_lflag
-determines whether the terminal is operating in canonical mode
+determines whether the terminal is operating
+in canonical mode
 .RB ( ICANON
-set) or
-noncanonical mode
+set)
+or noncanonical mode
 .RB ( ICANON
 unset).
 By default,
@@ -785,19 +833,23 @@ is set.
 In canonical mode:
 .IP \[bu] 3
 Input is made available line by line.
-An input line is available when one of the line delimiters
-is typed (NL, EOL, EOL2; or EOF at the start of line).
-Except in the case of EOF, the line delimiter is included
+An input line is available when one of the line delimiters is typed
+(NL, EOL, EOL2;
+or EOF at the start of line).
+Except in the case of EOF,
+the line delimiter is included
 in the buffer returned by
 .BR read (2).
 .IP \[bu]
-Line editing is enabled (ERASE, KILL;
+Line editing is enabled
+(ERASE, KILL;
 and if the
 .B IEXTEN
 flag is set: WERASE, REPRINT, LNEXT).
 A
 .BR read (2)
-returns at most one line of input; if the
+returns at most one line of input;
+if the
 .BR read (2)
 requested fewer bytes than are available in the current line of input,
 then only as many bytes as requested are read,
@@ -807,35 +859,43 @@ and the remaining characters will be available for a future
 The maximum line length is 4096 chars
 (including the terminating newline character);
 lines longer than 4096 chars are truncated.
-After 4095 characters, input processing (e.g.,
+After 4095 characters,
+input processing
+(e.g.,
 .B ISIG
 and
 .B ECHO*
-processing) continues, but any input data after 4095 characters up to
-(but not including) any terminating newline is discarded.
-This ensures that the terminal can always receive
-more input until at least one line can be read.
+processing)
+continues,
+but any input data after 4095 characters
+up to (but not including) any terminating newline
+is discarded.
+This ensures that
+the terminal can always receive more input
+until at least one line can be read.
 .P
-In noncanonical mode input is available immediately (without
-the user having to type a line-delimiter character),
+In noncanonical mode input is available immediately
+(without the user having to type a line-delimiter character),
 no input processing is performed,
 and line editing is disabled.
-The read buffer will only accept 4095 chars; this provides the
-necessary space for a newline char if the input mode is switched
-to canonical.
+The read buffer will only accept 4095 chars;
+this provides the necessary space for a newline char
+if the input mode is switched to canonical.
 The settings of MIN
 .RI ( c_cc[VMIN] )
 and TIME
 .RI ( c_cc[VTIME] )
 determine the circumstances in which a
 .BR read (2)
-completes; there are four distinct cases:
+completes;
+there are four distinct cases:
 .TP
 MIN == 0, TIME == 0 (polling read)
 If data is available,
 .BR read (2)
-returns immediately, with the lesser of the number of bytes
-available, or the number of bytes requested.
+returns immediately,
+with the lesser of the number of bytes available,
+or the number of bytes requested.
 If no data is available,
 .BR read (2)
 returns 0.
@@ -882,8 +942,8 @@ and on some other implementations
 does not return in this case.)
 .RE
 .IP
-Because the timer is started only after the initial byte
-becomes available, at least one byte will be read.
+Because the timer is started only after the initial byte becomes available,
+at least one byte will be read.
 If data is already available at the time of the call to
 .BR read (2),
 the call behaves as though the data was received immediately after the call.
@@ -899,7 +959,8 @@ is set, a
 .BR read (2)
 in noncanonical mode may return immediately,
 regardless of the setting of MIN or TIME.
-Furthermore, if no data is available,
+Furthermore,
+if no data is available,
 POSIX permits a
 .BR read (2)
 in noncanonical mode to return either 0, or \-1 with
@@ -911,8 +972,8 @@ set to
 sets the terminal to something like the
 "raw" mode of the old Version 7 terminal driver:
 input is available character by character,
-echoing is disabled, and all special processing of
-terminal input and output characters is disabled.
+echoing is disabled,
+and all special processing of terminal input and output characters is disabled.
 The terminal attributes are set as follows:
 .P
 .in +4n
@@ -928,14 +989,14 @@ termios_p\->c_cflag |= CS8;
 .\"
 .SS Line control
 .BR tcsendbreak ()
-transmits a continuous stream of zero-valued bits for a specific
-duration, if the terminal is using asynchronous serial data
-transmission.
+transmits a continuous stream of zero-valued bits for a specific duration,
+if the terminal is using asynchronous serial data transmission.
 If
 .I duration
 is zero,
 it transmits zero-valued bits
-for at least 0.25 seconds, and not more than 0.5 seconds.
+for at least 0.25 seconds,
+and not more than 0.5 seconds.
 If
 .I duration
 is not zero,
@@ -954,8 +1015,9 @@ has been transmitted.
 .BR tcflush ()
 discards data written to the object referred to by
 .I fd
-but not transmitted, or data received but not read, depending on the
-value of
+but not transmitted,
+or data received but not read,
+depending on the value of
 .IR queue_selector :
 .TP
 .B TCIFLUSH
@@ -965,11 +1027,12 @@ flushes data received but not read.
 flushes data written but not transmitted.
 .TP
 .B TCIOFLUSH
-flushes both data received but not read, and data written but not
-transmitted.
+flushes both data received but not read,
+and data written but not transmitted.
 .P
 .BR tcflow ()
-suspends transmission or reception of data on the object referred to by
+suspends transmission or reception of data
+on the object referred to by
 .IR fd ,
 depending on the value of
 .IR action :
@@ -981,18 +1044,22 @@ suspends output.
 restarts suspended output.
 .TP
 .B TCIOFF
-transmits a STOP character, which stops the terminal device from
+transmits a STOP character,
+which stops the terminal device from
 transmitting data to the system.
 .TP
 .B TCION
-transmits a START character, which starts the terminal device
+transmits a START character,
+which starts the terminal device
 transmitting data to the system.
 .P
-The default on open of a terminal file is that neither its input nor its
-output is suspended.
+The default on open of a terminal file is that
+neither its input nor its output is suspended.
 .SS Line speed
-The baud rate functions are provided for getting and setting the values
-of the input and output baud rates in the
+The baud rate functions are provided
+for getting and setting
+the values of the input and output baud rates
+in the
 .I termios
 structure.
 The new values do not take effect
@@ -1109,7 +1176,8 @@ These constants are additionally supported on non-SPARC architectures:
 .B B4000000
 .RE
 .P
-Due to differences between architectures, portable applications should check
+Due to differences between architectures,
+portable applications should check
 if a particular
 .BI B nnn
 constant is defined prior to using it.
@@ -1119,11 +1187,14 @@ The zero baud rate,
 is used to terminate the connection.
 If
 .B B0
-is specified, the modem control lines shall no longer be asserted.
-Normally, this will disconnect the line.
+is specified,
+the modem control lines shall no longer be asserted.
+Normally,
+this will disconnect the line.
 .B CBAUDEX
 is a mask
-for the speeds beyond those defined in POSIX.1 (57600 and above).
+for the speeds beyond those defined in POSIX.1
+(57600 and above).
 Thus,
 .BR B57600 " & " CBAUDEX
 is nonzero.
@@ -1132,7 +1203,8 @@ Setting the baud rate to a value other than those defined by
 .BI B nnn
 constants is possible via the
 .B TCSETS2
-ioctl; see
+ioctl;
+see
 .BR ioctl_tty (2).
 .P
 .BR cfgetispeed ()
@@ -1188,12 +1260,14 @@ returns success if
 .I any
 of the requested changes could be
 successfully carried out.
-Therefore, when making multiple changes
+Therefore,
+when making multiple changes,
 it may be necessary to follow this call with a further call to
 .BR tcgetattr ()
 to check that all changes have been performed successfully.
 .SH ATTRIBUTES
-For an explanation of the terms used in this section, see
+For an explanation of the terms used in this section,
+see
 .BR attributes (7).
 .TS
 allbox;

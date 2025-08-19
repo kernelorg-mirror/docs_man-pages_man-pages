@@ -268,7 +268,8 @@ POSIX.1 specifies one exception: if
 .B SIGCHLD
 is being ignored,
 then an implementation may leave the disposition unchanged or
-reset it to the default; Linux does the former.
+reset it to the default;
+Linux does the former.
 .IP \[bu]
 Any outstanding asynchronous I/O operations are canceled
 .RB ( aio_read (3),
@@ -304,7 +305,7 @@ closed across an
 .BR execve ().
 .\" On Linux it appears that these file descriptors are
 .\" always open after an execve(), and it looks like
-.\" Solaris 8 and FreeBSD 6.1 are the same. -- mtk, 30 Apr 2007
+.\" Solaris 8 and FreeBSD 6.1 are the same.  -- mtk, 30 Apr 2007
 .SS Interpreter scripts
 An interpreter script is a text file that has execute
 permission enabled and whose first line is of the form:
@@ -350,7 +351,8 @@ call.
 For portable use,
 .I optional-arg
 should either be absent, or be specified as a single word (i.e., it
-should not contain white space); see VERSIONS below.
+should not contain white space);
+see VERSIONS below.
 .P
 Since Linux 2.6.28,
 .\" commit bf2a9a39639b8b51377905397a5005f444e9a892

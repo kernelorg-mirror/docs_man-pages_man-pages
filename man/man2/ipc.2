@@ -37,9 +37,12 @@ User-space programs should call the appropriate functions by their usual names.
 Only standard library implementors and kernel hackers need to know about
 .BR ipc ().
 .SH VERSIONS
-On some architectures\[em]for example x86-64 and ARM\[em]there is no
+On some architectures
+\[em]for example x86-64 and ARM\[em]
+there is no
 .BR ipc ()
-system call; instead,
+system call;
+instead,
 .BR msgctl (2),
 .BR semctl (2),
 .BR shmctl (2),

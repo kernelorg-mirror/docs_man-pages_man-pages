@@ -161,7 +161,8 @@ Ensure the caller thread, upon return from system call, that all its
 running thread siblings have any currently running rseq critical sections
 restarted if
 .I flags
-parameter is 0; if
+parameter is 0;
+if
 .I flags
 parameter is
 .BR MEMBARRIER_CMD_FLAG_CPU ,
@@ -345,7 +346,7 @@ main(void)
 \&
     /*
      * Real applications would call fast_path() and slow_path()
-     * from different threads. Call those from main() to keep
+     * from different threads.  Call those from main() to keep
      * this example short.
      */
 \&
@@ -392,7 +393,7 @@ init_membarrier(void)
 {
     int ret;
 \&
-    /* Check that membarrier() is supported. */
+    /* Check that membarrier() is supported.  */
 \&
     ret = membarrier(MEMBARRIER_CMD_QUERY, 0, 0);
     if (ret < 0) {
@@ -435,7 +436,7 @@ main(int argc, char *argv[])
 \&
     /*
      * Real applications would call fast_path() and slow_path()
-     * from different threads. Call those from main() to keep
+     * from different threads.  Call those from main() to keep
      * this example short.
      */
 \&

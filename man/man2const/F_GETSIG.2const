@@ -383,8 +383,9 @@ and
 are Linux-specific.
 POSIX has asynchronous I/O and the
 .I aio_sigevent
-structure to achieve similar things; these are also available
-in Linux as part of the GNU C Library (glibc).
+structure to achieve similar things;
+these are also available in Linux
+as part of the GNU C Library (glibc).
 .SH RETURN VALUE
 See
 .BR fcntl (2).
@@ -483,7 +484,7 @@ The Linux-specific
 operation avoids this problem.
 .\" mtk, Dec 04: some limited testing on alpha and ia64 seems to
 .\" indicate that ANY negative PGID value will cause F_GETOWN
-.\" to misinterpret the return as an error. Some other architectures
+.\" to misinterpret the return as an error.  Some other architectures
 .\" seem to have the same range check as i386.
 Since glibc 2.11, glibc makes the kernel
 .B F_GETOWN

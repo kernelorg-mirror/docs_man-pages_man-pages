@@ -71,7 +71,8 @@ For example, changes to
 or
 .I st_mtime
 (respectively, time of last access and
-time of last modification; see
+time of last modification;
+see
 .BR inode (7))
 do not require flushing because they are not necessary for
 a subsequent data read to be handled correctly.
@@ -97,7 +98,8 @@ is set to indicate the error.
 is not a valid open file descriptor.
 .TP
 .B EINTR
-The function was interrupted by a signal; see
+The function was interrupted by a signal;
+see
 .BR signal (7).
 .TP
 .B EIO

@@ -18,7 +18,7 @@ Standard C library
 .BI "int waitid(idtype_t " idtype ", id_t " id \
 ", siginfo_t *" infop ", int " options );
                 /* This is the glibc and POSIX interface; see
-                   VERSIONS for information on the raw system call. */
+                   VERSIONS for information on the raw system call.  */
 .fi
 .P
 .RS -4
@@ -37,15 +37,22 @@ Feature Test Macro Requirements for glibc (see
             || /* glibc <= 2.19: */ _BSD_SOURCE
 .fi
 .SH DESCRIPTION
-All of these system calls are used to wait for state changes
-in a child of the calling process, and obtain information
+All of these system calls are used
+to wait for state changes
+in a child of the calling process,
+and obtain information
 about the child whose state has changed.
-A state change is considered to be: the child terminated;
-the child was stopped by a signal; or the child was resumed by a signal.
-In the case of a terminated child, performing a wait allows
-the system to release the resources associated with the child;
-if a wait is not performed, then the terminated child remains in
-a "zombie" state (see NOTES below).
+A state change is considered to be:
+the child terminated;
+the child was stopped by a signal;
+or the child was resumed by a signal.
+In the case of a terminated child,
+performing a wait allows the system to
+release the resources associated with the child;
+if a wait is not performed,
+then the terminated child remains
+in a "zombie" state
+(see NOTES below).
 .P
 If a child has already changed state, then these calls return immediately.
 Otherwise, they block until either a child changes state or
@@ -187,7 +194,7 @@ returned true.
 This macro is not specified in POSIX.1-2001 and is not available on
 some UNIX implementations (e.g., AIX, SunOS).
 Therefore, enclose its use inside
-.IR "#ifdef WCOREDUMP ... #endif" .
+.IR \%#ifdef\~WCOREDUMP .
 .TP
 .BI WIFSTOPPED( wstatus )
 returns true if the child process was stopped by delivery of a signal;
@@ -268,7 +275,8 @@ As for
 .BR waitpid ().
 .TP
 .B WNOWAIT
-Leave the child in a waitable state; a later wait call
+Leave the child in a waitable state;
+a later wait call
 can be used to again retrieve the child status information.
 .P
 Upon successful return,
@@ -311,7 +319,8 @@ Set to one of:
 .B CLD_STOPPED
 (child stopped by signal);
 .B CLD_TRAPPED
-(traced child has trapped); or
+(traced child has trapped);
+or
 .B CLD_CONTINUED
 (child continued by
 .BR SIGCONT ).
@@ -424,7 +433,8 @@ section about threads.)
 .B WNOHANG
 was not set and an unblocked signal or a
 .B SIGCHLD
-was caught; see
+was caught;
+see
 .BR signal (7).
 .TP
 .B EINVAL
@@ -532,14 +542,17 @@ terminates and then returns the process ID and status of that child.
 .SS Linux notes
 In the Linux kernel, a kernel-scheduled thread is not a distinct
 construct from a process.
-Instead, a thread is simply a process
+Instead,
+a thread is simply a process
 that is created using the Linux-unique
 .BR clone (2)
-system call; other routines such as the portable
+system call;
+other routines such as the portable
 .BR pthread_create (3)
 call are implemented using
 .BR clone (2).
-Before Linux 2.4, a thread was just a special case of a process,
+Before Linux 2.4,
+a thread was just a special case of a process,
 and as a consequence one thread could not wait on the children
 of another thread, even when the latter belongs to the same thread group.
 However, POSIX prescribes such functionality, and since Linux 2.4

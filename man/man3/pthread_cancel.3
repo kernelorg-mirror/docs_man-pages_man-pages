@@ -160,7 +160,7 @@ thread_func(void *ignored_argument)
     int s;
 \&
     /* Disable cancelation for a while, so that we don\[aq]t
-       immediately react to a cancelation request. */
+       immediately react to a cancelation request.  */
 \&
     s = pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);
     if (s != 0)
@@ -174,11 +174,11 @@ thread_func(void *ignored_argument)
     if (s != 0)
         errc(EXIT_FAILURE, s, "pthread_setcancelstate");
 \&
-    /* sleep() is a cancelation point. */
+    /* sleep() is a cancelation point.  */
 \&
     sleep(1000);        /* Should get canceled while we sleep */
 \&
-    /* Should never get here. */
+    /* Should never get here.  */
 \&
     printf("%s(): not canceled!\[rs]n", __func__);
     return NULL;
@@ -191,7 +191,7 @@ main(void)
     void *res;
     int s;
 \&
-    /* Start a thread and then send it a cancelation request. */
+    /* Start a thread and then send it a cancelation request.  */
 \&
     s = pthread_create(&thr, NULL, &thread_func, NULL);
     if (s != 0)
@@ -204,7 +204,7 @@ main(void)
     if (s != 0)
         errc(EXIT_FAILURE, s, "pthread_cancel");
 \&
-    /* Join with thread to see what its exit status was. */
+    /* Join with thread to see what its exit status was.  */
 \&
     s = pthread_join(thr, &res);
     if (s != 0)

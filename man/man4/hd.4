@@ -33,13 +33,15 @@ is a number denoting the partition on that physical drive.
 The first form,
 .BI hd X\c
 , is used to address the whole drive.
-Partition numbers are assigned in the order the partitions
-are discovered, and only nonempty, nonextended partitions
-get a number.
-However, partition numbers 1\[en]4 are given to the
-four partitions described in the MBR (the "primary" partitions),
+Partition numbers are assigned in the order the partitions are discovered,
+and only nonempty, nonextended partitions get a number.
+However,
+partition numbers 1\[en]4 are given to
+the four partitions described in the MBR
+(the "primary" partitions),
 regardless of whether they are unused or extended.
-Thus, the first logical partition will be
+Thus,
+the first logical partition will be
 .BI hd X 5\c
 \&.
 Both DOS-type partitioning and BSD-disklabel partitioning are supported.
@@ -47,7 +49,8 @@ You can have at most 63 partitions on an IDE disk.
 .P
 For example,
 .I /dev/hda
-refers to all of the first IDE drive in the system; and
+refers to all of the first IDE drive in the system;
+and
 .I /dev/hdb3
 refers to the third DOS "primary" partition on the second one.
 .P

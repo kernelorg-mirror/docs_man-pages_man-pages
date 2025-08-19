@@ -170,7 +170,9 @@ The system-wide limit on the total number of open files has been reached.
 .TP
 .B ENFILE
 The user hard limit on memory that can be allocated for pipes
-has been reached and the caller is not privileged; see
+has been reached
+and the caller is not privileged;
+see
 .BR pipe (7).
 .TP
 .B ENOPKG
@@ -184,8 +186,10 @@ is not compiled into the kernel.
 .SH VERSIONS
 .\" See http://math-atlas.sourceforge.net/devel/assembly/64.psabi.1.33.ps.Z
 .\" for example, section 3.2.1 "Registers and the Stack Frame".
-The System V ABI on some architectures allows the use of more than one register
-for returning multiple values; several architectures
+The System V ABI on some architectures
+allows the use of more than one register
+for returning multiple values;
+several architectures
 (namely, Alpha, IA-64, MIPS, SuperH, and SPARC/SPARC64)
 (ab)use this feature in order to implement the
 .BR pipe ()

@@ -86,8 +86,9 @@ for that region.
 .P
 By default,
 .BR mbind ()
-has an effect only for new allocations; if the pages inside
-the range have been already touched before setting the policy,
+has an effect only for new allocations;
+if the pages inside the range
+have been already touched before setting the policy,
 then the policy has no effect.
 This default behavior may be overridden by the
 .B MPOL_MF_MOVE
@@ -276,14 +277,17 @@ the node of the CPU that triggered the allocation.
 .TP
 .BR MPOL_PREFERRED_MANY " (since Linux 5.15)"
 .\" commit b27abaccf8e8b012f126da0c2a1ab32723ec8b9f
-Specifies a set of nodes for allocation; see
-.BR set_mempolicy (2)
+Specifies a set of nodes for allocation;
+see
+.BR set_mempolicy (2).
 .TP
 .BR MPOL_LOCAL " (since Linux 3.8)"
 .\" commit 479e2802d09f1e18a97262c4c6f8f17ae5884bd8
 .\" commit f2a07f40dbc603c15f8b06e6ec7f768af67b424f
-This mode specifies "local allocation"; the memory is allocated on
-the node of the CPU that triggered the allocation (the "local node").
+This mode specifies "local allocation";
+the memory is allocated on
+the node of the CPU that triggered the allocation
+(the "local node").
 The
 .I nodemask
 and

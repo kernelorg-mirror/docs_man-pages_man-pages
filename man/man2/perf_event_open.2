@@ -41,7 +41,8 @@ A call to
 creates a file descriptor that allows measuring performance
 information.
 Each file descriptor corresponds to one
-event that is measured; these can be grouped together
+event that is measured;
+these can be grouped together
 to measure multiple events simultaneously.
 .P
 Events can be enabled and disabled in two ways: via
@@ -103,9 +104,11 @@ When
 is greater than zero, permission to perform this system call
 is governed by
 .B CAP_PERFMON
-(since Linux 5.9) and a ptrace access mode
+(since Linux 5.9)
+and a ptrace access mode
 .B PTRACE_MODE_READ_REALCREDS
-check on older Linux versions; see
+check on older Linux versions;
+see
 .BR ptrace (2).
 .P
 The
@@ -383,7 +386,8 @@ the struct size at the time of compilation.
 .IP
 The related define
 .B PERF_ATTR_SIZE_VER0
-is set to 64; this was the size of the first published struct.
+is set to 64;
+this was the size of the first published struct.
 .B PERF_ATTR_SIZE_VER1
 is 72, corresponding to the addition of breakpoints in Linux 2.6.33.
 .\" commit cb5d76999029ae7a517cb07dfa732c1b5a934fc2
@@ -459,12 +463,14 @@ issues, most notably hardware interrupt counts.
 Cache accesses.
 Usually this indicates Last Level Cache accesses but this may
 vary depending on your CPU.
-This may include prefetches and coherency messages; again this
-depends on the design of your CPU.
+This may include prefetches and coherency messages;
+again,
+this depends on the design of your CPU.
 .TP
 .B PERF_COUNT_HW_CACHE_MISSES
 Cache misses.
-Usually this indicates Last Level Cache misses; this is intended to be
+Usually this indicates Last Level Cache misses;
+this is intended to be
 used in conjunction with the
 .B PERF_COUNT_HW_CACHE_REFERENCES
 event to calculate cache miss rates.
@@ -491,7 +497,8 @@ Stalled cycles during retirement.
 .TP
 .BR PERF_COUNT_HW_REF_CPU_CYCLES  " (since Linux 3.3)"
 .\" commit c37e17497e01fc0f5d2d6feb5723b210b3ab8890
-Total cycles; not affected by CPU frequency scaling.
+Total cycles;
+not affected by CPU frequency scaling.
 .RE
 .IP
 If
@@ -534,8 +541,9 @@ These required disk I/O to handle.
 .BR PERF_COUNT_SW_ALIGNMENT_FAULTS " (since Linux 2.6.33)"
 .\" commit f7d7986060b2890fc26db6ab5203efbd33aa2497
 This counts the number of alignment faults.
-These happen when unaligned memory accesses happen; the kernel
-can handle these but it reduces performance.
+These happen when unaligned memory accesses happen;
+the kernel can handle these
+but it reduces performance.
 This happens only on some architectures (never on x86).
 .TP
 .BR PERF_COUNT_SW_EMULATION_FAULTS " (since Linux 2.6.33)"
@@ -663,9 +671,11 @@ then a custom "raw"
 .I config
 value is needed.
 Most CPUs support events that are not covered by the "generalized" events.
-These are implementation defined; see your CPU manual (for example
-the Intel Volume 3B documentation or the AMD BIOS and Kernel Developer
-Guide).
+These are implementation defined;
+see your CPU manual
+(for example,
+the Intel Volume 3B documentation,
+or the AMD BIOS and Kernel Developer Guide).
 The libpfm4 library can be used to translate from the name in the
 architectural manuals to the raw hex value
 .BR perf_event_open ()
@@ -1226,8 +1236,9 @@ VM instances (i.e., have executed a
 .B KVM_RUN
 .BR ioctl (2)),
 only measure events happening inside a guest instance.
-This is only meaningful outside the guests; this setting does
-not change counts gathered inside of a guest.
+This is only meaningful outside the guests;
+this setting does not change
+counts gathered inside of a guest.
 Currently, this functionality is x86 only.
 .TP
 .IR exclude_guest " (since Linux 3.2)"
@@ -1237,8 +1248,9 @@ VM instances (i.e., have executed a
 .B KVM_RUN
 .BR ioctl (2)),
 do not measure events happening inside guest instances.
-This is only meaningful outside the guests; this setting does
-not change counts gathered inside of a guest.
+This is only meaningful outside the guests;
+this setting does not change
+counts gathered inside of a guest.
 Currently, this functionality is x86 only.
 .TP
 .IR exclude_callchain_kernel " (since Linux 3.7)"
@@ -1432,8 +1444,11 @@ is not allowed.
 .IR bp_addr " (since Linux 2.6.33)"
 .\" commit 24f1e32c60c45c89a997c73395b69c8af6f0a84e
 This is the address of the breakpoint.
-For execution breakpoints, this is the memory address of the instruction
-of interest; for read and write breakpoints, it is the memory address
+For execution breakpoints,
+this is the memory address
+of the instruction of interest;
+for read and write breakpoints,
+it is the memory address
 of the memory location of interest.
 .TP
 .IR config1 " (since Linux 2.6.39)"
@@ -1679,7 +1694,8 @@ values can be used to scale an estimated value for the count.
 An unsigned 64-bit value containing the counter result.
 .TP
 .I id
-A globally unique value for this particular event; only present if
+A globally unique value for this particular event;
+only present if
 .B PERF_FORMAT_ID
 was specified in
 .IR read_format .
@@ -1876,7 +1892,7 @@ This can be used to sign extend the result like:
 .in +4n
 .EX
 pmc <<= 64 \- pmc_width;
-pmc >>= 64 \- pmc_width; // signed shift right
+pmc >>= 64 \- pmc_width;  // signed shift right
 count += pmc;
 .EE
 .in
@@ -2424,9 +2440,13 @@ if available and the jiffies value if not.
 .I addr
 If
 .B PERF_SAMPLE_ADDR
-is enabled, then a 64-bit address is included.
-This is usually the address of a tracepoint,
-breakpoint, or software event; otherwise the value is 0.
+is enabled,
+then a 64-bit address is included.
+This is usually the address of
+a tracepoint,
+breakpoint,
+or software event;
+otherwise the value is 0.
 .TP
 .I id
 If
@@ -2542,8 +2562,9 @@ Support for
 .IR predicted ,
 and
 .I cycles
-is optional; if not supported, those
-values will be 0.
+is optional;
+if not supported,
+those values will be 0.
 .P
 The type of branches recorded is specified by the
 .I branch_sample_type
@@ -3298,8 +3319,10 @@ event file descriptor with
 .BR select (2),
 or
 .BR epoll (7).
-Alternatively, the overflow events can be captured via sa signal handler,
-by enabling I/O signaling on the file descriptor; see the discussion of the
+Alternatively,
+the overflow events can be captured via sa signal handler,
+by enabling I/O signaling on the file descriptor;
+see the discussion of the
 .B F_SETOWN
 and
 .B F_SETSIG
@@ -3356,8 +3379,9 @@ is not necessarily faster than other methods for reading event values.
 .P
 Support for this can be detected with the
 .I cap_usr_rdpmc
-field in the mmap page; documentation on how
-to calculate event values can be found in that section.
+field in the mmap page;
+documentation on how to calculate event values
+can be found in that section.
 .P
 Originally, when rdpmc support was enabled, any process (not just ones
 with an active perf event) could use the rdpmc instruction to access
@@ -3387,12 +3411,16 @@ enabled, even if the event specified is not the group leader
 This disables the individual counter or event group specified by the
 file descriptor argument.
 .IP
-Enabling or disabling the leader of a group enables or disables the
-entire group; that is, while the group leader is disabled, none of the
-counters in the group will count.
+Enabling or disabling the leader of a group
+enables or disables the entire group;
+that is,
+while the group leader is disabled,
+none of the counters in the group will count.
 Enabling or disabling a member of a group other than the leader
-affects only that counter; disabling a non-leader
-stops that counter from counting but doesn't affect any other counter.
+affects only that counter;
+disabling a non-leader
+stops that counter from counting
+but doesn't affect any other counter.
 .IP
 If the
 .B PERF_IOC_FLAG_GROUP
@@ -3408,17 +3436,18 @@ Subsequent calls of this ioctl add the argument value to the current
 count.
 An overflow notification with
 .B POLL_IN
-set will happen on each overflow until the
-count reaches 0; when that happens a notification with
+set will happen on each overflow
+until the count reaches 0;
+when that happens a notification with
 .B POLL_HUP
 set is sent and the event is disabled.
 Using an argument of 0 is considered undefined behavior.
 .TP
 .B PERF_EVENT_IOC_RESET
-Reset the event count specified by the
-file descriptor argument to zero.
-This resets only the counts; there is no way to reset the
-multiplexing
+Reset the event count specified by the file descriptor argument
+to zero.
+This resets only the counts;
+there is no way to reset the multiplexing
 .I time_enabled
 or
 .I time_running
@@ -3795,7 +3824,8 @@ set and the event is not a group leader;
 the event
 .I config
 values are out of range or set reserved bits;
-the generic event selected is not supported; or
+the generic event selected is not supported;
+or
 there is not enough room to add the selected event.
 .TP
 .B EMFILE

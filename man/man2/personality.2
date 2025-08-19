@@ -104,7 +104,8 @@ No effect.
 The available execution domains are:
 .TP
 .BR PER_BSD " (since Linux 1.2.0)"
-BSD. (No effects.)
+BSD.
+(No effects.)
 .TP
 .BR PER_HPUX " (since Linux 2.4)"
 Support for 32-bit HP/UX.
@@ -113,7 +114,8 @@ this value has no effect.
 .TP
 .BR PER_IRIX32 " (since Linux 2.2)"
 IRIX 5 32-bit.
-Never fully functional; support dropped in Linux 2.6.27.
+Never fully functional;
+support dropped in Linux 2.6.27.
 Implies
 .BR STICKY_TIMEOUTS .
 .TP
@@ -151,7 +153,7 @@ flag forced.
 Under 64-bit ARM, setting this personality is forbidden if
 .BR execve (2)ing
 a 32-bit process would also be forbidden
-(cf. the allow_mismatched_32bit_el0 kernel parameter and
+(cf.\& the allow_mismatched_32bit_el0 kernel parameter and
 .IR Documentation/arm64/asymmetric-32bit.rst ).
 .TP
 .BR PER_LINUX32_3GB " (since Linux 2.4)"

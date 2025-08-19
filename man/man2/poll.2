@@ -114,11 +114,13 @@ The call will block until either:
 .IP \[bu] 3
 a file descriptor becomes ready;
 .IP \[bu]
-the call is interrupted by a signal handler; or
+the call is interrupted by a signal handler;
+or
 .IP \[bu]
 the timeout expires.
 .P
-Being "ready" means that the requested operation will not block; thus,
+Being "ready" means that the requested operation will not block;
+thus,
 .BR poll ()ing
 regular files,
 block devices,
@@ -343,7 +345,8 @@ The array given as argument was not contained in the calling program's
 address space.
 .TP
 .B EINTR
-A signal occurred before any requested event; see
+A signal occurred before any requested event;
+see
 .BR signal (7).
 .TP
 .B EINVAL
@@ -472,7 +475,8 @@ displays the returned
 field in a human-readable form;
 .IP \[bu]
 if the file descriptor is readable, reads some data from it,
-and displays that data on standard output; and
+and displays that data on standard output;
+and
 .IP \[bu]
 if the file descriptor was not readable,
 but some other event occurred (presumably
@@ -515,7 +519,7 @@ About to poll()
 Ready: 1
   fd=3; events: POLLHUP
     closing fd 3
-All file descriptors closed; bye
+All file descriptors closed.  Bye.
 .EE
 .in
 .P
@@ -582,7 +586,7 @@ main(int argc, char *argv[])
     if (pfds == NULL)
         err(EXIT_FAILURE, "malloc");
 \&
-    /* Open each file on command line, and add it to \[aq]pfds\[aq] array. */
+    /* Open each file on command line, and add it to \[aq]pfds\[aq] array.  */
 \&
     for (nfds_t j = 0; j < nfds; j++) {
         pfds[j].fd = open(argv[j + 1], O_RDONLY);
@@ -595,7 +599,7 @@ main(int argc, char *argv[])
     }
 \&
     /* Keep calling poll() as long as at least one file descriptor is
-       open. */
+       open.  */
 \&
     while (num_open_fds > 0) {
         printf("About to poll()\[rs]n");
@@ -605,7 +609,7 @@ main(int argc, char *argv[])
 \&
         printf("Ready: %d\[rs]n", ready);
 \&
-        /* Deal with array returned by poll(). */
+        /* Deal with array returned by poll().  */
 \&
         for (nfds_t j = 0; j < nfds; j++) {
             if (pfds[j].revents != 0) {
@@ -630,7 +634,7 @@ main(int argc, char *argv[])
         }
     }
 \&
-    printf("All file descriptors closed; bye\[rs]n");
+    printf("All file descriptors closed.  Bye.\[rs]n");
     exit(EXIT_SUCCESS);
 }
 .EE

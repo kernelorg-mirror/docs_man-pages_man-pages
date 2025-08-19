@@ -94,9 +94,10 @@ Finally,
 .I ar_result
 corresponds to the
 .I res
-argument; you do not need to initialize this element,
-it will be automatically set when the request
-is resolved.
+argument;
+you do not need to initialize this element,
+it will be automatically set
+when the request is resolved.
 The
 .I addrinfo
 structure referenced by the last two elements is described in
@@ -457,7 +458,8 @@ getcmd(void)
 {
     static char buf[256];
 \&
-    fputs("> ", stdout); fflush(stdout);
+    fputs("> ", stdout);
+    fflush(stdout);
     if (fgets(buf, sizeof(buf), stdin) == NULL)
         return NULL;
 \&
@@ -467,7 +469,7 @@ getcmd(void)
     return buf;
 }
 \&
-/* Add requests for specified hostnames. */
+/* Add requests for specified hostnames.  */
 static void
 add_requests(void)
 {
@@ -488,7 +490,7 @@ add_requests(void)
         reqs[nreqs \- 1]\->ar_name = strdup(host);
     }
 \&
-    /* Queue nreqs_base..nreqs requests. */
+    /* Queue nreqs_base..nreqs requests.  */
 \&
     ret = getaddrinfo_a(GAI_NOWAIT, &reqs[nreqs_base],
                         nreqs \- nreqs_base, NULL);
@@ -499,7 +501,7 @@ add_requests(void)
     }
 }
 \&
-/* Wait until at least one of specified requests completes. */
+/* Wait until at least one of specified requests completes.  */
 static void
 wait_requests(void)
 {
@@ -512,7 +514,7 @@ wait_requests(void)
     if (wait_reqs == NULL)
         err(EXIT_FAILURE, "calloc");
 \&
-                /* NULL elements are ignored by gai_suspend(). */
+                /* NULL elements are ignored by gai_suspend().  */
 \&
     while ((id = strtok(NULL, " ")) != NULL) {
         n = atoi(id);
@@ -544,7 +546,7 @@ wait_requests(void)
     }
 }
 \&
-/* Cancel specified requests. */
+/* Cancel specified requests.  */
 static void
 cancel_requests(void)
 {
@@ -566,7 +568,7 @@ cancel_requests(void)
     }
 }
 \&
-/* List all requests. */
+/* List all requests.  */
 static void
 list_requests(void)
 {

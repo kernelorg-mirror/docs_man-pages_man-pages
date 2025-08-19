@@ -139,7 +139,8 @@ The file descriptor is readable
 (the
 .BR select (2)
 .I readfds
-argument; the
+argument;
+the
 .BR poll (2)
 .B POLLIN
 flag)
@@ -213,7 +214,8 @@ field.
 This field is the analog of the
 .I siginfo_t
 .I si_code
-field; see
+field;
+see
 .BR sigaction (2)
 for details.
 .SS fork(2) semantics
@@ -484,7 +486,7 @@ main(void)
     sigaddset(&mask, SIGQUIT);
 \&
     /* Block signals so that they aren\[aq]t handled
-       according to their default dispositions. */
+       according to their default dispositions.  */
 \&
     if (sigprocmask(SIG_BLOCK, &mask, NULL) == \-1)
         err(EXIT_FAILURE, "sigprocmask");

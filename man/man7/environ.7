@@ -48,11 +48,15 @@ such as definitions from
 .I /etc/environment
 that are processed by
 .BR pam_env (8)
-for all users at login time (on systems that employ
+for all users at login time
+(on systems that employ
 .BR pam (8)).
-In addition, various shell initialization scripts, such as the system-wide
+In addition,
+various shell initialization scripts,
+such as the system-wide
 .I /etc/profile
-script and per-user initializations script may include commands
+script and per-user initialization scripts
+may include commands
 that add variables to the shell's environment;
 see the manual page of your preferred shell for details.
 .P
@@ -64,14 +68,16 @@ NAME=value command
 .EE
 .in
 .P
-to create an environment variable definition only in the scope
-of the process that executes
+to create an environment variable definition
+only in the scope of the process that executes
 .IR command .
-Multiple variable definitions, separated by white space, may precede
+Multiple variable definitions,
+separated by white space,
+may precede
 .IR command .
 .P
-Arguments may also be placed in the
-environment at the point of an
+Arguments may also be placed in the environment
+at the point of an
 .BR exec (3).
 A C program can manipulate its environment using the functions
 .BR getenv (3),
@@ -80,28 +86,33 @@ A C program can manipulate its environment using the functions
 and
 .BR unsetenv (3).
 .P
-What follows is a list of environment variables typically seen on a
-system.
+What follows is a list of environment variables
+typically seen on a system.
 This list is incomplete and includes only common variables seen
 by average users in their day-to-day routine.
 Environment variables specific to a particular program or library function
 are documented in the ENVIRONMENT section of the appropriate manual page.
 .TP
 .B USER
-The name of the logged-in user (used by some BSD-derived programs).
-Set at login time, see section NOTES below.
+The name of the logged-in user
+(used by some BSD-derived programs).
+Set at login time;
+see section NOTES below.
 .TP
 .B LOGNAME
-The name of the logged-in user (used by some System-V derived programs).
-Set at login time, see section NOTES below.
+The name of the logged-in user
+(used by some System-V derived programs).
+Set at login time;
+see section NOTES below.
 .TP
 .B HOME
 A user's login directory.
-Set at login time, see section NOTES below.
+Set at login time;
+see section NOTES below.
 .TP
 .B LANG
-The name of a locale to use for locale categories when not overridden
-by
+The name of a locale to use for locale categories
+when not overridden by
 .B LC_ALL
 or more specific environment variables such as
 .BR LC_COLLATE ,
@@ -120,29 +131,33 @@ environment variables).
 .B PATH
 The sequence of directory prefixes that
 .BR sh (1)
-and many other
-programs employ when searching for an executable file that is specified
-as a simple filename (i.a., a pathname that contains no slashes).
+and many other programs employ
+when searching for an executable file
+that is specified as a simple filename
+(i.a., a pathname that contains no slashes).
 The prefixes are separated by colons
 .RB ( : ).
 The list of prefixes is searched from beginning to end,
-by checking the pathname formed by concatenating
+by checking the pathname formed by catenating
 a prefix, a slash, and the filename,
 until a file with execute permission is found.
 .IP
-As a legacy feature, a zero-length prefix
+As a legacy feature,
+a zero-length prefix
 (specified as two adjacent colons, or an initial or terminating colon)
 is interpreted to mean the current working directory.
-However, use of this feature is deprecated,
+However,
+use of this feature is deprecated,
 and POSIX notes that a conforming application shall use
-an explicit pathname (e.g.,
+an explicit pathname
+(e.g.,
 .IR . )
 to specify the current working directory.
 .IP
 Analogously to
 .BR PATH ,
 one has
-.B CDPATH
+.BR CDPATH ,
 used by some shells to find the target
 of a change directory command,
 .B MANPATH
@@ -185,17 +200,22 @@ Any string acceptable as a command_string operand to the
 command shall be valid.
 .\" .TP
 .\" .B BROWSER
-.\" The user's preferred utility to browse URLs. Sequence of colon-separated
-.\" browser commands. See http://www.catb.org/\[ti]esr/BROWSER/ .
+.\" The user's preferred utility to browse URLs.  Sequence of colon-separated
+.\" browser commands.  See http://www.catb.org/\[ti]esr/BROWSER/ .
 .P
 Note that the behavior of many programs and library routines is
 influenced by the presence or value of certain environment variables.
 Examples include the following:
 .IP \[bu] 3
 The variables
-.BR LANG ", " LANGUAGE ", " NLSPATH ", " LOCPATH ,
-.BR LC_ALL ", " LC_MESSAGES ,
-and so on influence locale handling; see
+.BR LANG ,
+.BR LANGUAGE ,
+.BR NLSPATH ,
+.BR LOCPATH ,
+.BR LC_ALL ,
+.BR LC_MESSAGES ,
+and so on influence locale handling;
+see
 .BR catopen (3),
 .BR gettext (3),
 and
@@ -208,7 +228,8 @@ and other routines, and the temporary directory used by
 .BR sort (1)
 and other programs.
 .IP \[bu]
-.BR LD_LIBRARY_PATH ", " LD_PRELOAD ,
+.BR LD_LIBRARY_PATH ,
+.BR LD_PRELOAD ,
 and other
 .B LD_*
 variables influence the behavior of the dynamic loader/linker.
@@ -216,8 +237,8 @@ See also
 .BR ld.so (8).
 .IP \[bu]
 .B POSIXLY_CORRECT
-makes certain programs and library routines follow
-the prescriptions of POSIX.
+makes certain programs and library routines
+follow the prescriptions of POSIX.
 .IP \[bu]
 The behavior of
 .BR malloc (3)
@@ -231,7 +252,9 @@ gives the name of a file containing aliases
 to be used with
 .BR gethostbyname (3).
 .IP \[bu]
-.BR TZ " and " TZDIR
+.B TZ
+and
+.B TZDIR
 give timezone information used by
 .BR tzset (3)
 and through that by functions like
@@ -246,10 +269,15 @@ See also
 gives information on how to address a given terminal
 (or gives the name of a file containing such information).
 .IP \[bu]
-.BR COLUMNS " and " LINES
-tell applications about the window size, possibly overriding the actual size.
+.B COLUMNS
+and
+.B LINES
+tell applications about the window size,
+possibly overriding the actual size.
 .IP \[bu]
-.BR PRINTER " or " LPDEST
+.B PRINTER
+or
+.B LPDEST
 may specify the desired printer to use.
 See
 .BR lpr (1).
@@ -257,7 +285,8 @@ See
 Historically and by standard,
 .I environ
 must be declared in the user program.
-However, as a (nonstandard) programmer convenience,
+However,
+as a (nonstandard) programmer convenience,
 .I environ
 is declared in the header file
 .I <unistd.h>
@@ -279,10 +308,12 @@ The
 .BR SHELL ,
 and
 .B USER
-variables are set when the user is changed via a
-session management interface, typically by a program such as
+variables are set when the user is changed
+via a session management interface,
+typically by a program such as
 .BR login (1)
-from a user database (such as
+from a user database
+(such as
 .BR passwd (5)).
 (Switching to the root user using
 .BR su (1)
@@ -290,25 +321,29 @@ may result in a mixed environment where
 .B LOGNAME
 and
 .B USER
-are retained from old user; see the
+are retained from old user;
+see the
 .BR su (1)
 manual page.)
 .SH BUGS
 Clearly there is a security risk here.
 Many a system command has been
 tricked into mischief by a user who specified unusual values for
-.BR IFS " or " LD_LIBRARY_PATH .
+.B IFS
+or
+.BR LD_LIBRARY_PATH .
 .P
 There is also the risk of name space pollution.
 Programs like
 .I make
 and
 .I autoconf
-allow overriding of default utility names from the
-environment with similarly named variables in all caps.
+allow overriding of default utility names from the environment
+with similarly named variables in all caps.
 Thus one uses
 .B CC
-to select the desired C compiler (and similarly
+to select the desired C compiler
+(and similarly
 .BR MAKE ,
 .BR AR ,
 .BR AS ,
@@ -318,14 +353,17 @@ to select the desired C compiler (and similarly
 .BR RM ,
 .BR YACC ,
 etc.).
-However, in some traditional uses such an environment variable
+However,
+in some traditional uses,
+such an environment variable
 gives options for the program instead of a pathname.
-Thus, one has
+Thus,
+one has
 .B MORE
 and
 .BR LESS .
-Such usage is considered mistaken, and to be avoided in new
-programs.
+Such usage is considered mistaken,
+and to be avoided in new programs.
 .SH SEE ALSO
 .BR bash (1),
 .BR csh (1),

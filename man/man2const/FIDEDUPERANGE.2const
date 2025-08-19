@@ -141,10 +141,11 @@ Possible errors include (but are not limited to) the following:
 .I src_fd
 is not open for reading;
 .I dest_fd
-is not open for writing or is open for append-only writes; or the filesystem
-which
+is not open for writing or is open for append-only writes;
+or the filesystem which
 .I src_fd
-resides on does not support deduplication.
+resides on
+does not support deduplication.
 .TP
 .B EINVAL
 The filesystem does not support deduplicating the ranges of the given files.

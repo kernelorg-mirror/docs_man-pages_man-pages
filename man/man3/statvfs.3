@@ -69,14 +69,16 @@ Mandatory locking is permitted on the filesystem (see
 .BR fcntl (2)).
 .TP
 .B ST_NOATIME
-Do not update access times; see
+Do not update access times;
+see
 .BR mount (2).
 .TP
 .B ST_NODEV
 Disallow access to device special files on this filesystem.
 .TP
 .B ST_NODIRATIME
-Do not update directory access times; see
+Do not update directory access times;
+see
 .BR mount (2).
 .TP
 .B ST_NOEXEC
@@ -91,7 +93,8 @@ for executable files on this filesystem
 This filesystem is mounted read-only.
 .TP
 .B ST_RELATIME
-Update atime relative to mtime/ctime; see
+Update atime relative to mtime/ctime;
+see
 .BR mount (2).
 .TP
 .B ST_SYNCHRONOUS
@@ -132,7 +135,8 @@ or
 points to an invalid address.
 .TP
 .B EINTR
-This call was interrupted by a signal; see
+This call was interrupted by a signal;
+see
 .BR signal (7).
 .TP
 .B EIO

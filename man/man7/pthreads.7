@@ -718,7 +718,8 @@ return a different value in each thread.
 Calls to
 .BR getppid (2)
 in threads other than the main thread return the process ID of the
-manager thread; instead
+manager thread;
+instead
 .BR getppid (2)
 in these threads should return the same value as
 .BR getppid (2)

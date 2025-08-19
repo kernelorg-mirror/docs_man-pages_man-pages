@@ -52,7 +52,8 @@ may or may not depend on the hint.
 .\" boundary; since Linux 2.6.24, it is rounded down!
 The address of the new mapping is returned as the result of the call.
 .P
-The contents of a file mapping (as opposed to an anonymous mapping; see
+The contents of a file mapping (as opposed to an anonymous mapping;
+see
 .B MAP_ANONYMOUS
 below), are initialized using
 .I length
@@ -202,7 +203,7 @@ But this was a source of denial-of-service attacks.)
 .TP
 .B MAP_EXECUTABLE
 This flag is ignored.
-.\" Introduced in 1.1.38, removed in 1.3.24. Flag tested in proc_follow_link.
+.\" Introduced in 1.1.38, removed in 1.3.24.  Flag tested in proc_follow_link.
 .\" (Long ago, it signaled that the underlying file is an executable.
 .\" However, that information was not really used anywhere.)
 .\" Linus talked about DOS related to MAP_EXECUTABLE, but he was thinking of
@@ -219,9 +220,10 @@ Don't interpret
 .I addr
 as a hint: place the mapping at exactly that address.
 .I addr
-must be suitably aligned: for most architectures a multiple of the page
-size is sufficient; however, some architectures may impose additional
-restrictions.
+must be suitably aligned:
+for most architectures a multiple of the page size is sufficient;
+however,
+some architectures may impose additional restrictions.
 If the memory region specified by
 .I addr
 and
@@ -253,8 +255,10 @@ If the requested range would collide with an existing mapping,
 then this call fails with the error
 .B EEXIST.
 This flag can therefore be used as a way to atomically
-(with respect to other threads) attempt to map an address range:
-one thread will succeed; all others will report failure.
+(with respect to other threads)
+attempt to map an address range:
+one thread will succeed;
+all others will report failure.
 .IP
 Note that older kernels which do not recognize the
 .B MAP_FIXED_NOREPLACE
@@ -604,7 +608,8 @@ was mounted no-exec.
 .\" (Since Linux 2.4.25 / Linux 2.6.0.)
 .TP
 .B EPERM
-The operation was prevented by a file seal; see
+The operation was prevented by a file seal;
+see
 .BR fcntl (2).
 .TP
 .B EPERM
@@ -615,7 +620,8 @@ flag was specified, but the caller was not privileged (did not have the
 capability)
 and is not a member of the
 .I hugetlb_shm_group
-group; see the description of
+group;
+see the description of
 .I /proc/sys/vm/hugetlb_shm_group
 in
 .BR proc_sys_vm (5).
@@ -794,8 +800,10 @@ When thread A subsequently employs
 .BR mmap(MAP_FIXED) ,
 it will effectively clobber the mapping that thread B created.
 In this scenario,
-thread B need not create a mapping directly; simply making a library call
-that, internally, uses
+thread B need not create a mapping directly;
+simply making a library call that,
+internally,
+uses
 .BR dlopen (3)
 to load some other shared library, will suffice.
 The
@@ -823,8 +831,9 @@ For file-backed mappings, the
 .I st_atime
 field for the mapped file may be updated at any time between the
 .BR mmap ()
-and the corresponding unmapping; the first reference to a mapped
-page will update the field if it has not been already.
+and the corresponding unmapping;
+the first reference to a mapped page
+will update the field if it has not been already.
 .P
 The
 .I st_ctime
@@ -1043,7 +1052,7 @@ The descriptions of the following files in
 and
 .IR /proc/ pid /smaps .
 .P
-B.O. Gallmeister, POSIX.4, O'Reilly, pp. 128\[en]129 and 389\[en]391.
+B.O.\& Gallmeister, POSIX.4, O'Reilly, pp.\& 128\[en]129 and 389\[en]391.
 .\"
 .\" Repeat after me: private read-only mappings are 100% equivalent to
-.\" shared read-only mappings. No ifs, buts, or maybes. -- Linus
+.\" shared read-only mappings.  No ifs, buts, or maybes.  -- Linus

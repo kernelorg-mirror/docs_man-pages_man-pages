@@ -31,8 +31,10 @@ determines
 how often the kernel checks the amount of free space (value is in
 seconds).
 Default values are 4, 2, and 30.
-That is, suspend accounting if 2% or less space is free; resume it
-if 4% or more space is free; consider information about amount of free space
+That is,
+suspend accounting if 2% or less space is free;
+resume it if 4% or more space is free;
+consider information about amount of free space
 valid for 30 seconds.
 .TP
 .IR /proc/sys/kernel/auto_msgmni " (Linux 2.6.27 to Linux 3.18)"
@@ -73,7 +75,8 @@ during
 .BR execve (2).
 Starting with Linux 2.6.25,
 the system-wide capability bounding set disappeared,
-and was replaced by a per-thread bounding set; see
+and was replaced by a per-thread bounding set;
+see
 .BR capabilities (7).
 .TP
 .I /proc/sys/kernel/core_pattern
@@ -278,11 +281,12 @@ and
 .I /proc/sys/kernel/panic
 This file gives read/write access to the kernel variable
 .IR panic_timeout .
-If this is zero, the kernel will loop on a panic; if nonzero,
-it indicates that the kernel should autoreboot after this number
-of seconds.
-When you use the
-software watchdog device driver, the recommended setting is 60.
+If this is zero,
+the kernel will loop on a panic;
+if nonzero,
+it indicates that the kernel should autoreboot after this number of seconds.
+When you use the software watchdog device driver,
+the recommended setting is 60.
 .TP
 .IR /proc/sys/kernel/panic_on_oops " (since Linux 2.5.68)"
 This file controls the kernel's behavior when an oops
@@ -401,11 +405,12 @@ Maybe to tell it what to do after
 rebooting?
 .TP
 .I /proc/sys/kernel/rtsig\-max
-(Up to and including Linux 2.6.7; see
+(Up to and including Linux 2.6.7;
+see
 .BR setrlimit (2))
-This file can be used to tune the maximum number
-of POSIX real-time (queued) signals that can be outstanding
-in the system.
+This file can be used to tune
+the maximum number of POSIX real-time (queued) signals
+that can be outstanding in the system.
 .TP
 .I /proc/sys/kernel/rtsig\-nr
 (Up to and including Linux 2.6.7.)
@@ -572,9 +577,9 @@ fully contained in the buffer provided to
 .BR write (2).
 .\" FIXME .
 .\"     With /proc/sys/kernel/sysctl_writes_strict==1, writes at an
-.\"     offset other than 0 do not generate an error. Instead, the
+.\"     offset other than 0 do not generate an error.  Instead, the
 .\"     write() succeeds, but the file is left unmodified.
-.\"     This is surprising. The behavior may change in the future.
+.\"     This is surprising.  The behavior may change in the future.
 .\"     See thread.gmane.org/gmane.linux.man/9197
 .\"		From: Michael Kerrisk (man-pages <mtk.manpages@...>
 .\"		Subject: sysctl_writes_strict documentation + an oddity?

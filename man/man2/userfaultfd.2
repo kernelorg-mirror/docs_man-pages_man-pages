@@ -169,7 +169,7 @@ The current asynchronous model of the event delivery is optimal for
 single threaded non-cooperative userfaultfd manager implementations.
 .\" Regarding the preceding sentence, Mike Rapoport says:
 .\"     The major point here is that current events delivery model could be
-.\"     problematic for multi-threaded monitor. I even suspect that it would be
+.\"     problematic for multi-threaded monitor.  I even suspect that it would be
 .\"     impossible to ensure synchronization between page faults and non-page
 .\"     fault events in multi-threaded monitor.
 .\" .P
@@ -775,7 +775,7 @@ fault_handler_thread(void *arg)
 \&
     uffd = (long) arg;
 \&
-    /* Create a page that will be copied into the faulting region. */
+    /* Create a page that will be copied into the faulting region.  */
 \&
     if (page == NULL) {
         page = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
@@ -785,11 +785,11 @@ fault_handler_thread(void *arg)
     }
 \&
     /* Loop, handling incoming events on the userfaultfd
-       file descriptor. */
+       file descriptor.  */
 \&
     for (;;) {
 \&
-        /* See what poll() tells us about the userfaultfd. */
+        /* See what poll() tells us about the userfaultfd.  */
 \&
         pollfd.fd = uffd;
         pollfd.events = POLLIN;
@@ -803,7 +803,7 @@ fault_handler_thread(void *arg)
                (pollfd.revents & POLLIN) != 0,
                (pollfd.revents & POLLERR) != 0);
 \&
-        /* Read an event from the userfaultfd. */
+        /* Read an event from the userfaultfd.  */
 \&
         nread = read(uffd, &msg, sizeof(msg));
         if (nread == 0) {
@@ -814,22 +814,22 @@ fault_handler_thread(void *arg)
         if (nread == \-1)
             err(EXIT_FAILURE, "read");
 \&
-        /* We expect only one kind of event; verify that assumption. */
+        /* We expect only one kind of event; verify that assumption.  */
 \&
         if (msg.event != UFFD_EVENT_PAGEFAULT) {
             fprintf(stderr, "Unexpected event on userfaultfd\[rs]n");
             exit(EXIT_FAILURE);
         }
 \&
-        /* Display info about the page\-fault event. */
+        /* Display info about the page\-fault event.  */
 \&
         printf("    UFFD_EVENT_PAGEFAULT event: ");
         printf("flags = %"PRIx64"; ", msg.arg.pagefault.flags);
         printf("address = %"PRIx64"\[rs]n", msg.arg.pagefault.address);
 \&
         /* Copy the page pointed to by \[aq]page\[aq] into the faulting
-           region. Vary the contents that are copied in, so that it
-           is more obvious that each fault is handled separately. */
+           region.  Vary the contents that are copied in, so that it
+           is more obvious that each fault is handled separately.  */
 \&
         memset(page, \[aq]A\[aq] + fault_cnt % 20, page_size);
         fault_cnt++;
@@ -837,7 +837,7 @@ fault_handler_thread(void *arg)
         uffdio_copy.src = (unsigned long) page;
 \&
         /* We need to handle page faults in units of pages(!).
-           So, round faulting address down to page boundary. */
+           So, round faulting address down to page boundary.  */
 \&
         uffdio_copy.dst = (unsigned long) msg.arg.pagefault.address &
                                            \[ti](page_size \- 1);
@@ -872,7 +872,7 @@ main(int argc, char *argv[])
     page_size = sysconf(_SC_PAGE_SIZE);
     size = strtoull(argv[1], NULL, 0) * page_size;
 \&
-    /* Create and enable userfaultfd object. */
+    /* Create and enable userfaultfd object.  */
 \&
     uffd = syscall(SYS_userfaultfd, O_CLOEXEC | O_NONBLOCK);
     if (uffd == \-1)
@@ -884,16 +884,16 @@ main(int argc, char *argv[])
        Programs that *do* should call UFFDIO_API twice: once with
        `features = 0` to detect features supported by this kernel, and
        again with the subset of features the program actually wants to
-       enable. */
+       enable.  */
     uffdio_api.api = UFFD_API;
     uffdio_api.features = 0;
     if (ioctl(uffd, UFFDIO_API, &uffdio_api) == \-1)
         err(EXIT_FAILURE, "ioctl\-UFFDIO_API");
 \&
-    /* Create a private anonymous mapping. The memory will be
-       demand\-zero paged\-\-that is, not yet allocated. When we
+    /* Create a private anonymous mapping.  The memory will be
+       demand\-zero paged\-\-that is, not yet allocated.  When we
        actually touch the memory, it will be allocated via
-       the userfaultfd. */
+       the userfaultfd.  */
 \&
     addr = mmap(NULL, size, PROT_READ | PROT_WRITE,
                 MAP_PRIVATE | MAP_ANONYMOUS, \-1, 0);
@@ -903,8 +903,8 @@ main(int argc, char *argv[])
     printf("Address returned by mmap() = %p\[rs]n", addr);
 \&
     /* Register the memory range of the mapping we just created for
-       handling by the userfaultfd object. In mode, we request to track
-       missing pages (i.e., pages that have not yet been faulted in). */
+       handling by the userfaultfd object.  In mode, we request to track
+       missing pages (i.e., pages that have not yet been faulted in).  */
 \&
     uffdio_register.range.start = (unsigned long) addr;
     uffdio_register.range.len = size;
@@ -912,7 +912,7 @@ main(int argc, char *argv[])
     if (ioctl(uffd, UFFDIO_REGISTER, &uffdio_register) == \-1)
         err(EXIT_FAILURE, "ioctl\-UFFDIO_REGISTER");
 \&
-    /* Create a thread that will process the userfaultfd events. */
+    /* Create a thread that will process the userfaultfd events.  */
 \&
     s = pthread_create(&thr, NULL, fault_handler_thread, (void *) uffd);
     if (s != 0) {
@@ -920,12 +920,12 @@ main(int argc, char *argv[])
     }
 \&
     /* Main thread now touches memory in the mapping, touching
-       locations 1024 bytes apart. This will trigger userfaultfd
-       events for all pages in the region. */
+       locations 1024 bytes apart.  This will trigger userfaultfd
+       events for all pages in the region.  */
 \&
     i = 0xf;    /* Ensure that faulting address is not on a page
                    boundary, in order to test that we correctly
-                   handle that case in fault_handling_thread(). */
+                   handle that case in fault_handling_thread().  */
     while (i < size) {
         c = addr[i];
         printf("Read address %p in %s(): ", addr + i, __func__);

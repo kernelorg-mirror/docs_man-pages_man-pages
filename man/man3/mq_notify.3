@@ -116,7 +116,8 @@ the queue of messages without blocking once it is empty.)
 .SH RETURN VALUE
 On success
 .BR mq_notify ()
-returns 0; on error, \-1 is returned, with
+returns 0;
+on error, \-1 is returned, with
 .I errno
 set to indicate the error.
 .SH ERRORS
@@ -132,7 +133,8 @@ for this message queue.
 .TP
 .B EINVAL
 .I sevp\->sigev_notify
-is not one of the permitted values; or
+is not one of the permitted values;
+or
 .I sevp\->sigev_notify
 is
 .B SIGEV_SIGNAL
@@ -217,7 +219,7 @@ tfunc(union sigval sv)
     void *buf;
     mqd_t mqdes = *((mqd_t *) sv.sival_ptr);
 \&
-    /* Determine max. msg size; allocate buffer to receive msg */
+    /* Determine max.\& msg size; allocate buffer to receive msg */
 \&
     if (mq_getattr(mqdes, &attr) == \-1)
         err(EXIT_FAILURE, "mq_getattr");
@@ -252,7 +254,7 @@ main(int argc, char *argv[])
     sev.sigev_notify = SIGEV_THREAD;
     sev.sigev_notify_function = tfunc;
     sev.sigev_notify_attributes = NULL;
-    sev.sigev_value.sival_ptr = &mqdes;   /* Arg. to thread func. */
+    sev.sigev_value.sival_ptr = &mqdes;   /* Arg.\& to thread func.  */
     if (mq_notify(mqdes, &sev) == \-1)
         err(EXIT_FAILURE, "mq_notify");
 \&

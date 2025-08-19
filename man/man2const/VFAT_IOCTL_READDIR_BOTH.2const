@@ -124,8 +124,8 @@ The following was recorded when applying the program to the directory
 .in +4n
 .EX
 .RB $ " ./fat_dir /mnt/user" ;
-\&. \-> \[aq]\[aq]
-\&.. \-> \[aq]\[aq]
+\&.\& \-> \[aq]\[aq]
+\&..\& \-> \[aq]\[aq]
 ALONGF\[ti]1.TXT \-> \[aq]a long filename.txt\[aq]
 UPPER.TXT \-> \[aq]\[aq]
 LOWER.TXT \-> \[aq]lower.txt\[aq]

@@ -8,18 +8,23 @@ keyrings \- in-kernel key management and retention facility
 .SH DESCRIPTION
 The Linux key-management facility
 is primarily a way for various kernel components
-to retain or cache security data,
-authentication keys, encryption keys, and other data in the kernel.
+to retain or cache
+security data,
+authentication keys,
+encryption keys,
+and other data in the kernel.
 .P
-System call interfaces are provided so that user-space programs can manage
-those objects and also use the facility for their own purposes; see
+System call interfaces are provided
+so that user-space programs can manage those objects
+and also use the facility for their own purposes;
+see
 .BR add_key (2),
 .BR request_key (2),
 and
 .BR keyctl (2).
 .P
-A library and some user-space utilities are provided to allow access to the
-facility.
+A library and some user-space utilities are provided
+to allow access to the facility.
 See
 .BR keyctl (1),
 .BR keyctl (3),
@@ -33,7 +38,8 @@ A key has the following attributes:
 Serial number (ID)
 This is a unique integer handle by which a key is referred to in system calls.
 The serial number is sometimes synonymously referred as the key ID.
-Programmatically, key serial numbers are represented using the type
+Programmatically,
+key serial numbers are represented using the type
 .IR key_serial_t .
 .TP
 Type
@@ -41,13 +47,16 @@ A key's type defines what sort of data can be held in the key,
 how the proposed content of the key will be parsed,
 and how the payload will be used.
 .IP
-There are a number of general-purpose types available, plus some specialist
-types defined by specific kernel components.
+There are a number of general-purpose types available,
+plus some specialist types defined by specific kernel components.
 .TP
 Description (name)
-The key description is a printable string that is used as the search term
-for the key (in conjunction with the key type) as well as a display name.
-During searches, the description may be partially matched or exactly matched.
+The key description is a printable string
+that is used as the search term for the key
+(in conjunction with the key type)
+as well as a display name.
+During searches,
+the description may be partially matched or exactly matched.
 .TP
 Payload (data)
 The payload is the actual content of a key.
@@ -55,24 +64,28 @@ This is usually set when a key is created,
 but it is possible for the kernel to upcall to user space to finish the
 instantiation of a key if that key wasn't already known to the kernel
 when it was requested.
-For further details, see
+For further details,
+see
 .BR request_key (2).
 .IP
-A key's payload can be read and updated if the key type supports it and if
-suitable permission is granted to the caller.
+A key's payload can be read and updated
+if the key type supports it
+and if suitable permission is granted to the caller.
 .TP
 Access rights
 Much as files do,
-each key has an owning user ID, an owning group ID, and a security label.
+each key has
+an owning user ID, an owning group ID, and a security label.
 Each key also has a set of permissions,
 though there are more than for a normal UNIX file,
-and there is an additional category\[em]possessor\[em]beyond the usual user,
-group, and other (see
+and there is an additional category (possessor)
+beyond the usual user, group, and other
+(see
 .IR Possession ,
 below).
 .IP
-Note that keys are quota controlled, since they require unswappable kernel
-memory.
+Note that keys are quota controlled,
+since they require unswappable kernel memory.
 The owning user ID specifies whose quota is to be debited.
 .TP
 Expiration time
@@ -88,7 +101,9 @@ and attempts to access the key fail with the error
 .TP
 Reference count
 Each key has a reference count.
-Keys are referenced by keyrings, by currently active users,
+Keys are referenced
+by keyrings,
+by currently active users,
 and by a process's credentials.
 When the reference count reaches zero,
 the key is scheduled for garbage collection.
@@ -103,8 +118,9 @@ The kernel provides several basic types of key:
 Keyrings are special keys which store a set of links
 to other keys (including other keyrings),
 analogous to a directory holding links to files.
-The main purpose of a keyring is to prevent other keys from
-being garbage collected because nothing refers to them.
+The main purpose of a keyring is
+to prevent other keys from being garbage collected
+because nothing refers to them.
 .IP
 Keyrings with descriptions (names)
 that begin with a period (\[aq].\[aq]) are reserved to the implementation.
@@ -117,9 +133,9 @@ The payload may be read and updated by user-space applications.
 The payload for keys of this type is a blob of arbitrary data
 of up to 32,767 bytes.
 .IP
-The description may be any valid string, though it is preferred that it
-start with a colon-delimited prefix representing the service
-to which the key is of interest
+The description may be any valid string,
+though it is preferred that it start with a colon-delimited prefix
+representing the service to which the key is of interest
 (for instance
 .IR \[dq]afs:mykey\[dq] ).
 .TP
@@ -139,11 +155,12 @@ The description of a
 .I \[dq]logon\[dq]
 key
 .I must
-start with a non-empty colon-delimited prefix whose purpose
-is to identify the service to which the key belongs.
+start with a non-empty colon-delimited prefix whose purpose is
+to identify the service to which the key belongs.
 (Note that this differs from keys of the
 .I \[dq]user\[dq]
-type, where the inclusion of a prefix is recommended but is not enforced.)
+type,
+where the inclusion of a prefix is recommended but is not enforced.)
 .TP
 .IR \[dq]big_key\[dq] " (since Linux 3.13)"
 .\" commit ab3c3587f8cda9083209a61dbe3a4407d3cada10
@@ -477,7 +494,8 @@ If a matching key is found that has an error state attached,
 that error state is noted and the search continues.
 .IP (6)
 If no valid matching key is found,
-then the first noted error state is returned; otherwise, an
+then the first noted error state is returned;
+otherwise, an
 .B ENOKEY
 error is returned.
 .P
@@ -735,10 +753,11 @@ or the string
 if there are no keys linked to the keyring.
 .TP
 .I \[dq]big_key\[dq]
-The payload size in bytes, followed either by the string
+The payload size in bytes,
+followed either by the string
 .IR [file] ,
-if the key payload exceeds the threshold that means that the
-payload is stored in a (swappable)
+if the key payload exceeds the threshold
+that means that the payload is stored in a (swappable)
 .BR tmpfs (5)
 filesystem,
 or otherwise the string
@@ -749,7 +768,8 @@ indicating that the key is small enough to reside in kernel memory.
 For the
 .I \[dq].request_key_auth\[dq]
 key type
-(authorization key; see
+(authorization key;
+see
 .BR request_key (2)),
 the description field has the form shown in the following example:
 .IP

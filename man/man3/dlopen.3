@@ -45,8 +45,8 @@ If
 .\" a handle for (something like) the root of the namespace.
 .\" The point here is that if we do a dlmopen(LM_ID_NEWLM), then
 .\" the path==NULL case returns a different handle than
-.\" in the initial namespace. But, on glibc, the same handle is
-.\" returned. This is probably a bug in glibc.
+.\" in the initial namespace.  But, on glibc, the same handle is
+.\" returned.  This is probably a bug in glibc.
 .\"
 is NULL, then the returned handle is for the main program.
 If
@@ -331,7 +331,8 @@ these functions return NULL.
 .P
 On success,
 .BR dlclose ()
-returns 0; on error, it returns a nonzero value.
+returns 0;
+on error, it returns a nonzero value.
 .P
 Errors from these functions can be diagnosed using
 .BR dlerror (3).
@@ -580,7 +581,7 @@ main(void)
        by requiring that conforming implementations support casting
        \[aq]void *\[aq] to a function pointer.  Nevertheless, some compilers
        (e.g., gcc with the \[aq]\-pedantic\[aq] option) may complain about the
-       cast used in this program. */
+       cast used in this program.  */
 .\" http://pubs.opengroup.org/onlinepubs/009695399/functions/dlsym.html#tag_03_112_08
 .\" http://pubs.opengroup.org/onlinepubs/9699919799/functions/dlsym.html#tag_16_96_07
 .\" http://austingroupbugs.net/view.php?id=74

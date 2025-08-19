@@ -298,7 +298,8 @@ structure, cast to
 .IR "void\ *" .
 The structure pointed to by this field contains
 signal context information that was saved
-on the user-space stack by the kernel; for details, see
+on the user-space stack by the kernel;
+for details, see
 .BR sigreturn (2).
 Further information about the
 .I ucontext_t
@@ -387,8 +388,10 @@ and
 .IR si_timerid .
 The
 .I si_timerid
-field is an internal ID used by the kernel to identify
-the timer; it is not the same as the timer ID returned by
+field is an internal ID
+used by the kernel
+to identify the timer;
+it is not the same as the timer ID returned by
 .BR timer_create (2).
 The
 .I si_overrun
@@ -408,7 +411,8 @@ with the
 supplied to
 .BR mq_notify (3);
 .IR si_pid ,
-with the process ID of the message sender; and
+with the process ID of the message sender;
+and
 .IR si_uid ,
 with the real user ID of the message sender.
 .IP \[bu]
@@ -630,7 +634,8 @@ or
 timer expired.
 .TP
 .BR SI_MESGQ " (since Linux 2.6.6)"
-POSIX message queue state changed; see
+POSIX message queue state changed;
+see
 .BR mq_notify (3).
 .TP
 .B SI_ASYNCIO
@@ -639,7 +644,8 @@ AIO completed.
 .B SI_SIGIO
 Queued
 .B SIGIO
-(only up to Linux 2.2; from Linux 2.4 onward
+(only up to Linux 2.2;
+from Linux 2.4 onward
 .BR SIGIO / SIGPOLL
 fills in
 .I si_code
@@ -788,10 +794,12 @@ Nonexistent physical address.
 Object-specific hardware error.
 .TP
 .BR BUS_MCEERR_AR " (since Linux 2.6.32)"
-Hardware memory error consumed on a machine check; action required.
+Hardware memory error consumed on a machine check;
+action required.
 .TP
 .BR BUS_MCEERR_AO " (since Linux 2.6.32)"
-Hardware memory error detected in process but not consumed; action optional.
+Hardware memory error detected in process but not consumed;
+action optional.
 .RE
 .P
 The following values can be placed in
@@ -955,7 +963,8 @@ See EXAMPLES below for a demonstration of the use of
 .BR SA_UNSUPPORTED .
 .SH RETURN VALUE
 .BR sigaction ()
-returns 0 on success; on error, \-1 is returned, and
+returns 0 on success;
+on error, \-1 is returned, and
 .I errno
 is set to indicate the error.
 .SH ERRORS

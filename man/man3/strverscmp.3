@@ -84,7 +84,7 @@ T}	Thread safety	MT-Safe
 .\"
 .\" glibc manual says strverscmp should have marking locale because it calls
 .\" isdigit() multiple times and isdigit() uses locale variable.
-.\" But isdigit() has two implementations. With different compiling conditions,
+.\" But isdigit() has two implementations.  With different compiling conditions,
 .\" we may call isdigit() in macro, then strverscmp() should not have locale
 .\" problem.
 .SH STANDARDS

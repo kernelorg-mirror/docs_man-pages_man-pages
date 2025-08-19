@@ -121,7 +121,7 @@ The following shell session shows a sample run of the program:
 .in +4n
 .EX
 .RB $ " ./a.out" ;
-Created a thread. Default name is: a.out
+Created a thread.  Default name is: a.out
 The thread name after setting it is THREADFOO.
 \f[B]\[ha]Z\f[]                           # Suspend the program
 [1]+  Stopped           ./a.out
@@ -172,7 +172,7 @@ main(int argc, char *argv[])
     if (rc != 0)
         errc(EXIT_FAILURE, rc, "pthread_getname_np");
 \&
-    printf("Created a thread. Default name is: %s\[rs]n", thread_name);
+    printf("Created a thread.  Default name is: %s\[rs]n", thread_name);
     rc = pthread_setname_np(thread, (argc > 1) ? argv[1] : "THREADFOO");
     if (rc != 0)
         errc(EXIT_FAILURE, rc, "pthread_setname_np");

@@ -58,7 +58,7 @@ arguments serve the same purposes as for
 .\"
 .\"       The page at http://locklessinc.com/articles/futex_cheat_sheet/
 .\"       notes that "priority-inheritance Futex to priority-inheritance
-.\"       Futex requeues are currently unsupported". However, probably
+.\"       Futex requeues are currently unsupported".  However, probably
 .\"       the page does not need to say nothing about this, since
 .\"       Thomas Gleixner commented (July 2015): "they never will be
 .\"       supported because they make no sense at all"
@@ -103,11 +103,11 @@ is already locked by the caller.
 .TP
 .B EDEADLK
 .\" FIXME . I see that kernel/locking/rtmutex.c uses EDEADLK in some
-.\"       places, and EDEADLOCK in others. On almost all architectures
-.\"       these constants are synonymous. Is there a reason that both
+.\"       places, and EDEADLOCK in others.  On almost all architectures
+.\"       these constants are synonymous.  Is there a reason that both
 .\"       names are used?
 .\"
-.\"       tglx (July 2015): "No. We should probably fix that."
+.\"       tglx (July 2015): "No.  We should probably fix that."
 .\"
 While requeueing a waiter to the PI futex for the futex word at
 .IR uaddr2 ,

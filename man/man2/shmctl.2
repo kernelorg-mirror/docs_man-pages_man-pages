@@ -42,7 +42,7 @@ struct shmid_ds {
                                     modification via shmctl() */
     pid_t           shm_cpid;    /* PID of creator */
     pid_t           shm_lpid;    /* PID of last shmat(2)/shmdt(2) */
-    shmatt_t        shm_nattch;  /* No. of current attaches */
+    shmatt_t        shm_nattch;  /* # of current attaches */
     ...
 };
 .EE
@@ -238,7 +238,8 @@ and
 .I shmall
 settings can be changed via
 .I /proc
-files of the same name; see
+files of the same name;
+see
 .BR proc (5)
 for details.
 .TP

@@ -56,9 +56,11 @@ or the
 .I len
 field of the
 .I ufdio_range
-structure was not a multiple of the system page size; or
+structure was not a multiple of the system page size;
+or
 .I len
-was zero; or the specified range was otherwise invalid.
+was zero;
+or the specified range was otherwise invalid.
 .SH STANDARDS
 Linux.
 .SH HISTORY

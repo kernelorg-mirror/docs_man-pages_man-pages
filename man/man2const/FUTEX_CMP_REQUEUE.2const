@@ -56,7 +56,7 @@ and the requeueing of any waiters are performed atomically and totally
 ordered with respect to other operations on the same futex word.
 .\" Notes from a f2f conversation with Thomas Gleixner (Aug 2015): ###
 .\"	The operation is serialized with respect to operations on both
-.\"	source and target futex. No other waiter can enqueue itself
+.\"	source and target futex.  No other waiter can enqueue itself
 .\"	for waiting and no other waiter can dequeue itself because of
 .\"	a timeout or signal.
 .P

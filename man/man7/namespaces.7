@@ -144,16 +144,16 @@ supports being manipulated by
 .EX
 .RB $ " ls \-l /proc/$$/ns | awk \[aq]{print $1, $9, $10, $11}\[aq]"
 total 0
-lrwxrwxrwx. cgroup \-> cgroup:[4026531835]
-lrwxrwxrwx. ipc \-> ipc:[4026531839]
-lrwxrwxrwx. mnt \-> mnt:[4026531840]
-lrwxrwxrwx. net \-> net:[4026531969]
-lrwxrwxrwx. pid \-> pid:[4026531836]
-lrwxrwxrwx. pid_for_children \-> pid:[4026531834]
-lrwxrwxrwx. time \-> time:[4026531834]
-lrwxrwxrwx. time_for_children \-> time:[4026531834]
-lrwxrwxrwx. user \-> user:[4026531837]
-lrwxrwxrwx. uts \-> uts:[4026531838]
+lrwxrwxrwx.\& cgroup \-> cgroup:[4026531835]
+lrwxrwxrwx.\& ipc \-> ipc:[4026531839]
+lrwxrwxrwx.\& mnt \-> mnt:[4026531840]
+lrwxrwxrwx.\& net \-> net:[4026531969]
+lrwxrwxrwx.\& pid \-> pid:[4026531836]
+lrwxrwxrwx.\& pid_for_children \-> pid:[4026531834]
+lrwxrwxrwx.\& time \-> time:[4026531834]
+lrwxrwxrwx.\& time_for_children \-> time:[4026531834]
+lrwxrwxrwx.\& user \-> user:[4026531837]
+lrwxrwxrwx.\& uts \-> uts:[4026531838]
 .EE
 .in
 .P
@@ -183,7 +183,8 @@ they appear as symbolic links.
 If two processes are in the same namespace,
 then the device IDs and inode numbers of their
 .IR /proc/ pid /ns/ xxx
-symbolic links will be the same; an application can check this using the
+symbolic links will be the same;
+an application can check this using the
 .I stat.st_dev
 .\" Eric Biederman: "I reserve the right for st_dev to be significant
 .\" when comparing namespaces."
@@ -269,7 +270,8 @@ Permission to dereference or read
 .RB ( readlink (2))
 these symbolic links is governed by a ptrace access mode
 .B PTRACE_MODE_READ_FSCREDS
-check; see
+check;
+see
 .BR ptrace (2).
 .\"
 .\" ==================== The /proc/sys/user directory ====================

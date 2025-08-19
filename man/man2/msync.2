@@ -69,7 +69,8 @@ and a memory lock exists for the specified address range.
 .TP
 .B EINVAL
 .I addr
-is not a multiple of PAGESIZE; or any bit other than
+is not a multiple of PAGESIZE;
+or any bit other than
 .BR MS_ASYNC " | " MS_INVALIDATE " | " MS_SYNC
 is set in
 .IR flags ;
@@ -138,4 +139,4 @@ to a value greater than 0.
 .SH SEE ALSO
 .BR mmap (2)
 .P
-B.O. Gallmeister, POSIX.4, O'Reilly, pp. 128\[en]129 and 389\[en]391.
+B.O.\& Gallmeister, POSIX.4, O'Reilly, pp.\& 128\[en]129 and 389\[en]391.

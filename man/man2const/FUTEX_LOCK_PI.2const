@@ -35,12 +35,12 @@ the kernel atomically sets the
 bit, which signals the futex owner that it cannot unlock the futex in
 user space atomically by setting the futex value to 0.
 .\" tglx (July 2015):
-.\"     The operation here is similar to the FUTEX_WAIT logic. When the user
+.\"     The operation here is similar to the FUTEX_WAIT logic.  When the user
 .\"     space atomic acquire does not succeed because the futex value was non
 .\"     zero, then the waiter goes into the kernel, takes the kernel internal
-.\"     lock and retries the acquisition under the lock. If the acquisition
+.\"     lock and retries the acquisition under the lock.  If the acquisition
 .\"     does not succeed either, then it sets the FUTEX_WAITERS bit, to signal
-.\"     the lock owner that it needs to go into the kernel. Here is the pseudo
+.\"     the lock owner that it needs to go into the kernel.  Here is the pseudo
 .\"     code:
 .\"
 .\"     	lock(kernel_lock);
@@ -100,7 +100,7 @@ policy).
 .\"     mtk: If the realm is restricted purely to SCHED_OTHER (SCHED_NORMAL)
 .\"          processes, does the nice value come into play also?
 .\"
-.\"     tglx: No. SCHED_OTHER/NORMAL tasks are handled in FIFO order
+.\"     tglx: No.  SCHED_OTHER/NORMAL tasks are handled in FIFO order
 This inheritance follows the lock chain in the case of nested locking
 .\" (i.e., task 1 blocks on lock A, held by task 2,
 .\" while task 2 blocks on lock B, held by task 3)
@@ -214,7 +214,7 @@ clock.
 .\" > Yes, that's another weird inconsistency.
 .\"
 .\" The reason is that phtread_mutex_timedlock() uses absolute timeouts based on
-.\" CLOCK_REALTIME. glibc folks asked to make that the default behaviour back
+.\" CLOCK_REALTIME.  glibc folks asked to make that the default behaviour back
 .\" then when we added LOCK_PI.
 .\"
 .SH SEE ALSO

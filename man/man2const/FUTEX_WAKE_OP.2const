@@ -1,3 +1,4 @@
+'\" t
 .\" Copyright, the authors of the Linux man-pages project
 .\"
 .\" %%%LICENSE_START(FREELY_REDISTRIBUTABLE)
@@ -24,7 +25,7 @@ Standard C library
 .\" commit 4732efbeb997189d9f9b04708dc26bf8613ed721
 .\"	Author: Jakub Jelinek <jakub@redhat.com>
 .\"	Date:   Tue Sep 6 15:16:25 2005 -0700
-.\" FIXME. (Torvald) The glibc condvar implementation is currently being
+.\" FIXME . (Torvald) The glibc condvar implementation is currently being
 .\"     revised (e.g., to not use an internal lock anymore).
 .\"     It is probably more future-proof to remove this paragraph.
 .\" [Torvald, do you have an update here?]
@@ -122,13 +123,14 @@ The
 component has one of the following values:
 .P
 .in +4n
-.EX
-FUTEX_OP_SET        0  /* uaddr2 = oparg; */
-FUTEX_OP_ADD        1  /* uaddr2 += oparg; */
-FUTEX_OP_OR         2  /* uaddr2 |= oparg; */
-FUTEX_OP_ANDN       3  /* uaddr2 &= \[ti]oparg; */
-FUTEX_OP_XOR        4  /* uaddr2 \[ha]= oparg; */
-.EE
+.TS
+l l l.
+FUTEX_OP_SET	0	/* uaddr2 = oparg; */
+FUTEX_OP_ADD	1	/* uaddr2 += oparg; */
+FUTEX_OP_OR	2	/* uaddr2 |= oparg; */
+FUTEX_OP_ANDN	3	/* uaddr2 &= \[ti]oparg; */
+FUTEX_OP_XOR	4	/* uaddr2 \[ha]= oparg; */
+.TE
 .in
 .P
 In addition, bitwise ORing the following value into

@@ -93,7 +93,8 @@ The operation could not be performed without blocking (i.e., the
 semaphore currently has the value zero).
 .TP
 .B EINTR
-The call was interrupted by a signal handler; see
+The call was interrupted by a signal handler;
+see
 .BR signal (7).
 .TP
 .B EINVAL
@@ -204,7 +205,7 @@ main(int argc, char *argv[])
     if (sem_init(&sem, 0, 0) == \-1)
         err(EXIT_FAILURE, "sem_init");
 \&
-    /* Establish SIGALRM handler; set alarm timer using argv[1]. */
+    /* Establish SIGALRM handler; set alarm timer using argv[1].  */
 \&
     sa.sa_handler = handler;
     sigemptyset(&sa.sa_mask);
@@ -215,7 +216,7 @@ main(int argc, char *argv[])
     alarm(atoi(argv[1]));
 \&
     /* Calculate relative interval as current time plus
-       number of seconds given argv[2]. */
+       number of seconds given argv[2].  */
 \&
     if (clock_gettime(CLOCK_REALTIME, &ts) == \-1)
         err(EXIT_FAILURE, "clock_gettime");
@@ -224,9 +225,9 @@ main(int argc, char *argv[])
 \&
     printf("%s() about to call sem_timedwait()\[rs]n", __func__);
     while ((s = sem_timedwait(&sem, &ts)) == \-1 && errno == EINTR)
-        continue;       /* Restart if interrupted by handler. */
+        continue;       /* Restart if interrupted by handler.  */
 \&
-    /* Check what happened. */
+    /* Check what happened.  */
 \&
     if (s == \-1) {
         if (errno == ETIMEDOUT)

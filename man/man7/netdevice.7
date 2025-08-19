@@ -25,7 +25,7 @@ structure:
 .in +4n
 .EX
 struct ifreq {
-    char ifr_name[IFNAMSIZ]; /* Interface name */
+    char ifr_name[IFNAMSIZ];  /* Interface name */
     union {
         struct sockaddr ifr_addr;
         struct sockaddr ifr_dstaddr;
@@ -56,7 +56,7 @@ structure:
 struct in6_ifreq {
     struct in6_addr     ifr6_addr;
     u32                 ifr6_prefixlen;
-    int                 ifr6_ifindex; /* Interface index */
+    int                 ifr6_ifindex;  /* Interface index */
 };
 .EE
 .in
@@ -221,7 +221,8 @@ Setting the network mask is a privileged operation.
 .B SIOCSIFMETRIC
 Get or set the metric of the device using
 .IR ifr_metric .
-This is currently not implemented; it sets
+This is currently not implemented;
+it sets
 .I ifr_metric
 to 0 if you attempt to read it and returns
 .B EOPNOTSUPP

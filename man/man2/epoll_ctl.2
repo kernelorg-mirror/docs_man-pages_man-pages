@@ -113,7 +113,8 @@ This event is also reported for the write end of a pipe when the read end
 has been closed.
 .IP
 .BR epoll_wait (2)
-will always report for this event; it is not necessary to set it in
+will always report for this event;
+it is not necessary to set it in
 .I events
 when calling
 .BR epoll_ctl ().
@@ -122,7 +123,8 @@ when calling
 Hang up happened on the associated file descriptor.
 .IP
 .BR epoll_wait (2)
-will always wait for this event; it is not necessary to set it in
+will always wait for this event;
+it is not necessary to set it in
 .I events
 when calling
 .BR epoll_ctl ().
@@ -232,7 +234,8 @@ yield the error
 .B EPOLLEXCLUSIVE
 may be used only in an
 .B EPOLL_CTL_ADD
-operation; attempts to employ it with
+operation;
+attempts to employ it with
 .B EPOLL_CTL_MOD
 yield an error.
 If

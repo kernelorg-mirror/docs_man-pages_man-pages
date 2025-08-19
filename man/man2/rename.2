@@ -88,7 +88,8 @@ must either not exist, or it must specify an empty directory.
 .P
 If
 .I oldpath
-refers to a symbolic link, the link is renamed; if
+refers to a symbolic link, the link is renamed;
+if
 .I newpath
 refers to a symbolic link, the link will be overwritten.
 .SS renameat()
@@ -234,11 +235,15 @@ When not part of a union/overlay,
 the whiteout appears as a character device with a {0,0} device number.
 .\" https://www.freebsd.org/cgi/man.cgi?query=mount_unionfs&manpath=FreeBSD+11.0-RELEASE
 (Note that other union/overlay implementations may employ different methods
-for storing whiteout entries; specifically, BSD union mount employs
+for storing whiteout entries;
+specifically,
+BSD union mount employs
 a separate inode type,
 .BR DT_WHT ,
-which, while supported by some filesystems available in Linux,
-such as CODA and XFS, is ignored by the kernel's whiteout support code,
+which,
+while supported by some filesystems available in Linux,
+such as CODA and XFS,
+is ignored by the kernel's whiteout support code,
 as of Linux 4.19, at least.)
 .IP
 .B RENAME_WHITEOUT

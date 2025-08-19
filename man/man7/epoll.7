@@ -149,7 +149,8 @@ as an edge-triggered
 .RB ( EPOLLET )
 interface is as follows:
 .IP (1) 5
-with nonblocking file descriptors; and
+with nonblocking file descriptors;
+and
 .IP (2)
 by waiting for an event only after
 .BR read (2)
@@ -291,7 +292,7 @@ struct epoll_event ev, events[MAX_EVENTS];
 int listen_sock, conn_sock, nfds, epollfd;
 \&
 /* Code to set up listening socket, \[aq]listen_sock\[aq],
-   (socket(), bind(), listen()) omitted. */
+   (socket(), bind(), listen()) omitted.  */
 \&
 epollfd = epoll_create1(0);
 if (epollfd == \-1) {

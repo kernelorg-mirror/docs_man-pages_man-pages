@@ -34,7 +34,8 @@ argument specifies which information is to be returned.
 The
 .I info
 argument is a pointer to a buffer used to store information
-returned by the call; the type of this argument depends on
+returned by the call;
+the type of this argument depends on
 .IR request .
 .P
 The following values are supported for
@@ -211,7 +212,8 @@ On success,
 returns 0
 (if not specified explicitly),
 or a positive value corresponding to the request.
-On failure, it returns \-1; the error can be diagnosed using
+On error, it returns \-1;
+the error can be diagnosed using
 .BR dlerror (3).
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -274,7 +276,7 @@ main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 \&
-    /* Obtain a handle for shared object specified on command line. */
+    /* Obtain a handle for shared object specified on command line.  */
 \&
     handle = dlopen(argv[1], RTLD_NOW);
     if (handle == NULL) {
@@ -283,14 +285,14 @@ main(int argc, char *argv[])
     }
 \&
     /* Discover the size of the buffer that we must pass to
-       RTLD_DI_SERINFO. */
+       RTLD_DI_SERINFO.  */
 \&
     if (dlinfo(handle, RTLD_DI_SERINFOSIZE, &serinfo) == \-1) {
         fprintf(stderr, "RTLD_DI_SERINFOSIZE failed: %s\[rs]n", dlerror());
         exit(EXIT_FAILURE);
     }
 \&
-    /* Allocate the buffer for use with RTLD_DI_SERINFO. */
+    /* Allocate the buffer for use with RTLD_DI_SERINFO.  */
 \&
     sip = malloc(serinfo.dls_size);
     if (sip == NULL) {
@@ -299,14 +301,14 @@ main(int argc, char *argv[])
     }
 \&
     /* Initialize the \[aq]dls_size\[aq] and \[aq]dls_cnt\[aq] fields in the newly
-       allocated buffer. */
+       allocated buffer.  */
 \&
     if (dlinfo(handle, RTLD_DI_SERINFOSIZE, sip) == \-1) {
         fprintf(stderr, "RTLD_DI_SERINFOSIZE failed: %s\[rs]n", dlerror());
         exit(EXIT_FAILURE);
     }
 \&
-    /* Fetch and print library search list. */
+    /* Fetch and print library search list.  */
 \&
     if (dlinfo(handle, RTLD_DI_SERINFO, sip) == \-1) {
         fprintf(stderr, "RTLD_DI_SERINFO failed: %s\[rs]n", dlerror());

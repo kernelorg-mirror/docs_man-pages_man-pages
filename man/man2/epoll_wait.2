@@ -60,7 +60,8 @@ will block until either:
 .IP \[bu] 3
 a file descriptor delivers an event;
 .IP \[bu]
-the call is interrupted by a signal handler; or
+the call is interrupted by a signal handler;
+or
 .IP \[bu]
 the timeout expires.
 .P
@@ -195,7 +196,8 @@ is not accessible with write permissions.
 The call was interrupted by a signal handler before either (1) any of the
 requested events occurred or (2) the
 .I timeout
-expired; see
+expired;
+see
 .BR signal (7).
 .TP
 .B EINVAL

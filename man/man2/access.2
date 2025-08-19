@@ -70,10 +70,12 @@ UID and GID, rather than the effective IDs as is done when
 actually attempting an operation (e.g.,
 .BR open (2))
 on the file.
-Similarly, for the root user, the check uses the set of
-permitted capabilities rather than the set of effective
-capabilities; and for non-root users, the check uses an empty set
-of capabilities.
+Similarly,
+for the root user,
+the check uses the set of permitted capabilities
+rather than the set of effective capabilities;
+and for non-root users,
+the check uses an empty set of capabilities.
 .P
 This allows set-user-ID programs and capability-endowed programs
 to easily determine the invoking user's authority.
@@ -154,7 +156,8 @@ If
 is
 .BR AT_FDCWD ,
 the call operates on the current working directory.
-This flag is Linux-specific; define
+This flag is Linux-specific;
+define
 .B _GNU_SOURCE
 to obtain its definition.
 .TP

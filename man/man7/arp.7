@@ -40,12 +40,14 @@ tuned by the
 .I /proc
 interfaces described below.
 .P
-When there is no positive feedback for an existing mapping after some
-time (see the
+When there is no positive feedback for an existing mapping after some time
+(see the
 .I /proc
-interfaces below), a neighbor cache entry is considered stale.
-Positive feedback can be gotten from a higher layer; for example from
-a successful TCP ACK.
+interfaces below),
+a neighbor cache entry is considered stale.
+Positive feedback can be gotten from a higher layer;
+for example,
+from a successful TCP ACK.
 Other protocols can signal forward progress
 using the
 .B MSG_CONFIRM
@@ -272,21 +274,23 @@ Support for the old ioctls was dropped in Linux 2.2.
 .P
 Support for proxy arp entries for networks (netmask not equal 0xffffffff)
 was dropped in Linux 2.2.
-It is replaced by automatic proxy arp setup by
-the kernel for all reachable hosts on other interfaces (when
-forwarding and proxy arp is enabled for the interface).
+It is replaced by automatic proxy arp setup by the kernel
+for all reachable hosts on other interfaces
+(when forwarding and proxy arp is enabled for the interface).
 .P
 The
 .I neigh/*
 interfaces did not exist before Linux 2.2.
 .SH BUGS
-Some timer settings are specified in jiffies, which is architecture-
-and kernel version-dependent; see
+Some timer settings are specified in jiffies,
+which is architecture- and kernel version-dependent;
+see
 .BR time (7).
 .P
 There is no way to signal positive feedback from user space.
 This means connection-oriented protocols implemented in user space
-will generate excessive ARP traffic, because ndisc will regularly
+will generate excessive ARP traffic,
+because ndisc will regularly
 reprobe the MAC address.
 The same problem applies for some kernel protocols (e.g., NFS over UDP).
 .P

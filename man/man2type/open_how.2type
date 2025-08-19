@@ -15,7 +15,7 @@ Linux kernel headers
 .BR "    u64  flags;" "    /* " O_ "* flags */"
 .BR "    u64  mode;" "     /* Mode for " O_ { CREAT , TMPFILE "} */"
 .BR "    u64  resolve;" "  /* " RESOLVE_ "* flags */"
-    /* ... */
+    /* ...\& */
 .B };
 .EE
 .SH DESCRIPTION

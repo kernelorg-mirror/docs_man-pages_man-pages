@@ -90,7 +90,8 @@ A set of functions for modifying and inspecting variables of type
 .P
 The use of
 .BR sigprocmask ()
-is unspecified in a multithreaded process; see
+is unspecified in a multithreaded process;
+see
 .BR pthread_sigmask (3).
 .SH RETURN VALUE
 .BR sigprocmask ()
@@ -159,7 +160,7 @@ This argument is currently required to have a fixed architecture specific value
 (equal to
 .IR sizeof(kernel_sigset_t) ).
 .\" sizeof(kernel_sigset_t) == _NSIG / 8,
-.\" which equals to 8 on most architectures, but e.g. on MIPS it's 16.
+.\" which equals to 8 on most architectures, but e.g., on MIPS it's 16.
 .P
 The glibc
 .BR sigprocmask ()

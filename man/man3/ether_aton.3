@@ -67,13 +67,17 @@ The
 .BR ether_line ()
 function parses a line in
 .I /etc/ethers
-format (ethernet address followed by whitespace followed by
-hostname; \[aq]#\[aq] introduces a comment) and returns an address
-and hostname pair, or nonzero if it cannot be parsed.
+format
+(ethernet address followed by whitespace followed by hostname;
+\[aq]#\[aq] introduces a comment)
+and returns an address and hostname pair,
+or nonzero if it cannot be parsed.
 The buffer pointed to by
 .I hostname
-must be sufficiently long, for example, have the same length as
-.IR line .
+must be sufficiently long
+\[em]for example,
+have the same length as
+.IR line \[em].
 .P
 The functions
 .BR ether_ntoa_r ()

@@ -91,9 +91,11 @@ Either
 .I range.start
 or
 .I range.len
-was not a multiple of the system page size; or
+was not a multiple of the system page size;
+or
 .I range.len
-was zero; or the range specified was invalid.
+was zero;
+or the range specified was invalid.
 .TP
 .B EINVAL
 An invalid bit was specified in the

@@ -204,30 +204,30 @@ main (void)
     suseconds_t us;
     intmax_t    tmp;
 \&
-    /* Scan the number from the string into the temporary variable. */
+    /* Scan the number from the string into the temporary variable.  */
 \&
     sscanf(str, "%jd", &tmp);
 \&
-    /* Check that the value is within the valid range of suseconds_t. */
+    /* Check that the value is within the valid range of suseconds_t.  */
 \&
     if (tmp < \-1 || tmp > 1000000) {
         fprintf(stderr, "Scanned value outside valid range!\[rs]n");
         exit(EXIT_FAILURE);
     }
 \&
-    /* Copy the value to the suseconds_t variable \[aq]us\[aq]. */
+    /* Copy the value to the suseconds_t variable \[aq]us\[aq].  */
 \&
     us = tmp;
 \&
     /* Even though suseconds_t can hold the value \-1, this isn\[aq]t
-       a sensible number of microseconds. */
+       a sensible number of microseconds.  */
 \&
     if (us < 0) {
         fprintf(stderr, "Scanned value shouldn\[aq]t be negative!\[rs]n");
         exit(EXIT_FAILURE);
     }
 \&
-    /* Print the value. */
+    /* Print the value.  */
 \&
     printf("There are %jd microseconds in half a second.\[rs]n",
             (intmax_t) us);

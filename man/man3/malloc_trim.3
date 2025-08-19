@@ -61,11 +61,13 @@ GNU.
 .SH VERSIONS
 glibc 2.0.
 .SH NOTES
-Only the main heap (using
+Only the main heap
+(using
 .BR sbrk (2))
 honors the
 .I pad
-argument; thread heaps do not.
+argument;
+thread heaps do not.
 .P
 Since glibc 2.8 this function frees memory in all arenas and in all
 chunks with whole free pages.

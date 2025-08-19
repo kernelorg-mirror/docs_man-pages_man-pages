@@ -18,7 +18,8 @@ Standard C library
 .P
 .IR Note :
 On some architectures,
-there is no glibc wrapper for this system call; see VERSIONS.
+there is no glibc wrapper for this system call;
+see VERSIONS.
 .SH DESCRIPTION
 .BR cacheflush ()
 flushes the contents of the indicated cache(s) for the
@@ -94,7 +95,8 @@ NDS32:
 .fi
 .P
 On the above architectures,
-glibc does not provide a wrapper for this system call; call it using
+glibc does not provide a wrapper for this system call;
+call it using
 .BR syscall (2).
 .SS GCC alternative
 Unless you need the finer grained control that this system call provides,

@@ -111,8 +111,8 @@ This structure is defined as follows:
 .EX
 struct mq_attr {
     long mq_flags;       /* Flags (ignored for mq_open()) */
-    long mq_maxmsg;      /* Max. # of messages on queue */
-    long mq_msgsize;     /* Max. message size (bytes) */
+    long mq_maxmsg;      /* Max.\& # of messages on queue */
+    long mq_msgsize;     /* Max.\& message size (bytes) */
     long mq_curmsgs;     /* # of messages currently in queue
                             (ignored for mq_open()) */
 };
@@ -133,7 +133,8 @@ is NULL, then the queue is created with implementation-defined
 default attributes.
 Since Linux 3.5, two
 .I /proc
-files can be used to control these defaults; see
+files can be used to control these defaults;
+see
 .BR mq_overview (7)
 for details.
 .SH RETURN VALUE
@@ -246,7 +247,8 @@ Insufficient memory.
 Insufficient space for the creation of a new message queue.
 This probably occurred because the
 .I queues_max
-limit was encountered; see
+limit was encountered;
+see
 .BR mq_overview (7).
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see

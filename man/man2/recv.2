@@ -103,9 +103,12 @@ flag of
 .BR open (2).
 .TP
 .BR MSG_DONTWAIT " (since Linux 2.2)"
-Enables nonblocking operation; if the operation would block,
-the call fails with the error
-.BR EAGAIN " or " EWOULDBLOCK .
+Enables nonblocking operation;
+if the operation would block,
+the call fails with
+.B EAGAIN
+or
+.BR EWOULDBLOCK .
 This provides similar behavior to setting the
 .B O_NONBLOCK
 flag (via the
@@ -259,7 +262,7 @@ that source address is placed in the buffer pointed to by
 .\" is also filled in for stream sockets in the UNIX domain, but is not
 .\" filled in for stream sockets in the Internet domain.)
 .\" [The above notes on AF_UNIX and AF_INET sockets apply as at
-.\" Kernel 2.4.18. (MTK, 22 Jul 02)]
+.\" Kernel 2.4.18.  (MTK, 22 Jul 02)]
 In this case,
 .I addrlen
 is a value-result argument.
@@ -389,8 +392,9 @@ is set on return of
 It can contain several flags:
 .TP
 .B MSG_EOR
-indicates end-of-record; the data returned completed a record (generally
-used with sockets of type
+indicates end-of-record;
+the data returned completed a record
+(generally, used with sockets of type
 .BR SOCK_SEQPACKET ).
 .TP
 .B MSG_TRUNC
@@ -461,8 +465,9 @@ The receive buffer pointer(s) point outside the process's
 address space.
 .TP
 .B EINTR
-The receive was interrupted by delivery of a signal before
-any data was available; see
+The receive was interrupted by delivery of a signal
+before any data was available;
+see
 .BR signal (7).
 .TP
 .B EINVAL

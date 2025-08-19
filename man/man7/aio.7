@@ -121,7 +121,8 @@ See
 for further details.
 .TP
 .I aio_lio_opcode
-The type of operation to be performed; used only for
+The type of operation to be performed;
+used only for
 .BR lio_listio (3).
 .P
 In addition to the standard functions listed above,
@@ -285,7 +286,7 @@ main(int argc, char *argv[])
 \&
     numReqs = argc \- 1;
 \&
-    /* Allocate our arrays. */
+    /* Allocate our arrays.  */
 \&
     struct ioRequest *ioList = calloc(numReqs, sizeof(*ioList));
     if (ioList == NULL)
@@ -295,7 +296,7 @@ main(int argc, char *argv[])
     if (aiocbList == NULL)
         err(EXIT_FAILURE, "calloc");
 \&
-    /* Establish handlers for SIGQUIT and the I/O completion signal. */
+    /* Establish handlers for SIGQUIT and the I/O completion signal.  */
 \&
     sa.sa_flags = SA_RESTART;
     sigemptyset(&sa.sa_mask);
@@ -310,7 +311,7 @@ main(int argc, char *argv[])
         err(EXIT_FAILURE, "sigaction");
 \&
     /* Open each file specified on the command line, and queue
-       a read request on the resulting file descriptor. */
+       a read request on the resulting file descriptor.  */
 \&
     for (size_t j = 0; j < numReqs; j++) {
         ioList[j].reqNum = j;
@@ -342,7 +343,7 @@ main(int argc, char *argv[])
 \&
     openReqs = numReqs;
 \&
-    /* Loop, monitoring status of I/O requests. */
+    /* Loop, monitoring status of I/O requests.  */
 \&
     while (openReqs > 0) {
         sleep(3);       /* Delay between each monitoring step */
@@ -351,7 +352,7 @@ main(int argc, char *argv[])
 \&
             /* On receipt of SIGQUIT, attempt to cancel each of the
                outstanding I/O requests, and display status returned
-               from the cancelation requests. */
+               from the cancelation requests.  */
 \&
             printf("got SIGQUIT; canceling I/O requests: \[rs]n");
 \&
@@ -376,7 +377,7 @@ main(int argc, char *argv[])
         }
 \&
         /* Check the status of each I/O request that is still
-           in progress. */
+           in progress.  */
 \&
         printf("aio_error():\[rs]n");
         for (size_t j = 0; j < numReqs; j++) {
@@ -408,7 +409,7 @@ main(int argc, char *argv[])
 \&
     printf("All I/O requests completed\[rs]n");
 \&
-    /* Check status return of all I/O requests. */
+    /* Check status return of all I/O requests.  */
 \&
     printf("aio_return():\[rs]n");
     for (size_t j = 0; j < numReqs; j++) {

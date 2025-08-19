@@ -127,7 +127,7 @@ main(void)
     int s;
 \&
     /* Block SIGQUIT and SIGUSR1; other threads created by main()
-       will inherit a copy of the signal mask. */
+       will inherit a copy of the signal mask.  */
 \&
     sigemptyset(&set);
     sigaddset(&set, SIGQUIT);
@@ -141,7 +141,7 @@ main(void)
         errc(EXIT_FAILURE, s, "pthread_create");
 \&
     /* Main thread carries on to create other threads and/or do
-       other work. */
+       other work.  */
 \&
     pause();            /* Dummy pause so we can test program */
 }

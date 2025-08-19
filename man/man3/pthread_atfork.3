@@ -54,9 +54,11 @@ On error, it returns an error number.
 .BR pthread_atfork ()
 may be called multiple times by a process
 to register additional handlers.
-The handlers for each phase are called in a specified order: the
+The handlers for each phase are called in a specified order:
+the
 .I prepare
-handlers are called in reverse order of registration; the
+handlers are called in reverse order of registration;
+the
 .I parent
 and
 .I child

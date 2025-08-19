@@ -98,7 +98,8 @@ On success,
 .BR mq_send ()
 and
 .BR mq_timedsend ()
-return zero; on error, \-1 is returned, with
+return zero;
+on error, \-1 is returned, with
 .I errno
 set to indicate the error.
 .SH ERRORS
@@ -115,7 +116,8 @@ The descriptor specified in
 was invalid or not opened for writing.
 .TP
 .B EINTR
-The call was interrupted by a signal handler; see
+The call was interrupted by a signal handler;
+see
 .BR signal (7).
 .TP
 .B EINVAL

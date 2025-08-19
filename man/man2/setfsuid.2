@@ -42,7 +42,9 @@ need to change what user and group ID is used for file access without a
 corresponding change in the real and effective user and group IDs.
 A change in the normal user IDs for a program such as the NFS server
 is (was) a security hole that can expose it to unwanted signals.
-(However, this issue is historical; see below.)
+(However,
+this issue is historical;
+see below.)
 .P
 .BR setfsuid ()
 will succeed only if the caller is the superuser or if

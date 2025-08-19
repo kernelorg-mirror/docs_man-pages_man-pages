@@ -90,10 +90,12 @@ struct sigvec {
 .P
 The
 .I sv_handler
-field specifies the disposition of the signal, and is either:
+field specifies the disposition of the signal,
+and is either:
 the address of a signal handler function;
 .BR SIG_DFL ,
-meaning the default disposition applies for the signal; or
+meaning the default disposition applies for the signal;
+or
 .BR SIG_IGN ,
 meaning that the signal is ignored.
 .P
@@ -139,7 +141,8 @@ or until the process performs an
 Handle the signal on the alternate signal stack
 (historically established under BSD using the obsolete
 .BR sigstack ()
-function; the POSIX replacement is
+function;
+the POSIX replacement is
 .BR sigaltstack (2)).
 .P
 The
@@ -190,7 +193,8 @@ This call is equivalent to
 .SH RETURN VALUE
 The
 .BR sigvec ()
-function returns 0 on success; on error, it returns \-1 and sets
+function returns 0 on success;
+on error, it returns \-1 and sets
 .I errno
 to indicate the error.
 .P

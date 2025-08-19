@@ -75,11 +75,11 @@ on the same futex word.
 .\" Notes from Darren Hart (Dec 2015):
 .\"     Totally ordered with respect futex operations refers to semantics
 .\"     of the ACQUIRE/RELEASE operations and how they impact ordering of
-.\"     memory reads and writes. The kernel futex operations are protected
+.\"     memory reads and writes.  The kernel futex operations are protected
 .\"     by spinlocks, which ensure that all operations are serialized
 .\"     with respect to one another.
 .\"
-.\"     This is a lot to attempt to define in this document. Perhaps a
+.\"     This is a lot to attempt to define in this document.  Perhaps a
 .\"     reference to linux/Documentation/memory-barriers.txt as a footnote
 .\"     would be sufficient? Or perhaps for this manual, "serialized" would
 .\"     be sufficient, with a footnote regarding "totally ordered" and a
@@ -269,7 +269,7 @@ for the implementation of very specific IPC mechanisms.)
 .\"
 .\" Quoting Darren Hart:
 .\"     These opcodes paired with the PI futex value policy (described below)
-.\"     defines a "futex" as PI aware. These were created very specifically
+.\"     defines a "futex" as PI aware.  These were created very specifically
 .\"     in support of PI pthread_mutexes, so it makes a lot more sense to
 .\"     talk about a PI aware pthread_mutex, than a PI aware futex, since
 .\"     there is a lot of policy and scaffolding that has to be built up
@@ -294,7 +294,9 @@ of the owning thread.
 If the lock is owned and there are threads contending for the lock,
 then the
 .B FUTEX_WAITERS
-bit shall be set in the futex word's value; in other words, this value is:
+bit shall be set in the futex word's value;
+in other words,
+this value is:
 .IP
 .in +4n
 .EX
@@ -343,11 +345,11 @@ before the calling thread returns to user space.
 It is important to note
 .\" tglx (July 2015):
 .\"     If there are multiple waiters on a pi futex then a wake pi operation
-.\"     will wake the first waiter and hand over the lock to this waiter. This
+.\"     will wake the first waiter and hand over the lock to this waiter.  This
 .\"     includes handing over the rtmutex which represents the futex in the
-.\"     kernel. The strict requirement is that the futex owner and the rtmutex
+.\"     kernel.  The strict requirement is that the futex owner and the rtmutex
 .\"     owner must be the same, except for the update period which is
-.\"     serialized by the futex internal locking. That means the kernel must
+.\"     serialized by the futex internal locking.  That means the kernel must
 .\"     update the user-space value prior to returning to user space
 that the kernel will update the futex word's value prior
 to returning to user space.
@@ -371,9 +373,9 @@ bit and is then responsible for cleaning up the stale state left over by
 the dead owner.
 .\" tglx (July 2015):
 .\"     The FUTEX_OWNER_DIED bit can also be set on uncontended futexes, where
-.\"     the kernel has no state associated. This happens via the robust futex
-.\"     mechanism. In that case the futex value will be set to
-.\"     FUTEX_OWNER_DIED. The robust futex mechanism is also available for non
+.\"     the kernel has no state associated.  This happens via the robust futex
+.\"     mechanism.  In that case the futex value will be set to
+.\"     FUTEX_OWNER_DIED.  The robust futex mechanism is also available for non
 .\"     PI futexes.
 .P
 PI futexes are operated on by specifying one of the values listed below in
@@ -440,7 +442,7 @@ operation.
 .\"
 .\" Darren Hart notes that a patch to allow glibc to fully support
 .\" PI-aware pthreads condition variables has not yet been accepted into
-.\" glibc. The story is complex, and can be found at
+.\" glibc.  The story is complex, and can be found at
 .\" https://sourceware.org/bugzilla/show_bug.cgi?id=11588
 .\" Darren notes that in the meantime, the patch is shipped with various
 .\" PREEMPT_RT-enabled Linux systems.
@@ -454,14 +456,14 @@ operation.
 .\"     the glibc implementation does not yet take full advantage of this.
 .\"     Specifically, the condvar internal data lock remains a non-PI aware
 .\"     mutex, regardless of the type of the pthread_mutex associated with
-.\"     the condvar. This can lead to an unbounded priority inversion on
+.\"     the condvar.  This can lead to an unbounded priority inversion on
 .\"     the internal data lock even when associating a PI aware
 .\"     pthread_mutex with a condvar during a pthread_cond*_wait
-.\"     operation. For this reason, it is not recommended to rely on
+.\"     operation.  For this reason, it is not recommended to rely on
 .\"     priority inheritance when using pthread condition variables.
 .\"
 .\" The problem is that the obvious location for this text is
-.\" the pthread_cond*wait(3) man page. However, such a man page
+.\" the pthread_cond*wait(3) man page.  However, such a man page
 .\" does not currently exist.
 .\"
 .\""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -560,7 +562,7 @@ Child  (18535) 4
 \&
    Demonstrate the use of futexes in a program where parent and child
    use a pair of futexes located inside a shared anonymous mapping to
-   synchronize access to a shared resource: the terminal. The two
+   synchronize access to a shared resource: the terminal.  The two
    processes each write \[aq]num\-loops\[aq] messages to the terminal and employ
    a synchronization protocol that ensures that they alternate in
    writing messages.
@@ -590,7 +592,7 @@ futex(uint32_t *uaddr, int op, uint32_t val,
 }
 \&
 /* Acquire the futex pointed to by \[aq]futexp\[aq]: wait for its value to
-   become 1, and then set the value to 0. */
+   become 1, and then set the value to 0.  */
 \&
 static void
 fwait(uint32_t *futexp)
@@ -604,7 +606,7 @@ fwait(uint32_t *futexp)
            if (*ptr == *oldval)
                *ptr = newval;
 \&
-       It returns true if the test yielded true and *ptr was updated. */
+       It returns true if the test yielded true and *ptr was updated.  */
 \&
     while (1) {
 \&
@@ -612,7 +614,7 @@ fwait(uint32_t *futexp)
         if (atomic_compare_exchange_strong(futexp, &one, 0))
             break;      /* Yes */
 \&
-        /* Futex is not available; wait. */
+        /* Futex is not available; wait.  */
 \&
         s = futex(futexp, FUTEX_WAIT, 0, NULL, NULL, 0);
         if (s == \-1 && errno != EAGAIN)
@@ -622,7 +624,7 @@ fwait(uint32_t *futexp)
 \&
 /* Release the futex pointed to by \[aq]futexp\[aq]: if the futex currently
    has the value 0, set its value to 1 and then wake any futex waiters,
-   so that if the peer is blocked in fwait(), it can proceed. */
+   so that if the peer is blocked in fwait(), it can proceed.  */
 \&
 static void
 fpost(uint32_t *futexp)
@@ -631,7 +633,7 @@ fpost(uint32_t *futexp)
     const uint32_t  zero = 0;
 \&
     /* atomic_compare_exchange_strong() was described
-       in comments above. */
+       in comments above.  */
 \&
     if (atomic_compare_exchange_strong(futexp, &zero, 1)) {
         s = futex(futexp, FUTEX_WAKE, 1, NULL, NULL, 0);
@@ -653,7 +655,7 @@ main(int argc, char *argv[])
     /* Create a shared anonymous mapping that will hold the futexes.
        Since the futexes are being shared between processes, we
        subsequently use the "shared" futex operations (i.e., not the
-       ones suffixed "_PRIVATE"). */
+       ones suffixed "_PRIVATE").  */
 \&
     iaddr = mmap(NULL, sizeof(*iaddr) * 2, PROT_READ | PROT_WRITE,
                  MAP_ANONYMOUS | MAP_SHARED, \-1, 0);
@@ -667,7 +669,7 @@ main(int argc, char *argv[])
     *futex2 = 1;        /* State: available */
 \&
     /* Create a child process that inherits the shared anonymous
-       mapping. */
+       mapping.  */
 \&
     childPid = fork();
     if (childPid == \-1)
@@ -683,7 +685,7 @@ main(int argc, char *argv[])
         exit(EXIT_SUCCESS);
     }
 \&
-    /* Parent falls through to here. */
+    /* Parent falls through to here.  */
 \&
     for (unsigned int j = 0; j < nloops; j++) {
         fwait(futex2);

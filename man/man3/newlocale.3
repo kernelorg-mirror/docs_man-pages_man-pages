@@ -296,7 +296,7 @@ main(int argc, char *argv[])
     }
 \&
     /* Create a new locale object, taking the LC_NUMERIC settings
-       from the locale specified in argv[1]. */
+       from the locale specified in argv[1].  */
 \&
     loc = newlocale(LC_NUMERIC_MASK, argv[1], (locale_t) 0);
     if (loc == (locale_t) 0)
@@ -304,9 +304,9 @@ main(int argc, char *argv[])
 \&
     /* If a second command\-line argument was specified, modify the
        locale object to take the LC_TIME settings from the locale
-       specified in argv[2]. We assign the result of this newlocale()
+       specified in argv[2].  We assign the result of this newlocale()
        call to \[aq]nloc\[aq] rather than \[aq]loc\[aq], since in some cases, we might
-       want to preserve \[aq]loc\[aq] if this call fails. */
+       want to preserve \[aq]loc\[aq] if this call fails.  */
 \&
     if (argc > 2) {
         nloc = newlocale(LC_TIME_MASK, argv[2], loc);
@@ -315,15 +315,15 @@ main(int argc, char *argv[])
         loc = nloc;
     }
 \&
-    /* Apply the newly created locale to this thread. */
+    /* Apply the newly created locale to this thread.  */
 \&
     uselocale(loc);
 \&
-    /* Test effect of LC_NUMERIC. */
+    /* Test effect of LC_NUMERIC.  */
 \&
     printf("%8.3f\[rs]n", 123456.789);
 \&
-    /* Test effect of LC_TIME. */
+    /* Test effect of LC_TIME.  */
 \&
     t = time(NULL);
     tm = localtime(&t);
@@ -336,7 +336,7 @@ main(int argc, char *argv[])
 \&
     printf("%s\[rs]n", buf);
 \&
-    /* Free the locale object. */
+    /* Free the locale object.  */
 \&
     uselocale(LC_GLOBAL_LOCALE);    /* So \[aq]loc\[aq] is no longer in use */
     freelocale(loc);

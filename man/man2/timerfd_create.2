@@ -326,7 +326,8 @@ The file descriptor is readable
 (the
 .BR select (2)
 .I readfds
-argument; the
+argument;
+the
 .BR poll (2)
 .B POLLIN
 flag)
@@ -497,7 +498,8 @@ A discontinuous change (e.g.,
 .BR settimeofday (2))
 is subsequently made to the
 .B CLOCK_REALTIME
-clock; and
+clock;
+and
 .IP (3)
 the caller once more calls
 .BR timerfd_settime ()
@@ -544,16 +546,16 @@ The following shell session demonstrates the use of the program:
 .in +4n
 .EX
 .RB "$" " a.out 3 1 100"
-0.000: timer started
-3.000: read: 1; total=1
-4.000: read: 1; total=2
+0.000:	timer started
+3.000:	read: 1; total=1
+4.000:	read: 1; total=2
 .BR "\[ha]Z " "                 # type control\-Z to suspend the program"
 [1]+  Stopped                 ./timerfd3_demo 3 1 100
 .RB "$ " "fg" "                # Resume execution after a few seconds"
 a.out 3 1 100
-9.660: read: 5; total=7
-10.000: read: 1; total=8
-11.000: read: 1; total=9
+9.660:	read: 5; total=7
+10.000:	read: 1; total=8
+11.000:	read: 1; total=9
 .BR "\[ha]C " "                 # type control\-C to suspend the program"
 .EE
 .in
@@ -631,7 +633,7 @@ print_elapsed_time(void)
         secs\-\-;
         nsecs += 1000000000;
     }
-    printf("%d.%03d: ", secs, (nsecs + 500000) / 1000000);
+    printf("%d.%03d:\[rs]t", secs, (nsecs + 500000) / 1000000);
 }
 \&
 int
@@ -653,7 +655,7 @@ main(int argc, char *argv[])
         err(EXIT_FAILURE, "clock_gettime");
 \&
     /* Create a CLOCK_REALTIME absolute timer with initial
-       expiration and interval as specified in command line. */
+       expiration and interval as specified in command line.  */
 \&
     new_value.it_value.tv_sec = now.tv_sec + atoi(argv[1]);
     new_value.it_value.tv_nsec = now.tv_nsec;

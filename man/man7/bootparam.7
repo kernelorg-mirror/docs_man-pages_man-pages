@@ -113,26 +113,30 @@ use 'root=/dev/fd1'.
 The root device can be specified symbolically or numerically.
 A symbolic specification has the form
 .IR /dev/XXYN ,
-where XX designates
-the device type (e.g., 'hd' for ST-506 compatible hard disk, with Y in
-\&'a'\[en]'d'; 'sd' for SCSI compatible disk, with Y in 'a'\[en]'e'),
-Y the driver letter or
-number, and N the number (in decimal) of the partition on this device.
+where XX designates the device type
+(e.g.,
+\&'hd' for ST-506 compatible hard disk,
+with Y in \&'a'\[en]'d';
+\&'sd' for SCSI compatible disk,
+with Y in 'a'\[en]'e'),
+Y the driver letter or number,
+and N the number (in decimal) of the partition on this device.
 .IP
-Note that this has nothing to do with the designation of these
-devices on your filesystem.
+Note that this has nothing to do with
+the designation of these devices on your filesystem.
 The '/dev/' part is purely conventional.
 .IP
-The more awkward and less portable numeric specification of the above
-possible root devices in major/minor format is also accepted.
+The more awkward and less portable numeric specification
+of the above possible root devices
+in major/minor format is also accepted.
 (For example,
 .I /dev/sda3
 is major 8, minor 3, so you could use 'root=0x803' as an
 alternative.)
 .TP
 .B 'rootdelay='
-This parameter sets the delay (in seconds) to pause before attempting
-to mount the root filesystem.
+This parameter sets the delay (in seconds)
+to pause before attempting to mount the root filesystem.
 .TP
 .B 'rootflags=...'
 This parameter sets the mount option string for the root filesystem
@@ -140,12 +144,13 @@ This parameter sets the mount option string for the root filesystem
 .BR fstab (5)).
 .TP
 .B 'rootfstype=...'
-The 'rootfstype' option tells the kernel to mount the root filesystem as
-if it where of the type specified.
-This can be useful (for example) to
-mount an ext3 filesystem as ext2 and then remove the journal in the root
-filesystem, in fact reverting its format from ext3 to ext2 without the
-need to boot the box from alternate media.
+The 'rootfstype' option tells the kernel to mount the root filesystem
+as if it where of the type specified.
+This can be useful (for example)
+to mount an ext3 filesystem as ext2
+and then remove the journal in the root filesystem,
+in fact reverting its format from ext3 to ext2
+without the need to boot the box from alternate media.
 .TP
 .B 'ro'
 .TQ
@@ -153,9 +158,10 @@ need to boot the box from alternate media.
 The 'ro' option tells the kernel to mount the root filesystem
 as 'read-only' so that filesystem consistency check programs (fsck)
 can do their work on a quiescent filesystem.
-No processes can
-write to files on the filesystem in question until it is 'remounted'
-as read/write capable, for example, by 'mount \-w \-n \-o remount /'.
+No processes can write to files on the filesystem in question
+until it is 'remounted' as read/write capable,
+for example,
+by 'mount \-w \-n \-o remount /'.
 (See also
 .BR mount (8).)
 .IP
@@ -166,7 +172,8 @@ This is the default.
 This tells the kernel the location of
 the suspend-to-disk data that you want the machine to resume from
 after hibernation.
-Usually, it is the same as your swap partition or file.
+Usually,
+it is the same as your swap partition or file.
 Example:
 .IP
 .in +4n
@@ -235,9 +242,10 @@ instead jump through the BIOS.
 .TQ
 .B 'maxcpus=N'
 (Only when __SMP__ is defined.)
-A command-line option of 'nosmp' or 'maxcpus=0' will disable SMP
-activation entirely; an option 'maxcpus=N' limits the maximum number
-of CPUs activated in SMP mode to N.
+A command-line option of 'nosmp' or 'maxcpus=0'
+will disable SMP activation entirely;
+an option 'maxcpus=N' limits
+the maximum number of CPUs activated in SMP mode to N.
 .SS Boot arguments for use by kernel developers
 .TP
 .B "'debug'"
@@ -347,20 +355,24 @@ This is needed in case the ramdisk follows a kernel image.
 and
 .BR CONFIG_BLK_DEV_INITRD .)
 These days it is possible to compile the kernel to use initrd.
-When this feature is enabled, the boot process will load the kernel
-and an initial ramdisk; then the kernel converts initrd into
-a "normal" ramdisk, which is mounted read-write as root device;
+When this feature is enabled,
+the boot process will load the kernel and an initial ramdisk;
+then the kernel converts initrd into a "normal" ramdisk,
+which is mounted read-write as root device;
 then
 .I /linuxrc
-is executed; afterward the "real" root filesystem is mounted,
+is executed;
+afterward the "real" root filesystem is mounted,
 and the initrd filesystem is moved over to
 .IR /initrd ;
-finally
-the usual boot sequence (e.g., invocation of
+finally,
+the usual boot sequence
+(e.g., invocation of
 .IR /sbin/init )
 is performed.
 .IP
-For a detailed description of the initrd feature, see the kernel source file
+For a detailed description of the initrd feature,
+see the kernel source file
 .I Documentation/admin\-guide/initrd.rst
 .\" commit 9d85025b0418163fae079c9ba8f8445212de8568
 (or
@@ -535,10 +547,12 @@ is identified automatically, but if it isn't then this may help.
 .B "Standard ST-506 Disk Driver Options ('hd=')"
 The standard disk driver can accept geometry arguments for the disks
 similar to the IDE driver.
-Note however that it expects only three
-values (C/H/S); any more or any less and it will silently ignore you.
-Also, it accepts only 'hd=' as an argument, that is, 'hda='
-and so on are not valid here.
+Note however that it expects only three values (C/H/S);
+any more or any less and it will silently ignore you.
+Also,
+it accepts only 'hd=' as an argument,
+that is,
+\&'hda=' and so on are not valid here.
 The format is as follows:
 .IP
 .in +4n
@@ -547,12 +561,14 @@ hd=cyls,heads,sects
 .EE
 .in
 .IP
-If there are two disks installed, the above is repeated with the
-geometry parameters of the second disk.
+If there are two disks installed,
+the above is repeated with the geometry parameters of the second disk.
 .SS Ethernet devices
-Different drivers make use of different parameters, but they all at
-least share having an IRQ, an I/O port base value, and a name.
-In its most generic form, it looks something like this:
+Different drivers make use of different parameters,
+but they all at least share having
+an IRQ, an I/O port base value, and a name.
+In its most generic form,
+it looks something like this:
 .P
 .in +4n
 .EX

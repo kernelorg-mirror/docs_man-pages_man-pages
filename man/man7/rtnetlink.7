@@ -25,7 +25,8 @@ disciplines, traffic classes and packet classifiers may all be controlled
 through
 .B NETLINK_ROUTE
 sockets.
-It is based on netlink messages; see
+It is based on netlink messages;
+see
 .BR netlink (7)
 for more information.
 .\" FIXME . ? all these macros could be moved to rtnetlink(3)
@@ -354,7 +355,8 @@ RTA_CACHEINFO:struct rta_cacheinfo:(see linux/rtnetlink.h)
 RTA_SESSION::No longer used
 RTA_MP_ALGO::No longer used
 RTA_TABLE:int:T{
-Routing table ID; if set,
+Routing table ID;
+if set,
 .br
 rtm_table is ignored
 T}

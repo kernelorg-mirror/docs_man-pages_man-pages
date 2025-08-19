@@ -50,8 +50,10 @@ and bind the socket to
 .BR INADDR_ANY .
 .P
 All receive operations return only one packet.
-When the packet is smaller than the passed buffer, only that much
-data is returned; when it is bigger, the packet is truncated and the
+When the packet is smaller than the passed buffer,
+only that much data is returned;
+when it is bigger,
+the packet is truncated and the
 .B MSG_TRUNC
 flag is set.
 .B MSG_WAITALL
@@ -81,7 +83,8 @@ Path MTU discovery can be also turned off using the
 .B IP_MTU_DISCOVER
 socket option or the
 .I /proc/sys/net/ipv4/ip_no_pmtu_disc
-file; see
+file;
+see
 .BR ip (7)
 for details.
 When turned off, UDP will fragment outgoing UDP packets
@@ -115,7 +118,8 @@ connected (except for
 and
 .BR EMSGSIZE ).
 Locally generated errors are always passed.
-Support for this socket option was removed in later kernels; see
+Support for this socket option was removed in later kernels;
+see
 .BR socket (7)
 for further information.
 .P

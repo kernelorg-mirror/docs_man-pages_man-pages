@@ -125,8 +125,11 @@ did not point to a valid user-space address.
 The
 operation was interrupted by a signal (see
 .BR signal (7)).
-Before Linux 2.6.22, this error could also be returned for
-a spurious wakeup; since Linux 2.6.22, this no longer happens.
+Before Linux 2.6.22,
+this error could also be returned for
+a spurious wakeup;
+since Linux 2.6.22,
+this no longer happens.
 .TP
 .B EINVAL
 The supplied

@@ -92,7 +92,8 @@ is set to
 .SH STANDARDS
 None.
 .SH HISTORY
-4.3BSD; SUSv1, marked LEGACY in SUSv2, removed in POSIX.1-2001.
+4.3BSD;
+SUSv1, marked LEGACY in SUSv2, removed in POSIX.1-2001.
 .\"
 .\" .BR brk ()
 .\" and
@@ -128,9 +129,11 @@ The return value described above for
 is the behavior provided by the glibc wrapper function for the Linux
 .BR brk ()
 system call.
-(On most other implementations, the return value from
+(On most other implementations,
+the return value from
 .BR brk ()
-is the same; this return value was also specified in SUSv2.)
+is the same;
+this return value was also specified in SUSv2.)
 However,
 the actual Linux system call returns the new program break on success.
 On failure, the system call returns the current break.

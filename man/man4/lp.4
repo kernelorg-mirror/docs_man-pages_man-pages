@@ -44,8 +44,10 @@ It influences only the polling driver.
 Sets the maximum number of busy-wait iterations which the polling driver does
 while waiting for the printer to get ready for receiving a character to
 .IR arg .
-If printing is too slow, increase this number; if the
-system gets too slow, decrease this number.
+If printing is too slow,
+increase this number;
+if the system gets too slow,
+decrease this number.
 The default is 1000.
 It influences only the polling driver.
 .TP
@@ -67,19 +69,22 @@ The default is to ignore it.
 .BR "int ioctl(int " fd ", LPCAREFUL, int " arg )
 If
 .I arg
-is 0, then the out-of-paper, offline, and error signals are
-required to be false on all writes, otherwise they are ignored.
+is 0,
+then the out-of-paper, offline, and error signals
+are required to be false on all writes;
+otherwise,
+they are ignored.
 The default is to ignore them.
 .TP
 .BR "int ioctl(int " fd ", LPWAIT, int " arg )
-Sets the number of busy waiting iterations to wait before strobing the
-printer to accept a just-written character, and the number of iterations to
-wait before turning the strobe off again,
+Sets the number of busy waiting iterations to wait
+before strobing the printer to accept a just-written character,
+and the number of iterations to wait
+before turning the strobe off again,
 to
 .IR arg .
-The specification says this time should be 0.5
-microseconds, but experience has shown the delay caused by the code is
-already enough.
+The specification says this time should be 0.5 microseconds,
+but experience has shown the delay caused by the code is already enough.
 For that reason, the default value is 0.
 .\" FIXME . Actually, since Linux 2.2, the default is 1
 This is used for both the polling and the interrupt driver.

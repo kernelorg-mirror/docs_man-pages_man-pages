@@ -90,7 +90,8 @@ These clocks are described in
 .BR clock_gettime (2).
 A few of the clocks are settable using
 .BR clock_settime (2).
-The values of certain clocks are virtualized by time namespaces; see
+The values of certain clocks are virtualized by time namespaces;
+see
 .BR time_namespaces (7).
 .\"
 .SS High-resolution timers
@@ -151,7 +152,9 @@ and
 .BR strptime (3).
 .SS Sleeping and setting timers
 Various system calls and functions allow a program to sleep
-(suspend execution) for a specified period of time; see
+(suspend execution)
+for a specified period of time;
+see
 .BR nanosleep (2),
 .BR clock_nanosleep (2),
 and

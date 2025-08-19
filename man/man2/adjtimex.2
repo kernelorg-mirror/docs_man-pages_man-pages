@@ -340,7 +340,8 @@ Mode (0 = Phase Locked Loop, 1 = Frequency Locked Loop).
 .BR STA_CLK " (read-only; since Linux 2.6.26)"
 .\" commit eea83d896e318bda54be2d2770d2c5d6668d11db
 .\" Author: Roman Zippel <zippel@linux-m68k.org>
-Clock source (0 = A, 1 = B); currently unused.
+Clock source (0 = A, 1 = B);
+currently unused.
 .P
 Attempts to set read-only
 .I status
@@ -387,7 +388,9 @@ On success,
 .BR adjtimex ()
 and
 .BR ntp_adjtime ()
-return the clock state; that is, one of the following values:
+return the clock state;
+that is,
+one of the following values:
 .TP 12
 .B TIME_OK
 Clock synchronized, no leap second adjustment pending.

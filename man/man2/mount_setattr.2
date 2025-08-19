@@ -180,7 +180,9 @@ mnt\->mnt_flags = current_mnt_flags;
 .P
 As a result of this change, the mount or mount tree (a) is read-only;
 (b) blocks the execution of set-user-ID and set-group-ID programs;
-(c) allows execution of programs; and (d) allows access to devices.
+(c) allows execution of programs;
+and
+(d) allows access to devices.
 .P
 Multiple changes with the same set of flags requested
 in
@@ -512,7 +514,7 @@ a new peer group ID needs to be allocated for all mounts without a peer group
 ID set.
 This allocation failed because
 the kernel has run out of IDs.
-.\" Christian Brauner: i.e. someone has somehow managed to
+.\" Christian Brauner: i.e., someone has somehow managed to
 .\" allocate so many peer groups and managed to keep the kernel running
 .\" (???) that the ida has ran out of ids
 .\" Note that technically further error codes are possible that are
@@ -973,15 +975,15 @@ main(int argc, char *argv[])
     target = argv[optind + 1];
 \&
     /* In the following, \-1 as the \[aq]dirfd\[aq] argument ensures that
-       open_tree() fails if \[aq]source\[aq] is not an absolute pathname. */
+       open_tree() fails if \[aq]source\[aq] is not an absolute pathname.  */
 .\" Christian Brauner
 .\"     When writing programs I like to never use relative paths with AT_FDCWD
-.\"     because. Because making assumptions about the current working directory
+.\"     because.  Because making assumptions about the current working directory
 .\"     of the calling process is just too easy to get wrong; especially when
 .\"     pivot_root() or chroot() are in play.
 .\"     My absolut preference (joke intended) is to open a well-known starting
 .\"     point with an absolute path to get a dirfd and then scope all future
-.\"     operations beneath that dirfd. This already works with old-style
+.\"     operations beneath that dirfd.  This already works with old-style
 .\"     openat() and _very_ cautious programming but openat2() and its
 .\"     resolve-flag space have made this **chef's kiss**.
 .\"     If I can't operate based on a well-known dirfd I use absolute paths
@@ -1007,7 +1009,7 @@ main(int argc, char *argv[])
     close(fd_userns);
 \&
     /* In the following, \-1 as the \[aq]to_dirfd\[aq] argument ensures that
-       open_tree() fails if \[aq]target\[aq] is not an absolute pathname. */
+       open_tree() fails if \[aq]target\[aq] is not an absolute pathname.  */
 \&
     ret = move_mount(fd_tree, "", \-1, target,
                      MOVE_MOUNT_F_EMPTY_PATH);

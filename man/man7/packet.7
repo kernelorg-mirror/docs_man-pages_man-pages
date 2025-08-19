@@ -567,10 +567,10 @@ header for a IEEE 802.3 frame.
 When
 .B ETH_P_802_3
 is specified as protocol for sending the kernel creates the
-802.3 frame and fills out the size field; the user has to supply the LLC
-header to get a fully conforming packet.
-Incoming 802.3 packets are not multiplexed on the DSAP/SSAP protocol
-fields; instead they are supplied to the user as protocol
+802.3 frame and fills out the size field;
+the user has to supply the LLC header to get a fully conforming packet.
+Incoming 802.3 packets are not multiplexed on the DSAP/SSAP protocol fields;
+instead they are supplied to the user as protocol
 .B ETH_P_802_2
 with the LLC header prefixed.
 It is thus not possible to bind to

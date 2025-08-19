@@ -42,9 +42,11 @@ or
 see
 .BR signal (2)
 for details.)
-Using these system calls, a process can elect one of the
-following behaviors to occur on delivery of the signal:
-perform the default action; ignore the signal;
+Using these system calls,
+a process can elect one of the following behaviors
+to occur on delivery of the signal:
+perform the default action;
+ignore the signal;
 or catch the signal with a
 .IR "signal handler" ,
 a programmer-defined function that is automatically invoked
@@ -53,7 +55,8 @@ when the signal is delivered.
 By default, a signal handler is invoked on the
 normal process stack.
 It is possible to arrange that the signal handler
-uses an alternate stack; see
+uses an alternate stack;
+see
 .BR sigaltstack (2)
 for a discussion of how to do this and when it might be useful.
 .P
@@ -185,7 +188,7 @@ or
 .P
 A process-directed signal may be delivered to any one of the
 threads that does not currently have the signal blocked.
-.\" Joseph C. Sible notes:
+.\" Joseph C.\& Sible notes:
 .\" On Linux, if the main thread has the signal unblocked, then the kernel
 .\" will always deliver the signal there, citing this kernel code
 .\"
@@ -361,7 +364,7 @@ SIGILL	P1990	Core	Illegal Instruction
 SIGINFO	\-		A synonym for \f[B]SIGPWR\f[]
 SIGINT	P1990	Term	Interrupt from keyboard
 SIGIO	\-	Term	I/O now possible (4.2BSD)
-SIGIOT	\-	Core	IOT trap. A synonym for \f[B]SIGABRT\f[]
+SIGIOT	\-	Core	IOT trap.  A synonym for \f[B]SIGABRT\f[]
 SIGKILL	P1990	Term	Kill signal
 SIGLOST	\-	Term	File lock lost (unused)
 SIGPIPE	P1990	Term	Broken pipe: write to pipe with no
@@ -448,7 +451,8 @@ As shown in the table, many signals have different numeric values
 on different architectures.
 The first numeric value in each table row shows the signal number
 on x86, ARM, and most other architectures;
-the second value is for Alpha and SPARC; the third is for MIPS;
+the second value is for Alpha and SPARC;
+the third is for MIPS;
 and the last is for PARISC.
 A dash (\-) denotes that a signal is absent on the corresponding architecture.
 .TS
@@ -613,8 +617,8 @@ In Linux 2.6.8, these
 .I /proc
 interfaces were replaced by the
 .B RLIMIT_SIGPENDING
-resource limit, which specifies a per-user limit for queued
-signals; see
+resource limit, which specifies a per-user limit for queued signals;
+see
 .BR setrlimit (2)
 for further details.
 .P
@@ -638,10 +642,12 @@ Linux 2.0 and earlier	Linux 2.2 and later
 .TE
 .\"
 .SS Interruption of system calls and library functions by signal handlers
-If a signal handler is invoked while a system call or library
-function call is blocked, then either:
+If a signal handler is invoked
+while a system call or library function call is blocked,
+then either:
 .IP \[bu] 3
-the call is automatically restarted after the signal handler returns; or
+the call is automatically restarted after the signal handler returns;
+or
 .IP \[bu]
 the call fails with the error
 .BR EINTR .
@@ -658,7 +664,8 @@ If a blocked call to one of the following interfaces is interrupted
 by a signal handler, then the call is automatically restarted
 after the signal handler returns if the
 .B SA_RESTART
-flag was used; otherwise the call fails with the error
+flag was used;
+otherwise the call fails with the error
 .BR EINTR :
 .\" The following system calls use ERESTARTSYS,
 .\" so that they are restartable
@@ -680,7 +687,9 @@ Note that a (local) disk is not a slow device according to this definition;
 I/O operations on disk devices are not interrupted by signals.
 .IP \[bu]
 .BR open (2),
-if it can block (e.g., when opening a FIFO; see
+if it can block
+(e.g., when opening a FIFO;
+see
 .BR fifo (7)).
 .IP \[bu]
 .BR wait (2),

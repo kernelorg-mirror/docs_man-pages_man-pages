@@ -80,7 +80,9 @@ by doing:
 .P
 .in +4n
 .EX
-mkdir foo; chroot foo; cd ..
+mkdir foo;
+chroot foo;
+cd ..;
 .EE
 .in
 .P
@@ -146,7 +148,8 @@ The root directory is left unchanged by
 .P
 The magic symbolic link,
 .IR /proc/ pid /root ,
-can be used to discover a process's root directory; see
+can be used to discover a process's root directory;
+see
 .BR proc (5)
 for details.
 .P

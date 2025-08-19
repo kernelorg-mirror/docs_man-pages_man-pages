@@ -32,41 +32,47 @@ though present, has no effect on the system's behavior.
 .P
 A cpuset defines a list of CPUs and memory nodes.
 .P
-The CPUs of a system include all the logical processing
-units on which a process can execute, including, if present,
-multiple processor cores within a package and Hyper-Threads
-within a processor core.
-Memory nodes include all distinct
-banks of main memory; small and SMP systems typically have
+The CPUs of a system include
+all the logical processing units on which a process can execute,
+including,
+if present,
+multiple processor cores within a package
+and Hyper-Threads within a processor core.
+Memory nodes include all distinct banks of main memory;
+small and SMP systems typically have
 just one memory node that contains all the system's main memory,
 while NUMA (non-uniform memory access) systems have multiple memory nodes.
 .P
-Cpusets are represented as directories in a hierarchical
-pseudo-filesystem, where the top directory in the hierarchy
+Cpusets are represented as directories in a hierarchical pseudo-filesystem,
+where the top directory in the hierarchy
 .RI ( /dev/cpuset )
 represents the entire system (all online CPUs and memory nodes)
-and any cpuset that is the child (descendant) of
-another parent cpuset contains a subset of that parent's
-CPUs and memory nodes.
-The directories and files representing cpusets have normal
-filesystem permissions.
+and any cpuset that is the child (descendant) of another parent cpuset
+contains a subset of that parent's CPUs and memory nodes.
+The directories and files representing cpusets
+have normal filesystem permissions.
 .P
 Every process in the system belongs to exactly one cpuset.
-A process is confined to run only on the CPUs in
-the cpuset it belongs to, and to allocate memory only
-on the memory nodes in that cpuset.
+A process is confined to run
+only on the CPUs in the cpuset it belongs to,
+and to allocate memory
+only on the memory nodes in that cpuset.
 When a process
 .BR fork (2)s,
 the child process is placed in the same cpuset as its parent.
-With sufficient privilege, a process may be moved from one
-cpuset to another and the allowed CPUs and memory nodes
-of an existing cpuset may be changed.
+With sufficient privilege,
+a process may be moved from one cpuset to another
+and the allowed CPUs and memory nodes of an existing cpuset
+may be changed.
 .P
-When the system begins booting, a single cpuset is
-defined that includes all CPUs and memory nodes on the
-system, and all processes are in that cpuset.
-During the boot process, or later during normal system operation,
-other cpusets may be created, as subdirectories of this top cpuset,
+When the system begins booting,
+a single cpuset is defined
+that includes all CPUs and memory nodes on the system,
+and all processes are in that cpuset.
+During the boot process,
+or later during normal system operation,
+other cpusets may be created,
+as subdirectories of this top cpuset,
 under the control of the system administrator,
 and processes may be placed in these other cpusets.
 .P
@@ -77,26 +83,28 @@ scheduling affinity mechanism and the
 and
 .BR set_mempolicy (2)
 memory-placement mechanisms in the kernel.
-Neither of these mechanisms let a process make use
-of a CPU or memory node that is not allowed by that process's cpuset.
-If changes to a process's cpuset placement conflict with these
-other mechanisms, then cpuset placement is enforced
+Neither of these mechanisms let a process
+make use of a CPU or memory node that is not allowed by that process's cpuset.
+If changes to a process's cpuset placement
+conflict with these other mechanisms,
+then cpuset placement is enforced
 even if it means overriding these other mechanisms.
-The kernel accomplishes this overriding by silently
-restricting the CPUs and memory nodes requested by
-these other mechanisms to those allowed by the
-invoking process's cpuset.
-This can result in these
-other calls returning an error, if for example, such
-a call ends up requesting an empty set of CPUs or
-memory nodes, after that request is restricted to
-the invoking process's cpuset.
+The kernel accomplishes this overriding
+by silently restricting the CPUs and memory nodes
+requested by these other mechanisms
+to those allowed by the invoking process's cpuset.
+This can result in these other calls returning an error,
+if for example,
+such a call ends up requesting an empty set of CPUs or memory nodes,
+after that request is restricted to the invoking process's cpuset.
 .P
-Typically, a cpuset is used to manage
-the CPU and memory-node confinement for a set of
-cooperating processes such as a batch scheduler job, and these
-other mechanisms are used to manage the placement of
-individual processes or memory regions within that set or job.
+Typically,
+a cpuset is used to manage
+the CPU and memory-node confinement for a set of cooperating processes,
+such as a batch scheduler job,
+and these other mechanisms are used to manage
+the placement of individual processes or memory regions
+within that set or job.
 .SH FILES
 Each directory below
 .I /dev/cpuset
@@ -108,28 +116,33 @@ New cpusets are created using the
 system call or the
 .BR mkdir (1)
 command.
-The properties of a cpuset, such as its flags, allowed
-CPUs and memory nodes, and attached processes, are queried and modified
+The properties of a cpuset,
+such as its flags,
+allowed CPUs and memory nodes,
+and attached processes,
+are queried and modified
 by reading or writing to the appropriate file in that cpuset's directory,
 as listed below.
 .P
-The pseudo-files in each cpuset directory are automatically created when
-the cpuset is created, as a result of the
+The pseudo-files in each cpuset directory
+are automatically created when the cpuset is created,
+as a result of the
 .BR mkdir (2)
 invocation.
 It is not possible to directly add or remove these pseudo-files.
 .P
 A cpuset directory that contains no child cpuset directories,
-and has no attached processes, can be removed using
+and has no attached processes,
+can be removed using
 .BR rmdir (2)
 or
 .BR rmdir (1).
 It is not necessary, or possible,
 to remove the pseudo-files inside the directory before removing it.
 .P
-The pseudo-files in each cpuset directory are
-small text files that may be read and
-written using traditional shell utilities such as
+The pseudo-files in each cpuset directory
+are small text files that may be
+read and written using traditional shell utilities such as
 .BR cat (1),
 and
 .BR echo (1),
@@ -141,34 +154,38 @@ such as
 and
 .BR close (2).
 .P
-The pseudo-files in a cpuset directory represent internal kernel
-state and do not have any persistent image on disk.
+The pseudo-files in a cpuset directory represent internal kernel state
+and do not have any persistent image on disk.
 Each of these per-cpuset files is listed and described below.
 .\" ====================== tasks ======================
 .TP
 .I tasks
 List of the process IDs (PIDs) of the processes in that cpuset.
-The list is formatted as a series of ASCII
-decimal numbers, each followed by a newline.
-A process may be added to a cpuset (automatically removing
-it from the cpuset that previously contained it) by writing its
-PID to that cpuset's
+The list is formatted as a series of
+ASCII decimal numbers,
+each followed by a newline.
+A process may be added to a cpuset
+(automatically removing it from the cpuset that previously contained it)
+by writing its PID to that cpuset's
 .I tasks
-file (with or without a trailing newline).
+file
+(with or without a trailing newline).
 .IP
 .B Warning:
 only one PID may be written to the
 .I tasks
 file at a time.
-If a string is written that contains more
-than one PID, only the first one will be used.
+If a string is written that contains more than one PID,
+only the first one will be used.
 .\" =================== notify_on_release ===================
 .TP
 .I notify_on_release
 Flag (0 or 1).
-If set (1), that cpuset will receive special handling
-after it is released, that is, after all processes cease using
-it (i.e., terminate or are moved to a different cpuset)
+If set (1),
+that cpuset will receive special handling after it is released,
+that is,
+after all processes cease using it
+(i.e., terminate or are moved to a different cpuset)
 and all child cpuset directories have been removed.
 See the
 .B Notify On Release  \" Sx
@@ -176,8 +193,8 @@ section, below.
 .\" ====================== cpus ======================
 .TP
 .I cpuset.cpus
-List of the physical numbers of the CPUs on which processes
-in that cpuset are allowed to execute.
+List of the physical numbers of the CPUs
+on which processes in that cpuset are allowed to execute.
 See
 .B List Format  \" Sx
 below for a description of the format of
@@ -191,9 +208,11 @@ file.
 .TP
 .I cpuset.cpu_exclusive
 Flag (0 or 1).
-If set (1), the cpuset has exclusive use of
-its CPUs (no sibling or cousin cpuset may overlap CPUs).
-By default, this is off (0).
+If set (1),
+the cpuset has exclusive use of its CPUs
+(no sibling or cousin cpuset may overlap CPUs).
+By default,
+this is off (0).
 Newly created cpusets also initially default this to off (0).
 .IP
 Two cpusets are
@@ -206,12 +225,14 @@ Two cpusets are
 cpusets if neither is the ancestor of the other.
 Regardless of the
 .I cpu_exclusive
-setting, if one cpuset is the ancestor of another,
+setting,
+if one cpuset is the ancestor of another,
 and if both of these cpusets have nonempty
 .IR cpus ,
 then their
 .I cpus
-must overlap, because the
+must overlap,
+because the
 .I cpus
 of any cpuset are always a subset of the
 .I cpus
@@ -219,8 +240,9 @@ of its parent cpuset.
 .\" ====================== mems ======================
 .TP
 .I cpuset.mems
-List of memory nodes on which processes in this cpuset are
-allowed to allocate memory.
+List of memory nodes on which
+processes in this cpuset
+are allowed to allocate memory.
 See
 .B List Format  \" Sx
 below for a description of the format of
@@ -229,25 +251,32 @@ below for a description of the format of
 .TP
 .I cpuset.mem_exclusive
 Flag (0 or 1).
-If set (1), the cpuset has exclusive use of
-its memory nodes (no sibling or cousin may overlap).
-Also if set (1), the cpuset is a
+If set (1),
+the cpuset has exclusive use of its memory nodes
+(no sibling or cousin may overlap).
+Also if set (1),
+the cpuset is a
 .B Hardwall  \" Sx
 cpuset (see below).
-By default, this is off (0).
+By default,
+this is off (0).
 Newly created cpusets also initially default this to off (0).
 .IP
 Regardless of the
 .I mem_exclusive
-setting, if one cpuset is the ancestor of another,
-then their memory nodes must overlap, because the memory
-nodes of any cpuset are always a subset of the memory nodes
-of that cpuset's parent cpuset.
+setting,
+if one cpuset is the ancestor of another,
+then their memory nodes must overlap,
+because
+the memory nodes of any cpuset
+are always a subset of
+the memory nodes of that cpuset's parent cpuset.
 .\" ==================== mem_hardwall ====================
 .TP
 .IR cpuset.mem_hardwall " (since Linux 2.6.26)"
 Flag (0 or 1).
-If set (1), the cpuset is a
+If set (1),
+the cpuset is a
 .B Hardwall
 cpuset (see below).
 Unlike
@@ -255,105 +284,127 @@ Unlike
 there is no constraint on whether cpusets marked
 .B mem_hardwall
 may have overlapping memory nodes with sibling or cousin cpusets.
-By default, this is off (0).
+By default,
+this is off (0).
 Newly created cpusets also initially default this to off (0).
 .\" ==================== memory_migrate ====================
 .TP
 .IR cpuset.memory_migrate " (since Linux 2.6.16)"
 Flag (0 or 1).
-If set (1), then memory migration is enabled.
-By default, this is off (0).
+If set (1),
+then memory migration is enabled.
+By default,
+this is off (0).
 See the
 .B Memory Migration  \" Sx
 section, below.
 .\" ==================== memory_pressure ====================
 .TP
 .IR cpuset.memory_pressure " (since Linux 2.6.16)"
-A measure of how much memory pressure the processes in this
-cpuset are causing.
+A measure of how much memory pressure the processes in this cpuset are causing.
 See the
 .B Memory Pressure  \" Sx
-section, below.
+section,
+below.
 Unless
 .I memory_pressure_enabled
-is enabled, always has value zero (0).
+is enabled,
+always has value zero (0).
 This file is read-only.
 See the
 .B WARNINGS
-section, below.
+section,
+below.
 .\" ================= memory_pressure_enabled =================
 .TP
 .IR cpuset.memory_pressure_enabled " (since Linux 2.6.16)"
 Flag (0 or 1).
-This file is present only in the root cpuset, normally
+This file is present only in the root cpuset,
+normally
 .IR /dev/cpuset .
-If set (1), the
+If set (1),
+the
 .I memory_pressure
 calculations are enabled for all cpusets in the system.
-By default, this is off (0).
+By default,
+this is off (0).
 See the
 .B Memory Pressure  \" Sx
-section, below.
+section,
+below.
 .\" ================== memory_spread_page ==================
 .TP
 .IR cpuset.memory_spread_page " (since Linux 2.6.17)"
 Flag (0 or 1).
-If set (1), pages in the kernel page cache
-(filesystem buffers) are uniformly spread across the cpuset.
-By default, this is off (0) in the top cpuset,
-and inherited from the parent cpuset in
-newly created cpusets.
+If set (1),
+pages in the kernel page cache
+(filesystem buffers)
+are uniformly spread across the cpuset.
+By default,
+this is off (0) in the top cpuset,
+and inherited from the parent cpuset
+in newly created cpusets.
 See the
 .B Memory Spread  \" Sx
-section, below.
+section,
+below.
 .\" ================== memory_spread_slab ==================
 .TP
 .IR cpuset.memory_spread_slab " (since Linux 2.6.17)"
 Flag (0 or 1).
-If set (1), the kernel slab caches
-for file I/O (directory and inode structures) are
-uniformly spread across the cpuset.
-By default, is off (0) in the top cpuset,
-and inherited from the parent cpuset in
-newly created cpusets.
+If set (1),
+the kernel slab caches for file I/O
+(directory and inode structures)
+are uniformly spread across the cpuset.
+By default,
+this is off (0) in the top cpuset,
+and inherited from the parent cpuset
+in newly created cpusets.
 See the
 .B Memory Spread  \" Sx
-section, below.
+section,
+below.
 .\" ================== sched_load_balance ==================
 .TP
 .IR cpuset.sched_load_balance " (since Linux 2.6.24)"
 Flag (0 or 1).
-If set (1, the default) the kernel will
-automatically load balance processes in that cpuset over
-the allowed CPUs in that cpuset.
-If cleared (0) the
-kernel will avoid load balancing processes in this cpuset,
+If set (1, the default)
+the kernel will automatically load balance processes in that cpuset
+over the allowed CPUs in that cpuset.
+If cleared (0),
+the kernel will avoid load balancing processes in this cpuset,
 .I unless
 some other cpuset with overlapping CPUs has its
 .I sched_load_balance
 flag set.
 See
 .BR "Scheduler Load Balancing" ,  \" Sx
-below, for further details.
+below,
+for further details.
 .\" ================== sched_relax_domain_level ==================
 .TP
 .IR cpuset.sched_relax_domain_level " (since Linux 2.6.26)"
-Integer, between \-1 and a small positive value.
+Integer,
+between \-1 and a small positive value.
 The
 .I sched_relax_domain_level
-controls the width of the range of CPUs over which the kernel scheduler
-performs immediate rebalancing of runnable tasks across CPUs.
+controls the width of the range of CPUs over which
+the kernel scheduler performs
+immediate rebalancing of runnable tasks across CPUs.
 If
 .I sched_load_balance
-is disabled, then the setting of
+is disabled,
+then the setting of
 .I sched_relax_domain_level
-does not matter, as no such load balancing is done.
+does not matter,
+as no such load balancing is done.
 If
 .I sched_load_balance
-is enabled, then the higher the value of the
+is enabled,
+then,
+the higher the value of the
 .IR sched_relax_domain_level ,
-the wider
-the range of CPUs over which immediate load balancing is attempted.
+the wider the range of CPUs over which immediate load balancing is attempted.
 See
 .BR "Scheduler Relax Domain Level" ,  \" Sx
 below, for further details.
@@ -657,42 +708,53 @@ Cpuset-specified memory spreading can provide substantial performance
 improvements for jobs that:
 .IP \[bu] 3
 need to place thread-local data on
-memory nodes close to the CPUs which are running the threads that most
-frequently access that data; but also
+memory nodes close to the CPUs
+which are running the threads
+that most frequently access that data;
+but also
 .IP \[bu]
-need to access large filesystem data sets that must to be spread
-across the several nodes in the job's cpuset in order to fit.
+need to access large filesystem data sets
+that must to be spread across the several nodes in the job's cpuset
+in order to fit.
 .P
 Without this policy,
 the memory allocation across the nodes in the job's cpuset
 can become very uneven,
-especially for jobs that might have just a single
-thread initializing or reading in the data set.
+especially for jobs that might have
+just a single thread initializing or reading in the data set.
 .\" ================== Memory Migration ==================
 .SS Memory migration
-Normally, under the default setting (disabled) of
+Normally,
+under the default setting (disabled) of
 .IR cpuset.memory_migrate ,
-once a page is allocated (given a physical page
-of main memory), then that page stays on whatever node it
-was allocated, so long as it remains allocated, even if the
-cpuset's memory-placement policy
+once a page is allocated
+(given a physical page of main memory),
+then that page stays on whatever node it was allocated,
+so long as it remains allocated,
+even if the cpuset's memory-placement policy
 .I mems
 subsequently changes.
 .P
-When memory migration is enabled in a cpuset, if the
+When memory migration is enabled in a cpuset,
+if the
 .I mems
-setting of the cpuset is changed, then any memory page in use by any
-process in the cpuset that is on a memory node that is no longer
-allowed will be migrated to a memory node that is allowed.
+setting of the cpuset is changed,
+then any memory page in use
+by any process in the cpuset that is
+on a memory node that is no longer allowed
+will be migrated to a memory node that is allowed.
 .P
-Furthermore, if a process is moved into a cpuset with
+Furthermore,
+if a process is moved into a cpuset with
 .I memory_migrate
-enabled, any memory pages it uses that were on memory nodes allowed
-in its previous cpuset, but which are not allowed in its new cpuset,
+enabled,
+any memory pages it uses that were on memory nodes
+allowed in its previous cpuset,
+but which are not allowed in its new cpuset,
 will be migrated to a memory node allowed in the new cpuset.
 .P
-The relative placement of a migrated page within
-the cpuset is preserved during these migration operations if possible.
+The relative placement of a migrated page within the cpuset
+is preserved during these migration operations if possible.
 For example,
 if the page was on the second valid node of the prior cpuset,
 then the page will be placed on the second valid node of the new cpuset,
@@ -1086,38 +1148,44 @@ Not all allocations of system memory are constrained by cpusets,
 for the following reasons.
 .P
 If hot-plug functionality is used to remove all the CPUs that are
-currently assigned to a cpuset, then the kernel will automatically
+currently assigned to a cpuset,
+then the kernel will automatically
 update the
 .I cpus_allowed
 of all processes attached to CPUs in that cpuset
 to allow all CPUs.
-When memory hot-plug functionality for removing
-memory nodes is available, a similar exception is expected to apply
-there as well.
-In general, the kernel prefers to violate cpuset placement,
+When memory hot-plug functionality for removing memory nodes is available,
+a similar exception is expected to apply there as well.
+In general,
+the kernel prefers to violate cpuset placement,
 rather than starving a process that has had all its allowed CPUs or
 memory nodes taken offline.
 User code should reconfigure cpusets to refer only to online CPUs
 and memory nodes when using hot-plug to add or remove such resources.
 .P
-A few kernel-critical, internal memory-allocation requests, marked
-GFP_ATOMIC, must be satisfied immediately.
-The kernel may drop some
-request or malfunction if one of these allocations fail.
+A few kernel-critical,
+internal memory-allocation requests,
+marked GFP_ATOMIC,
+must be satisfied immediately.
+The kernel may drop some request or malfunction
+if one of these allocations fail.
 If such a request cannot be satisfied within the current process's cpuset,
-then we relax the cpuset, and look for memory anywhere we can find it.
+then we relax the cpuset,
+and look for memory anywhere we can find it.
 It's better to violate the cpuset than stress the kernel.
 .P
-Allocations of memory requested by kernel drivers while processing
-an interrupt lack any relevant process context, and are not confined
-by cpusets.
+Allocations of memory requested by kernel drivers
+while processing an interrupt
+lack any relevant process context,
+and are not confined by cpusets.
 .SS Renaming cpusets
 You can use the
 .BR rename (2)
 system call to rename cpusets.
-Only simple renaming is supported; that is, changing the name of a cpuset
-directory is permitted, but moving a directory into
-a different directory is not permitted.
+Only simple renaming is supported;
+that is,
+changing the name of a cpuset directory is permitted,
+but moving a directory into a different directory is not permitted.
 .\" ================== ERRORS ==================
 .SH ERRORS
 The Linux kernel implementation of cpusets sets
@@ -1144,10 +1212,12 @@ the process ID (PID) of a process to a cpuset
 file when one lacks permission to move that process.
 .TP
 .B EACCES
-Attempted to add, using
+Attempted to add,
+using
 .BR write (2),
-a CPU or memory node to a cpuset, when that CPU or memory node was
-not already in its parent.
+a CPU or memory node to a cpuset,
+when that CPU or memory node
+was not already in its parent.
 .TP
 .B EACCES
 Attempted to set, using
@@ -1308,9 +1378,9 @@ or
 a nonexistent file in a cpuset directory.
 .TP
 .B ENOMEM
-Insufficient memory is available within the kernel; can occur
-on a variety of system calls affecting cpusets, but only if the
-system is extremely short of memory.
+Insufficient memory is available within the kernel;
+can occur on a variety of system calls affecting cpusets,
+but only if the system is extremely short of memory.
 .TP
 .B ENOSPC
 Attempted to

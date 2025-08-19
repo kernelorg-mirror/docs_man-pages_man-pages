@@ -13,7 +13,7 @@ Standard C library
 .nf
 .B #include <sys/select.h>
 .P
-.BR typedef " /* ... */ " fd_set;
+.BR typedef " /* .\|.\|.\& */ " fd_set;
 .P
 .BI "int select(int " nfds ", fd_set *_Nullable restrict " readfds ,
 .BI "           fd_set *_Nullable restrict " writefds ,
@@ -143,8 +143,9 @@ are as follows:
 .I readfds
 The file descriptors in this set are watched to see if they are
 ready for reading.
-A file descriptor is ready for reading if a read operation will not
-block; in particular, a file descriptor is also ready on end-of-file.
+A file descriptor is ready for reading if a read operation will not block;
+in particular,
+a file descriptor is also ready on end-of-file.
 .IP
 After
 .BR select ()
@@ -200,7 +201,8 @@ The call will block until either:
 .IP \[bu] 3
 a file descriptor becomes ready;
 .IP \[bu]
-the call is interrupted by a signal handler; or
+the call is interrupted by a signal handler;
+or
 .IP \[bu]
 the timeout expires.
 .RE
@@ -348,7 +350,8 @@ On Linux,
 .BR select ()
 modifies
 .I timeout
-to reflect the amount of time not slept; most other implementations
+to reflect the amount of time not slept;
+most other implementations
 do not do this.
 (POSIX.1 permits either behavior.)
 This causes problems both when Linux code which reads
@@ -397,7 +400,8 @@ or one on which an error has occurred.)
 However, see BUGS.
 .TP
 .B EINTR
-A signal was caught; see
+A signal was caught;
+see
 .BR signal (7).
 .TP
 .B EINVAL
@@ -717,12 +721,12 @@ main(void)
     fd_set          rfds;
     struct timeval  tv;
 \&
-    /* Watch stdin (fd 0) to see when it has input. */
+    /* Watch stdin (fd 0) to see when it has input.  */
 \&
     FD_ZERO(&rfds);
     FD_SET(0, &rfds);
 \&
-    /* Wait up to five seconds. */
+    /* Wait up to five seconds.  */
 \&
     tv.tv_sec = 5;
     tv.tv_usec = 0;
@@ -734,7 +738,7 @@ main(void)
         perror("select()");
     else if (retval)
         printf("Data is available now.\[rs]n");
-        /* FD_ISSET(0, &rfds) will be true. */
+        /* FD_ISSET(0, &rfds) will be true.  */
     else
         printf("No data within five seconds.\[rs]n");
 \&

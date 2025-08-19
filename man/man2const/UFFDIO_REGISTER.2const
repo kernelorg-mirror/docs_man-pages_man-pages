@@ -129,7 +129,8 @@ accessible address space.
 .B EINVAL
 An invalid or unsupported bit was specified in the
 .I mode
-field; or the
+field;
+or the
 .I mode
 field was zero.
 .TP
@@ -140,9 +141,11 @@ There is no mapping in the specified address range.
 .I range.start
 or
 .I range.len
-is not a multiple of the system page size; or,
+is not a multiple of the system page size;
+or,
 .I range.len
-is zero; or these fields are otherwise invalid.
+is zero;
+or these fields are otherwise invalid.
 .TP
 .B EINVAL
 There as an incompatible mapping in the specified address range.

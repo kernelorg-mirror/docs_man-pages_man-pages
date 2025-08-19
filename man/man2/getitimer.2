@@ -173,7 +173,9 @@ getitimer(which, &old_value);
 .P
 In Linux, this is treated as being equivalent to a call in which the
 .I new_value
-fields are zero; that is, the timer is disabled.
+fields are zero;
+that is,
+the timer is disabled.
 .IR "Don't use this Linux misfeature" :
 it is nonportable and unnecessary.
 .SH STANDARDS
@@ -191,7 +193,8 @@ etc.) instead.
 .SH NOTES
 Timers will never expire before the requested time,
 but may expire some (short) time afterward, which depends
-on the system timer resolution and on the system load; see
+on the system timer resolution and on the system load;
+see
 .BR time (7).
 (But see BUGS below.)
 If the timer expires while the process is active (always true for

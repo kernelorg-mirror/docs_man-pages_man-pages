@@ -107,7 +107,8 @@ structure that defines attributes for the new thread (see
 .TP
 .BR SIGEV_THREAD_ID " (Linux-specific)"
 .\" | SIGEV_SIGNAL vs not?
-Currently used only by POSIX timers; see
+Currently used only by POSIX timers;
+see
 .BR timer_create (2).
 .SS sigval
 Data passed with a signal.

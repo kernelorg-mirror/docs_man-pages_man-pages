@@ -77,9 +77,11 @@ and
 categories are exclusive:
 if a process matches the
 .I user
-category, it will not receive permissions granted in the
+category,
+it will not receive permissions granted in the
 .I group
-category; if a process matches the
+category;
+if a process matches the
 .I user
 or
 .I group

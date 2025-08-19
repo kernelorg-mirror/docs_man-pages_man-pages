@@ -679,7 +679,7 @@ main(int argc, char *argv[])
     posix_spawn_file_actions_t *file_actionsp;
 \&
     /* Parse command\-line options, which can be used to specify an
-       attributes object and file actions object for the child. */
+       attributes object and file actions object for the child.  */
 \&
     attrp = NULL;
     file_actionsp = NULL;
@@ -689,7 +689,7 @@ main(int argc, char *argv[])
         case \[aq]c\[aq]:       /* \-c: close standard output in child */
 \&
             /* Create a file actions object and add a "close"
-               action to it. */
+               action to it.  */
 \&
             s = posix_spawn_file_actions_init(&file_actions);
             if (s != 0)
@@ -706,7 +706,7 @@ main(int argc, char *argv[])
         case \[aq]s\[aq]:       /* \-s: block all signals in child */
 \&
             /* Create an attributes object and add a "set signal mask"
-               action to it. */
+               action to it.  */
 \&
             s = posix_spawnattr_init(&attr);
             if (s != 0)
@@ -730,17 +730,17 @@ main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 \&
-    /* Spawn the child. The name of the program to execute and the
+    /* Spawn the child.  The name of the program to execute and the
        command\-line arguments are taken from the command\-line arguments
-       of this program. The environment of the program execed in the
-       child is made the same as the parent\[aq]s environment. */
+       of this program.  The environment of the program execed in the
+       child is made the same as the parent\[aq]s environment.  */
 \&
     s = posix_spawnp(&child_pid, argv[optind], file_actionsp, attrp,
                      &argv[optind], environ);
     if (s != 0)
         errc(EXIT_FAILURE, s, "posix_spawn");
 \&
-    /* Destroy any objects that we created earlier. */
+    /* Destroy any objects that we created earlier.  */
 \&
     if (attrp != NULL) {
         s = posix_spawnattr_destroy(attrp);
@@ -756,7 +756,7 @@ main(int argc, char *argv[])
 \&
     printf("PID of child: %jd\[rs]n", (intmax_t) child_pid);
 \&
-    /* Monitor status of the child until it terminates. */
+    /* Monitor status of the child until it terminates.  */
 \&
     do {
         s = waitpid(child_pid, &status, WUNTRACED | WCONTINUED);

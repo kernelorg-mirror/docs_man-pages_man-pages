@@ -56,19 +56,24 @@ Symbolic links may contain
 path components, which (if used at the start of the link) refer to the
 parent directories of that in which the link resides.
 .P
-A symbolic link (also known as a soft link) may point to an existing
-file or to a nonexistent one; the latter case is known as a dangling
-link.
+A symbolic link
+(also known as a soft link)
+may point to an existing file
+or to a nonexistent one;
+the latter case is known as a dangling link.
 .P
-The permissions of a symbolic link are irrelevant; the ownership is
-ignored when following the link
+The permissions of a symbolic link are irrelevant;
+the ownership is ignored
+when following the link
 (except when the
 .I protected_symlinks
-feature is enabled, as explained in
+feature is enabled,
+as explained in
 .BR proc (5)),
-but is checked when removal or
-renaming of the link is requested and the link is in a directory with
-the sticky bit
+but is checked
+when removal or renaming of the link is requested
+and the link is in a directory
+with the sticky bit
 .RB ( S_ISVTX )
 set.
 .P

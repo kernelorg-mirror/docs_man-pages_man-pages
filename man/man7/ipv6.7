@@ -90,10 +90,10 @@ ipv6 \- Linux IPv6 protocol implementation
 .fi
 .SH DESCRIPTION
 Linux 2.2 optionally implements the Internet Protocol, version 6.
-This man page contains a description of the IPv6 basic API as
-implemented by the Linux kernel and glibc 2.1.
-The interface
-is based on the BSD sockets interface; see
+This man page contains a description of the IPv6 basic API
+as implemented by the Linux kernel and glibc 2.1.
+The interface is based on the BSD sockets interface;
+see
 .BR socket (7).
 .P
 The IPv6 API aims to be mostly compatible with the
@@ -103,14 +103,16 @@ Only differences are described in this man page.
 .P
 To bind an
 .B AF_INET6
-socket to any process, the local address should be copied from the
+socket to any process,
+the local address should be copied from the
 .I in6addr_any
 variable which has
 .I in6_addr
 type.
 In static initializations,
 .B IN6ADDR_ANY_INIT
-may also be used, which expands to a constant expression.
+may also be used,
+which expands to a constant expression.
 Both of them are in network byte order.
 .P
 The IPv6 loopback address (::1) is available in the global
@@ -120,12 +122,12 @@ For initializations,
 .B IN6ADDR_LOOPBACK_INIT
 should be used.
 .P
-IPv4 connections can be handled with the v6 API by using the
-v4-mapped-on-v6 address type;
-thus a program needs to support only this API type to
-support both protocols.
-This is handled transparently by the address
-handling functions in the C library.
+IPv4 connections can be handled with the v6 API
+by using the v4-mapped-on-v6 address type;
+thus a program needs to support only this API type
+to support both protocols.
+This is handled transparently
+by the address handling functions in the C library.
 .P
 IPv4 and IPv6 share the local port space.
 When you get an IPv4 connection
@@ -168,14 +170,15 @@ Linux supports it only for link-local addresses, in that case
 contains the interface index (see
 .BR netdevice (7))
 .P
-IPv6 supports several address types: unicast to address a single
-host, multicast to address a group of hosts,
+IPv6 supports several address types: unicast to address a single host,
+multicast to address a group of hosts,
 anycast to address the nearest member of a group of hosts
-(not implemented in Linux), IPv4-on-IPv6 to
-address an IPv4 host, and other reserved address types.
+(not implemented in Linux),
+IPv4-on-IPv6 to address an IPv4 host,
+and other reserved address types.
 .P
-The address notation for IPv6 is a group of 8 4-digit hexadecimal
-numbers, separated with a \[aq]:\[aq].
+The address notation for IPv6 is a group of 8 4-digit hexadecimal numbers,
+separated with a \[aq]:\[aq].
 \&"::" stands for a string of 0 bits.
 Special addresses are ::1 for loopback and ::FFFF:<IPv4 address>
 for IPv4-mapped-on-IPv6.
@@ -231,10 +234,9 @@ for details.
 .TP
 .B IPV6_MULTICAST_HOPS
 Set the multicast hop limit for the socket.
-Argument is a pointer to an
-integer.
-\-1 in the value means use the route default, otherwise it should be
-between 0 and 255.
+Argument is a pointer to an integer.
+\-1 in the value means use the route default,
+otherwise it should be between 0 and 255.
 .TP
 .B IPV6_MULTICAST_IF
 Set the device for outgoing multicast packets on the socket.
@@ -243,7 +245,8 @@ This is allowed only for
 and
 .B SOCK_RAW
 socket.
-The argument is a pointer to an interface index (see
+The argument is a pointer to an interface index
+(see
 .BR netdevice (7))
 in an integer.
 .TP
@@ -267,8 +270,8 @@ Argument is a pointer to a boolean value in an integer.
 .TP
 .B \%IPV6_RTHDR, \%IPV6_AUTHHDR, \%IPV6_DSTOPTS, \%IPV6_HOPOPTS, \
 \%IPV6_FLOWINFO, \%IPV6_HOPLIMIT
-Set delivery of control messages for incoming datagrams containing
-extension headers from the received packet.
+Set delivery of control messages for incoming datagrams
+containing extension headers from the received packet.
 .B IPV6_RTHDR
 delivers the routing header,
 .B IPV6_AUTHHDR

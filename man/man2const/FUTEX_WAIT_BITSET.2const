@@ -86,7 +86,7 @@ including those that are not interested in being woken up
 .\"
 .\"    "The original reason for the addition of these extensions
 .\"     was to improve the performance of pthread read-write locks
-.\"     in glibc. However, the pthreads library no longer uses the
+.\"     in glibc.  However, the pthreads library no longer uses the
 .\"     same locking algorithm, and these extensions are not used
 .\"     without the bitset parameter being all ones.
 .\"
@@ -172,8 +172,11 @@ A
 .B FUTEX_WAIT_BITSET
 operation was interrupted by a signal (see
 .BR signal (7)).
-Before Linux 2.6.22, this error could also be returned for
-a spurious wakeup; since Linux 2.6.22, this no longer happens.
+Before Linux 2.6.22,
+this error could also be returned for
+a spurious wakeup;
+since Linux 2.6.22,
+this no longer happens.
 .TP
 .B EINVAL
 The supplied

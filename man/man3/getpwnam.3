@@ -168,7 +168,8 @@ or
 was not found.
 .TP
 .B EINTR
-A signal was caught; see
+A signal was caught;
+see
 .BR signal (7).
 .TP
 .B EIO
@@ -185,7 +186,7 @@ The system-wide limit on the total number of open files has been reached.
 Insufficient memory to allocate
 .I passwd
 structure.
-.\" This structure is static, allocated 0 or 1 times. No memory leak. (libc45)
+.\" This structure is static, allocated 0 or 1 times.  No memory leak.  (libc45)
 .TP
 .B ERANGE
 Insufficient buffer space supplied.

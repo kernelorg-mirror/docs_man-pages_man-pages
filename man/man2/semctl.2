@@ -59,7 +59,7 @@ struct semid_ds {
     time_t          sem_otime; /* Last semop time */
     time_t          sem_ctime; /* Creation time/time of last
                                   modification via semctl() */
-    unsigned long   sem_nsems; /* No. of semaphores in set */
+    unsigned long   sem_nsems; /* # of semaphores in set */
 };
 .EE
 .in
@@ -221,7 +221,7 @@ struct seminfo {
                     process; unused within kernel */
     int semusz;  /* Size of struct sem_undo */
     int semvmx;  /* Maximum semaphore value */
-    int semaem;  /* Max. value that can be recorded for
+    int semaem;  /* Max.\& value that can be recorded for
                     semaphore adjustment (SEM_UNDO) */
 };
 .EE
@@ -244,14 +244,16 @@ Return a
 .I seminfo
 structure containing the same information as for
 .BR IPC_INFO ,
-except that the following fields are returned with information
-about system resources consumed by semaphores: the
+except that the following fields are returned with
+information about system resources consumed by semaphores:
+the
 .I semusz
-field returns the number of semaphore sets that currently exist
-on the system; and the
+field returns
+the number of semaphore sets that currently exist on the system;
+and the
 .I semaem
-field returns the total number of semaphores in all semaphore sets
-on the system.
+field returns
+the total number of semaphores in all semaphore sets on the system.
 .TP
 .BR SEM_STAT " (Linux-specific)"
 Return a
