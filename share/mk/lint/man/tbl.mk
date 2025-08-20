@@ -24,21 +24,21 @@ $(_LINT_man_tbl): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
 	| if $(GREP) '\\" t$$' >/dev/null; then \
 		$(CAT) <$< \
 		| if ! $(GREP) '^\.TS$$' >/dev/null; then \
-			>&2 $(ECHO) "$<:1: spurious '\\\" t' comment:"; \
+			>&2 $(ECHO) "lint-man-tbl: $<:1: spurious '\\\" t' comment:"; \
 			>&2 $(HEAD) -n1 <$<; \
 			exit 1; \
 		fi; \
 	else \
 		$(CAT) <$< \
 		| if $(GREP) '^\.TS$$' >/dev/null; then \
-			>&2 $(ECHO) "$<:1: missing '\\\" t' comment:"; \
+			>&2 $(ECHO) "lint-man-tbl: $<:1: missing '\\\" t' comment:"; \
 			>&2 $(HEAD) -n1 <$<; \
 			exit 1; \
 		fi; \
 	fi
 	$(TAIL) -n+2 <$< \
 	| if $(GREP) '\\" t$$' >/dev/null; then \
-		>&2 $(ECHO) "$<: spurious '\\\" t' not in first line:"; \
+		>&2 $(ECHO) "lint-man-tbl: $<: spurious '\\\" t' not in first line:"; \
 		>&2 $(GREP) -n '\\" t$$' $< /dev/null; \
 		exit 1; \
 	fi
