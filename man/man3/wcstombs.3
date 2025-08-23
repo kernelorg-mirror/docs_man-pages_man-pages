@@ -13,10 +13,9 @@ Standard C library
 .nf
 .B #include <stdlib.h>
 .P
-.BR "size_t wcstombs(" "size_t n;"
-.BI "                char " dest "[restrict " n "], \
-const wchar_t *restrict " src ,
-.BI "                size_t " n );
+.BR "size_t wcstombs(" "size_t dsize;"
+.BI "                char " dest "[restrict " dsize "], const wchar_t *restrict " src ,
+.BI "                size_t " dsize );
 .fi
 .SH DESCRIPTION
 If
@@ -29,7 +28,7 @@ the wide-character string
 to a multibyte string starting at
 .IR dest .
 At most
-.I n
+.I dsize
 bytes are written to
 .IR dest .
 The sequence of characters placed in
@@ -56,7 +55,7 @@ The number of bytes written to
 excluding the terminating null byte (\[aq]\[rs]0\[aq]), is returned.
 .P
 The programmer must ensure that there is room for at least
-.I n
+.I dsize
 bytes
 at
 .IR dest .
@@ -64,13 +63,13 @@ at
 If
 .I dest
 is NULL,
-.I n
+.I dsize
 is ignored, and the conversion proceeds as
 above, except that the converted bytes are not written out to memory,
 and no length limit exists.
 .P
 In order to avoid the case 2 above, the programmer should make sure
-.I n
+.I dsize
 is greater than or equal to
 .IR "wcstombs(NULL,src,0)+1" .
 .SH RETURN VALUE

@@ -14,9 +14,8 @@ Standard C library
 .nf
 .B #include <dirent.h>
 .P
-.BR "ssize_t getdirentries(" "size_t nbytes;"
-.BI "                      int " fd ", char " buf "[restrict " nbytes "], \
-size_t " nbytes ,
+.BR "ssize_t getdirentries(" "size_t size;"
+.BI "                      int " fd ", char " buf "[restrict " size "], size_t " size ,
 .BI "                      off_t *restrict " basep );
 .fi
 .P
@@ -38,8 +37,8 @@ Read directory entries from the directory specified by
 into
 .IR buf .
 At most
-.I nbytes
-are read.
+.I size
+bytes are read.
 Reading starts at offset
 .IR *basep ,
 and

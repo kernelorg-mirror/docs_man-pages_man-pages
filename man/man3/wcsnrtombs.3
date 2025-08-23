@@ -13,11 +13,10 @@ Standard C library
 .nf
 .B #include <wchar.h>
 .P
-.BR "size_t wcsnrtombs(" "size_t size;"
-.BI "                  char " dest "[restrict " size "], \
-const wchar_t **restrict " src ,
-.BI "                  size_t " nwc ", size_t " size ", \
-mbstate_t *restrict " ps );
+.BR "size_t wcsnrtombs(" "size_t dsize;"
+.BI "                  char " dest "[restrict " dsize ],
+.BI "                  const wchar_t **restrict " src ,
+.BI "                  size_t " nwc ", size_t " dsize ", mbstate_t *restrict " ps );
 .fi
 .P
 .RS -4
@@ -58,7 +57,7 @@ the wide-character string
 to a multibyte string starting at
 .IR dest .
 At most
-.I size
+.I dsize
 bytes are written to
 .IR dest .
 The shift state
@@ -115,7 +114,7 @@ returned.
 If
 .I dest
 is NULL,
-.I size
+.I dsize
 is ignored,
 and the conversion proceeds as above,
 except that the converted bytes are not written out to memory, and that
@@ -130,7 +129,7 @@ state known only to the
 function is used instead.
 .P
 The programmer must ensure that there is room for at least
-.I size
+.I dsize
 bytes
 at
 .IR dest .

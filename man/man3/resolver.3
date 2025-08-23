@@ -28,25 +28,27 @@ Resolver library
 .P
 .BR "int res_nquery(" "int anslen;"
 .BI "           res_state " statep ,
-.BI "           const char *" dname ", int " class ", int " type ,
+.BI "           const char *" dname ,
+.BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .BR "int res_nsearch(" "int anslen;"
 .BI "           res_state " statep ,
-.BI "           const char *" dname ", int " class ", int " type ,
+.BI "           const char *" dname ,
+.BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .BR "int res_nquerydomain(" "int anslen;"
 .BI "           res_state " statep ,
 .BI "           const char *" name ", const char *" domain ,
-.BI "           int " class ", int " type ", unsigned char " answer [ anslen ],
-.BI "           int " anslen );
+.BI "           int " class ", int " type ,
+.BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .BR "int res_nmkquery(" "int datalen, int buflen;"
-.BI "           res_state " statep ,
-.BI "           int " op ", const char *" dname ", int " class ,
-.BI "           int " type ", const unsigned char " data [ datalen "], \
-int " datalen ,
+.BI "           res_state " statep ", int " op ,
+.BI "           const char *" dname ,
+.BI "           int " class ", int " type ,
+.BI "           const unsigned char " data [ datalen "], int " datalen ,
 .BI "           const unsigned char *" newrr ,
 .BI "           unsigned char " buf [ buflen "], int " buflen );
 .P
@@ -56,15 +58,16 @@ int " datalen ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .BR "int dn_comp(" "int length;"
-.BI "           const char *" exp_dn ", unsigned char " comp_dn [ length ],
-.BI "           int " length ", unsigned char **" dnptrs ,
+.BI "           const char *" exp_dn ,
+.BI "           unsigned char " comp_dn [ length "], int " length ,
+.BI "           unsigned char **" dnptrs ,
 .BI "           unsigned char **" lastdnptr );
 .P
 .BR "int dn_expand(" "int length;"
 .BI "           const unsigned char *" msg ,
 .BI "           const unsigned char *" eomorig ,
-.BI "           const unsigned char *" comp_dn ", char " exp_dn [ length ],
-.BI "           int " length );
+.BI "           const unsigned char *" comp_dn ,
+.BI "           char " exp_dn [ length "], int " length );
 .P
 .B [[deprecated]] extern struct __res_state _res;
 .P
@@ -72,25 +75,28 @@ int " datalen ,
 .P
 .B [[deprecated]]
 .BR "int res_query(" "int anslen;"
-.BI "           const char *" dname ", int " class ", int " type ,
+.BI "           const char *" dname ,
+.BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .B [[deprecated]]
 .BR "int res_search(" "int anslen;"
-.BI "           const char *" dname ", int " class ", int " type ,
+.BI "           const char *" dname ,
+.BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .B [[deprecated]]
 .BR "int res_querydomain(" "int anslen;"
 .BI "           const char *" name ", const char *" domain ,
-.BI "           int " class ", int " type ", unsigned char " answer [ anslen ],
-.BI "           int " anslen );
+.BI "           int " class ", int " type ,
+.BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .B [[deprecated]]
 .BR "int res_mkquery(" "int datalen, int buflen;"
-.BI "           int " op ", const char *" dname ", int " class ,
-.BI "           int " type ", const unsigned char " data [ datalen "], \
-int " datalen ,
+.BI "           int " op ,
+.BI "           const char *" dname ,
+.BI "           int " class ", int " type ,
+.BI "           const unsigned char " data [ datalen "], int " datalen ,
 .BI "           const unsigned char *" newrr ,
 .BI "           unsigned char " buf [ buflen "], int " buflen );
 .P

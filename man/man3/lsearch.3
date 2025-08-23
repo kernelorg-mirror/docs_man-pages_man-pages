@@ -14,14 +14,14 @@ Standard C library
 .B #include <search.h>
 .P
 .BR "void *lfind(" "size_t *n, size_t size;"
-.BI "            const void " key [ size "], \
-const void " base [* n " * " size ],
+.BI "            const void " key [ size ],
+.BI "            const void " base [* n " * " size ],
 .BI "            size_t *" n ", size_t " size ,
 .BI "            typeof(int (const void [" size "], const void [" size ]))
 .BI "                *" compar );
 .BR "void *lsearch(" "size_t *n, size_t size;"
-.BI "            const void " key [ size "], \
-void " base [* n " * " size ],
+.BI "            const void " key [ size ],
+.BI "            void " base [* n " * " size ],
 .BI "            size_t *" n ", size_t " size ,
 .BI "            typeof(int (const void [" size "], const void [" size ]))
 .BI "                *" compar );

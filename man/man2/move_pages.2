@@ -17,10 +17,9 @@ NUMA (Non-Uniform Memory Access) policy library
 .nf
 .B #include <numaif.h>
 .P
-.BI "long move_pages(int " pid ", unsigned long " count ", \
-void *" pages [ count ],
-.BI "                const int " nodes [ count "], int " status [ count "], \
-int " flags );
+.BI "long move_pages(int " pid ", unsigned long " count ", void *" pages [ count ],
+.BI "                const int " nodes [ count "], int " status [ count ],
+.BI "                int " flags );
 .fi
 .SH DESCRIPTION
 .BR move_pages ()

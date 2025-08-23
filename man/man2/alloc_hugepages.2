@@ -8,8 +8,8 @@ alloc_hugepages, free_hugepages \- allocate or free huge pages
 .SH SYNOPSIS
 .nf
 .BR "void *syscall(" "size_t size;"
-.BI "              SYS_alloc_hugepages, int " key ", void " addr [ size "], \
-size_t " size ,
+.BI "              SYS_alloc_hugepages, int " key ,
+.BI "              void " addr [ size "], size_t " size ,
 .BI "              int " prot ", int " flag );
 .\" asmlinkage unsigned long sys_alloc_hugepages(int key, unsigned long addr,
 .\" unsigned long size, int prot, int flag);

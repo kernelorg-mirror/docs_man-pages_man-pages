@@ -12,9 +12,8 @@ Standard C library
 .nf
 .B #include <sys/random.h>
 .P
-.BR "ssize_t getrandom(" "size_t buflen;"
-.BI "                  void " buf [ buflen "], size_t " buflen ", \
-unsigned int " flags );
+.BR "ssize_t getrandom(" "size_t size;"
+.BI "                  void " buf [ size "], size_t " size ", unsigned int " flags );
 .fi
 .SH DESCRIPTION
 The
@@ -22,7 +21,7 @@ The
 system call fills the buffer pointed to by
 .I buf
 with up to
-.I buflen
+.I size
 random bytes.
 These bytes can be used to seed user-space random number generators
 or for cryptographic purposes.
@@ -79,7 +78,7 @@ noise.
 If the number of available bytes in the
 .I random
 source is less than requested in
-.IR buflen ,
+.IR size ,
 the call returns just the available random bytes.
 If no random bytes are available, the behavior depends on the presence of
 .B GRND_NONBLOCK
@@ -110,7 +109,7 @@ On success,
 returns the number of bytes that were copied to the buffer
 .IR buf .
 This may be less than the number of bytes requested via
-.I buflen
+.I size
 if either
 .B GRND_RANDOM
 was specified in
@@ -229,18 +228,18 @@ that is blocked while reading from the
 source is interrupted by a signal handler
 depends on the initialization state of the entropy buffer
 and on the request size,
-.IR buflen .
+.IR size .
 If the entropy is not yet initialized, then the call fails with the
 .B EINTR
 error.
 If the entropy pool has been initialized
 and the request size is large
-.RI ( buflen "\ >\ 256),"
+.RI ( size "\ >\ 256),"
 the call either succeeds, returning a partially filled buffer,
 or fails with the error
 .BR EINTR .
 If the entropy pool has been initialized and the request size is small
-.RI ( buflen "\ <=\ 256),"
+.RI ( size "\ <=\ 256),"
 then
 .BR getrandom ()
 will not fail with
@@ -260,7 +259,7 @@ to read small buffers (<=\ 256 bytes) from the
 source is the preferred mode of usage.
 .P
 The special treatment of small values of
-.I buflen
+.I size
 was designed for compatibility with
 OpenBSD's
 .BR getentropy (3),
@@ -275,7 +274,7 @@ or fewer bytes than requested were returned.
 In the case where
 .B GRND_RANDOM
 is not specified and
-.I buflen
+.I size
 is less than or equal to 256,
 a return of fewer bytes than requested should never happen,
 but the careful programmer will check for this anyway!

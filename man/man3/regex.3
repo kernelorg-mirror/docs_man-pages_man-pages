@@ -15,10 +15,9 @@ Standard C library
 .P
 .BI "int regcomp(regex_t *restrict " preg ", const char *restrict " regex ,
 .BI "            int " cflags );
-.BI "int regexec(const regex_t *restrict " preg \
-", const char *restrict " string ,
-.BI "            size_t " nmatch ", \
-regmatch_t " pmatch "[_Nullable restrict " nmatch ],
+.BI "int regexec(const regex_t *restrict " preg ,
+.BI "            const char *restrict " string ,
+.BI "            size_t " n ", regmatch_t " pmatch "[_Nullable restrict " n ],
 .BI "            int " eflags );
 .P
 .BR "size_t regerror(" "size_t errbuf_size;"
@@ -64,7 +63,7 @@ Thus, a value of
 .I preg->re_nsub
 + 1
 passed as
-.I nmatch
+.I n
 to
 .BR regexec ()
 is sufficient to capture all matches.
@@ -97,7 +96,7 @@ will use only
 for
 .BR REG_STARTEND ,
 ignoring
-.IR nmatch .
+.IR n .
 .TP
 .B REG_NEWLINE
 Match-any-character operators don't match a newline.
@@ -165,7 +164,7 @@ If any matches are returned
 wasn't passed to
 .BR regcomp (),
 the match succeeded, and
-.I nmatch
+.I n
 > 0), they overwrite
 .I pmatch
 as usual, and the match offsets remain relative to
@@ -183,7 +182,7 @@ obtain the locations of matches within
 .IR string :
 .BR regexec ()
 fills
-.I nmatch
+.I n
 elements of
 .I pmatch
 with results:
@@ -192,7 +191,7 @@ corresponds to the entire match,
 .I pmatch[1]
 to the first subexpression, etc.
 If there were more matches than
-.IR nmatch ,
+.IR n ,
 they are discarded;
 if fewer,
 unused elements of

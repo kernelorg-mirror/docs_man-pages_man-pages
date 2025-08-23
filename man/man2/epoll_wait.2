@@ -13,17 +13,16 @@ Standard C library
 .nf
 .B #include <sys/epoll.h>
 .P
-.BR "int epoll_wait(" "int maxevents;"
-.BI "               int " epfd ", struct epoll_event " events [ maxevents ],
-.BI "               int " maxevents ", int " timeout );
-.BR "int epoll_pwait(" "int maxevents;"
-.BI "               int " epfd ", struct epoll_event " events [ maxevents ],
-.BI "               int " maxevents ", int " timeout ,
+.BR "int epoll_wait(" "int n;"
+.BI "               int " epfd ", struct epoll_event " events [ n "], int " n ,
+.BI "               int " timeout );
+.BR "int epoll_pwait(" "int n;"
+.BI "               int " epfd ", struct epoll_event " events [ n "], int " n ,
+.BI "               int " timeout ,
 .BI "               const sigset_t *_Nullable " sigmask );
-.BR "int epoll_pwait2(" "int maxevents;"
-.BI "               int " epfd ", struct epoll_event " events [ maxevents ],
-.BI "               int " maxevents ", \
-const struct timespec *_Nullable " timeout ,
+.BR "int epoll_pwait2(" "int n;"
+.BI "               int " epfd ", struct epoll_event " events [ n "], int " n ,
+.BI "               const struct timespec *_Nullable " timeout ,
 .BI "               const sigset_t *_Nullable " sigmask );
 .fi
 .SH DESCRIPTION
@@ -39,11 +38,11 @@ is used to return information from the ready list
 about file descriptors in the interest list that
 have some events available.
 Up to
-.I maxevents
+.I n
 are returned by
 .BR epoll_wait ().
 The
-.I maxevents
+.I n
 argument must be greater than zero.
 .P
 The
@@ -124,7 +123,7 @@ call:
 .P
 .in +4n
 .EX
-ready = epoll_pwait(epfd, &events, maxevents, timeout, &sigmask);
+ready = epoll_pwait(epfd, &events, n, timeout, &sigmask);
 .EE
 .in
 .P
@@ -137,7 +136,7 @@ executing the following calls:
 sigset_t origmask;
 \&
 pthread_sigmask(SIG_SETMASK, &sigmask, &origmask);
-ready = epoll_wait(epfd, &events, maxevents, timeout);
+ready = epoll_wait(epfd, &events, n, timeout);
 pthread_sigmask(SIG_SETMASK, &origmask, NULL);
 .EE
 .in
@@ -204,7 +203,7 @@ expired; see
 is not an
 .B epoll
 file descriptor, or
-.I maxevents
+.I n
 is less than or equal to zero.
 .SH STANDARDS
 Linux.
@@ -234,7 +233,7 @@ it will cause the
 call to unblock.
 .P
 If more than
-.I maxevents
+.I n
 file descriptors are ready when
 .BR epoll_wait ()
 is called, then successive

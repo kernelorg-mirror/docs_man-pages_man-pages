@@ -16,8 +16,8 @@ Standard C library
 .B #include <unistd.h>
 .P
 .BR "int syscall(" "unsigned long size;"
-.BI "            SYS_init_module, void " module_image [ size "], \
-unsigned long " size ,
+.B  "            SYS_init_module,"
+.BI "            void " module_image [ size "], unsigned long " size ,
 .BI "            const char *" param_values );
 .BI "int syscall(SYS_finit_module, int " fd ,
 .BI "            const char *" param_values ", int " flags );

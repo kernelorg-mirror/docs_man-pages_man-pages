@@ -31,16 +31,13 @@ strncat
 .P
 // Copy/catenate a string with truncation.
 .BR "ssize_t strtcpy(" "size_t dsize;"
-.BI "               char " dst "[restrict " dsize "], \
-const char *restrict " src ,
+.BI "               char " dst "[restrict " dsize "], const char *restrict " src ,
 .BI "               size_t " dsize );
 .BR "size_t strlcpy(" "size_t dsize;"
-.BI "               char " dst "[restrict " dsize "], \
-const char *restrict " src ,
+.BI "               char " dst "[restrict " dsize "], const char *restrict " src ,
 .BI "               size_t " dsize );
 .BR "size_t strlcat(" "size_t dsize;"
-.BI "               char " dst "[restrict " dsize "], \
-const char *restrict " src ,
+.BI "               char " dst "[restrict " dsize "], const char *restrict " src ,
 .BI "               size_t " dsize );
 .fi
 .\" ----- SYNOPSIS :: Null-padded character sequences --------/
@@ -49,12 +46,10 @@ const char *restrict " src ,
 // Fill a fixed-size buffer with characters from a string
 // and pad with null bytes.
 .BR "char *strncpy(" "size_t dsize;"
-.BI "              char " dst "[restrict " dsize "], \
-const char *restrict " src ,
+.BI "              char " dst "[restrict " dsize "], const char *restrict " src ,
 .BI "               size_t " dsize );
 .BR "char *stpncpy(" "size_t dsize;"
-.BI "              char " dst "[restrict " dsize "], \
-const char *restrict " src ,
+.BI "              char " dst "[restrict " dsize "], const char *restrict " src ,
 .BI "               size_t " dsize );
 .P
 // Chain-copy a null-padded character sequence into a character sequence.
@@ -77,8 +72,7 @@ const char *restrict " src ,
 .nf
 // Chain-copy a length-bounded character sequence.
 .BR "void *mempcpy(" "size_t len;"
-.BI "               void " dst "[restrict " len "], \
-const void " src "[restrict " len ],
+.BI "               void " dst "[restrict " len "], const void " src "[restrict " len ],
 .BI "               size_t " len );
 .P
 // Chain-copy a length-bounded character sequence into a string.
