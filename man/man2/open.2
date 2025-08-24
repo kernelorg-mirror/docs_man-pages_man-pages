@@ -367,7 +367,10 @@ is described in
 .B O_DIRECTORY
 If
 .I path
-is not a directory, cause the open to fail.
+is not a directory,
+cause
+.BR open ()
+to fail.
 .\" But see the following and its replies:
 .\" http://marc.theaimsgroup.com/?t=112748702800001&r=1&w=2
 .\" [PATCH] open: O_DIRECTORY and O_CREAT together should fail
