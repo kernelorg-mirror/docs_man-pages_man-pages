@@ -35,10 +35,7 @@ is set to indicate the error.
 is not a valid value.
 .TP
 .B EPERM
-.I op
-is
-.BR PR_SET_SECUREBITS ,
-and the caller does not have the
+The caller does not have the
 .B CAP_SETPCAP
 capability,
 or tried to unset a "locked" flag,
