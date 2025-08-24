@@ -20,27 +20,48 @@ Standard C library
 .SH DESCRIPTION
 Set floating-point exception mode to
 .IR mode .
-Pass
+.I mode
+can be one of the following values.
+.TP
 .B PR_FP_EXC_SW_ENABLE
-to use FPEXC for FP exception enables,
+Use FPEXC for
+FP exception enables.
+.TP
 .B PR_FP_EXC_DIV
-for floating-point divide by zero,
+Use FPEXC for
+floating-point divide by zero.
+.TP
 .B PR_FP_EXC_OVF
-for floating-point overflow,
+Use FPEXC for
+floating-point overflow.
+.TP
 .B PR_FP_EXC_UND
-for floating-point underflow,
+Use FPEXC for
+floating-point underflow.
+.TP
 .B PR_FP_EXC_RES
-for floating-point inexact result,
+Use FPEXC for
+floating-point inexact result.
+.TP
 .B PR_FP_EXC_INV
-for floating-point invalid operation,
+Use FPEXC for
+floating-point invalid operation.
+.TP
 .B PR_FP_EXC_DISABLED
-for FP exceptions disabled,
+Use FPEXC for
+FP exceptions disabled.
+.TP
 .B PR_FP_EXC_NONRECOV
-for async nonrecoverable exception mode,
+Use FPEXC for
+async nonrecoverable exception mode.
+.TP
 .B PR_FP_EXC_ASYNC
-for async recoverable exception mode,
+Use FPEXC for
+async recoverable exception mode.
+.TP
 .B PR_FP_EXC_PRECISE
-for precise exception mode.
+Use FPEXC for
+precise exception mode.
 .SH RETURN VALUE
 On success,
 0 is returned.
