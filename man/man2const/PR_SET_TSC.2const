@@ -38,7 +38,7 @@ is set to indicate the error.
 .SH ERRORS
 .TP
 .B EINVAL
-.I arg2
+.I flag
 is not a valid value.
 .SH STANDARDS
 Linux.

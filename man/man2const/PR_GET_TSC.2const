@@ -31,7 +31,7 @@ is set to indicate the error.
 .SH ERRORS
 .TP
 .B EFAULT
-.I arg2
+.I flag
 is an invalid address.
 .SH STANDARDS
 Linux.
