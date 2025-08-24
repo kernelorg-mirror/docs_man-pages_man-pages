@@ -53,6 +53,6 @@ Linux.
 Linux 2.6.25.
 .SH SEE ALSO
 .BR prctl (2),
-.BR PR_CAPBSET_READ (2const)
+.BR PR_CAPBSET_READ (2const),
 .BR libcap (3),
 .BR cap_drop_bound (3)
