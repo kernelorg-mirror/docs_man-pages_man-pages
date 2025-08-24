@@ -99,7 +99,7 @@ Version\~7 AT&T UNIX has
 .PD 0
 .in +4n
 .nf
-.BI "ioctl(int " fildes ", int " op ", struct sgttyb *" argp );
+.BI "ioctl(int " fd ", int " op ", struct sgttyb *" argp );
 .fi
 .in
 .P
@@ -136,7 +136,7 @@ SysVr4 has
 .PD 0
 .in +4n
 .nf
-.BI "int ioctl(int " fildes ", int " op ", ... /* " arg " */);"
+.BI "int ioctl(int " fd ", int " op ", ... /* " arg " */);"
 .fi
 .in
 .P
