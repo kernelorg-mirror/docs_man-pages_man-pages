@@ -404,8 +404,23 @@ flag can be used with
 .B MS_BIND
 to modify only the per-mount-point flags.
 .\" See https://lwn.net/Articles/281157/
-This is particularly useful for setting or clearing the "read-only"
-flag on a mount without changing the underlying filesystem.
+This is particularly useful
+for setting or clearing the "read-only" flag on a mount
+without changing the filesystem parameters of the underlying filesystem.
+The
+.I data
+argument is ignored.
+The existing per-mount-point flags of the mount point
+are cleared
+and replaced with those in
+.IR mountflags .
+This means that
+if you wish to preserve
+any existing per-mount-point flags,
+you need to include them in
+.IR mountflags ,
+along with the per-mount-point flags you wish to set
+(or with the flags you wish to clear missing).
 Specifying
 .I mountflags
 as:
@@ -416,8 +431,9 @@ MS_REMOUNT | MS_BIND | MS_RDONLY
 .EE
 .in
 .P
-will make access through this mountpoint read-only, without affecting
-other mounts.
+will make access through this mount point read-only
+(clearing all other per-mount-point flags),
+without affecting other mounts of this filesystem.
 .\"
 .SS Creating a bind mount
 If
