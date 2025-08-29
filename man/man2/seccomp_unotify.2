@@ -1075,7 +1075,8 @@ the supervisor might remain blocked in its
 .BR accept (2)
 holding a port number that the target
 (which, after the interruption by the signal handler,
-perhaps closed  its listening socket) might expect to be able to reuse in a
+perhaps closed its listening socket)
+might expect to be able to reuse in a
 .BR bind (2)
 call.
 .P
@@ -1304,7 +1305,7 @@ If the target process attempts to create a directory with
 a pathname that doesn't start with "." and doesn't begin with the prefix
 "/tmp/", then the supervisor spoofs an error return
 .RB ( EOPNOTSUPP ,
-"Operation not  supported")
+"Operation not supported")
 for the target's
 .BR mkdir (2)
 call (which is not executed):
