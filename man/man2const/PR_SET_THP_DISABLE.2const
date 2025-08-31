@@ -26,7 +26,9 @@ has a nonzero value, the flag is set, otherwise it is cleared.
 Setting this flag provides a method
 for disabling transparent huge pages
 for jobs where the code cannot be modified,
-and using a malloc hook with
+and using a
+.BR malloc (3)
+hook with
 .BR madvise (2)
 is not an option (i.e., statically allocated data).
 The setting of the "THP disable" flag is inherited by a child created via
