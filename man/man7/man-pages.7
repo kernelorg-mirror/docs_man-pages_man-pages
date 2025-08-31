@@ -484,6 +484,19 @@ Wrap the function prototype(s) in a
 .IR .nf / .fi
 pair to prevent filling.
 .P
+Forward declarations of parameters in functions
+should not use bold nor italics;
+this helps distinguish them visually from actual parameters.
+As an example:
+.P
+.in +4n
+.nf
+.BR "int snprintf(" "size_t size;"
+.BI "             char " str "[restrict " size "], size_t " size ,
+.BI "             const char *restrict " format ", ...);"
+.fi
+.in
+.P
 In general, where more than one function prototype is shown in the SYNOPSIS,
 the prototypes should
 .I not
