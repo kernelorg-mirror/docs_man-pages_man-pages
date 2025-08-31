@@ -18,7 +18,7 @@ Standard C library
 .BI "int prctl(PR_SET_ENDIAN, long " endianness );
 .fi
 .SH DESCRIPTION
-Set the endian-ness of the calling process
+Set the endianness of the calling process
 to the value given in
 .IR endianness ,
 which should be one of the following:

@@ -6,7 +6,7 @@
 .SH NAME
 PR_GET_ENDIAN
 \-
-get the endian-ness of the calling process
+get the endianness of the calling process
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -18,7 +18,7 @@ Standard C library
 .BI "int prctl(PR_GET_ENDIAN, int *" endianness );
 .fi
 .SH DESCRIPTION
-Return the endian-ness of the calling process,
+Return the endianness of the calling process,
 in the location pointed to by
 .IR endianness .
 .SH RETURN VALUE
