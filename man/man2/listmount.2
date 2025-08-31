@@ -81,7 +81,9 @@ is set to indicate the error.
 .SH ERRORS
 .TP
 .B EPERM
-Permission is denied for accessing this mount.
+The caller does not have
+.B CAP_SYS_ADMIN
+in the user namespace.
 .TP
 .B EFAULT
 .I req
