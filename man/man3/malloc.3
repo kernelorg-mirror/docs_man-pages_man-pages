@@ -272,8 +272,8 @@ impossible to write code that reliably
 determines if the input pointer is freed after
 .IR realloc(p,\~0) ,
 and C23 changed it again to make this undefined behavior,
-acknowledging that the C17 specification was broad enough that
-undefined behavior wasn't worse than that.
+acknowledging that the C17 specification was broad enough,
+so that undefined behavior wasn't worse than that.
 .P
 .BR reallocarray ()
 suffers the same issues in glibc.
