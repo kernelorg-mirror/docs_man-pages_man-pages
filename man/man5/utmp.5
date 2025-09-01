@@ -87,7 +87,7 @@ struct utmp {
        memory to be shared between 32\- and 64\-bit applications. */
 #if __WORDSIZE == 64 && defined __WORDSIZE_COMPAT32
     int32_t ut_session;           /* Session ID (\c
-.BR getsid (2) ),
+.BR getsid (2)),
                                      used for windowing */
     struct {
         int32_t tv_sec;           /* Seconds */

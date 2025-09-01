@@ -775,12 +775,15 @@ interpret the blink SGR as a bold SGR.
 Later versions which implemented ANSI colors, for example,
 XFree86 3.1.2A in 1995, improved this by allowing
 the blink attribute to be displayed as a color.
-Modern versions of xterm implement blink SGR as blinking text
+Modern versions of
+.BR xterm (1)
+implement blink SGR as blinking text
 and still allow colored text as an alternate rendering of SGRs.
 Stock X11R6 versions did not recognize the color-setting SGRs until
-the X11R6.8 release, which incorporated XFree86 xterm.
+the X11R6.8 release, which incorporated XFree86
+.BR xterm (1).
 All ECMA-48 CSI sequences recognized by Linux are also recognized by
-.IR xterm ,
+.BR xterm (1),
 however
 .BR xterm (1)
 implements several ECMA-48 and DEC control sequences
@@ -807,7 +810,8 @@ For a chronological overview,
 .UE
 .RE
 .P
-details changes to xterm.
+details changes to
+.BR xterm (1).
 .P
 The
 .I vttest
@@ -852,7 +856,7 @@ Unlike the
 .BR setterm (1)
 sequences which will be ignored (since
 they are invalid control sequences), the palette sequence will make
-.B xterm (1)
+.BR xterm (1)
 appear to hang (though pressing the return-key
 will fix that).
 To accommodate applications which have been hardcoded to use Linux
