@@ -4,7 +4,7 @@
 .\"
 .TH quotactl 2 (date) "Linux man-pages (unreleased)"
 .SH NAME
-quotactl \- manipulate disk quotas
+quotactl, quotactl_fd \- manipulate disk quotas
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -17,7 +17,19 @@ Standard C library
 .P
 .BI "int quotactl(int " op ", const char *_Nullable " special ", int " id ,
 .BI "             caddr_t " addr );
+.P
+.BR "#include <sys/syscall.h>" "    /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int syscall(SYS_quotactl_fd, int " fd ", int " op ", int " id \
+", caddr_t " addr );
 .fi
+.P
+.IR Note :
+glibc provides no wrapper for
+.BR quotactl_fd (),
+necessitating the use of
+.BR syscall (2).
 .SH DESCRIPTION
 The quota system can be used to set per-user, per-group, and per-project limits
 on the amount of disk space used on a filesystem.
@@ -31,7 +43,14 @@ after this, the soft limit counts as a hard limit.
 .P
 The
 .BR quotactl ()
-call manipulates disk quotas.
+and
+.BR quotactl_fd ()
+calls manipulate disk quotas.
+The difference between these functions is
+the way the filesystem being manipulated is specified,
+see description of the arguments below.
+See NOTES for why one variant might be preferred over the other.
+.P
 The
 .I op
 argument indicates an operation to be applied to the user or
@@ -56,10 +75,20 @@ The
 .I subop
 value is described below.
 .P
-The
+For
+.BR quotactl (),
+the
 .I special
 argument is a pointer to a null-terminated string containing the pathname
 of the (mounted) block special device for the filesystem being manipulated.
+.P
+For
+.BR quotactl_fd (),
+the
+.I fd
+argument is a file descriptor (which may be opened with the
+.B O_PATH
+flag) referring to a file or directory on the filesystem being manipulated.
 .P
 The
 .I addr
@@ -117,6 +146,18 @@ flag in the
 field returned by the
 .B Q_GETINFO
 operation.
+.IP
+The
+.BR quotactl_fd ()
+variant of this system call ignores the
+.I addr
+and
+.I id
+arguments, so the
+.B Q_QUOTAON
+operation of
+.BR quotactl_fd ()
+is only suitable for work with hidden system inodes.
 .IP
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
@@ -350,10 +391,14 @@ where the format number will be stored.
 .TP
 .B Q_SYNC
 Update the on-disk copy of quota usages for a filesystem.
-If
+For
+.BR quotactl (),
+if
 .I special
 is NULL, then all filesystems with active quotas are sync'ed.
-The
+.RB ( quotactl_fd ()
+always sync's only one filesystem.)
+In both cases, the
 .I addr
 and
 .I id
@@ -770,6 +815,7 @@ but there is no ID greater than or equal to
 .I id
 that has an active quota.
 .SH NOTES
+.SS Alternative XFS header
 Instead of
 .I <xfs/xqm.h>
 one can use
@@ -797,6 +843,28 @@ constants for the available quota types, but their values are the same as for
 constants without the
 .B XQM_
 prefix.
+.SS quotactl() versus quotactl_fd()
+The original
+.BR quotactl ()
+variant of this system call requires specifying
+the block device containing the filesystem to operate on.
+This makes it impossible to use
+in cases where the filesystem has no backing block device (e.g. tmpfs).
+Even when the block device does exist, it might be difficult to locate
+(requires scanning
+.I /proc/self/mounts
+and even some filesystem-specific parsing in the case of e.g. bcachefs).
+.BR quotactl_fd ()
+instead works on the mount point,
+which avoids this limitation and is simpler to use
+(since the filesystem to manipulate is typically specified by its mount
+point anyway).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+.TP
+.BR quotactl_fd ()
+Linux 5.14.
 .SH SEE ALSO
 .BR quota (1),
 .BR getrlimit (2),
