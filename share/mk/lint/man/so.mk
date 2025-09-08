@@ -15,14 +15,16 @@ include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_LINT_man_so := \
-	$(_MANDIR)/man7/man.7.lint-man.so.touch
+ext := .lint-man.so.touch
+xfail := $(MAKEFILEDIR)/lint/man/so.xfail
 
-
-_LINT_man_so := $(patsubst %, %.lint-man.so.touch, $(_SO_MAN))
+tgts := $(patsubst %, %$(ext), $(_SO_MAN))
 ifeq ($(SKIP_XFAIL),yes)
-_LINT_man_so := $(filter-out $(_XFAIL_LINT_man_so), $(_LINT_man_so))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
+
+
+_LINT_man_so := $(tgts)
 
 
 $(_LINT_man_so): %.lint-man.so.touch: % $(MK) | $$(@D)/
@@ -35,6 +37,11 @@ $(_LINT_man_so): %.lint-man.so.touch: % $(MK) | $$(@D)/
 
 .PHONY: lint-man-so
 lint-man-so: $(_LINT_man_so);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

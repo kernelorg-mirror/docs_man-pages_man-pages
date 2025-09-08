@@ -14,15 +14,16 @@ include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 
-_XFAIL_LINT_man_quote := \
-	$(_MANDIR)/man8/tzselect.8.lint-man.quote.touch \
-	$(_MANDIR)/man8/zic.8.lint-man.quote.touch
+ext := .lint-man.quote.touch
+xfail := $(MAKEFILEDIR)/lint/man/quote.xfail
 
-
-_LINT_man_quote := $(patsubst %, %.lint-man.quote.touch, $(_NONSO_MAN) $(_NONSO_MDOC))
+tgts := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
 ifeq ($(SKIP_XFAIL),yes)
-_LINT_man_quote := $(filter-out $(_XFAIL_LINT_man_quote), $(_LINT_man_quote))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
+
+
+_LINT_man_quote := $(tgts)
 
 
 quote_Pgrep := $(MAKEFILEDIR)/lint/man/quote.Pgrep
@@ -41,6 +42,11 @@ $(_LINT_man_quote): %.lint-man.quote.touch: % $(quote_Pgrep) $(MK) | $$(@D)/
 
 .PHONY: lint-man-quote
 lint-man-quote: $(_LINT_man_quote);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

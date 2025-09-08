@@ -14,29 +14,16 @@ include $(MAKEFILEDIR)/configure/build-depends/groff-base/troff.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_HTMLMAN_set := \
-	$(_MANDIR)/man2/fanotify_init.2.html.set \
-	$(_MANDIR)/man2/s390_sthyi.2.html.set \
-	$(_MANDIR)/man2/mbind.2.html.set \
-	$(_MANDIR)/man2/membarrier.2.html.set \
-	$(_MANDIR)/man2/set_mempolicy.2.html.set \
-	$(_MANDIR)/man4/lirc.4.html.set \
-	$(_MANDIR)/man5/proc.5.html.set \
-	$(_MANDIR)/man7/address_families.7.html.set \
-	$(_MANDIR)/man7/bpf-helpers.7.html.set \
-	$(_MANDIR)/man7/charsets.7.html.set \
-	$(_MANDIR)/man7/iso_8859-16.7.html.set \
-	$(_MANDIR)/man7/iso_8859-6.7.html.set \
-	$(_MANDIR)/man7/vdso.7.html.set \
-	$(_MANDIR)/man8/zic.8.html.set
+ext := .html.set
+xfail := $(MAKEFILEDIR)/build/html/troff.xfail
 
-
-_HTMLMAN_set  := $(patsubst %, %.html.set, $(_NONSO_MAN) $(_NONSO_MDOC))
-
-
+tgts := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
 ifeq ($(SKIP_XFAIL),yes)
-_HTMLMAN_set := $(filter-out $(_XFAIL_HTMLMAN_set), $(_HTMLMAN_set))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
+
+
+_HTMLMAN_set  := $(tgts)
 
 
 $(_HTMLMAN_set): %.html.set: %.eqn $(MK) | $$(@D)/
@@ -47,6 +34,11 @@ $(_HTMLMAN_set): %.html.set: %.eqn $(MK) | $$(@D)/
 
 .PHONY: build-html-troff
 build-html-troff: $(_HTMLMAN_set);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

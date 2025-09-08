@@ -13,28 +13,16 @@ include $(MAKEFILEDIR)/configure/build-depends/man/man.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_CHECK_catman := \
-	$(_MANDIR)/man1/memusage.1.check-catman.touch \
-	$(_MANDIR)/man3/mallopt.3.check-catman.touch \
-	$(_MANDIR)/man4/smartpqi.4.check-catman.touch \
-	$(_MANDIR)/man4/veth.4.check-catman.touch \
-	$(_MANDIR)/man5/proc_buddyinfo.5.check-catman.touch \
-	$(_MANDIR)/man5/proc_pid_fdinfo.5.check-catman.touch \
-	$(_MANDIR)/man5/proc_pid_maps.5.check-catman.touch \
-	$(_MANDIR)/man5/proc_pid_mountinfo.5.check-catman.touch \
-	$(_MANDIR)/man5/proc_pid_net.5.check-catman.touch \
-	$(_MANDIR)/man5/proc_timer_stats.5.check-catman.touch \
-	$(_MANDIR)/man5/proc_version.5.check-catman.touch \
-	$(_MANDIR)/man5/slabinfo.5.check-catman.touch \
-	$(_MANDIR)/man7/keyrings.7.check-catman.touch \
-	$(_MANDIR)/man7/string_copying.7.check-catman.touch \
-	$(_MANDIR)/man7/uri.7.check-catman.touch
+ext := .check-catman.touch
+xfail := $(MAKEFILEDIR)/check/catman/grep.xfail
 
-
-_CHECK_catman := $(patsubst %.cat.grep, %.check-catman.touch, $(_CHECK_catman_grep))
+tgts := $(patsubst %.cat.grep, %$(ext), $(_CHECK_catman_grep))
 ifeq ($(SKIP_XFAIL),yes)
-_CHECK_catman := $(filter-out $(_XFAIL_CHECK_catman), $(_CHECK_catman))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
+
+
+_CHECK_catman := $(tgts)
 
 
 $(_CHECK_catman): %.check-catman.touch: %.cat.grep $(MK) | $$(@D)/
@@ -45,6 +33,11 @@ $(_CHECK_catman): %.check-catman.touch: %.cat.grep $(MK) | $$(@D)/
 
 .PHONY: check-catman-grep
 check-catman-grep: $(_CHECK_catman);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

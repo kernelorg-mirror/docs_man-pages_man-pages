@@ -14,44 +14,16 @@ include $(MAKEFILEDIR)/configure/build-depends/groff-base/troff.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_PDFMAN_set := \
-	$(_MANDIR)/man1/iconv.1.pdf.set \
-	$(_MANDIR)/man2/fanotify_init.2.pdf.set \
-	$(_MANDIR)/man2/membarrier.2.pdf.set \
-	$(_MANDIR)/man2/prctl.2.pdf.set \
-	$(_MANDIR)/man2/statx.2.pdf.set \
-	$(_MANDIR)/man2/syscall.2.pdf.set \
-	$(_MANDIR)/man3/newlocale.3.pdf.set \
-	$(_MANDIR)/man7/address_families.7.pdf.set \
-	$(_MANDIR)/man7/armscii-8.7.pdf.set \
-	$(_MANDIR)/man7/ascii.7.pdf.set \
-	$(_MANDIR)/man7/bpf-helpers.7.pdf.set \
-	$(_MANDIR)/man7/charsets.7.pdf.set \
-	$(_MANDIR)/man7/cp1251.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-2.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-3.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-4.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-5.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-6.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-7.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-8.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-10.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-11.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-13.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-14.7.pdf.set \
-	$(_MANDIR)/man7/iso_8859-16.7.pdf.set \
-	$(_MANDIR)/man7/koi8-r.7.pdf.set \
-	$(_MANDIR)/man7/koi8-u.7.pdf.set \
-	$(_MANDIR)/man7/pathname.7.pdf.set \
-	$(_MANDIR)/man7/vdso.7.pdf.set
+ext := .pdf.set
+xfail := $(MAKEFILEDIR)/build/pdf/pages/troff.xfail
 
-
-_PDFMAN_set  := $(patsubst %, %.pdf.set, $(_NONSO_MAN) $(_NONSO_MDOC))
-
-
+tgts := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
 ifeq ($(SKIP_XFAIL),yes)
-_PDFMAN_set := $(filter-out $(_XFAIL_PDFMAN_set), $(_PDFMAN_set))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(shell cat $(xfail))), $(tgts))
 endif
+
+
+_PDFMAN_set  := $(tgts)
 
 
 $(_PDFMAN_set): %.pdf.set: %.pdf.troff $(MK) | $$(@D)/
@@ -62,6 +34,11 @@ $(_PDFMAN_set): %.pdf.set: %.pdf.troff $(MK) | $$(@D)/
 
 .PHONY: build-pdf-pages-troff
 build-pdf-pages-troff: $(_PDFMAN_set);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

@@ -14,44 +14,16 @@ include $(MAKEFILEDIR)/configure/build-depends/groff-base/troff.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_PSMAN_set := \
-	$(_MANDIR)/man1/iconv.1.ps.set \
-	$(_MANDIR)/man2/fanotify_init.2.ps.set \
-	$(_MANDIR)/man2/membarrier.2.ps.set \
-	$(_MANDIR)/man2/prctl.2.ps.set \
-	$(_MANDIR)/man2/statx.2.ps.set \
-	$(_MANDIR)/man2/syscall.2.ps.set \
-	$(_MANDIR)/man3/newlocale.3.ps.set \
-	$(_MANDIR)/man7/address_families.7.ps.set \
-	$(_MANDIR)/man7/armscii-8.7.ps.set \
-	$(_MANDIR)/man7/ascii.7.ps.set \
-	$(_MANDIR)/man7/bpf-helpers.7.ps.set \
-	$(_MANDIR)/man7/charsets.7.ps.set \
-	$(_MANDIR)/man7/cp1251.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-2.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-3.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-4.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-5.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-6.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-7.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-8.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-10.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-11.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-13.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-14.7.ps.set \
-	$(_MANDIR)/man7/iso_8859-16.7.ps.set \
-	$(_MANDIR)/man7/koi8-r.7.ps.set \
-	$(_MANDIR)/man7/koi8-u.7.ps.set \
-	$(_MANDIR)/man7/pathname.7.ps.set \
-	$(_MANDIR)/man7/vdso.7.ps.set
+ext := .ps.set
+xfail := $(MAKEFILEDIR)/build/ps/troff.xfail
 
-
-_PSMAN_set  := $(patsubst %, %.ps.set, $(_NONSO_MAN) $(_NONSO_MDOC))
-
-
+tgts := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
 ifeq ($(SKIP_XFAIL),yes)
-_PSMAN_set := $(filter-out $(_XFAIL_PSMAN_set), $(_PSMAN_set))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
+
+
+_PSMAN_set  := $(tgts)
 
 
 $(_PSMAN_set): %.ps.set: %.ps.troff $(MK) | $$(@D)/
@@ -62,6 +34,11 @@ $(_PSMAN_set): %.ps.set: %.ps.troff $(MK) | $$(@D)/
 
 .PHONY: build-ps-troff
 build-ps-troff: $(_PSMAN_set);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

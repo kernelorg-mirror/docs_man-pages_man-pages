@@ -13,13 +13,16 @@ include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_LINT_c_EX_checkpatch := $(_MANDIR)/man2/bpf.2.d/bpf.c.lint-c.checkpatch.touch
+ext := .lint-c.checkpatch.touch
+xfail := $(MAKEFILEDIR)/lint/c/iwyu.xfail
 
-
-_LINT_c_EX_checkpatch   := $(patsubst %, %.lint-c.checkpatch.touch, $(_EX_TU_src))
+tgts := $(patsubst %, %$(ext), $(_EX_TU_src))
 ifeq ($(SKIP_XFAIL),yes)
-_LINT_c_EX_checkpatch   := $(filter-out $(_XFAIL_LINT_c_EX_checkpatch), $(_LINT_c_EX_checkpatch))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
+
+
+_LINT_c_EX_checkpatch   := $(tgts)
 _LINT_c_checkpatch      := $(_LINT_c_EX_checkpatch)
 
 
@@ -35,6 +38,11 @@ $(_LINT_c_checkpatch):
 
 .PHONY: lint-c-checkpatch
 lint-c-checkpatch: $(_LINT_c_checkpatch);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

@@ -16,16 +16,15 @@ include $(MAKEFILEDIR)/configure/build-depends/mandoc/mandoc.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_LINT_man_mandoc := \
-	$(_MANDIR)/man7/bpf-helpers.7.lint-man.mandoc.touch \
-	$(_MANDIR)/man7/uri.7.lint-man.mandoc.touch \
-	$(_MANDIR)/man8/zic.8.lint-man.mandoc.touch
+ext := .lint-man.mandoc.touch
+xfail := $(MAKEFILEDIR)/lint/man/mandoc.xfail
 
-
-_LINT_man_mandoc := $(patsubst %, %.lint-man.mandoc.touch, $(_NONSO_MAN) $(_NONSO_MDOC))
+tgts := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
 ifeq ($(SKIP_XFAIL),yes)
-_LINT_man_mandoc := $(filter-out $(_XFAIL_LINT_man_mandoc), $(_LINT_man_mandoc))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
+
+_LINT_man_mandoc := $(tgts)
 
 
 mandoc_man_ignore_grep := $(MAKEFILEDIR)/lint/man/mandoc.ignore.grep
@@ -43,6 +42,11 @@ $(_LINT_man_mandoc): %.lint-man.mandoc.touch: % $(mandoc_man_ignore_grep) $(MK) 
 
 .PHONY: lint-man-mandoc
 lint-man-mandoc: $(_LINT_man_mandoc);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard
