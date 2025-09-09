@@ -652,6 +652,9 @@ or
 .\" SI_DETHREAD is defined in Linux 2.6.9 sources, but isn't implemented
 .\" It appears to have been an idea that was tried during 2.5.6
 .\" through to Linux 2.5.24 and then was backed out.
+.TP
+.B SI_ASYNCNL
+Async name lookup completion.
 .RE
 .P
 The following values can be placed in
@@ -716,6 +719,12 @@ Floating-point invalid operation.
 .TP
 .B FPE_FLTSUB
 Subscript out of range.
+.TP
+.BR FPE_FLTUNK " (since Linux 4.17)"
+Undiagnosed floating-point exception.
+.TP
+.BR FPE_CONDTRAP " (PARISC only)"
+Trap on condition.
 .RE
 .P
 The following values can be placed in
@@ -742,6 +751,24 @@ See
 .BR pkeys (7).
 The protection key which applied to this access is available via
 .IR si_pkey .
+.TP
+.BR SEGV_ACCADI " (since Linux 4.17, SPARC only)"
+Application Data Integrity not enabled for mapped object.
+.TP
+.BR SEGV_ADIDERR " (since Linux 4.17, SPARC only)"
+Disrupting Memory Corruption Detection error.
+.TP
+.BR SEGV_ADIPERR " (since Linux 4.17, SPARC only)"
+Precise Memory Corruption Detection exception.
+.TP
+.BR SEGV_MTEAERR " (since Linux 5.10, ARM only)"
+Asynchronous Memory Tagging Extension error.
+.TP
+.BR SEGV_MTESERR " (since Linux 5.10, ARM only)"
+Synchronous Memory Tagging Extension exception.
+.TP
+.BR SEGV_CPERR " (since Linux 6.10)"
+Control protection fault.
 .RE
 .P
 The following values can be placed in
@@ -785,6 +812,12 @@ Process taken branch trap.
 .TP
 .BR TRAP_HWBKPT " (since Linux 2.4, IA64 only)"
 Hardware breakpoint/watchpoint.
+.TP
+.BR TRAP_UNK " (since Linux 4.18)"
+Undiagnosed trap.
+.TP
+.BR TRAP_PERF " (since Linux 5.13 and glibc 2.43)"
+Perf event with sigtrap=1.
 .RE
 .P
 The following values can be placed in
@@ -839,17 +872,31 @@ High priority input available.
 Device disconnected.
 .RE
 .P
-The following value can be placed in
+The following values can be placed in
 .I si_code
 for a
 .B SIGSYS
 signal:
 .RS 4
 .TP
-.BR SYS_SECCOMP " (since Linux 3.5)"
+.BR SYS_SECCOMP " (since Linux 3.5 and glibc 2.43)"
 Triggered by a
 .BR seccomp (2)
 filter rule.
+.TP
+.BR SYS_USER_DISPATCH " (since Linux 5.11 and glibc 2.43)"
+Syscall user dispatch triggered.
+.RE
+.P
+The following value can be placed in
+.I si_code
+for a
+.B SIGEMT
+signal:
+.RS 4
+.TP
+.BR EMT_TAGOVF " (SPARC only)"
+Tag overflow.
 .RE
 .SS Dynamically probing for flag bit support
 The
