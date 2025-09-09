@@ -16,7 +16,7 @@ include $(MAKEFILEDIR)/configure/build-depends/groff-base/troff.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_CATMAN_MAN_set := \
+_XFAIL_CATMAN_set := \
 	$(_MANDIR)/man2/fanotify_init.2.cat.set \
 	$(_MANDIR)/man2/s390_sthyi.2.cat.set \
 	$(_MANDIR)/man3/unlocked_stdio.3.cat.set \
@@ -52,37 +52,25 @@ _XFAIL_CATMAN_MAN_set := \
 troff_catman_ignore_grep := $(MAKEFILEDIR)/build/catman/troff.ignore.grep
 
 
-_CATMAN_MAN_set  := $(patsubst %, %.cat.set, $(_NONSO_MAN))
-_CATMAN_MDOC_set := $(patsubst %, %.cat.set, $(_NONSO_MDOC))
+_CATMAN_set := $(patsubst %, %.cat.set, $(_NONSO_MAN) $(_NONSO_MDOC))
 
 
 ifeq ($(SKIP_XFAIL),yes)
-_CATMAN_MAN_set := $(filter-out $(_XFAIL_CATMAN_MAN_set), $(_CATMAN_MAN_set))
+_CATMAN_set := $(filter-out $(_XFAIL_CATMAN_set), $(_CATMAN_set))
 endif
 
 
-$(_CATMAN_MAN_set): %.cat.set: %.cat.troff $(troff_catman_ignore_grep) $(MK) | $$(@D)/
+$(_CATMAN_set): %.cat.set: %.cat.troff $(troff_catman_ignore_grep) $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
-	! ($(TROFF) -man $(TROFFFLAGS_) $(NROFFFLAGS_) <$< 2>&1 >$@ \
+	! ($(TROFF) -mandoc $(TROFFFLAGS_) $(NROFFFLAGS_) <$< 2>&1 >$@ \
 	   | $(GREP) -v -f '$(troff_catman_ignore_grep)' \
 	   || $(TRUE); \
 	) \
 	| $(GREP) ^ >&2
 
-$(_CATMAN_MDOC_set): %.cat.set: %.cat.troff $(MK) | $$(@D)/
-	$(info	$(INFO_)TROFF		$@)
-	! ($(TROFF) -mdoc $(TROFFFLAGS_) $(NROFFFLAGS_) <$< 2>&1 >$@) \
-	| $(GREP) ^ >&2
-
-
-.PHONY: build-catman-troff-man
-build-catman-troff-man: $(_CATMAN_MAN_set);
-
-.PHONY: build-catman-troff-mdoc
-build-catman-troff-mdoc: $(_CATMAN_MDOC_set);
 
 .PHONY: build-catman-troff
-build-catman-troff: build-catman-troff-man build-catman-troff-mdoc;
+build-catman-troff: $(_CATMAN_set);
 
 
 endif  # include guard

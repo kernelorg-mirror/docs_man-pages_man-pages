@@ -14,7 +14,7 @@ include $(MAKEFILEDIR)/configure/build-depends/groff-base/troff.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_PDFMAN_MAN_set := \
+_XFAIL_PDFMAN_set := \
 	$(_MANDIR)/man1/iconv.1.pdf.set \
 	$(_MANDIR)/man2/fanotify_init.2.pdf.set \
 	$(_MANDIR)/man2/membarrier.2.pdf.set \
@@ -46,34 +46,22 @@ _XFAIL_PDFMAN_MAN_set := \
 	$(_MANDIR)/man7/vdso.7.pdf.set
 
 
-_PDFMAN_MAN_set  := $(patsubst %, %.pdf.set, $(_NONSO_MAN))
-_PDFMAN_MDOC_set := $(patsubst %, %.pdf.set, $(_NONSO_MDOC))
+_PDFMAN_set  := $(patsubst %, %.pdf.set, $(_NONSO_MAN) $(_NONSO_MDOC))
 
 
 ifeq ($(SKIP_XFAIL),yes)
-_PDFMAN_MAN_set := $(filter-out $(_XFAIL_PDFMAN_MAN_set), $(_PDFMAN_MAN_set))
+_PDFMAN_set := $(filter-out $(_XFAIL_PDFMAN_set), $(_PDFMAN_set))
 endif
 
 
-$(_PDFMAN_MAN_set): %.pdf.set: %.pdf.troff $(MK) | $$(@D)/
+$(_PDFMAN_set): %.pdf.set: %.pdf.troff $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
-	! ($(TROFF) -man -Tpdf $(TROFFFLAGS_) <$< 2>&1 >$@) \
+	! ($(TROFF) -mandoc -Tpdf $(TROFFFLAGS_) <$< 2>&1 >$@) \
 	| $(GREP) ^ >&2
 
-$(_PDFMAN_MDOC_set): %.pdf.set: %.pdf.troff $(MK) | $$(@D)/
-	$(info	$(INFO_)TROFF		$@)
-	! ($(TROFF) -mdoc -Tpdf $(TROFFFLAGS_) <$< 2>&1 >$@) \
-	| $(GREP) ^ >&2
-
-
-.PHONY: build-pdf-pages-troff-man
-build-pdf-pages-troff-man: $(_PDFMAN_MAN_set);
-
-.PHONY: build-pdf-pages-troff-mdoc
-build-pdf-pages-troff-mdoc: $(_PDFMAN_MDOC_set);
 
 .PHONY: build-pdf-pages-troff
-build-pdf-pages-troff: build-pdf-pages-troff-man build-pdf-pages-troff-mdoc;
+build-pdf-pages-troff: $(_PDFMAN_set);
 
 
 endif  # include guard

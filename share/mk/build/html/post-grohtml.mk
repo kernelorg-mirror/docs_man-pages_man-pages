@@ -10,7 +10,7 @@ include $(MAKEFILEDIR)/build/html/troff.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff/post-grohtml.mk
 
 
-_HTMLMAN := $(patsubst %.html.set, %.html, $(_HTMLMAN_MAN_set) $(_HTMLMAN_MDOC_set))
+_HTMLMAN := $(patsubst %.html.set, %.html, $(_HTMLMAN_set))
 
 
 $(_HTMLMAN): %.html: %.html.set $(MK) | $$(@D)/

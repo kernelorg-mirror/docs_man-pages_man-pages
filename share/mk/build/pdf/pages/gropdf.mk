@@ -10,7 +10,7 @@ include $(MAKEFILEDIR)/build/pdf/pages/troff.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff/gropdf.mk
 
 
-_PDFMAN := $(patsubst %.pdf.set, %.pdf, $(_PDFMAN_MAN_set) $(_PDFMAN_MDOC_set))
+_PDFMAN := $(patsubst %.pdf.set, %.pdf, $(_PDFMAN_set))
 
 
 $(_PDFMAN): %.pdf: %.pdf.set $(MK) | $$(@D)/

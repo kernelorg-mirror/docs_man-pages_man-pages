@@ -14,7 +14,7 @@ include $(MAKEFILEDIR)/configure/build-depends/groff-base/troff.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
 
 
-_XFAIL_PSMAN_MAN_set := \
+_XFAIL_PSMAN_set := \
 	$(_MANDIR)/man1/iconv.1.ps.set \
 	$(_MANDIR)/man2/fanotify_init.2.ps.set \
 	$(_MANDIR)/man2/membarrier.2.ps.set \
@@ -46,34 +46,22 @@ _XFAIL_PSMAN_MAN_set := \
 	$(_MANDIR)/man7/vdso.7.ps.set
 
 
-_PSMAN_MAN_set  := $(patsubst %, %.ps.set, $(_NONSO_MAN))
-_PSMAN_MDOC_set := $(patsubst %, %.ps.set, $(_NONSO_MDOC))
+_PSMAN_set  := $(patsubst %, %.ps.set, $(_NONSO_MAN) $(_NONSO_MDOC))
 
 
 ifeq ($(SKIP_XFAIL),yes)
-_PSMAN_MAN_set := $(filter-out $(_XFAIL_PSMAN_MAN_set), $(_PSMAN_MAN_set))
+_PSMAN_set := $(filter-out $(_XFAIL_PSMAN_set), $(_PSMAN_set))
 endif
 
 
-$(_PSMAN_MAN_set): %.ps.set: %.ps.troff $(MK) | $$(@D)/
+$(_PSMAN_set): %.ps.set: %.ps.troff $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
-	! ($(TROFF) -man -Tps $(TROFFFLAGS_) <$< 2>&1 >$@) \
+	! ($(TROFF) -mandoc -Tps $(TROFFFLAGS_) <$< 2>&1 >$@) \
 	| $(GREP) ^ >&2
 
-$(_PSMAN_MDOC_set): %.ps.set: %.ps.troff $(MK) | $$(@D)/
-	$(info	$(INFO_)TROFF		$@)
-	! ($(TROFF) -mdoc -Tps $(TROFFFLAGS_) <$< 2>&1 >$@) \
-	| $(GREP) ^ >&2
-
-
-.PHONY: build-ps-troff-man
-build-ps-troff-man: $(_PSMAN_MAN_set);
-
-.PHONY: build-ps-troff-mdoc
-build-ps-troff-mdoc: $(_PSMAN_MDOC_set);
 
 .PHONY: build-ps-troff
-build-ps-troff: build-ps-troff-man build-ps-troff-mdoc;
+build-ps-troff: $(_PSMAN_set);
 
 
 endif  # include guard
