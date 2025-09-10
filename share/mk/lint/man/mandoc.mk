@@ -17,6 +17,7 @@ include $(MAKEFILEDIR)/configure/xfail.mk
 
 ext := .lint-man.mandoc.touch
 xfail := $(MAKEFILEDIR)/lint/man/mandoc.xfail
+regexf := $(MAKEFILEDIR)/lint/man/mandoc.ignore.grep
 
 tgts := $(patsubst %, %$(ext), $(_NONSO))
 ifeq ($(SKIP_XFAIL),yes)
@@ -24,13 +25,10 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-mandoc_man_ignore_grep := $(MAKEFILEDIR)/lint/man/mandoc.ignore.grep
-
-
-$(tgts): %$(ext): % $(mandoc_man_ignore_grep) $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(regexf) $(MK) | $$(@D)/
 	$(info	$(INFO_)MANDOC		$@)
 	! ($(MANDOC) $(MANDOCFLAGS_) $< 2>&1 \
-	   | $(GREP) -v -f '$(mandoc_man_ignore_grep)' \
+	   | $(GREP) -v -f '$(filter %.grep, $^)' \
 	   || $(TRUE); \
 	) \
 	| $(GREP) ^ >&2
@@ -43,6 +41,7 @@ lint-man-mandoc: $(tgts);
 
 undefine ext
 undefine xfail
+undefine regexf
 undefine tgts
 
 

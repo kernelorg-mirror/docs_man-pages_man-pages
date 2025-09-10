@@ -17,6 +17,7 @@ include $(MAKEFILEDIR)/configure/xfail.mk
 
 ext := .cat.set
 xfail := $(MAKEFILEDIR)/build/catman/troff.xfail
+regexf := $(MAKEFILEDIR)/build/catman/troff.ignore.grep
 
 tgts := $(patsubst %, %$(ext), $(_NONSO))
 ifeq ($(SKIP_XFAIL),yes)
@@ -24,16 +25,13 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-troff_catman_ignore_grep := $(MAKEFILEDIR)/build/catman/troff.ignore.grep
-
-
 _CATMAN_set := $(tgts)
 
 
-$(_CATMAN_set): %$(ext): %.cat.troff $(troff_catman_ignore_grep) $(MK) | $$(@D)/
+$(_CATMAN_set): %$(ext): %.cat.troff $(regexf) $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
 	! ($(TROFF) -mandoc $(TROFFFLAGS_) $(NROFFFLAGS_) <$< 2>&1 >$@ \
-	   | $(GREP) -v -f '$(troff_catman_ignore_grep)' \
+	   | $(GREP) -v -f '$(filter %.grep, $^)' \
 	   || $(TRUE); \
 	) \
 	| $(GREP) ^ >&2
@@ -45,6 +43,7 @@ build-catman-troff: $(_CATMAN_set);
 
 undefine ext
 undefine xfail
+undefine regexf
 undefine tgts
 
 

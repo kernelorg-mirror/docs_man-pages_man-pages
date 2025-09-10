@@ -15,6 +15,7 @@ include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 ext := .lint-man.ws.touch
 xfail := $(MAKEFILEDIR)/lint/man/ws.xfail
+regexf := $(MAKEFILEDIR)/lint/man/ws.egrep
 
 tgts := $(patsubst %, %$(ext), $(_NONSO))
 ifeq ($(SKIP_XFAIL),yes)
@@ -22,15 +23,12 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-ws_egrep := $(MAKEFILEDIR)/lint/man/ws.egrep
-
-
-$(tgts): %$(ext): % $(ws_egrep) $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(regexf) $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
-	| if $(GREP) -Ef $(ws_egrep) >/dev/null; then \
+	| if $(GREP) -Ef $(filter %.egrep, $^) >/dev/null; then \
 		>&2 $(ECHO) "lint-man-ws: $<: Spurious white space:"; \
-		>&2 $(GREP) -ETnf '$(ws_egrep)' <$<; \
+		>&2 $(GREP) -ETnf '$(filter %.egrep, $^)' <$<; \
 		exit 1; \
 	fi;
 	$(TOUCH) $@
@@ -42,6 +40,7 @@ lint-man-ws: $(tgts);
 
 undefine ext
 undefine xfail
+undefine regexf
 undefine tgts
 
 
