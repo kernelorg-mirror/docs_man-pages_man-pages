@@ -23,10 +23,7 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-_LINT_man_blank := $(tgts)
-
-
-$(_LINT_man_blank): %.lint-man.blank.touch: % $(MK) | $$(@D)/
+$(tgts): %.lint-man.blank.touch: % $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) '^$$' >/dev/null; then \
@@ -38,7 +35,7 @@ $(_LINT_man_blank): %.lint-man.blank.touch: % $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-blank
-lint-man-blank: $(_LINT_man_blank);
+lint-man-blank: $(tgts);
 
 
 undefine ext

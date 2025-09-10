@@ -23,13 +23,10 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-_LINT_man_ws := $(tgts)
-
-
 ws_egrep := $(MAKEFILEDIR)/lint/man/ws.egrep
 
 
-$(_LINT_man_ws): %.lint-man.ws.touch: % $(ws_egrep) $(MK) | $$(@D)/
+$(tgts): %.lint-man.ws.touch: % $(ws_egrep) $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) -Ef $(ws_egrep) >/dev/null; then \
@@ -41,7 +38,7 @@ $(_LINT_man_ws): %.lint-man.ws.touch: % $(ws_egrep) $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-ws
-lint-man-ws: $(_LINT_man_ws);
+lint-man-ws: $(tgts);
 
 
 undefine ext

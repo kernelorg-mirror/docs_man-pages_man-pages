@@ -24,10 +24,7 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-_LINT_man_so := $(tgts)
-
-
-$(_LINT_man_so): %.lint-man.so.touch: % $(MK) | $$(@D)/
+$(tgts): %.lint-man.so.touch: % $(MK) | $$(@D)/
 	$(info	$(INFO_)FIND		$@)
 	$(GREP) '^\.so ' <$< \
 	| $(CUT) -f2 -d' ' \
@@ -36,7 +33,7 @@ $(_LINT_man_so): %.lint-man.so.touch: % $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-so
-lint-man-so: $(_LINT_man_so);
+lint-man-so: $(tgts);
 
 
 undefine ext

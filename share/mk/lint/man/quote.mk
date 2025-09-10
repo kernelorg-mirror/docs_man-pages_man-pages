@@ -23,13 +23,10 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-_LINT_man_quote := $(tgts)
-
-
 quote_Pgrep := $(MAKEFILEDIR)/lint/man/quote.Pgrep
 
 
-$(_LINT_man_quote): %.lint-man.quote.touch: % $(quote_Pgrep) $(MK) | $$(@D)/
+$(tgts): %.lint-man.quote.touch: % $(quote_Pgrep) $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) -Pf $(quote_Pgrep) >/dev/null; then \
@@ -41,7 +38,7 @@ $(_LINT_man_quote): %.lint-man.quote.touch: % $(quote_Pgrep) $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-quote
-lint-man-quote: $(_LINT_man_quote);
+lint-man-quote: $(tgts);
 
 
 undefine ext

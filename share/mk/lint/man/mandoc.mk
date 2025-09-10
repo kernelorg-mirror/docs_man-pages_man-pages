@@ -24,13 +24,11 @@ ifeq ($(SKIP_XFAIL),yes)
 tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
 
-_LINT_man_mandoc := $(tgts)
-
 
 mandoc_man_ignore_grep := $(MAKEFILEDIR)/lint/man/mandoc.ignore.grep
 
 
-$(_LINT_man_mandoc): %.lint-man.mandoc.touch: % $(mandoc_man_ignore_grep) $(MK) | $$(@D)/
+$(tgts): %.lint-man.mandoc.touch: % $(mandoc_man_ignore_grep) $(MK) | $$(@D)/
 	$(info	$(INFO_)MANDOC		$@)
 	! ($(MANDOC) $(MANDOCFLAGS_) $< 2>&1 \
 	   | $(GREP) -v -f '$(mandoc_man_ignore_grep)' \
@@ -41,7 +39,7 @@ $(_LINT_man_mandoc): %.lint-man.mandoc.touch: % $(mandoc_man_ignore_grep) $(MK) 
 
 
 .PHONY: lint-man-mandoc
-lint-man-mandoc: $(_LINT_man_mandoc);
+lint-man-mandoc: $(tgts);
 
 
 undefine ext
