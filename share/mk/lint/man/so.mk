@@ -7,7 +7,7 @@ MAKEFILE_LINT_MAN_SO_INCLUDED := 1
 
 
 include $(MAKEFILEDIR)/build/_.mk
-include $(MAKEFILEDIR)/build/man/man.mk
+include $(MAKEFILEDIR)/build/man/so.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/cut.mk
 include $(MAKEFILEDIR)/configure/build-depends/findutils/find.mk
 include $(MAKEFILEDIR)/configure/build-depends/findutils/xargs.mk
