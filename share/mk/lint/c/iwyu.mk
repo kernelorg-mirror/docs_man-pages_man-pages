@@ -30,7 +30,7 @@ endif
 tgts := $(tgts_EX)
 
 
-$(tgts_EX): %.lint-c.iwyu.touch: %
+$(tgts_EX): %$(ext): %
 $(tgts): $(MK) | $$(@D)/
 
 

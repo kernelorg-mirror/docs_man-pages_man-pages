@@ -15,10 +15,11 @@ include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 
-tgts := $(patsubst %, %.lint-man.tbl.touch, $(_NONSO_MAN))
+ext := .lint-man.tbl.touch
+tgts := $(patsubst %, %$(ext), $(_NONSO_MAN))
 
 
-$(tgts): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(HEAD) -n1 <$< \
 	| if $(GREP) '\\" t$$' >/dev/null; then \
@@ -49,6 +50,7 @@ $(tgts): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
 lint-man-tbl: $(tgts);
 
 
+undefine ext
 undefine tgts
 
 

@@ -10,16 +10,22 @@ include $(MAKEFILEDIR)/build/pdf/pages/troff.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff/gropdf.mk
 
 
-_PDFMAN := $(patsubst %.pdf.set, %.pdf, $(_PDFMAN_set))
+ext := .pdf
 
 
-$(_PDFMAN): %.pdf: %.pdf.set $(MK) | $$(@D)/
+_PDFMAN := $(patsubst %.pdf.set, %$(ext), $(_PDFMAN_set))
+
+
+$(_PDFMAN): %$(ext): %.pdf.set $(MK) | $$(@D)/
 	$(info	$(INFO_)GROPDF		$@)
 	$(GROPDF) $(GROPDFFLAGS_) <$< >$@
 
 
 .PHONY: build-pdf-pages-gropdf
 build-pdf-pages-gropdf: $(_PDFMAN);
+
+
+undefine ext
 
 
 endif  # include guard

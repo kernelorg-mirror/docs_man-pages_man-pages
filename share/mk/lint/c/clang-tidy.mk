@@ -27,7 +27,7 @@ endif
 tgts := $(tgts_EX)
 
 
-$(tgts_EX): %.lint-c.clang-tidy.touch: %
+$(tgts_EX): %$(ext): %
 $(tgts): $(CLANG_TIDY_CONF) $(MK) | $$(@D)/
 
 

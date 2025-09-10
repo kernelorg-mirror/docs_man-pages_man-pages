@@ -10,16 +10,22 @@ include $(MAKEFILEDIR)/build/catman/grotty.mk
 include $(MAKEFILEDIR)/configure/build-depends/bsdextrautils/col.mk
 
 
-_CHECK_catman_grep := $(patsubst %.cat, %.cat.grep, $(_CATMAN))
+ext := .cat.grep
 
 
-$(_CHECK_catman_grep): %.grep: % $(MK) | $$(@D)/
+_CHECK_catman_grep := $(patsubst %.cat, %$(ext), $(_CATMAN))
+
+
+$(_CHECK_catman_grep): %$(ext): %.cat $(MK) | $$(@D)/
 	$(info	$(INFO_)COL		$@)
 	$(COL) $(COLFLAGS_) <$< >$@
 
 
 .PHONY: check-catman-col
 check-catman-col: $(_CHECK_catman_grep);
+
+
+undefine ext
 
 
 endif  # include guard

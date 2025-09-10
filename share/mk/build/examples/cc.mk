@@ -25,7 +25,7 @@ endif
 _EX_TU_o := $(tgts)
 
 
-$(_EX_TU_o): %.o: %.c $(MK)
+$(_EX_TU_o): %$(ext): %.c $(MK)
 	$(info	$(INFO_)CC		$@)
 	$(CC) -c $(CFLAGS_) $(CPPFLAGS_) -o $@ $<
 

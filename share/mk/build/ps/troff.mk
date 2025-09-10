@@ -26,7 +26,7 @@ endif
 _PSMAN_set  := $(tgts)
 
 
-$(_PSMAN_set): %.ps.set: %.ps.troff $(MK) | $$(@D)/
+$(_PSMAN_set): %$(ext): %.ps.troff $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
 	! ($(TROFF) -mandoc -Tps $(TROFFFLAGS_) <$< 2>&1 >$@) \
 	| $(GREP) ^ >&2

@@ -26,7 +26,7 @@ endif
 _PDFMAN_set  := $(tgts)
 
 
-$(_PDFMAN_set): %.pdf.set: %.pdf.troff $(MK) | $$(@D)/
+$(_PDFMAN_set): %$(ext): %.pdf.troff $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
 	! ($(TROFF) -mandoc -Tpdf $(TROFFFLAGS_) <$< 2>&1 >$@) \
 	| $(GREP) ^ >&2

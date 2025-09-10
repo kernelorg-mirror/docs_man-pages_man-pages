@@ -31,7 +31,7 @@ troff_catman_ignore_grep := $(MAKEFILEDIR)/build/catman/troff.ignore.grep
 _CATMAN_set := $(tgts)
 
 
-$(_CATMAN_set): %.cat.set: %.cat.troff $(troff_catman_ignore_grep) $(MK) | $$(@D)/
+$(_CATMAN_set): %$(ext): %.cat.troff $(troff_catman_ignore_grep) $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
 	! ($(TROFF) -mandoc $(TROFFFLAGS_) $(NROFFFLAGS_) <$< 2>&1 >$@ \
 	   | $(GREP) -v -f '$(troff_catman_ignore_grep)' \

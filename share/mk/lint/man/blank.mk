@@ -23,7 +23,7 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-$(tgts): %.lint-man.blank.touch: % $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) '^$$' >/dev/null; then \

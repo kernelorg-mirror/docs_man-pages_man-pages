@@ -24,7 +24,7 @@ endif
 tgts := $(tgts_EX)
 
 
-$(tgts_EX): %.lint-c.cppcheck.touch: %
+$(tgts_EX): %$(ext): %
 $(tgts): $(CPPCHECK_SUPPRESS) $(MK) | $$(@D)/
 
 

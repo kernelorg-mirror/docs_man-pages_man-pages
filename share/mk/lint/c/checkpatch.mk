@@ -24,7 +24,7 @@ endif
 tgts := $(tgts_EX)
 
 
-$(tgts_EX): %.lint-c.checkpatch.touch: %
+$(tgts_EX): %$(ext): %
 $(tgts): $(CHECKPATCH_CONF) $(MK) | $$(@D)/
 
 

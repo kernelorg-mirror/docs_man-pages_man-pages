@@ -11,11 +11,12 @@ include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/cpplint/cpplint.mk
 
 
-tgts_EX := $(patsubst %, %.lint-c.cpplint.touch, $(_EX_TU_src))
+ext := .lint-c.cpplint.touch
+tgts_EX := $(patsubst %, %$(ext), $(_EX_TU_src))
 tgts    := $(tgts_EX)
 
 
-$(tgts_EX): %.lint-c.cpplint.touch: %
+$(tgts_EX): %$(ext): %
 $(tgts): $(CPPLINT_CONF) $(MK) | $$(@D)/
 
 
@@ -29,6 +30,7 @@ $(tgts):
 lint-c-cpplint: $(tgts);
 
 
+undefine ext
 undefine tgts_EX
 undefine tgts
 

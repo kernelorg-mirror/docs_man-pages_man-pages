@@ -26,7 +26,7 @@ endif
 ws_egrep := $(MAKEFILEDIR)/lint/man/ws.egrep
 
 
-$(tgts): %.lint-man.ws.touch: % $(ws_egrep) $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(ws_egrep) $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) -Ef $(ws_egrep) >/dev/null; then \

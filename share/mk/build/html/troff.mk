@@ -26,7 +26,7 @@ endif
 _HTMLMAN_set  := $(tgts)
 
 
-$(_HTMLMAN_set): %.html.set: %.eqn $(MK) | $$(@D)/
+$(_HTMLMAN_set): %$(ext): %.eqn $(MK) | $$(@D)/
 	$(info	$(INFO_)TROFF		$@)
 	! ($(TROFF) -mandoc -Thtml $(TROFFFLAGS_) <$< 2>&1 >$@) \
 	| $(GREP) ^ >&2

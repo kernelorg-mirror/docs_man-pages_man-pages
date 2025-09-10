@@ -28,7 +28,7 @@ endif
 mandoc_man_ignore_grep := $(MAKEFILEDIR)/lint/man/mandoc.ignore.grep
 
 
-$(tgts): %.lint-man.mandoc.touch: % $(mandoc_man_ignore_grep) $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(mandoc_man_ignore_grep) $(MK) | $$(@D)/
 	$(info	$(INFO_)MANDOC		$@)
 	! ($(MANDOC) $(MANDOCFLAGS_) $< 2>&1 \
 	   | $(GREP) -v -f '$(mandoc_man_ignore_grep)' \

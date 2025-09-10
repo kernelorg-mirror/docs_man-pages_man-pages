@@ -24,7 +24,7 @@ tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tg
 endif
 
 
-$(tgts): %.lint-man.so.touch: % $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(MK) | $$(@D)/
 	$(info	$(INFO_)FIND		$@)
 	$(GREP) '^\.so ' <$< \
 	| $(CUT) -f2 -d' ' \

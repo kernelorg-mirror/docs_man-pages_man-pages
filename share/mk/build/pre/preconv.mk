@@ -11,16 +11,22 @@ include $(MAKEFILEDIR)/build/man/mdoc.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff-base/preconv.mk
 
 
-_MAN_tbl := $(patsubst %, %.tbl, $(_NONSO_MAN) $(_NONSO_MDOC))
+ext := .tbl
 
 
-$(_MAN_tbl): %.tbl: % $(MK) | $$(@D)/
+_MAN_tbl := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
+
+
+$(_MAN_tbl): %$(ext): % $(MK) | $$(@D)/
 	$(info	$(INFO_)PRECONV		$@)
 	$(PRECONV) $(PRECONVFLAGS_) $< >$@
 
 
 .PHONY: build-pre-preconv
 build-pre-preconv: $(_MAN_tbl);
+
+
+undefine ext
 
 
 endif  # include guard

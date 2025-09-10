@@ -10,16 +10,22 @@ include $(MAKEFILEDIR)/build/html/troff.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff/post-grohtml.mk
 
 
-_HTMLMAN := $(patsubst %.html.set, %.html, $(_HTMLMAN_set))
+ext := .html
 
 
-$(_HTMLMAN): %.html: %.html.set $(MK) | $$(@D)/
+_HTMLMAN := $(patsubst %.html.set, %$(ext), $(_HTMLMAN_set))
+
+
+$(_HTMLMAN): %$(ext): %.html.set $(MK) | $$(@D)/
 	$(info	$(INFO_)POST_GROHTML	$@)
 	$(POST_GROHTML) $(POST_GROHTMLFLAGS_) <$< >$@
 
 
 .PHONY: build-html-post-grohtml
 build-html-post-grohtml: $(_HTMLMAN);
+
+
+undefine ext
 
 
 endif  # include guard

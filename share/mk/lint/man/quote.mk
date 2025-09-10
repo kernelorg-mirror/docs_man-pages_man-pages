@@ -26,7 +26,7 @@ endif
 quote_Pgrep := $(MAKEFILEDIR)/lint/man/quote.Pgrep
 
 
-$(tgts): %.lint-man.quote.touch: % $(quote_Pgrep) $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(quote_Pgrep) $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) -Pf $(quote_Pgrep) >/dev/null; then \
