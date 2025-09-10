@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: LGPL-3.0-only WITH LGPL-3.0-linking-exception
 
 
-ifndef MAKEFILE_BUILD_MAN_MAN_INCLUDED
-MAKEFILE_BUILD_MAN_MAN_INCLUDED := 1
+ifndef MAKEFILE_BUILD_MAN_NONSO_INCLUDED
+MAKEFILE_BUILD_MAN_NONSO_INCLUDED := 1
 
 
 include $(MAKEFILEDIR)/build/_.mk
@@ -15,18 +15,21 @@ include $(MAKEFILEDIR)/configure/version.mk
 include $(MAKEFILEDIR)/src/man.mk
 
 
-_NONSO_MAN := $(patsubst $(MANDIR)/%, $(_MANDIR)/%, $(NONSO_MAN))
+_NONSO := $(patsubst $(MANDIR)/%, $(_MANDIR)/%, $(NONSO))
 
 
-$(_NONSO_MAN): $(_MANDIR)/%: $(MANDIR)/% $(MK) | $$(@D)/
+$(_NONSO): $(_MANDIR)/%: $(MANDIR)/% $(MK) | $$(@D)/
 	$(info	$(INFO_)SED		$@)
 	<$< \
-	$(SED) "/^\.TH/s/(date)/$$($(MANPAGEDATECMD))/" \
-	| $(SED) '/^\.TH/s/(unreleased)/$(DISTVERSION)/' >$@
+	$(SED) "/^\.TH /s/(date)/$$($(MANPAGEDATECMD))/" \
+	| $(SED) '/^\.TH /s/(unreleased)/$(DISTVERSION)/' \
+	| $(SED) '/^\.Dd /s/$$Mdocdate$$'"/$$($(MANPAGEDATECMD))/" \
+	| $(SED) '/^\.Os /s/(unreleased)/$(DISTVERSION)/' \
+	>$@
 
 
-.PHONY: build-man-man
-build-man-man: $(_NONSO_MAN)
+.PHONY: build-man-nonso
+build-man-nonso: $(_NONSO)
 
 
 endif  # include guard

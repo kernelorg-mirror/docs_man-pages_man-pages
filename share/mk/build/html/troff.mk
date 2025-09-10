@@ -7,8 +7,7 @@ MAKEFILE_BUILD_HTML_TROFF_INCLUDED := 1
 
 
 include $(MAKEFILEDIR)/build/_.mk
-include $(MAKEFILEDIR)/build/man/man.mk
-include $(MAKEFILEDIR)/build/man/mdoc.mk
+include $(MAKEFILEDIR)/build/man/nonso.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff-base/troff.mk
 include $(MAKEFILEDIR)/configure/xfail.mk
@@ -17,7 +16,7 @@ include $(MAKEFILEDIR)/configure/xfail.mk
 ext := .html.set
 xfail := $(MAKEFILEDIR)/build/html/troff.xfail
 
-tgts := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
+tgts := $(patsubst %, %$(ext), $(_NONSO))
 ifeq ($(SKIP_XFAIL),yes)
 tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif

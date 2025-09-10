@@ -6,15 +6,14 @@ ifndef MAKEFILE_BUILD_PRE_PRECONV_INCLUDED
 MAKEFILE_BUILD_PRE_PRECONV_INCLUDED := 1
 
 
-include $(MAKEFILEDIR)/build/man/man.mk
-include $(MAKEFILEDIR)/build/man/mdoc.mk
+include $(MAKEFILEDIR)/build/man/nonso.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff-base/preconv.mk
 
 
 ext := .tbl
 
 
-_MAN_tbl := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
+_MAN_tbl := $(patsubst %, %$(ext), $(_NONSO))
 
 
 $(_MAN_tbl): %$(ext): % $(MK) | $$(@D)/

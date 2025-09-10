@@ -7,8 +7,7 @@ MAKEFILE_LINT_MAN_MANDOC_INCLUDED := 1
 
 
 include $(MAKEFILEDIR)/build/_.mk
-include $(MAKEFILEDIR)/build/man/man.mk
-include $(MAKEFILEDIR)/build/man/mdoc.mk
+include $(MAKEFILEDIR)/build/man/nonso.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/true.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
@@ -19,7 +18,7 @@ include $(MAKEFILEDIR)/configure/xfail.mk
 ext := .lint-man.mandoc.touch
 xfail := $(MAKEFILEDIR)/lint/man/mandoc.xfail
 
-tgts := $(patsubst %, %$(ext), $(_NONSO_MAN) $(_NONSO_MDOC))
+tgts := $(patsubst %, %$(ext), $(_NONSO))
 ifeq ($(SKIP_XFAIL),yes)
 tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif

@@ -6,7 +6,7 @@ ifndef MAKEFILE_LINT_MAN_TBL_INCLUDED
 MAKEFILE_LINT_MAN_TBL_INCLUDED := 1
 
 
-include $(MAKEFILEDIR)/build/man/man.mk
+include $(MAKEFILEDIR)/build/man/nonso.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/cat.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/echo.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/head.mk
@@ -16,7 +16,7 @@ include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 
 ext := .lint-man.tbl.touch
-tgts := $(patsubst %, %$(ext), $(_NONSO_MAN))
+tgts := $(patsubst %, %$(ext), $(_NONSO))
 
 
 $(tgts): %$(ext): % $(MK) | $$(@D)/
