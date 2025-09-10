@@ -22,21 +22,19 @@ include $(MAKEFILEDIR)/configure/xfail.mk
 ext := .lint-c.iwyu.touch
 xfail := $(MAKEFILEDIR)/lint/c/iwyu.xfail
 
-tgts := $(patsubst %, %$(ext), $(_EX_TU_src))
+tgts_EX := $(patsubst %, %$(ext), $(_EX_TU_src))
 ifeq ($(SKIP_XFAIL),yes)
-tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
+tgts_EX := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts_EX))
 endif
 
-
-_LINT_c_EX_iwyu   := $(tgts)
-_LINT_c_iwyu      := $(_LINT_c_EX_iwyu)
+tgts := $(tgts_EX)
 
 
-$(_LINT_c_EX_iwyu): %.lint-c.iwyu.touch: %
-$(_LINT_c_iwyu): $(MK) | $$(@D)/
+$(tgts_EX): %.lint-c.iwyu.touch: %
+$(tgts): $(MK) | $$(@D)/
 
 
-$(_LINT_c_iwyu):
+$(tgts):
 	$(info	$(INFO_)IWYU		$@)
 	! ($(IWYU) $(IWYUFLAGS_) $(CLANGFLAGS_) $(CPPFLAGS_) $< 2>&1 \
 	   | $(SED) -n '/should add these lines:/,$$p' \
@@ -50,11 +48,12 @@ $(_LINT_c_iwyu):
 
 
 .PHONY: lint-c-iwyu
-lint-c-iwyu: $(_LINT_c_iwyu);
+lint-c-iwyu: $(tgts);
 
 
 undefine ext
 undefine xfail
+undefine tgts_EX
 undefine tgts
 
 

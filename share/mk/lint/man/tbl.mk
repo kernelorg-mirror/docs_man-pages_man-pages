@@ -15,10 +15,10 @@ include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 
-_LINT_man_tbl := $(patsubst %, %.lint-man.tbl.touch, $(_NONSO_MAN))
+tgts := $(patsubst %, %.lint-man.tbl.touch, $(_NONSO_MAN))
 
 
-$(_LINT_man_tbl): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
+$(tgts): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(HEAD) -n1 <$< \
 	| if $(GREP) '\\" t$$' >/dev/null; then \
@@ -46,7 +46,10 @@ $(_LINT_man_tbl): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-tbl
-lint-man-tbl: $(_LINT_man_tbl);
+lint-man-tbl: $(tgts);
+
+
+undefine tgts
 
 
 endif  # include guard

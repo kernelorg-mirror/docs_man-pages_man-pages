@@ -16,32 +16,31 @@ include $(MAKEFILEDIR)/configure/xfail.mk
 ext := .lint-c.cppcheck.touch
 xfail := $(MAKEFILEDIR)/lint/c/cppcheck.xfail
 
-tgts := $(patsubst %, %$(ext), $(_EX_TU_src))
+tgts_EX := $(patsubst %, %$(ext), $(_EX_TU_src))
 ifeq ($(SKIP_XFAIL),yes)
-tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
+tgts_EX := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts_EX))
 endif
 
-
-_LINT_c_EX_cppcheck   := $(tgts)
-_LINT_c_cppcheck      := $(_LINT_c_EX_cppcheck)
+tgts := $(tgts_EX)
 
 
-$(_LINT_c_EX_cppcheck): %.lint-c.cppcheck.touch: %
-$(_LINT_c_cppcheck): $(CPPCHECK_SUPPRESS) $(MK) | $$(@D)/
+$(tgts_EX): %.lint-c.cppcheck.touch: %
+$(tgts): $(CPPCHECK_SUPPRESS) $(MK) | $$(@D)/
 
 
-$(_LINT_c_EX_cppcheck):
+$(tgts):
 	$(info	$(INFO_)CPPCHECK	$@)
 	$(CPPCHECK) $(CPPCHECKFLAGS_) $<
 	$(TOUCH) $@
 
 
 .PHONY: lint-c-cppcheck
-lint-c-cppcheck: $(_LINT_c_cppcheck);
+lint-c-cppcheck: $(tgts);
 
 
 undefine ext
 undefine xfail
+undefine tgts_EX
 undefine tgts
 
 

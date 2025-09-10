@@ -11,17 +11,20 @@ include $(MAKEFILEDIR)/configure/build-depends/shellcheck/shellcheck.mk
 include $(MAKEFILEDIR)/src/sh.mk
 
 
-_LINT_sh_shellcheck := $(patsubst $(SRCBINDIR)/%, $(builddir)/%.lint-sh.shellcheck.touch, $(BIN_sh))
+tgts := $(patsubst $(SRCBINDIR)/%, $(builddir)/%.lint-sh.shellcheck.touch, $(BIN_sh))
 
 
-$(_LINT_sh_shellcheck): $(builddir)/%.lint-sh.shellcheck.touch: $(SRCBINDIR)/% $(SHELLCHECK_CONF) $(MK) | $$(@D)/
+$(tgts): $(builddir)/%.lint-sh.shellcheck.touch: $(SRCBINDIR)/% $(SHELLCHECK_CONF) $(MK) | $$(@D)/
 	$(info	$(INFO_)SHELLCHECK	$@)
 	$(SHELLCHECK) $(SHELLCHECKFLAGS_) $<
 	$(TOUCH) $@
 
 
 .PHONY: lint-sh-shellcheck
-lint-sh-shellcheck: $(_LINT_sh_shellcheck);
+lint-sh-shellcheck: $(tgts);
+
+
+undefine tgts
 
 
 endif  # include guard

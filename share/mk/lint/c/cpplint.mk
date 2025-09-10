@@ -11,22 +11,26 @@ include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/cpplint/cpplint.mk
 
 
-_LINT_c_EX_cpplint   := $(patsubst %, %.lint-c.cpplint.touch, $(_EX_TU_src))
-_LINT_c_cpplint      := $(_LINT_c_EX_cpplint)
+tgts_EX := $(patsubst %, %.lint-c.cpplint.touch, $(_EX_TU_src))
+tgts    := $(tgts_EX)
 
 
-$(_LINT_c_EX_cpplint): %.lint-c.cpplint.touch: %
-$(_LINT_c_cpplint): $(CPPLINT_CONF) $(MK) | $$(@D)/
+$(tgts_EX): %.lint-c.cpplint.touch: %
+$(tgts): $(CPPLINT_CONF) $(MK) | $$(@D)/
 
 
-$(_LINT_c_cpplint):
+$(tgts):
 	$(info	$(INFO_)CPPLINT		$@)
 	$(CPPLINT) $(CPPLINTFLAGS_) $< >/dev/null
 	$(TOUCH) $@
 
 
 .PHONY: lint-c-cpplint
-lint-c-cpplint: $(_LINT_c_cpplint);
+lint-c-cpplint: $(tgts);
+
+
+undefine tgts_EX
+undefine tgts
 
 
 endif  # include guard

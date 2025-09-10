@@ -16,32 +16,31 @@ include $(MAKEFILEDIR)/configure/xfail.mk
 ext := .lint-c.checkpatch.touch
 xfail := $(MAKEFILEDIR)/lint/c/iwyu.xfail
 
-tgts := $(patsubst %, %$(ext), $(_EX_TU_src))
+tgts_EX := $(patsubst %, %$(ext), $(_EX_TU_src))
 ifeq ($(SKIP_XFAIL),yes)
-tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
+tgts_EX := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts_EX))
 endif
 
-
-_LINT_c_EX_checkpatch   := $(tgts)
-_LINT_c_checkpatch      := $(_LINT_c_EX_checkpatch)
+tgts := $(tgts_EX)
 
 
-$(_LINT_c_EX_checkpatch): %.lint-c.checkpatch.touch: %
-$(_LINT_c_checkpatch): $(CHECKPATCH_CONF) $(MK) | $$(@D)/
+$(tgts_EX): %.lint-c.checkpatch.touch: %
+$(tgts): $(CHECKPATCH_CONF) $(MK) | $$(@D)/
 
 
-$(_LINT_c_checkpatch):
+$(tgts):
 	$(info	$(INFO_)CHECKPATCH	$@)
 	$(CHECKPATCH) $(CHECKPATCHFLAGS_) -f $< >&2
 	$(TOUCH) $@
 
 
 .PHONY: lint-c-checkpatch
-lint-c-checkpatch: $(_LINT_c_checkpatch);
+lint-c-checkpatch: $(tgts);
 
 
 undefine ext
 undefine xfail
+undefine tgts_EX
 undefine tgts
 
 
