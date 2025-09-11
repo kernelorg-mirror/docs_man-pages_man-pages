@@ -15,7 +15,7 @@ _MANPAGES := $(patsubst $(MANDIR)/%, $(_MANDIR)/%, $(MANPAGES))
 
 
 .PHONY: build-man
-build-man: build-man-man build-man-mdoc build-man-so;
+build-man: build-man-nonso build-man-so;
 
 
 endif  # include guard

@@ -9,8 +9,6 @@ MAKEFILE_BUILD_FONTS_DOWNLOAD_INCLUDED := 1
 include $(MAKEFILEDIR)/build/fonts/_.mk
 
 
-DOWNLOAD := $(MAKEFILEDIR)/build/fonts/devpdf/download
-
 _DOWNLOAD := $(_FONTSDIR)/devpdf/download
 
 

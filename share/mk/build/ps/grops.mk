@@ -10,16 +10,22 @@ include $(MAKEFILEDIR)/build/ps/troff.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff-base/grops.mk
 
 
-_PSMAN := $(patsubst %.ps.set, %.ps, $(_PSMAN_MAN_set) $(_PSMAN_MDOC_set))
+ext := .ps
 
 
-$(_PSMAN): %.ps: %.ps.set $(MK) | $$(@D)/
+_PSMAN := $(patsubst %.ps.set, %$(ext), $(_PSMAN_set))
+
+
+$(_PSMAN): %$(ext): %.ps.set $(MK) | $$(@D)/
 	$(info	$(INFO_)GROPS		$@)
 	$(GROPS) $(GROPSFLAGS_) <$< >$@
 
 
 .PHONY: build-ps-grops
 build-ps-grops: $(_PSMAN);
+
+
+undefine ext
 
 
 endif  # include guard

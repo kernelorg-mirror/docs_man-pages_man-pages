@@ -6,28 +6,26 @@ ifndef MAKEFILE_LINT_MAN_WS_INCLUDED
 MAKEFILE_LINT_MAN_WS_INCLUDED := 1
 
 
-include $(MAKEFILEDIR)/build/man/man.mk
-include $(MAKEFILEDIR)/build/man/mdoc.mk
+include $(MAKEFILEDIR)/build/man/nonso.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/cat.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/echo.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 
-_XFAIL_LINT_man_ws := \
-	$(_MANDIR)/man7/bpf-helpers.7.lint-man.ws.touch
+ext := .lint-man.ws.touch
+xfail := $(MAKEFILEDIR)/lint/man/ws.xfail
 
-
-_LINT_man_ws := $(patsubst %, %.lint-man.ws.touch, $(_NONSO_MAN) $(_NONSO_MDOC))
+tgts := $(patsubst %, %$(ext), $(_NONSO))
 ifeq ($(SKIP_XFAIL),yes)
-_LINT_man_ws := $(filter-out $(_XFAIL_LINT_man_ws), $(_LINT_man_ws))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
 
 
 ws_egrep := $(MAKEFILEDIR)/lint/man/ws.egrep
 
 
-$(_LINT_man_ws): %.lint-man.ws.touch: % $(ws_egrep) $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(ws_egrep) $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) -Ef $(ws_egrep) >/dev/null; then \
@@ -39,7 +37,12 @@ $(_LINT_man_ws): %.lint-man.ws.touch: % $(ws_egrep) $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-ws
-lint-man-ws: $(_LINT_man_ws);
+lint-man-ws: $(tgts);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

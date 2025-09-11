@@ -6,25 +6,23 @@ ifndef MAKEFILE_LINT_MAN_BLANK_INCLUDED
 MAKEFILE_LINT_MAN_BLANK_INCLUDED := 1
 
 
-include $(MAKEFILEDIR)/build/man/man.mk
-include $(MAKEFILEDIR)/build/man/mdoc.mk
+include $(MAKEFILEDIR)/build/man/nonso.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/cat.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/echo.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 
-_XFAIL_LINT_man_blank := \
-	$(_MANDIR)/man7/bpf-helpers.7.lint-man.blank.touch
+ext := .lint-man.blank.touch
+xfail := $(MAKEFILEDIR)/lint/man/blank.xfail
 
-
-_LINT_man_blank := $(patsubst %, %.lint-man.blank.touch, $(_NONSO_MAN) $(_NONSO_MDOC))
+tgts := $(patsubst %, %$(ext), $(_NONSO))
 ifeq ($(SKIP_XFAIL),yes)
-_LINT_man_blank := $(filter-out $(_XFAIL_LINT_man_blank), $(_LINT_man_blank))
+tgts := $(filter-out $(patsubst %, $(_MANDIR)/%$(ext), $(file < $(xfail))), $(tgts))
 endif
 
 
-$(_LINT_man_blank): %.lint-man.blank.touch: % $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(CAT) <$< \
 	| if $(GREP) '^$$' >/dev/null; then \
@@ -36,7 +34,12 @@ $(_LINT_man_blank): %.lint-man.blank.touch: % $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-blank
-lint-man-blank: $(_LINT_man_blank);
+lint-man-blank: $(tgts);
+
+
+undefine ext
+undefine xfail
+undefine tgts
 
 
 endif  # include guard

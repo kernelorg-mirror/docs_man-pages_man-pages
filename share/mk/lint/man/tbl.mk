@@ -6,7 +6,7 @@ ifndef MAKEFILE_LINT_MAN_TBL_INCLUDED
 MAKEFILE_LINT_MAN_TBL_INCLUDED := 1
 
 
-include $(MAKEFILEDIR)/build/man/man.mk
+include $(MAKEFILEDIR)/build/man/nonso.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/cat.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/echo.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/head.mk
@@ -15,10 +15,11 @@ include $(MAKEFILEDIR)/configure/build-depends/coreutils/touch.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 
 
-_LINT_man_tbl := $(patsubst %, %.lint-man.tbl.touch, $(_NONSO_MAN))
+ext := .lint-man.tbl.touch
+tgts := $(patsubst %, %$(ext), $(_NONSO))
 
 
-$(_LINT_man_tbl): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
+$(tgts): %$(ext): % $(MK) | $$(@D)/
 	$(info	$(INFO_)GREP		$@)
 	$(HEAD) -n1 <$< \
 	| if $(GREP) '\\" t$$' >/dev/null; then \
@@ -46,7 +47,11 @@ $(_LINT_man_tbl): %.lint-man.tbl.touch: % $(MK) | $$(@D)/
 
 
 .PHONY: lint-man-tbl
-lint-man-tbl: $(_LINT_man_tbl);
+lint-man-tbl: $(tgts);
+
+
+undefine ext
+undefine tgts
 
 
 endif  # include guard

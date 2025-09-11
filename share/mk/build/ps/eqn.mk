@@ -11,10 +11,13 @@ include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff-base/eqn.mk
 
 
-_PSMAN_troff := $(patsubst %.eqn, %.ps.troff, $(_MAN_eqn))
+ext := .ps.troff
 
 
-$(_PSMAN_troff): %.ps.troff: %.eqn $(MK) | $$(@D)/
+_PSMAN_troff := $(patsubst %.eqn, %$(ext), $(_MAN_eqn))
+
+
+$(_PSMAN_troff): %$(ext): %.eqn $(MK) | $$(@D)/
 	$(info	$(INFO_)EQN		$@)
 	! ($(EQN) -Tps $(EQNFLAGS_) <$< 2>&1 >$@) \
 	| $(GREP) ^ >&2
@@ -22,6 +25,9 @@ $(_PSMAN_troff): %.ps.troff: %.eqn $(MK) | $$(@D)/
 
 .PHONY: build-ps-eqn
 build-ps-eqn: $(_PSMAN_troff);
+
+
+undefine ext
 
 
 endif  # include guard

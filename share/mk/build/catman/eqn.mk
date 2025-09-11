@@ -12,10 +12,13 @@ include $(MAKEFILEDIR)/configure/build-depends/groff-base/eqn.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff-base/nroff.mk
 
 
-_CATMAN_troff := $(patsubst %.eqn, %.cat.troff, $(_MAN_eqn))
+ext := .cat.troff
 
 
-$(_CATMAN_troff): %.cat.troff: %.eqn $(MK) | $$(@D)/
+_CATMAN_troff := $(patsubst %.eqn, %$(ext), $(_MAN_eqn))
+
+
+$(_CATMAN_troff): %$(ext): %.eqn $(MK) | $$(@D)/
 	$(info	$(INFO_)EQN		$@)
 	! ($(EQN) -T$(NROFF_OUT_DEVICE) $(EQNFLAGS_) <$< 2>&1 >$@) \
 	| $(GREP) ^ >&2
@@ -23,6 +26,9 @@ $(_CATMAN_troff): %.cat.troff: %.eqn $(MK) | $$(@D)/
 
 .PHONY: build-catman-eqn
 build-catman-eqn: $(_CATMAN_troff);
+
+
+undefine ext
 
 
 endif  # include guard

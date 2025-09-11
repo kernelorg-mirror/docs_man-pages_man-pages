@@ -10,16 +10,22 @@ include $(MAKEFILEDIR)/build/pre/preconv.mk
 include $(MAKEFILEDIR)/configure/build-depends/groff-base/tbl.mk
 
 
-_MAN_eqn := $(patsubst %.tbl, %.eqn, $(_MAN_tbl))
+ext := .eqn
 
 
-$(_MAN_eqn): %.eqn: %.tbl $(MK) | $$(@D)/
+_MAN_eqn := $(patsubst %.tbl, %$(ext), $(_MAN_tbl))
+
+
+$(_MAN_eqn): %$(ext): %.tbl $(MK) | $$(@D)/
 	$(info	$(INFO_)TBL		$@)
 	$(TBL) <$< >$@
 
 
 .PHONY: build-pre-tbl
 build-pre-tbl: $(_MAN_eqn);
+
+
+undefine ext
 
 
 endif  # include guard
