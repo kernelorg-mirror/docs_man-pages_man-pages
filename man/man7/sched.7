@@ -940,16 +940,12 @@ of the processes in a terminal session:
 .EE
 .in
 .SS Real-time features in the mainline Linux kernel
-.\" FIXME . Probably this text will need some minor tweaking
-.\" ask Carsten Emde about this.
+.\" The archaeologist knows about v2.6.9-mm1-V0.1-realtime-preempt
 Since Linux 2.6.18, Linux is gradually
 becoming equipped with real-time capabilities,
 most of which are derived from the former
 .I realtime\-preempt
 patch set.
-Until the patches have been completely merged into the
-mainline kernel,
-they must be installed to achieve the best real-time performance.
 These patches are named:
 .P
 .in +4n
@@ -960,24 +956,52 @@ These patches are named:
 .P
 and can be downloaded from
 .UR http://www.kernel.org\:/pub\:/linux\:/kernel\:/projects\:/rt/
+.UE
+or cloned from a git tree
+.UR https://git.kernel.org\:/pub\:/scm\:/linux\:/kernel\:/git\:/rt\:/linux-stable-rt.git
 .UE .
+The individual releases are maintained
+as long as the matching LTS kernel is maintained.
 .P
-Without the patches and prior to their full inclusion into the mainline
-kernel, the kernel configuration offers only the three preemption classes
+Since Linux 6.12 it possible to enable the real-time preemption
+without the need for any patches.
+The
+.I realtime\-patch
+continues to exist and contains support
+for not-yet-integrated architectures,
+drivers, and features that are in development.
+.P
+Since Linux 6.13 real-time became an option
+and not a preemption model.
+With this change,
+the following preemption models are available:
 .BR CONFIG_PREEMPT_NONE ,
 .BR CONFIG_PREEMPT_VOLUNTARY ,
+.BR CONFIG_PREEMPT ,
 and
-.B CONFIG_PREEMPT_DESKTOP
-which respectively provide no, some, and considerable
-reduction of the worst-case scheduling latency.
-.P
-With the patches applied or after their full inclusion into the mainline
-kernel, the additional configuration item
+.BR CONFIG_PREEMPT_LAZY .
+The real-time capabilities can be enabled with the option
 .B CONFIG_PREEMPT_RT
-becomes available.
-If this is selected, Linux is transformed into a regular
+and the preemption model can be set to either
+.B CONFIG_PREEMPT
+or
+.BR CONFIG_PREEMPT_LAZY .
+The latter model is less eager to preempt
+.B SCHED_NORMAL
+tasks in an attempt to reduce lock-holder preemption.
+It does not affect real-time tasks.
+.P
+With
+.B CONFIG_PREEMPT_RT
+enabled,
+Linux is transformed into a regular
 real-time operating system.
-The FIFO and RR scheduling policies are then used to run a thread
+The
+.BR SCHED_FIFO ,
+.BR SCHED_RR ,
+and
+.B SCHED_DEADLINE
+scheduling policies are then used to run a thread
 with true real-time priority and a minimum worst-case scheduling latency.
 .SH NOTES
 The
@@ -1039,5 +1063,5 @@ and
 .I \%Documentation/\:scheduler/\:sched\-nice\-design\:.txt
 .P
 Worth looking at:
-.UR http://rt.wiki.kernel.org/\:index.php
+.UR https://wiki.linuxfoundation.org/\:realtime/\:start
 .UE
