@@ -115,6 +115,7 @@ if all threads always acquire the mutex before signaling the condition,
 this guarantees that the condition cannot be signaled (and thus ignored)
 between the time a thread locks the mutex
 and the time it waits on the condition variable.
+See CAVEATS below.
 .P
 .BR pthread_cond_timedwait ()
 atomically unlocks
@@ -240,6 +241,29 @@ Some threads are currently waiting on
 .BR gettimeofday (2),
 .BR nanosleep (2).
 .
+.SH CAVEATS
+The implementation of the provided functions until
+glibc 2.25 used an internal data lock.
+This lock did not support priority-inheritance and
+was subject to unbounded priority inversion,
+visible on a real-time system.
+.P
+After the rewrite of the implementation in glibc 2.25
+the usage of internal lock changed.
+The internal lock is always acquired by
+the signaling functions
+.BR pthread_cond_signal ()
+and
+.BR pthread_cond_broadcast ().
+The waiting function acquires the lock
+if the waiting process was interrupted.
+The interruption can be caused for instance
+by a specified timeout,
+and denoted by the error value
+.BR ETIMEDOUTA ,
+or by a received signal,
+which is denoted by the error value
+.BR EINTR .
 .
 .SH EXAMPLE
 Consider two shared variables
