@@ -35,6 +35,7 @@ Checks: >
     -cppcoreguidelines-macro-to-enum,
     -google-readability-braces-around-statements,
     -hicpp-braces-around-statements,
+    -hicpp-named-parameter,
     -hicpp-no-assembler,
     -hicpp-uppercase-literal-suffix,
     -llvm-header-guard,
@@ -47,6 +48,7 @@ Checks: >
     -readability-function-cognitive-complexity,
     -readability-identifier-length,
     -readability-isolate-declaration,
+    -readability-named-parameter,
     -readability-uppercase-literal-suffix,
 
 WarningsAsErrors: >

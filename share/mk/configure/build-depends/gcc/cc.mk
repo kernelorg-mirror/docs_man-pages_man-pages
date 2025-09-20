@@ -49,6 +49,7 @@ GCC_CFLAGS := -fanalyzer
 
 CLANG_CFLAGS := \
 	-Weverything \
+	-Wno-c23-extensions \
 	-Wno-language-extension-token \
 	-Wno-unreachable-code \
 	-Wno-unsafe-buffer-usage \
