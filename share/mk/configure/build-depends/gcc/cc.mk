@@ -51,6 +51,7 @@ CLANG_CFLAGS := \
 	-Weverything \
 	-Wno-c23-extensions \
 	-Wno-language-extension-token \
+	-Wno-unknown-attributes \
 	-Wno-unreachable-code \
 	-Wno-unsafe-buffer-usage \
 	-Wno-used-but-marked-unused
