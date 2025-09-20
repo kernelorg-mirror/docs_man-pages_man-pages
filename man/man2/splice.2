@@ -281,7 +281,8 @@ main(void)
         int         fd;
         int         pfd[2];
         off_t       off;
-        const char  s[12] = "Hello, world";
+        [[gnu::nonstring]]
+	const char  s[12] = "Hello, world";
 \&
         fd = open("out", O_WRONLY | O_CREAT | O_EXCL, 0666);
         if (fd == \-1)
