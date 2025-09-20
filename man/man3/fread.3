@@ -108,7 +108,7 @@ Class: 0x02
 #include <stdio.h>
 #include <stdlib.h>
 \&
-#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+#define NITEMS(arr)  (sizeof(arr) / sizeof((arr)[0]))
 \&
 int
 main(void)
@@ -123,8 +123,8 @@ main(void)
         return EXIT_FAILURE;
     }
 \&
-    ret = fread(buffer, sizeof(*buffer), ARRAY_SIZE(buffer), fp);
-    if (ret != ARRAY_SIZE(buffer)) {
+    ret = fread(buffer, sizeof(*buffer), NITEMS(buffer), fp);
+    if (ret != NITEMS(buffer)) {
         fprintf(stderr, "fread() failed: %zu\[rs]n", ret);
         exit(EXIT_FAILURE);
     }

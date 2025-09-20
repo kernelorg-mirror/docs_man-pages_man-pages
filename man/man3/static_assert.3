@@ -90,7 +90,7 @@ The following program uses the macro to get the size of an array safely.
 #define must_be_array(arr)  must_be(is_array(arr))
 \&
 #define sizeof_array(arr)   (sizeof(arr) + must_be_array(arr))
-#define nitems(arr)         (sizeof((arr)) / sizeof((arr)[0]) \[rs]
+#define NITEMS(arr)         (sizeof((arr)) / sizeof((arr)[0]) \[rs]
                              + must_be_array(arr))
 \&
 int     foo[10];
@@ -99,13 +99,13 @@ int8_t  bar[sizeof_array(foo)];
 int
 main(void)
 {
-    for (size_t i = 0; i < nitems(foo); i++) {
+    for (size_t i = 0; i < NITEMS(foo); i++) {
         foo[i] = i;
     }
 \&
     memcpy(bar, foo, sizeof_array(bar));
 \&
-    for (size_t i = 0; i < nitems(bar); i++) {
+    for (size_t i = 0; i < NITEMS(bar); i++) {
         printf("%d,", bar[i]);
     }
 \&

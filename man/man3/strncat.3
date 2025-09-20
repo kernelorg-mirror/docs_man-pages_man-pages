@@ -95,7 +95,7 @@ Shlemiel the painter
 #include <stdlib.h>
 #include <string.h>
 \&
-#define nitems(arr)  (sizeof((arr)) / sizeof((arr)[0]))
+#define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))
 \&
 int
 main(void)
@@ -111,15 +111,15 @@ main(void)
     char    src[] = "some_long_body.post";
     char    *dest;
 \&
-    n = nitems(pre) + strlen(src) \- strlen(post) + nitems(new_post) + 1;
+    n = NITEMS(pre) + strlen(src) \- strlen(post) + NITEMS(new_post) + 1;
     dest = malloc(sizeof(*dest) * n);
     if (dest == NULL)
         err(EXIT_FAILURE, "malloc()");
 \&
     dest[0] = \[aq]\[rs]0\[aq];  // There's no 'cpy' function to this 'cat'.
-    strncat(dest, pre, nitems(pre));
+    strncat(dest, pre, NITEMS(pre));
     strncat(dest, src, strlen(src) \- strlen(post));
-    strncat(dest, new_post, nitems(new_post));
+    strncat(dest, new_post, NITEMS(new_post));
 \&
     puts(dest);  // "pre.some_long_body.foo.bar"
     free(dest);
