@@ -46,30 +46,26 @@ capable of storing values at least in the range
 C11, POSIX.1-2024.
 .TP
 .I suseconds_t
-.TQ
-.I useconds_t
 POSIX.1-2008.
-.PD
+.TP
+.I useconds_t
+None.
 .SH HISTORY
 .TP
 .I time_t
 C89, POSIX.1-2001.
 .TP
 .I suseconds_t
-.TQ
+POSIX.1-2001.
+.TP
 .I useconds_t
 POSIX.1-2001.
+Removed in POSIX.1-2008.
 .SS Header files
 .I <sched.h>
 defines
 .I time_t
 since POSIX.1-2008.
-.P
-POSIX.1-2001 defined
-.I useconds_t
-in
-.I <unistd.h>
-too.
 .SS time_t
 In POSIX.1-2001,
 .I time_t
@@ -108,6 +104,10 @@ The following headers also provide
 .I <sys/select.h>
 and
 .IR <sys/time.h> .
+.P
+The following headers also provided
+.IR useconds_t :
+.IR <unistd.h> .
 .SH SEE ALSO
 .BR stime (2),
 .BR time (2),
