@@ -13,7 +13,7 @@ Standard C library
 .nf
 .B #include <sys/socket.h>
 .P
-.BR "int getsockopt(" "socklen *restrict optlen;"
+.BR "int getsockopt(" "socklen_t *restrict optlen;"
 .BI "               int " sockfd ", int " level ", int " optname ,
 .BI "               void " optval "[_Nullable restrict *" optlen ],
 .BI "               socklen_t *restrict " optlen );
