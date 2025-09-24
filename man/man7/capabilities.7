@@ -625,6 +625,15 @@ Use
 Trace arbitrary processes using
 .BR ptrace (2);
 .IP \[bu]
+inspect sensitive information of other processes via
+.I /proc
+(e.g., reading
+.IR /proc/ pid /maps ,
+.IR /proc/ pid /mem ,
+or reading symbolic links
+.IR /proc/ pid /exe ,
+.IR /proc/ pid /fd/* );
+.IP \[bu]
 apply
 .BR get_robust_list (2)
 to arbitrary processes;
@@ -635,7 +644,12 @@ and
 .BR process_vm_writev (2);
 .IP \[bu]
 inspect processes using
-.BR kcmp (2).
+.BR kcmp (2);
+.IP \[bu]
+perform other privileged process-inspection and debugging operations.
+(See uses of the
+.IR ptrace_may_access ()
+kernel function.)
 .RE
 .PD
 .TP
