@@ -580,6 +580,18 @@ any filesystem parameters associated with
 Linux Security Modules (LSMs)
 are also generic with respect to the underlying filesystem.
 See the documentation for the LSM you wish to configure for more details.
+.SS Mount attributes and filesystem parameters
+Some filesystem parameters
+(traditionally associated with
+.BR mount (8)-style
+options)
+have a sibling mount attribute
+with superficially similar user-facing behaviour.
+.P
+For a description of the distinction between
+mount attributes and filesystem parameters,
+see the "Mount attributes and filesystem parameters" subsection of
+.BR mount_setattr (2).
 .SH CAVEATS
 .SS Filesystem parameter types
 As a result of
