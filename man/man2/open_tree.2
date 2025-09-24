@@ -15,7 +15,19 @@ Standard C library
 .B #include <sys/mount.h>
 .P
 .BI "int open_tree(int " dirfd ", const char *" path ", unsigned int " flags );
+.P
+.BR "#include <sys/syscall.h>" "    /* Definition of " SYS_* " constants */"
+.P
+.B int syscall(SYS_open_tree_attr,
+.BI "            int " dirfd ", const char *" path ", unsigned int " flags ,
+.BI "            struct mount_attr *_Nullable " attr ", size_t " size );
 .fi
+.P
+.IR Note :
+glibc provides no wrapper for
+.BR open_tree_attr (),
+necessitating the use of
+.BR syscall (2).
 .SH DESCRIPTION
 The
 .BR open_tree ()
@@ -263,6 +275,129 @@ Create a recursive bind-mount of the path
 as a detached mount object.
 This flag is only permitted in conjunction with
 .BR \%OPEN_TREE_CLONE .
+.SS open_tree_attr()
+The
+.BR open_tree_attr ()
+system call operates in exactly the same way as
+.BR open_tree (),
+except for the differences described here.
+.P
+After performing the same operation as with
+.BR open_tree (),
+.BR open_tree_attr ()
+will apply the mount attribute changes described in
+.I attr
+to the file descriptor before it is returned.
+(See
+.BR mount_attr (2type)
+for a description of the
+.I \%mount_attr
+structure.
+As described in
+.BR mount_setattr (2),
+.I size
+must be set to
+.I \%sizeof(struct mount_attr)
+in order to support future extensions.)
+If
+.I attr
+is NULL,
+or has
+.IR \%attr.attr_clr ,
+.IR \%attr.attr_set ,
+and
+.I \%attr.propagation
+all set to zero,
+then
+.BR open_tree_attr ()
+has identical behaviour to
+.BR open_tree ().
+.P
+The application of
+.I attr
+to the resultant file descriptor
+has identical semantics to
+.BR mount_setattr (2),
+except for the following extensions and general caveats:
+.IP \[bu] 3
+Unlike
+.BR mount_setattr (2)
+called with a regular
+.B OPEN_TREE_CLONE
+detached mount object from
+.BR open_tree (),
+.BR open_tree_attr ()
+can specify a different setting for
+.B \%MOUNT_ATTR_IDMAP
+to the original mount object cloned with
+.BR \%OPEN_TREE_CLONE .
+.IP
+Adding
+.B \%MOUNT_ATTR_IDMAP
+to
+.I \%attr.attr_clr
+will disable ID-mapping for the new mount object;
+adding
+.B \%MOUNT_ATTR_IDMAP
+to
+.I \%attr.attr_set
+will configure the mount object to have the ID-mapping defined by
+the user namespace referenced by the file descriptor
+.IR \%attr.userns_fd .
+(The semantics of which are identical to when
+.BR mount_setattr (2)
+is used to configure
+.BR \%MOUNT_ATTR_IDMAP .)
+.IP
+Changing or removing the mapping
+of an ID-mapped mount is only permitted
+if a new detached mount object is being created with
+.I flags
+including
+.BR \%OPEN_TREE_CLONE .
+.\" Aleksa Sarai
+.\"  At time of writing, this is not actually true because of a bug where
+.\"  open_tree_attr() would accidentally permit changing MOUNT_ATTR_IDMAP for
+.\"  existing detached mount objects without setting OPEN_TREE_CLONE, but a
+.\"  patch to fix it has been slated for 6.18 and will be backported to 6.15+.
+.\"  <https://lore.kernel.org/r/20250808-open_tree_attr-bugfix-idmap-v1-0-0ec7bc05646c@cyphar.com/>
+.IP \[bu]
+If
+.I flags
+contains
+.BR \%AT_RECURSIVE ,
+then the attributes described in
+.I attr
+are applied recursively
+(just as when
+.BR mount_setattr (2)
+is called with
+.BR \%AT_RECURSIVE ).
+However, this applies in addition to the
+.BR open_tree ()-specific
+behaviour regarding
+.BR \%AT_RECURSIVE ,
+and thus
+.I flags
+must also contain
+.BR \%OPEN_TREE_CLONE .
+.P
+Note that if
+.I flags
+does not contain
+.BR \%OPEN_TREE_CLONE ,
+.BR open_tree_attr ()
+will attempt to modify the mount attributes of
+the mount object attached at
+the path described by
+.I dirfd
+and
+.IR path .
+As with
+.BR mount_setattr (2),
+if said path is not a mount point,
+.BR open_tree_attr ()
+will return an error.
 .SH RETURN VALUE
 On success, a new file descriptor is returned.
 On error, \-1 is returned, and
@@ -356,10 +491,15 @@ capability.
 .SH STANDARDS
 Linux.
 .SH HISTORY
+.SS open_tree()
 Linux 5.2.
 .\" commit a07b20004793d8926f78d63eb5980559f7813404
 .\" commit 400913252d09f9cfb8cce33daee43167921fc343
 glibc 2.36.
+.SS open_tree_attr()
+Linux 6.15.
+.\" commit c4a16820d90199409c9bf01c4f794e1e9e8d8fd8
+.\" commit 7a54947e727b6df840780a66c970395ed9734ebe
 .SH NOTES
 .SS Mount propagation
 The bind-mount mount objects created by
@@ -507,6 +647,57 @@ close(fd);
 /* The bind-mount is now destroyed */
 .EE
 .in
+.SS open_tree_attr()
+The following is an example of how
+.BR open_tree_attr ()
+can be used to
+take an existing id-mapped mount and
+construct a new bind-mount mount object
+with a different
+.B \%MOUNT_ATTR_IDMAP
+attribute.
+The resultant detached mount object
+can be used
+like any other mount object
+returned by
+.BR open_tree ().
+.P
+.in +4n
+.EX
+int nsfd1, nsfd2;
+int mntfd1, mntfd2, mntfd3;
+struct mount_attr attr;
+mntfd1 = open_tree(AT_FDCWD, "/foo", OPEN_TREE_CLONE);
+\&
+/* Configure the id-mapping of mntfd1 */
+nsfd1 = open("/proc/1234/ns/user", O_RDONLY);
+memset(&attr, 0, sizeof(attr));
+attr.attr_set = MOUNT_ATTR_IDMAP;
+attr.userns_fd = nsfd1;
+mount_setattr(mntfd1, "", AT_EMPTY_PATH, &attr, sizeof(attr));
+\&
+/* Create a new copy with a different id-mapping */
+nsfd2 = open("/proc/5678/ns/user", O_RDONLY);
+memset(&attr, 0, sizeof(attr));
+attr.attr_clr = MOUNT_ATTR_IDMAP;
+.\" Using .attr_clr is not strictly necessary but makes the intent clearer.
+attr.attr_set = MOUNT_ATTR_IDMAP;
+attr.userns_fd = nsfd2;
+mntfd2 = open_tree_attr(mntfd1, "", OPEN_TREE_CLONE,
+                        &attr, sizeof(attr));
+\&
+/* Create a new copy with the id-mapping cleared */
+memset(&attr, 0, sizeof(attr));
+attr.attr_clr = MOUNT_ATTR_IDMAP;
+mntfd3 = open_tree_attr(mntfd1, "", OPEN_TREE_CLONE,
+                        &attr, sizeof(attr));
+.EE
+.in
+.P
+.BR open_tree_attr ()
+can also be used
+with attached mount objects;
+the above example is only intended to be illustrative.
 .SH SEE ALSO
 .BR fsconfig (2),
 .BR fsmount (2),
