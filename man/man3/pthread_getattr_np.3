@@ -271,7 +271,7 @@ get_thread_attributes_from_cl(int argc, char *argv[],
     if (argc > optind)
         usage(argv[0], "Extraneous command\-line arguments\[rs]n");
 \&
-    if (stack_size != -1 || guard_size > 0) {
+    if (stack_size != \-1 || guard_size > 0) {
         ret_attrp = attrp;
 \&
         s = pthread_attr_init(attrp);
@@ -279,7 +279,7 @@ get_thread_attributes_from_cl(int argc, char *argv[],
             errc(EXIT_FAILURE, s, "pthread_attr_init");
     }
 \&
-    if (stack_size != -1) {
+    if (stack_size != \-1) {
         if (!allocate_stack) {
             s = pthread_attr_setstacksize(attrp, stack_size);
             if (s != 0)
@@ -297,7 +297,7 @@ get_thread_attributes_from_cl(int argc, char *argv[],
         }
     }
 \&
-    if (guard_size != -1) {
+    if (guard_size != \-1) {
         s = pthread_attr_setguardsize(attrp, guard_size);
         if (s != 0)
             errc(EXIT_FAILURE, s, "pthread_attr_setstacksize");

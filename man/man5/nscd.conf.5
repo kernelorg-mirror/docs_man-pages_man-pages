@@ -286,7 +286,7 @@ and only then will it actually be removed from the cache.
 A request from a client which hits the entry will
 reset the reload counter on the entry.
 Purging the cache using
-.I nscd\~-i
+.I nscd\~\-i
 overrides the reload logic and removes the entry.
 .P
 Reloading has the effect of extending cache entry TTLs
@@ -337,7 +337,7 @@ Some distributions have an init script for
 with a
 .I reload
 command which uses
-.I nscd\~-i
+.I nscd\~\-i
 to purge the cache.
 That use of the word "reload" is entirely different
 from the "reloading" described here.

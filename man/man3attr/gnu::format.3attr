@@ -124,13 +124,13 @@ vstprintf(int size;
 \&
 	if (size == 0) {
 		errno = EOVERFLOW;
-		return -1;
+		return \-1;
 	}
 \&
 	len = vsnprintf(buf, size, fmt, args);
 	if (len >= size) {
 		errno = E2BIG;
-		return -1;
+		return \-1;
 	}
 \&
 	return len;
