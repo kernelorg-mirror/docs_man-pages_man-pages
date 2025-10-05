@@ -1,7 +1,6 @@
 man2/fanotify_init.2
 man2/s390_sthyi.2
 man3/unlocked_stdio.3
-man4/console_codes.4
 man4/lirc.4
 man5/proc_pid_smaps.5
 man5/tzfile.5
