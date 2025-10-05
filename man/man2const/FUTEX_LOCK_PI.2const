@@ -43,28 +43,28 @@ user space atomically by setting the futex value to 0.
 .\"     the lock owner that it needs to go into the kernel.  Here is the pseudo
 .\"     code:
 .\"
-.\"     	lock(kernel_lock);
+.\"		lock(kernel_lock);
 .\"     retry:
 .\"
-.\"     	/*
-.\"     	 * Owner might have unlocked in user space before we
-.\"     	 * were able to set the waiter bit.
+.\"		/*
+.\"		 * Owner might have unlocked in user space before we
+.\"		 * were able to set the waiter bit.
 .\"              */
 .\"             if (atomic_acquire(futex) == SUCCESS) {
-.\"     	   unlock(kernel_lock());
-.\"     	   return 0;
-.\"     	}
+.\"		   unlock(kernel_lock());
+.\"		   return 0;
+.\"		}
 .\"
-.\"     	/*
-.\"     	 * Owner might have unlocked after the above atomic_acquire()
-.\"     	 * attempt.
-.\"     	 */
-.\"     	if (atomic_set_waiters_bit(futex) != SUCCESS)
-.\"     	   goto retry;
+.\"		/*
+.\"		 * Owner might have unlocked after the above atomic_acquire()
+.\"		 * attempt.
+.\"		 */
+.\"		if (atomic_set_waiters_bit(futex) != SUCCESS)
+.\"		   goto retry;
 .\"
-.\"     	queue_waiter();
-.\"     	unlock(kernel_lock);
-.\"     	block();
+.\"		queue_waiter();
+.\"		unlock(kernel_lock);
+.\"		block();
 .\"
 After that, the kernel:
 .IP (1) 5
