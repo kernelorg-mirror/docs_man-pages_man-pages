@@ -864,10 +864,16 @@ when calling
 .BR clone ().
 .RE
 .IP
-It is currently not possible to use this flag together with
-.B CLONE_THREAD.
-This means that the process identified by the PID file descriptor
-will always be a thread group leader.
+If
+.B CLONE_PIDFD
+is specified together with
+.BR CLONE_THREAD ,
+the obtained PID file descriptor refers to a specific thread,
+as opposed to a thread-group leader if
+.B CLONE_THREAD
+is not specified.
+This feature is available since Linux 6.9.
+.\" commit 83b290c9e3b5d95891f43a4aeadf6071cbff25d3
 .IP
 If the obsolete
 .B CLONE_DETACHED
@@ -1386,7 +1392,7 @@ in the
 .I flags
 mask.
 .TP
-.B EINVAL
+.BR EINVAL " (before Linux 6.9)"
 .B CLONE_PIDFD
 was specified together with
 .B CLONE_THREAD
