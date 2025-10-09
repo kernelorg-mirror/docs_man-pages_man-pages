@@ -174,7 +174,7 @@ grepc_c_fld()		{ printf '%s\n' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}'; 
 grepc_c_mf()		{ printf '%s\n' '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\(.*?[^\\]$'; }
 grepc_c_mo()		{ printf '%s\n' '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$'; }
 grepc_c_t_braced()	{ printf '%s\n' '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b[ \t]*\n*([ \t]*){.*?^\5}.*?;'; }
-grepc_c_t_td_simple()	{ printf '%s\n' '(?s)^[ \t]*typedef\s+[^{};]+'"$1"';'; }
+grepc_c_t_td_simple()	{ printf '%s\n' '(?s)^[ \t]*typedef\s+[^{};]+\b'"$1"';'; }
 grepc_c_t_td_braced()	{ printf '%s\n' '(?s)^[ \t]*typedef\s+(struct|union|enum)\b(?:(?!\W'"$1"'\W)([\w \t[\]]|::))*\n*([ \t]*){(?:(?!^\3?}).)*?^\3}\s*'"$1"'(\[[\w\(,\)]\])*;'; }
 grepc_c_t_td_func()	{ printf '%s\n' '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;'; }
 grepc_c_ue()		{ printf '%s\n' '(?s)^([\w[]+[\w\s]*)?\benum\b([\w \t[\]]|::)*\n*([ \t]*){[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^\3}.*?;'; }
