@@ -124,7 +124,6 @@ CSI (0x9B)
 is equivalent to ESC [.
 .P
 .B "ESC- but not CSI-sequences"
-.ad l
 .P
 .TS
 l l lx.
@@ -201,7 +200,6 @@ indicates
 the red/green/blue values (0\[en]255).
 T}
 .TE
-.ad
 .P
 .B "ECMA-48 CSI sequences"
 .P
@@ -216,7 +214,6 @@ and this entire sequence is ignored.
 (The idea is to ignore an echoed function key.)
 .P
 The action of a CSI sequence is determined by its final character.
-.ad l
 .P
 .TS
 l l lx.
@@ -322,7 +319,6 @@ u	SCORC	Restore cursor location.
 Move cursor to indicated column in current row.
 T}
 .TE
-.ad
 .P
 .B ECMA-48 Select Graphic Rendition
 .P
@@ -334,7 +330,6 @@ Several attributes can be set in the same sequence, separated by
 semicolons.
 An empty parameter (between semicolons or string initiator or
 terminator) is interpreted as a zero.
-.ad l
 .P
 .TS
 l lx.
@@ -417,7 +412,6 @@ T}
 set background, same as 40..47 (bright not supported)
 T}
 .TE
-.ad
 .P
 Commands 38 and 48 require further arguments:
 .P
