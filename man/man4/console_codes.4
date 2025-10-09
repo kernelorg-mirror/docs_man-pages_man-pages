@@ -150,11 +150,15 @@ ESC 8	DECRC	T{
 Restore state most recently saved by ESC 7.
 T}
 ESC %		Start sequence selecting character set
+.T&
+l l ax.
 ESC % @		T{
-\0\0\0Select default (ISO/IEC\~646 / ISO/IEC\~8859-1)
+Select default (ISO/IEC\~646 / ISO/IEC\~8859-1)
 T}
-ESC % G		\0\0\0Select UTF-8
-ESC % 8		\0\0\0Select UTF-8 (obsolete)
+ESC % G		Select UTF-8
+ESC % 8		Select UTF-8 (obsolete)
+.T&
+l l lx.
 ESC # 8	DECALN	T{
 DEC screen alignment test \- fill screen with E's.
 T}
