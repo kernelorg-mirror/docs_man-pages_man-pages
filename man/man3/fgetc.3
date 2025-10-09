@@ -5,7 +5,7 @@
 .\"
 .TH fgetc 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-fgetc, fgets, getc, getchar, ungetc \- input of characters and strings
+fgetc, fgets, getchar, ungetc \- input of characters and strings
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -14,7 +14,6 @@ Standard C library
 .B #include <stdio.h>
 .P
 .BI "int fgetc(FILE *" stream );
-.BI "int getc(FILE *" stream );
 .B "int getchar(void);"
 .P
 .BR "char *fgets(" "int size;"
@@ -34,16 +33,9 @@ or
 .B EOF
 on end of file or error.
 .P
-.BR getc ()
-is equivalent to
-.BR fgetc ()
-except that it may be implemented as a macro which evaluates
-.I stream
-more than once.
-.P
 .BR getchar ()
 is equivalent to
-.IR getc(stdin) .
+.IR fgetc(stdin) .
 .P
 .BR fgets ()
 reads in at most one less than
@@ -79,8 +71,7 @@ library for the same input stream.
 For nonlocking counterparts, see
 .BR unlocked_stdio (3).
 .SH RETURN VALUE
-.BR fgetc (),
-.BR getc (),
+.BR fgetc ()
 and
 .BR getchar ()
 return the character read as an
@@ -116,7 +107,6 @@ T{
 .nh
 .BR fgetc (),
 .BR fgets (),
-.BR getc (),
 .BR getchar (),
 .BR ungetc ()
 T}	Thread safety	MT-Safe
