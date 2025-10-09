@@ -131,7 +131,9 @@ l l lx.
 ESC c	RIS	Reset.
 ESC D	IND	Linefeed.
 ESC E	NEL	Newline.
-ESC H	HTS	Set tab stop at current column.
+ESC H	HTS	T{
+Set tab stop at current column.
+T}
 ESC M	RI	Reverse linefeed.
 ESC Z	DECID	T{
 DEC private identification.
@@ -148,7 +150,9 @@ ESC 8	DECRC	T{
 Restore state most recently saved by ESC 7.
 T}
 ESC %		Start sequence selecting character set
-ESC % @		\0\0\0Select default (ISO/IEC\~646 / ISO/IEC\~8859-1)
+ESC % @		T{
+\0\0\0Select default (ISO/IEC\~646 / ISO/IEC\~8859-1)
+T}
 ESC % G		\0\0\0Select UTF-8
 ESC % 8		\0\0\0Select UTF-8 (obsolete)
 ESC # 8	DECALN	T{
@@ -780,8 +784,10 @@ by
 .B hpLowerleftBugCompat
 resource).
 T}
-ESC l		Memory lock (per HP terminals).
-		Locks memory above the cursor.
+ESC l		T{
+Memory lock (per HP terminals).
+Locks memory above the cursor.
+T}
 ESC m		Memory unlock (per HP terminals).
 ESC n	LS2	Invoke the G2 character set.
 ESC o	LS3	Invoke the G3 character set.
