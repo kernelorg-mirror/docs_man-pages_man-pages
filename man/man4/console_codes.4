@@ -125,6 +125,7 @@ is equivalent to ESC [.
 .P
 .B "ESC- but not CSI-sequences"
 .ad l
+.P
 .TS
 l l lx.
 ESC c	RIS	Reset.
@@ -208,6 +209,7 @@ and this entire sequence is ignored.
 .P
 The action of a CSI sequence is determined by its final character.
 .ad l
+.P
 .TS
 l l lx.
 @	ICH	T{
@@ -325,6 +327,7 @@ semicolons.
 An empty parameter (between semicolons or string initiator or
 terminator) is interpreted as a zero.
 .ad l
+.P
 .TS
 l lx.
 param	result
@@ -409,6 +412,7 @@ T}
 .ad
 .P
 Commands 38 and 48 require further arguments:
+.P
 .TS
 l lx.
 ;5;x	T{
@@ -514,6 +518,7 @@ Colors are in SGR parameters:
 6 = cyan,
 7 = white;
 8\[en]15 = bright versions of 0\[en]7.
+.P
 .TS
 l lx.
 ESC [ 1 ; \f[I]n\f[] ]	T{
@@ -692,6 +697,7 @@ BEL, BS, HT, LF, VT, FF, CR, SO, SI, ESC.
 .B Escape sequences
 .P
 VT100 console sequences not implemented on the Linux console:
+.P
 .TS
 l l l.
 ESC N	SS2	T{
@@ -735,6 +741,7 @@ In addition to the ECMA-48 string terminator (ST),
 accepts a BEL to terminate an OSC string.
 These are a few of the OSC control sequences recognized by
 .BR xterm (1):
+.P
 .TS
 l l.
 ESC ] 0 ; \f[I]txt\f[] ST	T{
@@ -755,6 +762,7 @@ ESC ] 5 0 ; \f[I]fn\f[] ST	Set font to \f[I]fn\f[].
 .P
 It recognizes the following with slightly modified meaning
 (saving more state, behaving closer to VT100/VT220):
+.P
 .TS
 l l l.
 ESC 7  DECSC	Save cursor
@@ -762,6 +770,7 @@ ESC 8  DECRC	Restore cursor
 .TE
 .P
 It also recognizes
+.P
 .TS
 l l lx.
 ESC F		T{
