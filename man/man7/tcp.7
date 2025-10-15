@@ -72,10 +72,6 @@
 .\"	   commit 6e9250f59ef9efb932c84850cd221f22c2a03c4a
 .\"	   Author: Eric Dumazet <edumazet@google.com>
 .\"
-.\"	TCP_SAVE_SYN, TCP_SAVED_SYN (4.2)
-.\"	    commit cd8ae85299d54155702a56811b2e035e63064d3d
-.\"	    Author: Eric Dumazet <edumazet@google.com>
-.\"
 .TH tcp 7 (date) "Linux man-pages (unreleased)"
 .SH NAME
 tcp \- TCP protocol
@@ -1201,6 +1197,23 @@ Set the number of SYN retransmits that TCP should send before
 aborting the attempt to connect.
 It cannot exceed 255.
 This option should not be used in code intended to be portable.
+.TP
+.BR TCP_SAVE_SYN " (since Linux 4.3)"
+Saves incoming SYN packet contents of the listening socket
+until it is read with
+.B TCP_SAVED_SYN
+once.
+Could be set before or after the
+.BR listen (2)
+call.
+.TP
+.BR TCP_SAVED_SYN " (since Linux 4.3)"
+Reads SYN packet contents saved by
+.BR TCP_SAVE_SYN .
+The saved SYN headers are freed after the first call.
+The data returned in
+.B TCP_SAVED_SYN
+are network (IPv4/IPv6) and TCP headers.
 .TP
 .BR TCP_USER_TIMEOUT " (since Linux 2.6.37)"
 .\"	    commit dca43c75e7e545694a9dd6288553f55c53e2a3a3
