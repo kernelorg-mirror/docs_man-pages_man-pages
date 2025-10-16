@@ -245,6 +245,24 @@ was specified.
 and occurs on many other implementations.)
 .\" Kernel 2.5.21 changed things a little: during lock conversion
 .\" it is now the highest priority process that will get the lock -- mtk
+.P
+Release of a lock when a file descriptor is closed
+is not sequenced after all observable effects of
+.BR close (2).
+For example,
+if one process writes a file while holding an exclusive lock,
+then closes that file,
+and another process blocks placing a shared lock on that file
+to wait until it is closed,
+it may observe that a subsequent
+.BR execve (2)
+of that file fails with
+.BR ETXTBSY ,
+and
+.BR umount (2)
+of its underlying filesystem fails with
+.BR EBUSY ,
+as if the file were still open in the first process.
 .SH SEE ALSO
 .BR flock (1),
 .BR close (2),
