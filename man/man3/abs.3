@@ -6,7 +6,7 @@
 .TH abs 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
 abs, labs, llabs, imaxabs,
-uabs, ulabs, ullabs, uimaxabs
+uabs, ulabs, ullabs, umaxabs
 \-
 compute the absolute value of an integer
 .SH LIBRARY
@@ -27,7 +27,7 @@ Standard C library
 .B #include <inttypes.h>
 .P
 .BI "intmax_t imaxabs(intmax_t " j );
-.BI "uintmax_t uimaxabs(intmax_t " j );
+.BI "uintmax_t umaxabs(intmax_t " j );
 .fi
 .P
 .RS -4
@@ -43,7 +43,7 @@ Feature Test Macro Requirements for glibc (see
 .BR uabs (),
 .BR ulabs (),
 .BR ullabs (),
-.BR uimaxabs ():
+.BR umaxabs ():
 .nf
     _ISOC2Y_SOURCE
 .fi
@@ -74,7 +74,7 @@ T{
 .BR uabs (),
 .BR ulabs (),
 .BR \%ullabs (),
-.BR \%uimaxabs ()
+.BR \%umaxabs ()
 T}	Thread safety	MT-Safe
 .TE
 .SH STANDARDS
@@ -108,10 +108,12 @@ glibc 2.1.1.
 .BR ulabs ()
 .TQ
 .BR \%ullabs ()
-.TQ
-.BR \%uimaxabs ()
 C2y;
 glibc 2.42.
+.TP
+.BR \%umaxabs ()
+C2y;
+glibc 2.43.
 .SH BUGS
 For
 .BR abs (),
