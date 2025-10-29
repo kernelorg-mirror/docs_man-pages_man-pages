@@ -57,7 +57,7 @@ Description
             will be read by users and packagers.  It should include any
             information that is especially relevant for them.  Check old
             tags:
-            `git tag | grep 'man-pages-6' | tac | xargs git show --stat`
+            `git tag | grep -- -6 | sort -V | tac | xargs git show --stat`
 
             -  Tag:
 
