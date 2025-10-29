@@ -18,7 +18,7 @@ Standard C library
 Used for some file attributes (e.g., file mode).
 It is an integer type.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001.
 .SH NOTES

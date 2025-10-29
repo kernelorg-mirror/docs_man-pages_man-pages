@@ -85,10 +85,10 @@ and using its length modifier
 .SH STANDARDS
 .TP
 .I size_t
-C11, POSIX.1-2008.
+C11, POSIX.1-2024.
 .TP
 .I ssize_t
-POSIX.1-2008.
+POSIX.1-2024.
 .PD
 .SH HISTORY
 .TP

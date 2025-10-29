@@ -561,27 +561,24 @@ was not specified as zero.
 Too many segment locks open, lock table is full, or a remote locking
 protocol failed (e.g., locking over NFS).
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .\" .P
 .\" SVr4 documents additional EIO, ENOLINK and EOVERFLOW error conditions.
-.P
-.BR F_OFD_SETLK ,
-.BR F_OFD_SETLKW ,
-and
-.B F_OFD_GETLK
-are Linux-specific (and one must define
-.B _GNU_SOURCE
-to obtain their definitions),
-but work is being done to have them included in the next version of POSIX.1.
 .SH HISTORY
-SVr4, 4.3BSD, POSIX.1-2001.
-.P
-Only the operations
-.BR F_GETLK ,
-.BR F_SETLK ,
-and
+.TP
+.B F_GETLK
+.TQ
+.B F_SETLK
+.TQ
 .B F_SETLKW
-are specified in POSIX.1-2001.
+SVr4, 4.3BSD, POSIX.1-2001.
+.TP
+.B F_OFD_SETLK
+.TQ
+.B F_OFD_SETLKW
+.TQ
+.B F_OFD_GETLK
+POSIX.1-2024.
 .SH NOTES
 .SS File locking
 The original Linux

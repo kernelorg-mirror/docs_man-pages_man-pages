@@ -27,7 +27,7 @@ is not a character
 .IR "unsigned char" ).
 It is instead a sentinel value outside of the valid range for valid characters.
 .SH STANDARDS
-C11, POSIX.1-2008.
+C11, POSIX.1-2024.
 .SH HISTORY
 C89, POSIX.1-2001.
 .SH CAVEATS

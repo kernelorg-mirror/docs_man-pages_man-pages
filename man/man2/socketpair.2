@@ -79,26 +79,21 @@ and
 .\" commit: 70b03759e9ecfae400605fa34f3d7154cccbbba3
 (since Linux 4.12).
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001, 4.4BSD.
+POSIX.1-2001, 4.2BSD.
 .P
-.BR socketpair ()
-first appeared in 4.2BSD.
 It is generally portable to/from
 non-BSD systems supporting clones of the BSD socket layer (including
 System\ V variants).
-.P
-Since Linux 2.6.27,
-.BR socketpair ()
-supports the
-.B SOCK_NONBLOCK
-and
+.TP
 .B SOCK_CLOEXEC
-flags in the
-.I type
-argument, as described in
-.BR socket (2).
+.TQ
+.B SOCK_NONBLOCK
+POSIX.1-2024;
+Linux 2.6.27.
+(See
+.BR socket (2).)
 .SH SEE ALSO
 .BR pipe (2),
 .BR read (2),

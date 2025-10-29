@@ -113,7 +113,7 @@ see
 .SS sigval
 Data passed with a signal.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001.
 .P

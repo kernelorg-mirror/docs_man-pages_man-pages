@@ -36,7 +36,7 @@ and returns a pointer to the corresponding
 .I value
 string.
 .P
-The GNU-specific
+The
 .BR secure_getenv ()
 function is just like
 .BR getenv ()
@@ -89,14 +89,14 @@ T}	Thread safety	MT-Safe env
 C11, POSIX.1-2008.
 .TP
 .BR secure_getenv ()
-GNU.
+POSIX.1-2024.
 .SH HISTORY
 .TP
 .BR getenv ()
 POSIX.1-2001, C89, C99, SVr4, 4.3BSD.
 .TP
 .BR secure_getenv ()
-glibc 2.17.
+POSIX.1-2024, glibc 2.17.
 .SH NOTES
 The strings in the environment list are of the form
 .IR name=value .

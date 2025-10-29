@@ -271,8 +271,12 @@ The glibc wrapper invokes any fork handlers that have been
 established using
 .BR pthread_atfork (3).
 .\" and does some magic to ensure that getpid(2) returns the right value.
+.SS Async-signal safety
+.BR _Fork (3)
+is an async-signal safe variant of
+.BR fork (2).
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001, SVr4, 4.3BSD.
 .SH NOTES
@@ -333,6 +337,7 @@ main(void)
 .BR vfork (2),
 .BR wait (2),
 .BR daemon (3),
+.BR _Fork (3),
 .BR pthread_atfork (3),
 .BR capabilities (7),
 .BR credentials (7)

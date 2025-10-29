@@ -22,7 +22,7 @@ Describes the initial expiration of a timer,
 and its interval,
 in seconds and nanoseconds.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001.
 .SH SEE ALSO

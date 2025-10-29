@@ -184,19 +184,14 @@ This macro should be employed only if
 .B WIFSIGNALED
 returned true.
 .TP
-.BI WCOREDUMP( wstatus )
+.BI WCOREDUMP( wstatus ) "  \f[R]// POSIX.1-2024\f[]"
 returns true if the child produced a core dump (see
 .BR core (5)).
 This macro should be employed only if
 .B WIFSIGNALED
 returned true.
-.IP
-This macro is not specified in POSIX.1-2001 and is not available on
-some UNIX implementations (e.g., AIX, SunOS).
-Therefore, enclose its use inside
-.IR \%#ifdef\~WCOREDUMP .
 .TP
-.BI WIFSTOPPED( wstatus )
+.BI WIFSTOPPED( wstatus ) "  \f[R]// POSIX.1-2024\f[]"
 returns true if the child process was stopped by delivery of a signal;
 this is possible only if the call was done using
 .B WUNTRACED
@@ -476,7 +471,7 @@ See
 .BR getrusage (2)
 for details.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 SVr4, 4.3BSD, POSIX.1-2001.
 .SH NOTES

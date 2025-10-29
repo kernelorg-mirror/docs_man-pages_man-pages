@@ -25,7 +25,8 @@ Standard C library
 .BR "    int         tm_yday;" \
 "   /* Day of the year  [" 0 ", " 365 "] (Jan/01 = " 0 ") */"
 .BR "    int         tm_isdst;" "  /* Daylight savings flag */"
-.P
+\&
+    /* Since POSIX.1-2024:  */
 .BR "    long        tm_gmtoff;" " /* Seconds East of UTC */"
 .BR "    const char *tm_zone;" "   /* Timezone abbreviation */"
 .B };

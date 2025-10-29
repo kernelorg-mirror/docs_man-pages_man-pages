@@ -367,7 +367,7 @@ On some architectures, an implementation of
 is provided in the
 .BR vdso (7).
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001, SUSv2.
 Linux 2.6.
@@ -391,6 +391,10 @@ are available.
 (See also
 .BR sysconf (3).)
 .\"
+.P
+POSIX.1-2024 made
+.B CLOCK_MONOTONIC
+mandatory.
 .SS Historical note for SMP systems
 Before Linux added kernel support for
 .B CLOCK_PROCESS_CPUTIME_ID

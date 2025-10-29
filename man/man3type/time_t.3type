@@ -24,11 +24,8 @@ Standard C library
 .I time_t
 Used for time in seconds.
 According to POSIX,
-it is an integer type.
-.\" In POSIX.1-2001, the type was specified as being either an integer
-.\" type or a real-floating type.  However, existing implementations
-.\" used an integer type, and POSIX.1-2008 tightened the specification
-.\" to reflect this.
+it is an integer type
+of at least 64 bits.
 .TP
 .I suseconds_t
 Used for time in microseconds.
@@ -46,33 +43,40 @@ capable of storing values at least in the range
 .SH STANDARDS
 .TP
 .I time_t
-C11, POSIX.1-2008.
+C11, POSIX.1-2024.
 .TP
 .I suseconds_t
-.TQ
+POSIX.1-2024.
+.TP
 .I useconds_t
-POSIX.1-2008.
-.PD
+None.
 .SH HISTORY
 .TP
 .I time_t
 C89, POSIX.1-2001.
 .TP
 .I suseconds_t
-.TQ
+POSIX.1-2001.
+.TP
 .I useconds_t
 POSIX.1-2001.
-.P
+Removed in POSIX.1-2008.
+.SS Header files
 .I <sched.h>
 defines
 .I time_t
 since POSIX.1-2008.
+.SS time_t
+In POSIX.1-2001,
+.I time_t
+was specified as being either an integer type or a real-floating type.
+However,
+existing implementations used an integer type,
+and POSIX.1-2008 tightened the specification to reflect this.
 .P
-POSIX.1-2001 defined
-.I useconds_t
-in
-.I <unistd.h>
-too.
+POSIX.1-2024 required that the width of
+.I time_t
+is at least 64 bits.
 .SH NOTES
 On some architectures,
 the width of
@@ -100,6 +104,10 @@ The following headers also provide
 .I <sys/select.h>
 and
 .IR <sys/time.h> .
+.P
+The following headers also provided
+.IR useconds_t :
+.IR <unistd.h> .
 .SH SEE ALSO
 .BR stime (2),
 .BR time (2),

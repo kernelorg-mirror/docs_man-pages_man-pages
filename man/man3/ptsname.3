@@ -110,7 +110,7 @@ T}	Thread safety	MT-Safe
 .SH VERSIONS
 A version of
 .BR ptsname_r ()
-is documented on Tru64 and HP-UX,
+is documented on Tru64, HP-UX, and FreeBSD,
 but on those implementations,
 \-1 is returned on error, with
 .I errno
@@ -120,13 +120,9 @@ Avoid using this function in portable programs.
 .TP
 .BR ptsname ():
 POSIX.1-2008.
-.P
-.BR ptsname_r ()
-is a Linux extension, that is proposed for inclusion
-.\" FIXME . for later review when Issue 8 is one day released
-.\" http://austingroupbugs.net/tag_view_page.php?tag_id=8
-.\" http://austingroupbugs.net/view.php?id=508
-in the next major revision of POSIX.1 (Issue 8).
+.TP
+.BR ptsname_r ():
+POSIX.1-2024.
 .SH HISTORY
 .TP
 .BR ptsname ():
@@ -136,6 +132,9 @@ glibc 2.1.
 .BR ptsname ()
 is part of the UNIX 98 pseudoterminal support (see
 .BR pts (4)).
+.TP
+.BR ptsname_r ():
+GNU.
 .SH SEE ALSO
 .BR grantpt (3),
 .BR posix_openpt (3),

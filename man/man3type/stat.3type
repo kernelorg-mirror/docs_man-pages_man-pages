@@ -115,7 +115,7 @@ This is the file's last status change timestamp
 For further information on the above fields, see
 .BR inode (7).
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001.
 .P

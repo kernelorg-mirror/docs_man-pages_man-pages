@@ -203,17 +203,15 @@ on a terminal device fails with the error
 .\" Other systems return the number of written characters,
 .\" using SEEK_SET to set the counter.  (Of written characters.)
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2001, SVr4, 4.3BSD.
-.P
+.TP
 .B SEEK_DATA
-and
+.TQ
 .B SEEK_HOLE
-are nonstandard extensions also present in Solaris,
-FreeBSD, and DragonFly BSD;
-they are proposed for inclusion in the next POSIX revision (Issue 8).
-.\" FIXME . Review http://austingroupbugs.net/view.php?id=415 in the future
+POSIX.1-2024;
+Solaris, FreeBSD, DragonFly BSD.
 .SH NOTES
 See
 .BR open (2)

@@ -427,12 +427,12 @@ is not an allowable signal number.
 .B F_GETOWN
 .TQ
 .B F_SETOWN
-POSIX.1-2008.
-.TP
+.TQ
 .B F_GETOWN_EX
 .TQ
 .B F_SETOWN_EX
-.TQ
+POSIX.1-2024.
+.TP
 .B F_GETSIG
 .TQ
 .B F_SETSIG
@@ -459,6 +459,7 @@ with the value 200809L or greater.)
 .B F_GETOWN_EX
 .TQ
 .B F_GETOWN_EX
+POSIX.1-2024.
 Linux 2.6.32.
 .TP
 .B F_GETSIG

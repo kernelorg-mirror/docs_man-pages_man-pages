@@ -179,10 +179,10 @@ the timer is disabled.
 .IR "Don't use this Linux misfeature" :
 it is nonportable and unnecessary.
 .SH STANDARDS
-POSIX.1-2008.
+None.
 .SH HISTORY
 POSIX.1-2001, SVr4, 4.4BSD (this call first appeared in 4.2BSD).
-POSIX.1-2008 marks
+POSIX.1-2008 marked
 .BR getitimer ()
 and
 .BR setitimer ()
@@ -190,6 +190,7 @@ obsolete, recommending the use of the POSIX timers API
 .RB ( timer_gettime (2),
 .BR timer_settime (2),
 etc.) instead.
+POSIX.1-2024 removed them.
 .SH NOTES
 Timers will never expire before the requested time,
 but may expire some (short) time afterward, which depends

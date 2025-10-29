@@ -20,7 +20,7 @@ Standard C library
 .I locale_t
 is a type used for storing a locale object.
 .SH STANDARDS
-POSIX.1-2008.
+POSIX.1-2024.
 .SH HISTORY
 POSIX.1-2008.
 .SH NOTES
