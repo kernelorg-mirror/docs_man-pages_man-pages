@@ -248,9 +248,11 @@ else
 fi \
 | perl -p <(
 	# shellcheck disable=SC2312  # We don't care about failures here.
-	test "$r" = 'yes' \
-	&& printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/' \
-	|| printf '%s\n' 's///';
+	if test "$r" = 'yes'; then
+		printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/';
+	else
+		printf '%s\n' 's///';
+	fi;
 ) \
 | if test -n "$l"; then
 	sort \
