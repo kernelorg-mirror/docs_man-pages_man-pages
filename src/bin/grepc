@@ -64,7 +64,7 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 	n)	n='-n';		;;&
 	r)	r='yes';	;;&
 	t)
-		if [ -z "$x" ]; then
+		if test -z "$x"; then
 			x='c';
 		fi;
 
@@ -116,10 +116,10 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 		esac;
 		;;
 	x)
-		if [ "$t" = 'yes' ]; then
+		if test "$t" = 'yes'; then
 			grepc_err "-$opt: This option must come before '-t'.";
 		fi;
-		if [ -n "$x" ]; then
+		if test -n "$x"; then
 			grepc_err "-$opt: This option cannot be repeated.";
 		fi;
 
@@ -142,11 +142,11 @@ test $# -lt 1 && grepc_err "Missing identifier.";
 identifier=$1;
 shift;
 
-if [ -z "$x" ]; then
+if test -z "$x"; then
 	x='c';
 fi;
-if [ "$t" = 'no' ]; then
-	if [ "$x" = 'c' ]; then
+if test "$t" = 'no'; then
+	if test "$x" = 'c'; then
 		t_e='yes';
 		t_fp='yes';
 		t_fd='yes';
@@ -161,7 +161,7 @@ if [ "$t" = 'no' ]; then
 		t_t_td_simple='yes';
 		t_t_td_braced='yes';
 		t_t_td_func='yes';
-	elif [ "$x" = 'mk' ]; then
+	elif test "$x" = 'mk'; then
 		t_v='yes';
 	fi;
 fi;
@@ -199,7 +199,7 @@ patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 
 
 (
-	if [ "$x" = 'c' ]; then
+	if test "$x" = 'c'; then
 		test $t_e = yes			&& grepc_c_e "$identifier";
 		test $t_fp = yes		&& grepc_c_fp "$identifier";
 		test $t_fd = yes		&& grepc_c_fd "$identifier";
@@ -221,7 +221,7 @@ patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 		test $t_ut_su = yes		&& grepc_c_ut_su "$identifier";
 		test $t_ut_td_simple = yes	&& grepc_c_ut_td_simple "$identifier";
 		test $t_ut_td_su = yes		&& grepc_c_ut_td_su "$identifier";
-	elif [ "$x" = 'mk' ]; then
+	elif test "$x" = 'mk'; then
 		test $t_r = yes			&& grepc_mk_r "$identifier";
 		test $t_v = yes			&& grepc_mk_v "$identifier";
 	fi;
@@ -248,7 +248,7 @@ fi \
 	&& printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/' \
 	|| printf '%s\n' 's///';
 ) \
-| if [ -n "$l" ]; then
+| if test -n "$l"; then
 	sort \
 	| uniq;
 else
