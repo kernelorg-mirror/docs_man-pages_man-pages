@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "BPF-HELPERS" "7" "2024-10-10" "Linux v6.14"
+.TH "BPF-HELPERS" "7" "2025-06-26" "Linux v6.17"
 .SH NAME
 BPF-HELPERS \- list of eBPF helper functions
 .\" Copyright (C) All BPF authors and contributors from 2014 to present.
@@ -263,10 +263,17 @@ The SMP id of the processor running the program.
 .TP
 .B Description
 Store \fIlen\fP bytes from address \fIfrom\fP into the packet
-associated to \fIskb\fP, at \fIoffset\fP\&. \fIflags\fP are a combination of
-\fBBPF_F_RECOMPUTE_CSUM\fP (automatically recompute the
-checksum for the packet after storing the bytes) and
-\fBBPF_F_INVALIDATE_HASH\fP (set \fIskb\fP\fB\->hash\fP, \fIskb\fP\fB\->swhash\fP and \fIskb\fP\fB\->l4hash\fP to 0).
+associated to \fIskb\fP, at \fIoffset\fP\&. The \fIflags\fP are a combination
+of the following values:
+.INDENT 7.0
+.TP
+.B \fBBPF_F_RECOMPUTE_CSUM\fP
+Automatically update \fIskb\fP\fB\->csum\fP after storing the
+bytes.
+.TP
+.B \fBBPF_F_INVALIDATE_HASH\fP
+Set \fIskb\fP\fB\->hash\fP, \fIskb\fP\fB\->swhash\fP and \fIskb\fP\fB\->l4hash\fP to 0.
+.UNINDENT
 .sp
 A call to this helper is susceptible to change the underlying
 packet buffer. Therefore, at load time, all checks on pointers
@@ -326,7 +333,8 @@ flags. With \fBBPF_F_MARK_MANGLED_0\fP, a null checksum is left
 untouched (unless \fBBPF_F_MARK_ENFORCE\fP is added as well), and
 for updates resulting in a null checksum the value is set to
 \fBCSUM_MANGLED_0\fP instead. Flag \fBBPF_F_PSEUDO_HDR\fP indicates
-the checksum is to be computed against a pseudo\-header.
+that the modified header field is part of the pseudo\-header.
+Flag \fBBPF_F_IPV6\fP should be set for IPv6 packets.
 .sp
 This helper works in combination with \fBbpf_csum_diff\fP(),
 which does not update the checksum in\-place, but offers more
@@ -740,7 +748,7 @@ one or for all CPUs) and to store the file descriptor into the
 into it. An example is available in file
 \fIsamples/bpf/trace_output_user.c\fP in the Linux kernel source
 tree (the eBPF program counterpart is in
-\fIsamples/bpf/trace_output_kern.c\fP).
+\fIsamples/bpf/trace_output.bpf.c\fP).
 .sp
 \fBbpf_perf_event_output\fP() achieves better performance
 than \fBbpf_trace_printk\fP() for sharing data with user
@@ -3996,6 +4004,9 @@ This helper is somewhat similar to \fBbpf_redirect\fP(), except
 that the redirection happens to the \fIifindex\fP\(aq peer device and
 the netns switch takes place from ingress to ingress without
 going through the CPU\(aqs backlog queue.
+.sp
+\fIskb\fP\fB\->mark\fP and \fIskb\fP\fB\->tstamp\fP are not cleared during
+the netns switch.
 .sp
 The \fIflags\fP argument is reserved and must be 0. The helper is
 currently only supported for tc BPF program types at the
