@@ -1,0 +1,204 @@
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH grepc 1 (date) "Linux man-pages (unreleased)"
+.SH NAME
+grepc \- find C declarations, definitions, and uses in source code
+.SH SYNOPSIS
+.B grepc
+.RI [ option\~ .\|.\|.\&]
+.I pattern
+.RI [ file\~ .\|.\|.\&]
+.SH DESCRIPTION
+.BR grepc (1)
+searches for C declarations, definitions, and/or uses of
+.I pattern
+in each
+.IR file .
+.P
+.I pattern
+is a PCRE pattern.
+It normally represents a C identifier,
+and word boundaries are implicitly added to it in most cases.
+.P
+If no
+.I file
+is given,
+this program reads standard input.
+Otherwise,
+it reads all files specified,
+and searches under any specified directories, recursively,
+without following symbolic links.
+.SS Types of code
+This program can search for several types of code.
+The following arguments can be passed to the
+.B \-t
+option
+to select the types of code that will be searched.
+.TP
+.B e
+enum constant definitions.
+.TP
+.B f
+Function prototypes and definitions.
+This can be further subdivided into:
+.RS
+.TP
+.B fp
+Function prototypes.
+.TP
+.B fd
+Function definitions.
+.TP
+.B fl
+Linux kernel system calls.
+This can be further subdivided into:
+.RS
+.TP
+.B flp
+Linux kernel system call prototypes.
+.TP
+.B fld
+Linux kernel system call definitions.
+.RE
+.TP
+.B fg
+Glibc internal names of libc functions.
+This can be further subdivided into:
+.RS
+.TP
+.B fgp
+Glibc prototypes.
+.TP
+.B fgd
+Glibc definitions.
+.RE
+.RE
+.TP
+.B m
+Macro definitions.
+.RS
+.TP
+.B mf
+Function-like macro definitions.
+.TP
+.B mo
+Other macro definitions.
+.RE
+.TP
+.B t
+Type definitions.
+.TP
+.B u
+Uses.
+Searches occurences of
+.I pattern
+within enums,
+function bodies,
+macro replacements,
+and type definitions,
+and prints the whole enum, function, macro, and/or type definitions.
+In this case there are no word boundaries set by default,
+so if
+.I pattern
+is
+.BR open ,
+.B fopen
+will also be found;
+that's to allow searching for patterns containing any sequence of characters.
+.IP
+This can be further subdivided into:
+.RS
+.TP
+.B ue
+Uses within enum definitions (except as an enum constant).
+.TP
+.B uf
+Uses within function definition bodies.
+.TP
+.B um
+Uses within macro replacements.
+.TP
+.B ut
+Uses within type definitions
+(except enum; that is: typedef, struct, or union).
+.RE
+.SH OPTIONS
+.TP
+.BI \-A \~n
+Print
+.I n
+lines of trailing context after a match.
+.TP
+.BI \-B \~n
+Print
+.I n
+lines of leading context before a match.
+.TP
+.BI \-C \~n
+Print
+.I n
+lines of context surrounding a match.
+.TP
+.B \-c
+Do not print matches,
+and instead print a count of them.
+.TP
+.B \-h
+Suppress the prefixing of file names on output.
+.TP
+.B \-i
+Ignore case distinctions in
+.IR pattern .
+.TP
+.B \-l
+Suppress normal output;
+instead print the name of each input file
+from which output would normally have been printed.
+Each file is only printed once.
+.TP
+.B \-m \~n
+Stop processing after finding
+.I n
+matches.
+.TP
+.B \-n
+Prefix each line of output with the
+1-based line number within its input file.
+.TP
+.B \-r
+.RI (colo r )
+Surround the matched strings
+with escape sequences to display them in color on the terminal.
+.TP
+.BI \-t " type"
+Restrict the search to a specific
+.I type
+of code (see Types of code under DESCRIPTION).
+This option can be passed multiple times
+to search for various types of code.
+Default:
+.BR "e f m t" .
+.SH CAVEATS
+.SS Crashes
+In some cases,
+internal calls to
+.BR pcre2grep (1)
+may fail after consuming too much resources.
+To solve that,
+restrict the "types of code" of your search.
+.SS Seekable files
+Files specified in the command line
+must be seekable and able to be opened twice.
+If you need to read a non-seekable file,
+redirect it to the standard input.
+.SH EXAMPLES
+.EX
+.RB alx@devuan:/usr/lib/gcc$ " grepc alignof ." ;
+\&./x86_64\-linux\-gnu/15/include/stdalign.h:33:#define alignof _Alignof
+.EE
+.SH SEE ALSO
+.BR pcre2grep (1),
+.BR pcresyntax (3),
+.BR pcrepattern (3)
