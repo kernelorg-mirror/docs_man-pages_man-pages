@@ -3,7 +3,8 @@
 # Copyright, the authors of the Linux man-pages project
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-set -uo pipefail;
+set -Eeuo pipefail;
+trap 'exit 2;' ERR;
 
 
 # Defaults:
@@ -47,7 +48,7 @@ x=''
 grepc_err()
 {
 	>&2 printf '%s\n' "$(basename "$0"): error: $*";
-	exit 1;
+	exit 2;
 }
 
 
@@ -135,7 +136,7 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 		esac;
 		;;
 	\? | *)
-		exit 1;
+		exit 2;
 		;;
 	esac;
 done;
@@ -238,16 +239,18 @@ opts=($A $B $C $c $h $i $l -M $m $n);
 
 
 if test -z "$*"; then
-	pcre2grep "${opts[@]}" -f "$patterns";
+	pcre2grep "${opts[@]}" -f "$patterns" || true;
 else
 	find "$@" -type f -print0 \
 	| if test -z "$c"; then
 		# shellcheck disable=SC2248  # $i may be -i or nothing.
-		xargs -0 grep -lZPI $i -- "$identifier";
+		xargs -0 grep -lZPI $i -- "$identifier" || true;
 	else
 		cat;
 	fi \
-	| xargs -0 pcre2grep "${opts[@]}" -f "$patterns";
+	| {
+		xargs -0 pcre2grep "${opts[@]}" -f "$patterns" || true;
+	};
 fi \
 | if test "$r" = 'yes'; then
 	perl -p -e 's/('"$identifier"')/\033[32m\1\033[0m/';
