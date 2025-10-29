@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Copyright, the authors of the Linux man-pages project
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 set -uo pipefail;
 
