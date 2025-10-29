@@ -52,6 +52,7 @@ grepc_err()
 
 
 while getopts "A:B:C:chilm:nrt:x:" opt; do
+	# shellcheck disable=SC2249  # getopts(1) uses '?' for an error.
 	case "$opt" in
 	A)	A="-A$OPTARG";	;;&
 	B)	B="-B$OPTARG";	;;&
@@ -68,6 +69,7 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 			x='c';
 		fi;
 
+		# shellcheck disable=SC2249  # Already validated under x).
 		case "$x" in
 		c)
 			case "$OPTARG" in
@@ -237,6 +239,7 @@ if test -z "$*"; then
 else
 	find "$@" -type f -print0 \
 	| if test -z "$c"; then
+		# shellcheck disable=SC2248  # $i may be -i or nothing.
 		xargs -0 grep -lZPI $i -- "$identifier";
 	else
 		cat;
@@ -244,6 +247,7 @@ else
 	| xargs -0 pcre2grep "${opts[@]}" -f "$patterns";
 fi \
 | perl -p <(
+	# shellcheck disable=SC2312  # We don't care about failures here.
 	test "$r" = 'yes' \
 	&& printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/' \
 	|| printf '%s\n' 's///';
