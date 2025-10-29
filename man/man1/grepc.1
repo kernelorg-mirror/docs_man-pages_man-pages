@@ -195,21 +195,8 @@ If you need to read a non-seekable file,
 redirect it to the standard input.
 .SH EXAMPLES
 .EX
-.RB \(ti/src/nginx/unit$ " grepc \-n nxt_sprintf ." ;
-\&./src/nxt_sprintf.h:15:NXT_EXPORT u_char *nxt_cdecl nxt_sprintf(u_char *buf, u_char *end,
-    const char *fmt, ...);
-\&./src/nxt_sprintf.c:58:u_char * nxt_cdecl
-nxt_sprintf(u_char *buf, u_char *end, const char *fmt, ...)
-{
-    u_char   *p;
-    va_list  args;
-\&
-    va_start(args, fmt);
-    p = nxt_vsprintf(buf, end, fmt, args);
-    va_end(args);
-\&
-    return p;
-}
+.RB alx@devuan:/usr/lib/gcc$ " grepc alignof ." ;
+\&./x86_64\-linux\-gnu/15/include/stdalign.h:33:#define alignof _Alignof
 .EE
 .SH SEE ALSO
 .BR pcre2grep (1),
