@@ -1,4 +1,4 @@
-.TH GREPC 1 2022-05-09 grepc "User commands"
+.TH grepc 1 (date) "Linux man-pages (unreleased)"
 .SH NAME
 grepc \- find C declarations, definitions, and uses in source code
 .SH SYNOPSIS
@@ -7,17 +7,17 @@ grepc \- find C declarations, definitions, and uses in source code
 .I pattern
 .RI [ file\~ .\|.\|.\&]
 .SH DESCRIPTION
-.MR grepc 1
+.BR grepc (1)
 searches for C declarations, definitions, and/or uses of
 .I pattern
 in each
 .IR file .
-.PP
+.P
 .I pattern
 is a PCRE pattern.
 It normally represents a C identifier,
 and word boundaries are implicitly added to it in most cases.
-.PP
+.P
 If no
 .I file
 is given,
@@ -180,7 +180,7 @@ Default:
 .SS Crashes
 In some cases,
 internal calls to
-.MR pcre2grep 1
+.BR pcre2grep (1)
 may fail after consuming too much resources.
 To solve that,
 restrict the "types of code" of your search.
@@ -191,7 +191,7 @@ If you need to read a non-seekable file,
 redirect it to the standard input.
 .SH EXAMPLES
 .EX
-.RB \(ti/src/nginx/unit$ " grepc \-n nxt_sprintf .;"
+.RB \(ti/src/nginx/unit$ " grepc \-n nxt_sprintf ." ;
 \&./src/nxt_sprintf.h:15:NXT_EXPORT u_char *nxt_cdecl nxt_sprintf(u_char *buf, u_char *end,
     const char *fmt, ...);
 \&./src/nxt_sprintf.c:58:u_char * nxt_cdecl
@@ -199,24 +199,15 @@ nxt_sprintf(u_char *buf, u_char *end, const char *fmt, ...)
 {
     u_char   *p;
     va_list  args;
-
+\&
     va_start(args, fmt);
     p = nxt_vsprintf(buf, end, fmt, args);
     va_end(args);
-
+\&
     return p;
 }
 .EE
-.SH AUTHORS
-Originally written by
-.MT alx.manpages@gmail.com
-Alejandro Colomar
-.ME .
 .SH SEE ALSO
-.MR pcre2grep 1 ,
-.MR pcresyntax 3 ,
-.MR pcrepattern 3
-.PP
-Homepage:
-.UR http://www.alejandro-colomar.es/\:src/\:alx/\:alx/\:grepc.git
-.UE
+.BR pcre2grep (1),
+.BR pcresyntax (3),
+.BR pcrepattern (3)
