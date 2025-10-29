@@ -111,11 +111,14 @@ live in their block scope and don't have an allocator-like interface,
 making them unfit for implementing functionality like
 .BR strdupa (3).
 .SH BUGS
-Due to the nature of the stack, it is impossible to check if the allocation
-would overflow the space available, and, hence, neither is indicating an error.
-(However, the program is likely to receive a
+.BR alloca ()
+does not query the system for available stack memory,
+and does not fall back to using heap if stack storage is unavailable.
+It therefore cannot indicate an error if the allocation fails.
+If the allocation fails,
+the program is likely to receive a
 .B SIGSEGV
-signal if it attempts to access unavailable space.)
+signal.
 .P
 On many systems
 .BR alloca ()
