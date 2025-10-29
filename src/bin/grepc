@@ -68,7 +68,6 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 			x='c';
 		fi;
 
-		# shellcheck disable=SC2249  # Already validated under x).
 		case "$x" in
 		c)
 			case "$OPTARG" in
@@ -113,6 +112,9 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 					grepc_err "-$opt: $OPTARG: Unknown argument.";
 					;;
 			esac;
+			;;
+		*)  # Unreachable; already validated under x).
+			exit 2;
 			;;
 		esac;
 		;;
