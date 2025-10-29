@@ -202,30 +202,30 @@ patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 
 (
 	if test "$x" = 'c'; then
-		test $t_e = yes			&& grepc_c_e "$identifier";
-		test $t_fp = yes		&& grepc_c_fp "$identifier";
-		test $t_fd = yes		&& grepc_c_fd "$identifier";
-		test $t_flp = yes		&& grepc_c_flp "$identifier";
-		test $t_fld = yes		&& grepc_c_fld "$identifier";
-		test $t_fgp = yes		&& grepc_c_fgp "$identifier";
-		test $t_fgd_libm = yes		&& grepc_c_fgd_libm "$identifier";
-		test $t_fgd_libio = yes		&& grepc_c_fgd_libio "$identifier";
-		test $t_mf = yes		&& grepc_c_mf "$identifier";
-		test $t_mo = yes		&& grepc_c_mo "$identifier";
-		test $t_t_braced = yes		&& grepc_c_t_braced "$identifier";
-		test $t_t_td_simple = yes	&& grepc_c_t_td_simple "$identifier";
-		test $t_t_td_braced = yes	&& grepc_c_t_td_braced "$identifier";
-		test $t_t_td_func = yes		&& grepc_c_t_td_func "$identifier";
-		test $t_ue = yes		&& grepc_c_ue "$identifier";
-		test $t_uf_def = yes		&& grepc_c_uf_def "$identifier";
-		test $t_uf_linux_def = yes	&& grepc_c_uf_linux_def "$identifier";
-		test $t_um = yes		&& grepc_c_um "$identifier";
-		test $t_ut_su = yes		&& grepc_c_ut_su "$identifier";
-		test $t_ut_td_simple = yes	&& grepc_c_ut_td_simple "$identifier";
-		test $t_ut_td_su = yes		&& grepc_c_ut_td_su "$identifier";
+		test "$t_e" = yes		&& grepc_c_e "$identifier";
+		test "$t_fp" = yes		&& grepc_c_fp "$identifier";
+		test "$t_fd" = yes		&& grepc_c_fd "$identifier";
+		test "$t_flp" = yes		&& grepc_c_flp "$identifier";
+		test "$t_fld" = yes		&& grepc_c_fld "$identifier";
+		test "$t_fgp" = yes		&& grepc_c_fgp "$identifier";
+		test "$t_fgd_libm" = yes	&& grepc_c_fgd_libm "$identifier";
+		test "$t_fgd_libio" = yes	&& grepc_c_fgd_libio "$identifier";
+		test "$t_mf" = yes		&& grepc_c_mf "$identifier";
+		test "$t_mo" = yes		&& grepc_c_mo "$identifier";
+		test "$t_t_braced" = yes	&& grepc_c_t_braced "$identifier";
+		test "$t_t_td_simple" = yes	&& grepc_c_t_td_simple "$identifier";
+		test "$t_t_td_braced" = yes	&& grepc_c_t_td_braced "$identifier";
+		test "$t_t_td_func" = yes	&& grepc_c_t_td_func "$identifier";
+		test "$t_ue" = yes		&& grepc_c_ue "$identifier";
+		test "$t_uf_def" = yes		&& grepc_c_uf_def "$identifier";
+		test "$t_uf_linux_def" = yes	&& grepc_c_uf_linux_def "$identifier";
+		test "$t_um" = yes		&& grepc_c_um "$identifier";
+		test "$t_ut_su" = yes		&& grepc_c_ut_su "$identifier";
+		test "$t_ut_td_simple" = yes	&& grepc_c_ut_td_simple "$identifier";
+		test "$t_ut_td_su" = yes	&& grepc_c_ut_td_su "$identifier";
 	elif test "$x" = 'mk'; then
-		test $t_r = yes			&& grepc_mk_r "$identifier";
-		test $t_v = yes			&& grepc_mk_v "$identifier";
+		test "$t_r" = yes		&& grepc_mk_r "$identifier";
+		test "$t_v" = yes		&& grepc_mk_v "$identifier";
 	fi;
 ) >"$patterns";
 
