@@ -52,7 +52,6 @@ grepc_err()
 
 
 while getopts "A:B:C:chilm:nrt:x:" opt; do
-	# shellcheck disable=SC2249  # getopts(1) uses '?' for an error.
 	case "$opt" in
 	A)	A="-A$OPTARG";	;;
 	B)	B="-B$OPTARG";	;;
@@ -133,7 +132,7 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 			;;
 		esac;
 		;;
-	\?)
+	\? | *)
 		exit 1;
 		;;
 	esac;
