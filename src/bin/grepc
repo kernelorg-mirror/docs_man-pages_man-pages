@@ -234,23 +234,20 @@ patterns="$(mktemp -t grepc.patterns.XXXXXX)";
 ) >"$patterns";
 
 
-# shellcheck disable=SC2206  # We want only non-empty variables in the array.
-opts=($A $B $C $c $h $i $l -M $m $n);
+export opts="$A $B $C $c $h $i $l -M $m $n";
 
 
 if test -z "$*"; then
-	pcre2grep "${opts[@]}" -f "$patterns" || true;
+	# shellcheck disable=SC2086  # $opts may contain zero or more flags
+	pcre2grep $opts -f "$patterns" || test $? -eq 1;
 else
 	find "$@" -type f -print0 \
 	| if test -z "$c"; then
-		# shellcheck disable=SC2248  # $i may be -i or nothing.
-		xargs -0 grep -lZPI $i -- "$identifier" || true;
+		xargs -0 sh -c 'grep -lZPI $i -e "$0" -- "$@" || test $? -eq 1;' "$identifier";
 	else
 		cat;
 	fi \
-	| {
-		xargs -0 pcre2grep "${opts[@]}" -f "$patterns" || true;
-	};
+	| xargs -0 sh -c 'pcre2grep $opts -f "$0" -- "$@" || test $? -eq 1;' "$patterns";
 fi \
 | if test "$r" = 'yes'; then
 	perl -p -e 's/('"$identifier"')/\033[32m\1\033[0m/';
