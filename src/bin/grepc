@@ -247,14 +247,11 @@ else
 	fi \
 	| xargs -0 pcre2grep "${opts[@]}" -f "$patterns";
 fi \
-| perl -p <(
-	# shellcheck disable=SC2312  # We don't care about failures here.
-	if test "$r" = 'yes'; then
-		printf '%s\n' 's/('"$identifier"')/\033[32m\1\033[0m/';
-	else
-		printf '%s\n' 's///';
-	fi;
-) \
+| if test "$r" = 'yes'; then
+	perl -p -e 's/('"$identifier"')/\033[32m\1\033[0m/';
+else
+	cat;
+fi \
 | if test -n "$l"; then
 	sort \
 	| uniq;
