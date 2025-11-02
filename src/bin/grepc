@@ -145,7 +145,7 @@ shift $((OPTIND-1));
 if test $# -lt 1; then
 	grepc_err "Missing identifier.";
 fi;
-identifier=$1;
+identifier="$1";
 shift;
 
 if test -z "$x"; then
