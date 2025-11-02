@@ -202,10 +202,15 @@ that was also backported to earlier stable kernels.
 .SH STANDARDS
 Linux, GNU.
 .SH HISTORY
-Linux 4.5,
-but glibc 2.27 provides a user-space
-emulation when it is not available.
-.\" https://sourceware.org/git/?p=glibc.git;a=commit;f=posix/unistd.h;h=bad7a0c81f501fbbcc79af9eaa4b8254441c4a1f
+Linux 4.5.
+.P
+.\" glibc.git bad7a0c81f50 (2017-12-22; "copy_file_range: New function to copy file data")
+Before glibc 2.30, starting with glibc 2.27, the glibc wrapper function
+provided a user-space fallback implementation when the kernel did not
+implement this system call.
+.\" glibc.git 5a659ccc0ec2 (2019-06-28; "io: Remove copy_file_range emulation [BZ #24744]")
+Since glibc 2.30, that fallback has been removed; the function now
+fails with ENOSYS if the kernel lacks support for .BR copy_file_range ().
 .SH NOTES
 If
 .I fd_in
