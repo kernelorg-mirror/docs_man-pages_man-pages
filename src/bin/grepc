@@ -19,7 +19,7 @@ m='';
 n='';
 r='no';
 t='';
-x=''
+x='c';
 
 
 grepc_err()
@@ -42,22 +42,8 @@ while getopts "A:B:C:chilm:nrt:x:" opt; do
 	n)	n='-n';			;;
 	r)	r='yes';		;;
 	t)	t="$t -t$OPTARG";	;;
-	x)
-		if test -n "$x"; then
-			grepc_err "-$opt: This option cannot be repeated.";
-		fi;
-
-		case "$OPTARG" in
-		c)	x='c';		;;
-		mk)	x='mk';		;;
-		*)
-			grepc_err "-$opt: $OPTARG: Unknown argument.";
-			;;
-		esac;
-		;;
-	\? | *)
-		exit 2;
-		;;
+	x)	x="$OPTARG";		;;
+	\? | *)	exit 2;			;;
 	esac;
 done;
 shift $((OPTIND-1));
@@ -67,10 +53,6 @@ if test $# -lt 1; then
 fi;
 identifier="$1";
 shift;
-
-if test -z "$x"; then
-	x='c';
-fi;
 
 
 patterns="$(mktemp -t grepc.patterns.XXXXXX)";
