@@ -31,16 +31,16 @@ grepc_err()
 
 while getopts "A:B:C:chilm:nrt:x:" opt; do
 	case "$opt" in
-	A)	A="-A$OPTARG";	;;
-	B)	B="-B$OPTARG";	;;
-	C)	C="-C$OPTARG";	;;
-	c)	c='-c';		;;
-	h)	h='-h';		;;
-	i)	i='-i';		;;
-	l)	l='-l';		;;
-	m)	m="-m$OPTARG";	;;
-	n)	n='-n';		;;
-	r)	r='yes';	;;
+	A)	A="-A$OPTARG";		;;
+	B)	B="-B$OPTARG";		;;
+	C)	C="-C$OPTARG";		;;
+	c)	c='-c';			;;
+	h)	h='-h';			;;
+	i)	i='-i';			;;
+	l)	l='-l';			;;
+	m)	m="-m$OPTARG";		;;
+	n)	n='-n';			;;
+	r)	r='yes';		;;
 	t)	t="$t -t$OPTARG";	;;
 	x)
 		if test -n "$x"; then

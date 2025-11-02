@@ -22,17 +22,17 @@ grepc_err()
 while getopts "t:" opt; do
 	case "$opt" in
 	t)
-			case "$OPTARG" in
-			r)		t_r='yes';		;;&
-			v)		t_v='yes';		;;&
-			[rv])
-					t='yes';
-					;;
-			*)
-					grepc_err "-$opt: $OPTARG: Unknown argument.";
-					;;
-			esac;
+		case "$OPTARG" in
+		r)	t_r='yes';	;;&
+		v)	t_v='yes';	;;&
+		[rv])
+			t='yes';
 			;;
+		*)
+			grepc_err "-$opt: $OPTARG: Unknown argument.";
+			;;
+		esac;
+		;;
 	\? | *)
 		exit 1;
 		;;
@@ -51,13 +51,13 @@ if test $# -gt 0; then
 fi;
 
 if test "$t" = 'no'; then
-		t_v='yes';
+	t_v='yes';
 fi;
 
 
-grepc_mk_r()		{ printf '%s\n' '(?s)^(\$\()?'"$1"'\)?\s*:[^=].*?(?<!\\)$(?:(?!^[^\t]).)*'; }
-grepc_mk_v()		{ printf '%s\n' '(?s)^'"$1"'\s*[:?+]*=.*?(?<!\\)$'; }
+grepc_mk_r()  { printf '%s\n' '(?s)^(\$\()?'"$1"'\)?\s*:[^=].*?(?<!\\)$(?:(?!^[^\t]).)*'; }
+grepc_mk_v()  { printf '%s\n' '(?s)^'"$1"'\s*[:?+]*=.*?(?<!\\)$'; }
 
 
-		if test "$t_r" = yes;			then grepc_mk_r "$identifier";			fi;
-		if test "$t_v" = yes;			then grepc_mk_v "$identifier";			fi;
+if test "$t_r" = yes;  then grepc_mk_r "$identifier";  fi;
+if test "$t_v" = yes;  then grepc_mk_v "$identifier";  fi;
