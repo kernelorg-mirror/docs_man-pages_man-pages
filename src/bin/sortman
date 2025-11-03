@@ -5,8 +5,8 @@
 
 sed   -E '/\/intro./  s/.*\.([[:digit:]])$/\10\t&/' \
 | sed -E '/\/intro./  s/.*\.([[:digit:]])([[:alpha:]][[:alnum:]]*\>)/\12.\20\t&/' \
-| sed -E '/\/intro./! s/.*\.([[:digit:]])\>/\11\t&/' \
-| sed -E '/\/intro./! s/.*\.([[:digit:]])([[:alpha:]][[:alnum:]]*\>)/\12.\21\t&/' \
+| sed -E '/\/intro./ !s/.*\.([[:digit:]])\>/\11\t&/' \
+| sed -E '/\/intro./ !s/.*\.([[:digit:]])([[:alpha:]][[:alnum:]]*\>)/\12.\21\t&/' \
 | sed -E '            s/\t(.*)/&\n\1/' \
 | sed -E '/\t/        s/\.[[:digit:]]([[:alpha:]][[:alnum:]]*)?\>.*//' \
 | sed -E '/\t/        s/\/[_-]*/\//g' \
