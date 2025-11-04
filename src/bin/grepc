@@ -78,7 +78,7 @@ else
 	| xargs -0 sh -c 'pcre2grep $opts -f "$0" -- "$@" || test $? -eq 1;' "$patterns";
 fi \
 | if test "$r" = 'yes'; then
-	perl -p -e 's/('"$identifier"')/\033[32m\1\033[0m/';
+	grep -h --color=always -P "($identifier|^)";
 else
 	cat;
 fi \
