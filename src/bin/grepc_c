@@ -149,7 +149,7 @@ grepc_c_t_braced()      { printf '%s' '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\
                           grepc_c_body_;
                           echo '[^;]*;'; }
 grepc_c_t_td_simple()   { echo '(?s)^[ \t]*typedef\s+[^{};]+\b'"$1"';'; }
-grepc_c_t_td_braced()   { printf '%s' '(?s)^[ \t]*typedef\s+(struct|union|enum)\b(?:(?!\W'"$1"'\W)([\w \t[\]]|::))*';
+grepc_c_t_td_braced()   { printf '%s' '(?s)^[ \t]*typedef\s+(struct|union|enum)\b([\w \t[\]]|::)*';
                           grepc_c_body_;
                           echo '\s*'"$1"'(\[[\w\(,\)]\])*;'; }
 grepc_c_t_td_func()     { echo '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;'; }
