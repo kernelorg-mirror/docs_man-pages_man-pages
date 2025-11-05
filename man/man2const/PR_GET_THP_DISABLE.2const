@@ -6,7 +6,7 @@
 .SH NAME
 PR_GET_THP_DISABLE
 \-
-get the state of the "THP disable" flag for the calling thread
+get the state of the "THP disable" flags for the calling thread
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -18,13 +18,22 @@ Standard C library
 .B int prctl(PR_GET_THP_DISABLE, 0L, 0L, 0L, 0L);
 .fi
 .SH DESCRIPTION
-Return the current setting of
-the "THP disable" flag for the calling thread:
-either 1, if the flag is set, or 0, if it is not.
+Return a value whose bits indicate how THP-disable is configured
+for the calling thread.
+The returned value is interpreted as follows:
+.TP
+.B 0b00
+No THP-disable behaviour specified.
+.TP
+.B 0b01
+THP is entirely disabled for this process.
+.TP
+.B 0b11
+THP-except-advised mode is set for this process.
 .SH RETURN VALUE
 On success,
 .BR PR_GET_THP_DISABLE ,
-returns the boolean value described above.
+returns the value described above.
 On error, \-1 is returned, and
 .I errno
 is set to indicate the error.

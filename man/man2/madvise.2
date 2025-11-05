@@ -372,9 +372,11 @@ or
 .BR VM_PFNMAP ,
 nor can it be stack memory or backed by a DAX-enabled device
 (unless the DAX device is hot-plugged as System RAM).
-The process must also not have
+The process can have
 .B PR_SET_THP_DISABLE
-set (see
+set only if
+.B PR_THP_DISABLE_EXCEPT_ADVISED
+is set (see
 .BR prctl (2)).
 .IP
 The
