@@ -108,6 +108,7 @@ if test "$t" = 'no'; then
 fi;
 
 
+grepc_c_e_decl_()       { printf '%s' '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*'; }
 grepc_c_f_return_()     { printf '%s' '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'; }
 grepc_c_f_params_()     { printf '%s' '\s*(?<params>\((?:[\w\s,;[\]*\?:+-]|(?&params))*(?:\.\.\.)?\))'; }
 grepc_c_f_decl_()       { grepc_c_f_return_;
@@ -123,7 +124,8 @@ grepc_c_mo_decl_()      { grepc_c_m_decl_ "$1";
 grepc_c_m_repl_()       { printf '%s' '(?:(?![^\\]$).)*'"$1"'.*?(?<!\\)$'; }
 
 
-grepc_c_e()             { echo '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
+grepc_c_e()             { grepc_c_e_decl_;
+                          echo '\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
 grepc_c_fp()            { grepc_c_f_decl_ "$1";
                           echo '(?:[\w\s\(,\)[\]]|::)*;'; }
 grepc_c_fd()            { grepc_c_f_decl_ "$1";
@@ -147,7 +149,8 @@ grepc_c_t_braced()      { echo '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?
 grepc_c_t_td_simple()   { echo '(?s)^[ \t]*typedef\s+[^{};]+\b'"$1"';'; }
 grepc_c_t_td_braced()   { echo '(?s)^[ \t]*typedef\s+(struct|union|enum)\b(?:(?!\W'"$1"'\W)([\w \t[\]]|::))*\n*([ \t]*){(?:(?!^\3?}).)*?^\3}\s*'"$1"'(\[[\w\(,\)]\])*;'; }
 grepc_c_t_td_func()     { echo '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;'; }
-grepc_c_ue()            { echo '(?s)^([\w[]+[\w\s]*)?\benum\b([\w \t[\]]|::)*\n*([ \t]*){[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^\3}.*?;'; }
+grepc_c_ue()            { grepc_c_e_decl_;
+                          echo '\n*([ \t]*){[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^\3}.*?;'; }
 grepc_c_uf_def()        { grepc_c_f_decl_ '\w+';
                           grepc_c_f_body_ "$1";
                           echo; }
