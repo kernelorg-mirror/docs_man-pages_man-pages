@@ -108,8 +108,10 @@ fi;
 
 grepc_c_e()             { printf '%s\n' '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
 grepc_c_f_decl_()       { printf '%s' '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**\(?'"$1"'\)?\s*(\((?:[\w\s,;[\]*]|::|(?1))*(?:\.\.\.)?\))'; }
-grepc_c_fp()            { grepc_c_f_decl_ "$1"; printf '%s\n' '(?:[\w\s\(,\)[\]]|::)*;'; }
-grepc_c_fd()            { grepc_c_f_decl_ "$1"; printf '%s\n' '[ \t]*\n(?<space>[ \t]*){.*?^\k<space>}'; }
+grepc_c_fp()            { grepc_c_f_decl_ "$1";
+                          printf '%s\n' '(?:[\w\s\(,\)[\]]|::)*;'; }
+grepc_c_fd()            { grepc_c_f_decl_ "$1";
+                          printf '%s\n' '[ \t]*\n(?<space>[ \t]*){.*?^\k<space>}'; }
 grepc_c_fgd_libm()      { grepc_c_fd "M_DECL_FUNC \(__$1\)"; }
 grepc_c_fgd_libio()     { grepc_c_fd "_IO_$1"; }
 grepc_c_fgp_libio()     { grepc_c_fp "_IO_$1"; }
@@ -123,7 +125,8 @@ grepc_c_t_td_simple()   { printf '%s\n' '(?s)^[ \t]*typedef\s+[^{};]+\b'"$1"';';
 grepc_c_t_td_braced()   { printf '%s\n' '(?s)^[ \t]*typedef\s+(struct|union|enum)\b(?:(?!\W'"$1"'\W)([\w \t[\]]|::))*\n*([ \t]*){(?:(?!^\3?}).)*?^\3}\s*'"$1"'(\[[\w\(,\)]\])*;'; }
 grepc_c_t_td_func()     { printf '%s\n' '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;'; }
 grepc_c_ue()            { printf '%s\n' '(?s)^([\w[]+[\w\s]*)?\benum\b([\w \t[\]]|::)*\n*([ \t]*){[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^\3}.*?;'; }
-grepc_c_uf_def()        { grepc_c_f_decl_ '\w+'; printf '%s\n' '[ \t]*\n*(?<space>[ \t]*){(?:(?!^\k<space>?}).)*'"$1"'.*?^\k<space>}'; }
+grepc_c_uf_def()        { grepc_c_f_decl_ '\w+';
+                          printf '%s\n' '[ \t]*\n*(?<space>[ \t]*){(?:(?!^\k<space>?}).)*'"$1"'.*?^\k<space>}'; }
 grepc_c_uf_linux_def()  { printf '%s\n' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\(\w+\b(?:(?!^}).)*'"$1"'.?^}'; }
 grepc_c_um()            { printf '%s\n' '(?s)^[ \t]*#\s*define\s[\s\\]*\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*'"$1"'.*?[^\\]$'; }
 grepc_c_ut_su()         { printf '%s\n' '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\b([\w \t[\]]|::)*\w+[ \t]*\n*([ \t]*){(?:(?!^\5?}).)*?'"$1"'.*?^\5}.*?;'; }
