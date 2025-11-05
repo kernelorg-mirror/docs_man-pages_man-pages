@@ -55,8 +55,8 @@ if test "$t" = 'no'; then
 fi;
 
 
-grepc_mk_r()  { printf '%s\n' '(?s)^(\$\()?'"$1"'\)?\s*:[^=].*?(?<!\\)$(?:(?!^[^\t]).)*'; }
-grepc_mk_v()  { printf '%s\n' '(?s)^'"$1"'\s*[:?+]*=.*?(?<!\\)$'; }
+grepc_mk_r()  { echo '(?s)^(\$\()?'"$1"'\)?\s*:[^=].*?(?<!\\)$(?:(?!^[^\t]).)*'; }
+grepc_mk_v()  { echo '(?s)^'"$1"'\s*[:?+]*=.*?(?<!\\)$'; }
 
 
 if test "$t_r" = yes;  then grepc_mk_r "$identifier";  fi;
