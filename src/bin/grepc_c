@@ -108,7 +108,7 @@ if test "$t" = 'no'; then
 fi;
 
 
-grepc_c_e_decl_()       { printf '%s' '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*'; }
+grepc_c_e_decl_()       { printf '%s' '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*[\w \t[\]:]*'; }
 grepc_c_f_return_()     { printf '%s' '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'; }
 grepc_c_f_params_()     { printf '%s' '\s*(?<params>\((?:[\w\s,;[\]*\?:+-]|(?&params))*(?:\.\.\.)?\))'; }
 grepc_c_f_decl_()       { grepc_c_f_return_;
