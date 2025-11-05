@@ -121,7 +121,7 @@ grepc_c_mf_decl_()      { grepc_c_m_decl_ "$1";
 grepc_c_mo_decl_()      { grepc_c_m_decl_ "$1";
                           printf '%s' '(?!\()'; }
 grepc_c_m_repl_()       { printf '%s' '(?:(?![^\\]$).)*'"$1"'.*?(?<!\\)$'; }
-grepc_c_t_sue_decl_()   { printf '%s' '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(?:'"$1"')\b([\w \t[\]]|::)*(?<!\w)'"$2"'(?!\w)'; }
+grepc_c_t_sue_decl_()   { printf '%s' '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(?:'"$1"')\b[\w \t[\]:]*(?<!\w)'"$2"'(?!\w)'; }
 
 
 grepc_c_e()             { grepc_c_e_decl_;
@@ -150,7 +150,7 @@ grepc_c_t_braced()      { grepc_c_t_sue_decl_ 'struct|union|enum' "$1";
                           grepc_c_body_;
                           echo '[^;]*;'; }
 grepc_c_t_td_simple()   { echo '(?s)^[ \t]*typedef\s+[^{};]+\b'"$1"';'; }
-grepc_c_t_td_braced()   { printf '%s' '(?s)^[ \t]*typedef\s+(struct|union|enum)\b([\w \t[\]]|::)*';
+grepc_c_t_td_braced()   { printf '%s' '(?s)^[ \t]*typedef\s+(struct|union|enum)\b[\w \t[\]:]*';
                           grepc_c_body_;
                           echo '\s*'"$1"'(\[[\w\(,\)]\])*;'; }
 grepc_c_t_td_func()     { echo '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;'; }
