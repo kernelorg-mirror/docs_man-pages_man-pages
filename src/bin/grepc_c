@@ -106,13 +106,16 @@ if test "$t" = 'no'; then
 fi;
 
 
-grepc_c_e()             { echo '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
 grepc_c_f_return_()     { printf '%s' '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'; }
 grepc_c_f_params_()     { printf '%s' '\s*(?<params>\((?:[\w\s,;[\]*\?:+-]|(?&params))*(?:\.\.\.)?\))'; }
 grepc_c_f_decl_()       { grepc_c_f_return_;
                           printf '%s' '\(?'"$1"'\)?';
                           grepc_c_f_params_; }
 grepc_c_f_body_()       { printf '%s' '[ \t]*\n*(?<space>[ \t]*){(?:(?!^\k<space>?}).)*'"$1"'.*?^\k<space>}'; }
+grepc_c_fld_decl_()     { printf '%s' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b[\w\s,;[\]*\?:+-]*\)'; }
+
+
+grepc_c_e()             { echo '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
 grepc_c_fp()            { grepc_c_f_decl_ "$1";
                           echo '(?:[\w\s\(,\)[\]]|::)*;'; }
 grepc_c_fd()            { grepc_c_f_decl_ "$1";
@@ -123,7 +126,6 @@ grepc_c_fgd_libio()     { grepc_c_fd "_IO_$1"; }
 grepc_c_fgp_libio()     { grepc_c_fp "_IO_$1"; }
 grepc_c_fgp()           { grepc_c_fgp_libio "$1"; }
 grepc_c_flp()           { grepc_c_fp "(?:compat_)?sys_$1"; }
-grepc_c_fld_decl_()     { printf '%s' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b[\w\s,;[\]*\?:+-]*\)'; }
 grepc_c_fld()           { grepc_c_fld_decl_ "$1";
                           grepc_c_f_body_ '';
                           echo; }
