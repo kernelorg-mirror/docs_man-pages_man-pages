@@ -112,10 +112,12 @@ grepc_c_f_params_()     { printf '%s' '\s*(?<params>\((?:[\w\s,;[\]*\?:+-]|(?&pa
 grepc_c_f_decl_()       { grepc_c_f_return_;
                           printf '%s' '\(?'"$1"'\)?';
                           grepc_c_f_params_; }
+grepc_c_f_body_()       { printf '%s' '[ \t]*\n(?<space>[ \t]*){.*?^\k<space>}'; }
 grepc_c_fp()            { grepc_c_f_decl_ "$1";
                           echo '(?:[\w\s\(,\)[\]]|::)*;'; }
 grepc_c_fd()            { grepc_c_f_decl_ "$1";
-                          echo '[ \t]*\n(?<space>[ \t]*){.*?^\k<space>}'; }
+                          grepc_c_f_body_;
+                          echo; }
 grepc_c_fgd_libm()      { grepc_c_fd "M_DECL_FUNC \(__$1\)"; }
 grepc_c_fgd_libio()     { grepc_c_fd "_IO_$1"; }
 grepc_c_fgp_libio()     { grepc_c_fp "_IO_$1"; }
