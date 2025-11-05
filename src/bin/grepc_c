@@ -106,7 +106,7 @@ if test "$t" = 'no'; then
 fi;
 
 
-grepc_c_t_sue_decl_()   { printf '%s' '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(?:'"$1"')\b[\w \t[\]:]*(?<!\w)'"$2"'(?!\w)'; }
+grepc_c_t_sue_decl_()   { printf '%s' '(?s)^(?:[\w[](?:[\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(?:'"$1"')\b[\w \t[\]:]*(?<!\w)'"$2"'(?!\w)'; }
 grepc_c_f_return_()     { printf '%s' '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'; }
 grepc_c_f_params_()     { printf '%s' '\s*(?<params>\((?:[\w\s,;[\]*\?:+-]|(?&params))*(?:\.\.\.)?\))'; }
 grepc_c_f_decl_()       { grepc_c_f_return_;
@@ -114,7 +114,7 @@ grepc_c_f_decl_()       { grepc_c_f_return_;
                           grepc_c_f_params_; }
 grepc_c_body_()         { printf '%s' '[ \t]*\n*(?<space>[ \t]*){.*?^\k<space>}'; }
 grepc_c_u_body_()       { printf '%s' '[ \t]*\n*(?<space>[ \t]*){(?:(?!^\k<space>?}).)*'"$1"'.*?^\k<space>}'; }
-grepc_c_fld_decl_()     { printf '%s' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b[\w\s,;[\]*\?:+-]*\)'; }
+grepc_c_fld_decl_()     { printf '%s' '(?s)^(?:COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b[\w\s,;[\]*\?:+-]*\)'; }
 grepc_c_m_decl_()       { printf '%s' '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b'; }
 grepc_c_mf_decl_()      { grepc_c_m_decl_ "$1";
                           printf '%s' '\([^\(]*\)'; }
@@ -149,9 +149,9 @@ grepc_c_t_braced()      { grepc_c_t_sue_decl_ 'struct|union|enum' "$1";
                           grepc_c_body_;
                           echo '[^;]*;'; }
 grepc_c_t_td_simple()   { echo '(?s)^[ \t]*typedef\s+[^{};]+\b'"$1"';'; }
-grepc_c_t_td_braced()   { printf '%s' '(?s)^[ \t]*typedef\s+(struct|union|enum)\b[\w \t[\]:]*';
+grepc_c_t_td_braced()   { printf '%s' '(?s)^[ \t]*typedef\s+(?:struct|union|enum)\b[\w \t[\]:]*';
                           grepc_c_body_;
-                          echo '\s*'"$1"'(\[[\w\(,\)]\])*;'; }
+                          echo '\s*'"$1"'(?:\[[\w\(,\)]\])*;'; }
 grepc_c_t_td_func()     { echo '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;'; }
 grepc_c_ue()            { grepc_c_t_sue_decl_ 'enum' '';
                           grepc_c_u_body_ "$1";
