@@ -29,7 +29,6 @@ t_umf='no';
 t_umo='no';
 t_ut_su='no';
 t_ut_td_simple='no';
-t_ut_td_su='no';
 
 
 grepc_err()
@@ -63,8 +62,7 @@ while getopts "t:" opt; do
 		u | um)		t_umf='yes';
 				t_umo='yes';		;;&
 		u | ut)		t_ut_su='yes';
-				t_ut_td_simple='yes';
-				t_ut_td_su='yes';	;;&
+				t_ut_td_simple='yes';	;;&
 		[efmtu] | f[pdlg] | fl[pd] | fg[pd] | m[fo] | u[efmt])
 				t='yes';
 				;;
@@ -170,13 +168,10 @@ grepc_c_umf()           { grepc_c_mf_decl_ '\w+'
 grepc_c_umo()           { grepc_c_mo_decl_ '\w+'
                           grepc_c_m_repl_ "$1";
                           echo; }
-grepc_c_ut_su()         { printf '%s' '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\b([\w \t[\]]|::)*\w+';
+grepc_c_ut_su()         { printf '%s' '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\b([\w \t[\]]|::)*';
                           grepc_c_u_body_ "$1";
                           echo '[^;]*;'; }
 grepc_c_ut_td_simple()  { echo '(?s)^[ \t]*typedef\s+[^{};]*'"$1"'[^{};]+;'; }
-grepc_c_ut_td_su()      { printf '%s' '(?s)^[ \t]*typedef\s+(struct|union)\b([\w \t[\]]|::)*';
-                          grepc_c_u_body_ "$1";
-                          echo '[^;]*;'; }
 
 
 if test "$t_e" = yes;             then grepc_c_e "$identifier";             fi;
@@ -200,4 +195,3 @@ if test "$t_umf" = yes;           then grepc_c_umf "$identifier";           fi;
 if test "$t_umo" = yes;           then grepc_c_umo "$identifier";           fi;
 if test "$t_ut_su" = yes;         then grepc_c_ut_su "$identifier";         fi;
 if test "$t_ut_td_simple" = yes;  then grepc_c_ut_td_simple "$identifier";  fi;
-if test "$t_ut_td_su" = yes;      then grepc_c_ut_td_su "$identifier";      fi;
