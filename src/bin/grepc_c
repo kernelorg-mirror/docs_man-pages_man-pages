@@ -25,7 +25,8 @@ t_t_td_func='no';
 t_ue='no';
 t_uf_def='no';
 t_uf_linux_def='no';
-t_um='no';
+t_umf='no';
+t_umo='no';
 t_ut_su='no';
 t_ut_td_simple='no';
 t_ut_td_su='no';
@@ -59,7 +60,8 @@ while getopts "t:" opt; do
 		u | ue)		t_ue='yes';		;;&
 		u | uf)		t_uf_def='yes';
 				t_uf_linux_def='yes';	;;&
-		u | um)		t_um='yes';		;;&
+		u | um)		t_umf='yes';
+				t_umo='yes';		;;&
 		u | ut)		t_ut_su='yes';
 				t_ut_td_simple='yes';
 				t_ut_td_su='yes';	;;&
@@ -152,8 +154,10 @@ grepc_c_uf_def()        { grepc_c_f_decl_ '\w+';
 grepc_c_uf_linux_def()  { grepc_c_fld_decl_ '\w+';
                           grepc_c_f_body_ "$1";
                           echo; }
-grepc_c_um()            { grepc_c_m_decl_ '\w+'
-                          printf '%s' '(?:\([^\)]*\))?';
+grepc_c_umf()           { grepc_c_mf_decl_ '\w+'
+                          grepc_c_m_repl_ "$1";
+                          echo; }
+grepc_c_umo()           { grepc_c_mo_decl_ '\w+'
                           grepc_c_m_repl_ "$1";
                           echo; }
 grepc_c_ut_su()         { echo '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\b([\w \t[\]]|::)*\w+[ \t]*\n*([ \t]*){(?:(?!^\5?}).)*?'"$1"'.*?^\5}.*?;'; }
@@ -178,7 +182,8 @@ if test "$t_t_td_func" = yes;     then grepc_c_t_td_func "$identifier";     fi;
 if test "$t_ue" = yes;            then grepc_c_ue "$identifier";            fi;
 if test "$t_uf_def" = yes;        then grepc_c_uf_def "$identifier";        fi;
 if test "$t_uf_linux_def" = yes;  then grepc_c_uf_linux_def "$identifier";  fi;
-if test "$t_um" = yes;            then grepc_c_um "$identifier";            fi;
+if test "$t_umf" = yes;           then grepc_c_umf "$identifier";           fi;
+if test "$t_umo" = yes;           then grepc_c_umo "$identifier";           fi;
 if test "$t_ut_su" = yes;         then grepc_c_ut_su "$identifier";         fi;
 if test "$t_ut_td_simple" = yes;  then grepc_c_ut_td_simple "$identifier";  fi;
 if test "$t_ut_td_su" = yes;      then grepc_c_ut_td_su "$identifier";      fi;
