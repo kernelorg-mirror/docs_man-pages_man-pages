@@ -108,7 +108,7 @@ fi;
 
 grepc_c_e()             { echo '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
 grepc_c_f_return_()     { printf '%s' '(?s)^[\w[](?:[\w\s\(,\)[\]*]|::)+[\w\s\)*\]]\s+\**'; }
-grepc_c_f_params_()     { printf '%s' '\s*(\((?:[\w\s,;[\]*]|::|(?1))*(?:\.\.\.)?\))'; }
+grepc_c_f_params_()     { printf '%s' '\s*(?<params>\((?:[\w\s,;[\]*]|::|(?&params))*(?:\.\.\.)?\))'; }
 grepc_c_f_decl_()       { grepc_c_f_return_;
                           printf '%s' '\(?'"$1"'\)?';
                           grepc_c_f_params_; }
