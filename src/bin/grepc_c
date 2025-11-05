@@ -123,7 +123,10 @@ grepc_c_fgd_libio()     { grepc_c_fd "_IO_$1"; }
 grepc_c_fgp_libio()     { grepc_c_fp "_IO_$1"; }
 grepc_c_fgp()           { grepc_c_fgp_libio "$1"; }
 grepc_c_flp()           { grepc_c_fp "(?:compat_)?sys_$1"; }
-grepc_c_fld()           { echo '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}'; }
+grepc_c_fld_decl_()     { printf '%s' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b[\w\s,;[\]*\?:+-]*\)'; }
+grepc_c_fld()           { grepc_c_fld_decl_ "$1";
+                          grepc_c_f_body_;
+                          echo; }
 grepc_c_mf()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\(.*?[^\\]$'; }
 grepc_c_mo()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$'; }
 grepc_c_t_braced()      { echo '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b[ \t]*\n*([ \t]*){.*?^\5}.*?;'; }
