@@ -113,6 +113,12 @@ grepc_c_f_decl_()       { grepc_c_f_return_;
                           grepc_c_f_params_; }
 grepc_c_f_body_()       { printf '%s' '[ \t]*\n*(?<space>[ \t]*){(?:(?!^\k<space>?}).)*'"$1"'.*?^\k<space>}'; }
 grepc_c_fld_decl_()     { printf '%s' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b[\w\s,;[\]*\?:+-]*\)'; }
+grepc_c_m_decl_()       { printf '%s' '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b'; }
+grepc_c_mf_decl_()      { grepc_c_m_decl_ "$1";
+                          printf '%s' '\([^\(]*\)'; }
+grepc_c_mo_decl_()      { grepc_c_m_decl_ "$1";
+                          printf '%s' '(?!\()'; }
+grepc_c_m_repl_()       { printf '%s' '.*?(?<!\\)$'; }
 
 
 grepc_c_e()             { echo '(?s)^([\w[]+[\w\s]*)?\benum\b[ \t]*([\w \t[\]]|::)*\n*([ \t]*){[^}]*^[ \t]*'"$1"'\b\s*[=,].*?^\3}.*?;'; }
@@ -129,8 +135,12 @@ grepc_c_flp()           { grepc_c_fp "(?:compat_)?sys_$1"; }
 grepc_c_fld()           { grepc_c_fld_decl_ "$1";
                           grepc_c_f_body_ '';
                           echo; }
-grepc_c_mf()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\(.*?[^\\]$'; }
-grepc_c_mo()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$'; }
+grepc_c_mf()            { grepc_c_mf_decl_ "$1";
+                          grepc_c_m_repl_;
+                          echo; }
+grepc_c_mo()            { grepc_c_mo_decl_ "$1";
+                          grepc_c_m_repl_;
+                          echo; }
 grepc_c_t_braced()      { echo '(?s)^([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union|enum)\b([\w \t[\]]|::)+\b'"$1"'\b[ \t]*\n*([ \t]*){.*?^\5}.*?;'; }
 grepc_c_t_td_simple()   { echo '(?s)^[ \t]*typedef\s+[^{};]+\b'"$1"';'; }
 grepc_c_t_td_braced()   { echo '(?s)^[ \t]*typedef\s+(struct|union|enum)\b(?:(?!\W'"$1"'\W)([\w \t[\]]|::))*\n*([ \t]*){(?:(?!^\3?}).)*?^\3}\s*'"$1"'(\[[\w\(,\)]\])*;'; }
