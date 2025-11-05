@@ -112,11 +112,11 @@ grepc_c_f_params_()     { printf '%s' '\s*(?<params>\((?:[\w\s,;[\]*\?:+-]|(?&pa
 grepc_c_f_decl_()       { grepc_c_f_return_;
                           printf '%s' '\(?'"$1"'\)?';
                           grepc_c_f_params_; }
-grepc_c_uf_body_()      { printf '%s' '[ \t]*\n*(?<space>[ \t]*){(?:(?!^\k<space>?}).)*'"$1"'.*?^\k<space>}'; }
+grepc_c_f_body_()       { printf '%s' '[ \t]*\n*(?<space>[ \t]*){(?:(?!^\k<space>?}).)*'"$1"'.*?^\k<space>}'; }
 grepc_c_fp()            { grepc_c_f_decl_ "$1";
                           echo '(?:[\w\s\(,\)[\]]|::)*;'; }
 grepc_c_fd()            { grepc_c_f_decl_ "$1";
-                          grepc_c_uf_body_ '';
+                          grepc_c_f_body_ '';
                           echo; }
 grepc_c_fgd_libm()      { grepc_c_fd "M_DECL_FUNC \(__$1\)"; }
 grepc_c_fgd_libio()     { grepc_c_fd "_IO_$1"; }
@@ -125,7 +125,7 @@ grepc_c_fgp()           { grepc_c_fgp_libio "$1"; }
 grepc_c_flp()           { grepc_c_fp "(?:compat_)?sys_$1"; }
 grepc_c_fld_decl_()     { printf '%s' '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b[\w\s,;[\]*\?:+-]*\)'; }
 grepc_c_fld()           { grepc_c_fld_decl_ "$1";
-                          grepc_c_uf_body_ '';
+                          grepc_c_f_body_ '';
                           echo; }
 grepc_c_mf()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\(.*?[^\\]$'; }
 grepc_c_mo()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$'; }
@@ -135,10 +135,10 @@ grepc_c_t_td_braced()   { echo '(?s)^[ \t]*typedef\s+(struct|union|enum)\b(?:(?!
 grepc_c_t_td_func()     { echo '(?s)^[ \t]*typedef\s+[^{};]+\(\**'"$1"'\)\s*\([^{};]+;'; }
 grepc_c_ue()            { echo '(?s)^([\w[]+[\w\s]*)?\benum\b([\w \t[\]]|::)*\n*([ \t]*){[^}]*^\s*\w+[\w\s[\]=]*'"$1"'.*?^\3}.*?;'; }
 grepc_c_uf_def()        { grepc_c_f_decl_ '\w+';
-                          grepc_c_uf_body_ "$1";
+                          grepc_c_f_body_ "$1";
                           echo; }
 grepc_c_uf_linux_def()  { grepc_c_fld_decl_ '\w+';
-                          grepc_c_uf_body_ "$1";
+                          grepc_c_f_body_ "$1";
                           echo; }
 grepc_c_um()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*\w+\b(\([^\)]*\))?(?:(?![^\\]$).)*'"$1"'.*?[^\\]$'; }
 grepc_c_ut_su()         { echo '(?s)^(?!^[ \t]*typedef\b)([\w[]([\w\s\(,\)[\]*]|::)*[\w\s\)*\]]\s+)?\b(struct|union)\b([\w \t[\]]|::)*\w+[ \t]*\n*([ \t]*){(?:(?!^\5?}).)*?'"$1"'.*?^\5}.*?;'; }
