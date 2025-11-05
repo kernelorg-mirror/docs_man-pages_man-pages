@@ -120,7 +120,7 @@ grepc_c_fgd_libm()      { grepc_c_fd "M_DECL_FUNC \(__$1\)"; }
 grepc_c_fgd_libio()     { grepc_c_fd "_IO_$1"; }
 grepc_c_fgp_libio()     { grepc_c_fp "_IO_$1"; }
 grepc_c_fgp()           { grepc_c_fgp_libio "$1"; }
-grepc_c_flp()           { echo '(?s)^asmlinkage\s+[\w\s]+\**sys_'"$1"'\s*\(.*?\)'; }
+grepc_c_flp()           { grepc_c_fp "(?:compat_)?sys_$1"; }
 grepc_c_fld()           { echo '(?s)^(COMPAT_)?SYSCALL_DEFINE.\('"$1"'\b.*?^}'; }
 grepc_c_mf()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\(.*?[^\\]$'; }
 grepc_c_mo()            { echo '(?s)^[ \t]*#\s*define\s[\s\\]*'"$1"'\b(?!\().*?(?<!\\)$'; }
