@@ -74,10 +74,4 @@ else
 		cat;
 	fi \
 	| xargs -0 sh -c 'pcre2grep $opts -f "$0" -- "$@" || test $? -eq 1;' "$patterns";
-fi \
-| if test -n "$l"; then
-	sort \
-	| uniq;
-else
-	cat;
 fi;
