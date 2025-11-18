@@ -831,12 +831,15 @@ is passed to
 and
 .\" This field is grossly misnamed
 .I ipi_spec_dst
-is not zero, then it is used as the local source address, for the routing
-table lookup, and for setting up IP source route options.
+is not zero,
+then it is used as the local source address,
+for the routing table lookup,
+and for setting up IP source route options.
 When
 .I ipi_ifindex
-is not zero, the primary local address of the interface specified by the
-index overwrites
+is not zero,
+the primary local address of the interface specified by the index
+overwrites
 .I ipi_spec_dst
 for the routing table lookup.
 .I ipi_addr
