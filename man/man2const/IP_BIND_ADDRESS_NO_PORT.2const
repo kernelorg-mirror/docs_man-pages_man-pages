@@ -19,9 +19,6 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_BIND_ADDRESS_NO_PORT " (since Linux 4.2)"
-.\" commit 90c337da1524863838658078ec34241f45d8394d
 Inform the kernel to not reserve an ephemeral port when using
 .BR bind (2)
 with a port number of 0.
@@ -36,6 +33,9 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 4.2.
+.\" commit 90c337da1524863838658078ec34241f45d8394d
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
