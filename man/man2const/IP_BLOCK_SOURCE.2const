@@ -20,18 +20,13 @@ Standard C library
 .B "               sizeof(struct\~ip_mreq_source));"
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_BLOCK_SOURCE " (since Linux 2.4.22 / 2.5.68)"
 Stop receiving multicast data from a specific source in a given group.
+.P
 This is valid only after the application has subscribed
 to the multicast group using either
 .BR IP_ADD_MEMBERSHIP (2const)
 or
 .BR IP_ADD_SOURCE_MEMBERSHIP (2const).
-.IP
-Argument is an
-.BR ip_mreq_source (2type)
-structure.
 .SH ERRORS
 See
 .BR IPPROTO_IP (2const).
@@ -39,6 +34,8 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 2.4.22, Linux 2.5.68.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR ip_mreq_source (2type),
