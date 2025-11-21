@@ -91,9 +91,8 @@ or
 .BR IP_ADD_SOURCE_MEMBERSHIP (2const).
 .IP
 Argument is an
-.I ip_mreq_source
-structure as described in
-.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
+.BR ip_mreq_source (2type)
+structure.
 .TP
 .BR IP_DROP_MEMBERSHIP " (since Linux 1.2)"
 Leave a multicast group.
@@ -112,9 +111,8 @@ To stop receiving data from all sources at once, use
 .BR IP_DROP_MEMBERSHIP .
 .IP
 Argument is an
-.I ip_mreq_source
-structure as described in
-.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
+.BR ip_mreq_source (2type)
+structure.
 .TP
 .BR IP_FREEBIND " (since Linux 2.4)"
 .\" Precisely: since Linux 2.4.0-test10
@@ -770,9 +768,8 @@ Returns
 when given source is not being blocked.
 .IP
 Argument is an
-.I ip_mreq_source
-structure as described in
-.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
+.BR ip_mreq_source (2type)
+structure.
 .TP
 .BR SO_PEERSEC " (since Linux 2.6.17)"
 If labeled IPSEC or NetLabel is configured on both the sending and
