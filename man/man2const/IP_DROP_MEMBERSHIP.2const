@@ -19,14 +19,7 @@ Standard C library
 .BI "               const\~struct\~ip_mreqn\~*" val ,\~sizeof(struct\~ip_mreqn));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_DROP_MEMBERSHIP " (since Linux 1.2)"
 Leave a multicast group.
-Argument is an
-.BR ip_mreqn (2type)
-or
-.BR ip_mreq (2type)
-structure.
 .SH ERRORS
 See
 .BR IPPROTO_IP (2const).
@@ -34,6 +27,14 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 1.2.
+.P
+For compatibility, the old
+.I ip_mreq
+structure is still supported.
+The kernel determines which structure is being passed based
+on the size passed in the last argument.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR ip_mreqn (2type),
