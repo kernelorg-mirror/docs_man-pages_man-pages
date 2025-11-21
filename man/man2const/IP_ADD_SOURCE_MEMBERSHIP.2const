@@ -1,0 +1,77 @@
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH IP_ADD_SOURCE_MEMBERSHIP 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+IP_ADD_SOURCE_MEMBERSHIP
+\-
+join a multicast group
+and allow receiving data
+only from a specified source
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <netinet/in.h>" "  /* Definition of " IP* " constants */"
+.B #include <sys/socket.h>
+.P
+.BI int\~setsockopt(int\~ sockfd ,\~IPPROTO_IP,\~IP_ADD_SOURCE_MEMBERSHIP,
+.BI "               const\~struct\~ip_mreq_source\~*" val ,
+.B "               sizeof(struct\~ip_mreq_source));"
+.fi
+.SH DESCRIPTION
+.TP
+.BR IP_ADD_SOURCE_MEMBERSHIP " (since Linux 2.4.22 / Linux 2.5.68)"
+Join a multicast group and allow receiving data only
+from a specified source.
+Argument is an
+.I ip_mreq_source
+structure.
+.IP
+.in +4n
+.EX
+struct ip_mreq_source {
+    struct in_addr imr_multiaddr;  /* IP multicast group
+                                      address */
+    struct in_addr imr_interface;  /* IP address of local
+                                      interface */
+    struct in_addr imr_sourceaddr; /* IP address of
+                                      multicast source */
+};
+.EE
+.in
+.IP
+The
+.I ip_mreq_source
+structure is similar to
+.I ip_mreqn
+described in
+.BR IP_ADD_MEMBERSHIP (2const).
+The
+.I imr_multiaddr
+field contains the address of the multicast group the application
+wants to join or leave.
+The
+.I imr_interface
+field is the address of the local interface with which
+the system should join the multicast group.
+Finally, the
+.I imr_sourceaddr
+field contains the address of the source the
+application wants to receive data from.
+.IP
+This option can be used multiple times to allow
+receiving data from more than one source.
+.SH ERRORS
+See
+.BR IPPROTO_IP (2const).
+See
+.BR setsockopt (2).
+See
+.BR ip (7).
+.SH SEE ALSO
+.BR IPPROTO_IP (2const),
+.BR setsockopt (2),
+.BR ip (7)

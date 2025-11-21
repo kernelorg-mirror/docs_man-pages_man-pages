@@ -69,46 +69,8 @@ fail with the error
 .BR ENOPROTOOPT .
 .TP
 .BR IP_ADD_MEMBERSHIP (2const)
-.TP
-.BR IP_ADD_SOURCE_MEMBERSHIP " (since Linux 2.4.22 / Linux 2.5.68)"
-Join a multicast group and allow receiving data only
-from a specified source.
-Argument is an
-.I ip_mreq_source
-structure.
-.IP
-.in +4n
-.EX
-struct ip_mreq_source {
-    struct in_addr imr_multiaddr;  /* IP multicast group
-                                      address */
-    struct in_addr imr_interface;  /* IP address of local
-                                      interface */
-    struct in_addr imr_sourceaddr; /* IP address of
-                                      multicast source */
-};
-.EE
-.in
-.IP
-The
-.I ip_mreq_source
-structure is similar to
-.BR ip_mreqn (2type).
-The
-.I imr_multiaddr
-field contains the address of the multicast group the application
-wants to join or leave.
-The
-.I imr_interface
-field is the address of the local interface with which
-the system should join the multicast group.
-Finally, the
-.I imr_sourceaddr
-field contains the address of the source the
-application wants to receive data from.
-.IP
-This option can be used multiple times to allow
-receiving data from more than one source.
+.TQ
+.BR IP_ADD_SOURCE_MEMBERSHIP (2const)
 .TP
 .BR IP_BIND_ADDRESS_NO_PORT " (since Linux 4.2)"
 .\" commit 90c337da1524863838658078ec34241f45d8394d
@@ -126,12 +88,12 @@ This is valid only after the application has subscribed
 to the multicast group using either
 .BR IP_ADD_MEMBERSHIP (2const)
 or
-.BR IP_ADD_SOURCE_MEMBERSHIP .
+.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
 .IP
 Argument is an
 .I ip_mreq_source
-structure as described under
-.BR IP_ADD_SOURCE_MEMBERSHIP .
+structure as described in
+.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
 .TP
 .BR IP_DROP_MEMBERSHIP " (since Linux 1.2)"
 Leave a multicast group.
@@ -151,8 +113,8 @@ To stop receiving data from all sources at once, use
 .IP
 Argument is an
 .I ip_mreq_source
-structure as described under
-.BR IP_ADD_SOURCE_MEMBERSHIP .
+structure as described in
+.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
 .TP
 .BR IP_FREEBIND " (since Linux 2.4)"
 .\" Precisely: since Linux 2.4.0-test10
@@ -809,8 +771,8 @@ when given source is not being blocked.
 .IP
 Argument is an
 .I ip_mreq_source
-structure as described under
-.BR IP_ADD_SOURCE_MEMBERSHIP .
+structure as described in
+.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
 .TP
 .BR SO_PEERSEC " (since Linux 2.6.17)"
 If labeled IPSEC or NetLabel is configured on both the sending and
