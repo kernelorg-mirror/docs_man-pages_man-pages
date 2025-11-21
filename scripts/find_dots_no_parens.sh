@@ -21,6 +21,7 @@
 #
 ######################################################################
 #
+# Copyright 2005-2013, Michael Kerrisk <mtk.manpages@gmail.com>
 # Copyright, the authors of the Linux man-pages project
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
