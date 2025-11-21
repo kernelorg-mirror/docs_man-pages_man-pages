@@ -18,35 +18,8 @@ Standard C library
 .BI int\~setsockopt(int\~ sockfd ,\~IPPROTO_IP,\~IP_ADD_MEMBERSHIP,
 .BI "               const\~struct\~ip_mreqn\~*" val ,\~sizeof(struct\~ip_mreqn));
 .fi
-.P
-.EX
-struct ip_mreqn {
-    struct in_addr  imr_multiaddr;  /* IP multicast group address */
-    struct in_addr  imr_address;    /* IP address of local interface */
-    int             imr_ifindex;    /* interface index */
-};
-.EE
 .SH DESCRIPTION
 Join a multicast group.
-.TP
-.I .imr_multiaddr
-The address of the multicast group
-the application wants to join or leave.
-It must be a valid multicast address.
-.\" (i.e., within the 224.0.0.0-239.255.255.255 range)
-.TP
-.I .imr_address
-The address of the local interface with which the system
-should join the multicast group;
-if it is equal to
-.BR INADDR_ANY ,
-an appropriate interface is chosen by the system.
-.TP
-.I .imr_ifindex
-The interface index of the interface that should join/leave the
-.I .imr_multiaddr
-group,
-or 0 to indicate any interface.
 .P
 .B IP_ADD_MEMBERSHIP
 is valid only for
@@ -60,25 +33,18 @@ See
 .BR ip (7).
 .TP
 .B EINVAL
-.I .imr_multiaddr
+.I val->imr_multiaddr
 is not a valid multicast address.
 .SH HISTORY
 Linux 1.2.
 .P
-The
-.I ip_mreqn
-structure is available only since Linux 2.2.
 For compatibility, the old
 .I ip_mreq
-structure (present since Linux 1.2) is still supported;
-it differs from
-.I ip_mreqn
-only by not including the
-.I .imr_ifindex
-field.
-(The kernel determines which structure is being passed based
-on the size passed in the last argument.)
+structure is still supported.
+The kernel determines which structure is being passed based
+on the size passed in the last argument.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
+.BR ip_mreqn (2type),
 .BR setsockopt (2),
 .BR ip (7)
