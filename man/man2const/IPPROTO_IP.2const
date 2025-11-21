@@ -73,18 +73,8 @@ fail with the error
 .BR IP_ADD_SOURCE_MEMBERSHIP (2const)
 .TQ
 .BR IP_BIND_ADDRESS_NO_PORT (2const)
-.TP
-.BR IP_BLOCK_SOURCE " (since Linux 2.4.22 / 2.5.68)"
-Stop receiving multicast data from a specific source in a given group.
-This is valid only after the application has subscribed
-to the multicast group using either
-.BR IP_ADD_MEMBERSHIP (2const)
-or
-.BR IP_ADD_SOURCE_MEMBERSHIP (2const).
-.IP
-Argument is an
-.BR ip_mreq_source (2type)
-structure.
+.TQ
+.BR IP_BLOCK_SOURCE (2const)
 .TP
 .BR IP_DROP_MEMBERSHIP " (since Linux 1.2)"
 Leave a multicast group.
