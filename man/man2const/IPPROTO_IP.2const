@@ -79,18 +79,8 @@ fail with the error
 .BR IP_DROP_MEMBERSHIP (2const)
 .TQ
 .BR IP_DROP_SOURCE_MEMBERSHIP (2const)
-.TP
-.BR IP_FREEBIND " (since Linux 2.4)"
-.\" Precisely: since Linux 2.4.0-test10
-If enabled, this boolean option allows binding to an IP address
-that is nonlocal or does not (yet) exist.
-This permits listening on a socket,
-without requiring the underlying network interface or the
-specified dynamic IP address to be up at the time that
-the application is trying to bind to it.
-This option is the per-socket equivalent of the
-.I /proc/sys/net/ipv4/ip_nonlocal_bind
-interface.
+.TQ
+.BR IP_FREEBIND (2const)
 .TP
 .BR IP_HDRINCL " (since Linux 2.0)"
 If enabled,
@@ -799,7 +789,6 @@ See
 See
 .BR ip (7).
 .SH NOTES
-.BR IP_FREEBIND ,
 .BR IP_MSFILTER ,
 .BR IP_MTU ,
 .BR IP_MTU_DISCOVER ,
