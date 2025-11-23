@@ -85,45 +85,8 @@ fail with the error
 .BR IP_HDRINCL (2const)
 .TQ
 .BR IP_LOCAL_PORT_RANGE (2const)
-.TP
-.BR IP_MSFILTER " (since Linux 2.4.22 / 2.5.68)"
-This option provides access to the advanced full-state filtering API.
-Argument is an
-.I ip_msfilter
-structure.
-.IP
-.in +4n
-.EX
-struct ip_msfilter {
-    struct in_addr imsf_multiaddr; /* IP multicast group
-                                      address */
-    struct in_addr imsf_interface; /* IP address of local
-                                      interface */
-    uint32_t       imsf_fmode;     /* Filter\-mode */
-\&
-    uint32_t       imsf_numsrc;    /* Number of sources in
-                                      the following array */
-    struct in_addr imsf_slist[1];  /* Array of source
-                                      addresses */
-};
-.EE
-.in
-.IP
-There are two macros,
-.B MCAST_INCLUDE
-and
-.BR MCAST_EXCLUDE ,
-which can be used to specify the filtering mode.
-Additionally, the
-.BR IP_MSFILTER_SIZE (n)
-macro exists to determine how much memory is needed to store
-.I ip_msfilter
-structure with
-.I n
-sources in the source list.
-.IP
-For the full description of multicast source filtering
-refer to RFC 3376.
+.TQ
+.BR IP_MSFILTER (2const)
 .TP
 .BR IP_MTU " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.124
@@ -751,7 +714,6 @@ See
 See
 .BR ip (7).
 .SH NOTES
-.BR IP_MSFILTER ,
 .BR IP_MTU ,
 .BR IP_MTU_DISCOVER ,
 .BR IP_RECVORIGDSTADDR ,
