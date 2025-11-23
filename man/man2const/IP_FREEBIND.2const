@@ -19,15 +19,17 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_FREEBIND " (since Linux 2.4)"
-.\" Precisely: since Linux 2.4.0-test10
-If enabled, this boolean option allows binding to an IP address
+If enabled,
+this boolean option allows binding to an IP address
 that is nonlocal or does not (yet) exist.
+.P
 This permits listening on a socket,
-without requiring the underlying network interface or the
-specified dynamic IP address to be up at the time that
-the application is trying to bind to it.
+without requiring
+the underlying network interface
+or the specified dynamic IP address
+to be up at the time
+that the application is trying to bind to it.
+.P
 This option is the per-socket equivalent of the
 .I /proc/sys/net/ipv4/ip_nonlocal_bind
 interface.
@@ -40,6 +42,9 @@ See
 .BR ip (7).
 .SH STANDARDS
 Linux.
+.SH HISTORY
+Linux 2.4.
+.\" Precisely: since Linux 2.4.0-test10
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
