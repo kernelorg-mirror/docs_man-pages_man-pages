@@ -19,15 +19,11 @@ Standard C library
 .BI "               int\~*" val ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_MTU " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.124
 Retrieve the current known path MTU of the current socket.
-Returns an integer.
-.IP
+.P
 .B IP_MTU
 is valid only for
-.BR getsockopt (2)
+.BR getsockopt (2),
 and can be employed only when the socket has been connected.
 .SH ERRORS
 See
@@ -38,6 +34,9 @@ See
 .BR ip (7).
 .SH STANDARDS
 Linux.
+.SH HISTORY
+Linux 2.2.
+.\" Precisely: since Linux 2.1.124
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR getsockopt (2),
