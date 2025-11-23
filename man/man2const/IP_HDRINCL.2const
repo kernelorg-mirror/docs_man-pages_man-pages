@@ -19,21 +19,22 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_HDRINCL " (since Linux 2.0)"
 If enabled,
 the user supplies an IP header in front of the user data.
+.P
 Valid only for
 .B SOCK_RAW
 sockets;
 see
 .BR raw (7)
 for more information.
-When this flag is enabled, the values set by
-.BR IP_OPTIONS ,
-.BR IP_TTL ,
+.P
+When this flag is enabled,
+the values set by
+.BR IP_OPTIONS (2const),
+.BR IP_TTL (2const),
 and
-.B IP_TOS
+.BR IP_TOS (2const)
 are ignored.
 .SH ERRORS
 See
@@ -42,6 +43,8 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 2.0.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
