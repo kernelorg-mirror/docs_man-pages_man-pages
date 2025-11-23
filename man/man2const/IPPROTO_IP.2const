@@ -87,16 +87,8 @@ fail with the error
 .BR IP_LOCAL_PORT_RANGE (2const)
 .TQ
 .BR IP_MSFILTER (2const)
-.TP
-.BR IP_MTU " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.124
-Retrieve the current known path MTU of the current socket.
-Returns an integer.
-.IP
-.B IP_MTU
-is valid only for
-.BR getsockopt (2)
-and can be employed only when the socket has been connected.
+.TQ
+.BR IP_MTU (2const)
 .TP
 .BR IP_MTU_DISCOVER " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.124
@@ -142,7 +134,7 @@ the path MTU per destination host.
 When it is connected to a specific peer with
 .BR connect (2),
 the currently known path MTU can be retrieved conveniently using the
-.B IP_MTU
+.BR IP_MTU (2const)
 socket option (e.g., after an
 .B EMSGSIZE
 error occurred).
@@ -168,7 +160,7 @@ path MTU, connect a datagram socket to the destination address using
 and retrieve the MTU by calling
 .BR getsockopt (2)
 with the
-.B IP_MTU
+.BR IP_MTU (2const)
 option.
 .IP
 It is possible to implement RFC 4821 MTU probing with
@@ -714,7 +706,6 @@ See
 See
 .BR ip (7).
 .SH NOTES
-.BR IP_MTU ,
 .BR IP_MTU_DISCOVER ,
 .BR IP_RECVORIGDSTADDR ,
 .BR IP_PASSSEC ,
