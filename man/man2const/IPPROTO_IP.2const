@@ -81,22 +81,8 @@ fail with the error
 .BR IP_DROP_SOURCE_MEMBERSHIP (2const)
 .TQ
 .BR IP_FREEBIND (2const)
-.TP
-.BR IP_HDRINCL " (since Linux 2.0)"
-If enabled,
-the user supplies an IP header in front of the user data.
-Valid only for
-.B SOCK_RAW
-sockets;
-see
-.BR raw (7)
-for more information.
-When this flag is enabled, the values set by
-.BR IP_OPTIONS ,
-.BR IP_TTL ,
-and
-.B IP_TOS
-are ignored.
+.TQ
+.BR IP_HDRINCL (2const)
 .TP
 .BR IP_LOCAL_PORT_RANGE " (since Linux 6.3)"
 Set or get the per-socket default local port range.
@@ -380,7 +366,7 @@ socket option value as the message type.
 There is no conflict currently since the IP option with the same value as
 .B SCM_SECURITY
 is
-.B IP_HDRINCL
+.BR IP_HDRINCL (2const)
 and this is never used for a control message type.
 .TP
 .BR IP_PKTINFO " (since Linux 2.2)"
