@@ -124,10 +124,8 @@ fail with the error
 .BR IP_TOS (2const)
 .TQ
 .BR IP_TRANSPARENT (2const)
-.TP
-.BR IP_TTL " (since Linux 1.0)"
-Set or retrieve the current time-to-live field that is used in every packet
-sent from this socket.
+.TQ
+.BR IP_TTL (2const)
 .TP
 .BR IP_UNBLOCK_SOURCE " (since Linux 2.4.22 / 2.5.68)"
 Unblock previously blocked multicast source.
