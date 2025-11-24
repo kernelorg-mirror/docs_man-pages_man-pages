@@ -102,46 +102,8 @@ fail with the error
 .BR IP_NODEFRAG (2const)
 .TQ
 .BR IP_OPTIONS (2const)
-.TP
-.BR IP_PASSSEC " (since Linux 2.6.17)"
-.\" commit 2c7946a7bf45ae86736ab3b43d0085e43947945c
-If labeled IPSEC or NetLabel is configured on the sending and receiving
-hosts, this option enables receiving of the security context of the peer
-socket in an ancillary message of type
-.B SCM_SECURITY
-retrieved using
-.BR recvmsg (2).
-This option is supported only for UDP sockets;
-for TCP or SCTP sockets,
-see the description of the
-.B SO_PEERSEC
-option below.
-.IP
-The value given as an argument to
-.BR setsockopt (2)
-and returned as the result of
-.BR getsockopt (2)
-is an integer boolean flag.
-.IP
-The security context returned in the
-.B SCM_SECURITY
-ancillary message
-is of the same format as the one described under the
-.B SO_PEERSEC
-option below.
-.IP
-Note: the reuse of the
-.B SCM_SECURITY
-message type for the
-.B IP_PASSSEC
-socket option was likely a mistake, since other IP control messages use
-their own numbering scheme in the IP namespace and often use the
-socket option value as the message type.
-There is no conflict currently since the IP option with the same value as
-.B SCM_SECURITY
-is
-.BR IP_HDRINCL (2const)
-and this is never used for a control message type.
+.TQ
+.BR IP_PASSSEC (2const)
 .TP
 .BR IP_PKTINFO " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.68
@@ -551,7 +513,6 @@ See
 .BR ip (7).
 .SH NOTES
 .BR IP_RECVORIGDSTADDR ,
-.BR IP_PASSSEC ,
 .BR IP_PKTINFO ,
 .BR IP_RECVERR ,
 .BR IP_ROUTER_ALERT ,
