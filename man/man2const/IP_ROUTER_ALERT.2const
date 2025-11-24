@@ -19,18 +19,12 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_ROUTER_ALERT " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.68
 Pass all to-be forwarded packets with the
 IP Router Alert option set to this socket.
+.P
 Valid only for raw sockets.
+.P
 This is useful, for instance, for user-space RSVP daemons.
-The tapped packets are not forwarded by the kernel;
-it is the user's responsibility to send them out again.
-Socket binding is ignored,
-such packets are filtered only by protocol.
-Expects an integer flag.
 .SH ERRORS
 See
 .BR IPPROTO_IP (2const).
@@ -40,6 +34,15 @@ See
 .BR ip (7).
 .SH STANDARDS
 Linux.
+.SH HISTORY
+Linux 2.2.
+.\" Precisely: since Linux 2.1.68
+.SH CAVEATS
+The tapped packets are not forwarded by the kernel;
+it is the user's responsibility to send them out again.
+.P
+Socket binding is ignored,
+such packets are filtered only by protocol.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
