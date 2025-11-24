@@ -44,17 +44,17 @@ Standard C library
 .TP
 .I sockaddr_in
 Describes an IPv4 Internet domain socket address.
-The
-.I sin_port
+.IP
+.I .sin_port
 and
-.I sin_addr
-members are stored in network byte order.
+.I .sin_addr
+are stored in network byte order.
 .TP
 .I sockaddr_in6
 Describes an IPv6 Internet domain socket address.
-The
-.I sin6_addr.s6_addr
-array is used to contain a 128-bit IPv6 address,
+.TP
+.I in6_addr
+Contains a 128-bit IPv6 address,
 stored in network byte order.
 .SH STANDARDS
 POSIX.1-2024.
