@@ -126,16 +126,8 @@ fail with the error
 .BR IP_TRANSPARENT (2const)
 .TQ
 .BR IP_TTL (2const)
-.TP
-.BR IP_UNBLOCK_SOURCE " (since Linux 2.4.22 / 2.5.68)"
-Unblock previously blocked multicast source.
-Returns
-.B EADDRNOTAVAIL
-when given source is not being blocked.
-.IP
-Argument is an
-.BR ip_mreq_source (2type)
-structure.
+.TQ
+.BR IP_UNBLOCK_SOURCE (2const)
 .TP
 .BR SO_PEERSEC " (since Linux 2.6.17)"
 If labeled IPSEC or NetLabel is configured on both the sending and
