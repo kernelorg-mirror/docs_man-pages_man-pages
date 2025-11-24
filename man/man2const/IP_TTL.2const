@@ -21,8 +21,6 @@ Standard C library
 .BI "               int\~*" ttl ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_TTL " (since Linux 1.0)"
 Set or retrieve the current time-to-live field that is used in every packet
 sent from this socket.
 .SH ERRORS
@@ -32,6 +30,8 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 1.0.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
