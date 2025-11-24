@@ -120,35 +120,8 @@ fail with the error
 .BR IP_RETOPTS (2const)
 .TQ
 .BR IP_ROUTER_ALERT (2const)
-.TP
-.BR IP_TOS " (since Linux 1.0)"
-Set or receive the Type-Of-Service (TOS) field that is sent
-with every IP packet originating from this socket.
-It is used to prioritize packets on the network.
-TOS is a byte.
-There are some standard TOS flags defined:
-.B IPTOS_LOWDELAY
-to minimize delays for interactive traffic,
-.B IPTOS_THROUGHPUT
-to optimize throughput,
-.B IPTOS_RELIABILITY
-to optimize for reliability,
-.B IPTOS_MINCOST
-should be used for "filler data" where slow transmission doesn't matter.
-At most one of these TOS values can be specified.
-Other bits are invalid and shall be cleared.
-Linux sends
-.B IPTOS_LOWDELAY
-datagrams first by default,
-but the exact behavior depends on the configured queueing discipline.
-.\" FIXME elaborate on this
-Some high-priority levels may require superuser privileges (the
-.B CAP_NET_ADMIN
-capability).
-.\" The priority can also be set in a protocol-independent way by the
-.\" .RB ( SOL_SOCKET ", " SO_PRIORITY )
-.\" socket option (see
-.\" .BR socket (7)).
+.TQ
+.BR IP_TOS (2const)
 .TP
 .BR IP_TRANSPARENT " (since Linux 2.6.24)"
 .\" commit f5715aea4564f233767ea1d944b2637a5fd7cd2e
