@@ -14,8 +14,8 @@ Standard C library
 .B #include <sys/un.h>
 .P
 .B struct sockaddr_un {
-.BR "    sa_family_t     sun_family;" "     /* Address family */"
-.BR "    char            sun_path[];" "     /* Socket pathname */"
+.BR "    sa_family_t  sun_family;" "  /* Address family */"
+.BR "    char         sun_path[];" "  /* Socket pathname */"
 .B };
 .EE
 .SH DESCRIPTION
