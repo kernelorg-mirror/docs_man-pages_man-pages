@@ -118,18 +118,8 @@ fail with the error
 .BR IP_RECVTTL (2const)
 .TQ
 .BR IP_RETOPTS (2const)
-.TP
-.BR IP_ROUTER_ALERT " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.68
-Pass all to-be forwarded packets with the
-IP Router Alert option set to this socket.
-Valid only for raw sockets.
-This is useful, for instance, for user-space RSVP daemons.
-The tapped packets are not forwarded by the kernel;
-it is the user's responsibility to send them out again.
-Socket binding is ignored,
-such packets are filtered only by protocol.
-Expects an integer flag.
+.TQ
+.BR IP_ROUTER_ALERT (2const)
 .TP
 .BR IP_TOS " (since Linux 1.0)"
 Set or receive the Type-Of-Service (TOS) field that is sent
@@ -261,10 +251,8 @@ See
 See
 .BR ip (7).
 .SH NOTES
-.BR IP_ROUTER_ALERT ,
-and
 .B IP_TRANSPARENT
-are Linux-specific.
+is Linux-specific.
 .\" IP_XFRM_POLICY is Linux-specific
 .\" IP_IPSEC_POLICY is a nonstandard extension, also present on some BSDs
 .SH SEE ALSO
