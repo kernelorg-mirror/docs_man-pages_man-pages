@@ -4,7 +4,7 @@
 .\"
 .TH sockaddr 3type (date) "Linux man-pages (unreleased)"
 .SH NAME
-sockaddr, sockaddr_storage, sockaddr_un, socklen_t
+sockaddr, sockaddr_storage, socklen_t
 \- socket address
 .SH LIBRARY
 Standard C library
@@ -25,15 +25,6 @@ Standard C library
 .BR typedef " /* ... */ " socklen_t;
 .BR typedef " /* ... */ " sa_family_t;
 .P
-.EE
-.SS UNIX domain sockets
-.EX
-.B #include <sys/un.h>
-.P
-.B struct sockaddr_un {
-.BR "    sa_family_t     sun_family;" "     /* Address family */"
-.BR "    char            sun_path[];" "     /* Socket pathname */"
-.B };
 .EE
 .SH DESCRIPTION
 .TP
@@ -62,9 +53,8 @@ See
 and
 .BR sockaddr_in6 (3type).
 .SS UNIX domain sockets
-.TP
-.I sockaddr_un
-Describes a UNIX domain socket address.
+See
+.BR sockaddr_un (3type).
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
