@@ -98,15 +98,8 @@ fail with the error
 .BR IP_MULTICAST_LOOP (2const)
 .TQ
 .BR IP_MULTICAST_TTL (2const)
-.TP
-.BR IP_NODEFRAG " (since Linux 2.6.36)"
-If enabled (argument is nonzero),
-the reassembly of outgoing packets is disabled in the netfilter layer.
-The argument is an integer.
-.IP
-This option is valid only for
-.B SOCK_RAW
-sockets.
+.TQ
+.BR IP_NODEFRAG (2const)
 .TP
 .BR IP_OPTIONS " (since Linux 2.0)"
 .\" Precisely: since Linux 1.3.30
