@@ -19,15 +19,13 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_RECVTOS " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.68
-If enabled, the
-.B IP_TOS
+If enabled,
+the
+.BR IP_TOS (2const)
 ancillary message is passed with incoming packets.
 It contains a byte which specifies the Type of Service/Precedence
 field of the packet header.
-Expects a boolean integer flag.
+.P
 Not supported for
 .B SOCK_STREAM
 sockets.
@@ -38,6 +36,9 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 2.2.
+.\" Precisely: since Linux 2.1.68
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
