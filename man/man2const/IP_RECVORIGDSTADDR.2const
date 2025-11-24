@@ -19,17 +19,17 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_RECVORIGDSTADDR " (since Linux 2.6.29)"
-.\" commit e8b2dfe9b4501ed0047459b2756ba26e5a940a69
 This boolean option enables the
 .B IP_ORIGDSTADDR
 ancillary message in
 .BR recvmsg (2),
 in which the kernel returns the original destination address
 of the datagram being received.
+.P
 The ancillary message contains a
-.IR "struct sockaddr_in" .
+.BR sockaddr_in (2type)
+structure.
+.P
 Not supported for
 .B SOCK_STREAM
 sockets.
@@ -42,6 +42,9 @@ See
 .BR ip (7).
 .SH STANDARDS
 Linux.
+.SH HISTORY
+Linux 2.6.29.
+.\" commit e8b2dfe9b4501ed0047459b2756ba26e5a940a69
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
