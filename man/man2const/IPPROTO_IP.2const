@@ -58,14 +58,8 @@ and read with
 The socket option level for IP is
 .BR IPPROTO_IP .
 .\" or SOL_IP on Linux
-A boolean integer flag is zero when it is false, otherwise true.
 .P
-When an invalid socket option is specified,
-.BR getsockopt (2)
-and
-.BR setsockopt (2)
-fail with the error
-.BR ENOPROTOOPT .
+The following socket options are supported.
 .TP
 .BR IP_ADD_MEMBERSHIP (2const)
 .TQ
@@ -135,6 +129,10 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.TP
+.B ENOPROTOOPT
+.I opt
+is invalid.
 .\" .SH STANDARDS
 .\" IP_XFRM_POLICY is Linux-specific
 .\" IP_IPSEC_POLICY is a nonstandard extension, also present on some BSDs
