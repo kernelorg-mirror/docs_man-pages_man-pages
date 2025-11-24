@@ -104,74 +104,8 @@ fail with the error
 .BR IP_OPTIONS (2const)
 .TQ
 .BR IP_PASSSEC (2const)
-.TP
-.BR IP_PKTINFO " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.68
-Pass an
-.B IP_PKTINFO
-ancillary message that contains a
-.I pktinfo
-structure that supplies some information about the incoming packet.
-This works only for datagram oriented sockets.
-The argument is a flag that tells the socket whether the
-.B IP_PKTINFO
-message should be passed or not.
-The message itself can be sent/retrieved
-only as a control message with a packet using
-.BR recvmsg (2)
-or
-.BR sendmsg (2).
-.IP
-.in +4n
-.EX
-struct in_pktinfo {
-    unsigned int   ipi_ifindex;  /* Interface index */
-    struct in_addr ipi_spec_dst; /* Local address */
-    struct in_addr ipi_addr;     /* Header Destination
-                                    address */
-};
-.EE
-.in
-.IP
-When returned by
-.BR recvmsg (2) ,
-.I ipi_ifindex
-is the unique index of the interface the packet was received on.
-.I ipi_spec_dst
-is the preferred source address for replies to the given packet,
-and
-.I ipi_addr
-is the destination address in the packet header.
-These addresses are usually the same,
-but can differ for broadcast or multicast packets.
-Depending on the configured routes,
-.I ipi_spec_dst
-might belong to a different interface from the one that received the packet.
-.IP
-If
-.B IP_PKTINFO
-is passed to
-.BR sendmsg (2)
-and
-.\" This field is grossly misnamed
-.I ipi_spec_dst
-is not zero,
-then it is used as the local source address,
-for the routing table lookup,
-and for setting up IP source route options.
-When
-.I ipi_ifindex
-is not zero,
-the primary local address of the interface specified by the index
-overwrites
-.I ipi_spec_dst
-for the routing table lookup.
-.I ipi_addr
-is ignored.
-.IP
-Not supported for
-.B SOCK_STREAM
-sockets.
+.TQ
+.BR IP_PKTINFO (2const)
 .TP
 .BR IP_RECVERR " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.15
@@ -513,7 +447,6 @@ See
 .BR ip (7).
 .SH NOTES
 .BR IP_RECVORIGDSTADDR ,
-.BR IP_PKTINFO ,
 .BR IP_RECVERR ,
 .BR IP_ROUTER_ALERT ,
 and
@@ -521,16 +454,6 @@ and
 are Linux-specific.
 .\" IP_XFRM_POLICY is Linux-specific
 .\" IP_IPSEC_POLICY is a nonstandard extension, also present on some BSDs
-.P
-Some other BSD sockets implementations provide
-.B IP_RCVDSTADDR
-and
-.B IP_RECVIF
-socket options to get the destination address and the interface of
-received datagrams.
-Linux has the more general
-.B IP_PKTINFO
-for the same task.
 .P
 Some BSD sockets implementations also provide an
 .B IP_RECVTTL
