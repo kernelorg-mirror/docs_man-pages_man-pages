@@ -20,16 +20,11 @@ Standard C library
 .B "               sizeof(struct\~ip_mreq_source));"
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_UNBLOCK_SOURCE " (since Linux 2.4.22 / 2.5.68)"
 Unblock previously blocked multicast source.
-Returns
+.P
+Fails with
 .B EADDRNOTAVAIL
 when given source is not being blocked.
-.IP
-Argument is an
-.BR ip_mreq_source (2type)
-structure.
 .SH ERRORS
 See
 .BR IPPROTO_IP (2const).
@@ -37,6 +32,8 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 2.4.22, Linux 2.5.68.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
