@@ -122,31 +122,8 @@ fail with the error
 .BR IP_ROUTER_ALERT (2const)
 .TQ
 .BR IP_TOS (2const)
-.TP
-.BR IP_TRANSPARENT " (since Linux 2.6.24)"
-.\" commit f5715aea4564f233767ea1d944b2637a5fd7cd2e
-.\"     This patch introduces the IP_TRANSPARENT socket option: enabling that
-.\"     will make the IPv4 routing omit the non-local source address check on
-.\"     output.  Setting IP_TRANSPARENT requires NET_ADMIN capability.
-.\" http://lwn.net/Articles/252545/
-Setting this boolean option enables transparent proxying on this socket.
-This socket option allows
-the calling application to bind to a nonlocal IP address and operate
-both as a client and a server with the foreign address as the local endpoint.
-NOTE: this requires that routing be set up in a way that
-packets going to the foreign address are routed through the TProxy box
-(i.e., the system hosting the application that employs the
-.B IP_TRANSPARENT
-socket option).
-Enabling this socket option requires superuser privileges
-(the
-.B CAP_NET_ADMIN
-or
-.B CAP_NET_RAW
-capability).
-.IP
-TProxy redirection with the iptables TPROXY target also requires that
-this option be set on the redirected socket.
+.TQ
+.BR IP_TRANSPARENT (2const)
 .TP
 .BR IP_TTL " (since Linux 1.0)"
 Set or retrieve the current time-to-live field that is used in every packet
@@ -223,9 +200,7 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
-.SH NOTES
-.B IP_TRANSPARENT
-is Linux-specific.
+.\" .SH STANDARDS
 .\" IP_XFRM_POLICY is Linux-specific
 .\" IP_IPSEC_POLICY is a nonstandard extension, also present on some BSDs
 .SH SEE ALSO
