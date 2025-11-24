@@ -112,18 +112,8 @@ fail with the error
 .BR IP_RECVOPTS (2const)
 .TQ
 .BR IP_RECVORIGDSTADDR (2const)
-.TP
-.BR IP_RECVTOS " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.68
-If enabled, the
-.B IP_TOS
-ancillary message is passed with incoming packets.
-It contains a byte which specifies the Type of Service/Precedence
-field of the packet header.
-Expects a boolean integer flag.
-Not supported for
-.B SOCK_STREAM
-sockets.
+.TQ
+.BR IP_RECVTOS (2const)
 .TP
 .BR IP_RECVTTL " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.68
