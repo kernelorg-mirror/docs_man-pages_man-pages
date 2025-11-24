@@ -21,28 +21,33 @@ Standard C library
 .BI "               int\~*" tos ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_TOS " (since Linux 1.0)"
 Set or receive the Type-Of-Service (TOS) field that is sent
 with every IP packet originating from this socket.
 It is used to prioritize packets on the network.
-TOS is a byte.
+.P
 There are some standard TOS flags defined:
+.TP
 .B IPTOS_LOWDELAY
 to minimize delays for interactive traffic,
+.TP
 .B IPTOS_THROUGHPUT
 to optimize throughput,
+.TP
 .B IPTOS_RELIABILITY
 to optimize for reliability,
+.TP
 .B IPTOS_MINCOST
 should be used for "filler data" where slow transmission doesn't matter.
+.P
 At most one of these TOS values can be specified.
 Other bits are invalid and shall be cleared.
+.P
 Linux sends
 .B IPTOS_LOWDELAY
 datagrams first by default,
 but the exact behavior depends on the configured queueing discipline.
 .\" FIXME elaborate on this
+.P
 Some high-priority levels may require superuser privileges (the
 .B CAP_NET_ADMIN
 capability).
@@ -57,6 +62,8 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 1.0.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
