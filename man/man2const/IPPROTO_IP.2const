@@ -108,17 +108,8 @@ fail with the error
 .BR IP_PKTINFO (2const)
 .TQ
 .BR IP_RECVERR (2const)
-.TP
-.BR IP_RECVOPTS " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.15
-Pass all incoming IP options to the user in a
-.BR IP_OPTIONS (2const)
-control message.
-The routing header and other options are already filled in
-for the local host.
-Not supported for
-.B SOCK_STREAM
-sockets.
+.TQ
+.BR IP_RECVOPTS (2const)
 .TP
 .BR IP_RECVORIGDSTADDR " (since Linux 2.6.29)"
 .\" commit e8b2dfe9b4501ed0047459b2756ba26e5a940a69
@@ -159,7 +150,7 @@ sockets.
 .BR IP_RETOPTS " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.15
 Identical to
-.BR IP_RECVOPTS ,
+.BR IP_RECVOPTS (2const),
 but returns raw unprocessed options with timestamp and route record
 options not filled in for this hop.
 Not supported for
