@@ -100,35 +100,8 @@ fail with the error
 .BR IP_MULTICAST_TTL (2const)
 .TQ
 .BR IP_NODEFRAG (2const)
-.TP
-.BR IP_OPTIONS " (since Linux 2.0)"
-.\" Precisely: since Linux 1.3.30
-Set or get the IP options to be sent with every packet from this socket.
-The arguments are a pointer to a memory buffer containing the options
-and the option length.
-The
-.BR setsockopt (2)
-call sets the IP options associated with a socket.
-The maximum option size for IPv4 is 40 bytes.
-See RFC\ 791 for the allowed options.
-When the initial connection request packet for a
-.B SOCK_STREAM
-socket contains IP options, the IP options will be set automatically
-to the options from the initial packet with routing headers reversed.
-Incoming packets are not allowed to change options after the connection
-is established.
-The processing of all incoming source routing options
-is disabled by default and can be enabled by using the
-.I accept_source_route
-.I /proc
-interface.
-Other options like timestamps are still handled.
-For datagram sockets, IP options can be set only by the local user.
-Calling
-.BR getsockopt (2)
-with
-.B IP_OPTIONS
-puts the current IP options used for sending into the supplied buffer.
+.TQ
+.BR IP_OPTIONS (2const)
 .TP
 .BR IP_PASSSEC " (since Linux 2.6.17)"
 .\" commit 2c7946a7bf45ae86736ab3b43d0085e43947945c
@@ -340,7 +313,8 @@ address is
 .B AF_UNSPEC
 when the source was unknown.
 When the error originated from the network, all IP options
-.RB ( IP_OPTIONS ", " IP_TTL ,
+.RB ( IP_OPTIONS (2const),
+.BR IP_TTL (2const),
 etc.) enabled on the socket and contained in the
 error packet are passed as control messages.
 The payload of the packet causing the error is returned as normal payload.
@@ -380,7 +354,7 @@ defaults to off.
 .BR IP_RECVOPTS " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.15
 Pass all incoming IP options to the user in a
-.B IP_OPTIONS
+.BR IP_OPTIONS (2const)
 control message.
 The routing header and other options are already filled in
 for the local host.
