@@ -117,31 +117,19 @@ are implemented by higher level protocols like
 and
 .BR tcp (7).
 On raw sockets
-.I sin_port
+.I .sin_port
 is set to the IP protocol.
 .P
-.in +4n
-.EX
-struct sockaddr_in {
-    sa_family_t    sin_family; /* address family: AF_INET */
-    in_port_t      sin_port;   /* port in network byte order */
-    struct in_addr sin_addr;   /* internet address */
-};
-\&
-/* Internet address */
-struct in_addr {
-    uint32_t       s_addr;     /* address in network byte order */
-};
-.EE
-.in
+See
+.BR sockaddr_in (3type).
 .P
-.I sin_family
+.I .sin_family
 is always set to
 .BR AF_INET .
 This is required; in Linux 2.2 most networking functions return
 .B EINVAL
 when this setting is missing.
-.I sin_port
+.I .sin_port
 contains the port in network byte order.
 The port numbers below 1024 are called
 .I privileged ports
@@ -159,14 +147,15 @@ port, they are implemented only by higher protocols like
 and
 .BR udp (7).
 .P
-.I sin_addr
+.I .sin_addr
 is the IP host address.
 The
-.I s_addr
-member of
-.I struct in_addr
+.I .s_addr
+member of the
+.BR in_addr (3type)
+structure
 contains the host interface address in network byte order.
-.I in_addr
+.BR in_addr (3type)
 should be assigned one of the
 .B INADDR_*
 values
