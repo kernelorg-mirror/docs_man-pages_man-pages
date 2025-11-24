@@ -19,13 +19,11 @@ Standard C library
 .BI "               const\~int\~*" enabled ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_RETOPTS " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.15
 Identical to
 .BR IP_RECVOPTS (2const),
 but returns raw unprocessed options with timestamp and route record
 options not filled in for this hop.
+.P
 Not supported for
 .B SOCK_STREAM
 sockets.
@@ -36,6 +34,9 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 2.2.
+.\" Precisely: since Linux 2.1.15
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
