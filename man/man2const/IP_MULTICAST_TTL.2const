@@ -21,14 +21,11 @@ Standard C library
 .BI "               int\~*" ttl ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_MULTICAST_TTL " (since Linux 1.2)"
 Set or read the time-to-live value of outgoing multicast packets for this
 socket.
-It is very important for multicast packets to set the smallest TTL possible.
+.P
 The default is 1 which means that multicast packets don't leave the local
 network unless the user program explicitly requests it.
-Argument is an integer.
 .SH ERRORS
 See
 .BR IPPROTO_IP (2const).
@@ -36,6 +33,10 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 1.2.
+.SH CAVEATS
+It is very important for multicast packets to set the smallest TTL possible.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
