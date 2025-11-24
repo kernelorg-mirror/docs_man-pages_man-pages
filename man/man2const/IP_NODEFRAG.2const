@@ -19,12 +19,11 @@ Standard C library
 .BI "               const\~int\~*" val ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_NODEFRAG " (since Linux 2.6.36)"
-If enabled (argument is nonzero),
+If
+.I val
+is nonzero,
 the reassembly of outgoing packets is disabled in the netfilter layer.
-The argument is an integer.
-.IP
+.P
 This option is valid only for
 .B SOCK_RAW
 sockets.
@@ -35,6 +34,8 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 2.6.36.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
