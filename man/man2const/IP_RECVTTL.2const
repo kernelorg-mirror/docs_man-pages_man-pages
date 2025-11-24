@@ -19,13 +19,13 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_RECVTTL " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.68
-When this flag is set, pass a
-.B IP_TTL
-control message with the time-to-live
-field of the received packet as a 32 bit integer.
+When this flag is set,
+pass a
+.BR IP_TTL (2const)
+control message
+with the time-to-live field
+of the received packet as a 32 bit integer.
+.P
 Not supported for
 .B SOCK_STREAM
 sockets.
@@ -43,8 +43,11 @@ option, but an ancillary message with type
 .B IP_RECVTTL
 is passed with the incoming packet.
 This is different from the
-.B IP_TTL
+.BR IP_TTL (2const)
 option used in Linux.
+.SH HISTORY
+Linux 2.2.
+.\" Precisely: since Linux 2.1.68
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
