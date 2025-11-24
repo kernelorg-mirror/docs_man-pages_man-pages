@@ -21,9 +21,8 @@ Standard C library
 .BI "               struct\~in_addr\~*" val ,\~sizeof(struct\~in_addr));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_MULTICAST_IF " (since Linux 1.2)"
 Set the local device for a multicast socket.
+.P
 The argument for
 .BR setsockopt (2)
 is an
@@ -35,16 +34,11 @@ or
 .BR ip_mreq (2type)
 structure,
 or an
-.I in_addr
+.BR in_addr (2type)
 structure.
 (The kernel determines which structure is being passed based
 on the size passed in
-.IR optlen .)
-For
-.BR getsockopt (2),
-the argument is an
-.I in_addr
-structure.
+.IR size .)
 .SH ERRORS
 See
 .BR IPPROTO_IP (2const).
@@ -52,7 +46,11 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 1.2.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
+.BR in_addr (2type),
+.BR ip_mreqn (2type),
 .BR setsockopt (2),
 .BR ip (7)
