@@ -110,20 +110,8 @@ fail with the error
 .BR IP_RECVERR (2const)
 .TQ
 .BR IP_RECVOPTS (2const)
-.TP
-.BR IP_RECVORIGDSTADDR " (since Linux 2.6.29)"
-.\" commit e8b2dfe9b4501ed0047459b2756ba26e5a940a69
-This boolean option enables the
-.B IP_ORIGDSTADDR
-ancillary message in
-.BR recvmsg (2),
-in which the kernel returns the original destination address
-of the datagram being received.
-The ancillary message contains a
-.IR "struct sockaddr_in" .
-Not supported for
-.B SOCK_STREAM
-sockets.
+.TQ
+.BR IP_RECVORIGDSTADDR (2const)
 .TP
 .BR IP_RECVTOS " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.68
@@ -299,7 +287,6 @@ See
 See
 .BR ip (7).
 .SH NOTES
-.BR IP_RECVORIGDSTADDR ,
 .BR IP_ROUTER_ALERT ,
 and
 .B IP_TRANSPARENT
