@@ -22,14 +22,14 @@ Standard C library
 .BI "               int\~*" val ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_MTU_DISCOVER " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.124
 Set or receive the Path MTU Discovery setting for a socket.
-When enabled, Linux will perform Path MTU Discovery
+.P
+When enabled,
+Linux will perform Path MTU Discovery
 as defined in RFC\ 1191 on
 .B SOCK_STREAM
 sockets.
+.P
 For
 .RB non- SOCK_STREAM
 sockets,
@@ -43,7 +43,7 @@ datagrams that are bigger than the known path MTU.
 .B IP_PMTUDISC_WANT
 will fragment a datagram if needed according to the path MTU,
 or will set the don't-fragment flag otherwise.
-.IP
+.P
 The system-wide default can be toggled between
 .B IP_PMTUDISC_WANT
 and
@@ -61,7 +61,7 @@ IP_PMTUDISC_DONT:Never do Path MTU Discovery.
 IP_PMTUDISC_DO:Always do Path MTU Discovery.
 IP_PMTUDISC_PROBE:Set DF but ignore Path MTU.
 .TE
-.IP
+.P
 When PMTU discovery is enabled, the kernel automatically keeps track of
 the path MTU per destination host.
 When it is connected to a specific peer with
@@ -75,18 +75,18 @@ The path MTU may change over time.
 For connectionless sockets with many destinations,
 the new MTU for a given destination can also be accessed using the
 error queue (see
-.BR IP_RECVERR ).
+.BR IP_RECVERR (2const)).
 A new error will be queued for every incoming MTU update.
-.IP
+.P
 While MTU discovery is in progress, initial packets from datagram sockets
 may be dropped.
 Applications using UDP should be aware of this and not
 take it into account for their packet retransmit strategy.
-.IP
+.P
 To bootstrap the path MTU discovery process on unconnected sockets, it
 is possible to start with a big datagram size
 (headers up to 64 kilobytes long) and let it shrink by updates of the path MTU.
-.IP
+.P
 To get an initial estimate of the
 path MTU, connect a datagram socket to the destination address using
 .BR connect (2)
@@ -95,14 +95,13 @@ and retrieve the MTU by calling
 with the
 .BR IP_MTU (2const)
 option.
-.IP
+.P
 It is possible to implement RFC 4821 MTU probing with
 .B SOCK_DGRAM
 or
 .B SOCK_RAW
 sockets by setting a value of
-.B IP_PMTUDISC_PROBE
-(available since Linux 2.6.22).
+.BR IP_PMTUDISC_PROBE .
 This is also particularly useful for diagnostic tools such as
 .BR tracepath (8)
 that wish to deliberately send probe packets larger than
@@ -116,6 +115,12 @@ See
 .BR ip (7).
 .SH STANDARDS
 Linux.
+.SH HISTORY
+Linux 2.2.
+.\" Precisely: since Linux 2.1.124
+.TP
+.B IP_PMTUDISC_PROBE
+Linux 2.6.22.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
