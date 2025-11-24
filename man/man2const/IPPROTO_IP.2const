@@ -116,16 +116,8 @@ fail with the error
 .BR IP_RECVTOS (2const)
 .TQ
 .BR IP_RECVTTL (2const)
-.TP
-.BR IP_RETOPTS " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.15
-Identical to
-.BR IP_RECVOPTS (2const),
-but returns raw unprocessed options with timestamp and route record
-options not filled in for this hop.
-Not supported for
-.B SOCK_STREAM
-sockets.
+.TQ
+.BR IP_RETOPTS (2const)
 .TP
 .BR IP_ROUTER_ALERT " (since Linux 2.2)"
 .\" Precisely: since Linux 2.1.68
