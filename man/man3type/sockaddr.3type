@@ -58,7 +58,9 @@ Describes a socket's protocol family.
 This is an unsigned integer type.
 .SS Internet domain sockets
 See
-.BR sockaddr_in (3type).
+.BR sockaddr_in (3type)
+and
+.BR sockaddr_in6 (3type).
 .SS UNIX domain sockets
 .TP
 .I sockaddr_un
