@@ -96,14 +96,8 @@ fail with the error
 .BR IP_MULTICAST_IF (2const)
 .TQ
 .BR IP_MULTICAST_LOOP (2const)
-.TP
-.BR IP_MULTICAST_TTL " (since Linux 1.2)"
-Set or read the time-to-live value of outgoing multicast packets for this
-socket.
-It is very important for multicast packets to set the smallest TTL possible.
-The default is 1 which means that multicast packets don't leave the local
-network unless the user program explicitly requests it.
-Argument is an integer.
+.TQ
+.BR IP_MULTICAST_TTL (2const)
 .TP
 .BR IP_NODEFRAG " (since Linux 2.6.36)"
 If enabled (argument is nonzero),
