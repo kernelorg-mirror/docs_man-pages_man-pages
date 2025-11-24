@@ -94,10 +94,8 @@ fail with the error
 .BR IP_MULTICAST_ALL (2const)
 .TQ
 .BR IP_MULTICAST_IF (2const)
-.TP
-.BR IP_MULTICAST_LOOP " (since Linux 1.2)"
-Set or read a boolean integer argument that determines whether
-sent multicast packets should be looped back to the local sockets.
+.TQ
+.BR IP_MULTICAST_LOOP (2const)
 .TP
 .BR IP_MULTICAST_TTL " (since Linux 1.2)"
 Set or read the time-to-live value of outgoing multicast packets for this
