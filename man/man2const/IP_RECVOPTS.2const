@@ -19,14 +19,13 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_RECVOPTS " (since Linux 2.2)"
-.\" Precisely: since Linux 2.1.15
 Pass all incoming IP options to the user in a
 .BR IP_OPTIONS (2const)
 control message.
+.P
 The routing header and other options are already filled in
 for the local host.
+.P
 Not supported for
 .B SOCK_STREAM
 sockets.
@@ -37,6 +36,9 @@ See
 .BR setsockopt (2).
 See
 .BR ip (7).
+.SH HISTORY
+Linux 2.2.
+.\" Precisely: since Linux 2.1.15
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
