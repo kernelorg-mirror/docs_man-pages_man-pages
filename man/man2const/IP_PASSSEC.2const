@@ -21,35 +21,37 @@ Standard C library
 .BI "               int\~*" enabled ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IP_PASSSEC " (since Linux 2.6.17)"
-.\" commit 2c7946a7bf45ae86736ab3b43d0085e43947945c
 If labeled IPSEC or NetLabel is configured on the sending and receiving
 hosts, this option enables receiving of the security context of the peer
 socket in an ancillary message of type
 .B SCM_SECURITY
 retrieved using
 .BR recvmsg (2).
+.P
 This option is supported only for UDP sockets;
 for TCP or SCTP sockets,
-see the description of the
-.B SO_PEERSEC
-option below.
-.IP
-The value given as an argument to
-.BR setsockopt (2)
-and returned as the result of
-.BR getsockopt (2)
-is an integer boolean flag.
-.IP
+see
+.BR SO_PEERSEC (2const).
+.P
 The security context returned in the
 .B SCM_SECURITY
 ancillary message
-is of the same format as the one described under the
-.B SO_PEERSEC
-option below.
-.IP
-Note: the reuse of the
+is of the same format as the one described in
+.BR SO_PEERSEC (2const).
+.SH ERRORS
+See
+.BR IPPROTO_IP (2const).
+See
+.BR setsockopt (2).
+See
+.BR ip (7).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.6.17.
+.\" commit 2c7946a7bf45ae86736ab3b43d0085e43947945c
+.SH CAVEATS
+The reuse of the
 .B SCM_SECURITY
 message type for the
 .B IP_PASSSEC
@@ -61,15 +63,6 @@ There is no conflict currently since the IP option with the same value as
 is
 .BR IP_HDRINCL (2const)
 and this is never used for a control message type.
-.SH ERRORS
-See
-.BR IPPROTO_IP (2const).
-See
-.BR setsockopt (2).
-See
-.BR ip (7).
-.SH STANDARDS
-Linux.
 .SH SEE ALSO
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
