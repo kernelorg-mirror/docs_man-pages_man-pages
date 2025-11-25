@@ -23,21 +23,24 @@ struct in_pktinfo {
 };
 .EE
 .SH DESCRIPTION
+.SS recvmsg(2)
 When returned by
 .BR recvmsg (2) ,
 .I .ipi_ifindex
 is the unique index of the interface the packet was received on.
+.P
 .I .ipi_spec_dst
-is the preferred source address for replies to the given packet,
-and
+is the preferred source address for replies to the given packet.
+.P
 .I .ipi_addr
 is the destination address in the packet header.
+.P
 These addresses are usually the same,
 but can differ for broadcast or multicast packets.
 Depending on the configured routes,
 .I .ipi_spec_dst
 might belong to a different interface from the one that received the packet.
-.P
+.SS sendmsg(2)
 If
 .B IP_PKTINFO
 is passed to
@@ -49,6 +52,7 @@ is not zero,
 then it is used as the local source address,
 for the routing table lookup,
 and for setting up IP source route options.
+.P
 When
 .I .ipi_ifindex
 is not zero,
@@ -56,6 +60,7 @@ the primary local address of the interface specified by the index
 overwrites
 .I .ipi_spec_dst
 for the routing table lookup.
+.P
 .I .ipi_addr
 is ignored.
 .SH STANDARDS
