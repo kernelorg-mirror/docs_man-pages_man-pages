@@ -18,19 +18,11 @@ Standard C library
 .BI int\~setsockopt(int\~ sockfd ,\~IPPROTO_IP,\~IP_PKTINFO,
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
-.P
-.EX
-struct in_pktinfo {
-    unsigned int    ipi_ifindex;   /* Interface index */
-    struct in_addr  ipi_spec_dst;  /* Local address */
-    struct in_addr  ipi_addr;      /* Header Destination address */
-};
-.EE
 .SH DESCRIPTION
 Pass an
 .B IP_PKTINFO
 ancillary message that contains a
-.I pktinfo
+.BR pktinfo (2type)
 structure that supplies some information about the incoming packet.
 This works only for datagram oriented sockets.
 .P
@@ -43,42 +35,6 @@ only as a control message with a packet using
 .BR recvmsg (2)
 or
 .BR sendmsg (2).
-.P
-When returned by
-.BR recvmsg (2) ,
-.I .ipi_ifindex
-is the unique index of the interface the packet was received on.
-.I .ipi_spec_dst
-is the preferred source address for replies to the given packet,
-and
-.I .ipi_addr
-is the destination address in the packet header.
-These addresses are usually the same,
-but can differ for broadcast or multicast packets.
-Depending on the configured routes,
-.I .ipi_spec_dst
-might belong to a different interface from the one that received the packet.
-.P
-If
-.B IP_PKTINFO
-is passed to
-.BR sendmsg (2)
-and
-.\" This field is grossly misnamed
-.I .ipi_spec_dst
-is not zero,
-then it is used as the local source address,
-for the routing table lookup,
-and for setting up IP source route options.
-When
-.I .ipi_ifindex
-is not zero,
-the primary local address of the interface specified by the index
-overwrites
-.I .ipi_spec_dst
-for the routing table lookup.
-.I .ipi_addr
-is ignored.
 .P
 Not supported for
 .B SOCK_STREAM
@@ -106,6 +62,7 @@ Linux.
 Linux 2.2.
 .\" Precisely: since Linux 2.1.68
 .SH SEE ALSO
+.BR in_pktinfo (2const),
 .BR IPPROTO_IP (2const),
 .BR setsockopt (2),
 .BR ip (7)
