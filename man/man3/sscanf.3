@@ -172,6 +172,9 @@ and these discarded characters don't count toward the maximum field width.
 String input conversions store a terminating null byte (\[aq]\[rs]0\[aq])
 to mark the end of the input;
 the maximum field width does not include this terminator.
+Some conversions require exactly
+the number of characters specified in the maximum field width,
+or they fail.
 .TP
 \[bu]
 An optional
@@ -480,6 +483,10 @@ and there must be enough room for all the characters
 (no terminating null byte is added).
 The usual skip of leading white space is suppressed.
 To skip white space first, use an explicit space in the format.
+.\" glibc commit 2b16c76609350ec887d49afd4447743da38f7fab
+This conversion only succeeds
+if the number of characters specified by the maximum field
+can be matched.
 .TP
 .B \&[
 Matches a nonempty sequence of characters from the specified set of
