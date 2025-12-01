@@ -114,12 +114,8 @@ The following socket options are supported.
 .BR IPV6_MTU (2const)
 .TQ
 .BR IPV6_MTU_DISCOVER (2const)
-.TP
-.B IPV6_MULTICAST_HOPS
-Set the multicast hop limit for the socket.
-Argument is a pointer to an integer.
-\-1 in the value means use the route default,
-otherwise it should be between 0 and 255.
+.TQ
+.BR IPV6_MULTICAST_HOPS (2const)
 .TP
 .B IPV6_MULTICAST_IF
 Set the device for outgoing multicast packets on the socket.
