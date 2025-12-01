@@ -138,12 +138,8 @@ The following socket options are supported.
 .BR IPV6_RECVERR (2const)
 .TQ
 .BR IPV6_ROUTER_ALERT (2const)
-.TP
-.B IPV6_UNICAST_HOPS
-Set the unicast hop limit for the socket.
-Argument is a pointer to an integer.
-\-1 in the value means use the route default,
-otherwise it should be between 0 and 255.
+.TQ
+.BR IPV6_UNICAST_HOPS (2const)
 .TP
 .BR IPV6_V6ONLY " (since Linux 2.4.21 and 2.6)"
 .\" See RFC 3493
