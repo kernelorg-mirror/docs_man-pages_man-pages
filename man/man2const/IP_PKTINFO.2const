@@ -22,7 +22,7 @@ Standard C library
 Pass an
 .B IP_PKTINFO
 ancillary message that contains a
-.BR pktinfo (2type)
+.BR in_pktinfo (2type)
 structure that supplies some information about the incoming packet.
 This works only for datagram oriented sockets.
 .P
