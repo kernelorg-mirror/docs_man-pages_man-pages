@@ -16,7 +16,9 @@ l l l.
 Operator	Associativity	Notes
 () _Generic()	-	[1]
 [] () . \-> ++ \-\- (type){}	left to right	[2] [3]
-++ \-\- & * + \- \[ti] ! _Countof sizeof alignof	right to left	[4]
+T{
+++ \-\- & * + \- \[ti] ! _Countof sizeof alignof _Maxof _Minof
+T}	right to left	[4]
 (type)	right to left
 * / %	left to right
 + \-	left to right
