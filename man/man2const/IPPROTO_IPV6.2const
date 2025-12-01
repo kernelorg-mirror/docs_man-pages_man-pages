@@ -136,21 +136,8 @@ The following socket options are supported.
 .BR IPV6_HOPLIMIT (2const)
 .TQ
 .BR IPV6_RECVERR (2const)
-.TP
-.B IPV6_ROUTER_ALERT
-Pass forwarded packets containing a router alert hop-by-hop option to
-this socket.
-Allowed only for
-.B SOCK_RAW
-sockets.
-The tapped packets are not forwarded by the kernel, it is the
-user's responsibility to send them out again.
-Argument is a pointer to an integer.
-A positive integer indicates a router alert option value to intercept.
-Packets carrying a router alert option with a value field containing
-this integer will be delivered to the socket.
-A negative integer disables delivery of packets with router alert options
-to this socket.
+.TQ
+.BR IPV6_ROUTER_ALERT (2const)
 .TP
 .B IPV6_UNICAST_HOPS
 Set the unicast hop limit for the socket.
