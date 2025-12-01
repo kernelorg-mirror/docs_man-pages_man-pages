@@ -22,11 +22,7 @@ Standard C library
 .BI "               const\~struct\~ipv6_mreq\~*" val ,\~sizeof(struct\~ipv6_mreq));
 .fi
 .SH DESCRIPTION
-.TP
-.B IPV6_ADD_MEMBERSHIP, IPV6_DROP_MEMBERSHIP
-Control membership in multicast groups.
-Argument is a pointer to a
-.IR "struct ipv6_mreq" .
+Join or leave a multicast group.
 .P
 See
 .BR IP_ADD_MULTICAST (2const)
