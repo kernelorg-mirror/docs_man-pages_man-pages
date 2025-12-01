@@ -122,8 +122,6 @@ The following socket options are supported.
 .BR IP_TTL (2const)
 .TQ
 .BR IP_UNBLOCK_SOURCE (2const)
-.TQ
-.BR SO_PEERSEC (2const)
 .SH ERRORS
 See
 .BR setsockopt (2).
