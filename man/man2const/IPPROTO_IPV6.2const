@@ -134,15 +134,8 @@ The following socket options are supported.
 .BR IPV6_FLOWINFO (2const)
 .TQ
 .BR IPV6_HOPLIMIT (2const)
-.TP
-.B IPV6_RECVERR
-Control receiving of asynchronous error options.
-See
-.B IP_RECVERR
-in
-.BR ip (7)
-for details.
-Argument is a pointer to boolean.
+.TQ
+.BR IPV6_RECVERR (2const)
 .TP
 .B IPV6_ROUTER_ALERT
 Pass forwarded packets containing a router alert hop-by-hop option to
