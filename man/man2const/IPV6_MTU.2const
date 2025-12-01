@@ -22,17 +22,14 @@ Standard C library
 .fi
 .SH DESCRIPTION
 .TP
-.B IPV6_MTU
 .BR getsockopt ():
 Retrieve the current known path MTU of the current socket.
 Valid only when the socket has been connected.
-Returns an integer.
-.IP
+.TP
 .BR setsockopt ():
 Set the MTU to be used for the socket.
 The MTU is limited by the device
 MTU or the path MTU when path MTU discovery is enabled.
-Argument is a pointer to integer.
 .SH ERRORS
 See
 .BR IPPROTO_IPV6 (2const).
