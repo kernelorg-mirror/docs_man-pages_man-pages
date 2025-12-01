@@ -21,14 +21,14 @@ Standard C library
 .BI "               int\~*" ifindex ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.B IPV6_MULTICAST_IF
 Set the device for outgoing multicast packets on the socket.
+.P
 This is allowed only for
 .B SOCK_DGRAM
 and
 .B SOCK_RAW
 socket.
+.P
 The argument is a pointer to an interface index
 (see
 .BR netdevice (7))
