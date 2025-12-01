@@ -35,33 +35,38 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.B \%IPV6_RTHDR, \%IPV6_AUTHHDR, \%IPV6_DSTOPTS, \%IPV6_HOPOPTS, \
-\%IPV6_FLOWINFO, \%IPV6_HOPLIMIT
 Set delivery of control messages for incoming datagrams
 containing extension headers from the received packet.
+.TP
 .B IPV6_RTHDR
-delivers the routing header,
+delivers the routing header.
+.TP
 .B IPV6_AUTHHDR
-delivers the authentication header,
+delivers the authentication header.
+.TP
 .B IPV6_DSTOPTS
-delivers the destination options,
+delivers the destination options.
+.TP
 .B IPV6_HOPOPTS
-delivers the hop options,
+delivers the hop options.
+.TP
 .B IPV6_FLOWINFO
-delivers an integer containing the flow ID,
+delivers an integer containing the flow ID.
+.TP
 .B IPV6_HOPLIMIT
 delivers an integer containing the hop count of the packet.
+.P
 The control messages have the same type as the socket option.
+.P
 All these header options can also be set for outgoing packets
 by putting the appropriate control message into the control buffer of
 .BR sendmsg (2).
+.P
 Allowed only for
 .B SOCK_DGRAM
 or
 .B SOCK_RAW
 sockets.
-Argument is a pointer to a boolean value.
 .SH ERRORS
 See
 .BR IPPROTO_IPV6 (2const).
