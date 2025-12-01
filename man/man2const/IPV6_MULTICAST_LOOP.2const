@@ -21,10 +21,7 @@ Standard C library
 .BI "               int\~*" enabled ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.B IPV6_MULTICAST_LOOP
 Control whether the socket sees multicast packets that it has send itself.
-Argument is a pointer to boolean.
 .SH ERRORS
 See
 .BR IPPROTO_IPV6 (2const).
@@ -33,6 +30,7 @@ See
 See
 .BR ipv6 (7).
 .SH SEE ALSO
+.BR IP_MULTICAST_LOOP (2const),
 .BR IPPROTO_IPV6 (2const),
 .BR setsockopt (2),
 .BR ipv6 (7)
