@@ -122,33 +122,18 @@ The following socket options are supported.
 .BR IPV6_MULTICAST_LOOP (2const)
 .TQ
 .BR IPV6_RECVPKTINFO (2const)
-.TP
-.B \%IPV6_RTHDR, \%IPV6_AUTHHDR, \%IPV6_DSTOPTS, \%IPV6_HOPOPTS, \
-\%IPV6_FLOWINFO, \%IPV6_HOPLIMIT
-Set delivery of control messages for incoming datagrams
-containing extension headers from the received packet.
-.B IPV6_RTHDR
-delivers the routing header,
-.B IPV6_AUTHHDR
-delivers the authentication header,
-.B IPV6_DSTOPTS
-delivers the destination options,
-.B IPV6_HOPOPTS
-delivers the hop options,
-.B IPV6_FLOWINFO
-delivers an integer containing the flow ID,
-.B IPV6_HOPLIMIT
-delivers an integer containing the hop count of the packet.
-The control messages have the same type as the socket option.
-All these header options can also be set for outgoing packets
-by putting the appropriate control message into the control buffer of
-.BR sendmsg (2).
-Allowed only for
-.B SOCK_DGRAM
-or
-.B SOCK_RAW
-sockets.
-Argument is a pointer to a boolean value.
+.TQ
+.BR IPV6_RTHDR (2const)
+.TQ
+.BR IPV6_AUTHHDR (2const)
+.TQ
+.BR IPV6_DSTOPTS (2const)
+.TQ
+.BR IPV6_HOPOPTS (2const)
+.TQ
+.BR IPV6_FLOWINFO (2const)
+.TQ
+.BR IPV6_HOPLIMIT (2const)
 .TP
 .B IPV6_RECVERR
 Control receiving of asynchronous error options.
