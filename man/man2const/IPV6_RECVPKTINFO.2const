@@ -19,20 +19,18 @@ Standard C library
 .BI "               const\~int\~*" enable ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.BR IPV6_RECVPKTINFO " (since Linux 2.6.14)"
 Set delivery of the
 .B IPV6_PKTINFO
 control message on incoming datagrams.
 Such control messages contain a
 .IR "struct in6_pktinfo" ,
 as per RFC 3542.
+.P
 Allowed only for
 .B SOCK_DGRAM
 or
 .B SOCK_RAW
 sockets.
-Argument is a pointer to a boolean value in an integer.
 .SH ERRORS
 See
 .BR IPPROTO_IPV6 (2const).
@@ -40,6 +38,8 @@ See
 .BR setsockopt (2).
 See
 .BR ipv6 (7).
+.SH HISTORY
+Linux 2.6.14.
 .SH SEE ALSO
 .BR IPPROTO_IPV6 (2const),
 .BR setsockopt (2),
