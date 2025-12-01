@@ -21,12 +21,14 @@ Standard C library
 .BI "               int\~*" val ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.B IPV6_MULTICAST_HOPS
 Set the multicast hop limit for the socket.
-Argument is a pointer to an integer.
-\-1 in the value means use the route default,
-otherwise it should be between 0 and 255.
+.P
+A value of
+.B \-1
+means use the route default;
+otherwise it should be in the range
+.RB [ 0 ,
+.BR 255 ].
 .SH ERRORS
 See
 .BR IPPROTO_IPV6 (2const).
