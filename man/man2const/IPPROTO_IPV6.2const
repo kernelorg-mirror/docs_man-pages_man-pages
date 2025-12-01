@@ -106,11 +106,10 @@ A boolean integer flag is zero when it is false, otherwise true.
 The following socket options are supported.
 .TP
 .BR IPV6_ADDRFORM (2const)
-.TP
-.B IPV6_ADD_MEMBERSHIP, IPV6_DROP_MEMBERSHIP
-Control membership in multicast groups.
-Argument is a pointer to a
-.IR "struct ipv6_mreq" .
+.TQ
+.BR IPV6_ADD_MEMBERSHIP (2const)
+.TQ
+.BR IPV6_DROP_MEMBERSHIP (2const)
 .TP
 .B IPV6_MTU
 .BR getsockopt ():
