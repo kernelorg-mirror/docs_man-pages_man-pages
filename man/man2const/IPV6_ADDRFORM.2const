@@ -19,18 +19,17 @@ Standard C library
 .B "               &(const\~int){AF_INET},\~sizeof(int));"
 .fi
 .SH DESCRIPTION
-.TP
-.B IPV6_ADDRFORM
 Turn an
 .B AF_INET6
 socket into a socket of a different address family.
+.P
 Only
 .B AF_INET
 is currently supported for that.
+.P
 It is allowed only for IPv6 sockets
 that are connected and bound to a v4-mapped-on-v6 address.
-The argument is a pointer to an integer containing
-.BR AF_INET .
+.P
 This is useful to pass v4-mapped sockets as file descriptors to
 programs that don't know how to deal with the IPv6 API.
 .SH ERRORS
