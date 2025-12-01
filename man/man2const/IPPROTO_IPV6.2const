@@ -120,20 +120,8 @@ The following socket options are supported.
 .BR IPV6_MULTICAST_IF (2const)
 .TQ
 .BR IPV6_MULTICAST_LOOP (2const)
-.TP
-.BR IPV6_RECVPKTINFO " (since Linux 2.6.14)"
-Set delivery of the
-.B IPV6_PKTINFO
-control message on incoming datagrams.
-Such control messages contain a
-.IR "struct in6_pktinfo" ,
-as per RFC 3542.
-Allowed only for
-.B SOCK_DGRAM
-or
-.B SOCK_RAW
-sockets.
-Argument is a pointer to a boolean value in an integer.
+.TQ
+.BR IPV6_RECVPKTINFO (2const)
 .TP
 .B \%IPV6_RTHDR, \%IPV6_AUTHHDR, \%IPV6_DSTOPTS, \%IPV6_HOPOPTS, \
 \%IPV6_FLOWINFO, \%IPV6_HOPLIMIT
