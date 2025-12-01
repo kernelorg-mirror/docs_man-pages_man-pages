@@ -354,7 +354,7 @@ the sockets in the reuseport group (that is, all sockets which have
 .B SO_REUSEPORT
 set and are using the same local address to receive packets).
 .IP
-The BPF program must return an index between 0 and N\-1 representing
+The classic BPF program must return an index between 0 and N\-1 representing
 the socket which should receive the packet
 (where N is the number of sockets in the group).
 If the BPF program returns an invalid index,
@@ -368,6 +368,26 @@ Sockets are numbered in the order in which they are added to the group
 calls for UDP sockets or the order of
 .BR listen (2)
 calls for TCP sockets).
+.IP
+The extended BPF program can be of two types:
+.RS
+.TP
+.B BPF_PROG_TYPE_SOCKET_FILTER
+In this case,
+the extended BPF program must return an index between 0 and N\-1,
+like a classic BPF program.
+.TP
+.BR BPF_PROG_TYPE_SK_REUSEPORT " (since Linux 4.19)"
+In this case,
+it must return an action
+.RB ( SK_PASS
+or
+.BR SK_DROP )
+and the
+.B bpf_sk_select_reuseport
+helper can be used to select the socket which should receive the packet.
+.RE
+.IP
 New sockets added to a reuseport group will inherit the BPF program.
 When a socket is removed from a reuseport group (via
 .BR close (2)),
