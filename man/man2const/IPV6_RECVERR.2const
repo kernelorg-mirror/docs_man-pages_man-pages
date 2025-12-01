@@ -21,15 +21,10 @@ Standard C library
 .BI "               int\~*" enabled ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.B IPV6_RECVERR
 Control receiving of asynchronous error options.
+.P
 See
-.B IP_RECVERR
-in
-.BR ip (7)
-for details.
-Argument is a pointer to boolean.
+.BR IP_RECVERR (2const).
 .SH ERRORS
 See
 .BR IPPROTO_IPV6 (2const).
@@ -38,6 +33,7 @@ See
 See
 .BR ipv6 (7).
 .SH SEE ALSO
+.BR IP_RECVERR (2const),
 .BR IPPROTO_IPV6 (2const),
 .BR setsockopt (2),
 .BR cmsg (3),
