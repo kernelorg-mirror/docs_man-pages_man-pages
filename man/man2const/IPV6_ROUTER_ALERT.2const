@@ -19,20 +19,22 @@ Standard C library
 .BI "               const\~int\~*" val ,\~sizeof(int));
 .fi
 .SH DESCRIPTION
-.TP
-.B IPV6_ROUTER_ALERT
 Pass forwarded packets containing a router alert hop-by-hop option to
 this socket.
+.P
 Allowed only for
 .B SOCK_RAW
 sockets.
-The tapped packets are not forwarded by the kernel, it is the
-user's responsibility to send them out again.
-Argument is a pointer to an integer.
+.P
+The tapped packets are not forwarded by the kernel,
+it is the user's responsibility to send them out again.
+.P
 A positive integer indicates a router alert option value to intercept.
-Packets carrying a router alert option with a value field containing
-this integer will be delivered to the socket.
-A negative integer disables delivery of packets with router alert options
+Packets carrying a router alert option
+with a value field containing this integer
+will be delivered to the socket.
+A negative integer disables delivery of packets
+with router alert options
 to this socket.
 .SH ERRORS
 See
