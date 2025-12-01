@@ -118,10 +118,8 @@ The following socket options are supported.
 .BR IPV6_MULTICAST_HOPS (2const)
 .TQ
 .BR IPV6_MULTICAST_IF (2const)
-.TP
-.B IPV6_MULTICAST_LOOP
-Control whether the socket sees multicast packets that it has send itself.
-Argument is a pointer to boolean.
+.TQ
+.BR IPV6_MULTICAST_LOOP (2const)
 .TP
 .BR IPV6_RECVPKTINFO " (since Linux 2.6.14)"
 Set delivery of the
