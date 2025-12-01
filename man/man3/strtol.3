@@ -220,9 +220,9 @@ errno = 0;
 n = strtol(s, &end, base);
 if (end == s)
 	goto no_number;
-if ((errno == ERANGE && n == LONG_MIN) || n < min)
+if ((errno == ERANGE && n == _Minof(long)) || n < min)
 	goto too_low;
-if ((errno == ERANGE && n == LONG_MAX) || n > max)
+if ((errno == ERANGE && n == _Maxof(long)) || n > max)
 	goto too_high;
 .EE
 .in
