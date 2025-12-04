@@ -6,8 +6,10 @@ ifndef MAKEFILE_HELP_LIST_INCLUDED
 MAKEFILE_HELP_LIST_INCLUDED := 1
 
 
+include $(MAKEFILEDIR)/configure/build-depends/coreutils/cut.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/sort.mk
 include $(MAKEFILEDIR)/configure/build-depends/coreutils/tr.mk
+include $(MAKEFILEDIR)/configure/build-depends/coreutils/uniq.mk
 include $(MAKEFILEDIR)/configure/build-depends/findutils/find.mk
 include $(MAKEFILEDIR)/configure/build-depends/findutils/xargs.mk
 include $(MAKEFILEDIR)/configure/build-depends/grep/grep.mk
@@ -31,7 +33,15 @@ help-list-variables:
 	| $(XARGS) $(GREP) '^[^[:space:]].*=' \
 	| $(SED) 's,$(CURDIR)/,,' \
 	| $(SED) 's/=.*/=/' \
-	| $(GREP) -v -e ':DEFAULT_.*=' -e ':MAKEFILE_.*INCLUDED :='
+	| $(GREP) -v -e ':DEFAULT_.*=' -e ':MAKEFILE_.*INCLUDED :=' \
+	| $(GREP) -v -f \
+		<( \
+			$(FIND) $(MAKEFILEDIR) -type f \
+			| $(XARGS) $(GREP) -h '^undefine ' \
+			| $(SORT) \
+			| $(UNIQ) \
+			| $(CUT) -f2 -d' '; \
+		)
 
 
 .PHONY: help-list-build-depends
