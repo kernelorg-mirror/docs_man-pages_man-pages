@@ -16,7 +16,7 @@ include $(MAKEFILEDIR)/configure/build-depends/sed/sed.mk
 
 .PHONY: help-list-targets
 help-list-targets:
-	$(MAKE) -p nothing \
+	$(MAKE) -p -n nothing \
 	| $(GREP) '^\.PHONY:' \
 	| $(TR) ' ' '\n' \
 	| $(GREP) -v '^\.PHONY:' \
