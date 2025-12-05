@@ -5,8 +5,9 @@
 .\"
 .TH printf 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-printf, fprintf, dprintf, sprintf, snprintf, vprintf, vfprintf, vdprintf,
-vsprintf, vsnprintf \- formatted output conversion
+printf, fprintf, dprintf, vprintf, vfprintf, vdprintf,
+\-
+formatted output conversion
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -19,21 +20,11 @@ Standard C library
 .BI "            const char *restrict " format ", ...);"
 .BI "int dprintf(int " fd ,
 .BI "            const char *restrict " format ", ...);"
-.BI "int sprintf(char *restrict " str ,
-.BI "            const char *restrict " format ", ...);"
-.BR "int snprintf(" "size_t size;"
-.BI "            char " str "[restrict " size "], size_t " size ,
-.BI "            const char *restrict " format ", ...);"
 .P
 .BI "int vprintf(const char *restrict " format ", va_list " ap );
 .BI "int vfprintf(FILE *restrict " stream ,
 .BI "            const char *restrict " format ", va_list " ap );
 .BI "int vdprintf(int " fd ,
-.BI "            const char *restrict " format ", va_list " ap );
-.BI "int vsprintf(char *restrict " str ,
-.BI "            const char *restrict " format ", va_list " ap );
-.BR "int vsnprintf(" "size_t size;"
-.BI "            char " str "[restrict " size "], size_t " size ,
 .BI "            const char *restrict " format ", va_list " ap );
 .fi
 .P
@@ -41,13 +32,6 @@ Standard C library
 Feature Test Macro Requirements for glibc (see
 .BR feature_test_macros (7)):
 .RE
-.P
-.BR snprintf (),
-.BR vsnprintf ():
-.nf
-    _XOPEN_SOURCE >= 500 || _ISOC99_SOURCE
-        || /* glibc <= 2.19: */ _BSD_SOURCE
-.fi
 .P
 .BR dprintf (),
 .BR vdprintf ():
@@ -74,14 +58,7 @@ the standard output stream;
 and
 .BR vfprintf ()
 write output to the given output
-.IR stream ;
-.BR sprintf (),
-.BR snprintf (),
-.BR vsprintf (),
-and
-.BR vsnprintf ()
-write to the character string
-.IR str .
+.IR stream .
 .P
 The function
 .BR dprintf ()
@@ -94,26 +71,13 @@ instead of to a
 stream.
 .P
 The functions
-.BR snprintf ()
-and
-.BR vsnprintf ()
-write at most
-.I size
-bytes (including the terminating null byte (\[aq]\[rs]0\[aq])) to
-.IR str .
-.P
-The functions
 .BR vprintf (),
 .BR vfprintf (),
-.BR vdprintf (),
-.BR vsprintf (),
-.BR vsnprintf ()
+.BR vdprintf ()
 are equivalent to the functions
 .BR printf (),
 .BR fprintf (),
 .BR dprintf (),
-.BR sprintf (),
-.BR snprintf (),
 respectively, except that they are called with a
 .I va_list
 instead of a variable number of arguments.
@@ -134,17 +98,6 @@ string that specifies how subsequent arguments (or arguments accessed via
 the variable-length argument facilities of
 .BR stdarg (3))
 are converted for output.
-.P
-C99 and POSIX.1-2001 specify that the results are undefined if a call to
-.BR sprintf (),
-.BR snprintf (),
-.BR vsprintf (),
-or
-.BR vsnprintf ()
-would cause copying to take place between objects that overlap
-(e.g., if the target string array and one of the supplied input arguments
-refer to the same buffer).
-See CAVEATS.
 .SS Format of the format string
 The format string is a character string, beginning and ending
 in its initial shift state, if any.
@@ -913,22 +866,6 @@ specification is \[aq]%%\[aq].
 Upon successful return, these functions return the number of bytes
 printed (excluding the null byte used to end output to strings).
 .P
-The functions
-.BR snprintf ()
-and
-.BR vsnprintf ()
-do not write more than
-.I size
-bytes (including the terminating null byte (\[aq]\[rs]0\[aq])).
-If the output was truncated due to this limit, then the return value
-is the number of characters (excluding the terminating null byte)
-which would have been written to the final string if enough space
-had been available.
-Thus, a return value of
-.I size
-or more means that the output was truncated.
-(See also below under CAVEATS.)
-.P
 On error,
 a negative value is returned,
 and
@@ -966,12 +903,8 @@ T{
 .nh
 .BR printf (),
 .BR fprintf (),
-.BR sprintf (),
-.BR snprintf (),
 .BR vprintf (),
-.BR vfprintf (),
-.BR vsprintf (),
-.BR vsnprintf ()
+.BR vfprintf ()
 T}	Thread safety	MT-Safe locale
 .TE
 .SH STANDARDS
@@ -980,17 +913,9 @@ T}	Thread safety	MT-Safe locale
 .TQ
 .BR printf ()
 .TQ
-.BR sprintf ()
-.TQ
 .BR vprintf ()
 .TQ
 .BR vfprintf ()
-.TQ
-.BR vsprintf ()
-.TQ
-.BR snprintf ()
-.TQ
-.BR vsnprintf ()
 C11, POSIX.1-2008.
 .TP
 .BR dprintf ()
@@ -1003,35 +928,10 @@ GNU, POSIX.1-2008.
 .TQ
 .BR printf ()
 .TQ
-.BR sprintf ()
-.TQ
 .BR vprintf ()
 .TQ
 .BR vfprintf ()
-.TQ
-.BR vsprintf ()
 C89, POSIX.1-2001.
-.TP
-.BR snprintf ()
-.TQ
-.BR vsnprintf ()
-SUSv2, C99, POSIX.1-2001.
-.IP
-Concerning the return value of
-.BR snprintf (),
-SUSv2 and C99 contradict each other: when
-.BR snprintf ()
-is called with
-.IR size =0
-then SUSv2 stipulates an unspecified return value less than 1,
-while C99 allows
-.I str
-to be NULL in this case, and gives the return value (as always)
-as the number of characters that would have been written in case
-the output string has been large enough.
-POSIX.1-2001 and later align their specification of
-.BR snprintf ()
-with C99.
 .TP
 .BR dprintf ()
 .TQ
@@ -1091,39 +991,6 @@ of the
 .B m
 conversion specifier, that is
 .IR %#m .
-.SH CAVEATS
-Some programs imprudently rely on code such as the following
-.P
-.in +4n
-.EX
-sprintf(buf, "%s some further text", buf);
-.EE
-.in
-.P
-to append text to
-.IR buf .
-However, the standards explicitly note that the results are undefined
-if source and destination buffers overlap when calling
-.BR sprintf (),
-.BR snprintf (),
-.BR vsprintf (),
-and
-.BR vsnprintf ().
-.\" http://sourceware.org/bugzilla/show_bug.cgi?id=7075
-Depending on the version of
-.BR gcc (1)
-used, and the compiler options employed, calls such as the above will
-.B not
-produce the expected results.
-.P
-The glibc implementation of the functions
-.BR snprintf ()
-and
-.BR vsnprintf ()
-conforms to the C99 standard, that is, behaves as described above,
-since glibc 2.1.
-Until glibc 2.0.6, they would return \-1
-when the output was truncated.
 .\" .SH HISTORY
 .\" UNIX V7 defines the three routines
 .\" .BR printf (),
@@ -1158,37 +1025,6 @@ when the output was truncated.
 .\" .BR vdprintf ()
 .\" that print to a file descriptor instead of a stream.
 .SH BUGS
-Because
-.BR sprintf ()
-and
-.BR vsprintf ()
-assume an arbitrarily long string,
-callers must be careful not to overflow the actual space;
-this is often impossible to assure.
-Note that the length of the strings produced is locale-dependent
-and difficult to predict.
-Use
-.BR snprintf ()
-and
-.BR vsnprintf ()
-instead (or
-.BR asprintf (3)
-and
-.BR vasprintf (3)).
-.\" .P
-.\" Linux libc4.[45] does not have a
-.\" .BR snprintf (),
-.\" but provides a libbsd that contains an
-.\" .BR snprintf ()
-.\" equivalent to
-.\" .BR sprintf (),
-.\" that is, one that ignores the
-.\" .I size
-.\" argument.
-.\" Thus, the use of
-.\" .BR snprintf ()
-.\" with early libc4 leads to serious security problems.
-.P
 Code such as
 .BI printf( foo );
 often indicates a bug, since
@@ -1256,58 +1092,13 @@ With the value:
 .in
 .P
 one might obtain "Sonntag, 3.\& Juli, 10:02".
-.P
-To allocate a sufficiently large string and print into it
-(code correct for both glibc 2.0 and glibc 2.1):
-.P
-.EX
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-\&
-char *
-make_message(const char *fmt, ...)
-{
-    int n = 0;
-    size_t size = 0;
-    char *p = NULL;
-    va_list ap;
-\&
-    /* Determine required size.  */
-\&
-    va_start(ap, fmt);
-    n = vsnprintf(p, size, fmt, ap);
-    va_end(ap);
-\&
-    if (n < 0)
-        return NULL;
-\&
-    size = (size_t) n + 1;      /* One extra byte for \[aq]\[rs]0\[aq] */
-    p = malloc(size);
-    if (p == NULL)
-        return NULL;
-\&
-    va_start(ap, fmt);
-    n = vsnprintf(p, size, fmt, ap);
-    va_end(ap);
-\&
-    if (n < 0) {
-        free(p);
-        return NULL;
-    }
-\&
-    return p;
-}
-.EE
-.P
-If truncation occurs in glibc versions prior to glibc 2.0.6,
-this is treated as an error instead of being handled gracefully.
 .SH SEE ALSO
 .BR printf (1),
 .BR asprintf (3),
 .BR puts (3),
 .BR scanf (3),
 .BR setlocale (3),
+.BR snprintf (3),
 .BR strfromd (3),
 .BR wcrtomb (3),
 .BR wprintf (3),
