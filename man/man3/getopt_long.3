@@ -12,6 +12,7 @@ Standard C library
 .RI ( libc ,\~ \-lc )
 .SH SYNOPSIS
 .nf
+.B #define _GNU_SOURCE
 .B #include <getopt.h>
 .P
 .BI "int getopt_long(int " argc ", char *" argv [],
@@ -20,17 +21,6 @@ Standard C library
 .BI "int getopt_long_only(int " argc ", char *" argv [],
 .BI "           const char *" optstring ,
 .BI "           const struct option *" longopts ", int *" longindex );
-.fi
-.P
-.RS -4
-Feature Test Macro Requirements for glibc (see
-.BR feature_test_macros (7)):
-.RE
-.P
-.BR getopt_long (),
-.BR getopt_long_only ():
-.nf
-    _GNU_SOURCE
 .fi
 .SH DESCRIPTION
 The
