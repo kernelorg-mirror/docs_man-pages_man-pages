@@ -5,7 +5,7 @@
 .\"
 .TH getopt_long 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-getopt_long, getopt_long_only
+getopt_long
 \- parse command-line options
 .SH LIBRARY
 Standard C library
@@ -16,9 +16,6 @@ Standard C library
 .B #include <getopt.h>
 .P
 .BI "int getopt_long(int " argc ", char *" argv [],
-.BI "           const char *" optstring ,
-.BI "           const struct option *" longopts ", int *" longindex );
-.BI "int getopt_long_only(int " argc ", char *" argv [],
 .BI "           const char *" optstring ,
 .BI "           const struct option *" longopts ", int *" longindex );
 .fi
@@ -105,26 +102,15 @@ If
 is not NULL, it
 points to a variable which is set to the index of the long option relative to
 .IR longopts .
-.P
-.BR getopt_long_only ()
-is like
-.BR getopt_long (),
-but \[aq]\-\[aq] as well
-as "\-\-" can indicate a long option.
-If an option that starts with \[aq]\-\[aq]
-(not "\-\-") doesn't match a long option, but does match a short option,
-it is parsed as a short option instead.
 .SH RETURN VALUE
 See
 .BR getopt (3).
 .P
 .BR getopt_long ()
-and
-.BR getopt_long_only ()
-also return the option
+also returns the option
 character when a short option is recognized.
-For a long option, they
-return
+For a long option,
+it returns
 .I val
 if
 .I flag
@@ -147,8 +133,7 @@ Interface	Attribute	Value
 T{
 .na
 .nh
-.BR getopt_long (),
-.BR getopt_long_only ()
+.BR getopt_long ()
 T}	Thread safety	T{
 .na
 .nh
@@ -247,4 +232,5 @@ main(int argc, char *argv[])
 .SH SEE ALSO
 .BR getopt (1),
 .BR getopt (3),
+.BR getopt_long_only (3),
 .BR getsubopt (3)
