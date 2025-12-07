@@ -5,7 +5,7 @@
 .\"
 .TH getopt 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-getopt, getopt_long, getopt_long_only,
+getopt,
 optarg, optind, opterr, optopt \- Parse command-line options
 .SH LIBRARY
 Standard C library
@@ -19,15 +19,6 @@ Standard C library
 .P
 .BI "extern char *" optarg ;
 .BI "extern int " optind ", " opterr ", " optopt ;
-.P
-.B #include <getopt.h>
-.P
-.BI "int getopt_long(int " argc ", char *" argv [],
-.BI "           const char *" optstring ,
-.BI "           const struct option *" longopts ", int *" longindex );
-.BI "int getopt_long_only(int " argc ", char *" argv [],
-.BI "           const char *" optstring ,
-.BI "           const struct option *" longopts ", int *" longindex );
 .fi
 .P
 .RS -4
@@ -38,12 +29,6 @@ Feature Test Macro Requirements for glibc (see
 .BR getopt ():
 .nf
     _POSIX_C_SOURCE >= 2 || _XOPEN_SOURCE
-.fi
-.P
-.BR getopt_long (),
-.BR getopt_long_only ():
-.nf
-    _GNU_SOURCE
 .fi
 .SH DESCRIPTION
 The
@@ -215,99 +200,6 @@ likewise does not print an error message.
 In addition, it returns \[aq]:\[aq] instead of \[aq]?\[aq] to
 indicate a missing option argument.
 This allows the caller to distinguish the two different types of errors.
-.\"
-.SS getopt_long() and getopt_long_only()
-The
-.BR getopt_long ()
-function works like
-.BR getopt ()
-except that it also accepts long options, started with two dashes.
-(If the program accepts only long options, then
-.I optstring
-should be specified as an empty string (""), not NULL.)
-Long option names may be abbreviated if the abbreviation is
-unique or is an exact match for some defined option.
-A long option
-may take a parameter, of the form
-.B \-\-arg=param
-or
-.BR "\-\-arg param" .
-.P
-.I longopts
-is a pointer to the first element of an array of
-.I struct option
-declared in
-.I <getopt.h>
-as
-.P
-.in +4n
-.EX
-struct option {
-    const char *name;
-    int         has_arg;
-    int        *flag;
-    int         val;
-};
-.EE
-.in
-.P
-The meanings of the different fields are:
-.TP
-.I name
-is the name of the long option.
-.TP
-.I has_arg
-is:
-.B no_argument
-(or 0) if the option does not take an argument;
-.B required_argument
-(or 1) if the option requires an argument;
-or
-.B optional_argument
-(or 2) if the option takes an optional argument.
-.TP
-.I flag
-specifies how results are returned for a long option.
-If
-.I flag
-is NULL, then
-.BR getopt_long ()
-returns
-.IR val .
-(For example, the calling program may set
-.I val
-to the equivalent short
-option character.)
-Otherwise,
-.BR getopt_long ()
-returns 0, and
-.I flag
-points to a variable which is set to
-.I val
-if the option is found,
-but left unchanged if the option is not found.
-.TP
-.I val
-is the value to return, or to load into the variable pointed
-to by
-.IR flag .
-.P
-The last element of the array has to be filled with zeros.
-.P
-If
-.I longindex
-is not NULL, it
-points to a variable which is set to the index of the long option relative to
-.IR longopts .
-.P
-.BR getopt_long_only ()
-is like
-.BR getopt_long (),
-but \[aq]\-\[aq] as well
-as "\-\-" can indicate a long option.
-If an option that starts with \[aq]\-\[aq]
-(not "\-\-") doesn't match a long option, but does match a short option,
-it is parsed as a short option instead.
 .SH RETURN VALUE
 If an option was successfully found, then
 .BR getopt ()
@@ -327,22 +219,6 @@ then the return value depends on the first character in
 .IR optstring :
 if it is \[aq]:\[aq], then \[aq]:\[aq] is returned;
 otherwise \[aq]?\[aq] is returned.
-.P
-.BR getopt_long ()
-and
-.BR getopt_long_only ()
-also return the option
-character when a short option is recognized.
-For a long option, they
-return
-.I val
-if
-.I flag
-is NULL, and 0 otherwise.
-Error and \-1 returns are the same as for
-.BR getopt (),
-plus \[aq]?\[aq] for an
-ambiguous match or an extraneous parameter.
 .SH ENVIRONMENT
 .TP
 .B POSIXLY_CORRECT
@@ -359,9 +235,7 @@ Interface	Attribute	Value
 T{
 .na
 .nh
-.BR getopt (),
-.BR getopt_long (),
-.BR getopt_long_only ()
+.BR getopt ()
 T}	Thread safety	T{
 .na
 .nh
@@ -385,11 +259,6 @@ to avoid confusing readers.
 .TP
 .BR getopt ()
 POSIX.1-2008.
-.TP
-.BR getopt_long ()
-.TQ
-.BR getopt_long_only ()
-GNU.
 .IP
 The use of \[aq]+\[aq] and \[aq]\-\[aq] in
 .I optstring
@@ -513,93 +382,8 @@ main(int argc, char *argv[])
 }
 .EE
 .\" SRC END
-.SS getopt_long()
-The following example program illustrates the use of
-.BR getopt_long ()
-with most of its features.
-.P
-.\" SRC BEGIN (getopt_long.c)
-.EX
-#include <getopt.h>
-#include <stdio.h>     /* for printf */
-#include <stdlib.h>    /* for exit */
-\&
-int
-main(int argc, char *argv[])
-{
-    int c;
-    int digit_optind = 0;
-\&
-    while (1) {
-        int this_option_optind = optind ? optind : 1;
-        int option_index = 0;
-        static struct option long_options[] = {
-            {"add",     required_argument, 0,  0 },
-            {"append",  no_argument,       0,  0 },
-            {"delete",  required_argument, 0,  0 },
-            {"verbose", no_argument,       0,  0 },
-            {"create",  required_argument, 0, \[aq]c\[aq]},
-            {"file",    required_argument, 0,  0 },
-            {0,         0,                 0,  0 }
-        };
-\&
-        c = getopt_long(argc, argv, "abc:d:012",
-                        long_options, &option_index);
-        if (c == \-1)
-            break;
-\&
-        switch (c) {
-        case 0:
-            printf("option %s", long_options[option_index].name);
-            if (optarg)
-                printf(" with arg %s", optarg);
-            printf("\[rs]n");
-            break;
-\&
-        case \[aq]0\[aq]:
-        case \[aq]1\[aq]:
-        case \[aq]2\[aq]:
-            if (digit_optind != 0 && digit_optind != this_option_optind)
-              printf("digits occur in two different argv\-elements.\[rs]n");
-            digit_optind = this_option_optind;
-            printf("option %c\[rs]n", c);
-            break;
-\&
-        case \[aq]a\[aq]:
-            printf("option a\[rs]n");
-            break;
-\&
-        case \[aq]b\[aq]:
-            printf("option b\[rs]n");
-            break;
-\&
-        case \[aq]c\[aq]:
-            printf("option c with value \[aq]%s\[aq]\[rs]n", optarg);
-            break;
-\&
-        case \[aq]d\[aq]:
-            printf("option d with value \[aq]%s\[aq]\[rs]n", optarg);
-            break;
-\&
-        case \[aq]?\[aq]:
-            break;
-\&
-        default:
-            printf("?? getopt returned character code 0%o ??\[rs]n", c);
-        }
-    }
-\&
-    if (optind < argc) {
-        printf("non\-option ARGV\-elements: ");
-        while (optind < argc)
-            printf("%s ", argv[optind++]);
-        printf("\[rs]n");
-    }
-\&
-    exit(EXIT_SUCCESS);
-}
-.EE
-.\" SRC END
 .SH SEE ALSO
 .BR getopt (1),
+.BR getopt_long (3),
+.BR getopt_long_only (3),
 .BR getsubopt (3)
