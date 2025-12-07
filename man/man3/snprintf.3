@@ -5,8 +5,8 @@
 .\"
 .TH snprintf 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-sprintf, snprintf,
-vsprintf, vsnprintf
+snprintf,
+vsnprintf
 \-
 string print formatted
 .SH LIBRARY
@@ -16,14 +16,9 @@ Standard C library
 .nf
 .B #include <stdio.h>
 .P
-.BI "int sprintf(char *restrict " str ,
-.BI "            const char *restrict " format ", ...);"
 .BR "int snprintf(" "size_t size;"
 .BI "            char " str "[restrict " size "], size_t " size ,
 .BI "            const char *restrict " format ", ...);"
-.P
-.BI "int vsprintf(char *restrict " str ,
-.BI "            const char *restrict " format ", va_list " ap );
 .BR "int vsnprintf(" "size_t size;"
 .BI "            char " str "[restrict " size "], size_t " size ,
 .BI "            const char *restrict " format ", va_list " ap );
@@ -56,21 +51,16 @@ write at most
 bytes (including the terminating null byte (\[aq]\[rs]0\[aq])) to
 .IR str .
 .P
-The functions
-.BR vsprintf ()
-and
 .BR vsnprintf ()
-are equivalent to the functions
-.BR sprintf ()
-and
+is equivalent to
 .BR snprintf (),
-respectively, except that they are called with a
+except that it is called with a
 .I va_list
 instead of a variable number of arguments.
-These functions do not call the
+This function does not call the
 .I va_end
 macro.
-Because they invoke the
+Because it invokes the
 .I va_arg
 macro, the value of
 .I ap
@@ -79,9 +69,7 @@ See
 .BR stdarg (3).
 .P
 C99 and POSIX.1-2001 specify that the results are undefined if a call to
-.BR sprintf (),
-.BR snprintf (),
-.BR vsprintf (),
+.BR snprintf ()
 or
 .BR vsnprintf ()
 would cause copying to take place between objects that overlap
@@ -130,36 +118,16 @@ Interface	Attribute	Value
 T{
 .na
 .nh
-.BR sprintf (),
 .BR snprintf (),
-.BR vsprintf (),
 .BR vsnprintf ()
 T}	Thread safety	MT-Safe locale
 .TE
 .SH STANDARDS
-.TP
-.BR sprintf ()
-.TQ
-.BR vsprintf ()
-.TQ
-.BR snprintf ()
-.TQ
-.BR vsnprintf ()
 C11, POSIX.1-2008.
 .SH HISTORY
-.TP
-.BR sprintf ()
-.TQ
-.BR vsprintf ()
-C89, POSIX.1-2001.
-.TP
-.BR snprintf ()
-.TQ
-.BR vsnprintf ()
 SUSv2, C99, POSIX.1-2001.
 .IP
-Concerning the return value of
-.BR snprintf (),
+Concerning the return value,
 SUSv2 and C99 contradict each other: when
 .BR snprintf ()
 is called with
@@ -178,7 +146,7 @@ Some programs imprudently rely on code such as the following
 .P
 .in +4n
 .EX
-sprintf(buf, "%s some further text", buf);
+snprintf(buf, countof(buf), "%s some further text", buf);
 .EE
 .in
 .P
@@ -186,9 +154,7 @@ to append text to
 .IR buf .
 However, the standards explicitly note that the results are undefined
 if source and destination buffers overlap when calling
-.BR sprintf (),
-.BR snprintf (),
-.BR vsprintf (),
+.BR snprintf ()
 and
 .BR vsnprintf ().
 .\" http://sourceware.org/bugzilla/show_bug.cgi?id=7075
@@ -224,40 +190,6 @@ when the output was truncated.
 .SH BUGS
 See
 .BR printf (3).
-.SS sprintf(), vsprintf()
-Because
-.BR sprintf ()
-and
-.BR vsprintf ()
-assume an arbitrarily long string,
-callers must be careful not to overflow the actual space;
-this is often impossible to assure.
-Note that the length of the strings produced is locale-dependent
-and difficult to predict.
-Use
-.BR snprintf ()
-and
-.BR vsnprintf ()
-instead (or
-.BR asprintf (3)
-and
-.BR vasprintf (3)).
-.\" .P
-.\" Linux libc4.[45] does not have a
-.\" .BR snprintf (),
-.\" but provides a libbsd that contains an
-.\" .BR snprintf ()
-.\" equivalent to
-.\" .BR sprintf (),
-.\" that is, one that ignores the
-.\" .I size
-.\" argument.
-.\" Thus, the use of
-.\" .BR snprintf ()
-.\" with early libc4 leads to serious security problems.
-.\" .P
-.\" Some floating-point conversions under early libc4
-.\" caused memory leaks.
 .SH EXAMPLES
 To allocate a sufficiently large string and print into it
 (code correct for both glibc 2.0 and glibc 2.1):
