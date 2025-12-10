@@ -5,7 +5,8 @@
 .\"
 .TH posix_memalign 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-posix_memalign, aligned_alloc, valloc, pvalloc \-
+posix_memalign, aligned_alloc, valloc
+\-
 allocate aligned memory
 .SH LIBRARY
 Standard C library
@@ -17,10 +18,6 @@ Standard C library
 .BI "int posix_memalign(void **" memptr ", size_t " alignment ", size_t " size );
 .BI "void *aligned_alloc(size_t " alignment ", size_t " size );
 .BI "[[deprecated]] void *valloc(size_t " size );
-.P
-.B #include <malloc.h>
-.P
-.BI "[[deprecated]] void *pvalloc(size_t " size );
 .fi
 .P
 .RS -4
@@ -86,19 +83,11 @@ The memory address will be a multiple of the page size.
 It is equivalent to
 .IR "memalign(sysconf(_SC_PAGESIZE),size)" .
 .P
-The obsolete function
-.BR pvalloc ()
-is similar to
-.BR valloc (),
-but rounds the size of the allocation up to
-the next multiple of the system page size.
-.P
 For all of these functions, the memory is not zeroed.
 .SH RETURN VALUE
 .BR aligned_alloc (),
-.BR valloc (),
 and
-.BR pvalloc ()
+.BR valloc ()
 return a pointer to the allocated memory on success.
 On error, NULL is returned, and
 .I errno
@@ -145,8 +134,7 @@ T}	Thread safety	MT-Safe
 T{
 .na
 .nh
-.BR valloc (),
-.BR pvalloc ()
+.BR valloc ()
 T}	Thread safety	MT-Unsafe init
 .TE
 .SH STANDARDS
@@ -160,9 +148,6 @@ POSIX.1-2024.
 .TP
 .BR valloc ()
 None.
-.TP
-.BR pvalloc ()
-GNU.
 .SH HISTORY
 .TP
 .BR aligned_alloc ()
@@ -179,9 +164,6 @@ glibc 2.0.
 3.0BSD.
 Documented as obsolete in 4.3BSD,
 and as legacy in SUSv2.
-.TP
-.BR pvalloc ()
-glibc 2.0.
 .\"
 .SS Headers
 Everybody agrees that
