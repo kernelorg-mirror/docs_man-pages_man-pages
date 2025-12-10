@@ -61,13 +61,6 @@ next section on failure.
 The value of
 .I errno
 is not set.
-On Linux (and other systems),
-.BR posix_memalign ()
-does not modify
-.I memptr
-on failure.
-A requirement standardizing this behavior was added in POSIX.1-2008 TC2.
-.\" http://austingroupbugs.net/view.php?id=520
 .SH ERRORS
 .TP
 .B EINVAL
@@ -118,5 +111,13 @@ The glibc
 .BR malloc (3)
 always returns 8-byte aligned memory addresses, so these functions are
 needed only if you require larger alignment values.
+.SH CAVEATS
+On Linux (and other systems),
+.BR posix_memalign ()
+does not modify
+.I memptr
+on failure.
+A requirement standardizing this behavior was added in POSIX.1-2008 TC2.
+.\" http://austingroupbugs.net/view.php?id=520
 .SH SEE ALSO
 .BR aligned_alloc (3)
