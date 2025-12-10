@@ -70,8 +70,7 @@ is either NULL
 .\" glibc does this:
 or a unique pointer value.
 .P
-The obsolete function
-.BR memalign ()
+.BR aligned_alloc ()
 allocates
 .I size
 bytes and returns a pointer to the allocated memory.
@@ -81,9 +80,10 @@ which must be a power of two.
 .\" The behavior of memalign() for size==0 is as for posix_memalign()
 .\" but no standards govern this.
 .P
-.BR aligned_alloc ()
+The obsolete function
+.BR memalign ()
 is the same as
-.BR memalign ().
+.BR aligned_alloc ().
 .P
 The obsolete function
 .BR valloc ()
