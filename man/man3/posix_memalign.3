@@ -90,23 +90,7 @@ POSIX.1-2024.
 .SH HISTORY
 glibc 2.1.91.
 POSIX.1d, POSIX.1-2001.
-.\"
-.SS Headers
-Everybody agrees that
-.BR posix_memalign ()
-is declared in
-.IR <stdlib.h> .
 .SH NOTES
-.BR posix_memalign ()
-verifies that
-.I alignment
-matches the requirements detailed above.
-.P
-POSIX requires that memory obtained from
-.BR posix_memalign ()
-can be freed using
-.BR free (3).
-.P
 The glibc
 .BR malloc (3)
 always returns 8-byte aligned memory addresses, so these functions are
