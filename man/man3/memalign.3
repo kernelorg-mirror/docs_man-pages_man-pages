@@ -19,8 +19,9 @@ Standard C library
 .fi
 .SH DESCRIPTION
 .BR memalign ()
-is the same as
-.BR aligned_alloc (3).
+is equivalent to
+.BR aligned_alloc (3),
+except for the CAVEATS documented below.
 .\" The behavior of memalign() for size==0 is as for posix_memalign()
 .\" but no standards govern this.
 .SH ATTRIBUTES
