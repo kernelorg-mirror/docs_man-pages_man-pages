@@ -90,11 +90,6 @@ POSIX.1-2024.
 .SH HISTORY
 glibc 2.1.91.
 POSIX.1d, POSIX.1-2001.
-.SH NOTES
-The glibc
-.BR malloc (3)
-always returns 8-byte aligned memory addresses, so these functions are
-needed only if you require larger alignment values.
 .SH CAVEATS
 On Linux (and other systems),
 .BR posix_memalign ()
