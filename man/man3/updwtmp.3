@@ -14,7 +14,7 @@ System utilities library
 .B #include <utmp.h>
 .P
 .BI "void updwtmp(const char *" wtmp_path ", const struct utmp *" ut );
-.BI "void logwtmp(const char *" line ", const char *" name \
+.BI "void logwtmp(const char *" line ", const char *" user \
 ", const char *" host );
 .fi
 .SH DESCRIPTION
@@ -25,7 +25,7 @@ to the wtmp file.
 .P
 .BR logwtmp ()
 constructs a utmp structure using
-.IR line ", " name ", " host ,
+.IR line ", " user ", " host ,
 current time, and current process ID.
 Then it calls
 .BR updwtmp ()
