@@ -102,6 +102,12 @@ If
 is not NULL, it
 points to a variable which is set to the index of the long option relative to
 .IR longopts .
+.P
+Its analogue to
+.BR getopt (3)'s
+.I optopt
+is
+.RI \[lq] "argv[(optind \- 1)]" \[rq].
 .SH RETURN VALUE
 See
 .BR getopt (3).
