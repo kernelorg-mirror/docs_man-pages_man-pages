@@ -1188,6 +1188,16 @@ in the caller's context, no child process is created, and
 is set to indicate the error.
 .SH ERRORS
 .TP
+.BR E2BIG " (" clone3 "() only)"
+The kernel does not support some functionality requested in this
+.BR clone3 ()
+call:
+The size argument is larger than what the kernel supports,
+and there are non-zero values in the struct after the kernel-supported size.
+.TP
+.BR E2BIG " (" clone3 "() only)"
+The size argument is larger than the page size.
+.TP
 .BR EACCES " (" clone3 "() only)"
 .B CLONE_INTO_CGROUP
 was specified in
