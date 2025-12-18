@@ -83,7 +83,9 @@ is the unique interface index
 message, thus creating a link with the given
 .IR ifindex );
 .I ifi_change
-is reserved for future use and should be always set to 0xFFFFFFFF.
+is a mask specifying which bits of
+.I ifi_flags
+should be applied to the device.
 .TS
 tab(:);
 c s s
