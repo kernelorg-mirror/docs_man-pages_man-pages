@@ -137,14 +137,14 @@ Two other scanning modes are also implemented.
 If the first character of
 .I optstring
 is \[aq]+\[aq] or the environment variable
-.B POSIXLY_CORRECT
+.B \%POSIXLY_CORRECT
 is set, then option processing stops as soon as a nonoption argument is
 encountered.
 If \[aq]+\[aq] is not the first character of
 .IR optstring ,
 it is treated as a normal option.
 If
-.B POSIXLY_CORRECT
+.B \%POSIXLY_CORRECT
 behaviour is required in this case
 .I optstring
 will contain two \[aq]+\[aq] symbols.
@@ -221,7 +221,7 @@ if it is \[aq]:\[aq], then \[aq]:\[aq] is returned;
 otherwise \[aq]?\[aq] is returned.
 .SH ENVIRONMENT
 .TP
-.B POSIXLY_CORRECT
+.B \%POSIXLY_CORRECT
 If this is set, then option processing stops as soon as a nonoption
 argument is encountered.
 .SH ATTRIBUTES
@@ -249,7 +249,7 @@ array argument should be
 .IR const ,
 but these functions permute its elements
 unless the environment variable
-.B POSIXLY_CORRECT
+.B \%POSIXLY_CORRECT
 is set.
 .I const
 is used in the actual prototype to be compatible with other systems;
@@ -284,7 +284,7 @@ POSIX.1-2001 does not require the declaration to appear in
 .P
 Very old versions of glibc were affected by a
 .UR https://\:sourceware.org/\:git/\:?p=glibc.git;a=commitdiff;h=bf079e19f50d64aa5e05
-.BI _ PID _GNU_nonoption_argv_flags_
+.BI \%_ PID _GNU_nonoption_argv_flags_
 environment variable
 .UE .
 .SH NOTES
@@ -294,7 +294,7 @@ and wants to make use of GNU extensions such as \[aq]+\[aq]
 and \[aq]\-\[aq] at the start of
 .IR optstring ,
 or changes the value of
-.B POSIXLY_CORRECT
+.B \%POSIXLY_CORRECT
 between scans,
 must reinitialize
 .BR getopt ()
@@ -303,7 +303,7 @@ by resetting
 to 0, rather than the traditional value of 1.
 (Resetting to 0 forces the invocation of an internal initialization
 routine that rechecks
-.B POSIXLY_CORRECT
+.B \%POSIXLY_CORRECT
 and checks for GNU extensions in
 .IR optstring .)
 .P
