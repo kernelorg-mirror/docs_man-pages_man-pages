@@ -33,7 +33,7 @@ operations are supported for console terminals and virtual consoles.
 Get state of LEDs.
 .I argp
 points to a
-.IR char .
+.IR uint8_t .
 The lower three bits
 of
 .I *argp
@@ -64,7 +64,9 @@ The following two ioctls are used to access the keyboard flags.
 .B KDGKBLED
 Get keyboard flags CapsLock, NumLock, ScrollLock (not lights).
 .I argp
-points to a char which is set to the flag state.
+points to a
+.I uint8_t
+which is set to the flag state.
 The low order three bits (mask 0x7) get the current flag state,
 and the low order bits of the next nibble (mask 0x70) get
 the default flag state.
