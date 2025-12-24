@@ -46,7 +46,7 @@ This can be used to discover the current default keyring
 (without changing it).
 .TP
 .B KEY_REQKEY_DEFL_DEFAULT
-This selects the default behaviour,
+This selects the default behavior,
 which is to use the thread-specific keyring if there is one,
 otherwise the process-specific keyring if there is one,
 otherwise the session keyring if there is one,

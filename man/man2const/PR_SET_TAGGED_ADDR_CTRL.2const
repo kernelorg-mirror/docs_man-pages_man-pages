@@ -59,7 +59,7 @@ argument of
 .BR mremap (2).
 .IP
 (Prior to Linux 5.6 these accepted tagged addresses,
-but the behaviour may not be what you expect.
+but the behavior may not be what you expect.
 Don't rely on it.)
 .IP \[bu]
 \[oq]polymorphic\[cq] interfaces

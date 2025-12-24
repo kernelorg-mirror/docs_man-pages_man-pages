@@ -126,7 +126,7 @@ for an explanation of the need for
 You may also use
 .B \%FSCONFIG_SET_STRING
 for path parameters,
-the behaviour of which is equivalent to
+the behavior of which is equivalent to
 .B \%FSCONFIG_SET_PATH
 with
 .I aux
@@ -144,7 +144,7 @@ the file descriptor specified by
 is operated on directly
 and may be any type of file
 (not just a directory).
-This is equivalent to the behaviour of
+This is equivalent to the behavior of
 .B \%AT_EMPTY_PATH
 with most "*at()" system calls.
 If
@@ -215,10 +215,10 @@ the filesystem instance "created" by
 may, in fact, be a reference
 to an extant filesystem instance in the kernel.
 (For reference,
-this behaviour also applies to
+this behavior also applies to
 .BR mount (2).)
 .IP
-One side-effect of this behaviour is that
+One side-effect of this behavior is that
 if an extant filesystem instance is reused,
 .I all
 parameters configured
@@ -517,18 +517,18 @@ Each filesystem driver is responsible for
 parsing most parameters specified with
 .BR fsconfig (),
 meaning that individual filesystems
-may have very different behaviour
+may have very different behavior
 when encountering parameters with the same name.
 In general,
-you should not assume that the behaviour of
+you should not assume that the behavior of
 .BR fsconfig ()
 when specifying a parameter to one filesystem type
-will match the behaviour of the same parameter
+will match the behavior of the same parameter
 with a different filesystem type.
 .P
 However,
 the following generic parameters
-apply to all filesystems and have unified behaviour.
+apply to all filesystems and have unified behavior.
 They are set using the listed
 .BI \%FSCONFIG_SET_ *
 command.
@@ -586,7 +586,7 @@ Some filesystem parameters
 .BR mount (8)-style
 options)
 have a sibling mount attribute
-with superficially similar user-facing behaviour.
+with superficially similar user-facing behavior.
 .P
 For a description of the distinction between
 mount attributes and filesystem parameters,
@@ -599,7 +599,7 @@ each filesystem driver being responsible for
 parsing most parameters specified with
 .BR fsconfig (),
 some filesystem drivers
-may have unintuitive behaviour
+may have unintuitive behavior
 with regards to which
 .BI \%FSCONFIG_SET_ *
 commands are permitted
@@ -649,7 +649,7 @@ that the
 commands used to configure each parameter
 are supported by the corresponding filesystem driver.
 .\" Aleksa Sarai
-.\"   While this (quite confusing) inconsistency in behaviour is true today
+.\"   While this (quite confusing) inconsistency in behavior is true today
 .\"   (and has been true since this was merged), this appears to mostly be an
 .\"   unintended consequence of filesystem drivers hand-coding fsparam parsing.
 .\"   Path parameters are the most eggregious causes of confusion.
@@ -688,7 +688,7 @@ specifying the same parameter named by
 multiple times with
 .BR fsconfig ()
 causes the parameter value to be replaced.
-However, some filesystems may have unique behaviour:
+However, some filesystems may have unique behavior:
 .P
 .in +4n
 .EX

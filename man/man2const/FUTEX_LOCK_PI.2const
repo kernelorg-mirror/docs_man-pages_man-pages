@@ -214,7 +214,7 @@ clock.
 .\" > Yes, that's another weird inconsistency.
 .\"
 .\" The reason is that phtread_mutex_timedlock() uses absolute timeouts based on
-.\" CLOCK_REALTIME.  glibc folks asked to make that the default behaviour back
+.\" CLOCK_REALTIME.  glibc folks asked to make that the default behavior back
 .\" then when we added LOCK_PI.
 .\"
 .SH SEE ALSO

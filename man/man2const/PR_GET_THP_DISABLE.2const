@@ -23,7 +23,7 @@ for the calling thread.
 The returned value is interpreted as follows:
 .TP
 .B 0b00
-No THP-disable behaviour specified.
+No THP-disable behavior specified.
 .TP
 .B 0b01
 THP is entirely disabled for this process.

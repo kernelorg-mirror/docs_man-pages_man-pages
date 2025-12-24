@@ -27,7 +27,7 @@ Specify the size of private hash to allocate.
 .TP
 .I 0
 Use the global hash.
-This is the behaviour used before Linux 6.17.
+This is the behavior used before Linux 6.17.
 .TP
 .I >0
 Specify the number of slots to allocate.
