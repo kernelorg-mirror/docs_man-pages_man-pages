@@ -50,6 +50,7 @@ Checks: >
     -readability-isolate-declaration,
     -readability-named-parameter,
     -readability-uppercase-literal-suffix,
+    -readability-use-concise-preprocessor-directives,
 
 WarningsAsErrors: >
     *,
