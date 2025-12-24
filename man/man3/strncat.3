@@ -90,40 +90,22 @@ Shlemiel the painter
 .SH EXAMPLES
 .\" SRC BEGIN (strncat.c)
 .EX
-#include <err.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <utmp.h>
 \&
-#define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))
+#define NITEMS(arr)     (sizeof((arr)) / sizeof((arr)[0]))
 \&
-int
-main(void)
+void print_ut_user(struct utmp *ut);
+\&
+void
+print_ut_user(struct utmp *ut)
 {
-    size_t  n;
+	char  buf[NITEMS(ut\->ut_user) + 1];
 \&
-    // Null-padded fixed-size character sequences
-    char    pre[4] = "pre.";
-    char    new_post[50] = ".foo.bar";
-\&
-    // Strings
-    char    post[] = ".post";
-    char    src[] = "some_long_body.post";
-    char    *dest;
-\&
-    n = NITEMS(pre) + strlen(src) \- strlen(post) + NITEMS(new_post) + 1;
-    dest = malloc(sizeof(*dest) * n);
-    if (dest == NULL)
-        err(EXIT_FAILURE, "malloc()");
-\&
-    dest[0] = \[aq]\[rs]0\[aq];  // There's no 'cpy' function to this 'cat'.
-    strncat(dest, pre, NITEMS(pre));
-    strncat(dest, src, strlen(src) \- strlen(post));
-    strncat(dest, new_post, NITEMS(new_post));
-\&
-    puts(dest);  // "pre.some_long_body.foo.bar"
-    free(dest);
-    exit(EXIT_SUCCESS);
+	strcpy(buf, "");
+	strncat(buf, ut\->ut_user, NITEMS(ut\->ut_user));
+	puts(buf);
 }
 .EE
 .\" SRC END
