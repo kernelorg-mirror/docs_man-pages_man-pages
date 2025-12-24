@@ -116,7 +116,7 @@ field is a null-terminated string which specifies a hash name
 the list of the hashes available
 is rather tricky to observe;
 please refer to the
-.UR https://www.kernel.org\:/doc\:/html\:/latest\:/crypto\:/architecture.html
+.UR https:\://www.kernel.org\:/doc\:/html\:/latest\:/crypto\:/architecture.html
 "Kernel Crypto API Architecture"
 .UE
 documentation
