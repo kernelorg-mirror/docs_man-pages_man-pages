@@ -6,7 +6,7 @@
 .SH NAME
 PR_RISCV_SET_ICACHE_FLUSH_CTX
 \-
-Enable/disable icache flushing instructions in userspace.
+enable/disable icache flushing instructions in userspace
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
