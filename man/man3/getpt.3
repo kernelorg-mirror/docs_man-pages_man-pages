@@ -22,7 +22,7 @@ Standard C library
 .BR getpt ()
 opens a new pseudoterminal device and returns a file descriptor
 that refers to that device.
-It is equivalent to opening the pseudoterminal multiplexor device
+It is equivalent to opening the pseudoterminal multiplexer device
 .P
 .in +4n
 .EX
@@ -30,7 +30,7 @@ open("/dev/ptmx", O_RDWR);
 .EE
 .in
 .P
-on Linux systems, though the pseudoterminal multiplexor device is located
+on Linux systems, though the pseudoterminal multiplexer device is located
 elsewhere on some systems that use the GNU C library.
 .SH RETURN VALUE
 .BR getpt ()
