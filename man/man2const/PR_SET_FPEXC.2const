@@ -19,9 +19,8 @@ Standard C library
 .fi
 .SH DESCRIPTION
 Set floating-point exception mode to
-.IR mode .
-.I mode
-can be one of the following values.
+.IR mode ,
+which can be one of the following values.
 .TP
 .B PR_FP_EXC_SW_ENABLE
 Use FPEXC for
