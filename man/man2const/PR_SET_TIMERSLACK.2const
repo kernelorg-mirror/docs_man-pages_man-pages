@@ -76,7 +76,7 @@ Thereafter, a thread can adjust its "current" timer slack value via
 .BR PR_SET_TIMERSLACK .
 The "default" value can't be changed.
 The timer slack values of
-.I init
+.BR init (1)
 (PID 1), the ancestor of all processes,
 are 50,000 nanoseconds (50 microseconds).
 The timer slack value is inherited by a child created via
