@@ -240,7 +240,6 @@ meaning that the option is disabled.
 .IR tcp_abc " (Integer; default: 0; Linux 2.6.15 to Linux 3.8)"
 .\" Since Linux 2.6.15; removed in Linux 3.9
 .\" commit ca2eb5679f8ddffff60156af42595df44a315ef0
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 Control the Appropriate Byte Count (ABC), defined in RFC 3465.
 ABC is a way of increasing the congestion window
 .RI ( cwnd )
@@ -304,7 +303,6 @@ default value of 2 implies that the space
 used for the application buffer is one fourth that of the total.
 .TP
 .IR tcp_allowed_congestion_control " (String; default: see text; since Linux 2.4.20)"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 Show/set the congestion control algorithm choices available to unprivileged
 processes (see the description of the
 .B TCP_CONGESTION
@@ -318,7 +316,7 @@ The default value for this list is "reno" plus the default setting of
 .TP
 .IR tcp_autocorking " (Boolean; default: enabled; since Linux 3.14)"
 .\" commit f54b311142a92ea2e42598e347b84e1655caf8e3
-.\" Text heavily based on Documentation/networking/ip-sysctl.txt
+.\" Text heavily based on Documentation/networking/ip-sysctl.rst
 If this option is enabled, the kernel tries to coalesce small writes
 (from consecutive
 .BR write (2)
@@ -334,7 +332,6 @@ socket option to obtain optimal behavior
 when they know how/when to uncork their sockets.
 .TP
 .IR tcp_available_congestion_control " (String; read-only; since Linux 2.4.20)"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 Show a list of the congestion-control algorithms
 that are registered.
 The items in the list are separated by white space and
@@ -355,7 +352,6 @@ mss) bytes in the window
 are reserved for the application buffer.
 A value of 0 implies that no amount is reserved.
 .\"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_base_mss " (Integer; default: 512; since Linux 2.6.17)"
 The initial value of
@@ -364,7 +360,6 @@ to be used by the packetization layer Path MTU discovery (MTU probing).
 If MTU probing is enabled,
 this is the initial MSS used by the connection.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_bic " (Boolean; default: disabled; Linux 2.4.27/2.6.6 to Linux 2.6.13)"
 Enable BIC TCP congestion control algorithm.
@@ -378,21 +373,18 @@ increment ensures linear RTT fairness as well as good scalability.
 Under small congestion windows, binary search
 increase provides TCP friendliness.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_bic_low_window " (integer; default: 14; Linux 2.4.27/2.6.6 to Linux 2.6.13)"
 Set the threshold window (in packets) where BIC TCP starts to
 adjust the congestion window.
 Below this threshold BIC TCP behaves the same as the default TCP Reno.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_bic_fast_convergence " (Boolean; default: enabled; Linux 2.4.27/2.6.6 to Linux 2.6.13)"
 Force BIC TCP to more quickly respond to changes in congestion window.
 Allows two flows sharing the same connection to converge more rapidly.
 .TP
 .IR tcp_congestion_control " (String; default: see text; since Linux 2.4.13)"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 Set the default congestion-control algorithm to be used for new connections.
 The algorithm "reno" is always available,
 but additional choices may be available depending on kernel configuration.
@@ -486,7 +478,6 @@ This is strictly a violation of the TCP specification,
 but required to prevent denial-of-service attacks.
 In Linux 2.2, the default value was 180.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_frto " (integer; default: see below; since Linux 2.4.21/2.6)"
 .\" Since Linux 2.4.21/2.5.43
@@ -583,7 +574,6 @@ of 75 seconds apart) when keep-alive is enabled.
 Note that underlying connection tracking mechanisms and
 application timeouts may be much shorter.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_low_latency  " (Boolean; default: disabled; since Linux 2.4.21/2.6; obsolete since Linux 4.14)"
 .\" Since Linux 2.4.21/2.5.60
@@ -653,7 +643,6 @@ If this number is
 exceeded, the socket is closed and a warning is printed.
 .TP
 .IR tcp_moderate_rcvbuf " (Boolean; default: enabled; since Linux 2.4.17/2.6.7)"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 If enabled, TCP performs receive buffer auto-tuning,
 attempting to automatically size the buffer (no greater than
 .IR tcp_rmem[2] )
@@ -691,7 +680,6 @@ This value overrides any other limits imposed by the kernel.
 .RE
 .TP
 .IR tcp_mtu_probing " (integer; default: 0; since Linux 2.6.17)"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 This parameter controls TCP Packetization-Layer Path MTU Discovery.
 The following values may be assigned to the file:
 .RS
@@ -708,7 +696,6 @@ Always enabled, use initial MSS of
 .RE
 .TP
 .IR tcp_no_metrics_save " (Boolean; default: disabled; since Linux 2.6.6)"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 By default, TCP saves various connection metrics in the route cache
 when the connection closes, so that connections established in the
 near future can use these to set initial conditions.
@@ -826,7 +813,6 @@ lowered to 87380 in low-memory systems).
 Enable RFC\ 2018 TCP Selective Acknowledgements.
 .TP
 .IR tcp_slow_start_after_idle " (Boolean; default: enabled; since Linux 2.6.18)"
-.\" The following is from Linux 2.6.28-rc4: Documentation/networking/ip-sysctl.txt
 If enabled, provide RFC 2861 behavior and time out the congestion
 window after an idle period.
 An idle period is defined as the current RTO (retransmission timeout).
@@ -937,7 +923,6 @@ timestamps (devices behind NAT, devices with per-connection timestamp
 offsets).
 See RFC 1323 (PAWS) and RFC 6191.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_tw_reuse " (Boolean; default: disabled; since Linux 2.4.19/2.6)"
 .\" Since Linux 2.4.19/2.5.43
@@ -945,7 +930,6 @@ Allow to reuse TIME_WAIT sockets for new connections when it is
 safe from protocol viewpoint.
 It should not be changed without advice/request of technical experts.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_vegas_cong_avoid  " (Boolean; default: disabled; Linux 2.2 to Linux 2.6.13)"
 .\" Since Linux 2.1.8; removed in Linux 2.6.13
@@ -956,7 +940,6 @@ TCP Vegas adjusts the sending rate by modifying the congestion window.
 TCP Vegas should provide less packet loss, but it is
 not as aggressive as TCP Reno.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR tcp_westwood " (Boolean; default: disabled; Linux 2.4.26/2.6.3 to Linux 2.6.13)"
 Enable TCP Westwood+ congestion control algorithm.
@@ -1541,7 +1524,7 @@ IPv6 is not described.
 .\" .SH AUTHORS
 .\" This man page was originally written by Andi Kleen.
 .\" It was updated for 2.4 by Nivedita Singhvi with input from
-.\" Alexey Kuznetsov's Documentation/networking/ip-sysctl.txt
+.\" Alexey Kuznetsov's Documentation/networking/ip-sysctl.rst
 .\" document.
 .SH SEE ALSO
 .BR accept (2),
@@ -1557,7 +1540,7 @@ IPv6 is not described.
 .BR socket (7)
 .P
 The kernel source file
-.IR Documentation/networking/ip\-sysctl.txt .
+.IR Documentation/networking/ip\-sysctl.rst .
 .P
 RFC\ 793 for the TCP specification.
 .br

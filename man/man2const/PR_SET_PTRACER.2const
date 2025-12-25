@@ -66,8 +66,4 @@ Linux 3.4.
 .BR prctl (2),
 .P
 For further information, see the kernel source file
-.I Documentation/\:admin\-guide/\:LSM/\:Yama.rst
-.\" commit 90bb766440f2147486a2acc3e793d7b8348b0c22
-(or
-.I Documentation/\:security/\:Yama.txt
-before Linux 4.13).
+.IR Documentation/\:admin\-guide/\:LSM/\:Yama.rst .

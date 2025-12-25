@@ -116,4 +116,4 @@ are not supported in Linux 5.4 and later.
 .BR prctl (2)
 .P
 For further information on Intel MPX, see the kernel source file
-.IR Documentation/\:x86/\:intel_mpx.txt .
+.IR Documentation/\:x86/\:intel_mpx.rst .

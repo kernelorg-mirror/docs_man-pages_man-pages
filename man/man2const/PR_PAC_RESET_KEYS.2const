@@ -85,8 +85,4 @@ Don't use it unless you know what you are doing.
 .BR prctl (2)
 .P
 For more information, see the kernel source file
-.I Documentation/arm64/pointer\-authentication.rst
-.\"commit b693d0b372afb39432e1c49ad7b3454855bc6bed
-(or
-.I Documentation/arm64/pointer\-authentication.txt
-before Linux 5.3).
+.IR Documentation/arch/arm64/pointer\-authentication.rst .

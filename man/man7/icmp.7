@@ -76,7 +76,6 @@ packets in response to
 packets.
 .TP
 .IR icmp_errors_use_inbound_ifaddr " (Boolean; default: disabled; since Linux 2.6.12)"
-.\" The following taken from Linux 2.6.28-rc4 Documentation/networking/ip-sysctl.txt
 If disabled, ICMP error messages are sent with the primary address of
 the exiting interface.
 .IP
@@ -92,7 +91,6 @@ has one will be used regardless of this setting.
 .TP
 .IR icmp_ignore_bogus_error_responses " (Boolean; default: disabled; since Linux 2.2)"
 .\" precisely: since Linux 2.1.32
-.\" The following taken from Linux 2.6.28-rc4 Documentation/networking/ip-sysctl.txt
 Some routers violate RFC1122 by sending bogus responses to broadcast frames.
 Such violations are normally logged via a kernel warning.
 If this parameter is enabled, the kernel will not give such warnings,
@@ -106,7 +104,6 @@ packets.
 These packets are sent when a packet arrives with an invalid IP header.
 .TP
 .IR icmp_ratelimit " (integer; default: 1000; since Linux 2.4.10)"
-.\" The following taken from Linux 2.6.28-rc4 Documentation/networking/ip-sysctl.txt
 Limit the maximum rates for sending ICMP packets whose type matches
 .I icmp_ratemask
 (see below) to specific targets.
@@ -114,7 +111,6 @@ Limit the maximum rates for sending ICMP packets whose type matches
 otherwise the minimum space between responses in milliseconds.
 .TP
 .IR icmp_ratemask " (integer; default: see below; since Linux 2.4.10)"
-.\" The following taken from Linux 2.6.28-rc4 Documentation/networking/ip-sysctl.txt
 Mask made of ICMP types for which rates are being limited.
 .IP
 Significant bits: IHGFEDCBA9876543210

@@ -126,7 +126,6 @@ It is better to fix the broken routers on the path than to turn off
 Path MTU Discovery globally, because not doing it incurs a high cost
 to the network.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR /proc/sys/net/ipv4/ip_nonlocal_bind " (Boolean; default: disabled; since Linux 2.4)"
 .\" Precisely: patch-2.4.0-test10
@@ -135,12 +134,10 @@ If set, allows processes to
 to nonlocal IP addresses,
 which can be quite useful, but may break some applications.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR /proc/sys/net/ipv4/ip6frag_time " (integer; default: 30)"
 Time in seconds to keep an IPv6 fragment in memory.
 .\"
-.\" The following is from Linux 2.6.12: Documentation/networking/ip-sysctl.txt
 .TP
 .IR /proc/sys/net/ipv4/ip6frag_secret_interval " (integer; default: 600)"
 Regeneration interval (in seconds) of the hash secret (or lifetime

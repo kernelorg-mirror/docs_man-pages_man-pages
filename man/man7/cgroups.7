@@ -57,7 +57,7 @@ A longer description of these problems can be found in the kernel
 source file
 .I Documentation/admin\-guide/cgroup\-v2.rst
 (or
-.I Documentation/cgroup\-v2.txt
+.I Documentation/cgroup\-v2.rst
 in Linux 4.17 and earlier).
 .P
 Because of the problems with the initial cgroups implementation
@@ -246,10 +246,7 @@ Cgroups can be guaranteed a minimum number of "CPU shares"
 when a system is busy.
 This does not limit a cgroup's CPU usage if the CPUs are not busy.
 For further information, see
-.I Documentation/scheduler/sched\-design\-CFS.rst
-(or
-.I Documentation/scheduler/sched\-design\-CFS.txt
-in Linux 5.2 and earlier).
+.IR Documentation/scheduler/sched\-design\-CFS.rst .
 .IP
 In Linux 3.2,
 this controller was extended to provide CPU "bandwidth" control.
@@ -260,29 +257,20 @@ then within each scheduling period
 an upper limit on the CPU time allocated to the processes in a cgroup.
 This upper limit applies even if there is no other competition for the CPU.
 Further information can be found in the kernel source file
-.I Documentation/scheduler/sched\-bwc.rst
-(or
-.I Documentation/scheduler/sched\-bwc.txt
-in Linux 5.2 and earlier).
+.IR Documentation/scheduler/sched\-bwc.rst .
 .TP
 .IR cpuacct " (since Linux 2.6.24; " \f[B]CONFIG_CGROUP_CPUACCT\f[] )
 This provides accounting for CPU usage by groups of processes.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/cpuacct.rst
-(or
-.I Documentation/cgroup\-v1/cpuacct.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/cpuacct.rst .
 .TP
 .IR cpuset " (since Linux 2.6.24; " \f[B]CONFIG_CPUSETS\f[] )
 This cgroup can be used to bind the processes in a cgroup to
 a specified set of CPUs and NUMA nodes.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/cpusets.rst
-(or
-.I Documentation/cgroup\-v1/cpusets.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/cpusets.rst .
 .
 .TP
 .IR memory " (since Linux 2.6.25; " \f[B]CONFIG_MEMCG\f[] )
@@ -290,10 +278,7 @@ The memory controller supports reporting and limiting of process memory, kernel
 memory, and swap used by cgroups.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/memory.rst
-(or
-.I Documentation/cgroup\-v1/memory.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/memory.rst .
 .TP
 .IR devices " (since Linux 2.6.26; " \f[B]CONFIG_CGROUP_DEVICE\f[] )
 This supports controlling which processes may create (mknod) devices as
@@ -303,10 +288,7 @@ Hierarchy is enforced, so new rules must not
 violate existing rules for the target or ancestor cgroups.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/devices.rst
-(or
-.I Documentation/cgroup\-v1/devices.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/devices.rst .
 .TP
 .IR freezer " (since Linux 2.6.28; " \f[B]CONFIG_CGROUP_FREEZER\f[] )
 The
@@ -319,10 +301,7 @@ also causes its children, for example, processes in
 to be frozen.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/freezer\-subsystem.rst
-(or
-.I Documentation/cgroup\-v1/freezer\-subsystem.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/freezer\-subsystem.rst .
 .TP
 .IR net_cls " (since Linux 2.6.29; " \f[B]CONFIG_CGROUP_NET_CLASSID\f[] )
 This places a classid, specified for the cgroup, on network packets
@@ -334,10 +313,7 @@ This applies only to packets
 leaving the cgroup, not to traffic arriving at the cgroup.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/net_cls.rst
-(or
-.I Documentation/cgroup\-v1/net_cls.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/net_cls.rst .
 .TP
 .IR blkio " (since Linux 2.6.33; " \f[B]CONFIG_BLK_CGROUP\f[] )
 The
@@ -354,10 +330,7 @@ The second is a throttling policy which specifies
 upper I/O rate limits on a device.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/blkio\-controller.rst
-(or
-.I Documentation/cgroup\-v1/blkio\-controller.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/blkio\-controller.rst .
 .TP
 .IR perf_event " (since Linux 2.6.39; " \f[B]CONFIG_CGROUP_PERF\f[] )
 This controller allows
@@ -370,39 +343,27 @@ Further information can be found in the kernel source files
 This allows priorities to be specified, per network interface, for cgroups.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/net_prio.rst
-(or
-.I Documentation/cgroup\-v1/net_prio.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/net_prio.rst .
 .TP
 .IR hugetlb " (since Linux 3.5; " \f[B]CONFIG_CGROUP_HUGETLB\f[] )
 This supports limiting the use of huge pages by cgroups.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/hugetlb.rst
-(or
-.I Documentation/cgroup\-v1/hugetlb.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/hugetlb.rst .
 .TP
 .IR pids " (since Linux 4.3; " \f[B]CONFIG_CGROUP_PIDS\f[] )
 This controller permits limiting the number of process that may be created
 in a cgroup (and its descendants).
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/pids.rst
-(or
-.I Documentation/cgroup\-v1/pids.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/pids.rst .
 .TP
 .IR rdma " (since Linux 4.11; " \f[B]CONFIG_CGROUP_RDMA\f[] )
 The RDMA controller permits limiting the use of
 RDMA/IB-specific resources per cgroup.
 .IP
 Further information can be found in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v1/rdma.rst
-(or
-.I Documentation/cgroup\-v1/rdma.txt
-in Linux 5.2 and earlier).
+.IR Documentation/admin\-guide/cgroup\-v1/rdma.rst .
 .\"
 .SS Creating cgroups and moving processes
 A cgroup filesystem initially contains a single root cgroup, '/',
@@ -587,10 +548,7 @@ file.
 .P
 For more changes, see the
 .I Documentation/admin\-guide/cgroup\-v2.rst
-file in the kernel source
-(or
-.I Documentation/cgroup\-v2.txt
-in Linux 4.17 and earlier).
+file in the kernel source.
 .
 .P
 Some of the new behaviors listed above saw subsequent modification with
@@ -672,10 +630,7 @@ it is silently ignored in noninitial namespaces.
 .\"
 .SS Cgroups v2 controllers
 The following controllers, documented in the kernel source file
-.I Documentation/admin\-guide/cgroup\-v2.rst
-(or
-.I Documentation/cgroup\-v2.txt
-in Linux 4.17 and earlier),
+.IR Documentation/admin\-guide/cgroup\-v2.rst ,
 are supported in cgroups version 2:
 .TP
 .IR cpu " (since Linux 4.15)"

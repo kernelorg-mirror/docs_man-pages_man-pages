@@ -225,7 +225,6 @@ It is described by the Linux kernel source file
 .TP
 .IR /proc/sys/kernel/modules_disabled " (since Linux 2.6.31)"
 .\" 3d43321b7015387cfebbe26436d0e9d299162ea1
-.\" From Documentation/sysctl/kernel.txt
 A toggle value indicating if modules are allowed to be loaded
 in an otherwise modular kernel.
 This toggle defaults to off (0), but can be set true (1).
@@ -358,7 +357,7 @@ Each read from this read-only file returns a randomly generated 128-bit UUID,
 as a string in the standard UUID format.
 .TP
 .IR /proc/sys/kernel/randomize_va_space " (since Linux 2.6.12)"
-.\" Some further details can be found in Documentation/sysctl/kernel.txt
+.\" Some further details can be found in Documentation/sysctl/kernel.rst
 Select the address space layout randomization (ASLR) policy for the system
 (on architectures that support ASLR).
 Three values are supported for this file:
@@ -392,11 +391,7 @@ This value is the default if the kernel was not configured with
 .TP
 .I /proc/sys/kernel/real\-root\-dev
 This file is documented in the Linux kernel source file
-.I Documentation/admin\-guide/initrd.rst
-.\" commit 9d85025b0418163fae079c9ba8f8445212de8568
-(or
-.I Documentation/initrd.txt
-before Linux 4.10).
+.IR Documentation/admin\-guide/initrd.rst .
 .TP
 .IR /proc/sys/kernel/reboot\-cmd " (Sparc only)"
 This file seems to be a way to give an argument to the SPARC
@@ -483,7 +478,7 @@ However, there shouldn't be any reason to change this value.
 .TP
 .IR /proc/sys/kernel/shm_rmid_forced " (since Linux 3.1)"
 .\" commit b34a6b1da371ed8af1221459a18c67970f7e3d53
-.\" See also Documentation/sysctl/kernel.txt
+.\" See also Documentation/sysctl/kernel.rst
 If this file is set to 1, all System V shared memory segments will
 be marked for destruction as soon as the number of attached processes
 falls to zero;
@@ -639,11 +634,7 @@ This file is present only if the
 .B CONFIG_MAGIC_SYSRQ
 kernel configuration option is enabled.
 For further details see the Linux kernel source file
-.I Documentation/admin\-guide/sysrq.rst
-.\" commit 9d85025b0418163fae079c9ba8f8445212de8568
-(or
-.I Documentation/sysrq.txt
-before Linux 4.10).
+.IR Documentation/admin\-guide/sysrq.rst .
 .TP
 .I /proc/sys/kernel/version
 This file contains a string such as:
@@ -659,7 +650,6 @@ this is the fifth kernel built from this source base and the
 date following it indicates the time the kernel was built.
 .TP
 .IR /proc/sys/kernel/threads\-max " (since Linux 2.3.11)"
-.\" The following is based on Documentation/sysctl/kernel.txt
 This file specifies the system-wide limit on the number of
 threads (tasks) that can be created on the system.
 .IP

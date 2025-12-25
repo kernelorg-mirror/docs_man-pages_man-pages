@@ -8,7 +8,6 @@
 .SH DESCRIPTION
 .TP
 .IR /proc/ pid /mountinfo " (since Linux 2.6.26)"
-.\" This info adapted from Documentation/filesystems/proc.txt
 .\" commit 2d4d4864ac08caff5c204a752bd004eed4f08760
 This file contains information about mounts
 in the process's mount namespace (see
@@ -114,9 +113,6 @@ Parsers should ignore all unrecognized optional fields.
 .IP
 For more information on mount propagation see
 .I Documentation/filesystems/sharedsubtree.rst
-(or
-.I Documentation/filesystems/sharedsubtree.txt
-before Linux 5.8)
 in the Linux kernel source tree.
 .SH SEE ALSO
 .BR proc (5)

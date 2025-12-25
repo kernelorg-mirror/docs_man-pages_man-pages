@@ -149,8 +149,4 @@ Don't use it unless you really know what you are doing.
 .BR PR_SVE_GET_VL (2const)
 .P
 For more information, see the kernel source file
-.I Documentation/arm64/sve.rst
-.\"commit b693d0b372afb39432e1c49ad7b3454855bc6bed
-(or
-.I Documentation/arm64/sve.txt
-before Linux 5.3).
+.IR Documentation/arch/arm64/sve.rst .

@@ -26,7 +26,7 @@ The ID of the key
 .\" or the error ENOTDIR results
 is provided in
 .IR key .
-.\" According to Documentation/security/keys.txt:
+.\" According to Documentation/security/keys/core.rst:
 .\"     This function can also be used to clear special kernel keyrings if they
 .\"     are appropriately marked if the user has CAP_SYS_ADMIN capability.  The
 .\"     DNS resolver cache keyring is an example of this.

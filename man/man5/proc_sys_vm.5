@@ -100,12 +100,10 @@ and
 .BR shmget (2).
 .TP
 .IR /proc/sys/vm/legacy_va_layout " (since Linux 2.6.9)"
-.\" The following is from Documentation/filesystems/proc.txt
 If nonzero, this disables the new 32-bit memory-mapping layout;
 the kernel will use the legacy (2.4) layout for all processes.
 .TP
 .IR /proc/sys/vm/memory_failure_early_kill " (since Linux 2.6.32)"
-.\" The following is based on the text in Documentation/sysctl/vm.txt
 Control how to kill processes when an uncorrected memory error
 (typically a 2-bit error in a memory module)
 that cannot be handled by the kernel
@@ -156,7 +154,6 @@ Present only if the kernel was configured with
 .BR CONFIG_MEMORY_FAILURE .
 .TP
 .IR /proc/sys/vm/memory_failure_recovery " (since Linux 2.6.32)"
-.\" The following is based on the text in Documentation/sysctl/vm.txt
 Enable memory failure recovery (when supported by the platform).
 .RS
 .TP
@@ -171,7 +168,6 @@ Present only if the kernel was configured with
 .BR CONFIG_MEMORY_FAILURE .
 .TP
 .IR /proc/sys/vm/oom_dump_tasks " (since Linux 2.6.25)"
-.\" The following is from Documentation/sysctl/vm.txt
 Enables a system-wide task dump (excluding kernel threads) to be
 produced when the kernel performs an OOM-killing.
 The dump includes the following information
@@ -197,7 +193,6 @@ OOM-killer actually kills a memory-hogging task.
 The default value is 0.
 .TP
 .IR /proc/sys/vm/oom_kill_allocating_task " (since Linux 2.6.24)"
-.\" The following is from Documentation/sysctl/vm.txt
 This enables or disables killing the OOM-triggering task in
 out-of-memory situations.
 .IP
@@ -338,7 +333,6 @@ See the description of
 .IR /proc/sys/vm/overcommit_memory .
 .TP
 .IR /proc/sys/vm/panic_on_oom " (since Linux 2.6.18)"
-.\" The following is adapted from Documentation/sysctl/vm.txt
 This enables or disables a kernel panic in
 an out-of-memory situation.
 .IP
@@ -370,7 +364,6 @@ The default value is 0.
 Select either according to your policy of failover.
 .TP
 .I /proc/sys/vm/swappiness
-.\" The following is from Documentation/sysctl/vm.txt
 The value in this file controls how aggressively the kernel will swap
 memory pages.
 Higher values increase aggressiveness, lower values
