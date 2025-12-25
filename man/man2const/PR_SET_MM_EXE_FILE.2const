@@ -51,7 +51,7 @@ The file descriptor passed in
 is not valid.
 .TP
 .B EBUSY
-This the second attempt to change the
+This is the second attempt to change the
 .IR /proc/ pid /exe
 symbolic link.
 .SH FILES
