@@ -89,11 +89,6 @@ On success,
 On error, \-1 is returned, and
 .I errno
 is set to indicate the error.
-.SH FILES
-.TP
-.IR /proc/\: pid /\:timerslack_ns
-Since Linux 4.6, the "current" timer slack value of any process
-can be examined and changed via this file.
 .SH STANDARDS
 Linux.
 .SH HISTORY
