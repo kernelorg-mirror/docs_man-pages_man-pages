@@ -63,7 +63,7 @@ Linux 3.4.
 .\" commit 2d514487faf188938a4ee4fb3464eeecfbdcf8eb
 .\" commit bf06189e4d14641c0148bea16e9dd24943862215
 .SH SEE ALSO
-.BR prctl (2),
+.BR prctl (2)
 .P
 For further information, see the kernel source file
 .IR Documentation/\:admin\-guide/\:LSM/\:Yama.rst .
