@@ -10,5 +10,6 @@ man7/bpf-helpers.7
 man7/charsets.7
 man7/iso_8859-16.7
 man7/iso_8859-6.7
+man7/standards.7
 man7/vdso.7
 man8/zic.8
