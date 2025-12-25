@@ -7,7 +7,7 @@
 wint_t,
 WEOF
 \-
-integer type capable of storing any wchar_t of WEOF
+integer type capable of storing any wchar_t or WEOF
 .SH LIBRARY
 Standard C library
 .RI ( libc )
