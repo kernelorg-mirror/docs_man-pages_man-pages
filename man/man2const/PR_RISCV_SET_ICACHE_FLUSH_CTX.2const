@@ -25,7 +25,9 @@ and
 .I scope
 respectively.
 .P
-When scope is set to
+When
+.I scope
+is set to
 .B PR_RISCV_SCOPE_PER_PROCESS
 all threads in the process are permitted to emit icache flushing instructions.
 Whenever any thread in the process is migrated,
@@ -38,7 +40,9 @@ before attempting to execute the potentially modified instruction.
 This must be performed by the user-space program.
 .P
 In per-thread context
-(i.e., scope is set to
+(i.e.,
+.I scope
+is set to
 .BR PR_RISCV_SCOPE_PER_THREAD )
 only the thread calling this function is permitted to
 emit icache flushing instructions.
@@ -59,7 +63,9 @@ Allow fence.i in user space.
 .TP
 .BR PR_RISCV_CTX_SW_FENCEI_OFF " (since Linux 6.10)"
 Disallow fence.i in user space.
-All threads in a process will be affected when scope is set to
+All threads in a process will be affected when
+.I scope
+is set to
 .BR PR_RISCV_SCOPE_PER_PROCESS .
 Therefore, caution must be taken;
 use this flag only when you can guarantee that
