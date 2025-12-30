@@ -458,13 +458,13 @@ with the value 200809L or greater.)
 .TP
 .B F_GETOWN_EX
 .TQ
-.B F_GETOWN_EX
+.B F_SETOWN_EX
 POSIX.1-2024.
 Linux 2.6.32.
 .TP
 .B F_GETSIG
 .TQ
-.B F_GETSIG
+.B F_SETSIG
 Linux.
 .SH BUGS
 .SS F_GETOWN
