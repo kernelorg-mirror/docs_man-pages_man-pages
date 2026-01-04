@@ -26,7 +26,7 @@ Lines starting with \[aq]#\[aq] are comments and are ignored.
 .P
 The keywords currently recognized are:
 .TP
-.BI label\~ netmask\~precedence
+.BI label\~ netmask\~label
 The value is added to the label table used in the RFC\ 3484 sorting.
 If any
 .B label
@@ -35,7 +35,7 @@ the default table is not used.
 All the label definitions
 of the default table which are to be maintained have to be duplicated.
 Following the keyword,
-the line has to contain a network mask and a precedence value.
+the line has to contain a network mask and a label value.
 .TP
 .BI precedence\~ netmask\~precedence
 This keyword is similar to
