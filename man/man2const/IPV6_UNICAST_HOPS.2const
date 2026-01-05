@@ -34,6 +34,10 @@ See
 .BR setsockopt (2).
 See
 .BR ipv6 (7).
+.SH HISTORY
+.TP
+.B IPV6_UNICAST_HOPS
+POSIX.1-2001.
 .SH SEE ALSO
 .BR IPPROTO_IPV6 (2const),
 .BR setsockopt (2),
