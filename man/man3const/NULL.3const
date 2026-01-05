@@ -22,7 +22,8 @@ that is, a pointer that does not point to anything.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
-C89, POSIX.1-2001.
+C89,
+POSIX.1-1988.
 .SH NOTES
 The following headers also provide
 .BR NULL :
