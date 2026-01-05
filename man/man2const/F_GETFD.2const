@@ -62,7 +62,9 @@ See
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
-SVr4, 4.3BSD, POSIX.1-2001.
+SVr4,
+4.3BSD,
+POSIX.1-1988.
 .SH CAVEATS
 In multithreaded programs, using
 .BR fcntl (2)
