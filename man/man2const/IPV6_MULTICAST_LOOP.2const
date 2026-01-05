@@ -29,6 +29,10 @@ See
 .BR setsockopt (2).
 See
 .BR ipv6 (7).
+.SH HISTORY
+.TP
+.B IPV6_MULTICAST_LOOP
+POSIX.1-2001.
 .SH SEE ALSO
 .BR IP_MULTICAST_LOOP (2const),
 .BR IPPROTO_IPV6 (2const),
