@@ -134,6 +134,10 @@ is invalid.
 .\" .SH STANDARDS
 .\" IP_XFRM_POLICY is Linux-specific
 .\" IP_IPSEC_POLICY is a nonstandard extension, also present on some BSDs
+.SH HISTORY
+.TP
+.B IPPROTO_IP
+POSIX.1-2001.
 .SH SEE ALSO
 .BR setsockopt (2),
 .BR ip (7)

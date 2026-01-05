@@ -151,6 +151,10 @@ See
 .B ENOPROTOOPT
 .I opt
 is invalid.
+.SH HISTORY
+.TP
+.B IPPROTO_IPV6
+POSIX.1-2001.
 .SH SEE ALSO
 .BR setsockopt (2),
 .BR cmsg (3),
