@@ -29,7 +29,8 @@ It is instead a sentinel value outside of the valid range for valid characters.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
-C89, POSIX.1-2001.
+C89,
+POSIX.1-1988.
 .SH CAVEATS
 Programs can't pass this value to an output function
 to "write" the end of a file.
