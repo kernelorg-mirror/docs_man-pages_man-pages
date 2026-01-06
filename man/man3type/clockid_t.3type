@@ -20,7 +20,7 @@ It is defined as an arithmetic type.
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001.
+POSIX.1-1996.
 .SH NOTES
 The following header also provides this type:
 .IR <time.h> .
