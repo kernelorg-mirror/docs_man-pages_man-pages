@@ -40,6 +40,15 @@ or
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
+.TP
+.I pid_t
+.TQ
+.I uid_t
+.TQ
+.I gid_t
+POSIX.1-2001.
+.TP
+.I id_t
 POSIX.1-2001.
 .SH NOTES
 The following headers also provide
