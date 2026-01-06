@@ -28,7 +28,7 @@ For further information about this structure, see
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001.
+POSIX.1-1996.
 .SH SEE ALSO
 .BR aio_cancel (3),
 .BR aio_error (3),
