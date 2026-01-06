@@ -49,6 +49,16 @@ function.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
+.TP
+.I div_t
+.TQ
+.I ldiv_t
+C99,
+POSIX.1-2001.
+.TP
+.I lldiv_t
+.TQ
+.I imaxdiv_t
 C99, POSIX.1-2001.
 .SH SEE ALSO
 .BR div (3),
