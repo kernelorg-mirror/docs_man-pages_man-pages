@@ -46,7 +46,7 @@ POSIX.1-2024.
 .I uid_t
 .TQ
 .I gid_t
-POSIX.1-2001.
+POSIX.1-1988.
 .TP
 .I id_t
 POSIX.1-2001.
