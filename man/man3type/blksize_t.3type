@@ -20,6 +20,7 @@ It is a signed integer type.
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
+SUSv2,
 POSIX.1-2001.
 .SH NOTES
 The following header also provides this type:
