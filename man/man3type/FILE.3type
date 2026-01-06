@@ -19,7 +19,8 @@ An object type used for streams.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
-C89, POSIX.1-2001.
+C89,
+POSIX.1-1988.
 .SH NOTES
 The following header also provides this type:
 .IR <wchar.h> .
