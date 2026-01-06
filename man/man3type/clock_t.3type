@@ -24,7 +24,8 @@ it is an integer type or a real-floating type.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
-C89, POSIX.1-2001.
+C89,
+POSIX.1-1988.
 .SH NOTES
 The following headers also provide this type:
 .I <sys/types.h>
