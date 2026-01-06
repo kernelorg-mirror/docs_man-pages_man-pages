@@ -156,6 +156,16 @@ values.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
+.TP
+.RI [ u ] int N _t
+C99,
+POSIX.1-2001.
+.TP
+.RB [ U ] INT \f[I]N\f[] _MAX
+.TQ
+.BI INT N _MIN
+.TQ
+.RB [ U ] INT \f[I]N\f[] _C ()
 C99, POSIX.1-2001.
 .P
 The
