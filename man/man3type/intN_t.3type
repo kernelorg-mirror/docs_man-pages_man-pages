@@ -168,10 +168,9 @@ POSIX.1-2001.
 .TQ
 .RB [ U ] INT \f[I]N\f[] _C ()
 C99, POSIX.1-2001.
-.P
-The
+.TP
 .RB [ U ] INT \f[I]N\f[] _WIDTH
-macros were added in C23.
+C23.
 .P
 Initially, SUSv2 did not include
 .I <stdint.h>
