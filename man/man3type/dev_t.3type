@@ -22,7 +22,7 @@ For further details of this type, see
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001.
+POSIX.1-1988.
 .SH NOTES
 The following header also provides this type:
 .IR <sys/stat.h> .
