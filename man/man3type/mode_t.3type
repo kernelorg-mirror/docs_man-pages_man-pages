@@ -20,7 +20,7 @@ It is an integer type.
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001.
+POSIX.1-1988.
 .SH NOTES
 The following headers also provide this type:
 .IR <fcntl.h> ,
