@@ -24,7 +24,7 @@ in seconds and nanoseconds.
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001.
+POSIX.1-1996.
 .SH SEE ALSO
 .BR timerfd_create (2),
 .BR timer_settime (2),
