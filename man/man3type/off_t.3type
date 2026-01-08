@@ -46,7 +46,7 @@ GNU and some BSDs.
 .TP
 .I loff_t
 Linux.
-.SH VERSIONS
+.SH HISTORY
 .TP
 .I off_t
 POSIX.1-2001.
