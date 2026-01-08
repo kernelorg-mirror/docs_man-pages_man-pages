@@ -49,7 +49,7 @@ Linux.
 .SH HISTORY
 .TP
 .I off_t
-POSIX.1-2001.
+POSIX.1-1988.
 .P
 .I <aio.h>
 and
