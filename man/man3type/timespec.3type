@@ -38,7 +38,7 @@ was
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001.
+POSIX.1-1996.
 .SH NOTES
 The following headers also provide this type:
 .IR <aio.h> ,
