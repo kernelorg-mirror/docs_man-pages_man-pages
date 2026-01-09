@@ -94,7 +94,16 @@ for scanning
 .I uintptr_t
 values.
 .SH STANDARDS
+.TP
+.RI [ u ] intptr_t
+.TQ
+.RB [ U ] INTPTR_MAX
+.TQ
+.B INTPTR_MIN
 C11, POSIX.1-2024.
+.TP
+.RB [ U ] INTPTR_WIDTH
+C23.
 .SH HISTORY
 .TP
 .RI [ u ] intptr_t
@@ -109,7 +118,7 @@ C99,
 POSIX.1-2001 XSI.
 .TP
 .RB [ U ] INTPTR_WIDTH
-C99, POSIX.1-2001.
+C23.
 .SH NOTES
 The following header also provides these types:
 .IR <inttypes.h> .
