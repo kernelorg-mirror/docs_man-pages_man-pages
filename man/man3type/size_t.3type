@@ -93,10 +93,11 @@ POSIX.1-2024.
 .SH HISTORY
 .TP
 .I size_t
-C89, POSIX.1-2001.
+C89,
+POSIX.1-1990.
 .TP
 .I ssize_t
-POSIX.1-2001.
+POSIX.1-1990.
 .P
 .IR <aio.h> ,
 .IR <glob.h> ,
