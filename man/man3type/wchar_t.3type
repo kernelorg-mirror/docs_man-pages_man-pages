@@ -29,6 +29,14 @@ It is an integer type.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
+.TP
+.I wchar_t
+C99,
+POSIX.1-2001.
+.TP
+.B WCHAR_MAX
+.TQ
+.B WCHAR_MIN
 C99, POSIX.1-2001.
 .P
 The
