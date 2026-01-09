@@ -28,7 +28,9 @@ to traverse the list of arguments.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
-C89, POSIX.1-2001.
+C89,
+SUSv1,
+POSIX.1-2001.
 .SH NOTES
 The following headers also provide
 .IR va_list :
