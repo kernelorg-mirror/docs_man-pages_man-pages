@@ -65,7 +65,8 @@ POSIX.1-2008 Technical Corrigendum 1 (2013).
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
-C89, POSIX.1-2001.
+C89,
+POSIX.1-1990.
 .SH SEE ALSO
 .BR malloc (3),
 .BR memcmp (3),
