@@ -39,7 +39,8 @@ or accessible via the call
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
-POSIX.1-2001.
+SUSv1,
+POSIX.1-2001 XSI.
 .SH NOTES
 The following header also provides this type:
 .IR <sys/socket.h> .
