@@ -76,7 +76,7 @@ for printing
 .I intptr_t
 values.
 The length modifiers for the
-.IR [ u ] intptr_t
+.RI [ u ] intptr_t
 types
 for the
 .BR scanf (3)
