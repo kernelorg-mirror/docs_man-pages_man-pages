@@ -49,7 +49,9 @@ POSIX.1-2024.
 POSIX.1-1988.
 .TP
 .I id_t
-POSIX.1-2001.
+SUSv1,
+POSIX.1-2001 XSI,
+POSIX.1-2008.
 .SH NOTES
 The following headers also provide
 .IR pid_t :
