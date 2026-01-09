@@ -44,6 +44,7 @@ C11, POSIX.1-2024.
 .I wint_t
 .TQ
 .B WEOF
+SUSv1,
 C99,
 POSIX.1-2001.
 .TP
