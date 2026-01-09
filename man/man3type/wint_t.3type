@@ -28,7 +28,10 @@ Standard C library
 .SH DESCRIPTION
 .I wint_t
 is a type used in functions that work with wide characters.
-It is capable of storing any valid wchar_t or WEOF.
+It is capable of storing any valid
+.IR wchar_t (3type)
+or
+.BR WEOF .
 It is an integer type.
 .P
 .B WEOF
