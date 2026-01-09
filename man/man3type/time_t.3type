@@ -57,7 +57,9 @@ C89,
 POSIX.1-1988.
 .TP
 .I suseconds_t
-POSIX.1-2001.
+SUSv2,
+POSIX.1-2001 XSI,
+POSIX.1-2024.
 .TP
 .I useconds_t
 POSIX.1-2001.
