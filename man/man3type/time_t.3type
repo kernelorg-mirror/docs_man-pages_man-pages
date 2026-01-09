@@ -53,7 +53,8 @@ None.
 .SH HISTORY
 .TP
 .I time_t
-C89, POSIX.1-2001.
+C89,
+POSIX.1-1988.
 .TP
 .I suseconds_t
 POSIX.1-2001.
