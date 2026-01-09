@@ -53,6 +53,7 @@ C11, POSIX.1-2024.
 .I div_t
 .TQ
 .I ldiv_t
+SUSv1,
 C99,
 POSIX.1-2001.
 .TP
