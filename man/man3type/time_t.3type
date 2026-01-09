@@ -62,7 +62,8 @@ POSIX.1-2001 XSI,
 POSIX.1-2024.
 .TP
 .I useconds_t
-POSIX.1-2001.
+SUSv1,
+POSIX.1-2001 XSI.
 Removed in POSIX.1-2008.
 .SS Header files
 .I <sched.h>
