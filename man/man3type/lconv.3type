@@ -46,6 +46,21 @@ shown in the comments above.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
+.TP
+.I lconv
+POSIX.1-2001.
+.TP
+.I .int_p_cs_precedes
+.TQ
+.I .int_n_cs_precedes
+.TQ
+.I .int_p_sep_by_space
+.TQ
+.I .int_n_sep_by_space
+.TQ
+.I .int_p_sign_posn
+.TQ
+.I .int_n_sign_posn
 POSIX.1-2001.
 .SH SEE ALSO
 .BR setlocale (3),
