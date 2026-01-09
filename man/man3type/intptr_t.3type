@@ -96,6 +96,18 @@ values.
 .SH STANDARDS
 C11, POSIX.1-2024.
 .SH HISTORY
+.TP
+.RI [ u ] intptr_t
+C99,
+POSIX.1-2001.
+.TP
+.RB [ U ] INTPTR_MAX
+.TQ
+.B INTPTR_MIN
+C99,
+POSIX.1-2001.
+.TP
+.RB [ U ] INTPTR_WIDTH
 C99, POSIX.1-2001.
 .SH NOTES
 The following header also provides these types:
