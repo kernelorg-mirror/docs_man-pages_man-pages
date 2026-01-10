@@ -147,6 +147,14 @@ POSIX.1-1988.
 SUSv1,
 POSIX.1-2001 XSI.
 .P
+Initially, SUSv1 specified
+.I .st_blksize
+and
+.I .st_blocks
+with type
+.IR long .
+This was remedied in SUSv2.
+.P
 Old kernels and old standards did not support nanosecond timestamp fields.
 Instead, there were three timestamp fields
 .RI \[em] .st_atime ,
