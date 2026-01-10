@@ -144,7 +144,8 @@ POSIX.1-1988.
 .I .st_blksize
 .TQ
 .I .st_blocks
-POSIX.1-1988.
+SUSv1,
+POSIX.1-2001 XSI.
 .P
 Old kernels and old standards did not support nanosecond timestamp fields.
 Instead, there were three timestamp fields
