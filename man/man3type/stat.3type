@@ -135,6 +135,15 @@ For further information on the above fields, see
 .SH STANDARDS
 POSIX.1-2024.
 .SH HISTORY
+.TP
+.I stat
+POSIX.1-1988.
+.TP
+.I .st_rdev
+.TQ
+.I .st_blksize
+.TQ
+.I .st_blocks
 POSIX.1-1988.
 .P
 Old kernels and old standards did not support nanosecond timestamp fields.
