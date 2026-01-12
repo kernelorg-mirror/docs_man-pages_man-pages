@@ -9,13 +9,7 @@ standards \- C and UNIX Standards
 The STANDARDS section that appears in many manual pages identifies
 various standards to which the documented interface conforms.
 The following list briefly describes these standards.
-.TP
-.B K&R
-This refers to the C language as specified in
-.I \[lq]The C Programming Language\[rq]
-[Brian W.\& Kernighan and Dennis M.\& Ritchie;
-Prentice Hall;
-1st Ed., 1978].
+.SS Research Unix
 .TP
 .B V7
 Version 7 (also known as Seventh Edition) UNIX,
@@ -26,6 +20,7 @@ Sources are
 .UR https:\://www.tuhs.org/\:cgi\-bin/\:utree.pl?file=V7
 available online
 .UE .
+.SS BSD
 .TP
 .B 4.2BSD
 This is an implementation standard defined by the 4.2 release
@@ -63,6 +58,7 @@ Sources are
 .UR https:\://www.tuhs.org/\:cgi\-bin/\:utree.pl?file=4.4BSD
 available online
 .UE .
+.SS Unix/TS
 .TP
 .B System V
 This is an implementation standard defined by AT&T's milestone 1983
@@ -99,6 +95,14 @@ System V Interface Definition version 4, issued in 1995.
 Available online at
 .UR http:\://www.sco.com\:/developers\:/devspecs/
 .UE .
+.SS Standard C
+.TP
+.B K&R
+This refers to the C language as specified in
+.I \[lq]The C Programming Language\[rq]
+[Brian W.\& Kernighan and Dennis M.\& Ritchie;
+Prentice Hall;
+1st Ed., 1978].
 .TP
 .B C89
 This was the first C language standard, ratified by ANSI
@@ -212,14 +216,7 @@ A draft is
 .UR https:\://www.open\-std.org/\:jtc1/\:sc22/\:wg14/\:www/\:docs/\:n3220.pdf
 available online
 .UE .
-.TP
-.B LFS
-The Large File Summit specification, completed in 1996.
-This specification defined mechanisms that allowed 32-bit systems
-to support the use of large files (i.e., 64-bit file offsets).
-See
-.UR https:\://www.opengroup.org\:/platform\:/lfs.html
-.UE .
+.SS POSIX and SUS
 .TP
 .B POSIX.1-1988
 This was the first POSIX standard,
@@ -500,6 +497,15 @@ manual pages under sections 0p (header files), 1p (commands),
 and 3p (functions);
 thus one can write
 .IR man\~3p\~open .
+.SS Other standards
+.TP
+.B LFS
+The Large File Summit specification, completed in 1996.
+This specification defined mechanisms that allowed 32-bit systems
+to support the use of large files (i.e., 64-bit file offsets).
+See
+.UR https:\://www.opengroup.org\:/platform\:/lfs.html
+.UE .
 .SH SEE ALSO
 .BR getconf (1),
 .BR confstr (3),
