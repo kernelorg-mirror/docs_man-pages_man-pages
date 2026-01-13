@@ -97,6 +97,45 @@ with
 .BR O_TRUNC .
 .IP
 This access right is available since the third version of the Landlock ABI.
+.TP
+.B LANDLOCK_ACCESS_FS_IOCTL_DEV
+Invoke
+.BR ioctl (2)
+commands on an opened character or block device.
+.IP
+This access right applies to all
+.BR ioctl (2)
+commands implemented by device drivers.
+However, the following common IOCTL commands continue to be invokable
+independent of the
+.B LANDLOCK_ACCESS_FS_IOCTL_DEV
+right:
+.RS
+.IP \[bu] 3
+IOCTL commands targeting file descriptors
+.RB ( FIOCLEX ,
+.BR FIONCLEX ),
+.IP \[bu]
+IOCTL commands targeting file descriptions
+.RB ( FIONBIO ,
+.BR FIOASYNC ),
+.IP \[bu]
+IOCTL commands targeting file systems
+.RB ( FIFREEZE ,
+.BR FITHAW ,
+.BR FIGETBSZ ,
+.BR FS_IOC_GETFSUUID ,
+.BR FS_IOC_GETFSSYSFSPATH )
+.IP \[bu]
+Some IOCTL commands which do not make sense when used with devices, but
+whose implementations are safe and return the right error codes
+.RB ( FS_IOC_FIEMAP ,
+.BR FICLONE ,
+.BR FICLONERANGE ,
+.BR FIDEDUPERANGE )
+.RE
+.IP
+This access right is available since the fifth version of the Landlock ABI.
 .P
 Whether an opened file can be truncated with
 .BR ftruncate (2)
@@ -198,48 +237,6 @@ If multiple requirements are not met, the
 .B EACCES
 error code takes precedence over
 .BR EXDEV .
-.P
-The following access right
-applies to both files and directories:
-.TP
-.B LANDLOCK_ACCESS_FS_IOCTL_DEV
-Invoke
-.BR ioctl (2)
-commands on an opened character or block device.
-.IP
-This access right applies to all
-.BR ioctl (2)
-commands implemented by device drivers.
-However, the following common IOCTL commands continue to be invokable
-independent of the
-.B LANDLOCK_ACCESS_FS_IOCTL_DEV
-right:
-.RS
-.IP \[bu] 3
-IOCTL commands targeting file descriptors
-.RB ( FIOCLEX ,
-.BR FIONCLEX ),
-.IP \[bu]
-IOCTL commands targeting file descriptions
-.RB ( FIONBIO ,
-.BR FIOASYNC ),
-.IP \[bu]
-IOCTL commands targeting file systems
-.RB ( FIFREEZE ,
-.BR FITHAW ,
-.BR FIGETBSZ ,
-.BR FS_IOC_GETFSUUID ,
-.BR FS_IOC_GETFSSYSFSPATH )
-.IP \[bu]
-Some IOCTL commands which do not make sense when used with devices, but
-whose implementations are safe and return the right error codes
-.RB ( FS_IOC_FIEMAP ,
-.BR FICLONE ,
-.BR FICLONERANGE ,
-.BR FIDEDUPERANGE )
-.RE
-.IP
-This access right is available since the fifth version of the Landlock ABI.
 .\"
 .SS Network flags
 These flags enable to restrict a sandboxed process
