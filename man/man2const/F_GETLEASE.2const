@@ -196,6 +196,19 @@ is set to indicate the error.
 .SH ERRORS
 See
 .BR fcntl (2).
+.P
+These operations can also fail with the following error codes:
+.TP
+.B EAGAIN
+The operation is prohibited because
+the file is open in a way that conflicts with the requested lease.
+.TP
+.B EINVAL
+The operation is prohibited because
+the underlying filesystem doesn't support leases,
+or because
+.I fd
+does not represent a regular file.
 .SH STANDARDS
 Linux.
 .SH HISTORY
