@@ -20,7 +20,6 @@ Standard C library
 .BI "int fcntl(int " fd ", F_GETLEASE);"
 .fi
 .SH DESCRIPTION
-.SS Leases
 .B F_SETLEASE
 and
 .B F_GETLEASE
@@ -43,7 +42,7 @@ values is specified in the integer
 .RS
 .TP
 .B F_RDLCK
-Take out a read lease.
+Establish a read lease.
 This will cause the calling process to be notified when
 the file is opened for writing or is truncated.
 .\" The following became true in Linux 2.6.10:
@@ -52,7 +51,7 @@ A read lease can be placed only on a file descriptor that
 is opened read-only.
 .TP
 .B F_WRLCK
-Take out a write lease.
+Establish a write lease.
 This will cause the caller to be notified when
 the file is opened for reading or writing or is truncated.
 A write lease may be placed on a file only if there are no
@@ -86,8 +85,11 @@ capability may take out leases on arbitrary files.
 Indicates what type of lease is associated with the file descriptor
 .I fd
 by returning either
-.BR F_RDLCK ", " F_WRLCK ", or " F_UNLCK ,
-indicating, respectively, a read lease , a write lease, or no lease.
+.BR F_RDLCK ,
+.BR F_WRLCK ,
+or
+.BR F_UNLCK ,
+indicating, respectively, a read lease, a write lease, or no lease.
 .I arg
 is ignored.
 .P
