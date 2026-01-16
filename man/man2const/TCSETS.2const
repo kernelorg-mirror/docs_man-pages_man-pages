@@ -36,16 +36,16 @@ Standard C library
 .BI "int ioctl(int " fd ", TCSETSW2, const struct termios2 *" argp );
 .BI "int ioctl(int " fd ", TCSETSF2, const struct termios2 *" argp );
 .P
-.BI "int ioctl(int " fd ", TCGETA, struct termio *" argp );
-.BI "int ioctl(int " fd ", TCSETA, const struct termio *" argp );
-.BI "int ioctl(int " fd ", TCSETAW, const struct termio *" argp );
-.BI "int ioctl(int " fd ", TCSETAF, const struct termio *" argp );
+.BI "[[deprecated]] int ioctl(int " fd ", TCGETA, struct termio *" argp );
+.BI "[[deprecated]] int ioctl(int " fd ", TCSETA, const struct termio *" argp );
+.BI "[[deprecated]] int ioctl(int " fd ", TCSETAW, const struct termio *" argp );
+.BI "[[deprecated]] int ioctl(int " fd ", TCSETAF, const struct termio *" argp );
 .P
 .B #include <asm/termbits.h>
 .P
 .B struct termios;
 .B struct termios2;
-.B struct termio;
+.B struct [[deprecated]] termio;
 .fi
 .SH DESCRIPTION
 .TP
