@@ -71,8 +71,6 @@ defines
 .I time_t
 since POSIX.1-2008.
 .SS time_t
-In POSIX.1-2001,
-.I time_t
 POSIX.1-2024 requires that the width of
 .I time_t
 is at least 64 bits;
