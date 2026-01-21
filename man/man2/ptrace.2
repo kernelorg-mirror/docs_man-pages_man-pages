@@ -1045,6 +1045,8 @@ structure contains the following fields:
 .EX
 struct ptrace_syscall_info {
     __u8 op;        /* Type of system call stop */
+    __u8 reserved;  /* Reserved for future use, must be zero */
+    __u16 flags;    /* Reserved for future use, must be zero */
     __u32 arch;     /* AUDIT_ARCH_* value; see seccomp(2) */
     __u64 instruction_pointer; /* CPU instruction pointer */
     __u64 stack_pointer;    /* CPU stack pointer */
@@ -1124,6 +1126,25 @@ is limited to type
 unless
 .B PTRACE_O_TRACESYSGOOD
 option is set before the corresponding system call stop has occurred.
+.TP
+.BR PTRACE_SET_SYSCALL_INFO " (since Linux 6.16)"
+.\" commit 26bb32768fe6552de044f782a58b3272073fbfc0
+Modify information about the system call that caused the stop.
+The
+.I data
+argument is a pointer to
+.I struct ptrace_syscall_info
+that specifies the system call information to be set.
+The
+.I addr
+argument should be set to
+.IR "sizeof(struct ptrace_syscall_info)" .
+Only the
+.IR nr ,
+.IR args ,
+and
+.I rval
+fields can be modified.
 .\"
 .SS Death under ptrace
 When a (possibly multithreaded) process receives a killing signal
