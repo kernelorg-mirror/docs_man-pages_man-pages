@@ -145,11 +145,15 @@ POSIX.1-2024.
 .BR sethostname ()
 None.
 .SH HISTORY
-SVr4, 4.4BSD (these interfaces first appeared in 4.2BSD).
-POSIX.1 specifies
+.TP
 .BR gethostname ()
-but not
-.BR sethostname ().
+4.2BSD,
+SVr4,
+POSIX.1-2001.
+.TP
+.BR sethostname ()
+4.2BSD,
+SVr4.
 .P
 Versions of glibc before glibc 2.2
 .\" At least glibc 2.0 and glibc 2.1, older versions not checked
