@@ -29,7 +29,10 @@ Feature Test Macro Requirements for glibc (see
     _ISOC11_SOURCE
 .fi
 .P
-.BR timespec_getres ():
+.BR timespec_getres (),
+.BR TIME_MONOTONIC ,
+.BR TIME_ACTIVE ,
+.BR TIME_THREAD_ACTIVE :
 .nf
     _ISOC23_SOURCE
 .fi
@@ -68,6 +71,40 @@ are the same as those retrieved by
 and
 .IR clock_getres(CLOCK_REALTIME,\~tp) ,
 respectively.
+.TP
+.B TIME_MONOTONIC
+A time base that measures
+time since an unspecified point in the past,
+where the time within a process will not decrease
+even if the system's real time clock is set or adjusted.
+The time and resolution in this time base
+are the same as those retrieved by
+.I clock_gettime(CLOCK_MONOTONIC,\~res)
+and
+.IR clock_getres(CLOCK_MONOTONIC,\~tp) ,
+respectively.
+.TP
+.B TIME_ACTIVE
+A process-specific time base that measures
+CPU time consumed by
+the calling process.
+The time and resolution in this time base
+are the same as those retrieved by
+.I clock_gettime(CLOCK_PROCESS_CPUTIME_ID,\~res)
+and
+.IR clock_getres(CLOCK_PROCESS_CPUTIME_ID,\~tp) ,
+respectively.
+.TP
+.B TIME_THREAD_ACTIVE
+A thread-specific time base that measures
+CPU time consumed by
+the calling thread.
+The time and resolution in this time base
+are the same as those retrieved by
+.I clock_gettime(CLOCK_THREAD_CPUTIME_ID,\~res)
+and
+.IR clock_getres(CLOCK_THREAD_CPUTIME_ID,\~tp) ,
+respectively.
 .SH RETURN VALUE
 .BR timespec_get ()
 returns the nonzero
@@ -104,6 +141,12 @@ C23 (though ISO C doesn't specify the time epoch),
 POSIX.1-2024.
 .TP
 .BR timespec_getres ()
+.TQ
+.B TIME_MONOTONIC
+.TQ
+.B TIME_ACTIVE
+.TQ
+.B TIME_THREAD_ACTIVE
 C23.
 .SH HISTORY
 .TP
@@ -114,6 +157,13 @@ C11, POSIX.1-2024, glibc 2.16, musl 1.1.10.
 .TP
 .BR timespec_getres ()
 C23, glibc 2.34.
+.TP
+.B TIME_MONOTONIC
+.TQ
+.B TIME_ACTIVE
+.TQ
+.B TIME_THREAD_ACTIVE
+C23, glibc 2.43.
 .SH SEE ALSO
 .BR clock_gettime (2),
 .BR clock_getres (2)
