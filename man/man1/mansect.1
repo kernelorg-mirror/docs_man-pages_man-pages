@@ -18,11 +18,6 @@ The
 command prints the source code of the
 .I section
 of the given manual-page files.
-If no files are specified,
-the standard input is used.
-.P
-.I section
-is a PCRE2 regular expression.
 .P
 The
 .B TH
@@ -31,6 +26,14 @@ line is unconditionally printed.
 The output of this program is suitable for piping to the
 .BR groff (1)
 pipeline.
+.SH PARAMETERS
+.TP
+.I section
+A PCRE2 regular expression.
+.TP
+.I file
+If no files are specified,
+the standard input is used.
 .SH EXAMPLES
 .EX
 .RB $\~ "man \-w strtol strtoul | xargs mansect \[aq]NAME|SEE ALSO\[aq]" ;
