@@ -58,7 +58,7 @@ Andreas Schwab <schwab@suse.de>
 Andreas Wiese <aw-lkml@instandbesetzt.net>
 Andrei Vagin <avagin@openvz.org>
 Andrew Clayton <andrew@digital-domain.net>
-Andrew Lutomirski
+Andrew Lutomirski <luto@kernel.org>
 Andrew Morgan <morgan@kernel.org>
 Andrew Morton <akpm@linux-foundation.org>
 Andrew Persons <andrewscottpersons@gmail.com>
@@ -67,7 +67,6 @@ Andrey Vagin <avagin@openvz.org>
 Andries E. Brouwer <aeb@cwi.nl>
 André Almeida <andrealmeid@collabora.com>
 André Goddard Rosa <andre.goddard@gmail.com>
-Andy Lutomirski <luto@kernel.org>
 Andy Pan <i@andypan.me>
 Anhad Singh <andypython@protonmail.com>
 Anna Schumaker <Anna.Schumaker@Netapp.com>
