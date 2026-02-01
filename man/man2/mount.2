@@ -796,6 +796,21 @@ A pathname was empty or had a nonexistent component.
 .B ENOMEM
 The kernel could not allocate a free page to copy filenames or data into.
 .TP
+.B ENOSPC
+Number of mounts will exceed the limit after this syscall
+in some mount namespaces.
+This limit is controlled by
+.IR /proc/sys/fs/mount-max ,
+see
+.BR proc_sys_fs (5)
+for details of this limit.
+that this limit applies both
+to the mount namespace where the mount operation occurs
+and to any mount namespaces to which the mount will propagate.
+See
+.BR mount_namespaces (7)
+for details of mount namespaces and mount propagation.
+.TP
 .B ENOTBLK
 .I source
 is not a block device (and a device was required).
