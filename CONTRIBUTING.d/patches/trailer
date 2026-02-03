@@ -12,3 +12,24 @@ Description
 	"Co-developed-by:".  Example:
 
 		Signed-off-by: Alejandro Colomar <alx@kernel.org>
+
+    Fixes
+	Add 'Fixes:' tags as necessary.  'Fixes:' trailer fields should
+	have the following format.
+
+		Fixes: 12-char-hash ([author-date,] commit-date; "subject")
+
+	where the author date is optional, and only included if it's
+	somehow important.  The commit date is often more important, as
+	it's sorted, and thus can be used to find (with a binary search)
+	a commit whose hash and subject may have collisions.  For
+	example:
+
+		Fixes: bb509e6fcbae (2020-10-16; "kernel_lockdown.7: New page documenting the Kernel Lockdown feature")
+
+	See <CONTRIBUTING.d/git> for how to configure the alias.ref and
+	alias.ref2 git aliases.  The commit references can be produced
+	with them.
+
+		$ git ref bb509e6fc
+		bb509e6fcbae (2020-10-16; "kernel_lockdown.7: New page documenting the Kernel Lockdown feature")

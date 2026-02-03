@@ -43,6 +43,15 @@ Description
 		$ git config --global \
 			sendemail.sendmailcmd 'mutt -H - && true';
 
+    alias.ref, alias.ref2
+	To produce git commit references, the following git aliases are
+	useful.
+
+		$ git config --global alias.ref \
+			"show -s --abbrev=12 --date=short --format=tformat:'%C(auto)%h%C(reset) %C(dim white)(%cd%x3B \"%C(reset)%C(auto)%s%C(reset)%C(dim white)\")%C(reset)'"
+		$ git config --global alias.ref2 \
+			"show -s --abbrev=12 --date=short --format=tformat:'%C(auto)%h%C(reset) %C(dim white)(%ad, %cd%x3B \"%C(reset)%C(auto)%s%C(reset)%C(dim white)\")%C(reset)'"
+
 See also
 	git-config(1)
 	git-diff(1)
