@@ -102,20 +102,12 @@ to decide whether to continue to block or not.
 See
 .BR futex (2).
 .TP
-.B EAGAIN
+.BR EAGAIN " or " EWOULDBLOCK
 The value pointed to by
 .I uaddr
 was not equal to the expected value
 .I val
 at the time of the call.
-.IP
-.BR Note :
-on Linux, the symbolic names
-.B EAGAIN
-and
-.B EWOULDBLOCK
-(both of which appear in different parts of the kernel futex code)
-have the same value.
 .TP
 .B EFAULT
 .I timeout
