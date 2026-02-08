@@ -1,0 +1,14 @@
+Name
+	patches/trailer - trailer of a patch description
+
+Description
+    Developer's Certificate of Origin
+	Sign your patch with "Signed-off-by:".  Read about the
+	"Developer's Certificate of Origin" at
+	<https://www.kernel.org/doc/Documentation/process/submitting-patches.rst>.
+	When appropriate, other tags documented in that file, such as
+	"Reported-by:", "Reviewed-by:", "Acked-by:", and "Suggested-by:"
+	can be added to the patch.  We use "Co-authored-by:" instead of
+	"Co-developed-by:".  Example:
+
+		Signed-off-by: Alejandro Colomar <alx@kernel.org>
