@@ -48,9 +48,14 @@ Description
 	useful.
 
 		$ git config --global alias.ref \
-			"show -s --abbrev=12 --date=short --format=tformat:'%C(auto)%h (%cd%x3B \"%s\")%C(reset)'"
+			"show -s --date=short --format=tformat:'%C(auto)%h (%cd%x3B \"%s\")%C(reset)'"
 		$ git config --global alias.ref2 \
-			"show -s --abbrev=12 --date=short --format=tformat:'%C(auto)%h (%ad, %cd%x3B \"%s\")%C(reset)'"
+			"show -s --date=short --format=tformat:'%C(auto)%h (%ad, %cd%x3B \"%s\")%C(reset)'"
+
+    core.abbrev
+	Use 12 characters in abbreviated hashes.
+
+		$ git config --global core.abbrev 12
 
 See also
 	git-config(1)
