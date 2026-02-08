@@ -2,6 +2,7 @@ checkersReport
 ConfigurationNotChecked
 constParameter
 constParameterCallback
+constVariablePointer
 knownConditionTrueFalse
 missingIncludeSystem
 nullPointerOutOfMemory
