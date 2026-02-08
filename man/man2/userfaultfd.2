@@ -765,11 +765,7 @@ static int page_size;
 static void *
 fault_handler_thread(void *arg)
 {
-    int                 nready;
-    long                uffd;   /* userfaultfd file descriptor */
-    ssize_t             nread;
-    struct pollfd       pollfd;
-    struct uffdio_copy  uffdio_copy;
+    long  uffd;   /* userfaultfd file descriptor */
 \&
     static int      fault_cnt = 0; /* Number of faults so far handled */
     static char     *page = NULL;
@@ -790,6 +786,10 @@ fault_handler_thread(void *arg)
        file descriptor.  */
 \&
     for (;;) {
+        int                 nready;
+        ssize_t             nread;
+        struct pollfd       pollfd;
+        struct uffdio_copy  uffdio_copy;
 \&
         /* See what poll() tells us about the userfaultfd.  */
 \&
@@ -858,7 +858,6 @@ int
 main(int argc, char *argv[])
 {
     int        s;
-    char       c;
     char       *addr;   /* Start of region handled by userfaultfd */
     long       uffd;    /* userfaultfd file descriptor */
     size_t     size, i;  /* Size of region handled by userfaultfd */
@@ -929,6 +928,8 @@ main(int argc, char *argv[])
                    boundary, in order to test that we correctly
                    handle that case in fault_handling_thread().  */
     while (i < size) {
+        char  c;
+\&
         c = addr[i];
         printf("Read address %p in %s(): ", addr + i, __func__);
         printf("%c\[rs]n", c);
