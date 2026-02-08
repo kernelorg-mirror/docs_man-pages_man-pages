@@ -57,6 +57,11 @@ Description
 
 		$ git config --global core.abbrev 12
 
+    log.date
+	Use ISO 8601-like format for dates.
+
+		$ git config --global log.date iso
+
 See also
 	git-config(1)
 	git-diff(1)
