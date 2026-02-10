@@ -363,8 +363,6 @@ Always reference them by name.
 #include <stdlib.h>
 #include <regex.h>
 \&
-#define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))
-\&
 static const char *const str =
         "1) John Driverhacker;\[rs]n2) John Doe;\[rs]n3) John Foo;\[rs]n";
 static const char *const re = "John.*o";
@@ -383,7 +381,7 @@ int main(void)
     printf("Matches:\[rs]n");
 \&
     for (unsigned int i = 0; ; i++) {
-        if (regexec(&regex, s, NITEMS(pmatch), pmatch, 0))
+        if (regexec(&regex, s, _Countof(pmatch), pmatch, 0))
             break;
 \&
         off = pmatch[0].rm_so + (s \- str);

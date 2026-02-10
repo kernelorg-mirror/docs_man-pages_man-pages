@@ -1118,7 +1118,6 @@ cecilia
 #include <unistd.h>
 \&
 #define X32_SYSCALL_BIT 0x40000000
-#define NITEMS(arr)  (sizeof(arr) / sizeof((arr)[0]))
 \&
 static int
 install_filter(int syscall_nr, unsigned int t_arch, int f_errno)
@@ -1169,7 +1168,7 @@ install_filter(int syscall_nr, unsigned int t_arch, int f_errno)
     };
 \&
     struct sock_fprog prog = {
-        .len = NITEMS(filter),
+        .len = _Countof(filter),
         .filter = filter,
     };
 \&

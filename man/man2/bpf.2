@@ -1208,8 +1208,6 @@ riscv
 .SH EXAMPLES
 .\" SRC BEGIN (bpf.c)
 .EX
-#define NITEMS(a)  (sizeof(a) / sizeof(*(a)))
-\&
 /* bpf+sockets example:
  * 1.  create array map of 256 elements
  * 2.  load program that counts number of packets received
@@ -1254,7 +1252,7 @@ main(int argc, char *argv[])
     };
 \&
     prog_fd = bpf_prog_load(BPF_PROG_TYPE_SOCKET_FILTER, prog,
-                            NITEMS(prog), "GPL");
+                            _Countof(prog), "GPL");
 \&
     sock = open_raw_sock("lo");
 \&

@@ -1429,8 +1429,6 @@ T: terminating
 #include <sys/un.h>
 #include <unistd.h>
 \&
-#define NITEMS(arr)  (sizeof(arr) / sizeof((arr)[0]))
-\&
 /* Send the file descriptor \[aq]fd\[aq] over the connected UNIX domain socket
    \[aq]sockfd\[aq].  Returns 0 on success, or \-1 on error.  */
 \&
@@ -1610,7 +1608,7 @@ installNotifyFilter(void)
     };
 \&
     struct sock_fprog prog = {
-        .len = NITEMS(filter),
+        .len = _Countof(filter),
         .filter = filter,
     };
 \&

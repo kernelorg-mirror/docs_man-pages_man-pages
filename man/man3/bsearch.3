@@ -85,8 +85,6 @@ then retrieves desired elements using
 #include <stdlib.h>
 #include <string.h>
 \&
-#define NITEMS(arr)  (sizeof((arr)) / sizeof((arr)[0]))
-\&
 struct mi {
     int         nr;
     const char  *name;
@@ -110,13 +108,13 @@ compmi(const void *m1, const void *m2)
 int
 main(int argc, char *argv[])
 {
-    qsort(months, NITEMS(months), sizeof(months[0]), compmi);
+    qsort(months, _Countof(months), sizeof(months[0]), compmi);
     for (size_t i = 1; i < argc; i++) {
         struct mi key;
         struct mi *res;
 \&
         key.name = argv[i];
-        res = bsearch(&key, months, NITEMS(months),
+        res = bsearch(&key, months, _Countof(months),
                       sizeof(months[0]), compmi);
         if (res == NULL)
             printf("\[aq]%s\[aq]: unknown month\[rs]n", argv[i]);

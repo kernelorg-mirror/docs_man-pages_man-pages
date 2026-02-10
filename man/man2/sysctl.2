@@ -120,8 +120,6 @@ It is not yet possible to change operating system by writing to
 \&
 #include <linux/sysctl.h>
 \&
-#define NITEMS(arr)  (sizeof(arr) / sizeof((arr)[0]))
-\&
 int _sysctl(struct __sysctl_args *args);
 \&
 #define OSNAMESZ 100
@@ -136,7 +134,7 @@ main(void)
 \&
     memset(&args, 0, sizeof(args));
     args.name = name;
-    args.nlen = NITEMS(name);
+    args.nlen = _Countof(name);
     args.oldval = osname;
     args.oldlenp = &osnamelth;
 \&
