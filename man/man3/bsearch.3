@@ -81,6 +81,7 @@ then retrieves desired elements using
 .P
 .\" SRC BEGIN (bsearch.c)
 .EX
+#include <stdcountof.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -108,13 +109,13 @@ compmi(const void *m1, const void *m2)
 int
 main(int argc, char *argv[])
 {
-    qsort(months, _Countof(months), sizeof(months[0]), compmi);
+    qsort(months, countof(months), sizeof(months[0]), compmi);
     for (size_t i = 1; i < argc; i++) {
         struct mi key;
         struct mi *res;
 \&
         key.name = argv[i];
-        res = bsearch(&key, months, _Countof(months),
+        res = bsearch(&key, months, countof(months),
                       sizeof(months[0]), compmi);
         if (res == NULL)
             printf("\[aq]%s\[aq]: unknown month\[rs]n", argv[i]);

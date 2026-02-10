@@ -112,6 +112,7 @@ It is not yet possible to change operating system by writing to
 .\" SRC BEGIN (sysctl.c)
 .EX
 #define _GNU_SOURCE
+#include <stdcountof.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -134,7 +135,7 @@ main(void)
 \&
     memset(&args, 0, sizeof(args));
     args.name = name;
-    args.nlen = _Countof(name);
+    args.nlen = countof(name);
     args.oldval = osname;
     args.oldlenp = &osnamelth;
 \&

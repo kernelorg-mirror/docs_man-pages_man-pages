@@ -358,6 +358,7 @@ Always reference them by name.
 .\" illumos has two more start/end pairs and the first one is of pointers
 .SH EXAMPLES
 .EX
+#include <stdcountof.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -381,7 +382,7 @@ int main(void)
     printf("Matches:\[rs]n");
 \&
     for (unsigned int i = 0; ; i++) {
-        if (regexec(&regex, s, _Countof(pmatch), pmatch, 0))
+        if (regexec(&regex, s, countof(pmatch), pmatch, 0))
             break;
 \&
         off = pmatch[0].rm_so + (s \- str);

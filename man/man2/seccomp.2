@@ -1110,6 +1110,7 @@ cecilia
 #include <linux/audit.h>
 #include <linux/filter.h>
 #include <linux/seccomp.h>
+#include <stdcountof.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1168,7 +1169,7 @@ install_filter(int syscall_nr, unsigned int t_arch, int f_errno)
     };
 \&
     struct sock_fprog prog = {
-        .len = _Countof(filter),
+        .len = countof(filter),
         .filter = filter,
     };
 \&

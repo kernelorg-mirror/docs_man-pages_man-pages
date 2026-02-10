@@ -1415,6 +1415,7 @@ T: terminating
 #include <linux/seccomp.h>
 #include <signal.h>
 #include <stdbool.h>
+#include <stdcountof.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -1608,7 +1609,7 @@ installNotifyFilter(void)
     };
 \&
     struct sock_fprog prog = {
-        .len = _Countof(filter),
+        .len = countof(filter),
         .filter = filter,
     };
 \&

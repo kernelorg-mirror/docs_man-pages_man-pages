@@ -90,6 +90,7 @@ Shlemiel the painter
 .SH EXAMPLES
 .\" SRC BEGIN (strncat.c)
 .EX
+#include <stdcountof.h>
 #include <stdio.h>
 #include <string.h>
 #include <utmp.h>
@@ -99,10 +100,10 @@ void print_ut_user(struct utmp *ut);
 void
 print_ut_user(struct utmp *ut)
 {
-	char  buf[_Countof(ut\->ut_user) + 1];
+	char  buf[countof(ut\->ut_user) + 1];
 \&
 	strcpy(buf, "");
-	strncat(buf, ut\->ut_user, _Countof(ut\->ut_user));
+	strncat(buf, ut\->ut_user, countof(ut\->ut_user));
 	puts(buf);
 }
 .EE

@@ -53,10 +53,10 @@ strncat
 .BI "               size_t " dsize );
 .P
 // Chain-copy a null-padded character sequence into a character sequence.
-.I mempcpy(dst, src, strnlen(src, _Countof(src)));
+.I mempcpy(dst, src, strnlen(src, countof(src)));
 .P
 // Chain-copy a null-padded character sequence into a string.
-.I stpcpy(mempcpy(dst, src, strnlen(src, _Countof(src))), \[dq]\[dq]);
+.I stpcpy(mempcpy(dst, src, strnlen(src, countof(src))), \[dq]\[dq]);
 .P
 // Catenate a null-padded character sequence into a string.
 .BR "char *strncat(" "size_t ssize;"
@@ -259,7 +259,7 @@ or
 .P
 To read a null-padded character sequence,
 use
-.IR "strnlen(src,\ _Countof(src))" ,
+.IR "strnlen(src,\ countof(src))" ,
 and then you can treat it as a length-bounded character sequence;
 or use
 .BR strncat (3)
@@ -468,7 +468,7 @@ Do not confuse this function with
 .BR strncpy (3);
 they are not related at all.
 .IP
-.I \%stpcpy(mempcpy(dst,\ src,\ strnlen(src,\ _Countof(src))),\ \[dq]\[dq])
+.I \%stpcpy(mempcpy(dst,\ src,\ strnlen(src,\ countof(src))),\ \[dq]\[dq])
 is a faster alternative to this function.
 .\" ----- DESCRIPTION :: Functions :: strndup(3) ----------------------/
 .TP
@@ -638,13 +638,13 @@ puts(buf);
 .TP
 .BR stpecpy ()
 .EX
-end = buf + _Countof(buf);
+end = buf + countof(buf);
 p = buf;
 p = stpecpy(p, end, "Hello ");
 p = stpecpy(p, end, "world");
 p = stpecpy(p, end, "!");
 if (p == NULL) {
-    len = _Countof(buf) \- 1;
+    len = countof(buf) \- 1;
     goto toolong;
 }
 len = p \- buf;
@@ -654,7 +654,7 @@ puts(buf);
 .TP
 .BR strtcpy ()
 .EX
-len = strtcpy(buf, "Hello world!", _Countof(buf));
+len = strtcpy(buf, "Hello world!", countof(buf));
 if (len == \-1)
     goto toolong;
 puts(buf);
@@ -665,12 +665,12 @@ puts(buf);
 .TQ
 .BR strlcat (3bsd)
 .EX
-if (strlcpy(buf, "Hello ", _Countof(buf)) >= _Countof(buf))
+if (strlcpy(buf, "Hello ", countof(buf)) >= countof(buf))
     goto toolong;
-if (strlcat(buf, "world", _Countof(buf)) >= _Countof(buf))
+if (strlcat(buf, "world", countof(buf)) >= countof(buf))
     goto toolong;
-len = strlcat(buf, "!", _Countof(buf));
-if (len >= _Countof(buf))
+len = strlcat(buf, "!", countof(buf));
+if (len >= countof(buf))
     goto toolong;
 puts(buf);
 .EE
@@ -678,8 +678,8 @@ puts(buf);
 .TP
 .BR stpncpy (3)
 .EX
-p = stpncpy(u->ut_user, "alx", _Countof(u->ut_user));
-if (_Countof(u->ut_user) < strlen("alx"))
+p = stpncpy(u->ut_user, "alx", countof(u->ut_user));
+if (countof(u->ut_user) < strlen("alx"))
     goto toolong;
 len = p \- u->ut_user;
 fwrite(u->ut_user, 1, len, stdout);
@@ -688,29 +688,29 @@ fwrite(u->ut_user, 1, len, stdout);
 .TP
 .BR strncpy (3)
 .EX
-strncpy(u->ut_user, "alx", _Countof(u->ut_user));
-if (_Countof(u->ut_user) < strlen("alx"))
+strncpy(u->ut_user, "alx", countof(u->ut_user));
+if (countof(u->ut_user) < strlen("alx"))
     goto toolong;
-len = strnlen(u->ut_user, _Countof(u->ut_user));
+len = strnlen(u->ut_user, countof(u->ut_user));
 fwrite(u->ut_user, 1, len, stdout);
 .EE
-.\" ----- EXAMPLES :: mempcpy(dst, src, strnlen(src, _Countof(src))) ----/
+.\" ----- EXAMPLES :: mempcpy(dst, src, strnlen(src, countof(src))) ----/
 .TP
-.I mempcpy(dst, src, strnlen(src, _Countof(src)))
+.I mempcpy(dst, src, strnlen(src, countof(src)))
 .EX
-char  buf[_Countof(u->ut_user)];
+char  buf[countof(u->ut_user)];
 p = buf;
-p = mempcpy(p, u->ut_user, strnlen(u->ut_user, _Countof(u->ut_user)));
+p = mempcpy(p, u->ut_user, strnlen(u->ut_user, countof(u->ut_user)));
 len = p \- buf;
 fwrite(buf, 1, len, stdout);
 .EE
-.\" ----- EXAMPLES :: stpcpy(mempcpy(dst, src, strnlen(src, _Countof(src))), "")
+.\" ----- EXAMPLES :: stpcpy(mempcpy(dst, src, strnlen(src, countof(src))), "")
 .TP
-.I stpcpy(mempcpy(dst, src, strnlen(src, _Countof(src))), \[dq]\[dq])
+.I stpcpy(mempcpy(dst, src, strnlen(src, countof(src))), \[dq]\[dq])
 .EX
-char  buf[_Countof(u->ut_user) + 1];
+char  buf[countof(u->ut_user) + 1];
 p = buf;
-p = mempcpy(p, u->ut_user, strnlen(u->ut_user, _Countof(u->ut_user)));
+p = mempcpy(p, u->ut_user, strnlen(u->ut_user, countof(u->ut_user)));
 p = stpcpy(p, "");
 len = p \- buf;
 puts(buf);
@@ -719,9 +719,9 @@ puts(buf);
 .TP
 .BR strncat (3)
 .EX
-char  buf[_Countof(u->ut_user) + 1];
+char  buf[countof(u->ut_user) + 1];
 strcpy(buf, "");
-strncat(buf, u->ut_user, _Countof(u->ut_user));
+strncat(buf, u->ut_user, countof(u->ut_user));
 len = strlen(buf);
 puts(buf);
 .EE
@@ -729,7 +729,7 @@ puts(buf);
 .TP
 .BR strndup (3)
 .EX
-buf = strndup(u->ut_user, _Countof(u->ut_user));
+buf = strndup(u->ut_user, countof(u->ut_user));
 len = strlen(buf);
 puts(buf);
 free(buf);

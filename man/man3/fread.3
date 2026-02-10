@@ -106,6 +106,7 @@ Class: 0x02
 \&
 .\" SRC BEGIN (fread.c)
 .EX
+#include <stdcountof.h>
 #include <stdio.h>
 #include <stdlib.h>
 \&
@@ -122,8 +123,8 @@ main(void)
         return EXIT_FAILURE;
     }
 \&
-    ret = fread(buffer, sizeof(*buffer), _Countof(buffer), fp);
-    if (ret != _Countof(buffer)) {
+    ret = fread(buffer, sizeof(*buffer), countof(buffer), fp);
+    if (ret != countof(buffer)) {
         fprintf(stderr, "fread() failed: %zu\[rs]n", ret);
         exit(EXIT_FAILURE);
     }
