@@ -14,9 +14,9 @@ POSIX threads library
 .B #include <pthread.h>
 .P
 .BI "int pthread_create(pthread_t *restrict " thread ,
-.BI "                   const pthread_attr_t *restrict " attr ,
-.BI "                   typeof(void *(void *)) *" start_routine ,
-.BI "                   void *restrict " arg );
+.BI "                   const pthread_attr_t *_Nullable restrict " attr ,
+.BI "                   typeof(void *(void *_Nullable)) *" start_routine ,
+.BI "                   void *_Nullable restrict " arg );
 .fi
 .SH DESCRIPTION
 The
