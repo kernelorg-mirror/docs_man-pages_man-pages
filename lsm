@@ -2,7 +2,7 @@ Begin4
 Title:          Linux man-pages
 Version:        6.17
 Entered-date:   2026-02-11
-Description:    Manual pages for GNU/Linux.  This package contains
+Description:    Manual pages for GNU+Linux.  This package contains
                 manual pages for sections 2, 3, 4, 5, and 7, and
                 subsections of those.  Only a few pages are provided in
                 sections 1, 6, and 8, and none in 9.
