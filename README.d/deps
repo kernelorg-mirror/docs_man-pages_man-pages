@@ -15,6 +15,7 @@ Description
 		-  bash/bash
 		-  git/git
 		-  git-email/git-send-email
+		-  gpg/gpg
 		-  isync/mbsync
 		-  less/less
 		-  make/make
