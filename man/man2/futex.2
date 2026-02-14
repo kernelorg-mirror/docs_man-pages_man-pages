@@ -609,7 +609,7 @@ fwait(uint32_t *futexp)
 \&
        It returns true if the test yielded true and *ptr was updated.  */
 \&
-    while (1) {
+    for (;;) {
 \&
         /* Is the futex available? */
         if (atomic_compare_exchange_strong(futexp, &one, 0))

@@ -204,7 +204,7 @@ main(void)
     int i;
 \&
     setgrent();
-    while (1) {
+    for (;;) {
         i = getgrent_r(&grp, buf, sizeof(buf), &grpp);
         if (i)
             break;
