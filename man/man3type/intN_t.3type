@@ -118,41 +118,17 @@ The length modifiers for the
 .RI [ u ] int N _t
 types for the
 .BR printf (3)
-family of functions
-are expanded by macros of the forms
-.BR PRId \f[I]N\f[],
-.BR PRIi \f[I]N\f[],
-.BR PRIu \f[I]N\f[],
 and
-.BI PRIx N
-(defined in
-.IR <inttypes.h> );
-resulting for example in
-.B %"PRId64"
-or
-.B %"PRIi64"
-for printing
-.I int64_t
-values.
-The length modifiers for the
-.RI [ u ] int N _t
-types for the
 .BR scanf (3)
-family of functions
-are expanded by macros of the forms
-.BR SCNd \f[I]N\f[],
-.BR SCNi \f[I]N\f[],
-.BR SCNu \f[I]N\f[],
-and
-.BI SCNx N,
-(defined in
-.IR <inttypes.h> );
+families of functions
+are
+.BR w \f[I]N\f[],
 resulting for example in
-.B %"SCNu8"
+.B %w64d
 or
-.B %"SCNx8"
-for scanning
-.I uint8_t
+.B %w64i
+for printing or scanning
+.I int64_t
 values.
 .SH STANDARDS
 C23, POSIX.1-2024.

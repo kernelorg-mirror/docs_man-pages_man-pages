@@ -686,8 +686,7 @@ main(int argc, char *argv[])
 \&
         tot_expir += expir;
         print_elapsed_time();
-        printf("read: %" PRIu64 "; total=%" PRIu64 "\[rs]n",
-               expir, tot_expir);
+        printf("read: %w64u; total=%w64u\[rs]n", expir, tot_expir);
     }
 \&
     exit(EXIT_SUCCESS);

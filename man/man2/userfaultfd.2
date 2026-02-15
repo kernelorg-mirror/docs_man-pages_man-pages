@@ -826,8 +826,8 @@ fault_handler_thread(void *arg)
         /* Display info about the page\-fault event.  */
 \&
         printf("    UFFD_EVENT_PAGEFAULT event: ");
-        printf("flags = %"PRIx64"; ", msg.arg.pagefault.flags);
-        printf("address = %"PRIx64"\[rs]n", msg.arg.pagefault.address);
+        printf("flags = %w64x; ", msg.arg.pagefault.flags);
+        printf("address = %w64x\[rs]n", msg.arg.pagefault.address);
 \&
         /* Copy the page pointed to by \[aq]page\[aq] into the faulting
            region.  Vary the contents that are copied in, so that it
@@ -849,7 +849,7 @@ fault_handler_thread(void *arg)
         if (ioctl(uffd, UFFDIO_COPY, &uffdio_copy) == \-1)
             err(EXIT_FAILURE, "ioctl\-UFFDIO_COPY");
 \&
-        printf("        (uffdio_copy.copy returned %"PRId64")\[rs]n",
+        printf("        (uffdio_copy.copy returned %w64d)\[rs]n",
                uffdio_copy.copy);
     }
 }
