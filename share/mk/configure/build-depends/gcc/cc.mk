@@ -49,10 +49,12 @@ GCC_CFLAGS := -fanalyzer
 
 CLANG_CFLAGS := \
 	-Weverything \
+	-Wno-atomic-implicit-seq-cst \
 	-Wno-c++-unterminated-string-initialization \
 	-Wno-c23-extensions \
 	-Wno-implicit-void-ptr-cast \
 	-Wno-language-extension-token \
+	-Wno-pre-c11-compat \
 	-Wno-unknown-attributes \
 	-Wno-unreachable-code \
 	-Wno-unsafe-buffer-usage \
