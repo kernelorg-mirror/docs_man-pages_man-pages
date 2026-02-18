@@ -86,15 +86,23 @@ parameters, except
 must be 0
 and
 .I .flags
-must contain one of
-.BI FUTEX2_SIZE_ *
-ORed with some of the flags below.
+must contain exactly one size flag,
+ORed with some other flags.
 .TP
 .B FUTEX2_SIZE_U32
 .I .val
 and
 .I .uaddr[]
 are 32-bit unsigned integers.
+.TP
+.B FUTEX2_SIZE_U8
+.TQ
+.B FUTEX2_SIZE_U16
+.TQ
+.B FUTEX2_SIZE_U64
+These are defined,
+but not supported
+.RB ( EINVAL ).
 .TP
 .B FUTEX2_NUMA
 The futex word is followed by another word of the same size
@@ -221,11 +229,8 @@ field contains an unknown flag.
 .B EINVAL
 Any
 .IR waiters []. flags
-field is missing a
-.BI FUTEX2_SIZE_ *
-flag or has a size flag different than
-.B FUTEX2_SIZE_U32
-set.
+field does not contain exactly one size flag,
+or it contains an unsupported one.
 .TP
 .B EINVAL
 Any
