@@ -77,6 +77,12 @@ specifies a deadline measured against clock
 This interval will be rounded up to the system clock granularity,
 and is guaranteed not to expire early.
 .P
+The following clocks are supported:
+.TP
+.B CLOCK_MONOTONIC
+.TQ
+.B CLOCK_REALTIME
+.P
 Futex words to monitor are given by
 .IR "struct futex_waitv" ,
 whose fields are analogous to
@@ -208,10 +214,7 @@ was not in the range
 .I timeout
 was not NULL and
 .I clockid
-was not a valid clock
-.RB ( CLOCK_MONOTONIC
-or
-.BR CLOCK_REALTIME ).
+was not a valid clock.
 .TP
 .B EINVAL
 .I *timeout
