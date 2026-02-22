@@ -50,6 +50,7 @@ Standard C library
 .B "    __u32  mnt_root;"
 .B "    __u32  mnt_point;"
 .B "    __u64  mnt_ns_id;"
+.B "    __u32  fs_subtype;"
 .B "    char   str[];"
 .B };
 .EE
@@ -110,6 +111,7 @@ STATMOUNT_MNT_POINT	/* Want/got mnt_point */
 STATMOUNT_FS_TYPE	/* Want/got fs_type */
 STATMOUNT_MNT_NS_ID	/* Want/got mnt_ns_id */
 STATMOUNT_MNT_OPTS	/* Want/got mnt_opts */
+STATMOUNT_FS_SUBTYPE	/* Want/got fs_subtype */
 .TE
 .in
 .P
@@ -259,6 +261,13 @@ It is a null-terminated string.
 .TP
 .IR smbuf.mnt_ns_id " (since Linux 6.11)"
 The unique ID of the mount namespace the mount belongs to.
+.TP
+.IR smbuf.fs_subtype " (since Linux 6.13)"
+The offset to the location in the
+.I smbuf.str
+buffer that contains the string representation of the file system subtype.
+This is particularly useful for disambiguating FUSE mounts.
+It is a null-terminated string.
 .SH RETURN VALUE
 On success, zero is returned.
 On error, \-1 is returned, and
