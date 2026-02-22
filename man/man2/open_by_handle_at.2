@@ -694,6 +694,8 @@ main(int argc, char *argv[])
 #include <sys/types.h>
 #include <unistd.h>
 \&
+#define streq(...)  (strcmp(__VA_ARGS__) == 0)
+\&
 /* Scan /proc/self/mountinfo to find the line whose mount ID matches
    \[aq]mount_id\[aq].  (An easier way to do this is to install and use the
    \[aq]libmount\[aq] library provided by the \[aq]util\-linux\[aq] project.)
@@ -754,7 +756,7 @@ main(int argc, char *argv[])
     ssize_t             nread;
     struct file_handle  *fhp;
 \&
-    if ((argc > 1 && strcmp(argv[1], "\-\-help") == 0) || argc > 2) {
+    if ((argc > 1 && streq(argv[1], "\-\-help")) || argc > 2) {
         fprintf(stderr, "Usage: %s [mount\-path]\[rs]n", argv[0]);
         exit(EXIT_FAILURE);
     }

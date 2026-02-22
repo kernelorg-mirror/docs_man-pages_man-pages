@@ -1430,6 +1430,8 @@ T: terminating
 #include <sys/un.h>
 #include <unistd.h>
 \&
+#define streq(...)  (strcmp(__VA_ARGS__) == 0)
+\&
 /* Send the file descriptor \[aq]fd\[aq] over the connected UNIX domain socket
    \[aq]sockfd\[aq].  Returns 0 on success, or \-1 on error.  */
 \&
@@ -1940,7 +1942,7 @@ handleNotifications(int notifyFd)
            of the loop and terminates.  This allows us to see what happens
            if the target process makes further calls to mkdir(2).  */
 \&
-        if (strcmp(path, "/bye") == 0)
+        if (streq(path, "/bye"))
             break;
     }
 \&

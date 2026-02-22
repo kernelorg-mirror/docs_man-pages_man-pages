@@ -146,10 +146,12 @@ is applied to the string given in the program's command-line argument.
 #include <stdlib.h>
 #include <string.h>
 \&
+#define streq(...)  (strcmp(__VA_ARGS__) == 0)
+\&
 int
 main(int argc, char *argv[])
 {
-    if (argc != 2 || strcmp(argv[1], "\-\-help") == 0) {
+    if (argc != 2 || streq(argv[1], "\-\-help")) {
         fprintf(stderr, "%s response\[rs]n", argv[0]);
         exit(EXIT_FAILURE);
     }

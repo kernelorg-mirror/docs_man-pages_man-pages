@@ -144,7 +144,7 @@ setlocale(LC_CTYPE, "")
 and programmers can then test the expression
 .P
 .RS
-strcmp(nl_langinfo(CODESET), "UTF-8") == 0
+streq(nl_langinfo(CODESET), "UTF-8")
 .RE
 .P
 to determine whether a UTF-8 locale has been selected and whether
