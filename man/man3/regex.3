@@ -155,11 +155,8 @@ above).
 Match
 .RI [ "string + pmatch[0].rm_so" , " string + pmatch[0].rm_eo" )
 instead of
-.RI [ string , " string + strlen(string)" ).
-This allows matching embedded NUL bytes
-and avoids a
-.BR strlen (3)
-on known-length strings.
+.RI [ string ,\~ strnul(string) ).
+This allows matching embedded NUL bytes.
 If any matches are returned
 .RB ( REG_NOSUB
 wasn't passed to

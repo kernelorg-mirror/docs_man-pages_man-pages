@@ -74,7 +74,7 @@ function returns a pointer to the matched character,
 or a pointer to the null byte at the end of
 .I s
 (i.e.,
-.IR "s+strlen(s)" )
+.IR strnul(s) )
 if the character is not found.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
@@ -116,6 +116,7 @@ NetBSD 8.
 .BR memchr (3),
 .BR string (3),
 .BR strlen (3),
+.BR strnul (3),
 .BR strpbrk (3),
 .BR strsep (3),
 .BR strspn (3),

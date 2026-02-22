@@ -59,6 +59,8 @@ An implementation of these functions might be:
 .P
 .in +4n
 .EX
+#define strnul(s)  strchr(s, \[aq]\[rs]0\[aq])
+\&
 char *
 stpcpy(char *restrict dst, const char *restrict src)
 {
@@ -80,7 +82,7 @@ strcpy(char *restrict dst, const char *restrict src)
 char *
 strcat(char *restrict dst, const char *restrict src)
 {
-    stpcpy(dst + strlen(dst), src);
+    stpcpy(strnul(dst), src);
     return dst;
 }
 .EE
