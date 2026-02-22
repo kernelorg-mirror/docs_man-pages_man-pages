@@ -54,6 +54,8 @@ Standard C library
 .B "    __u32  sb_source;"
 .B "    __u32  opt_num;"
 .B "    __u32  opt_array;"
+.B "    __u32  opt_sec_num;"
+.B "    __u32  opt_sec_array;"
 .B "    char   str[];"
 .B };
 .EE
@@ -117,6 +119,7 @@ STATMOUNT_MNT_OPTS	/* Want/got mnt_opts */
 STATMOUNT_FS_SUBTYPE	/* Want/got fs_subtype */
 STATMOUNT_SB_SOURCE	/* Want/got sb_source */
 STATMOUNT_OPT_ARRAY	/* Want/got opt_{num,array} */
+STATMOUNT_OPT_SEC_ARRAY	/* Want/got opt_sec_{num,array} */
 .TE
 .in
 .P
@@ -289,6 +292,16 @@ The offset to the location in the
 buffer that contains file system options separated by null bytes.
 They can be iterated over with the help of
 .IR smbuf.opt_num .
+.TP
+.IR smbuf.opt_sec_num " (since Linux 6.13)"
+The number of security options set on the mount.
+.TP
+.IR smbuf.opt_sec_array " (since Linux 6.13)"
+The offset to the location in the
+.I smbuf.str
+buffer that contains security options separated by null bytes.
+They can be iterated over with the help of
+.IR smbuf.opt_sec_num .
 .SH RETURN VALUE
 On success, zero is returned.
 On error, \-1 is returned, and
