@@ -31,6 +31,7 @@ Standard C library
 .P
 .B struct statmount {
 .B "    __u32  size;"
+.B "    __u32  mnt_opts;"
 .B "    __u64  mask;"
 .B "    __u32  sb_dev_major;"
 .B "    __u32  sb_dev_minor;"
@@ -108,6 +109,7 @@ STATMOUNT_MNT_ROOT	/* Want/got mnt_root  */
 STATMOUNT_MNT_POINT	/* Want/got mnt_point */
 STATMOUNT_FS_TYPE	/* Want/got fs_type */
 STATMOUNT_MNT_NS_ID	/* Want/got mnt_ns_id */
+STATMOUNT_MNT_OPTS	/* Want/got mnt_opts */
 .TE
 .in
 .P
@@ -159,6 +161,14 @@ The size of the returned
 .I smbuf
 structure,
 including any of the strings fields that were filled.
+.TP
+.IR smbuf.mnt_opts " (since Linux 6.11)"
+The offset to the location in the
+.I smbuf.str
+buffer that contains a comma separated list of mount options,
+similiar to those in
+.BR proc_pid_mountinfo (5) .
+It is a null-terminated string.
 .TP
 .I smbuf.mask
 The ORed combination of
