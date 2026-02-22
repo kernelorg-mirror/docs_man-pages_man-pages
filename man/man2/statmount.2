@@ -26,6 +26,7 @@ Standard C library
 .BR "    __u32  size;" "        /* sizeof(struct mnt_id_req) */"
 .BR "    __u64  mnt_id;" "      /* The mnt_id being queried */"
 .BR "    __u64  param;" "       /* ORed combination of the STATMOUNT_ constants */"
+.BR "    __u32  mnt_ns_id;" "   /* The id of mnt_ns to query the mnt_id in */"
 .B };
 .P
 .B struct statmount {
@@ -47,6 +48,7 @@ Standard C library
 .B "    __u64  propagate_from;"
 .B "    __u32  mnt_root;"
 .B "    __u32  mnt_point;"
+.B "    __u64  mnt_ns_id;"
 .B "    char   str[];"
 .B };
 .EE
@@ -59,6 +61,9 @@ necessitating the use of
 .SH DESCRIPTION
 To access a mount's status,
 the caller must have CAP_SYS_ADMIN in the user namespace.
+In case of accessing a mount in a foreign mount namespace (specified via
+.IR req.mnt_ns_id ),
+the foreign mount namespace should be child of the current namespace.
 .P
 This function returns information about a mount,
 storing it in the buffer pointed to by
@@ -102,6 +107,7 @@ STATMOUNT_PROPAGATE_FROM	/* Want/got propagate_from */
 STATMOUNT_MNT_ROOT	/* Want/got mnt_root  */
 STATMOUNT_MNT_POINT	/* Want/got mnt_point */
 STATMOUNT_FS_TYPE	/* Want/got fs_type */
+STATMOUNT_MNT_NS_ID	/* Want/got mnt_ns_id */
 .TE
 .in
 .P
@@ -130,6 +136,14 @@ to
 as one or more bits may,
 in the future,
 be used to specify an extension to the buffer.
+.P
+.I req.mnt_ns_id
+can be obtained from
+.B NS_GET_MNTNS_ID
+.BR ioctl (2)
+operation and is used to specify a foreign mount namespace in which to query
+.I req.mnt_id
+(since Linux 6.11).
 .SS The returned information
 The status information for the target mount is returned in the
 .I statmount
@@ -232,6 +246,9 @@ buffer that contains the string representation of the mount
 relative to the current root (ie if you are in a
 .BR chroot ).
 It is a null-terminated string.
+.TP
+.IR smbuf.mnt_ns_id " (since Linux 6.11)"
+The unique ID of the mount namespace the mount belongs to.
 .SH RETURN VALUE
 On success, zero is returned.
 On error, \-1 is returned, and
