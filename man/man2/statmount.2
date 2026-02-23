@@ -56,6 +56,10 @@ Standard C library
 .B "    __u32  opt_array;"
 .B "    __u32  opt_sec_num;"
 .B "    __u32  opt_sec_array;"
+.B "    __u32  mnt_uidmap_num;"
+.B "    __u32  mnt_uidmap;"
+.B "    __u32  mnt_gidmap_num;"
+.B "    __u32  mnt_gidmap;"
 .B "    char   str[];"
 .B };
 .EE
@@ -120,6 +124,8 @@ STATMOUNT_FS_SUBTYPE	/* Want/got fs_subtype */
 STATMOUNT_SB_SOURCE	/* Want/got sb_source */
 STATMOUNT_OPT_ARRAY	/* Want/got opt_{num,array} */
 STATMOUNT_OPT_SEC_ARRAY	/* Want/got opt_sec_{num,array} */
+STATMOUNT_MNT_UIDMAP	/* Want/got uidmap{_num,} */
+STATMOUNT_MNT_GIDMAP	/* Want/got gidmap{_num,} */
 .TE
 .in
 .P
@@ -302,6 +308,38 @@ The offset to the location in the
 buffer that contains security options separated by null bytes.
 They can be iterated over with the help of
 .IR smbuf.opt_sec_num .
+.TP
+.IR smbuf.mnt_uidmap_num " (since Linux 6.15)"
+The number of uid mappings applied on the mount.
+If
+.I smbuf.mask
+has STATMOUNT_UIDMAP set and this field is 0,
+the mount is not an idmapped mount.
+.TP
+.IR smbuf.mnt_uidmap " (since Linux 6.15)"
+The offset to the location in the
+.I smbuf.str
+buffer that contains uid mappings as consecutive null-terminated strings.
+They can be iterated over with the help of
+.IR smbuf.mnt_uidmap_num .
+The whole range of uid mappings must be resolvable in the user namespace
+of the caller.
+.TP
+.IR smbuf.mnt_gidmap_num " (since Linux 6.15)"
+The number of gid mappings applied on the mount.
+If
+.I smbuf.mask
+has STATMOUNT_GIDMAP set and this field is 0,
+the mount is not an idmapped mount.
+.TP
+.IR smbuf.mnt_gidmap " (since Linux 6.15)"
+The offset to the location in the
+.I smbuf.str
+buffer that contains gid mappings as consecutive null-terminated strings.
+They can be iterated over with the help of
+.IR smbuf.mnt_gidmap_num .
+The whole range of gid mappings must be resolvable in the user namespace
+of the caller.
 .SH RETURN VALUE
 On success, zero is returned.
 On error, \-1 is returned, and
