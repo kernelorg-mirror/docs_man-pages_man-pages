@@ -24,6 +24,7 @@ Standard C library
 .EX
 .B struct mnt_id_req {
 .BR "    __u32  size;" "        /* sizeof(struct mnt_id_req) */"
+.BR "    __u32  mnt_ns_fd;" "   /* fd of mnt_ns to query the mnt_id in */"
 .BR "    __u64  mnt_id;" "      /* The mnt_id being queried */"
 .BR "    __u64  param;" "       /* ORed combination of the STATMOUNT_ constants */"
 .BR "    __u32  mnt_ns_id;" "   /* The id of mnt_ns to query the mnt_id in */"
@@ -74,7 +75,9 @@ necessitating the use of
 To access a mount's status,
 the caller must have CAP_SYS_ADMIN in the user namespace.
 In case of accessing a mount in a foreign mount namespace (specified via
-.IR req.mnt_ns_id ),
+.I req.mnt_ns_id
+or
+.IR req.mnt_ns_fd ),
 the foreign mount namespace should be child of the current namespace.
 .P
 This function returns information about a mount,
@@ -96,6 +99,16 @@ is used by the kernel to determine which
 is being passed in;
 it should always be set to
 .IR sizeof(struct\~mnt_id_req) .
+.P
+.I req.mnt_ns_fd
+can be obtained from
+.B PIDFD_GET_MNT_NAMESPACE
+.BR ioctl (2)
+operation or by opening a file descriptor to
+.IR /proc/ pid /ns/mnt
+and is used to specify a foreign mount namespace in which to query
+.I req.mnt_id
+(since Linux 6.18).
 .P
 .I req.mnt_id
 can be obtained from either
@@ -371,6 +384,13 @@ Invalid flag specified in
 .B EINVAL
 .I req
 is of insufficient size to be utilized.
+.TP
+.B EINVAL
+Both
+.I req.mnt_ns_id
+and
+.I req.mnt_ns_fd
+were set.
 .TP
 .B E2BIG
 .I req
