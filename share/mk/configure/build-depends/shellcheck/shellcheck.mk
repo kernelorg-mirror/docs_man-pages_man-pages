@@ -10,9 +10,7 @@ include $(MAKEFILEDIR)/configure/directory_variables/src.mk
 
 
 SHELLCHECK_CONF         := $(SYSCONFDIR)/shellcheck/shellcheckrc
-DEFAULT_SHELLCHECKFLAGS := \
-	-o all \
-	-e SC2028
+DEFAULT_SHELLCHECKFLAGS := -o all
 ifndef SHELLCHECKFLAGS
 SHELLCHECKFLAGS         :=
 endif
