@@ -28,11 +28,12 @@ of the character
 in the string
 .IR s .
 .IP
-It is equivalent to
+It is equivalent to both of the following expressions:
 .IP
 .in +4n
 .EX
 memchr(s, c, strlen(s) + 1)
+strpbrk(s, (char [2]){c, \[aq]\[rs]0\[aq]})
 .EE
 .in
 .TP
