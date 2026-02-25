@@ -27,6 +27,14 @@ at the buffer pointed to by
 The programmer is responsible for allocating a destination buffer large enough,
 that is,
 .IR "strlen(src) + 1" .
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+stpcpy(dst, src), dst
+.EE
+.in
 .TP
 .BR strcat ()
 This function catenates the string pointed to by
@@ -37,26 +45,12 @@ after the string pointed to by
 The programmer is responsible for allocating a destination buffer large enough,
 that is,
 .IR "strlen(dst) + strlen(src) + 1" .
-.P
-An implementation of these functions might be:
-.P
+.IP
+It is equivalent to
+.IP
 .in +4n
 .EX
-#define strnul(s)  strchr(s, \[aq]\[rs]0\[aq])
-\&
-char *
-strcpy(char *restrict dst, const char *restrict src)
-{
-    stpcpy(dst, src);
-    return dst;
-}
-\&
-char *
-strcat(char *restrict dst, const char *restrict src)
-{
-    stpcpy(strnul(dst), src);
-    return dst;
-}
+stpcpy(strnul(dst), src), dst
 .EE
 .in
 .SH RETURN VALUE
