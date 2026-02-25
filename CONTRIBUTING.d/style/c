@@ -3,12 +3,10 @@ Name
 
 Description
     Indentation
-	Use 4 spaces.  Ideally, tabs would be preferred; however, they
-	cause 5 spaces in manual pages, which is weird, so we use 4
-	spaces.
+	Use tabs for indentation.
 
 		if (foo)
-		    bar();
+			bar();
 
 	Indent preprocessor directives after the hash by 1 space.
 
@@ -20,10 +18,10 @@ Description
 
 		switch (x) {
 		case 1:
-		    foo();
-		    break;
+			foo();
+			break;
 		default:
-		    break;
+			break;
 		}
 
     Line length
@@ -42,12 +40,12 @@ Description
 	its own.
 
 		if (foo)
-		    bar();
+			bar();
 
 		if (foooooooooooooooooooooooooo
 		 || baaaaaaaaaaaaaaaaaaaaaaaaaar)
 		{
-		    baz();
+			baz();
 		}
 
 	Treat sizeof() and similar operators as functions, not keywords.
