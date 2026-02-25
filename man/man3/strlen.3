@@ -22,6 +22,14 @@ The
 function calculates the length of the string pointed to by
 .IR s ,
 excluding the terminating null byte (\[aq]\[rs]0\[aq]).
+.P
+It is equivalent to
+.P
+.in +4n
+.EX
+strnul(s) - s
+.EE
+.in
 .SH RETURN VALUE
 The
 .BR strlen ()
