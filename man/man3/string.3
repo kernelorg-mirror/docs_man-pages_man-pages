@@ -13,7 +13,14 @@ strrchr, strsep, strspn, strstr, strtok, strxfrm
 Standard C library
 .RI ( libc ,\~ \-lc )
 .SH SYNOPSIS
+.nf
+.B #include <string.h>
 .B #include <strings.h>
+.fi
+.SH DESCRIPTION
+The string functions perform operations on null-terminated
+strings.
+See the individual man pages for descriptions of each function.
 .TP
 .BR strcasecmp (3)
 Compare two strings,
@@ -22,8 +29,6 @@ ignoring case.
 .BR strncasecmp (3)
 Compare the first bytes of two strings,
 ignoring case.
-.P
-.B #include <string.h>
 .TP
 .BR stpcpy (3)
 Copy a string,
@@ -101,10 +106,6 @@ and copies the first bytes to a buffer.
 .BR strncpy (3)
 Fill a fixed-size buffer with leading non-null bytes from a source array,
 padding with null bytes as needed.
-.SH DESCRIPTION
-The string functions perform operations on null-terminated
-strings.
-See the individual man pages for descriptions of each function.
 .SH SEE ALSO
 .BR bstring (3),
 .BR stpcpy (3),
