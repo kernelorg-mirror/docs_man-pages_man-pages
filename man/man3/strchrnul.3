@@ -29,11 +29,12 @@ then it returns a pointer to the null byte
 at the end of
 .IR s .
 .P
-It is equivalent to
+It is equivalent to both of the following expressions:
 .P
 .in +4n
 .EX
 strchr(s, c) ?: strnul(s)
+s + strcspn(s, (char [2]){c, \[aq]\[rs]0\[aq]})
 .EE
 .in
 .SH RETURN VALUE
@@ -67,4 +68,5 @@ NetBSD 8.
 .BR string (3),
 .BR strchr (3),
 .BR strnul (3),
+.BR strcspn (3),
 .BR strspn (3)
