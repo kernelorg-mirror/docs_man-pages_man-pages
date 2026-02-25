@@ -36,6 +36,14 @@ segment of
 .I s
 which consists entirely of bytes not in
 .IR reject .
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+(strpbrk(s, reject) ?: strnul(s)) - s
+.EE
+.in
 .SH RETURN VALUE
 The
 .BR strspn ()
