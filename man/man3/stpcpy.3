@@ -35,11 +35,12 @@ is similar to
 but returns a pointer to the terminating null byte in
 .IR dst .
 .P
-It is equivalent to
+It is equivalent to both of the following expressions:
 .P
 .in +4n
 .EX
 memset(mempcpy(dst, src, strlen(src)), \[aq]\[rs]0\[aq], 1);
+strcpy(dst, src) + strlen(dst)
 .EE
 .in
 .SH RETURN VALUE
