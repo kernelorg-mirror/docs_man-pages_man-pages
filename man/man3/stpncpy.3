@@ -48,26 +48,23 @@ limited by its size,
 isn't large enough to hold the copy,
 the resulting character sequence is truncated.
 For the difference between the two functions, see RETURN VALUE.
-.P
-An implementation of these functions might be:
-.P
+.TP
+.BR strncpy ()
+It is equivalent to
+.IP
 .in +4n
 .EX
-char *
-strncpy(char *restrict dst, const char *restrict src, size_t dsize)
-{
-    stpncpy(dst, src, dsize);
-    return dst;
-}
-\&
-char *
-stpncpy(char *restrict dst, const char *restrict src, size_t dsize)
-{
-    size_t  dlen;
-\&
-    dlen = strnlen(src, dsize);
-    return memset(mempcpy(dst, src, dlen), 0, dsize \- dlen);
-}
+stpncpy(dst, src, dsize), dst
+.EE
+.in
+.TP
+.BR stpncpy ()
+It is equivalent to
+.IP
+.in +4n
+.EX
+memset(mempcpy(dst, src, strnlen(src, dsize)), \[aq]\[rs]0\[aq],
+       dsize \- strnlen(src, dsize))
 .EE
 .in
 .SH RETURN VALUE
