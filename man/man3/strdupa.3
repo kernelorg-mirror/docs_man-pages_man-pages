@@ -28,6 +28,14 @@ is similar to
 but uses
 .BR alloca (3)
 to allocate the buffer.
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+strcpy(alloca(strlen(s) + 1), s)
+.EE
+.in
 .TP
 .BR strndupa ()
 .BR strndupa ()
@@ -36,6 +44,14 @@ is similar to
 but uses
 .BR alloca (3)
 to allocate the buffer.
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+strncat(strcpy(alloca(n + 1), ""), s, n)
+.EE
+.in
 .SH RETURN VALUE
 On success,
 these macros return
