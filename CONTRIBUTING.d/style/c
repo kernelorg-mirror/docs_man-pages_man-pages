@@ -24,15 +24,24 @@ Description
 			break;
 		}
 
-    Line length
-	Lines should not be longer than 80 columns.  Except that if they
-	contain string literals, they can be longer; don't break
-	user-visible string literals.
+    Alignment
+	However, alignment is done with spaces.
 
 	When breaking a function prototype, start the continuation line
 	with 4 spaces.
 
+		void foo(const char *restrict x,
+		    const char *restrict y);
+
 	When breaking a function call, align at the opening parenthesis.
+
+		foobar(qwertyuiopasdfghjklzxcvbnm, qwertyuiop,
+		       asdfghjkl);
+
+    Line length
+	Lines should not be longer than 80 columns.  Except that if they
+	contain string literals, they can be longer; don't break
+	user-visible string literals.
 
     Braces and spaces
 	Use K&R style for braces.  But if the controlling expression of
