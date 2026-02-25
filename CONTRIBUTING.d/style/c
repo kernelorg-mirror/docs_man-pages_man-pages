@@ -43,7 +43,7 @@ Description
 	contain string literals, they can be longer; don't break
 	user-visible string literals.
 
-    Braces and spaces
+    Braces
 	Use K&R style for braces.  But if the controlling expression of
 	an if/for/while is broken, the opening brace goes on a line of
 	its own.
@@ -57,6 +57,7 @@ Description
 			baz();
 		}
 
+    Spaces
 	Treat sizeof() and similar operators as functions, not keywords.
 	Use a space after keywords, but not after functions.
 
