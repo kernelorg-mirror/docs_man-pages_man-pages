@@ -20,15 +20,20 @@ Standard C library
 .BI "              const char " s [ n "], size_t " n );
 .fi
 .SH DESCRIPTION
+.TP
 .BR strdupa ()
-and
+.BR strdupa ()
+is similar to
+.BR strdup (3),
+but uses
+.BR alloca (3)
+to allocate the buffer.
+.TP
 .BR strndupa ()
-are similar
-to
-.BR strdup (3)
-and
+.BR strndupa ()
+is similar to
 .BR strndupa (3),
-but use
+but uses
 .BR alloca (3)
 to allocate the buffer.
 .SH RETURN VALUE
