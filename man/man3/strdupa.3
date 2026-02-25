@@ -1,1 +1,60 @@
-.so man3/strdup.3
+'\" t
+.\" Copyright 1993, David Metcalfe <david@prism.demon.co.uk>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH strdupa 3 (date) "Linux man-pages (unreleased)"
+.SH NAME
+strdupa, strndupa \- string duplicate using alloca
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#define _GNU_SOURCE" "  /* See feature_test_macros(7) */"
+.B #include <string.h>
+.P
+.BI "char *strdupa(const char *" s );
+.BR "char *strndupa(" "size_t n;"
+.BI "              const char " s [ n "], size_t " n );
+.fi
+.SH DESCRIPTION
+.BR strdupa ()
+and
+.BR strndupa ()
+are similar
+to
+.BR strdup (3)
+and
+.BR strndupa (3),
+but use
+.BR alloca (3)
+to allocate the buffer.
+.SH RETURN VALUE
+On success,
+these macros return
+a pointer to the duplicated string.
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lbx lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.na
+.nh
+.BR strdupa (),
+.BR strndupa ()
+T}	Thread safety	MT-Safe
+.TE
+.SH STANDARDS
+GNU.
+.SH HISTORY
+GNU.
+.SH SEE ALSO
+.BR alloca (3),
+.BR strdup (3),
+.BR strndup (3)
