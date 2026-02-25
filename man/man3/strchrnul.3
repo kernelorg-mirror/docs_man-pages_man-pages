@@ -28,6 +28,14 @@ is not found in
 then it returns a pointer to the null byte
 at the end of
 .IR s .
+.P
+It is equivalent to
+.P
+.in +4n
+.EX
+strchr(s, c) ?: strnul(s)
+.EE
+.in
 .SH RETURN VALUE
 The
 .BR strchrnul ()
