@@ -30,6 +30,14 @@ in the string
 .IR haystack .
 The terminating null bytes (\[aq]\[rs]0\[aq]) are not compared.
 .P
+It is equivalent to
+.P
+.in +4n
+.EX
+memmem(haystack, strlen(haystack), needle, strlen(needle))
+.EE
+.in
+.P
 The
 .BR strcasestr ()
 function is like
