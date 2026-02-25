@@ -35,20 +35,11 @@ is similar to
 but returns a pointer to the terminating null byte in
 .IR dst .
 .P
-An implementation of this function might be:
+It is equivalent to
 .P
 .in +4n
 .EX
-char *
-stpcpy(char *restrict dst, const char *restrict src)
-{
-    char  *p;
-\&
-    p = mempcpy(dst, src, strlen(src));
-    *p = \[aq]\[rs]0\[aq];
-\&
-    return p;
-}
+memset(mempcpy(dst, src, strlen(src)), \[aq]\[rs]0\[aq], 1);
 .EE
 .in
 .SH RETURN VALUE
