@@ -27,6 +27,14 @@ of the character
 .I c
 in the string
 .IR s .
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+memchr(s, c, strlen(s) + 1)
+.EE
+.in
 .TP
 .BR strrchr ()
 The
@@ -36,6 +44,14 @@ of the character
 .I c
 in the string
 .IR s .
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+memrchr(s, c, strlen(s) + 1)
+.EE
+.in
 .SH RETURN VALUE
 The
 .BR strchr ()
