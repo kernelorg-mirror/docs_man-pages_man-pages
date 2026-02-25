@@ -33,18 +33,11 @@ must point to a string contained in a buffer that is large enough,
 that is, the buffer size must be at least
 .IR "strlen(dst) + strnlen(src, ssize) + 1" .
 .P
-An implementation of this function might be:
+It is equivalent to
 .P
 .in +4n
 .EX
-char *
-strncat(char *restrict dst, const char *restrict src, size_t ssize)
-{
-    #define strnul(s)  (s + strlen(s))
-\&
-    stpcpy(mempcpy(strnul(dst), src, strnlen(src, ssize)), "");
-    return dst;
-}
+stpcpy(mempcpy(strnul(dst), src, strnlen(src, ssize)), ""), dst
 .EE
 .in
 .SH RETURN VALUE
