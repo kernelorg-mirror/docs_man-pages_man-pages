@@ -6,7 +6,7 @@
 .\"
 .TH strchr 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-strchr, strrchr, strchrnul \- locate character in string
+strchr, strrchr \- locate character in string
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -16,13 +16,10 @@ Standard C library
 .P
 .BI "char *strchr(const char *" s ", int " c );
 .BI "char *strrchr(const char *" s ", int " c );
-.P
-.BR "#define _GNU_SOURCE" "         /* See feature_test_macros(7) */"
-.B #include <string.h>
-.P
-.BI "char *strchrnul(const char *" s ", int " c );
 .fi
 .SH DESCRIPTION
+.TP
+.BR strchr ()
 The
 .BR strchr ()
 function returns a pointer to the first occurrence
@@ -30,7 +27,17 @@ of the character
 .I c
 in the string
 .IR s .
-.P
+.IP
+It is equivalent to both of the following expressions:
+.IP
+.in +4n
+.EX
+memchr(s, c, strlen(s) + 1)
+strpbrk(s, (char [2]){c, \[aq]\[rs]0\[aq]})
+.EE
+.in
+.TP
+.BR strrchr ()
 The
 .BR strrchr ()
 function returns a pointer to the last occurrence
@@ -38,23 +45,14 @@ of the character
 .I c
 in the string
 .IR s .
-.P
-The
-.BR strchrnul ()
-function is like
-.BR strchr ()
-except that if
-.I c
-is not found in
-.IR s ,
-then it returns a pointer to the null byte
-at the end of
-.IR s ,
-rather than NULL.
-.P
-Here "character" means "byte";
-these functions do not work with
-wide or multibyte characters.
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+memrchr(s, c, strlen(s) + 1)
+.EE
+.in
 .SH RETURN VALUE
 The
 .BR strchr ()
@@ -67,15 +65,6 @@ so that if
 .I c
 is specified as \[aq]\[rs]0\[aq],
 these functions return a pointer to the terminator.
-.P
-The
-.BR strchrnul ()
-function returns a pointer to the matched character,
-or a pointer to the null byte at the end of
-.I s
-(i.e.,
-.IR strnul(s) )
-if the character is not found.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -88,33 +77,17 @@ T{
 .na
 .nh
 .BR strchr (),
-.BR strrchr (),
-.BR strchrnul ()
+.BR strrchr ()
 T}	Thread safety	MT-Safe
 .TE
 .SH STANDARDS
-.TP
-.BR strchr ()
-.TQ
-.BR strrchr ()
 C11, POSIX.1-2008.
-.TP
-.BR strchrnul ()
-GNU.
 .SH HISTORY
-.TP
-.BR strchr ()
-.TQ
-.BR strrchr ()
 POSIX.1-2001, C89, SVr4, 4.3BSD.
-.TP
-.BR strchrnul ()
-glibc 2.1.1,
-FreeBSD 10,
-NetBSD 8.
 .SH SEE ALSO
 .BR memchr (3),
 .BR string (3),
+.BR strchrnul (3),
 .BR strlen (3),
 .BR strnul (3),
 .BR strpbrk (3),

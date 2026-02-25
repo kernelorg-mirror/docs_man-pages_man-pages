@@ -46,6 +46,14 @@ characters in the string pointed to by
 .I s
 and never beyond
 .IR s[maxlen\-1] .
+.P
+It is equivalent to
+.P
+.in +4n
+.EX
+(memchr(s, \[aq]\[rs]0\[aq], maxlen) ?: s + maxlen) - s
+.EE
+.in
 .SH RETURN VALUE
 The
 .BR strnlen ()

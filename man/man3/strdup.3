@@ -6,7 +6,7 @@
 .\"
 .TH strdup 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-strdup, strndup, strdupa, strndupa \- duplicate a string
+strdup, strndup \- duplicate a string
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -17,9 +17,6 @@ Standard C library
 .BI "char *strdup(const char *" s );
 .P
 .BR "char *strndup(" "size_t n;"
-.BI "              const char " s [ n "], size_t " n );
-.BI "char *strdupa(const char *" s );
-.BR "char *strndupa(" "size_t n;"
 .BI "              const char " s [ n "], size_t " n );
 .fi
 .P
@@ -42,12 +39,6 @@ Feature Test Macro Requirements for glibc (see
         _POSIX_C_SOURCE >= 200809L
     Before glibc 2.10:
         _GNU_SOURCE
-.fi
-.P
-.BR strdupa (),
-.BR strndupa ():
-.nf
-    _GNU_SOURCE
 .fi
 .SH DESCRIPTION
 The
@@ -73,13 +64,6 @@ is longer than
 only
 .I n
 bytes are copied, and a terminating null byte (\[aq]\[rs]0\[aq]) is added.
-.P
-.BR strdupa ()
-and
-.BR strndupa ()
-are similar, but use
-.BR alloca (3)
-to allocate the buffer.
 .SH RETURN VALUE
 On success, the
 .BR strdup ()
@@ -104,22 +88,11 @@ T{
 .na
 .nh
 .BR strdup (),
-.BR strndup (),
-.BR strdupa (),
-.BR strndupa ()
+.BR strndup ()
 T}	Thread safety	MT-Safe
 .TE
 .SH STANDARDS
-.TP
-.BR strdup ()
-.TQ
-.BR strndup ()
 POSIX.1-2008.
-.TP
-.BR strdupa ()
-.TQ
-.BR strndupa ()
-GNU.
 .SH HISTORY
 .TP
 .BR strdup ()
@@ -127,11 +100,6 @@ SVr4, 4.3BSD-Reno, POSIX.1-2001.
 .TP
 .BR strndup ()
 POSIX.1-2008.
-.TP
-.BR strdupa ()
-.TQ
-.BR strndupa ()
-GNU.
 .SH SEE ALSO
 .BR alloca (3),
 .BR calloc (3),
@@ -139,4 +107,6 @@ GNU.
 .BR malloc (3),
 .BR realloc (3),
 .BR string (3),
+.BR strdupa (3),
+.BR strndupa (3),
 .BR wcsdup (3)

@@ -20,6 +20,15 @@ gnulib \- The GNU Portability Library
 calculates the position of the terminating null byte (\[aq]\[rs]0\[aq])
 in the string pointed to by
 .IR s .
+.P
+It is equivalent to both of the following expressions:
+.P
+.in +4n
+.EX
+s + strlen(s)
+strchr(s, \[aq]\[rs]0\[aq])
+.EE
+.in
 .SH RETURN VALUE
 .BR strnul ()
 returns a pointer to the terminating null byte

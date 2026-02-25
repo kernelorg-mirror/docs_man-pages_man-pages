@@ -18,6 +18,8 @@ Standard C library
 .BI "size_t strcspn(const char *" s ", const char *" reject );
 .fi
 .SH DESCRIPTION
+.TP
+.BR strspn ()
 The
 .BR strspn ()
 function calculates the length (in bytes) of the initial
@@ -25,7 +27,8 @@ segment of
 .I s
 which consists entirely of bytes in
 .IR accept .
-.P
+.TP
+.BR strcspn ()
 The
 .BR strcspn ()
 function calculates the length of the initial
@@ -33,6 +36,14 @@ segment of
 .I s
 which consists entirely of bytes not in
 .IR reject .
+.IP
+It is equivalent to
+.IP
+.in +4n
+.EX
+(strpbrk(s, reject) ?: strnul(s)) - s
+.EE
+.in
 .SH RETURN VALUE
 The
 .BR strspn ()
