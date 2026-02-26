@@ -17,7 +17,7 @@ Description
 	Add 'Fixes:' tags as necessary.  'Fixes:' trailer fields should
 	have the following format.
 
-		Fixes: 12-char-hash ([author-date,] commit-date; "subject")
+		Fixes: abbrev-hash ([author-date,] commit-date; "subject")
 
 	where the author date is optional, and only included if it's
 	somehow important.  The commit date is often more important, as
