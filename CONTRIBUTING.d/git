@@ -53,9 +53,9 @@ Description
 			"show -s --format=tformat:'%C(auto)%h (%as, %cs%x3B \"%s\")%C(reset)'"
 
     core.abbrev
-	Use 12 characters in abbreviated hashes.
+	Use 8 characters in abbreviated hashes.
 
-		$ git config --global core.abbrev 12
+		$ git config --global core.abbrev 8
 
     log.date
 	Use ISO 8601-like format for dates.
