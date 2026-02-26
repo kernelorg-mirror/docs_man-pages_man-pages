@@ -24,7 +24,10 @@ Standard C library
 .EX
 .B struct mnt_id_req {
 .BR "    __u32  size;" "        /* sizeof(struct mnt_id_req) */"
-.BR "    __u32  mnt_ns_fd;" "   /* fd of mnt_ns to query the mnt_id in */"
+.B "    union {"
+.BR "        __u32  mnt_ns_fd;" "  /* fd of mnt_ns to query the mnt_id in */"
+.BR "        __u32  mnt_fd;" "     /* fd on the mount being queried */"
+.B "    };"
 .BR "    __u64  mnt_id;" "      /* The mnt_id being queried */"
 .BR "    __u64  param;" "       /* ORed combination of the STATMOUNT_ constants */"
 .BR "    __u32  mnt_ns_id;" "   /* The id of mnt_ns to query the mnt_id in */"
@@ -89,7 +92,8 @@ which is of size
 .I bufsize
 with the fields filled in as described below.
 .I flags
-must be 0.
+must either be 0 or
+.BR STATMOUNT_BY_FD .
 .P
 (Note that reserved space and padding is omitted.)
 .SS The mnt_id_req structure
@@ -109,6 +113,29 @@ operation or by opening a file descriptor to
 and is used to specify a foreign mount namespace in which to query
 .I req.mnt_id
 (since Linux 6.18).
+.P
+.I req.mnt_fd
+is a file descriptor on a mount.
+If
+.B STATMOUNT_BY_FD
+flag is specified,
+.I req.mnt_id
+and
+.I req.mnt_ns_id
+are zeroed,
+the function will return information about
+the mount the file descriptor is on
+(since Linux 7.0).
+.P
+The fd can also be on a mount that has been lazily unmounted (see
+.BR umount2 (2)
+with
+.BR MNT_DETACH ).
+In this case,
+.B STATMOUNT_MNT_POINT
+and
+.B STATMOUNT_MNT_NS_ID
+will be unset, since an unmounted mount is no longer a part of the filesystem.
 .P
 .I req.mnt_id
 can be obtained from either
@@ -391,6 +418,17 @@ Both
 and
 .I req.mnt_ns_fd
 were set.
+.TP
+.B EINVAL
+.I req.mnt_id
+or
+.I req.mnt_ns_id
+was specified alongside
+.IR req.mnt_fd .
+.TP
+.B EBADF
+.I req.mnt_fd
+is an invalid file descriptor.
 .TP
 .B E2BIG
 .I req
