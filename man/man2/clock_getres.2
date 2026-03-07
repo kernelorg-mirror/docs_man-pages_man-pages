@@ -119,8 +119,7 @@ but settable only indirectly by setting
 .BR CLOCK_REALTIME ,
 and behaves differently if the system is suspended.
 See
-.BR timer_create (2)
-for further details.
+.BR timer_create (2).
 .TP
 .BR CLOCK_REALTIME_COARSE " (since Linux 2.6.32; Linux-specific)"
 .\" Added in commit da15cfdae03351c689736f8d142618592e3cebc3
@@ -202,16 +201,15 @@ Like
 .BR CLOCK_BOOTTIME ,
 but behaves differently if the system is suspended.
 See
-.BR timer_create (2)
-for further details.
+.BR timer_create (2).
 .TP
 .BR CLOCK_PROCESS_CPUTIME_ID " (since Linux 2.6.12)"
-This is a clock that measures CPU time consumed by this process
+This clock measures CPU time consumed by this process
 (i.e., CPU time consumed by all threads in the process).
 On Linux, this clock is not settable.
 .TP
 .BR CLOCK_THREAD_CPUTIME_ID " (since Linux 2.6.12)"
-This is a clock that measures CPU time consumed by this thread.
+This clock measures CPU time consumed by this thread.
 On Linux, this clock is not settable.
 .P
 Linux also implements dynamic clock instances as described below.
