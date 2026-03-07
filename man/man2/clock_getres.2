@@ -115,7 +115,8 @@ to stay roughly in sync with UTC.
 .BR CLOCK_REALTIME_ALARM " (since Linux 3.0; Linux-specific)"
 Like
 .BR CLOCK_REALTIME ,
-but not settable.
+but settable only indirectly by setting
+.BR CLOCK_REALTIME .
 See
 .BR timer_create (2)
 for further details.
@@ -124,7 +125,8 @@ for further details.
 .\" Added in commit da15cfdae03351c689736f8d142618592e3cebc3
 A faster but less precise version of
 .BR CLOCK_REALTIME .
-This clock is not settable.
+It is settable only indirectly by setting
+.BR CLOCK_REALTIME .
 Use when you need very fast, but not fine-grained timestamps.
 Requires per-architecture support,
 and probably also architecture support for this flag in the
@@ -132,13 +134,16 @@ and probably also architecture support for this flag in the
 .TP
 .BR CLOCK_TAI " (since Linux 3.10; Linux-specific)"
 .\" commit 1ff3c9677bff7e468e0c487d0ffefe4e901d33f4
-A nonsettable system-wide clock derived from wall-clock time
+A system-wide clock derived from wall-clock time
 but counting leap seconds.
 This clock does
 not experience discontinuities or frequency adjustments caused by
 inserting leap seconds as
 .B CLOCK_REALTIME
 does.
+.IP
+It is settable only indirectly by setting
+.BR CLOCK_REALTIME .
 .IP
 The acronym TAI refers to International Atomic Time.
 .TP
