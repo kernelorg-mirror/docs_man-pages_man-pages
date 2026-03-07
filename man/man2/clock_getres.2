@@ -136,12 +136,28 @@ and probably also architecture support for this flag in the
 .\" commit 1ff3c9677bff7e468e0c487d0ffefe4e901d33f4
 A system-wide clock derived from wall-clock time
 but counting leap seconds.
-This clock does
-not experience discontinuities or frequency adjustments caused by
+This clock does not experience clock adjustments caused by
 inserting leap seconds as
 .B CLOCK_REALTIME
 does.
+It counts seconds since 1970-01-01 00:00 TAI (1969-12-31 23:59:50 UTC),
+so its epoch is ten seconds before
+.BR CLOCK_REALTIME 's.
+However, its implementation requires help from NTP,
+and if that help is not available it behaves like
+.B CLOCK_REALTIME
+instead.
 .IP
+Its relationship to
+.B CLOCK_REALTIME
+for timestamps before 1972 is only approximate,
+as the leap second regime was introduced on 1972-01-01.
+Because leap seconds are planned to be discontinued,
+its value from now on will likely remain exactly 37 seconds greater than
+.BR CLOCK_REALTIME 's
+for many years, after which its offset from
+.BR CLOCK_REALTIME 's
+will likely be adjusted by some other mechanism as yet unspecified.
 It is settable only indirectly by setting
 .BR CLOCK_REALTIME .
 .IP
