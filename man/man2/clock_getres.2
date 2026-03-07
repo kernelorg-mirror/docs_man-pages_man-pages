@@ -116,7 +116,8 @@ to stay roughly in sync with UTC.
 Like
 .BR CLOCK_REALTIME ,
 but settable only indirectly by setting
-.BR CLOCK_REALTIME .
+.BR CLOCK_REALTIME ,
+and behaves differently if the system is suspended.
 See
 .BR timer_create (2)
 for further details.
@@ -198,7 +199,8 @@ or similar.
 .TP
 .BR CLOCK_BOOTTIME_ALARM " (since Linux 3.0; Linux-specific)"
 Like
-.BR CLOCK_BOOTTIME .
+.BR CLOCK_BOOTTIME ,
+but behaves differently if the system is suspended.
 See
 .BR timer_create (2)
 for further details.
