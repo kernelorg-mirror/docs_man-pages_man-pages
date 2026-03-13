@@ -1091,6 +1091,14 @@ Allow a listener to be awakened only when data arrives on the socket.
 Takes an integer value (seconds), this can
 bound the maximum number of attempts TCP will make to
 complete the connection.
+.IP
+On a client socket,
+if nonzero,
+delays sending the final ACK of the three-way handshake
+until the socket has data to send,
+in which case the ACK is piggybacked on the first data segment,
+or a delayed-ACK timeout is reached.
+.IP
 This option should not be used in code intended to be portable.
 .TP
 .BR TCP_INFO " (since Linux 2.4)"
