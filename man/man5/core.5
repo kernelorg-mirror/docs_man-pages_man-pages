@@ -154,6 +154,11 @@ A single % character.
 %c
 Core file size soft resource limit of crashing process (since Linux 2.6.24).
 .TP
+%C
+CPU the task ran on
+.\" commit 8603b6f58637ce196d68f7749633ea81af196d66
+(since Linux 6.2).
+.TP
 %d
 .\" Added in git commit 12a2b4b2241e318b4f6df31228e4272d2c2968a1
 Dump mode\[em]same as value returned by
@@ -178,6 +183,11 @@ in
 Pathname of executable,
 with slashes (\[aq]/\[aq]) replaced by exclamation marks (\[aq]!\[aq])
 (since Linux 3.0).
+.TP
+%f
+Actual filename of executable, which may differ from %e
+.\" commit f38c85f1ba6902e4e2e2bf1b84edf065a904cdeb
+(since Linux 5.9).
 .TP
 %F
 PIDFD of dumped process
