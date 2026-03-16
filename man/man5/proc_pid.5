@@ -30,7 +30,9 @@ Before Linux 4.11,
 meant the "global" root user ID and group ID
 (i.e., UID 0 and GID 0 in the initial user namespace).
 Since Linux 4.11,
-if the process is in a noninitial user namespace that has a
+if when the last time the process called
+.BR execve (2),
+it was in a noninitial user namespace that has a
 valid mapping for user (group) ID 0 inside the namespace, then
 the user (group) ownership of the files under
 .IR /proc/ pid
