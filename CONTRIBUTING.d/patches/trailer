@@ -25,11 +25,11 @@ Description
 	a commit whose hash and subject may have collisions.  For
 	example:
 
-		Fixes: bb509e6fcbae (2020-10-16; "kernel_lockdown.7: New page documenting the Kernel Lockdown feature")
+		Fixes: bb509e6f (2020-10-16; "kernel_lockdown.7: New page documenting the Kernel Lockdown feature")
 
 	See <CONTRIBUTING.d/git> for how to configure the alias.ref and
 	alias.ref2 git aliases.  The commit references can be produced
 	with them.
 
 		$ git ref bb509e6fc
-		bb509e6fcbae (2020-10-16; "kernel_lockdown.7: New page documenting the Kernel Lockdown feature")
+		bb509e6f (2020-10-16; "kernel_lockdown.7: New page documenting the Kernel Lockdown feature")
