@@ -355,7 +355,7 @@ They can be iterated over with the help of
 The number of uid mappings applied on the mount.
 If
 .I smbuf.mask
-has STATMOUNT_UIDMAP set and this field is 0,
+has STATMOUNT_MNT_UIDMAP set and this field is 0,
 then uid mappings applied on the mount
 cannot be resolved in the user namespace of the caller.
 .TP
@@ -372,7 +372,7 @@ of the caller.
 The number of gid mappings applied on the mount.
 If
 .I smbuf.mask
-has STATMOUNT_GIDMAP set and this field is 0,
+has STATMOUNT_MNT_GIDMAP set and this field is 0,
 then gid mappings applied on the mount
 cannot be resolved in the user namespace of the caller.
 .TP
