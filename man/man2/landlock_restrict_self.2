@@ -82,12 +82,9 @@ is set to indicate the error.
 .BR landlock_restrict_self ()
 can fail for the following reasons:
 .TP
-.B EOPNOTSUPP
-Landlock is supported by the kernel but disabled at boot time.
-.TP
-.B EINVAL
-.I flags
-is not 0.
+.B E2BIG
+The maximum number of composed rulesets is reached for the calling thread.
+This limit is currently 64.
 .TP
 .B EBADF
 .I ruleset_fd
@@ -97,6 +94,13 @@ is not a file descriptor for the current thread.
 .I ruleset_fd
 is not a ruleset file descriptor.
 .TP
+.B EINVAL
+Invalid value in
+.IR flags .
+.TP
+.B EOPNOTSUPP
+Landlock is supported by the kernel but disabled at boot time.
+.TP
 .B EPERM
 .I ruleset_fd
 has no read access to the underlying ruleset,
@@ -105,10 +109,6 @@ or the calling thread is not running with
 or it doesn't have the
 .B CAP_SYS_ADMIN
 in its user namespace.
-.TP
-.B E2BIG
-The maximum number of composed rulesets is reached for the calling thread.
-This limit is currently 64.
 .SH STANDARDS
 Linux.
 .SH HISTORY

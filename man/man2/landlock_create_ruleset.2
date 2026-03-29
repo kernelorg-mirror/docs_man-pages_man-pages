@@ -134,15 +134,6 @@ is set to indicate the error.
 .BR landlock_create_ruleset ()
 can fail for the following reasons:
 .TP
-.B EOPNOTSUPP
-Landlock is supported by the kernel but disabled at boot time.
-.TP
-.B EINVAL
-Unknown
-.IR flags ,
-or unknown access, or too small
-.IR size .
-.TP
 .B E2BIG
 .I size
 is too big.
@@ -151,10 +142,19 @@ is too big.
 .I attr
 was not a valid address.
 .TP
+.B EINVAL
+Unknown
+.IR flags ,
+or unknown access, or too small
+.IR size .
+.TP
 .B ENOMSG
 Empty accesses (i.e.,
 .I attr
 did not specify any access rights to restrict).
+.TP
+.B EOPNOTSUPP
+Landlock is supported by the kernel but disabled at boot time.
 .SH STANDARDS
 Linux.
 .SH HISTORY
