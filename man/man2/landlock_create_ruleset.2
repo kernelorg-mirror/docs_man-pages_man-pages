@@ -44,6 +44,7 @@ It points to the following structure:
 struct landlock_ruleset_attr {
     __u64 handled_access_fs;
     __u64 handled_access_net;
+    __u64 scoped;
 };
 .EE
 .in
@@ -59,6 +60,13 @@ in
 is a bitmask of handled network actions
 (see
 .B Network actions
+in
+.BR landlock (7)).
+.IP
+.I scoped
+is a bitmask of scope flags
+(see
+.B Scope flags
 in
 .BR landlock (7)).
 .IP
