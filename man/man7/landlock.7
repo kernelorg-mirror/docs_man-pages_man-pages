@@ -445,7 +445,7 @@ users should query the Landlock ABI version:
 box;
 ntb| ntb| lbx
 nt| nt| lbx.
-ABI	Kernel	Newly introduced access rights
+ABI	Kernel	Newly introduced constants
 _	_	_
 1	5.13	LANDLOCK_ACCESS_FS_EXECUTE
 \^	\^	LANDLOCK_ACCESS_FS_WRITE_FILE
@@ -472,6 +472,10 @@ _	_	_
 _	_	_
 6	6.12	LANDLOCK_SCOPE_ABSTRACT_UNIX_SOCKET
 \^	\^	LANDLOCK_SCOPE_SIGNAL
+_	_	_
+7	6.15	LANDLOCK_RESTRICT_SELF_LOG_SAME_EXEC_OFF
+\^	\^	LANDLOCK_RESTRICT_SELF_LOG_NEW_EXEC_ON
+\^	\^	LANDLOCK_RESTRICT_SELF_LOG_SUBDOMAINS_OFF
 .TE
 .P
 Users should use the Landlock ABI version rather than the kernel version
