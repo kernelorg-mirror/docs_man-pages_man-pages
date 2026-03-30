@@ -60,7 +60,7 @@ The
 function processes the input string from left
 to right.
 Each of the three possible input elements (whitespace,
-literal, or format) are handled one after the other.
+literal, or format) is handled one after the other.
 If the input cannot be matched to the format string, the function stops.
 The remainder of the format and input strings are not processed.
 .P
@@ -288,7 +288,7 @@ explicitly specified, except that it recomputes the
 .I tm_wday
 and
 .I tm_yday
-field if any of the year, month, or day elements changed.
+fields if any of the year, month, or day elements changed.
 .\" .P
 .\" This function is available since libc 4.6.8.
 .\" Linux libc4 and libc5 includes define the prototype unconditionally;
@@ -319,7 +319,7 @@ the same format characters as for
 (In most cases, the corresponding fields are parsed, but no field in
 .I tm
 is changed.)
-This leads to
+This leads to:
 .TP
 .B %F
 Equivalent to
@@ -364,7 +364,7 @@ and
 .B %P
 is accepted as a synonym for
 .BR %p .
-Finally
+Finally:
 .TP
 .B %s
 The number of seconds since the Epoch, 1970-01-01 00:00:00 +0000 (UTC).
