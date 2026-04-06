@@ -42,7 +42,6 @@ These are not the interfaces you are interested in.
 Look at
 .BR readdir (3)
 for the POSIX-conforming C library interface.
-This page documents the bare kernel system call interfaces.
 .SS getdents()
 The system call
 .BR getdents ()
@@ -216,9 +215,30 @@ using
 .BR syscall (2).
 In that case you will need to define the
 .I linux_dirent
-or
-.I linux_dirent64
 structure yourself.
+.P
+The
+.BR getdents64 ()
+system call accepts an
+.B unsigned int
+argument
+.I count
+and assumes that
+.I count
+does not exceed
+.BR INT_MAX .
+The glibc wrapper function sets
+.I count
+to
+.B INT_MAX
+if it exceeds
+.BR INT_MAX .
+glibc defines a
+.I dirent64
+structure, which is similar to
+.I linux_dirent64
+but with a 256-byte
+.IR d_name .
 .P
 Probably, you want to use
 .BR readdir (3)
