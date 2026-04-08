@@ -17,7 +17,7 @@ see VERSIONS.
 .nf
 .BR "#include <linux/aio_abi.h>" "          /* Defines needed types */"
 .P
-.BI "long io_setup(unsigned int " nr_events ", aio_context_t *" ctx_idp );
+.BI "long io_setup(unsigned int " n ", aio_context_t *" ctx_idp );
 .fi
 .P
 .IR Note :
@@ -37,7 +37,7 @@ The
 .BR io_setup ()
 system call
 creates an asynchronous I/O context suitable for concurrently processing
-.I nr_events
+.I n
 operations.
 The
 .I ctx_idp
@@ -56,7 +56,7 @@ For the failure return, see VERSIONS.
 .TP
 .B EAGAIN
 The specified
-.I nr_events
+.I n
 exceeds the limit of available events,
 as defined in
 .I /proc/sys/fs/aio\-max\-nr
@@ -71,9 +71,9 @@ An invalid pointer is passed for
 .I ctx_idp
 is not initialized,
 or the specified
-.I nr_events
+.I n
 exceeds internal limits.
-.I nr_events
+.I n
 should be greater than 0.
 .TP
 .B ENOMEM
