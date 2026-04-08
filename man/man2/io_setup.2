@@ -15,9 +15,11 @@ Alternatively, Asynchronous I/O library
 see VERSIONS.
 .SH SYNOPSIS
 .nf
-.BR "#include <linux/aio_abi.h>" "          /* Defines needed types */"
+.B #include <linux/aio_abi.h>
+.BR "#include <sys/syscall.h>" "    /* Definition of SYS_* constants */"
+.B #include <unistd.h>
 .P
-.BI "long io_setup(unsigned int " n ", aio_context_t *" ctx_idp );
+.BI "long\~syscall(SYS_io_setup, unsigned int " n ", aio_context_t *" ctx_idp );
 .fi
 .P
 .IR Note :
