@@ -20,7 +20,7 @@ see VERSIONS.
 .B #include <unistd.h>
 .P
 .BI "int\~syscall(SYS_io_submit, aio_context_t\~" ctx_id ,
-.BI "            long\~" n ", struct\~iocb\~**" iocbpp );
+.BI "            long\~" n ", struct\~iocb\~*" iocbpp [ n ]);
 .fi
 .P
 .IR Note :
