@@ -9,10 +9,6 @@ io_submit \- submit asynchronous I/O blocks for processing
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
-.P
-Alternatively, Asynchronous I/O library
-.RI ( libaio ,\~ \-laio );
-see VERSIONS.
 .SH SYNOPSIS
 .nf
 .B #include <linux/aio_abi.h>
@@ -22,19 +18,13 @@ see VERSIONS.
 .BI "int\~syscall(SYS_io_submit, aio_context_t\~" ctx_id ,
 .BI "            long\~" n ", struct\~iocb\~*" iocbpp [ n ]);
 .fi
-.P
-.IR Note :
-There is no glibc wrapper for this system call;
-see VERSIONS.
 .SH DESCRIPTION
 .IR Note :
-this page describes the raw Linux system call interface.
-The wrapper function provided by
-.I libaio
-uses a different type for the
-.I ctx_id
-argument.
-See VERSIONS.
+you probably want to use the
+.BR io_setup (3)
+wrapper function provided by
+.IR libaio ;
+see VERSIONS.
 .P
 The
 .BR io_submit ()
@@ -256,7 +246,12 @@ less than
 or 0 if
 .I n
 is zero).
-For the failure return, see VERSIONS.
+.P
+On error,
+\-1 is returned,
+and
+.I errno
+is set to indicate the error.
 .SH ERRORS
 .TP
 .B EAGAIN
@@ -310,35 +305,12 @@ but the submitting context does not have the
 .B CAP_SYS_ADMIN
 capability.
 .SH VERSIONS
-glibc does not provide a wrapper for this system call.
-You could invoke it using
-.BR syscall (2).
-But instead, you probably want to use the
-.BR io_submit ()
-wrapper function provided by
-.\" http://git.fedorahosted.org/git/?p=libaio.git
-.IR libaio .
-.P
-Note that the
+.UR https://pagure.io/libaio
 .I libaio
-wrapper function uses a different type
-.RI ( io_context_t )
-.\" But glibc is confused, since <libaio.h> uses 'io_context_t' to declare
-.\" the system call.
-for the
-.I ctx_id
-argument.
-Note also that the
-.I libaio
-wrapper does not follow the usual C library conventions for indicating errors:
-on error it returns a negated error number
-(the negative of one of the values listed in ERRORS).
-If the system call is invoked via
-.BR syscall (2),
-then the return value follows the usual conventions for
-indicating an error: \-1, with
-.I errno
-set to a (positive) value that indicates the error.
+.UE
+provides a wrapper function with the same name,
+but different prototype and return value.
+You probably want to use that wrapper.
 .SH STANDARDS
 Linux.
 .SH HISTORY
@@ -348,6 +320,7 @@ Linux 2.5.
 .BR io_destroy (2),
 .BR io_getevents (2),
 .BR io_setup (2),
+.BR io_submit (3),
 .BR aio (7)
 .\" .SH AUTHOR
 .\" Kent Yoder.
