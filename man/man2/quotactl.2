@@ -103,16 +103,8 @@ The
 value is one of the following operations:
 .TP
 .BR Q_QUOTAON (2const)
-.TP
-.B Q_QUOTAOFF
-Turn off quotas for a filesystem.
-The
-.I addr
-and
-.I id
-arguments are ignored.
-This operation requires privilege
-.RB ( CAP_SYS_ADMIN ).
+.TQ
+.BR Q_QUOTAOFF (2const)
 .TP
 .B Q_GETQUOTA
 Get disk quota limits and current usage for user or group

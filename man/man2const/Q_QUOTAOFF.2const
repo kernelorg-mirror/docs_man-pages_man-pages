@@ -1,0 +1,52 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_QUOTAOFF 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_QUOTAOFF
+\-
+turn off quotas for a filesystem
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_QUOTAOFF, " type "), const\~char\~*_Nullable\~" special ,
+.B "             0, NULL);"
+.P
+.BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_QUOTAOFF, " type ));
+.fi
+.SH DESCRIPTION
+.TP
+.B Q_QUOTAOFF
+Turn off quotas for a filesystem.
+The
+.I addr
+and
+.I id
+arguments are ignored.
+This operation requires privilege
+.RB ( CAP_SYS_ADMIN ).
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2)
