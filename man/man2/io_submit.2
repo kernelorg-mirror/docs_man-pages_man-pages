@@ -273,16 +273,25 @@ One of the data structures points to invalid data.
 The AIO context specified by
 .I ctx_id
 is invalid.
+.TP
+.B EINVAL
 .I nr
 is less than 0.
+.TP
+.B EINVAL
 The
 .I iocb
 at
 .I *iocbpp[0]
-is not properly initialized, the operation specified is invalid for the file
+is not properly initialized.
+.TP
+.B EINVAL
+The operation specified is invalid for the file
 descriptor in the
-.IR iocb ,
-or the value in the
+.IR iocb .
+.TP
+.B EINVAL
+The value in the
 .I aio_reqprio
 field is invalid.
 .TP
