@@ -9,35 +9,27 @@ io_setup \- create an asynchronous I/O context
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
-.P
-Alternatively, Asynchronous I/O library
-.RI ( libaio ,\~ \-laio );
-see VERSIONS.
 .SH SYNOPSIS
 .nf
-.BR "#include <linux/aio_abi.h>" "          /* Defines needed types */"
+.B #include <linux/aio_abi.h>
+.BR "#include <sys/syscall.h>" "    /* Definition of SYS_* constants */"
+.B #include <unistd.h>
 .P
-.BI "long io_setup(unsigned int " nr_events ", aio_context_t *" ctx_idp );
+.BI "long\~syscall(SYS_io_setup, unsigned int " n ", aio_context_t *" ctx_idp );
 .fi
-.P
-.IR Note :
-There is no glibc wrapper for this system call;
-see VERSIONS.
 .SH DESCRIPTION
 .IR Note :
-this page describes the raw Linux system call interface.
-The wrapper function provided by
-.I libaio
-uses a different type for the
-.I ctx_idp
-argument.
-See VERSIONS.
+you probably want to use the
+.BR io_setup (3)
+wrapper function provided by
+.IR libaio ;
+see VERSIONS.
 .P
 The
 .BR io_setup ()
 system call
 creates an asynchronous I/O context suitable for concurrently processing
-.I nr_events
+.I n
 operations.
 The
 .I ctx_idp
@@ -51,29 +43,35 @@ with the resulting handle.
 On success,
 .BR io_setup ()
 returns 0.
-For the failure return, see VERSIONS.
+On error,
+\-1 is returned,
+and
+.I errno
+is set to indicate the error.
 .SH ERRORS
 .TP
 .B EAGAIN
 The specified
-.I nr_events
+.I n
 exceeds the limit of available events,
 as defined in
 .I /proc/sys/fs/aio\-max\-nr
 (see
-.BR proc (5)).
+.BR proc_sys_fs (5)).
 .TP
 .B EFAULT
 An invalid pointer is passed for
 .IR ctx_idp .
 .TP
 .B EINVAL
-.I ctx_idp
-is not initialized,
-or the specified
-.I nr_events
+.I *ctx_idp
+is not initialized to 0.
+.TP
+.B EINVAL
+The specified
+.I n
 exceeds internal limits.
-.I nr_events
+.I n
 should be greater than 0.
 .TP
 .B ENOMEM
@@ -83,35 +81,12 @@ Insufficient kernel resources are available.
 .BR io_setup ()
 is not implemented on this architecture.
 .SH VERSIONS
-glibc does not provide a wrapper for this system call.
-You could invoke it using
-.BR syscall (2).
-But instead, you probably want to use the
-.BR io_setup ()
-wrapper function provided by
-.\" http://git.fedorahosted.org/git/?p=libaio.git
-.IR libaio .
-.P
-Note that the
+.UR https://pagure.io/libaio
 .I libaio
-wrapper function uses a different type
-.RI ( "io_context_t\ *" )
-.\" But glibc is confused, since <libaio.h> uses 'io_context_t' to declare
-.\" the system call.
-for the
-.I ctx_idp
-argument.
-Note also that the
-.I libaio
-wrapper does not follow the usual C library conventions for indicating errors:
-on error it returns a negated error number
-(the negative of one of the values listed in ERRORS).
-If the system call is invoked via
-.BR syscall (2),
-then the return value follows the usual conventions for
-indicating an error: \-1, with
-.I errno
-set to a (positive) value that indicates the error.
+.UE
+provides a wrapper function with the same name,
+but different prototype and return value.
+You probably want to use that wrapper.
 .SH STANDARDS
 Linux.
 .SH HISTORY
@@ -121,6 +96,7 @@ Linux 2.5.
 .BR io_destroy (2),
 .BR io_getevents (2),
 .BR io_submit (2),
+.BR io_setup (3),
 .BR aio (7)
 .\" .SH AUTHOR
 .\" Kent Yoder.
