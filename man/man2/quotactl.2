@@ -30,12 +30,6 @@ Standard C library
 .BI "int syscall(SYS_quotactl_fd, int " fd ", int " op ", int " id \
 ", caddr_t " addr );
 .fi
-.P
-.IR Note :
-glibc provides no wrapper for
-.BR quotactl_fd (),
-necessitating the use of
-.BR syscall (2).
 .SH DESCRIPTION
 The quota system can be used to set per-user, per-group, and per-project limits
 on the amount of disk space used on a filesystem.
