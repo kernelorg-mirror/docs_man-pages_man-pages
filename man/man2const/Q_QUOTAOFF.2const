@@ -27,14 +27,8 @@ Standard C library
 .BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_QUOTAOFF, " type ));
 .fi
 .SH DESCRIPTION
-.TP
-.B Q_QUOTAOFF
 Turn off quotas for a filesystem.
-The
-.I addr
-and
-.I id
-arguments are ignored.
+.P
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
 .SH RETURN VALUE
@@ -49,4 +43,5 @@ Linux.
 Linux.
 .SH SEE ALSO
 .BR quotactl (2),
-.BR quotactl_fd (2)
+.BR quotactl_fd (2),
+.BR Q_QUOTAON (2const)
