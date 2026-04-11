@@ -13,14 +13,17 @@ Standard C library
 .RI ( libc ,\~ \-lc )
 .SH SYNOPSIS
 .nf
-.B #include <sys/quota.h>
 .BR "#include <xfs/xqm.h>" " /* Definition of " Q_X* " and " XFS_QUOTA_* \
 " constants"
 .RB    "                        (or " <linux/dqblk_xfs.h> "; see NOTES) */"
+.B #include <sys/quota.h>
 .P
 .BI "int quotactl(int " op ", const char *_Nullable " special ", int " id ,
 .BI "             caddr_t " addr );
 .P
+.BR "#include <xfs/xqm.h>" " /* Definition of " Q_X* " and " XFS_QUOTA_* \
+" constants"
+.RB    "                        (or " <linux/dqblk_xfs.h> "; see NOTES) */"
 .BR "#include <sys/syscall.h>" "    /* Definition of " SYS_* " constants */"
 .B #include <unistd.h>
 .P
