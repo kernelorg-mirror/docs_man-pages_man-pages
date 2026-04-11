@@ -20,7 +20,7 @@ see VERSIONS.
 .B #include <unistd.h>
 .P
 .BI "int\~syscall(SYS_io_submit, aio_context_t\~" ctx_id ,
-.BI "            long\~" nr ", struct\~iocb\~**" iocbpp );
+.BI "            long\~" n ", struct\~iocb\~**" iocbpp );
 .fi
 .P
 .IR Note :
@@ -40,14 +40,14 @@ The
 .BR io_submit ()
 system call
 queues
-.I nr
+.I n
 I/O request blocks for processing in
 the AIO context
 .IR ctx_id .
 The
 .I iocbpp
 argument should be an array of
-.I nr
+.I n
 AIO control blocks,
 which will be submitted to context
 .IR ctx_id .
@@ -252,9 +252,9 @@ returns the number of
 submitted
 (which may be
 less than
-.IR nr ,
+.IR n ,
 or 0 if
-.I nr
+.I n
 is zero).
 For the failure return, see VERSIONS.
 .SH ERRORS
@@ -277,7 +277,7 @@ The AIO context specified by
 is invalid.
 .TP
 .B EINVAL
-.I nr
+.I n
 is less than 0.
 .TP
 .B EINVAL
