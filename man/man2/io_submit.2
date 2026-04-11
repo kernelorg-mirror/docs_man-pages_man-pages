@@ -15,10 +15,12 @@ Alternatively, Asynchronous I/O library
 see VERSIONS.
 .SH SYNOPSIS
 .nf
-.BR "#include <linux/aio_abi.h>" "          /* Defines needed types */"
+.B #include <linux/aio_abi.h>
+.BR "#include <sys/syscall.h>" "    /* Definition of SYS_* constants */"
+.B #include <unistd.h>
 .P
-.BI "int io_submit(aio_context_t " ctx_id ", long " nr \
-", struct iocb **" iocbpp );
+.BI "int\~syscall(SYS_io_submit, aio_context_t\~" ctx_id ,
+.BI "            long\~" nr ", struct\~iocb\~**" iocbpp );
 .fi
 .P
 .IR Note :
