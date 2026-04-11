@@ -18,7 +18,7 @@ Standard C library
 .B #include <sys/quota.h>
 .P
 .BI "int\~quotactl(QCMD(Q_QUOTAON, " type "), const\~char\~*_Nullable\~" special ,
-.BI "             int\~" id ", caddr_t\~" addr );
+.BI "             int\~" fmt ", caddr_t\~" quota_path );
 .P
 .BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
 .BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
@@ -27,15 +27,13 @@ Standard C library
 .BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_QUOTAON, " type ));
 .fi
 .SH DESCRIPTION
-.TP
-.B Q_QUOTAON
 Turn on quotas for a filesystem.
+.P
 The
-.I id
+.I fmt
 argument is the identification number of the quota format to be used.
 Currently, there are three supported quota formats:
-.RS
-.TP 13
+.TP
 .B QFMT_VFS_OLD
 The original quota format.
 .TP
@@ -46,17 +44,16 @@ and quota limits up to 2\[ha]42 bytes and 2\[ha]32 inodes.
 .B QFMT_VFS_V1
 A quota format that can handle 32-bit UIDs and GIDs
 and quota limits of 2\[ha]63 \- 1 bytes and 2\[ha]63 \- 1 inodes.
-.RE
-.IP
+.P
 The
-.I addr
+.I quota_path
 argument points to the pathname of a file containing the quotas for
 the filesystem.
 The quota file must exist;
 it is normally created with the
 .BR quotacheck (8)
 program
-.IP
+.P
 Quota information can be also stored in hidden system inodes
 for ext4, XFS, and other filesystems if the filesystem is configured so.
 In this case, there are no visible quota files and there is no need to
@@ -71,21 +68,21 @@ system inodes with quota information is indicated by the
 flag in the
 .I dqi_flags
 field returned by the
-.B Q_GETINFO
+.BR Q_GETINFO (2const)
 operation.
-.IP
+.P
 The
 .BR quotactl_fd ()
-variant of this system call ignores the
-.I addr
+variant of this system call doesn't have the
+.I quota_path
 and
-.I id
+.I fmt
 arguments, so the
 .B Q_QUOTAON
 operation of
 .BR quotactl_fd ()
 is only suitable for work with hidden system inodes.
-.IP
+.P
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
 .SH RETURN VALUE
@@ -96,34 +93,22 @@ See
 .BR quotactl (2).
 .TP
 .B EACCES
-.I op
-is
-.BR Q_QUOTAON ,
-and the quota file pointed to by
-.I addr
+The quota file pointed to by
+.I quota_path
 exists, but is not a regular file or
 is not on the filesystem pointed to by
 .IR special .
 .TP
 .B EBUSY
-.I op
-is
-.BR Q_QUOTAON ,
-but another
+Another
 .B Q_QUOTAON
 had already been performed.
 .TP
 .B EINVAL
-.I op
-is
-.BR Q_QUOTAON ,
-but the specified quota file is corrupted.
+The specified quota file is corrupted.
 .TP
 .B ESRCH
-.I op
-is
-.BR Q_QUOTAON ,
-but the specified quota format was not found.
+The specified quota format was not found.
 .SH STANDARDS
 Linux.
 .SH HISTORY
@@ -131,4 +116,5 @@ Linux.
 .SH SEE ALSO
 .BR quotactl (2),
 .BR quotactl_fd (2),
+.BR Q_QUOTAOFF (2const),
 .BR quotacheck (8)
