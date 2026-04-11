@@ -102,66 +102,7 @@ The
 .I subop
 value is one of the following operations:
 .TP
-.B Q_QUOTAON
-Turn on quotas for a filesystem.
-The
-.I id
-argument is the identification number of the quota format to be used.
-Currently, there are three supported quota formats:
-.RS
-.TP 13
-.B QFMT_VFS_OLD
-The original quota format.
-.TP
-.B QFMT_VFS_V0
-The standard VFS v0 quota format, which can handle 32-bit UIDs and GIDs
-and quota limits up to 2\[ha]42 bytes and 2\[ha]32 inodes.
-.TP
-.B QFMT_VFS_V1
-A quota format that can handle 32-bit UIDs and GIDs
-and quota limits of 2\[ha]63 \- 1 bytes and 2\[ha]63 \- 1 inodes.
-.RE
-.IP
-The
-.I addr
-argument points to the pathname of a file containing the quotas for
-the filesystem.
-The quota file must exist;
-it is normally created with the
-.BR quotacheck (8)
-program
-.IP
-Quota information can be also stored in hidden system inodes
-for ext4, XFS, and other filesystems if the filesystem is configured so.
-In this case, there are no visible quota files and there is no need to
-use
-.BR quotacheck (8).
-Quota information is always kept consistent by the filesystem and the
-.B Q_QUOTAON
-operation serves only to enable enforcement of quota limits.
-The presence of hidden
-system inodes with quota information is indicated by the
-.B DQF_SYS_FILE
-flag in the
-.I dqi_flags
-field returned by the
-.B Q_GETINFO
-operation.
-.IP
-The
-.BR quotactl_fd ()
-variant of this system call ignores the
-.I addr
-and
-.I id
-arguments, so the
-.B Q_QUOTAON
-operation of
-.BR quotactl_fd ()
-is only suitable for work with hidden system inodes.
-.IP
-This operation requires privilege
-.RB ( CAP_SYS_ADMIN ).
+.BR Q_QUOTAON (2const)
 .TP
 .B Q_QUOTAOFF
 Turn off quotas for a filesystem.
@@ -720,24 +661,6 @@ and
 is set to indicate the error.
 .SH ERRORS
 .TP
-.B EACCES
-.I op
-is
-.BR Q_QUOTAON ,
-and the quota file pointed to by
-.I addr
-exists, but is not a regular file or
-is not on the filesystem pointed to by
-.IR special .
-.TP
-.B EBUSY
-.I op
-is
-.BR Q_QUOTAON ,
-but another
-.B Q_QUOTAON
-had already been performed.
-.TP
 .B EFAULT
 .I addr
 or
@@ -749,12 +672,6 @@ is invalid.
 or
 .I type
 is invalid.
-.TP
-.B EINVAL
-.I op
-is
-.BR Q_QUOTAON ,
-but the specified quota file is corrupted.
 .TP
 .BR EINVAL " (since Linux 5.5)"
 .\" 3dd4d40b420846dd35869ccc8f8627feef2cff32
@@ -795,12 +712,6 @@ but the specified limits are out of the range allowed by the quota format.
 .B ESRCH
 No disk quota is found for the indicated user.
 Quotas have not been turned on for this filesystem.
-.TP
-.B ESRCH
-.I op
-is
-.BR Q_QUOTAON ,
-but the specified quota format was not found.
 .TP
 .B ESRCH
 .I op

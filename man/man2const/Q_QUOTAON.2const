@@ -1,0 +1,134 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_QUOTAON 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_QUOTAON
+\-
+turn on quotas for a filesystem
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_QUOTAON, " type "), const\~char\~*_Nullable\~" special ,
+.BI "             int\~" id ", caddr_t\~" addr );
+.P
+.BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_QUOTAON, " type ));
+.fi
+.SH DESCRIPTION
+.TP
+.B Q_QUOTAON
+Turn on quotas for a filesystem.
+The
+.I id
+argument is the identification number of the quota format to be used.
+Currently, there are three supported quota formats:
+.RS
+.TP 13
+.B QFMT_VFS_OLD
+The original quota format.
+.TP
+.B QFMT_VFS_V0
+The standard VFS v0 quota format, which can handle 32-bit UIDs and GIDs
+and quota limits up to 2\[ha]42 bytes and 2\[ha]32 inodes.
+.TP
+.B QFMT_VFS_V1
+A quota format that can handle 32-bit UIDs and GIDs
+and quota limits of 2\[ha]63 \- 1 bytes and 2\[ha]63 \- 1 inodes.
+.RE
+.IP
+The
+.I addr
+argument points to the pathname of a file containing the quotas for
+the filesystem.
+The quota file must exist;
+it is normally created with the
+.BR quotacheck (8)
+program
+.IP
+Quota information can be also stored in hidden system inodes
+for ext4, XFS, and other filesystems if the filesystem is configured so.
+In this case, there are no visible quota files and there is no need to
+use
+.BR quotacheck (8).
+Quota information is always kept consistent by the filesystem and the
+.B Q_QUOTAON
+operation serves only to enable enforcement of quota limits.
+The presence of hidden
+system inodes with quota information is indicated by the
+.B DQF_SYS_FILE
+flag in the
+.I dqi_flags
+field returned by the
+.B Q_GETINFO
+operation.
+.IP
+The
+.BR quotactl_fd ()
+variant of this system call ignores the
+.I addr
+and
+.I id
+arguments, so the
+.B Q_QUOTAON
+operation of
+.BR quotactl_fd ()
+is only suitable for work with hidden system inodes.
+.IP
+This operation requires privilege
+.RB ( CAP_SYS_ADMIN ).
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.TP
+.B EACCES
+.I op
+is
+.BR Q_QUOTAON ,
+and the quota file pointed to by
+.I addr
+exists, but is not a regular file or
+is not on the filesystem pointed to by
+.IR special .
+.TP
+.B EBUSY
+.I op
+is
+.BR Q_QUOTAON ,
+but another
+.B Q_QUOTAON
+had already been performed.
+.TP
+.B EINVAL
+.I op
+is
+.BR Q_QUOTAON ,
+but the specified quota file is corrupted.
+.TP
+.B ESRCH
+.I op
+is
+.BR Q_QUOTAON ,
+but the specified quota format was not found.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2),
+.BR quotacheck (8)
