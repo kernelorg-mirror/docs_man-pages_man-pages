@@ -26,17 +26,33 @@ Standard C library
 .P
 .BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_GETNEXTQUOTA, " type ),
 .BI "            int\~" id ", struct\~nextdqblk\~*" addr );
+.P
+.B #include <sys/quota.h>
 .fi
+.P
+.EX
+struct nextdqblk {
+	uint64_t  dqb_bhardlimit;
+	uint64_t  dqb_bsoftlimit;
+	uint64_t  dqb_curspace;
+	uint64_t  dqb_ihardlimit;
+	uint64_t  dqb_isoftlimit;
+	uint64_t  dqb_curinodes;
+	uint64_t  dqb_btime;
+	uint64_t  dqb_itime;
+\&
+	uint32_t  dqb_valid;
+\&
+	uint32_t  dqb_id;
+};
+.EE
 .SH DESCRIPTION
-.TP
-.BR Q_GETNEXTQUOTA " (since Linux 4.6)"
-.\" commit 926132c0257a5a8d149a6a395cc3405e55420566
 This operation is the same as
 .BR Q_GETQUOTA (2const),
 but it returns quota information for the next ID greater than or equal to
 .I id
 that has a quota set.
-.IP
+.P
 The
 .I addr
 argument is a pointer to a
@@ -44,26 +60,9 @@ argument is a pointer to a
 structure whose fields are as for the
 .BR dqblk (2type),
 except for the addition of a
-.I dqb_id
+.I .dqb_id
 field that is used to return the ID for which
-quota information is being returned:
-.IP
-.in +4n
-.EX
-struct nextdqblk {
-    uint64_t dqb_bhardlimit;
-    uint64_t dqb_bsoftlimit;
-    uint64_t dqb_curspace;
-    uint64_t dqb_ihardlimit;
-    uint64_t dqb_isoftlimit;
-    uint64_t dqb_curinodes;
-    uint64_t dqb_btime;
-    uint64_t dqb_itime;
-    uint32_t dqb_valid;
-    uint32_t dqb_id;
-};
-.EE
-.in
+quota information is being returned.
 .SH RETURN VALUE
 See
 .BR quotactl (2).
@@ -72,16 +71,14 @@ See
 .BR quotactl (2).
 .TP
 .B ESRCH
-.I op
-is
-.B Q_GETNEXTQUOTA
-but there is no ID greater than or equal to
+There is no ID greater than or equal to
 .I id
 that has an active quota.
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 4.6.
+.\" commit 926132c0257a5a8d149a6a395cc3405e55420566
 .SH SEE ALSO
 .BR quotactl (2),
 .BR quotactl_fd (2),
