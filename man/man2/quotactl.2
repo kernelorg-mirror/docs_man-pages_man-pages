@@ -105,30 +105,13 @@ value is one of the following operations:
 .BR Q_QUOTAON (2const)
 .TQ
 .BR Q_QUOTAOFF (2const)
-.TP
-.B Q_GETQUOTA
-Get disk quota limits and current usage for user or group
-.IR id .
-The
-.I addr
-argument is a pointer to a
-.BR dqblk (2type)
-structure.
-.IP
-Currently, the kernel fills in all entries of the
-.BR dqblk (2type)
-structure and marks them as valid in the
-.I dqb_valid
-field.
-Unprivileged users may retrieve only their own quotas;
-a privileged user
-.RB ( CAP_SYS_ADMIN )
-can retrieve the quotas of any user.
+.TQ
+.BR Q_GETQUOTA (2const)
 .TP
 .BR Q_GETNEXTQUOTA " (since Linux 4.6)"
 .\" commit 926132c0257a5a8d149a6a395cc3405e55420566
 This operation is the same as
-.BR Q_GETQUOTA ,
+.BR Q_GETQUOTA (2const),
 but it returns quota information for the next ID greater than or equal to
 .I id
 that has a quota set.
@@ -436,7 +419,7 @@ Note that since
 already has
 .I q_id
 field, no separate structure type is needed (in contrast with
-.B Q_GETQUOTA
+.BR Q_GETQUOTA (2const)
 and
 .B Q_GETNEXTQUOTA
 operations)
