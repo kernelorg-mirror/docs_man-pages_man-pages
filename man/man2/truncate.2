@@ -98,6 +98,11 @@ The argument
 is larger than the maximum file size.
 (XSI)
 .TP
+.B ENOSPC
+There is not enough space left on the device for extending the
+file size to the given
+.IR length .
+.TP
 .B EINTR
 While blocked waiting to complete,
 the call was interrupted by a signal handler;
