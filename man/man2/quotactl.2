@@ -109,26 +109,8 @@ value is one of the following operations:
 .BR Q_GETQUOTA (2const)
 .TQ
 .BR Q_GETNEXTQUOTA (2const)
-.TP
-.B Q_SETQUOTA
-Set quota information for user or group
-.IR id ,
-using the information supplied in the
-.BR dqblk (2type)
-structure pointed to by
-.IR addr .
-The
-.I dqb_valid
-field of the
-.BR dqblk (2type)
-structure indicates which entries in the structure have been set by the caller.
-This operation supersedes the
-.B Q_SETQLIM
-and
-.B Q_SETUSE
-operations in the previous quota interfaces.
-This operation requires privilege
-.RB ( CAP_SYS_ADMIN ).
+.TQ
+.BR Q_SETQUOTA (2const)
 .TP
 .BR Q_GETINFO " (since Linux 2.4.22)"
 Get information (like grace times) about quotafile.
@@ -598,12 +580,6 @@ is not a block device.
 The caller lacked the required privilege
 .RB ( CAP_SYS_ADMIN )
 for the specified operation.
-.TP
-.B ERANGE
-.I op
-is
-.BR Q_SETQUOTA ,
-but the specified limits are out of the range allowed by the quota format.
 .TP
 .B ESRCH
 No disk quota is found for the indicated user.
