@@ -107,42 +107,8 @@ value is one of the following operations:
 .BR Q_QUOTAOFF (2const)
 .TQ
 .BR Q_GETQUOTA (2const)
-.TP
-.BR Q_GETNEXTQUOTA " (since Linux 4.6)"
-.\" commit 926132c0257a5a8d149a6a395cc3405e55420566
-This operation is the same as
-.BR Q_GETQUOTA (2const),
-but it returns quota information for the next ID greater than or equal to
-.I id
-that has a quota set.
-.IP
-The
-.I addr
-argument is a pointer to a
-.I nextdqblk
-structure whose fields are as for the
-.BR dqblk (2type),
-except for the addition of a
-.I dqb_id
-field that is used to return the ID for which
-quota information is being returned:
-.IP
-.in +4n
-.EX
-struct nextdqblk {
-    uint64_t dqb_bhardlimit;
-    uint64_t dqb_bsoftlimit;
-    uint64_t dqb_curspace;
-    uint64_t dqb_ihardlimit;
-    uint64_t dqb_isoftlimit;
-    uint64_t dqb_curinodes;
-    uint64_t dqb_btime;
-    uint64_t dqb_itime;
-    uint32_t dqb_valid;
-    uint32_t dqb_id;
-};
-.EE
-.in
+.TQ
+.BR Q_GETNEXTQUOTA (2const)
 .TP
 .B Q_SETQUOTA
 Set quota information for user or group
@@ -421,7 +387,7 @@ already has
 field, no separate structure type is needed (in contrast with
 .BR Q_GETQUOTA (2const)
 and
-.B Q_GETNEXTQUOTA
+.BR Q_GETNEXTQUOTA (2const)
 operations)
 .TP
 .B Q_XSETQLIM
@@ -646,8 +612,6 @@ Quotas have not been turned on for this filesystem.
 .B ESRCH
 .I op
 is
-.B Q_GETNEXTQUOTA
-or
 .BR Q_XGETNEXTQUOTA ,
 but there is no ID greater than or equal to
 .I id

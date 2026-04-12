@@ -1,0 +1,89 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_GETNEXTQUOTA 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_GETNEXTQUOTA
+\-
+get disk quota limits and current usage for next user or group
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_GETNEXTQUOTA, " type "), const\~char\~*_Nullable\~" special ,
+.BI "             int\~" id ", caddr_t\~" addr );
+.P
+.BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_GETNEXTQUOTA, " type ),
+.BI "            int\~" id ", struct\~nextdqblk\~*" addr );
+.fi
+.SH DESCRIPTION
+.TP
+.BR Q_GETNEXTQUOTA " (since Linux 4.6)"
+.\" commit 926132c0257a5a8d149a6a395cc3405e55420566
+This operation is the same as
+.BR Q_GETQUOTA (2const),
+but it returns quota information for the next ID greater than or equal to
+.I id
+that has a quota set.
+.IP
+The
+.I addr
+argument is a pointer to a
+.I nextdqblk
+structure whose fields are as for the
+.BR dqblk (2type),
+except for the addition of a
+.I dqb_id
+field that is used to return the ID for which
+quota information is being returned:
+.IP
+.in +4n
+.EX
+struct nextdqblk {
+    uint64_t dqb_bhardlimit;
+    uint64_t dqb_bsoftlimit;
+    uint64_t dqb_curspace;
+    uint64_t dqb_ihardlimit;
+    uint64_t dqb_isoftlimit;
+    uint64_t dqb_curinodes;
+    uint64_t dqb_btime;
+    uint64_t dqb_itime;
+    uint32_t dqb_valid;
+    uint32_t dqb_id;
+};
+.EE
+.in
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.TP
+.B ESRCH
+.I op
+is
+.B Q_GETNEXTQUOTA
+but there is no ID greater than or equal to
+.I id
+that has an active quota.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2),
+.BR Q_GETQUOTA (2const),
+.BR dqblk (2type)
