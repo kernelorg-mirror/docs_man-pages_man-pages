@@ -28,24 +28,19 @@ Standard C library
 .BI "             int\~" id ", struct\~dqblk\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.B Q_SETQUOTA
 Set quota information for user or group
 .IR id ,
 using the information supplied in the
 .BR dqblk (2type)
 structure pointed to by
 .IR addr .
+.P
 The
-.I dqb_valid
+.I .dqb_valid
 field of the
 .BR dqblk (2type)
 structure indicates which entries in the structure have been set by the caller.
-This operation supersedes the
-.B Q_SETQLIM
-and
-.B Q_SETUSE
-operations in the previous quota interfaces.
+.P
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
 .SH RETURN VALUE
@@ -56,14 +51,17 @@ See
 .BR quotactl (2).
 .TP
 .B ERANGE
-.I op
-is
-.BR Q_SETQUOTA ,
-but the specified limits are out of the range allowed by the quota format.
+The specified limits are out of the range allowed by the quota format.
 .SH STANDARDS
 Linux.
 .SH HISTORY
 Linux.
+.P
+This operation supersedes the
+.B Q_SETQLIM
+and
+.B Q_SETUSE
+operations in the previous quota interfaces.
 .SH SEE ALSO
 .BR quotactl (2),
 .BR quotactl_fd (2),
