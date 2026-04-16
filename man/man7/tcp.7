@@ -1091,6 +1091,8 @@ Allow a listener to be awakened only when data arrives on the socket.
 Takes an integer value (seconds), this can
 bound the maximum number of attempts TCP will make to
 complete the connection.
+The kernel will round this value up
+to the next larger TCP retransmit duration.
 .IP
 On a client socket,
 if nonzero,
