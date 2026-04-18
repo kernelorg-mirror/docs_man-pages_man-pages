@@ -19,31 +19,18 @@ Standard C library
 .fi
 .P
 .EX
-struct dqinfo {         /* Defined since Linux 2.4.22 */
-    uint64_t dqi_bgrace;  /* Time before block soft limit
-                             becomes hard limit */
-    uint64_t dqi_igrace;  /* Time before inode soft limit
-                             becomes hard limit */
-    uint32_t dqi_flags;   /* Flags for quotafile
-                             (DQF_*) */
-    uint32_t dqi_valid;
+struct dqinfo {
+	uint64_t  dqi_bgrace;
+	uint64_t  dqi_igrace;
+	uint32_t  dqi_flags;
+	uint32_t  dqi_valid;
 };
 \&
-/* Bits for dqi_flags */
-\&
 /* Quota format QFMT_VFS_OLD */
-\&
-#define DQF_ROOT_SQUASH (1 << 0) /* Root squash enabled */
-              /* Before Linux 4.0, this had been defined
-                 privately as V1_DQF_RSQUASH */
+#define DQF_ROOT_SQUASH (1 << 0)
 \&
 /* Quota format QFMT_VFS_V0 / QFMT_VFS_V1 */
-\&
-#define DQF_SYS_FILE    (1 << 16)   /* Quota stored in
-                                       a system file */
-\&
-/* Flags in dqi_valid that indicate which fields in
-   dqinfo structure are valid.  */
+#define DQF_SYS_FILE    (1 << 16)
 \&
 #define IIF_BGRACE  1
 #define IIF_IGRACE  2
@@ -51,16 +38,43 @@ struct dqinfo {         /* Defined since Linux 2.4.22 */
 #define IIF_ALL     (IIF_BGRACE | IIF_IGRACE | IIF_FLAGS)
 .EE
 .SH DESCRIPTION
-.IP
-The
-.I dqi_valid
-field in the
+.SS struct dqinfo
+.TP
+.I .dqi_bgrace
+Time before block soft limit becomes hard limit.
+.TP
+.I .dqi_igrace
+Time before inode soft limit becomes hard limit.
+.TP
+.I .dqi_flags
+Flags for quotafile
+.RB ( DQF_\f[I]*\f[] ).
+\&
+.TP
+.I .dqi_valid
+Bit mask of
+.BI IIF_ *
+constants.
+It is set to indicate which fields in the
 .I dqinfo
-structure indicates the entries in the structure that are valid.
+structure are valid.
+.SS
+.BI DQF_ *
+.TP
+.B DQF_ROOT_SQUASH
+Root squash enabled.
+.TP
+.B DQF_SYS_FILE
+Quota stored in a system file.
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.4.22.
+.P
+Before Linux 4.0,
+.B DQF_ROOT_SQUASH
+had been defined privately as
+.BR V1_DQF_RSQUASH .
 .SH SEE ALSO
 .BR Q_GETINFO (2const),
 .BR Q_SETINFO (2const)
