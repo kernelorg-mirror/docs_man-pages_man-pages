@@ -1,0 +1,66 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH dqinfo 2type (date) "Linux man-pages (unreleased)"
+.SH NAME
+dqinfo
+\-
+disk quota information
+.SH LIBRARY
+Standard C library
+.RI ( libc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.fi
+.P
+.EX
+struct dqinfo {         /* Defined since Linux 2.4.22 */
+    uint64_t dqi_bgrace;  /* Time before block soft limit
+                             becomes hard limit */
+    uint64_t dqi_igrace;  /* Time before inode soft limit
+                             becomes hard limit */
+    uint32_t dqi_flags;   /* Flags for quotafile
+                             (DQF_*) */
+    uint32_t dqi_valid;
+};
+\&
+/* Bits for dqi_flags */
+\&
+/* Quota format QFMT_VFS_OLD */
+\&
+#define DQF_ROOT_SQUASH (1 << 0) /* Root squash enabled */
+              /* Before Linux 4.0, this had been defined
+                 privately as V1_DQF_RSQUASH */
+\&
+/* Quota format QFMT_VFS_V0 / QFMT_VFS_V1 */
+\&
+#define DQF_SYS_FILE    (1 << 16)   /* Quota stored in
+                                       a system file */
+\&
+/* Flags in dqi_valid that indicate which fields in
+   dqinfo structure are valid.  */
+\&
+#define IIF_BGRACE  1
+#define IIF_IGRACE  2
+#define IIF_FLAGS   4
+#define IIF_ALL     (IIF_BGRACE | IIF_IGRACE | IIF_FLAGS)
+.EE
+.SH DESCRIPTION
+.IP
+The
+.I dqi_valid
+field in the
+.I dqinfo
+structure indicates the entries in the structure that are valid.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR Q_GETINFO (2const),
+.BR Q_SETINFO (2const)

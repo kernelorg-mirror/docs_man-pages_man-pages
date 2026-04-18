@@ -117,54 +117,11 @@ Get information (like grace times) about quotafile.
 The
 .I addr
 argument should be a pointer to a
-.I dqinfo
+.BR dqinfo (2type)
 structure.
-This structure is defined in
-.I <sys/quota.h>
-as follows:
 .IP
-.in +4n
-.EX
-struct dqinfo {         /* Defined since Linux 2.4.22 */
-    uint64_t dqi_bgrace;  /* Time before block soft limit
-                             becomes hard limit */
-    uint64_t dqi_igrace;  /* Time before inode soft limit
-                             becomes hard limit */
-    uint32_t dqi_flags;   /* Flags for quotafile
-                             (DQF_*) */
-    uint32_t dqi_valid;
-};
-\&
-/* Bits for dqi_flags */
-\&
-/* Quota format QFMT_VFS_OLD */
-\&
-#define DQF_ROOT_SQUASH (1 << 0) /* Root squash enabled */
-              /* Before Linux 4.0, this had been defined
-                 privately as V1_DQF_RSQUASH */
-\&
-/* Quota format QFMT_VFS_V0 / QFMT_VFS_V1 */
-\&
-#define DQF_SYS_FILE    (1 << 16)   /* Quota stored in
-                                       a system file */
-\&
-/* Flags in dqi_valid that indicate which fields in
-   dqinfo structure are valid.  */
-\&
-#define IIF_BGRACE  1
-#define IIF_IGRACE  2
-#define IIF_FLAGS   4
-#define IIF_ALL     (IIF_BGRACE | IIF_IGRACE | IIF_FLAGS)
-.EE
-.in
-.IP
-The
-.I dqi_valid
-field in the
-.I dqinfo
-structure indicates the entries in the structure that are valid.
 Currently, the kernel fills in all entries of the
-.I dqinfo
+.BR dqinfo (2type)
 structure and marks them all as valid in the
 .I dqi_valid
 field.
@@ -177,12 +134,12 @@ Set information about quotafile.
 The
 .I addr
 argument should be a pointer to a
-.I dqinfo
+.BR dqinfo (2type)
 structure.
 The
 .I dqi_valid
 field of the
-.I dqinfo
+.BR dqinfo (2type)
 structure indicates the entries in the structure
 that have been set by the caller.
 This operation supersedes the
