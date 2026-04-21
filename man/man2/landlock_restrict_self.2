@@ -133,6 +133,23 @@ It can also be used with a
 .I ruleset_fd
 value of \-1 to mute subdomain logs
 without creating a domain.
+.P
+The following flag supports policy enforcement in multithreaded processes:
+.TP
+.BR LANDLOCK_RESTRICT_SELF_TSYNC "  (since Landlock ABI version 8)"
+Applies the new Landlock configuration atomically
+to all threads of the current process,
+including the Landlock domain and logging configuration.
+This overrides the Landlock configuration of sibling threads,
+irrespective of
+previously established Landlock domains
+and logging configurations on those threads.
+.IP
+If the calling thread is running with
+.IR no_new_privs ,
+this operation enables
+.I no_new_privs
+on the sibling threads as well.
 .SH RETURN VALUE
 On success,
 .BR landlock_restrict_self ()
