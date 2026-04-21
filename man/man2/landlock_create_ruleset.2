@@ -116,11 +116,7 @@ Otherwise,
 can be set to:
 .TP
 .B LANDLOCK_CREATE_RULESET_VERSION
-If
-.I attr
-is NULL and
-.I size
-is 0, then the returned value is the highest supported Landlock ABI version
+Return the highest supported Landlock ABI version
 (starting at 1).
 This version can be used for a best-effort security approach,
 which is encouraged when user space is not pinned to a specific kernel
@@ -129,6 +125,15 @@ version.
 Unless noted otherwise,
 all features documented in these manual pages are available with the
 version 1.
+.P
+If
+.B LANDLOCK_CREATE_RULESET_VERSION
+is set,
+then
+.I attr
+must be NULL and
+.I size
+must be 0.
 .SH RETURN VALUE
 On success,
 .BR landlock_create_ruleset ()
@@ -158,6 +163,14 @@ Unknown
 .IR flags ,
 or unknown access, or unknown scope, or too small
 .IR size .
+.TP
+.B EINVAL
+Non-NULL
+.I attr
+or non-zero
+.I size
+in combination with
+.BR LANDLOCK_CREATE_RULESET_VERSION .
 .TP
 .B ENOMSG
 Empty accesses (i.e.,
