@@ -125,9 +125,38 @@ version.
 Unless noted otherwise,
 all features documented in these manual pages are available with the
 version 1.
+.TP
+.B LANDLOCK_CREATE_RULESET_ERRATA
+Return a bitmask of fixed issues
+for the current Landlock ABI version.
+If bit N is set (i.e.,
+.IR errata\~&\~(1\~<<\~(N\~\-\~1)) ),
+then erratum N has been fixed in the running kernel.
+.IP
+In addition to ABI versions,
+Landlock's errata mechanism
+tracks fixes for issues that
+may affect backwards compatibility
+or require userspace awareness.
+.IP
+Only check errata if your application specifically relies on behavior
+that changed due to the fix.
+.IP
+The full list of Landlock errata is available at
+.UR https:\://docs.kernel.org/\:userspace\-api/\:landlock.html#landlock\-errata
+.UE .
+.IP
+This flag is available on all Linux versions
+where Landlock errata were fixed.
+This specifically includes
+all newest bugfix releases
+of stable kernels
+where Landlock is supported.
 .P
 If
 .B LANDLOCK_CREATE_RULESET_VERSION
+or
+.B LANDLOCK_CREATE_RULESET_ERRATA
 is set,
 then
 .I attr
@@ -138,7 +167,8 @@ must be 0.
 On success,
 .BR landlock_create_ruleset ()
 returns a new Landlock ruleset file descriptor,
-or a Landlock ABI version,
+a Landlock ABI version,
+or a Landlock errata bitmask,
 according to
 .IR flags .
 .P
@@ -170,7 +200,9 @@ Non-NULL
 or non-zero
 .I size
 in combination with
-.BR LANDLOCK_CREATE_RULESET_VERSION .
+.B LANDLOCK_CREATE_RULESET_VERSION
+or
+.BR LANDLOCK_CREATE_RULESET_ERRATA .
 .TP
 .B ENOMSG
 Empty accesses (i.e.,
