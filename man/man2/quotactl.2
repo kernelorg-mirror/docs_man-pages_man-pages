@@ -113,30 +113,8 @@ value is one of the following operations:
 .BR Q_SETQUOTA (2const)
 .TQ
 .BR Q_GETINFO (2const)
-.TP
-.BR Q_SETINFO " (since Linux 2.4.22)"
-Set information about quotafile.
-The
-.I addr
-argument should be a pointer to a
-.BR dqinfo (2type)
-structure.
-The
-.I dqi_valid
-field of the
-.BR dqinfo (2type)
-structure indicates the entries in the structure
-that have been set by the caller.
-This operation supersedes the
-.B Q_SETGRACE
-and
-.B Q_SETFLAGS
-operations in the previous quota interfaces.
-The
-.I id
-argument is ignored.
-This operation requires privilege
-.RB ( CAP_SYS_ADMIN ).
+.TQ
+.BR Q_SETINFO (2const)
 .TP
 .BR Q_GETFMT " (since Linux 2.4.22)"
 Get quota format used on the specified filesystem.
