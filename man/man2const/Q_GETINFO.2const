@@ -28,23 +28,20 @@ Standard C library
 .BI "            struct\~dqinfo\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.BR Q_GETINFO " (since Linux 2.4.22)"
 Get information (like grace times) about quotafile.
+.P
 The
 .I addr
 argument should be a pointer to a
 .BR dqinfo (2type)
 structure.
-.IP
-Currently, the kernel fills in all entries of the
+.P
+Currently,
+the kernel fills in all entries of the
 .BR dqinfo (2type)
 structure and marks them all as valid in the
-.I dqi_valid
+.I .dqi_valid
 field.
-The
-.I id
-argument is ignored.
 .SH RETURN VALUE
 See
 .BR quotactl (2).
@@ -54,7 +51,7 @@ See
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.4.22.
 .SH SEE ALSO
 .BR quotactl (2),
 .BR quotactl_fd (2),
