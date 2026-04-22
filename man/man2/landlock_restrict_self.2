@@ -89,7 +89,7 @@ and
 .B LANDLOCK_RESTRICT_SELF_LOG_NEW_EXEC_ON
 flags apply to the newly created Landlock domain.
 .TP
-.B LANDLOCK_RESTRICT_SELF_LOG_SAME_EXEC_OFF
+.BR LANDLOCK_RESTRICT_SELF_LOG_SAME_EXEC_OFF "  (since Landlock ABI version 7)"
 Disables logging of denied accesses
 originating from the thread creating the Landlock domain,
 as well as its children,
@@ -105,7 +105,7 @@ Programs that only sandbox themselves should not set this flag,
 so users can be notified of unauthorized access attempts
 via system logs.
 .TP
-.B LANDLOCK_RESTRICT_SELF_LOG_NEW_EXEC_ON
+.BR LANDLOCK_RESTRICT_SELF_LOG_NEW_EXEC_ON "  (since Landlock ABI version 7)"
 Enables logging of denied accesses after an
 .BR execve (2)
 call,
@@ -116,7 +116,7 @@ in the domain are expected to comply with the access restrictions,
 as excessive audit log entries could make it more difficult
 to identify critical events.
 .TP
-.B LANDLOCK_RESTRICT_SELF_LOG_SUBDOMAINS_OFF
+.BR LANDLOCK_RESTRICT_SELF_LOG_SUBDOMAINS_OFF "  (since Landlock ABI version 7)"
 Disables logging of denied accesses
 originating from nested Landlock domains created by the caller
 or its descendants.
