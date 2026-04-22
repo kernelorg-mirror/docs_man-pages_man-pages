@@ -28,28 +28,20 @@ Standard C library
 .BI "            struct\~dqinfo\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.BR Q_SETINFO " (since Linux 2.4.22)"
 Set information about quotafile.
+.P
 The
 .I addr
 argument should be a pointer to a
 .BR dqinfo (2type)
 structure.
 The
-.I dqi_valid
+.I .dqi_valid
 field of the
 .BR dqinfo (2type)
 structure indicates the entries in the structure
 that have been set by the caller.
-This operation supersedes the
-.B Q_SETGRACE
-and
-.B Q_SETFLAGS
-operations in the previous quota interfaces.
-The
-.I id
-argument is ignored.
+.P
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
 .SH RETURN VALUE
@@ -61,7 +53,13 @@ See
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.4.22.
+.P
+This operation supersedes the
+.B Q_SETGRACE
+and
+.B Q_SETFLAGS
+operations in the previous quota interfaces.
 .SH SEE ALSO
 .BR quotactl (2),
 .BR quotactl_fd (2),
