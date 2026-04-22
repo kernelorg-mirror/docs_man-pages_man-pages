@@ -111,23 +111,8 @@ value is one of the following operations:
 .BR Q_GETNEXTQUOTA (2const)
 .TQ
 .BR Q_SETQUOTA (2const)
-.TP
-.BR Q_GETINFO " (since Linux 2.4.22)"
-Get information (like grace times) about quotafile.
-The
-.I addr
-argument should be a pointer to a
-.BR dqinfo (2type)
-structure.
-.IP
-Currently, the kernel fills in all entries of the
-.BR dqinfo (2type)
-structure and marks them all as valid in the
-.I dqi_valid
-field.
-The
-.I id
-argument is ignored.
+.TQ
+.BR Q_GETINFO (2const)
 .TP
 .BR Q_SETINFO " (since Linux 2.4.22)"
 Set information about quotafile.
