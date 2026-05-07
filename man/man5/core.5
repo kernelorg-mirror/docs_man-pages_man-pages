@@ -515,9 +515,11 @@ program:
 In this case, core dumps will be placed in the location configured for
 .BR systemd\-coredump (8),
 typically as
-.BR lz4 (1)
+.BR zstd (1)
 compressed files in the directory
 .IR /var/lib/systemd/coredump/ .
+Compression on or off is configurable via
+.BR coredump.conf (5).
 One can list the core dumps that have been recorded by
 .BR systemd\-coredump (8)
 using
