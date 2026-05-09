@@ -41,18 +41,18 @@ Description
              it, go to
              <https://subspace.kernel.org/vger.kernel.org.html>.
 
-   Sign your emails with PGP
+   Sign your emails with OpenPGP
         We encourage that you sign all of your emails sent to the
         mailing list, (especially) including the ones containing
-        patches, with your PGP key.  This helps establish trust between
+        patches, with your OpenPGP key.  This helps establish trust between
         you and other contributors of this project, and prevent others
         impersonating you.  If you don't have a key, it's not mandatory
         to sign your email, but you're encouraged to create and start
-        using a PGP key.  See also:
+        using a OpenPGP key.  See also:
         <https://www.gnupg.org/faq/gnupg-faq.html#use_pgpmime>
 
         If you use mutt(1), we recommend the following configuration for
-        PGP:
+        OpenPGP:
 
             set crypt_autosign = yes
             set crypt_protected_headers_write = yes

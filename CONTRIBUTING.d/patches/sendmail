@@ -32,7 +32,7 @@ Description
 		  ├─> [PATCH v3 02] ...
 		  └─> [PATCH v3 03] ...
 
-    Sign the email containing patches with PGP
+    Sign the email containing patches with OpenPGP
 	See <CONTRIBUTING.d/mail> for more details on signing your mail
 	to the list.  See also <CONTRIBUTING.d/git> for instructions for
 	configuring git-send-email(1) to use neomutt(1) as a driver.
