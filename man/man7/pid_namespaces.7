@@ -211,8 +211,12 @@ which would break many applications and libraries.
 To put things another way:
 a process's PID namespace membership is determined when the process is created
 and cannot be changed thereafter.
-Among other things,
-this means that
+.P
+Because of this,
+and because system calls to create a process
+in another namespace
+need to return a meaningful new PID
+in the namespace of their caller,
 the parental relationship between processes
 loosely mirrors
 the parental relationship between PID namespaces:
@@ -220,6 +224,15 @@ the parent of a process
 is either in the same namespace
 or resides in an ancestor PID namespace
 (immediate parent or not).
+This is enforced by the design of
+.BR clone (2)
+and
+.BR unshare (2),
+while
+.BR setns (2)
+is restricted to only accept
+the current PID namespace
+and its descendants.
 .P
 A process may call
 .BR unshare (2)
