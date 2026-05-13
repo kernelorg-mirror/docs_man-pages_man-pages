@@ -211,7 +211,8 @@ provided a user-space fallback implementation when the kernel did not
 implement this system call.
 .\" glibc.git 5a659ccc0ec2 (2019-06-28; "io: Remove copy_file_range emulation [BZ #24744]")
 Since glibc 2.30, that fallback has been removed; the function now
-fails with ENOSYS if the kernel lacks support for .BR copy_file_range ().
+fails with ENOSYS if the kernel lacks support for
+.BR copy_file_range ().
 .SH NOTES
 If
 .I fd_in
