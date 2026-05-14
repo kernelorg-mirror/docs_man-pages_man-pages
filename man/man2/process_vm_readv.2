@@ -192,10 +192,14 @@ returns the number of bytes read and
 returns the number of bytes written.
 This return value may be less than the total number of requested bytes,
 if a partial read/write occurred.
-(Partial transfers apply at the granularity of
+(Partial transfers apply at the granularity of pages in the remote process.
+If a remote
 .I iovec
-elements.
-These system calls won't perform a partial transfer that splits a single
+element spans multiple pages,
+and one of those pages
+is invalid or not resident,
+data may be transferred from/to the pages preceding the failing page,
+resulting in a partial transfer that splits a single
 .I iovec
 element.)
 The caller should check the return value to determine whether
