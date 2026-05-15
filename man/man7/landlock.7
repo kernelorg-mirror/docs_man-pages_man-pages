@@ -89,7 +89,7 @@ these system calls truncate existing files when overwriting them
 .B LANDLOCK_ACCESS_FS_READ_FILE
 Open a file with read access.
 .TP
-.B LANDLOCK_ACCESS_FS_TRUNCATE
+.BR LANDLOCK_ACCESS_FS_TRUNCATE "  (since Landlock ABI version 3)"
 Truncate a file with
 .BR truncate (2),
 .BR ftruncate (2),
@@ -98,10 +98,8 @@ or
 .BR open (2)
 with
 .BR O_TRUNC .
-.IP
-This access right is available since the third version of the Landlock ABI.
 .TP
-.B LANDLOCK_ACCESS_FS_IOCTL_DEV
+.BR LANDLOCK_ACCESS_FS_IOCTL_DEV "  (since Landlock ABI version 5)"
 Invoke
 .BR ioctl (2)
 commands on an opened character or block device.
@@ -137,8 +135,6 @@ whose implementations are safe and return the right error codes
 .BR FICLONERANGE ,
 .BR FIDEDUPERANGE )
 .RE
-.IP
-This access right is available since the fifth version of the Landlock ABI.
 .P
 Whether an opened file can be truncated with
 .BR ftruncate (2)
@@ -191,11 +187,9 @@ Create (or rename or link) a block device.
 .B LANDLOCK_ACCESS_FS_MAKE_SYM
 Create (or rename or link) a symbolic link.
 .TP
-.B LANDLOCK_ACCESS_FS_REFER
+.BR LANDLOCK_ACCESS_FS_REFER "  (since Landlock ABI version 2)"
 Link or rename a file from or to a different directory
 (i.e., reparent a file hierarchy).
-.IP
-This access right is available since the second version of the Landlock ABI.
 .IP
 This is the only access right which is denied by default by any ruleset,
 even if the right is not specified as handled at ruleset creation time.
@@ -203,7 +197,7 @@ The only way to make a ruleset grant this right
 is to explicitly allow it for a specific directory
 by adding a matching rule to the ruleset.
 .IP
-In particular, when using the first Landlock ABI version,
+In particular, when using Landlock ABI version 1,
 Landlock will always deny attempts to reparent files
 between different directories.
 .IP
@@ -245,14 +239,12 @@ error code takes precedence over
 These flags enable to restrict a sandboxed process
 to a set of network actions.
 .P
-This is supported since Landlock ABI version 4.
-.P
 The following access rights apply to TCP port numbers:
 .TP
-.B LANDLOCK_ACCESS_NET_BIND_TCP
+.BR LANDLOCK_ACCESS_NET_BIND_TCP "  (since Landlock ABI version 4)"
 Bind a TCP socket to a local port.
 .TP
-.B LANDLOCK_ACCESS_NET_CONNECT_TCP
+.BR LANDLOCK_ACCESS_NET_CONNECT_TCP "  (since Landlock ABI version 4)"
 Connect an active TCP socket to a remote port.
 .\"
 .SS Scope flags
@@ -260,16 +252,14 @@ These flags enable isolating a sandboxed process from a set of IPC actions.
 Setting a flag for a ruleset will isolate the Landlock domain
 to forbid connections to resources outside the domain.
 .P
-This is supported since Landlock ABI version 6.
-.P
 The following scopes exist:
 .TP
-.B LANDLOCK_SCOPE_ABSTRACT_UNIX_SOCKET
+.BR LANDLOCK_SCOPE_ABSTRACT_UNIX_SOCKET "  (since Landlock ABI version 6)"
 Restrict a sandboxed process from connecting to an abstract UNIX socket
 created by a process outside the related Landlock domain
 (e.g., a parent domain or a non-sandboxed process).
 .TP
-.B LANDLOCK_SCOPE_SIGNAL
+.BR LANDLOCK_SCOPE_SIGNAL "  (since Landlock ABI version 6)"
 Restrict a sandboxed process from sending a signal
 to another process outside the domain.
 .\"
