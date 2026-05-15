@@ -54,6 +54,7 @@ CLANG_CFLAGS := \
 	-Wno-c23-extensions \
 	-Wno-implicit-void-ptr-cast \
 	-Wno-language-extension-token \
+	-Wno-pedantic \
 	-Wno-pre-c11-compat \
 	-Wno-unknown-attributes \
 	-Wno-unreachable-code \
