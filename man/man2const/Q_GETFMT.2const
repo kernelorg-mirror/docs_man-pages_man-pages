@@ -28,9 +28,8 @@ Standard C library
 .BI "            int32_t\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.BR Q_GETFMT " (since Linux 2.4.22)"
 Get quota format used on the specified filesystem.
+.P
 The
 .I addr
 argument should be a pointer to a 4-byte buffer
@@ -44,7 +43,8 @@ See
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.4.22.
 .SH SEE ALSO
 .BR quotactl (2),
-.BR quotactl_fd (2)
+.BR quotactl_fd (2),
+.BR Q_QUOTAON (2const)
