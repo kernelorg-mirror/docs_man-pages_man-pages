@@ -12,27 +12,16 @@ Standard C library
 .RI ( libc ,\~ \-lc )
 .SH SYNOPSIS
 .nf
+.BR #define\~_GNU_SOURCE "  // See feature_test_macros(7)"
 .B #include <string.h>
 .P
-.BR "void *memrchr(" "size_t n;"
-.BI "             const void " s [ n "], int " c ", size_t " n );
-.fi
-.P
-.RS -4
-Feature Test Macro Requirements for glibc (see
-.BR feature_test_macros (7)):
-.RE
-.P
-.BR memrchr ():
-.nf
-    _GNU_SOURCE
+.BR void\~*memrchr( size_t\~n;
+.BI "              const void " s [ n "], int " c ", size_t " n );
 .fi
 .SH DESCRIPTION
-The
 .BR memrchr ()
-function is like the
-.BR memchr (3)
-function,
+is like
+.BR memchr (3),
 except that it searches backward from the end of the
 .I n
 bytes pointed to by

@@ -18,15 +18,15 @@ Standard C library
 .BI "             const void " s [ n "], int " c ", size_t " n );
 .fi
 .SH DESCRIPTION
-The
 .BR memchr ()
-function scans the initial
+scans the initial
 .I n
 bytes of the memory
 area pointed to by
 .I s
 for the first instance of
 .IR c .
+.P
 Both
 .I c
 and the bytes of the memory area pointed to by
@@ -34,11 +34,9 @@ and the bytes of the memory area pointed to by
 are interpreted as
 .IR "unsigned char" .
 .SH RETURN VALUE
-The
 .BR memchr ()
-function returns a pointer
-to the matching byte or NULL if the character does not occur in
-the given memory area.
+returns a pointer to the matching byte
+or NULL if the character does not occur in the given memory area.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
@@ -64,7 +62,6 @@ POSIX.1-2001, C89, SVr4, 4.3BSD.
 .BR memrchr (3),
 .BR strchr (3),
 .BR strpbrk (3),
-.BR strrchr (3),
 .BR strsep (3),
 .BR strspn (3),
 .BR strstr (3),
