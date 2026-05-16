@@ -29,18 +29,17 @@ Standard C library
 .BI "            unsigned\~int\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.B Q_XQUOTAON
 Turn on quotas for an XFS filesystem.
+.P
 XFS provides the ability to turn on/off quota limit enforcement
 with quota accounting.
 Therefore, XFS expects
 .I addr
 to be a pointer to an
-.I "unsigned int"
+.I \%unsigned\~int
 that contains a bitwise combination of the following flags (defined in
 .IR <xfs/xqm.h> ):
-.IP
+.P
 .in +4n
 .EX
 XFS_QUOTA_UDQ_ACCT  /* User quota accounting */
@@ -51,12 +50,9 @@ XFS_QUOTA_PDQ_ACCT  /* Project quota accounting */
 XFS_QUOTA_PDQ_ENFD  /* Project quota limits enforcement */
 .EE
 .in
-.IP
+.P
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
-The
-.I id
-argument is ignored.
 .SH RETURN VALUE
 See
 .BR quotactl (2).
