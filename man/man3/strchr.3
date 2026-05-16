@@ -6,7 +6,7 @@
 .\"
 .TH strchr 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-strchr, strrchr \- locate character in string
+strchr \- locate character in string
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -15,7 +15,6 @@ Standard C library
 .B #include <string.h>
 .P
 .BI "char *strchr(const char *" s ", int " c );
-.BI "char *strrchr(const char *" s ", int " c );
 .fi
 .SH DESCRIPTION
 .TP
@@ -36,29 +35,10 @@ memchr(s, c, strlen(s) + 1)
 strpbrk(s, (char [2]){c, \[aq]\[rs]0\[aq]})
 .EE
 .in
-.TP
-.BR strrchr ()
-The
-.BR strrchr ()
-function returns a pointer to the last occurrence
-of the character
-.I c
-in the string
-.IR s .
-.IP
-It is equivalent to
-.IP
-.in +4n
-.EX
-memrchr(s, c, strlen(s) + 1)
-.EE
-.in
 .SH RETURN VALUE
 The
 .BR strchr ()
-and
-.BR strrchr ()
-functions return a pointer to
+function returns a pointer to
 the matched character or NULL if the character is not found.
 The terminating null byte is considered part of the string,
 so that if
@@ -76,8 +56,7 @@ Interface	Attribute	Value
 T{
 .na
 .nh
-.BR strchr (),
-.BR strrchr ()
+.BR strchr ()
 T}	Thread safety	MT-Safe
 .TE
 .SH STANDARDS
@@ -91,6 +70,7 @@ POSIX.1-2001, C89, SVr4, 4.3BSD.
 .BR strlen (3),
 .BR strnul (3),
 .BR strpbrk (3),
+.BR strrchr (3),
 .BR strsep (3),
 .BR strspn (3),
 .BR strstr (3),
