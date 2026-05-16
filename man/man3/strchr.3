@@ -17,18 +17,15 @@ Standard C library
 .BI "char *strchr(const char *" s ", int " c );
 .fi
 .SH DESCRIPTION
-.TP
 .BR strchr ()
-The
-.BR strchr ()
-function returns a pointer to the first occurrence
+returns a pointer to the first occurrence
 of the character
 .I c
 in the string
 .IR s .
-.IP
+.P
 It is equivalent to both of the following expressions:
-.IP
+.P
 .in +4n
 .EX
 memchr(s, c, strlen(s) + 1)
@@ -36,15 +33,16 @@ strpbrk(s, (char [2]){c, \[aq]\[rs]0\[aq]})
 .EE
 .in
 .SH RETURN VALUE
-The
 .BR strchr ()
-function returns a pointer to
+returns a pointer to
 the matched character or NULL if the character is not found.
+.P
 The terminating null byte is considered part of the string,
 so that if
 .I c
 is specified as \[aq]\[rs]0\[aq],
-these functions return a pointer to the terminator.
+.BR strchr ()
+returns a pointer to the terminator.
 .SH ATTRIBUTES
 For an explanation of the terms used in this section, see
 .BR attributes (7).
