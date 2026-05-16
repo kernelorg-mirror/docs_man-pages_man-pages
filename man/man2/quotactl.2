@@ -125,43 +125,17 @@ value is one of the following operations:
 For XFS filesystems making use of the XFS Quota Manager (XQM),
 the above operations are bypassed and the following operations are used:
 .TP
-.B Q_XQUOTAON
-Turn on quotas for an XFS filesystem.
-XFS provides the ability to turn on/off quota limit enforcement
-with quota accounting.
-Therefore, XFS expects
-.I addr
-to be a pointer to an
-.I "unsigned int"
-that contains a bitwise combination of the following flags (defined in
-.IR <xfs/xqm.h> ):
-.IP
-.in +4n
-.EX
-XFS_QUOTA_UDQ_ACCT  /* User quota accounting */
-XFS_QUOTA_UDQ_ENFD  /* User quota limits enforcement */
-XFS_QUOTA_GDQ_ACCT  /* Group quota accounting */
-XFS_QUOTA_GDQ_ENFD  /* Group quota limits enforcement */
-XFS_QUOTA_PDQ_ACCT  /* Project quota accounting */
-XFS_QUOTA_PDQ_ENFD  /* Project quota limits enforcement */
-.EE
-.in
-.IP
-This operation requires privilege
-.RB ( CAP_SYS_ADMIN ).
-The
-.I id
-argument is ignored.
+.BR Q_XQUOTAON (2const)
 .TP
 .B Q_XQUOTAOFF
 Turn off quotas for an XFS filesystem.
 As with
-.BR Q_XQUOTAON ,
+.BR Q_XQUOTAON (2const),
 XFS filesystems expect a pointer to an
 .I "unsigned int"
 that specifies whether quota accounting and/or limit enforcement need
 to be turned off (using the same flags as for
-.B Q_XQUOTAON
+.BR Q_XQUOTAON (2const)
 operation).
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
