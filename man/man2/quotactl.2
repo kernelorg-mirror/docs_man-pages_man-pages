@@ -115,13 +115,8 @@ value is one of the following operations:
 .BR Q_GETINFO (2const)
 .TQ
 .BR Q_SETINFO (2const)
-.TP
-.BR Q_GETFMT " (since Linux 2.4.22)"
-Get quota format used on the specified filesystem.
-The
-.I addr
-argument should be a pointer to a 4-byte buffer
-where the format number will be stored.
+.TQ
+.BR Q_GETFMT (2const)
 .TP
 .B Q_SYNC
 Update the on-disk copy of quota usages for a filesystem.
