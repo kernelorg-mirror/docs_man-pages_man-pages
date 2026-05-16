@@ -6,7 +6,7 @@
 .\"
 .TH strstr 3 (date) "Linux man-pages (unreleased)"
 .SH NAME
-strstr \- locate a substring
+strstr \- string search substring
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -17,12 +17,12 @@ Standard C library
 .BI "char *strstr(const char *" haystack ", const char *" needle );
 .fi
 .SH DESCRIPTION
-The
 .BR strstr ()
-function finds the first occurrence of the substring
+finds the first occurrence of the substring
 .I needle
 in the string
 .IR haystack .
+.P
 The terminating null bytes (\[aq]\[rs]0\[aq]) are not compared.
 .P
 It is equivalent to

@@ -12,15 +12,14 @@ Standard C library
 .RI ( libc ,\~ \-lc )
 .SH SYNOPSIS
 .nf
-.BR "#define _GNU_SOURCE" "         /* See feature_test_macros(7) */"
+.BR #define\~_GNU_SOURCE "  // See feature_test_macros(7)"
 .B #include <string.h>
 .P
 .BI "char *strcasestr(const char *" haystack ", const char *" needle );
 .fi
 .SH DESCRIPTION
-The
 .BR strcasestr ()
-function is like
+is like
 .BR strstr (),
 but ignores the case of both arguments.
 .SH RETURN VALUE
