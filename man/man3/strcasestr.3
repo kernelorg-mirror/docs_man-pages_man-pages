@@ -1,1 +1,49 @@
-.so man3/strstr.3
+'\" t
+.\" Copyright 1993, David Metcalfe <david@prism.demon.co.uk>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH strcasestr 3 (date) "Linux man-pages (unreleased)"
+.SH NAME
+strcasestr \- string case-insensitive search substring
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#define _GNU_SOURCE" "         /* See feature_test_macros(7) */"
+.B #include <string.h>
+.P
+.BI "char *strcasestr(const char *" haystack ", const char *" needle );
+.fi
+.SH DESCRIPTION
+The
+.BR strcasestr ()
+function is like
+.BR strstr (),
+but ignores the case of both arguments.
+.SH RETURN VALUE
+See
+.BR strstr (3).
+.SH ATTRIBUTES
+For an explanation of the terms used in this section, see
+.BR attributes (7).
+.TS
+allbox;
+lbx lb lb
+l l l.
+Interface	Attribute	Value
+T{
+.na
+.nh
+.BR strcasestr ()
+T}	Thread safety	MT-Safe locale
+.TE
+.SH STANDARDS
+GNU.
+.SH HISTORY
+GNU.
+.SH SEE ALSO
+.BR string (3),
+.BR strstr (3)
