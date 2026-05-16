@@ -30,9 +30,8 @@ Standard C library
 .BI "            struct\~dqstats\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.BR Q_GETSTATS " (supported up to Linux 2.4.21)"
 Get statistics and other generic information about the quota subsystem.
+.P
 The
 .I addr
 argument should be a pointer to a
@@ -40,11 +39,6 @@ argument should be a pointer to a
 structure in which data should be stored.
 This structure is defined in
 .IR <sys/quota.h> .
-The
-.I special
-and
-.I id
-arguments are ignored.
 .SH RETURN VALUE
 See
 .BR quotactl (2).
@@ -55,6 +49,7 @@ See
 None.
 .SH HISTORY
 This operation is obsolete and was removed in Linux 2.4.22.
+.P
 Files in
 .I /proc/sys/fs/quota/
 carry the information instead.
