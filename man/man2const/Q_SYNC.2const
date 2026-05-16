@@ -26,21 +26,15 @@ Standard C library
 .BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_SYNC, " type "));"
 .fi
 .SH DESCRIPTION
-.TP
-.B Q_SYNC
 Update the on-disk copy of quota usages for a filesystem.
+.P
 For
-.BR quotactl (),
+.BR quotactl (2),
 if
 .I special
-is NULL, then all filesystems with active quotas are sync'ed.
-.RB ( quotactl_fd ()
-always sync's only one filesystem.)
-In both cases, the
-.I addr
-and
-.I id
-arguments are ignored.
+is NULL, then all filesystems with active quotas are synchronized.
+.BR quotactl_fd (2)
+always synchronizes only one filesystem.
 .SH RETURN VALUE
 See
 .BR quotactl (2).
