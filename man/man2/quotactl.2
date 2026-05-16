@@ -119,26 +119,8 @@ value is one of the following operations:
 .BR Q_GETFMT (2const)
 .TQ
 .BR Q_SYNC (2const)
-.TP
-.BR Q_GETSTATS " (supported up to Linux 2.4.21)"
-Get statistics and other generic information about the quota subsystem.
-The
-.I addr
-argument should be a pointer to a
-.I dqstats
-structure in which data should be stored.
-This structure is defined in
-.IR <sys/quota.h> .
-The
-.I special
-and
-.I id
-arguments are ignored.
-.IP
-This operation is obsolete and was removed in Linux 2.4.22.
-Files in
-.I /proc/sys/fs/quota/
-carry the information instead.
+.TQ
+.BR Q_GETSTATS (2const)
 .P
 For XFS filesystems making use of the XFS Quota Manager (XQM),
 the above operations are bypassed and the following operations are used:
