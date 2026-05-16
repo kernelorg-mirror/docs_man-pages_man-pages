@@ -197,7 +197,7 @@ and
 No memory is available.
 .TP
 .B EINTR
-Fetal signal is pending.
+Fatal signal is pending.
 .SH STANDARDS
 Linux.
 .SH HISTORY
