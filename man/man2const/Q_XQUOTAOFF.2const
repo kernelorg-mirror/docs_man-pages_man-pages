@@ -29,22 +29,19 @@ Standard C library
 .BI "            unsigned\~int\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.B Q_XQUOTAOFF
 Turn off quotas for an XFS filesystem.
+.P
 As with
 .BR Q_XQUOTAON (2const),
 XFS filesystems expect a pointer to an
-.I "unsigned int"
-that specifies whether quota accounting and/or limit enforcement need
-to be turned off (using the same flags as for
-.BR Q_XQUOTAON (2const)
-operation).
+.I \%unsigned\~int
+that specifies whether quota accounting and/or limit enforcement
+need to be turned off
+(using the same flags as for
+.BR Q_XQUOTAON (2const)).
+.P
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
-The
-.I id
-argument is ignored.
 .SH RETURN VALUE
 See
 .BR quotactl (2).
