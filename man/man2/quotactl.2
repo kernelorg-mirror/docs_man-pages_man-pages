@@ -126,22 +126,8 @@ For XFS filesystems making use of the XFS Quota Manager (XQM),
 the above operations are bypassed and the following operations are used:
 .TP
 .BR Q_XQUOTAON (2const)
-.TP
-.B Q_XQUOTAOFF
-Turn off quotas for an XFS filesystem.
-As with
-.BR Q_XQUOTAON (2const),
-XFS filesystems expect a pointer to an
-.I "unsigned int"
-that specifies whether quota accounting and/or limit enforcement need
-to be turned off (using the same flags as for
-.BR Q_XQUOTAON (2const)
-operation).
-This operation requires privilege
-.RB ( CAP_SYS_ADMIN ).
-The
-.I id
-argument is ignored.
+.TQ
+.BR Q_XQUOTAOFF (2const)
 .TP
 .B Q_XGETQUOTA
 Get disk quota limits and current usage for user
