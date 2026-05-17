@@ -19,53 +19,110 @@ Standard C library
 .fi
 .P
 .EX
-/* All the blk units are in BBs (Basic Blocks) of
-   512 bytes.  */
-\&
-#define FS_DQUOT_VERSION  1  /* fs_disk_quota.d_version */
-\&
-#define XFS_USER_QUOTA    (1<<0)  /* User quota type */
-#define XFS_PROJ_QUOTA    (1<<1)  /* Project quota type */
-#define XFS_GROUP_QUOTA   (1<<2)  /* Group quota type */
-\&
+#define FS_DQUOT_VERSION  1  // fs_disk_quota.d_version
+.P
+#define XFS_USER_QUOTA    (1<<0)  // User quota type
+#define XFS_PROJ_QUOTA    (1<<1)  // Project quota type
+#define XFS_GROUP_QUOTA   (1<<2)  // Group quota type
+.P
 struct fs_disk_quota {
-    int8_t   d_version;   /* Version of this structure */
-    int8_t   d_flags;     /* XFS_{USER,PROJ,GROUP}_QUOTA */
-    uint16_t d_fieldmask; /* Field specifier */
-    uint32_t d_id;        /* User, project, or group ID */
-    uint64_t d_blk_hardlimit; /* Absolute limit on
-                                 disk blocks */
-    uint64_t d_blk_softlimit; /* Preferred limit on
-                                 disk blocks */
-    uint64_t d_ino_hardlimit; /* Maximum # allocated
-                                 inodes */
-    uint64_t d_ino_softlimit; /* Preferred inode limit */
-    uint64_t d_bcount;    /* # disk blocks owned by
-                             the user */
-    uint64_t d_icount;    /* # inodes owned by the user */
-    int32_t  d_itimer;    /* Zero if within inode limits */
-                          /* If not, we refuse service */
-    int32_t  d_btimer;    /* Similar to above; for
-                             disk blocks */
-    uint16_t d_iwarns;    /* # warnings issued with
-                             respect to # of inodes */
-    uint16_t d_bwarns;    /* # warnings issued with
-                             respect to disk blocks */
-    int32_t  d_padding2;  /* Padding \- for future use */
-    uint64_t d_rtb_hardlimit; /* Absolute limit on realtime
-                                 (RT) disk blocks */
-    uint64_t d_rtb_softlimit; /* Preferred limit on RT
-                                 disk blocks */
-    uint64_t d_rtbcount;  /* # realtime blocks owned */
-    int32_t  d_rtbtimer;  /* Similar to above; for RT
-                             disk blocks */
-    uint16_t d_rtbwarns;  /* # warnings issued with
-                             respect to RT disk blocks */
-    int16_t  d_padding3;  /* Padding \- for future use */
-    char     d_padding4[8];   /* Yet more padding */
+	int8_t    d_version;
+	int8_t    d_flags;
+	uint16_t  d_fieldmask;
+	uint32_t  d_id;
+	uint64_t  d_blk_hardlimit;
+	uint64_t  d_blk_softlimit;
+	uint64_t  d_ino_hardlimit;
+	uint64_t  d_ino_softlimit;
+	uint64_t  d_bcount;
+	uint64_t  d_icount;
+	int32_t   d_itimer;
+	int32_t   d_btimer;
+	uint16_t  d_iwarns;
+	uint16_t  d_bwarns;
+	int32_t   d_padding2;
+	uint64_t  d_rtb_hardlimit;
+	uint64_t  d_rtb_softlimit;
+	uint64_t  d_rtbcount;
+	int32_t   d_rtbtimer;
+	uint16_t  d_rtbwarns;
+	int16_t   d_padding3;
+	char      d_padding4[8];
 };
 .EE
 .SH DESCRIPTION
+All the blk units are in BBs (Basic Blocks) of 512 bytes.
+.TP
+.I .d_version
+Version of this structure.
+.TP
+.I .d_flags
+.BR XFS_ { USER , PROJ , GROUP } _QUOTA
+.TP
+.I .d_fieldmask
+Field specifier.
+.TP
+.I .d_id
+User, project, or group ID.
+.TP
+.I .d_blk_hardlimit
+Absolute limit on disk blocks.
+.TP
+.I .d_blk_softlimit
+Preferred limit on disk blocks.
+.TP
+.I .d_ino_hardlimit
+Maximum # allocated inodes.
+.TP
+.I .d_ino_softlimit
+Preferred inode limit.
+.TP
+.I .d_bcount
+# disk blocks owned by the user.
+.TP
+.I .d_icount
+# inodes owned by the user.
+.TP
+.I .d_itimer
+Zero if within inode limits;
+if not, we refuse service.
+.TP
+.I .d_btimer
+Similar to above;
+for disk blocks.
+.TP
+.I .d_iwarns
+# warnings issued with respect to # of inodes.
+.TP
+.I .d_bwarns
+# warnings issued with respect to disk blocks.
+.TP
+.I .d_padding2
+Padding;
+reserved for future use.
+.TP
+.I .d_rtb_hardlimit
+Absolute limit on realtime (RT) disk blocks.
+.TP
+.I .d_rtb_softlimit
+Preferred limit on RT disk blocks.
+.TP
+.I .d_rtbcount
+# realtime blocks owned.
+.TP
+.I .d_rtbtimer
+Similar to above;
+for RT disk blocks.
+.TP
+.I .d_rtbwarns
+# warnings issued with respect to RT disk blocks.
+.TP
+.I .d_padding3
+Padding;
+reserved for future use.
+.TP
+.I .d_padding4[8]
+Yet more padding.
 .SH STANDARDS
 Linux.
 .SH HISTORY
