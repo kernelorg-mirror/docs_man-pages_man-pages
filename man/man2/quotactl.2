@@ -128,25 +128,13 @@ the above operations are bypassed and the following operations are used:
 .BR Q_XQUOTAON (2const)
 .TQ
 .BR Q_XQUOTAOFF (2const)
-.TP
-.B Q_XGETQUOTA
-Get disk quota limits and current usage for user
-.IR id .
-The
-.I addr
-argument is a pointer to an
-.BR fs_disk_quota (2type)
-structure.
-.IP
-Unprivileged users may retrieve only their own quotas;
-a privileged user
-.RB ( CAP_SYS_ADMIN )
-may retrieve the quotas of any user.
+.TQ
+.BR Q_XGETQUOTA (2const)
 .TP
 .BR Q_XGETNEXTQUOTA " (since Linux 4.6)"
 .\" commit 8b37524962b9c54423374717786198f5c0820a28
 This operation is the same as
-.BR Q_XGETQUOTA ,
+.BR Q_XGETQUOTA (2const),
 but it returns (in the
 .BR fs_disk_quota (2type)
 structure pointed by

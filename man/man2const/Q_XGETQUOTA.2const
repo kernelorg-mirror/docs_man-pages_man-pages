@@ -1,0 +1,60 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_XGETQUOTA 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_XGETQUOTA
+\-
+get quota limits for an XFS filesystem
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <xfs/xqm.h>" "      /* See quotactl(2) */"
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_XGETQUOTA, " type "), const\~char\~*_Nullable\~" special ,
+.BI "             int\~" id ", caddr_t\~" addr );
+.P
+.BR "#include <xfs/xqm.h>" "      /* See quotactl_fd(2) */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_XGETQUOTA, " type ),
+.BI "            int\~" id ", struct\~fs_disk_quota\~*" addr );
+.fi
+.SH DESCRIPTION
+.TP
+.B Q_XGETQUOTA
+Get disk quota limits and current usage for user
+.IR id .
+The
+.I addr
+argument is a pointer to an
+.BR fs_disk_quota (2type)
+structure.
+.IP
+Unprivileged users may retrieve only their own quotas;
+a privileged user
+.RB ( CAP_SYS_ADMIN )
+may retrieve the quotas of any user.
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2),
+.BR Q_XGETNEXTQUOTA (2const),
+.BR fs_disk_quota (2type)
