@@ -241,6 +241,21 @@ Synchronization will fail if another thread in the same process is in
 .B SECCOMP_MODE_STRICT
 or if it has attached new seccomp filters to itself,
 diverging from the calling thread's filter tree.
+.TP
+.BR SECCOMP_FILTER_FLAG_TSYNC_ESRCH " (since Linux 5.7)"
+.\" commit 51891498f2da78ee64dfad88fa53c9e85fb50abf
+Fail with
+.B ESRCH
+instead of returning the thread ID on synchronization failure if
+.B SECCOMP_FILTER_FLAG_TSYNC
+was specified.
+.IP
+If this flag is not set, using
+.B SECCOMP_FILTER_FLAG_NEW_LISTENER
+and
+.B SECCOMP_FILTER_FLAG_TSYNC
+together results in
+.BR EINVAL .
 .RE
 .TP
 .BR SECCOMP_GET_ACTION_AVAIL " (since Linux 4.14)"
