@@ -256,6 +256,14 @@ and
 .B SECCOMP_FILTER_FLAG_TSYNC
 together results in
 .BR EINVAL .
+.TP
+.BR SECCOMP_FILTER_FLAG_WAIT_KILLABLE_RECV " (since Linux 5.19)"
+.\" commit c2aa2dfef243efe213a480a1ee8566507a5152f4
+Ignore non-fatal signals until the supervisor sends a response.
+.IP
+The
+.B SECCOMP_FILTER_FLAG_NEW_LISTENER
+flag must be set.
 .RE
 .TP
 .BR SECCOMP_GET_ACTION_AVAIL " (since Linux 4.14)"
