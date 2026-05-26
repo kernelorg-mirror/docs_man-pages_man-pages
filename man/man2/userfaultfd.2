@@ -111,6 +111,32 @@ The faulted thread will be stopped from execution
 until user-space write-unprotects the page using an
 .B UFFDIO_WRITEPROTECT
 ioctl.
+.TP
+.BR UFFDIO_REGISTER_MODE_RWP " (since Linux 7.2)"
+When registered with
+.B UFFDIO_REGISTER_MODE_RWP
+mode,
+user space will receive a page-fault notification on any access
+\[em]read or write\[em]
+to a page present within the range.
+By default,
+the faulted thread will be stopped from execution
+until user space removes the protection using a
+.B UFFDIO_RWPROTECT
+ioctl;
+if
+.B UFFD_FEATURE_RWP_ASYNC
+was negotiated,
+the kernel restores access in place
+and the faulted thread continues without blocking.
+.IP
+.B UFFDIO_REGISTER_MODE_RWP
+and
+.B UFFDIO_REGISTER_MODE_WP
+cannot be combined on the same range;
+attempting to register with both bits set fails with
+.BR EINVAL .
+See the "Userfaultfd read-write-protect mode" section below.
 .P
 Multiple modes can be enabled at the same time for the same memory range.
 .P
@@ -192,6 +218,24 @@ The user needs to resolve the page fault by unprotecting the faulted page and
 kicking the faulted thread to continue.
 For more information,
 please refer to the "Userfaultfd write-protect mode" section.
+.P
+Since Linux 7.2,
+userfaultfd can do read-write-protection tracking,
+which traps every access
+(read or write)
+to a page present within a registered range.
+One should check against the feature bit
+.B UFFD_FEATURE_RWP
+before using this feature,
+and optionally negotiate
+.B UFFD_FEATURE_RWP_ASYNC
+to have the kernel auto-restore page permissions on fault
+without delivering a notification.
+This mode is intended for working-set tracking
+by VM memory managers and similar callers;
+cold pages can then be evicted using independent kernel interfaces.
+For more information,
+please refer to the "Userfaultfd read-write-protect mode" section.
 .\"
 .SS Userfaultfd operation
 After the userfaultfd object is created with
@@ -387,6 +431,113 @@ wakes up the faulting thread(s).
 Minor fault mode supports only hugetlbfs-backed (since Linux 5.13)
 and shmem-backed (since Linux 5.14) memory.
 .\"
+.SS Userfaultfd read-write-protect mode (since Linux 7.2)
+Since Linux 7.2,
+userfaultfd supports read-write-protect mode.
+Unlike write-protect mode,
+every access
+\[em]read or write\[em]
+to a protected page generates a userfaultfd notification.
+It works on anonymous, shmem, and hugetlbfs mappings.
+.P
+The user needs to first check availability of this feature using the
+.B UFFDIO_API
+ioctl against the feature bit
+.B UFFD_FEATURE_RWP
+before using this mode.
+See
+.BR UFFDIO_API (2const)
+for the recommended discovery sequence.
+.P
+To register with userfaultfd read-write-protect mode,
+the user needs to initiate the
+.B UFFDIO_REGISTER
+ioctl with mode
+.B UFFDIO_REGISTER_MODE_RWP
+set.
+.B UFFDIO_REGISTER_MODE_RWP
+cannot be combined with
+.BR UFFDIO_REGISTER_MODE_WP ;
+however it can be combined with
+.B UFFDIO_REGISTER_MODE_MISSING
+when the caller also wants notifications for fresh page populations.
+.P
+After registration,
+the user can read-write-protect any existing memory within the range using the
+.B UFFDIO_RWPROTECT
+ioctl where
+.I uffdio_rwprotect.mode
+is set to
+.BR UFFDIO_RWPROTECT_MODE_RWP .
+Read-write protection only affects pages
+that are currently populated in the range;
+unpopulated addresses remain unpopulated
+and fall through to the normal missing-page path on first access.
+.P
+For anonymous mappings,
+protection is preserved across page reclaim
+(the marker rides on the swap entry)
+and migration.
+For shmem and file-backed mappings,
+protection is dropped when the backing page is reclaimed
+and must be re-armed by the caller.
+Protection is also
+.I not
+preserved across operations that explicitly drop the underlying page:
+.B MADV_DONTNEED
+on anonymous memory,
+hole-punch on shmem,
+truncation of a file mapping.
+Callers must re-arm the range with
+.B UFFDIO_RWPROTECT
+after any such operation.
+.P
+When an access fault happens against a protected page,
+user space will receive a page-fault notification whose
+.I uffd_msg.pagefault.flags
+field has the
+.B UFFD_PAGEFAULT_FLAG_RWP
+bit set.
+.P
+To resolve a read-write-protect page fault,
+the user initiates another
+.B UFFDIO_RWPROTECT
+ioctl whose
+.I uffdio_rwprotect.mode
+has the
+.B UFFDIO_RWPROTECT_MODE_RWP
+flag cleared.
+This restores the original VMA permissions on the affected pages
+and wakes any blocked threads
+(unless
+.B UFFDIO_RWPROTECT_MODE_DONTWAKE
+is also set).
+.P
+If
+.B UFFD_FEATURE_RWP_ASYNC
+was negotiated alongside
+.BR UFFD_FEATURE_RWP ,
+the kernel resolves access faults in place
+without delivering a notification:
+page permissions are restored automatically
+and the faulting thread continues.
+Callers can later reconstruct which pages were touched
+by inspecting the
+.B PAGE_IS_ACCESSED
+bit returned by the
+.B PAGEMAP_SCAN
+ioctl described in
+.BR ioctl_userfaultfd (2)
+and
+.I Documentation/admin\-guide/mm/pagemap.rst
+in the Linux kernel source.
+.P
+The async mode can be toggled at runtime using the
+.B UFFDIO_SET_MODE
+ioctl,
+which lets a single userfaultfd switch between async detection
+and synchronous eviction without re-registering the range.
+.\"
 .SS Reading from the userfaultfd structure
 Each
 .BR read (2)
@@ -531,13 +682,17 @@ If this flag is set, then the fault was a write-protect fault.
 .B UFFD_PAGEFAULT_FLAG_MINOR
 If this flag is set, then the fault was a minor fault.
 .TP
+.BR UFFD_PAGEFAULT_FLAG_RWP " (since Linux 7.2)"
+If this flag is set, then the fault was a read-write-protect fault.
+.TP
 .B UFFD_PAGEFAULT_FLAG_WRITE
 If this flag is set, then the fault was a write fault.
 .P
 If neither
-.B UFFD_PAGEFAULT_FLAG_WP
+.BR UFFD_PAGEFAULT_FLAG_WP ,
+.BR UFFD_PAGEFAULT_FLAG_MINOR ,
 nor
-.B UFFD_PAGEFAULT_FLAG_MINOR
+.B UFFD_PAGEFAULT_FLAG_RWP
 are set, then the fault was a missing fault.
 .RE
 .TP
@@ -640,6 +795,17 @@ Linux 4.3.
 .P
 Support for hugetlbfs and shared memory areas and
 non-page-fault events was added in Linux 4.11
+.P
+Read-write-protect mode
+.RB ( UFFDIO_REGISTER_MODE_RWP ,
+.BR UFFD_FEATURE_RWP ,
+.BR UFFDIO_RWPROTECT )
+was added in Linux 7.2,
+together with
+.B UFFD_FEATURE_RWP_ASYNC
+and the
+.B UFFDIO_SET_MODE
+runtime mode toggle.
 .SH NOTES
 The userfaultfd mechanism can be used as an alternative to
 traditional user-space paging techniques based on the use of the
