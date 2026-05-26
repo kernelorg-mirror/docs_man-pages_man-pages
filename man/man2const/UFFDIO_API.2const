@@ -213,6 +213,30 @@ If this feature bit is set,
 the kernel supports resolving faults with the
 .B UFFDIO_MOVE
 ioctl.
+.TP
+.BR UFFD_FEATURE_RWP " (since Linux 7.2)"
+If this feature bit is set,
+the kernel supports read-write-protection tracking,
+and the
+.B UFFDIO_REGISTER_MODE_RWP
+registration mode and the
+.B UFFDIO_RWPROTECT
+ioctl become available.
+.TP
+.BR UFFD_FEATURE_RWP_ASYNC " (since Linux 7.2)"
+If this feature bit is set,
+the kernel will resolve read-write-protect faults in place
+without delivering a notification,
+automatically restoring page permissions
+and letting the faulted thread continue.
+This bit requires
+.B UFFD_FEATURE_RWP
+to be set in the same
+.B UFFDIO_API
+call.
+The async mode can also be toggled at runtime using the
+.BR UFFDIO_SET_MODE (2const)
+ioctl.
 .P
 The returned
 .I argp->ioctls
@@ -234,6 +258,14 @@ operation is supported.
 The
 .B UFFDIO_UNREGISTER
 operation is supported.
+.TP
+.BR "1 << _UFFDIO_SET_MODE" " (since Linux 7.2)"
+The
+.B UFFDIO_SET_MODE
+operation is supported.
+This is a file-descriptor-level ioctl
+and is reported once per userfaultfd,
+independent of any registered range.
 .SH RETURN VALUE
 On success,
 0 is returned.
