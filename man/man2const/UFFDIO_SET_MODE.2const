@@ -1,0 +1,105 @@
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH UFFDIO_SET_MODE 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+UFFDIO_SET_MODE
+\-
+toggle userfaultfd runtime mode bits
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <linux/userfaultfd.h>" "  /* Definition of " UFFD* " constants */"
+.B #include <sys/ioctl.h>
+.P
+.BI "int ioctl(int " fd ", UFFDIO_SET_MODE, struct uffdio_set_mode *" argp );
+.P
+.B #include <linux/userfaultfd.h>
+.P
+.fi
+.EX
+.B struct uffdio_set_mode {
+.BR "    __u64  enable;" "   /* Feature bits to set */"
+.BR "    __u64  disable;" "  /* Feature bits to clear */"
+.B };
+.EE
+.SH DESCRIPTION
+Toggle userfaultfd features that may be flipped at runtime.
+.P
+Bits set in
+.I .enable
+turn the named features on;
+bits set in
+.I .disable
+turn them off.
+The two fields must not overlap.
+Today only
+.B UFFD_FEATURE_RWP_ASYNC
+is a valid bit in either field;
+any other bit causes the ioctl to fail with
+.BR EINVAL .
+Enabling
+.B UFFD_FEATURE_RWP_ASYNC
+also requires
+.B UFFD_FEATURE_RWP
+to have been negotiated at
+.BR UFFDIO_API (2const)
+time.
+.P
+The operation is serialized against in-flight page faults,
+so the new mode takes effect
+only after every fault that started before the call has finished,
+and any fault that starts after the call observes the new mode.
+This allows a single userfaultfd
+to switch between lightweight async detection
+and synchronous eviction
+without re-registering its ranges.
+.SH RETURN VALUE
+On success,
+0 is returned.
+On error, \-1 is returned and
+.I errno
+is set to indicate the error.
+.SH ERRORS
+.TP
+.B EINVAL
+A bit other than
+.B UFFD_FEATURE_RWP_ASYNC
+was specified in
+.I .enable
+or
+.IR .disable .
+.TP
+.B EINVAL
+The fields
+.I .enable
+and
+.I .disable
+overlap.
+.TP
+.B EINVAL
+.B UFFD_FEATURE_RWP_ASYNC
+was requested without
+.B UFFD_FEATURE_RWP
+having been negotiated.
+.TP
+.B EFAULT
+.I argp
+refers to an address that is outside the calling process's
+accessible address space.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 7.2.
+.SH EXAMPLES
+See
+.BR userfaultfd (2).
+.SH SEE ALSO
+.BR ioctl (2),
+.BR ioctl_userfaultfd (2),
+.BR userfaultfd (2)
+.P
+.I linux.git/\:Documentation/\:admin\-guide/\:mm/\:userfaultfd.rst
