@@ -72,6 +72,20 @@ Since Linux 5.13,
 only hugetlbfs ranges are compatible.
 Since Linux 5.14,
 compatibility with shmem ranges was added.
+.TP
+.BR UFFDIO_REGISTER_MODE_RWP " (since Linux 7.2)"
+Track page faults on read-write-protected pages.
+Every access
+(read or write)
+to a page present within the registered range
+generates a notification
+once the range has been protected with
+.BR UFFDIO_RWPROTECT (2const).
+This mode cannot be combined with
+.BR UFFDIO_REGISTER_MODE_WP ;
+attempting to do so fails with
+.BR EINVAL .
+Anonymous, shmem, and hugetlbfs ranges are compatible.
 .P
 If the operation is successful, the kernel modifies the
 .I argp->ioctls
@@ -109,6 +123,16 @@ operation is supported.
 The
 .B UFFDIO_POISON
 operation is supported.
+.TP
+.BR "1 << _UFFDIO_RWPROTECT" " (since Linux 7.2)"
+The
+.B UFFDIO_RWPROTECT
+operation is supported.
+This bit is reported only when the range was registered with
+.B UFFDIO_REGISTER_MODE_RWP
+(which itself requires
+.B UFFD_FEATURE_RWP
+to have been negotiated).
 .SH RETURN VALUE
 On success,
 0 is returned.
