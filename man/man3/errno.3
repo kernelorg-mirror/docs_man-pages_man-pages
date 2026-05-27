@@ -477,13 +477,14 @@ Name not unique on network.
 No such device or address (POSIX.1-2001).
 .TP
 .B EOPNOTSUPP
-Operation not supported on socket (POSIX.1-2001).
+Operation not supported (POSIX.1-2001).
+According to POSIX.1 this is "Operation not supported on socket",
+but on Linux it effectively means just "Operation not supported".
 .IP
 .RB ( ENOTSUP
 and
 .B EOPNOTSUPP
-have the same value on Linux, but
-according to POSIX.1 these error values should be distinct.)
+have the same value on Linux.)
 .TP
 .B EOVERFLOW
 Value too large to be stored in data type (POSIX.1-2001).
