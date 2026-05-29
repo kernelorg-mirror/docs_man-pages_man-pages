@@ -176,6 +176,28 @@ will fail with
 Using this seal,
 one process can create a memory buffer that it can continue to modify
 while sharing that buffer on a "read-only" basis with other processes.
+.TP
+.BR F_SEAL_EXEC " (since Linux 6.3)"
+If this seal is set,
+the execute mode bits of the file cannot be modified.
+Attempting to change the execute mode bits via
+.BR fchmod (2)
+or similar will fail with
+.BR EPERM .
+This results in a memfd that is
+either permanently executable
+or permanently not executable.
+.IP
+Adding this seal implicitly adds
+.BR F_SEAL_GROW ,
+.BR F_SEAL_SHRINK ,
+.BR F_SEAL_WRITE ,
+and
+.BR F_SEAL_FUTURE_WRITE .
+This ensures that the executable code is not writeable.
+All the pre-requisites to add the implied seals must be met
+to successfully add
+.BR F_SEAL_EXEC .
 .SH RETURN VALUE
 .TP
 .B F_GET_SEALS
