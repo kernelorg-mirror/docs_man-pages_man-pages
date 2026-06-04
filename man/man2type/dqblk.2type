@@ -1,0 +1,84 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH dqblk 2type (date) "Linux man-pages (unreleased)"
+.SH NAME
+dqblk
+\-
+disk quota block
+.SH LIBRARY
+Standard C library
+.RI ( libc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.fi
+.P
+.EX
+struct dqblk {
+	uint64_t  dqb_bhardlimit;
+	uint64_t  dqb_bsoftlimit;
+	uint64_t  dqb_curspace;
+	uint64_t  dqb_ihardlimit;
+	uint64_t  dqb_isoftlimit;
+	uint64_t  dqb_curinodes;
+	uint64_t  dqb_btime;
+	uint64_t  dqb_itime;
+\&
+	uint32_t  dqb_valid;
+};
+\&
+#define QIF_BLIMITS   1
+#define QIF_SPACE     2
+#define QIF_ILIMITS   4
+#define QIF_INODES    8
+#define QIF_BTIME     16
+#define QIF_ITIME     32
+#define QIF_LIMITS    (QIF_BLIMITS | QIF_ILIMITS)
+#define QIF_USAGE     (QIF_SPACE | QIF_INODES)
+#define QIF_TIMES     (QIF_BTIME | QIF_ITIME)
+#define QIF_ALL       (QIF_LIMITS | QIF_USAGE | QIF_TIMES)
+.EE
+.SH DESCRIPTION
+.TP
+.I .dqb_bhardlimit
+.TQ
+.I .dqb_bsoftlimit
+Absolute and preferred limits on disk quota blocks.
+.TP
+.I .dqb_curspace
+Current occupied space (in bytes).
+.TP
+.I .dqb_ihardlimit
+.TQ
+.I .dqb_isoftlimit
+Absolute and preferred limits on number of allocated inodes.
+.TP
+.I .dqb_curinodes
+Current number of allocated inodes.
+.TP
+.I .dqb_btime
+Time limit for excessive disk use.
+.TP
+.I .dqb_itime
+Time limit for excessive files.
+.TP
+.I .dqb_valid
+Bit mask of
+.BI QIF_ *
+constants.
+It is set to indicate which fields in the
+.I dqblk
+structure are valid.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.4.22.
+.SH SEE ALSO
+.BR Q_GETQUOTA (2const),
+.BR Q_SETQUOTA (2const),
+.BR nextdqblk (2type)

@@ -1,0 +1,146 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_XGETQSTATV 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_XGETQSTATV
+\-
+get XFS-specific quota information
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <xfs/xqm.h>" "      /* See quotactl(2) */"
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_XGETQSTATV, " type "), const\~char\~*_Nullable\~" special ", 0,"
+.BI "             caddr_t\~" addr );
+.P
+.BR "#include <xfs/xqm.h>" "      /* See quotactl_fd(2) */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_XGETQSTATV, " type "), 0,"
+.BI "            struct\~fs_quota_statv\~*" addr );
+.P
+.BR "#include <xfs/xqm.h>" "      /* See quotactl_fd(2) */"
+.fi
+.P
+.EX
+#define FS_QSTATV_VERSION1  1
+\&
+struct fs_quota_statv {
+	int8_t    qs_version;
+	uint8_t   qs_pad1;
+	uint16_t  qs_flags;
+	uint32_t  qs_incoredqs;
+	struct fs_qfilestatv  qs_uquota;
+	struct fs_qfilestatv  qs_gquota;
+	struct fs_qfilestatv  qs_pquota;
+	int32_t   qs_btimelimit;
+	int32_t   qs_itimelimit;
+	int32_t   qs_rtbtimelimit;
+	uint16_t  qs_bwarnlimit;
+	uint16_t  qs_iwarnlimit;
+	uint64_t  qs_pad2[8];
+};
+\&
+struct fs_qfilestatv {
+	uint64_t  qfs_ino;
+	uint64_t  qfs_nblks;
+	uint32_t  qfs_nextents;
+	uint32_t  qfs_pad;
+};
+.EE
+.SH DESCRIPTION
+Returns XFS filesystem-specific quota information in the
+.I fs_quota_statv
+pointed to by
+.IR addr .
+.P
+This version of the operation
+(compared to
+.BR Q_XGETQSTAT (2const))
+uses a structure with proper versioning support,
+along with appropriate layout (all fields are naturally aligned)
+and padding to avoiding special compat handling;
+it also provides the ability to get
+statistics regarding the project quota file.
+.SS struct\~fs_quota_statv
+.TP
+.I .qs_version
+This field should be filled with
+the version of the structure supported by the callee
+(for now, only
+.I FS_QSTAT_VERSION1
+is supported).
+The kernel will fill the structure in accordance with
+the version provided.
+.TP
+.I .qs_pad1
+Pad for 16-bit alignment.
+.TP
+.I .qs_flags
+.BI XFS_QUOTA_ *
+flags.
+.TP
+.I .qs_incoredqs
+Number of dquots incore.
+.TP
+.I .qs_uquota
+User quota information.
+.TP
+.I .qs_gquota
+Group quota information.
+.TP
+.I .qs_pquota
+Project quota information.
+.TP
+.I .qs_btimelimit
+Limit for blocks timer.
+.TP
+.I .qs_itimelimit
+Limit for inodes timer.
+.TP
+.I .qs_rtbtimelimit
+Limit for RT blocks timer.
+.TP
+.I .qs_bwarnlimit
+Limit for # of warnings.
+.TP
+.I .qs_iwarnlimit
+Limit for # of warnings.
+.TP
+.I .qs_pad2
+For future proofing.
+.SS struct\~fs_qfilestatv
+.TP
+.I .qfs_ino
+Inode number.
+.TP
+.I .qfs_nblks
+Number of BBs 512-byte-blocks.
+.TP
+.I .qfs_nextents
+Number of extents.
+.TP
+.I .qfs_pad
+Pad for 8-byte alignment.
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2)

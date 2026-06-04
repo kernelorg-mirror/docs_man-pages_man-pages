@@ -1,0 +1,59 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_GETINFO 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_GETINFO
+\-
+get information about quotafile.
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_GETINFO, " type "), const\~char\~*_Nullable\~" special ", 0,"
+.BI "             caddr_t\~" addr );
+.P
+.BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_GETINFO, " type "), 0,"
+.BI "            struct\~dqinfo\~*" addr );
+.fi
+.SH DESCRIPTION
+Get information (like grace times) about quotafile.
+.P
+The
+.I addr
+argument should be a pointer to a
+.BR dqinfo (2type)
+structure.
+.P
+Currently,
+the kernel fills in all entries of the
+.BR dqinfo (2type)
+structure and marks them all as valid in the
+.I .dqi_valid
+field.
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.4.22.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2),
+.BR Q_SETINFO (2const),
+.BR dqinfo (2type)

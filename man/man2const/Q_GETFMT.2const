@@ -1,0 +1,50 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_GETFMT 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_GETFMT
+\-
+get quota format
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_GETFMT, " type "), const\~char\~*_Nullable\~" special ", int\~" id ,
+.BI "             caddr_t\~" addr );
+.P
+.BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_GETFMT, " type "), int\~" id ,
+.BI "            int32_t\~*" addr );
+.fi
+.SH DESCRIPTION
+Get quota format used on the specified filesystem.
+.P
+The
+.I addr
+argument should be a pointer to a 4-byte buffer
+where the format number will be stored.
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.4.22.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2),
+.BR Q_QUOTAON (2const)

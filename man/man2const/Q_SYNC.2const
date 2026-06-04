@@ -1,0 +1,50 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_SYNC 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_SYNC
+\-
+synchronize on-disk copy of quota usages
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_SYNC, " type "), const\~char\~*_Nullable\~" special ", 0, NULL);"
+.P
+.BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_SYNC, " type "));"
+.fi
+.SH DESCRIPTION
+Update the on-disk copy of quota usages for a filesystem.
+.P
+For
+.BR quotactl (2),
+if
+.I special
+is NULL, then all filesystems with active quotas are synchronized.
+.BR quotactl_fd (2)
+always synchronizes only one filesystem.
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2)

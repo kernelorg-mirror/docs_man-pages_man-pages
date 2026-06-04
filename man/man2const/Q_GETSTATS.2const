@@ -1,0 +1,58 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_GETSTATS 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_GETSTATS
+\-
+get statistics about the quota subsystem
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.B #include <sys/quota.h>
+.P
+[[deprecated]]
+.BI "int\~quotactl(QCMD(Q_GETSTATS, " type "), NULL, 0,"
+.BI "             caddr_t\~" addr );
+.P
+.BR "#include <sys/quota.h>" "    /* Definition of " Q_* " constants */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+[[deprecated]]
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_GETSTATS, " type "), 0,"
+.BI "            struct\~dqstats\~*" addr );
+.fi
+.SH DESCRIPTION
+Get statistics and other generic information about the quota subsystem.
+.P
+The
+.I addr
+argument should be a pointer to a
+.I dqstats
+structure in which data should be stored.
+This structure is defined in
+.IR <sys/quota.h> .
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+None.
+.SH HISTORY
+This operation is obsolete and was removed in Linux 2.4.22.
+.P
+Files in
+.I /proc/sys/fs/quota/
+carry the information instead.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2)

@@ -1,0 +1,73 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_XQUOTARM 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_XQUOTARM
+\-
+free disk space taken by disk quotas
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <xfs/xqm.h>" "      /* See quotactl(2) */"
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_XQUOTARM, " type "), const\~char\~*_Nullable\~" special ", 0,"
+.BI "             caddr_t\~" addr );
+.P
+.BR "#include <xfs/xqm.h>" "      /* See quotactl_fd(2) */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_XQUOTARM, " type "), 0,"
+.BI "            unsigned\~int\~*" addr );
+.fi
+.SH DESCRIPTION
+Free the disk space taken by disk quotas.
+.P
+The
+.I addr
+argument should be a pointer to an
+.I "unsigned int"
+value containing flags
+(the same as in
+.I .d_flags
+field of the
+.BR fs_disk_quota (2type)
+structure)
+which identify what types of quota
+should be removed.
+.P
+Quotas must have already been turned off.
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.TP
+.BR EINVAL " (since Linux 5.5)"
+.\" 3dd4d40b420846dd35869ccc8f8627feef2cff32
+.I addr
+does not point to valid quota types.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Buggy until Linux 3.16.
+.\" 9da93f9b7cdf8ab28da6b364cdc1fafc8670b4dc
+.SH CAVEATS
+The quota
+.I type
+argument is ignored,
+but should remain valid
+in order to pass preliminary quotactl syscall handler checks.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2),
+.BR fs_disk_quota (2type)

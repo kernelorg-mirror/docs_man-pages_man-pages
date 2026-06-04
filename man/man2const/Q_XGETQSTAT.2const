@@ -1,0 +1,124 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_XGETQSTAT 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_XGETQSTAT
+\-
+get XFS-specific quota information
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <xfs/xqm.h>" "      /* See quotactl(2) */"
+.B #include <sys/quota.h>
+.P
+.BI "int\~quotactl(QCMD(Q_XGETQSTAT, " type "), const\~char\~*_Nullable\~" special ", 0,"
+.BI "             caddr_t\~" addr );
+.P
+.BR "#include <xfs/xqm.h>" "      /* See quotactl_fd(2) */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "int\~syscall(SYS_quotactl_fd, int\~" fd ", QCMD(Q_XGETQSTAT, " type "), 0,"
+.BI "            struct\~fs_quota_stat\~*" addr );
+.P
+.BR "#include <xfs/xqm.h>" "      /* See quotactl(2) */"
+.fi
+.P
+.EX
+#define FS_QSTAT_VERSION  1  /* fs_quota_stat.qs_version */
+\&
+struct fs_quota_stat {
+	int8_t    qs_version;
+	uint16_t  qs_flags;
+	int8_t    qs_pad;
+	struct fs_qfilestat  qs_uquota;
+	struct fs_qfilestat  qs_gquota;
+	uint32_t  qs_incoredqs;
+	int32_t   qs_btimelimit;
+	int32_t   qs_itimelimit;
+	int32_t   qs_rtbtimelimit;
+	uint16_t  qs_bwarnlimit;
+	uint16_t  qs_iwarnlimit;
+};
+\&
+struct fs_qfilestat {
+	uint64_t  qfs_ino;
+	uint64_t  qfs_nblks;
+	uint32_t  qfs_nextents;
+};
+.EE
+.SH DESCRIPTION
+Returns XFS filesystem-specific quota information in the
+.I fs_quota_stat
+structure pointed by
+.IR addr .
+.P
+This is useful for finding out
+how much space is used to store quota information,
+and also to get the quota on/off status
+of a given local XFS filesystem.
+.SS struct\~fs_quota_stat
+.TP
+.I .qs_version
+Version number for future changes.
+.TP
+.I .qs_flags
+.BR XFS_QUOTA_ { U , P , G } DQ_ { ACCT , ENFD }
+.TP
+.I .qs_pad
+Unused.
+.TP
+.I .qs_uquota
+User quota storage information.
+.TP
+.I .qs_gquota
+Group quota storage information.
+.TP
+.I .qs_incoredqs
+Number of dquots in core.
+.TP
+.I .qs_btimelimit
+Limit for blocks timer.
+.TP
+.I .qs_itimelimit
+Limit for inodes timer.
+.TP
+.I .qs_rtbtimelimit
+Limit for RT blocks timer.
+.TP
+.I .qs_bwarnlimit
+Limit for # of warnings.
+.TP
+.I .qs_iwarnlimit
+Limit for # of warnings.
+.SS struct\~fs_quota_stat
+.TP
+.I .qfs_ino
+Inode number.
+.TP
+.I .qfs_nblks
+Number of BBs 512\-byte\-blocks.
+.TP
+.I .qfs_nextents
+Number of extents.
+.SH RETURN VALUE
+See
+.BR quotactl (2).
+.SH ERRORS
+See
+.BR quotactl (2).
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2),
+.BR Q_XGETQSTATV (2const)
