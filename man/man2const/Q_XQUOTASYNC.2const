@@ -29,9 +29,6 @@ Standard C library
 .BI "int syscall(SYS_quotactl_fd, int " fd ", QCMD(Q_XQUOTASYNC, " type ));
 .fi
 .SH DESCRIPTION
-.TP
-.BR Q_XQUOTASYNC " (since Linux 2.6.15; no-op since Linux 3.4)"
-.\" Added in commit ee34807a65aa0c5911dc27682863afca780a003e
 This operation was an XFS quota equivalent to
 .BR Q_SYNC (2const),
 but it is no-op since Linux 3.4,
@@ -40,9 +37,6 @@ as
 .BR sync (1)
 writes quota information to disk now
 (in addition to the other filesystem metadata that it writes out).
-The
-.IR special ", " id " and " addr
-arguments are ignored.
 .SH RETURN VALUE
 See
 .BR quotactl (2)
@@ -52,7 +46,9 @@ See
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Linux 2.6.15.
+.\" Added in commit ee34807a65aa0c5911dc27682863afca780a003e
+No-op since Linux 3.4.
 .SH SEE ALSO
 .BR quotactl (2),
 .BR quotactl_fd (2)
