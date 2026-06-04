@@ -130,27 +130,8 @@ the above operations are bypassed and the following operations are used:
 .BR Q_XQUOTAOFF (2const)
 .TQ
 .BR Q_XGETQUOTA (2const)
-.TP
-.BR Q_XGETNEXTQUOTA " (since Linux 4.6)"
-.\" commit 8b37524962b9c54423374717786198f5c0820a28
-This operation is the same as
-.BR Q_XGETQUOTA (2const),
-but it returns (in the
-.BR fs_disk_quota (2type)
-structure pointed by
-.IR addr )
-quota information for the next ID greater than or equal to
-.I id
-that has a quota set.
-Note that since
-.BR fs_disk_quota (2type)
-already has
-.I q_id
-field, no separate structure type is needed (in contrast with
-.BR Q_GETQUOTA (2const)
-and
-.BR Q_GETNEXTQUOTA (2const)
-operations)
+.TQ
+.BR Q_XGETNEXTQUOTA (2const)
 .TP
 .B Q_XSETQLIM
 Set disk quota limits for user
@@ -364,14 +345,6 @@ for the specified operation.
 .B ESRCH
 No disk quota is found for the indicated user.
 Quotas have not been turned on for this filesystem.
-.TP
-.B ESRCH
-.I op
-is
-.BR Q_XGETNEXTQUOTA ,
-but there is no ID greater than or equal to
-.I id
-that has an active quota.
 .SH NOTES
 .SS Alternative XFS header
 Instead of
