@@ -134,53 +134,8 @@ the above operations are bypassed and the following operations are used:
 .BR Q_XGETNEXTQUOTA (2const)
 .TQ
 .BR Q_XSETQLIM (2const)
-.TP
-.B Q_XGETQSTAT
-Returns XFS filesystem-specific quota information in the
-.I fs_quota_stat
-structure pointed by
-.IR addr .
-This is useful for finding out how much space is used to store quota
-information, and also to get the quota on/off status of a given local XFS
-filesystem.
-The
-.I fs_quota_stat
-structure itself is defined as follows:
-.IP
-.in +4n
-.EX
-#define FS_QSTAT_VERSION 1  /* fs_quota_stat.qs_version */
-\&
-struct fs_qfilestat {
-    uint64_t qfs_ino;       /* Inode number */
-    uint64_t qfs_nblks;     /* Number of BBs
-                               512\-byte\-blocks */
-    uint32_t qfs_nextents;  /* Number of extents */
-};
-\&
-struct fs_quota_stat {
-    int8_t   qs_version; /* Version number for
-                            future changes */
-    uint16_t qs_flags; /* XFS_QUOTA_{U,P,G}DQ_{ACCT,ENFD} */
-    int8_t   qs_pad;   /* Unused */
-    struct fs_qfilestat qs_uquota;  /* User quota storage
-                                       information */
-    struct fs_qfilestat qs_gquota;  /* Group quota storage
-                                       information */
-    uint32_t qs_incoredqs;   /* Number of dquots in core */
-    int32_t  qs_btimelimit;  /* Limit for blocks timer */
-    int32_t  qs_itimelimit;  /* Limit for inodes timer */
-    int32_t  qs_rtbtimelimit;/* Limit for RT
-                                blocks timer */
-    uint16_t qs_bwarnlimit;  /* Limit for # of warnings */
-    uint16_t qs_iwarnlimit;  /* Limit for # of warnings */
-};
-.EE
-.in
-.IP
-The
-.I id
-argument is ignored.
+.TQ
+.BR Q_XGETQSTAT (2const)
 .TP
 .B Q_XGETQSTATV
 Returns XFS filesystem-specific quota information in the
