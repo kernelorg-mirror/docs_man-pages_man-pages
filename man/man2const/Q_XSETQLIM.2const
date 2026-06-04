@@ -29,15 +29,15 @@ Standard C library
 .BI "            int\~" id ", struct\~fs_disk_quota\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.B Q_XSETQLIM
 Set disk quota limits for user
 .IR id .
+.P
 The
 .I addr
 argument is a pointer to an
 .BR fs_disk_quota (2type)
 structure.
+.P
 This operation requires privilege
 .RB ( CAP_SYS_ADMIN ).
 .SH RETURN VALUE
