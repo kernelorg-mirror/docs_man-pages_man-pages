@@ -140,20 +140,8 @@ the above operations are bypassed and the following operations are used:
 .BR Q_XGETQSTATV (2const)
 .TQ
 .BR Q_XQUOTARM (2const)
-.TP
-.BR Q_XQUOTASYNC " (since Linux 2.6.15; no-op since Linux 3.4)"
-.\" Added in commit ee34807a65aa0c5911dc27682863afca780a003e
-This operation was an XFS quota equivalent to
-.BR Q_SYNC (2const),
-but it is no-op since Linux 3.4,
-.\" 4b217ed9e30f94b6e8e5e262020ef0ceab6113af
-as
-.BR sync (1)
-writes quota information to disk now
-(in addition to the other filesystem metadata that it writes out).
-The
-.IR special ", " id " and " addr
-arguments are ignored.
+.TQ
+.BR Q_XQUOTASYNC (2const)
 .SH RETURN VALUE
 On success,
 .BR quotactl ()

@@ -1,0 +1,58 @@
+.\" Copyright 1996, Andries E. Brouwer <aeb@cwi.nl>
+.\" Copyright 2010, Jan Kara <jack@suse.cz>
+.\" Copyright 2010, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH Q_XQUOTASYNC 2const (date) "Linux man-pages (unreleased)"
+.SH NAME
+Q_XQUOTASYNC
+\-
+no-op
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <xfs/xqm.h>" "      /* See quotactl(2) */"
+.B #include <sys/quota.h>
+.P
+[[deprecated]]
+.BI "int\~quotactl(QCMD(Q_XQUOTASYNC, " type "), NULL, 0, NULL);"
+.P
+.BR "#include <xfs/xqm.h>" "      /* See quotactl_fd(2) */"
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+[[deprecated]]
+.BI "int syscall(SYS_quotactl_fd, int " fd ", QCMD(Q_XQUOTASYNC, " type ));
+.fi
+.SH DESCRIPTION
+.TP
+.BR Q_XQUOTASYNC " (since Linux 2.6.15; no-op since Linux 3.4)"
+.\" Added in commit ee34807a65aa0c5911dc27682863afca780a003e
+This operation was an XFS quota equivalent to
+.BR Q_SYNC (2const),
+but it is no-op since Linux 3.4,
+.\" 4b217ed9e30f94b6e8e5e262020ef0ceab6113af
+as
+.BR sync (1)
+writes quota information to disk now
+(in addition to the other filesystem metadata that it writes out).
+The
+.IR special ", " id " and " addr
+arguments are ignored.
+.SH RETURN VALUE
+See
+.BR quotactl (2)
+.SH ERRORS
+See
+.BR quotactl (2)
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR quotactl (2),
+.BR quotactl_fd (2)
