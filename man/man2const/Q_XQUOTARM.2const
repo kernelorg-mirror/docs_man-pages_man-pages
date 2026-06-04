@@ -29,30 +29,22 @@ Standard C library
 .BI "            unsigned\~int\~*" addr );
 .fi
 .SH DESCRIPTION
-.TP
-.BR Q_XQUOTARM " (buggy until Linux 3.16)"
-.\" 9da93f9b7cdf8ab28da6b364cdc1fafc8670b4dc
 Free the disk space taken by disk quotas.
+.P
 The
 .I addr
 argument should be a pointer to an
 .I "unsigned int"
-value containing flags (the same as in
-.I d_flags
-field of
+value containing flags
+(the same as in
+.I .d_flags
+field of the
 .BR fs_disk_quota (2type)
 structure)
 which identify what types of quota
 should be removed.
-(Note that the quota type passed in the
-.I op
-argument is ignored, but should remain valid in order to pass preliminary
-quotactl syscall handler checks.)
-.IP
+.P
 Quotas must have already been turned off.
-The
-.I id
-argument is ignored.
 .SH RETURN VALUE
 See
 .BR quotactl (2).
@@ -62,16 +54,19 @@ See
 .TP
 .BR EINVAL " (since Linux 5.5)"
 .\" 3dd4d40b420846dd35869ccc8f8627feef2cff32
-.I op
-is
-.BR Q_XQUOTARM ,
-but
 .I addr
 does not point to valid quota types.
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Linux.
+Buggy until Linux 3.16.
+.\" 9da93f9b7cdf8ab28da6b364cdc1fafc8670b4dc
+.SH CAVEATS
+The quota
+.I type
+argument is ignored,
+but should remain valid
+in order to pass preliminary quotactl syscall handler checks.
 .SH SEE ALSO
 .BR quotactl (2),
 .BR quotactl_fd (2),
