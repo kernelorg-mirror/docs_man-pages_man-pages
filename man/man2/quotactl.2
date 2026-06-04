@@ -136,67 +136,8 @@ the above operations are bypassed and the following operations are used:
 .BR Q_XSETQLIM (2const)
 .TQ
 .BR Q_XGETQSTAT (2const)
-.TP
-.B Q_XGETQSTATV
-Returns XFS filesystem-specific quota information in the
-.I fs_quota_statv
-pointed to by
-.IR addr .
-This version of the operation uses a structure with proper versioning support,
-along with appropriate layout (all fields are naturally aligned) and
-padding to avoiding special compat handling;
-it also provides the ability to get statistics regarding
-the project quota file.
-The
-.I fs_quota_statv
-structure itself is defined as follows:
-.IP
-.in +4n
-.EX
-#define FS_QSTATV_VERSION1 1 /* fs_quota_statv.qs_version */
-\&
-struct fs_qfilestatv {
-    uint64_t qfs_ino;       /* Inode number */
-    uint64_t qfs_nblks;     /* Number of BBs
-                               512\-byte\-blocks */
-    uint32_t qfs_nextents;  /* Number of extents */
-    uint32_t qfs_pad;       /* Pad for 8\-byte alignment */
-};
-\&
-struct fs_quota_statv {
-    int8_t   qs_version;    /* Version for future
-                               changes */
-    uint8_t  qs_pad1;       /* Pad for 16\-bit alignment */
-    uint16_t qs_flags;      /* XFS_QUOTA_.* flags */
-    uint32_t qs_incoredqs;  /* Number of dquots incore */
-    struct fs_qfilestatv qs_uquota;  /* User quota
-                                        information */
-    struct fs_qfilestatv qs_gquota;  /* Group quota
-                                        information */
-    struct fs_qfilestatv qs_pquota;  /* Project quota
-                                        information */
-    int32_t  qs_btimelimit;   /* Limit for blocks timer */
-    int32_t  qs_itimelimit;   /* Limit for inodes timer */
-    int32_t  qs_rtbtimelimit; /* Limit for RT blocks
-                                 timer */
-    uint16_t qs_bwarnlimit;   /* Limit for # of warnings */
-    uint16_t qs_iwarnlimit;   /* Limit for # of warnings */
-    uint64_t qs_pad2[8];      /* For future proofing */
-};
-.EE
-.in
-.IP
-The
-.I qs_version
-field of the structure should be filled with the version of the structure
-supported by the callee (for now, only
-.I FS_QSTAT_VERSION1
-is supported).
-The kernel will fill the structure in accordance with
-version provided.
-The
-.I id
-argument is ignored.
+.TQ
+.BR Q_XGETQSTATV (2const)
 .TP
 .BR Q_XQUOTARM " (buggy until Linux 3.16)"
 .\" 9da93f9b7cdf8ab28da6b364cdc1fafc8670b4dc
