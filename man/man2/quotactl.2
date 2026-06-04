@@ -132,17 +132,8 @@ the above operations are bypassed and the following operations are used:
 .BR Q_XGETQUOTA (2const)
 .TQ
 .BR Q_XGETNEXTQUOTA (2const)
-.TP
-.B Q_XSETQLIM
-Set disk quota limits for user
-.IR id .
-The
-.I addr
-argument is a pointer to an
-.BR fs_disk_quota (2type)
-structure.
-This operation requires privilege
-.RB ( CAP_SYS_ADMIN ).
+.TQ
+.BR Q_XSETQLIM (2const)
 .TP
 .B Q_XGETQSTAT
 Returns XFS filesystem-specific quota information in the
