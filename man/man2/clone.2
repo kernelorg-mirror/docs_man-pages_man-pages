@@ -7,7 +7,7 @@
 .\"
 .TH clone 2 (date) "Linux man-pages (unreleased)"
 .SH NAME
-clone, __clone2, clone3 \- create a child process
+clone, clone3 \- create a child process
 .SH LIBRARY
 Standard C library
 .RI ( libc ,\~ \-lc )
@@ -1697,43 +1697,8 @@ does not take arguments
 and
 .IR child_tid .
 .SS ia64
-On ia64, a different interface is used:
-.P
-.in +4n
-.EX
-.BI "int __clone2(typeof(int (void *)) *" fn ,
-.BI "             void *" stack_base ", size_t " stack_size ,
-.BI "             int " flags ", void *" "arg" ", ..."
-.BI "          \f[R]/*\f[] pid_t *" parent_tid ", struct user_desc *" tls ,
-.BI "             pid_t *" child_tid " \f[R]*/\f[] );"
-.EE
-.in
-.P
-The prototype shown above is for the glibc wrapper function;
-for the system call itself,
-the prototype can be described as follows (it is identical to the
-.BR clone ()
-prototype on microblaze):
-.P
-.in +4n
-.EX
-.BI "long clone2(unsigned long " flags ", void *" stack_base ,
-.BI "            int " stack_size , "\f[R]         /* Size of stack */\f[]"
-.BI "            int *" parent_tid ", int *" child_tid ,
-.BI "            unsigned long " tls );
-.EE
-.in
-.P
-.BR __clone2 ()
-operates in the same way as
-.BR clone (),
-except that
-.I stack_base
-points to the lowest address of the child's stack area,
-and
-.I stack_size
-specifies the size of the stack pointed to by
-.IR stack_base .
+On ia64, a different interface was used:
+.BR __clone2 (2).
 .SH NOTES
 One use of these system calls
 is to implement threads: multiple flows of control in a program that

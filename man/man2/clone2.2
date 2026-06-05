@@ -1,1 +1,55 @@
-.so man2/clone.2
+'\" t
+.\" Copyright 1992, Drew Eckhardt <drew@cs.colorado.edu>
+.\" Copyright 2001-2019, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: GPL-1.0-or-later
+.\"
+.TH clone2 2 (date) "Linux man-pages (unreleased)"
+.SH NAME
+clone2, __clone2 \- create a child process
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+// glibc wrapper:
+.BI "int __clone2(typeof(int (void *)) *" fn ,
+.BI "             void *" stack_base ", size_t " stack_size ,
+.BI "             int " flags ", void *" "arg" ", ..."
+.BI "          \f[R]/*\f[] pid_t *" parent_tid ", struct user_desc *" tls ,
+.BI "             pid_t *" child_tid " \f[R]*/\f[] );"
+.P
+// System call:
+.BI "long syscall(SYS_clone2, unsigned long " flags ", void *" stack_base ,
+.BI "            int " stack_size , "\f[R]         /* Size of stack */\f[]"
+.BI "            int *" parent_tid ", int *" child_tid ,
+.BI "            unsigned long " tls );
+.fi
+.SH DESCRIPTION
+These interfaces are similar to
+.BR clone (2)
+but for ia64.
+.P
+These interfaces
+operate in the same way as
+.BR clone (2),
+except that
+.I stack_base
+points to the lowest address of the child's stack area,
+and
+.I stack_size
+specifies the size of the stack pointed to by
+.IR stack_base .
+.SH RETURN VALUE
+See
+.BR clone (2).
+.SH ERRORS
+See
+.BR clone (2).
+.SH STANDARDS
+None.
+.SH HISTORY
+Linux (ia64).
+.SH SEE ALSO
+.BR clone (2)
