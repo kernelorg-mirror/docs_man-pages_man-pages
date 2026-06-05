@@ -403,7 +403,7 @@ or the target's (blocked) system call was interrupted by a signal handler.
 .\" unavoidable race where the child might terminate just after
 .\" I had checked the flag, but before I blocked (forever!) in the
 .\" SECCOMP_IOCTL_NOTIF_RECV operation.  Instead, I had to code
-.\" the signal handler to simply call _exit(2) in order to
+.\" the signal handler to simply call _exit(3) in order to
 .\" terminate the parent process (the supervisor).
 .\"
 .\" Is this expected behavior? It seems to me rather
