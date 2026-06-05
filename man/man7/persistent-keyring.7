@@ -59,7 +59,7 @@ The persistent keyring is independent of
 .BR vfork (2),
 .BR execve (2),
 and
-.BR _exit (2).
+.BR _exit (3).
 It persists until its expiration timer triggers,
 at which point it is garbage collected.
 This allows the persistent keyring to carry keys beyond the life of

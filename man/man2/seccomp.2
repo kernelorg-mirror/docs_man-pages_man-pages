@@ -46,7 +46,7 @@ values:
 The only system calls that the calling thread is permitted to make are
 .BR read (2),
 .BR write (2),
-.BR _exit (2)
+.BR _exit (3)
 (but not
 .BR exit_group (2)),
 and
@@ -970,7 +970,7 @@ Consequently, one must be aware of the following:
 The glibc wrappers for some traditional system calls may actually
 employ system calls with different names in the kernel.
 For example, the
-.BR exit (2)
+.BR exit (3)
 wrapper function actually employs the
 .BR exit_group (2)
 system call, and the

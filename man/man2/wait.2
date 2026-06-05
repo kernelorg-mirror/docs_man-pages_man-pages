@@ -160,7 +160,7 @@ returns true if the child terminated normally, that is,
 by calling
 .BR exit (3)
 or
-.BR _exit (2),
+.BR _exit (3),
 or by returning from main().
 .TP
 .BI WEXITSTATUS( wstatus )
@@ -170,7 +170,7 @@ This consists of the least significant 8 bits of the
 argument that the child specified in a call to
 .BR exit (3)
 or
-.BR _exit (2)
+.BR _exit (3)
 or as the argument for a return statement in main().
 This macro should be employed only if
 .B WIFEXITED
@@ -296,7 +296,7 @@ Always set to
 .TP
 .I si_status
 Either the exit status of the child, as given to
-.BR _exit (2)
+.BR _exit (3)
 (or
 .BR exit (3)),
 or the signal that caused the child to terminate, stop, or continue.
@@ -308,7 +308,7 @@ field can be used to determine how to interpret this field.
 Set to one of:
 .B CLD_EXITED
 (child called
-.BR _exit (2));
+.BR _exit (3));
 .B CLD_KILLED
 (child killed by signal);
 .B CLD_DUMPED
@@ -697,7 +697,6 @@ main(int argc, char *argv[])
 .EE
 .\" SRC END
 .SH SEE ALSO
-.BR _exit (2),
 .BR clone (2),
 .BR fork (2),
 .BR kill (2),
@@ -705,6 +704,7 @@ main(int argc, char *argv[])
 .BR sigaction (2),
 .BR signal (2),
 .BR wait4 (2),
+.BR _exit (3),
 .BR pthread_create (3),
 .BR core (5),
 .BR credentials (7),

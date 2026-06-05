@@ -45,7 +45,7 @@ the new registration is added to the front of the list of functions
 that remain to be called.)
 If one of these functions does not return
 (e.g., it calls
-.BR _exit (2),
+.BR _exit (3),
 or kills itself with a signal),
 then none of the remaining functions is called,
 and further exit processing (in particular, flushing of
@@ -198,10 +198,11 @@ However, a process can use the
 .B PR_SET_PDEATHSIG
 operation to arrange that it receives a signal if its parent terminates.
 .SH SEE ALSO
-.BR _exit (2),
 .BR get_robust_list (2),
+.BR exit (2),
 .BR setpgid (2),
 .BR wait (2),
+.BR _exit (3),
 .BR atexit (3),
 .BR on_exit (3),
 .BR tmpfile (3)

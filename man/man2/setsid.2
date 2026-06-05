@@ -69,7 +69,7 @@ In order to be sure that
 will succeed, call
 .BR fork (2)
 and have the parent
-.BR _exit (2),
+.BR _exit (3),
 while the child (which by definition can't be a process group leader) calls
 .BR setsid ().
 .P

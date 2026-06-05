@@ -586,7 +586,7 @@ successfully sent or the linger timeout has been reached.
 Otherwise,
 the call returns immediately and the closing is done in the background.
 When the socket is closed as part of
-.BR exit (2),
+.BR _exit (3),
 it always lingers in the background.
 .TP
 .B SO_LOCK_FILTER

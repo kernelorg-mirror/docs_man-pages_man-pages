@@ -105,7 +105,7 @@ The integer returned by
 .I fn
 is the exit status for the child process.
 The child process may also terminate explicitly by calling
-.BR exit (2)
+.BR _exit (3)
 or after receiving a fatal signal.
 .P
 The
@@ -1140,7 +1140,7 @@ until the child releases its virtual memory
 resources via a call to
 .BR execve (2)
 or
-.BR _exit (2)
+.BR _exit (3)
 (as with
 .BR vfork (2)).
 .IP

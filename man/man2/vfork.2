@@ -48,7 +48,7 @@ used to store the return value from
 or returns from the function in which
 .BR vfork ()
 was called, or calls any other function before successfully calling
-.BR _exit (2)
+.BR _exit (3)
 or one of the
 .BR exec (3)
 family of functions.
@@ -75,7 +75,7 @@ differs from
 in that the calling thread is suspended until the child terminates
 (either normally,
 by calling
-.BR _exit (2),
+.BR _exit (3),
 or abnormally, after delivery of a fatal signal),
 or it makes a call to
 .BR execve (2).
@@ -87,7 +87,7 @@ The child must not return from the current function or call
 established by the parent process and flushing the parent's
 .BR stdio (3)
 buffers), but may call
-.BR _exit (2).
+.BR _exit (3).
 .P
 As with
 .BR fork (2),
@@ -311,8 +311,8 @@ are allowed and input attempts result in an end-of-file indication."
 .SH SEE ALSO
 .BR clone (2),
 .BR execve (2),
-.BR _exit (2),
 .BR fork (2),
 .BR _Fork (3),
 .BR unshare (2),
-.BR wait (2)
+.BR wait (2),
+.BR _exit (3)

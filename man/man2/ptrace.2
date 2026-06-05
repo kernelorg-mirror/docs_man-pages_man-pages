@@ -1178,7 +1178,7 @@ always kills the process (all its threads),
 even if some threads of the process are ptraced.
 .P
 When the tracee calls
-.BR _exit (2),
+.BR _exit (3),
 it reports its death to its tracer.
 Other threads are not affected.
 .P
@@ -1192,7 +1192,7 @@ option is on,
 .B PTRACE_EVENT_EXIT
 will happen before actual death.
 This applies to exits via
-.BR exit (2),
+.BR _exit (3),
 .BR exit_group (2),
 and signal deaths (except
 .BR SIGKILL ,
@@ -1777,7 +1777,7 @@ it is not guaranteed that the next stop will be a syscall-exit-stop.
 Other possibilities are that the tracee may stop in a
 .B PTRACE_EVENT
 stop (including seccomp stops), exit (if it entered
-.BR _exit (2)
+.BR _exit (3)
 or
 .BR exit_group (2)),
 be killed by
@@ -2239,7 +2239,7 @@ stop, if the
 option was turned on.
 Then all other threads except the thread group leader report
 death as if they exited via
-.BR _exit (2)
+.BR _exit (3)
 with exit code 0.
 .IP \[bu]
 The execing tracee changes its thread ID while it is in the
@@ -2869,7 +2869,7 @@ Group-stop notifications are sent to the tracer, but not to real parent.
 Last confirmed on 2.6.38.6.
 .P
 If a thread group leader is traced and exits by calling
-.BR _exit (2),
+.BR _exit (3),
 .\" Note from Denys Vlasenko:
 .\"     Here "exits" means any kind of death - _exit, exit_group,
 .\"     signal death.  Signal death and exit_group cases are trivial,

@@ -58,8 +58,7 @@ otherwise, no changes are made to these file descriptors.
 (This function forks, and if the
 .BR fork (2)
 succeeds, the parent calls
-.\" not .IR in order not to underline _
-.BR _exit (2),
+.BR _exit (3),
 so that further errors are seen by the child only.)
 On success
 .BR daemon ()
