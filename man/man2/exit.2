@@ -1,1 +1,45 @@
-.so man2/_exit.2
+.\" Copyright 1992, Drew Eckhardt <drew@cs.colorado.edu>
+.\" Copyright 1993, Ian Jackson <iwj10@cus.cam.ac.uk>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH exit 2 (date) "Linux man-pages (unreleased)"
+.SH NAME
+exit \- terminate the calling thread
+.SH LIBRARY
+Standard C library
+.RI ( libc ,\~ \-lc )
+.SH SYNOPSIS
+.nf
+.BR "#include <sys/syscall.h>" "  /* Definition of " SYS_* " constants */"
+.B #include <unistd.h>
+.P
+.BI "[[noreturn]] long\~syscall(SYS_exit, int\~" status );
+.fi
+.SH DESCRIPTION
+.BR exit ()
+terminates the calling thread.
+.P
+By contrast with
+.BR _exit (3),
+the
+.BR exit ()
+system call terminates only the calling thread, and actions such as
+reparenting child processes or sending
+.B SIGCHLD
+to the parent process are performed only if this is
+the last thread in the thread group.
+.\" exit() is used by pthread_exit() to terminate the calling thread
+.SH RETURN VALUE
+.BR exit ()
+does not return.
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux.
+.SH SEE ALSO
+.BR exit_group (2),
+.BR _exit (3),
+.BR exit (3),
+.BR pthread_exit (3)
