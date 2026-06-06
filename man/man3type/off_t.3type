@@ -76,7 +76,7 @@ and
 .IR <unistd.h> .
 .SH SEE ALSO
 .BR copy_file_range (2),
-.BR llseek (2),
+.BR _llseek (2),
 .BR lseek (2),
 .BR mmap (2),
 .BR posix_fadvise (2),
