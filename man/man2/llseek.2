@@ -26,11 +26,6 @@ glibc provides no wrapper for
 necessitating the use of
 .BR syscall (2).
 .SH DESCRIPTION
-Note: for information about the
-.BR llseek (3)
-library function, see
-.BR lseek64 (3).
-.P
 The
 .BR _llseek ()
 system call repositions the offset of the open file description associated
@@ -85,6 +80,7 @@ wrapper function instead.
 .SH STANDARDS
 Linux.
 .SH SEE ALSO
+.BR llseek (3),
 .BR lseek (2),
 .BR open (2),
 .BR lseek64 (3)
