@@ -79,7 +79,6 @@ and
 .IR <unistd.h> .
 .SH SEE ALSO
 .BR copy_file_range (2),
-.BR _llseek (2),
 .BR lseek (2),
 .BR mmap (2),
 .BR posix_fadvise (2),
@@ -89,6 +88,5 @@ and
 .BR truncate (2),
 .BR fseeko (3),
 .BR lockf (3),
-.BR lseek64 (3),
 .BR posix_fallocate (3),
 .BR feature_test_macros (7)
