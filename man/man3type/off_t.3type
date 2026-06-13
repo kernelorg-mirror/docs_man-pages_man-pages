@@ -18,7 +18,7 @@ Standard C library
 .B #define _LARGEFILE64_SOURCE
 .B #include <sys/types.h>
 .P
-.BR typedef " /* ... */  " off64_t;
+.BR typedef " /* ... */  " off64_t \~[[deprecated]] ;
 .P
 .B #define _GNU_SOURCE
 .B #include <sys/types.h>
@@ -43,7 +43,7 @@ introduced by the Linux kernel.
 POSIX.1-2024.
 .TP
 .I off64_t
-GNU and some BSDs.
+None.
 .TP
 .I loff_t
 Linux.
@@ -51,6 +51,9 @@ Linux.
 .TP
 .I off_t
 POSIX.1-1988.
+.TP
+.I off64_t
+Large File Summit (LFS).
 .P
 .I <aio.h>
 and
