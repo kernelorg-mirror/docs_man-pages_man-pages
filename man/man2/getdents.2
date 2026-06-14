@@ -168,7 +168,7 @@ structures of the following type:
 .EX
 struct linux_dirent64 {
     ino64_t        d_ino;    /* 64\-bit inode number */
-    off64_t        d_off;    /* Not an offset; see getdents() */
+    loff_t         d_off;    /* Not an offset; see getdents() */
     unsigned short d_reclen; /* Size of this dirent */
     unsigned char  d_type;   /* File type */
     char           d_name[]; /* Filename (null\-terminated) */

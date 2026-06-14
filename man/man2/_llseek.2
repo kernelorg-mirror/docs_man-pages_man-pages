@@ -19,12 +19,6 @@ Standard C library
 .BI "            unsigned long " offset_low ", loff_t *" result ,
 .BI "            unsigned int " whence );
 .fi
-.P
-.IR Note :
-glibc provides no wrapper for
-.BR _llseek (),
-necessitating the use of
-.BR syscall (2).
 .SH DESCRIPTION
 The
 .BR _llseek ()
@@ -82,5 +76,4 @@ Linux.
 .SH SEE ALSO
 .BR llseek (3),
 .BR lseek (2),
-.BR open (2),
-.BR lseek64 (3)
+.BR open (2)
