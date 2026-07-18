@@ -2,11 +2,16 @@
 .SH NAME
 chown \- change file owner and group
 .SH SYNOPSIS
-.B chown
-[\fI\,OPTION\/\fR]... [\fI\,OWNER\/\fR][\fI\,:\/\fR[\fI\,GROUP\/\fR]] \fI\,FILE\/\fR...
-.br
-.B chown
-[\fI\,OPTION\/\fR]... \fI\,--reference=RFILE FILE\/\fR...
+.SY chown
+.RI [ OPTION \~.\|.\|.\&]
+.RI [ OWNER ][ \f[B]:\f[] [ GROUP ]]
+.IR FILE \~.\|.\|.\&
+.YS
+.SY chown
+.RI [ OPTION \~.\|.\|.\&]
+.BI \-\-reference= RFILE
+.IR FILE \~.\|.\|.\&
+.YS
 .SH DESCRIPTION
 This manual page
 documents the GNU version of

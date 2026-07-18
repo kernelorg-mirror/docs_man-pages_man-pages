@@ -2,14 +2,28 @@
 .SH NAME
 chcon \- change file security context
 .SH SYNOPSIS
-.B chcon
-[\fI\,OPTION\/\fR]... \fI\,CONTEXT FILE\/\fR...
-.br
-.B chcon
-[\fI\,OPTION\/\fR]... [\fI\,-u USER\/\fR] [\fI\,-r ROLE\/\fR] [\fI\,-l RANGE\/\fR] [\fI\,-t TYPE\/\fR] \fI\,FILE\/\fR...
-.br
-.B chcon
-[\fI\,OPTION\/\fR]... \fI\,--reference=RFILE FILE\/\fR...
+.SY chcon
+.RI [ OPTION \~.\|.\|.\&]
+.I CONTEXT
+.IR FILE \~.\|.\|.\&
+.YS
+.SY chcon
+.RI [ OPTION \~.\|.\|.\&]
+.RB [ \-u
+.IR USER ]
+.RB [ \-r
+.IR ROLE ]
+.RB [ \-l
+.IR RANGE ]
+.RB [ \-t
+.IR TYPE ]
+.IR FILE \~.\|.\|.\&
+.YS
+.SY chcon
+.RI [ OPTION \~.\|.\|.\&]
+.BI \-\-reference= RFILE
+.IR FILE \~.\|.\|.\&
+.YS
 .SH DESCRIPTION
 .\" Add any additional description here
 .PP
