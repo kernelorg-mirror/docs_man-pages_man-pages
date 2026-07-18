@@ -2,17 +2,27 @@
 .SH NAME
 install \- copy files and set attributes
 .SH SYNOPSIS
-.B install
-[\fI\,OPTION\/\fR]... [\fI\,-T\/\fR] \fI\,SOURCE DEST\/\fR
-.br
-.B install
-[\fI\,OPTION\/\fR]... \fI\,SOURCE\/\fR... \fI\,DIRECTORY\/\fR
-.br
-.B install
-[\fI\,OPTION\/\fR]... \fI\,-t DIRECTORY SOURCE\/\fR...
-.br
-.B install
-[\fI\,OPTION\/\fR]... \fI\,-d DIRECTORY\/\fR...
+.SY install
+.RI [ OPTION \~.\|.\|.\&]
+.RB [ \-T ]
+.I SOURCE
+.I DEST
+.YS
+.SY install
+.RI [ OPTION \~.\|.\|.\&]
+.IR SOURCE \~.\|.\|.\&
+.I DIRECTORY
+.YS
+.SY install
+.RI [ OPTION \~.\|.\|.\&]
+.BI \-t\~ DIRECTORY
+.IR SOURCE \~.\|.\|.\&
+.YS
+.SY install
+.RI [ OPTION \~.\|.\|.\&]
+.BI \-d
+.IR DIRECTORY \~.\|.\|.\&
+.YS
 .SH DESCRIPTION
 .\" Add any additional description here
 .PP

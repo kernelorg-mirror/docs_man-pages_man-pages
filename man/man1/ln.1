@@ -2,17 +2,26 @@
 .SH NAME
 ln \- make links between files
 .SH SYNOPSIS
-.B ln
-[\fI\,OPTION\/\fR]... [\fI\,-T\/\fR] \fI\,TARGET LINK_NAME\/\fR
-.br
-.B ln
-[\fI\,OPTION\/\fR]... \fI\,TARGET\/\fR
-.br
-.B ln
-[\fI\,OPTION\/\fR]... \fI\,TARGET\/\fR... \fI\,DIRECTORY\/\fR
-.br
-.B ln
-[\fI\,OPTION\/\fR]... \fI\,-t DIRECTORY TARGET\/\fR...
+.SY ln
+.RI [ OPTION \~.\|.\|.\&]
+.RB [ \-T ]
+.I TARGET
+.I LINK_NAME
+.YS
+.SY ln
+.RI [ OPTION \~.\|.\|.\&]
+.I TARGET
+.YS
+.SY ln
+.RI [ OPTION \~.\|.\|.\&]
+.IR TARGET \~.\|.\|.\&
+.I DIRECTORY
+.YS
+.SY ln
+.RI [ OPTION \~.\|.\|.\&]
+.BI \-t\~ DIRECTORY
+.IR TARGET \~.\|.\|.\&
+.YS
 .SH DESCRIPTION
 .\" Add any additional description here
 .PP

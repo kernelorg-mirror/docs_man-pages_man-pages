@@ -2,14 +2,22 @@
 .SH NAME
 mv \- move (rename) files
 .SH SYNOPSIS
-.B mv
-[\fI\,OPTION\/\fR]... [\fI\,-T\/\fR] \fI\,SOURCE DEST\/\fR
-.br
-.B mv
-[\fI\,OPTION\/\fR]... \fI\,SOURCE\/\fR... \fI\,DIRECTORY\/\fR
-.br
-.B mv
-[\fI\,OPTION\/\fR]... \fI\,-t DIRECTORY SOURCE\/\fR...
+.SY mv
+.RI [ OPTION \~.\|.\|.\&]
+.RB [ \-T ]
+.I SOURCE
+.I DEST
+.YS
+.SY mv
+.RI [ OPTION \~.\|.\|.\&]
+.IR SOURCE \~.\|.\|.\&
+.I DIRECTORY
+.YS
+.SY mv
+.RI [ OPTION \~.\|.\|.\&]
+.BI \-t\~ DIRECTORY
+.IR SOURCE \~.\|.\|.\&
+.YS
 .SH DESCRIPTION
 .\" Add any additional description here
 .PP

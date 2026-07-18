@@ -2,14 +2,22 @@
 .SH NAME
 cp \- copy files and directories
 .SH SYNOPSIS
-.B cp
-[\fI\,OPTION\/\fR]... [\fI\,-T\/\fR] \fI\,SOURCE DEST\/\fR
-.br
-.B cp
-[\fI\,OPTION\/\fR]... \fI\,SOURCE\/\fR... \fI\,DIRECTORY\/\fR
-.br
-.B cp
-[\fI\,OPTION\/\fR]... \fI\,-t DIRECTORY SOURCE\/\fR...
+.SY cp
+.RI [ OPTION \~.\|.\|.\&]
+.RB [ \-T ]
+.I SOURCE
+.I DEST
+.YS
+.SY cp
+.RI [ OPTION \~.\|.\|.\&]
+.IR SOURCE \~.\|.\|.\&
+.I DIRECTORY
+.YS
+.SY cp
+.RI [ OPTION \~.\|.\|.\&]
+.BI -t\~ DIRECTORY
+.IR SOURCE \~.\|.\|.\&
+.YS
 .SH DESCRIPTION
 .\" Add any additional description here
 .PP

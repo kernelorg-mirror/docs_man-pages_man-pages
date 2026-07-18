@@ -2,14 +2,27 @@
 .SH NAME
 stty \- change and print terminal line settings
 .SH SYNOPSIS
-.B stty
-[\fI\,-F DEVICE | --file=DEVICE\/\fR] [\fI\,SETTING\/\fR]...
-.br
-.B stty
-[\fI\,-F DEVICE | --file=DEVICE\/\fR] [\fI\,-a|--all\/\fR]
-.br
-.B stty
-[\fI\,-F DEVICE | --file=DEVICE\/\fR] [\fI\,-g|--save\/\fR]
+.SY stty
+.RB [ \-F
+.I DEVICE
+|
+.BR \-\-file=\f[I]DEVICE\f[] ]
+.RI [ SETTING \~.\|.\|.\&]
+.YS
+.SY stty
+.RB [ \-F
+.I DEVICE
+|
+.BR \-\-file=\f[I]DEVICE\f[] ]
+. RB [ \-a | \-\-all ]
+.YS
+.SY stty
+.RB [ \-F
+.I DEVICE
+|
+.BR \-\-file=\f[I]DEVICE\f[] ]
+.RB [ \-g | \-\-save ]
+.YS
 .SH DESCRIPTION
 .\" Add any additional description here
 .PP

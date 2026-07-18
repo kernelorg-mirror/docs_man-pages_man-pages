@@ -2,14 +2,22 @@
 .SH NAME
 od \- dump files in octal and other formats
 .SH SYNOPSIS
-.B od
-[\fI\,OPTION\/\fR]... [\fI\,FILE\/\fR]...
-.br
-.B od
-[\fI\,-abcdfilosx\/\fR]... [\fI\,FILE\/\fR] [[\fI\,+\/\fR]\fI\,OFFSET\/\fR[\fI\,.\/\fR][\fI\,b\/\fR]]
-.br
-.B od
-\fI\,--traditional \/\fR[\fI\,OPTION\/\fR]... [\fI\,FILE\/\fR] [[\fI\,+\/\fR]\fI\,OFFSET\/\fR[\fI\,.\/\fR][\fI\,b\/\fR] [\fI\,+\/\fR][\fI\,LABEL\/\fR][\fI\,.\/\fR][\fI\,b\/\fR]]
+.SY od
+.RI [ OPTION \~.\|.\|.\&]
+.RI [ FILE \~.\|.\|.\&]
+.YS
+.SY od
+.RB [ \-abcdfilosx ]\~.\|.\|.\&
+.RI [ FILE ]
+.RB [[ + ] \f[I]OFFSET\f[] [ . ][ b ]]
+.YS
+.SY od
+.B \-\-traditional
+.RI [ OPTION \~.\|.\|.\&]
+.RI [ FILE ]
+.RB [[ + ] \f[I]OFFSET\f[] [ . ][ b ]
+.RB [ + ][ \f[I]LABEL\f[] ][ . ][ b ]]
+.YS
 .SH DESCRIPTION
 .\" Add any additional description here
 .PP

@@ -2,11 +2,24 @@
 .SH NAME
 runcon \- run command with specified security context
 .SH SYNOPSIS
-.B runcon
-[\fI\,CONTEXT COMMAND \/\fR[\fI\,ARG\/\fR]...]
-.br
-.B runcon
-[\fI\,-c\/\fR] [\fI\,-u USER\/\fR] [\fI\,-r ROLE\/\fR] [\fI\,-t TYPE\/\fR] [\fI\,-l RANGE\/\fR] \fI\,COMMAND \/\fR[\fI\,ARG\/\fR]...
+.SY runcon
+.RI [ CONTEXT
+.I COMMAND
+.RI [ ARG \~.\|.\|.\&]]
+.YS
+.SY runcon
+.RB [ \-c ]
+.RB [ \-u
+.IR USER ]
+.RB [ \-r
+.IR ROLE ]
+.RB [ \-t
+.IR TYPE ]
+.RB [ \-l
+.IR RANGE ]
+.I COMMAND
+.RI [ ARG \~.\|.\|.\&]
+.YS
 .SH DESCRIPTION
 Run COMMAND with completely-specified CONTEXT, or with current or
 transitioned security context modified by one or more of LEVEL,
