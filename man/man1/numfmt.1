@@ -136,13 +136,32 @@ Optional quote (%'f) will enable \fB\-\-grouping\fR (if supported by current loc
 Optional width value (%10f) will pad output. Optional zero (%010f) width
 will zero pad the number. Optional negative values (%\-10f) will left align.
 Optional precision (%.1f) will override the input determined precision.
-.PP
-Exit status is 0 if all input numbers were successfully converted.
-By default, numfmt will stop at the first conversion error with exit status 2.
-With \fB\-\-invalid\fR=\fI\,'fail'\/\fR a warning is printed for each conversion error
-and the exit status is 2.  With \fB\-\-invalid\fR=\fI\,'warn'\/\fR each conversion error is
-diagnosed, but the exit status is 0.  With \fB\-\-invalid\fR=\fI\,'ignore'\/\fR conversion
-errors are not diagnosed and the exit status is 0.
+.SH EXIT STATUS
+.TP
+0
+if all input numbers were successfully converted.
+.TP
+2
+if a conversion error occurred.
+.IP
+By default,
+.B numfmt
+will stop at the first conversion error.
+.IP
+With
+.BR \-\-invalid=\[aq]fail\[aq] ,
+every conversion error is diagnosed,
+and the exit status is 2.
+.IP
+With
+.BR \-\-invalid=\[aq]warn\[aq] ,
+every conversion error is diagnosed,
+but the exit status is 0.
+.IP
+With
+.BR \-\-invalid=\[aq]ignore\[aq] ,
+conversion errors are not diagnosed,
+and the exit status is 0.
 .SH EXAMPLES
 .IP
 \*[mono]$ numfmt --to=si 1000\*[/mono]
