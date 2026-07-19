@@ -85,9 +85,19 @@ Beware that many operators need to be escaped or quoted for shells.
 Comparisons are arithmetic if both ARGs are numbers, else lexicographical.
 Pattern matches return the string matched between \e( and \e) or null; if
 \e( and \e) are not used, they return the number of characters matched or 0.
-.PP
-Exit status is 0 if EXPRESSION is neither null nor 0, 1 if EXPRESSION is null
-or 0, 2 if EXPRESSION is syntactically invalid, and 3 if an error occurred.
+.SH EXIT STATUS
+.TP
+0
+if EXPRESSION is neither null nor 0,
+.TP
+1
+if EXPRESSION is null or 0,
+.TP
+2
+if EXPRESSION is syntactically invalid,
+.TP
+3
+if an error occurred.
 .SH AUTHOR
 Written by Mike Parker, James Youngman, and Paul Eggert.
 .SH "REPORTING BUGS"
