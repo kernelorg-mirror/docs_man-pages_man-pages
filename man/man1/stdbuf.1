@@ -44,7 +44,7 @@ NOTE: If COMMAND adjusts the buffering of its standard streams ('tee' does
 for example) then that will override corresponding changes by 'stdbuf'.
 Also some filters (like 'dd' and 'cat' etc.) don't use streams for I/O,
 and are thus unaffected by 'stdbuf' settings.
-.SS "Exit status:"
+.SH EXIT STATUS
 .TP
 125
 if the stdbuf command itself fails
