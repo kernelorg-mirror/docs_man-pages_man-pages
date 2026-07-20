@@ -15,31 +15,45 @@ Start COMMAND, and kill it if still running after DURATION.
 .PP
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-f'\fB\-f, \-\-foreground\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-f
+\fB\-f, \-\-foreground\fP
+.UE
 when not running timeout directly from a shell prompt,
 allow COMMAND to read from the TTY and get TTY signals;
 in this mode, children of COMMAND will not be timed out
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-k'\fB\-k, \-\-kill\-after=\,DURATION\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-k
+\fB\-k, \-\-kill\-after=\,DURATION\fP
+.UE
 also send a KILL signal if COMMAND is still running
 this long after the initial signal was sent
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-p'\fB\-p, \-\-preserve\-status\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-p
+\fB\-p, \-\-preserve\-status\fP
+.UE
 exit with the same status as COMMAND,
 even when the command times out
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-s'\fB\-s, \-\-signal=\,SIGNAL\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-s
+\fB\-s, \-\-signal=\,SIGNAL\fP
+.UE
 specify the signal to be sent on timeout;
 SIGNAL may be a name like 'HUP' or a number;
 see 'kill \fB\-l\fR' for a list of signals
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-v'\fB\-v, \-\-verbose\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#timeout-v
+\fB\-v, \-\-verbose\fP
+.UE
 diagnose to standard error any signal sent upon timeout
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/timeout#timeout--help'\fB\-\-help\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/timeout#timeout--help
+\fB\-\-help\fP
+.UE
 display this help and exit
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/timeout#timeout--version'\fB\-\-version\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/timeout#timeout--version
+\fB\-\-version\fP
+.UE
 output version information and exit
 .PP
 DURATION is a floating point number with an optional suffix:

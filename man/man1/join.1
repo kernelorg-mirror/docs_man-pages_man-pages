@@ -15,53 +15,83 @@ standard output.  The default join field is the first, delimited by blanks.
 .PP
 When FILE1 or FILE2 (not both) is \-, read standard input.
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-a'\fB\-a FILENUM\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-a
+\fB\-a FILENUM\fP
+.UE
 also print unpairable lines from file FILENUM,
 where FILENUM is 1 or 2, corresponding to FILE1 or FILE2
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-e'\fB\-e STRING\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-e
+\fB\-e STRING\fP
+.UE
 replace missing (empty) input fields with STRING;
 I.e., missing fields specified with '\-12jo' options
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-i'\fB\-i, \-\-ignore\-case\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-i
+\fB\-i, \-\-ignore\-case\fP
+.UE
 ignore differences in case when comparing fields
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-j'\fB\-j FIELD\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-j
+\fB\-j FIELD\fP
+.UE
 equivalent to '\-1 FIELD \fB\-2\fR FIELD'
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-o'\fB\-o FORMAT\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-o
+\fB\-o FORMAT\fP
+.UE
 obey FORMAT while constructing output line
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-t'\fB\-t CHAR\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-t
+\fB\-t CHAR\fP
+.UE
 use CHAR as input and output field separator
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-v'\fB\-v FILENUM\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-v
+\fB\-v FILENUM\fP
+.UE
 like \fB\-a\fR FILENUM, but suppress joined output lines
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-1'\fB\-1 FIELD\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-1
+\fB\-1 FIELD\fP
+.UE
 join on this FIELD of file 1
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-2'\fB\-2 FIELD\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-2
+\fB\-2 FIELD\fP
+.UE
 join on this FIELD of file 2
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join--check-order'\fB\-\-check\-order\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join--check-order
+\fB\-\-check\-order\fP
+.UE
 check that the input is correctly sorted, even
 if all input lines are pairable
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join--nocheck-order'\fB\-\-nocheck\-order\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join--nocheck-order
+\fB\-\-nocheck\-order\fP
+.UE
 do not check that the input is correctly sorted
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join--header'\fB\-\-header\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join--header
+\fB\-\-header\fP
+.UE
 treat the first line in each file as field headers,
 print them without trying to pair them
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#join-z'\fB\-z, \-\-zero\-terminated\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#join-z
+\fB\-z, \-\-zero\-terminated\fP
+.UE
 line delimiter is NUL, not newline
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/join#join--help'\fB\-\-help\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/join#join--help
+\fB\-\-help\fP
+.UE
 display this help and exit
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/join#join--version'\fB\-\-version\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/join#join--version
+\fB\-\-version\fP
+.UE
 output version information and exit
 .PP
 Unless \fB\-t\fR CHAR is given, leading blanks separate fields and are ignored,

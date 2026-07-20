@@ -16,47 +16,73 @@ With no FILE, or when FILE is \-, read standard input.
 .PP
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-b'\fB\-b, \-\-binary\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-b
+\fB\-b, \-\-binary\fP
+.UE
 read in binary mode
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-c'\fB\-c, \-\-check\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-c
+\fB\-c, \-\-check\fP
+.UE
 read checksums from the FILEs and check them
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-l'\fB\-l, \-\-length=\,BITS\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-l
+\fB\-l, \-\-length=\,BITS\fP
+.UE
 digest length in bits; must not exceed the max size
 and must be a multiple of 8 for blake2b;
 must be 224, 256, 384, or 512 for sha2 or sha3
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--tag'\fB\-\-tag\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--tag
+\fB\-\-tag\fP
+.UE
 create a BSD\-style checksum
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-t'\fB\-t, \-\-text\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-t
+\fB\-t, \-\-text\fP
+.UE
 read in text mode (default)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-z'\fB\-z, \-\-zero\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-z
+\fB\-z, \-\-zero\fP
+.UE
 end each output line with NUL, not newline,
 and disable file name escaping
 .SS "The following five options are useful only when verifying checksums:"
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--ignore-missing'\fB\-\-ignore\-missing\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--ignore-missing
+\fB\-\-ignore\-missing\fP
+.UE
 don't fail or report status for missing files
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--quiet'\fB\-\-quiet\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--quiet
+\fB\-\-quiet\fP
+.UE
 don't print OK for each successfully verified file
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--status'\fB\-\-status\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--status
+\fB\-\-status\fP
+.UE
 don't output anything, status code shows success
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--strict'\fB\-\-strict\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum--strict
+\fB\-\-strict\fP
+.UE
 exit non\-zero for improperly formatted checksum lines
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-w'\fB\-w, \-\-warn\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#cksum-w
+\fB\-w, \-\-warn\fP
+.UE
 warn about improperly formatted checksum lines
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/cksum#cksum--help'\fB\-\-help\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/cksum#cksum--help
+\fB\-\-help\fP
+.UE
 display this help and exit
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/cksum#cksum--version'\fB\-\-version\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/cksum#cksum--version
+\fB\-\-version\fP
+.UE
 output version information and exit
 .PP
 The sums are computed as described in RFC 7693.

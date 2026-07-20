@@ -16,38 +16,60 @@ If FILE is \-, shred standard output.
 .PP
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-f'\fB\-f, \-\-force\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-f
+\fB\-f, \-\-force\fP
+.UE
 change permissions to allow writing if necessary
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-n'\fB\-n, \-\-iterations=\,N\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-n
+\fB\-n, \-\-iterations=\,N\fP
+.UE
 overwrite N times instead of the default (3)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred--random-source'\fB\-\-random\-source=FILE\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred--random-source
+\fB\-\-random\-source=FILE\fP
+.UE
 get random bytes from FILE
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-s'\fB\-s, \-\-size=\,N\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-s
+\fB\-s, \-\-size=\,N\fP
+.UE
 shred this many bytes (suffixes like K, M, G accepted)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-u'\fB\-u\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-u
+\fB\-u\fP
+.UE
 deallocate and remove file after overwriting
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred--remove'\fB\-\-remove[=HOW]\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred--remove
+\fB\-\-remove[=HOW]\fP
+.UE
 like \fB\-u\fR but give control on HOW to delete;  See below
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-v'\fB\-v, \-\-verbose\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-v
+\fB\-v, \-\-verbose\fP
+.UE
 show details of data and metadata operations performed
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-x'\fB\-x, \-\-exact\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-x
+\fB\-x, \-\-exact\fP
+.UE
 do not round file sizes up to the next full block;
 this is the default for non\-regular files
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-z'\fB\-z, \-\-zero\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#shred-z
+\fB\-z, \-\-zero\fP
+.UE
 add a final overwrite with zeros to hide shredding
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/shred#shred--help'\fB\-\-help\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/shred#shred--help
+\fB\-\-help\fP
+.UE
 display this help and exit
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/shred#shred--version'\fB\-\-version\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/shred#shred--version
+\fB\-\-version\fP
+.UE
 output version information and exit
 .PP
 Delete FILE(s) if \fB\-\-remove\fR (\fB\-u\fR) is specified.  The default is not to remove
