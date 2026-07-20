@@ -37,34 +37,34 @@ owner nor the group is changed.
 Change the owner and/or group of each FILE to OWNER and/or GROUP.
 With \fB\-\-reference\fR, change the owner and group of each FILE to those of RFILE.
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-c
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-c
 \fB\-c, \-\-changes\fP
 .UE
 like verbose but report only when a change is made
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-f
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-f
 \fB\-f, \-\-silent, \-\-quiet\fP
 .UE
 suppress most error messages
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-v
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-v
 \fB\-v, \-\-verbose\fP
 .UE
 output a diagnostic for every file processed
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown--dereference
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-\-dereference
 \fB\-\-dereference\fP
 .UE
 affect the referent of each symbolic link (this is
 the default), rather than the symbolic link itself
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-h
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-h
 \fB\-h, \-\-no\-dereference\fP
 .UE
 affect symbolic links instead of any referenced file;
 useful only on systems that can change the ownership of a symlink
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown--from
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-\-from
 \fB\-\-from=CURRENT_OWNER:CURRENT_GROUP\fP
 .UE
 change the ownership of each file only if its
@@ -72,23 +72,23 @@ current owner and/or group match those specified here.
 Either may be omitted, in which case a match
 is not required for the omitted attribute
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown--no-preserve-root
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-\-no\-preserve\-root
 \fB\-\-no\-preserve\-root\fP
 .UE
 do not treat '/' specially (the default)
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown--preserve-root
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-\-preserve\-root
 \fB\-\-preserve\-root\fP
 .UE
 fail to operate recursively on '/'
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown--reference
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-\-reference
 \fB\-\-reference=RFILE\fP
 .UE
 use RFILE's ownership rather than specifying values.
 RFILE is always dereferenced if a symbolic link.
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-R
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-R
 \fB\-R, \-\-recursive\fP
 .UE
 operate on files and directories recursively
@@ -97,27 +97,27 @@ The following options modify how a hierarchy is traversed when the \fB\-R\fR
 option is also specified.  If more than one is specified, only the final
 one takes effect. \fB\-P\fR is the default.
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-H
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-H
 \fB\-H\fP
 .UE
 if a command line argument is a symlink to a directory, traverse it
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-L
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-L
 \fB\-L\fP
 .UE
 traverse every symbolic link to a directory encountered
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown-P
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#chown\-P
 \fB\-P\fP
 .UE
 do not traverse any symbolic links
 .TP
-.UR https://www.gnu.org/software/coreutils/chown#chown--help
+.UR https://www.gnu.org/software/coreutils/chown#chown\-\-help
 \fB\-\-help\fP
 .UE
 display this help and exit
 .TP
-.UR https://www.gnu.org/software/coreutils/chown#chown--version
+.UR https://www.gnu.org/software/coreutils/chown#chown\-\-version
 \fB\-\-version\fP
 .UE
 output version information and exit

@@ -36,111 +36,111 @@ suffixes may be . for octal and b for multiply by 512.
 .PP
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-A
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-A
 \fB\-A, \-\-address\-radix=\,RADIX\fP
 .UE
 output format for file offsets;
 RADIX is one of [doxn], for Decimal, Octal, Hex or None
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od--endian
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-\-endian
 \fB\-\-endian={big|little}\fP
 .UE
 swap input bytes according the specified order
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-j
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-j
 \fB\-j, \-\-skip\-bytes=\,BYTES\fP
 .UE
 skip BYTES input bytes first
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-N
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-N
 \fB\-N, \-\-read\-bytes=\,BYTES\fP
 .UE
 limit dump to BYTES input bytes
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-S
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-S
 \fB\-S BYTES, \-\-strings[=\,BYTES]\fP
 .UE
 show only NUL terminated strings
 of at least BYTES (default 3) printable characters
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-t
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-t
 \fB\-t, \-\-format=\,TYPE\fP
 .UE
 select output format or formats
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-v
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-v
 \fB\-v, \-\-output\-duplicates\fP
 .UE
 do not use * to mark line suppression
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-w
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-w
 \fB\-w[BYTES], \-\-width[=\,BYTES]\fP
 .UE
 output BYTES bytes per output line;
 32 is implied when BYTES is not specified
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od--traditional
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-\-traditional
 \fB\-\-traditional\fP
 .UE
 accept arguments in third form above
 .TP
-.UR https://www.gnu.org/software/coreutils/od#od--help
+.UR https://www.gnu.org/software/coreutils/od#od\-\-help
 \fB\-\-help\fP
 .UE
 display this help and exit
 .TP
-.UR https://www.gnu.org/software/coreutils/od#od--version
+.UR https://www.gnu.org/software/coreutils/od#od\-\-version
 \fB\-\-version\fP
 .UE
 output version information and exit
 .SS "Traditional format specifications may be intermixed; they accumulate:"
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-a
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-a
 \fB\-a\fP
 .UE
 same as \fB\-t\fR a,  select named characters, ignoring high\-order bit
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-b
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-b
 \fB\-b\fP
 .UE
 same as \fB\-t\fR o1, select octal bytes
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-c
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-c
 \fB\-c\fP
 .UE
 same as \fB\-t\fR c,  select printable characters or backslash escapes
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-d
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-d
 \fB\-d\fP
 .UE
 same as \fB\-t\fR u2, select unsigned decimal 2\-byte units
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-f
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-f
 \fB\-f\fP
 .UE
 same as \fB\-t\fR fF, select floats
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-i
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-i
 \fB\-i\fP
 .UE
 same as \fB\-t\fR dI, select decimal ints
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-l
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-l
 \fB\-l\fP
 .UE
 same as \fB\-t\fR dL, select decimal longs
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-o
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-o
 \fB\-o\fP
 .UE
 same as \fB\-t\fR o2, select octal 2\-byte units
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-s
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-s
 \fB\-s\fP
 .UE
 same as \fB\-t\fR d2, select decimal 2\-byte units
 .TP
-.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od-x
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#od\-x
 \fB\-x\fP
 .UE
 same as \fB\-t\fR x2, select hexadecimal 2\-byte units
