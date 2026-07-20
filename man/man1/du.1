@@ -17,101 +17,159 @@ Summarize device usage of the set of FILEs, recursively for directories.
 .PP
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-0'\fB\-0, \-\-null\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-0
+\fB\-0, \-\-null\fP
+.UE
 end each output line with NUL, not newline
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-a'\fB\-a, \-\-all\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-a
+\fB\-a, \-\-all\fP
+.UE
 write counts for all files, not just directories
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-A'\fB\-A, \-\-apparent\-size\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-A
+\fB\-A, \-\-apparent\-size\fP
+.UE
 print apparent sizes rather than device usage;
 although the apparent size is usually smaller, it may be
 larger due to holes in ('sparse') files,
 internal fragmentation, indirect blocks, etc.
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-B'\fB\-B, \-\-block\-size=\,SIZE\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-B
+\fB\-B, \-\-block\-size=\,SIZE\fP
+.UE
 scale sizes by SIZE before printing them; See SIZE format below;
 E.g., '\-BM' prints sizes in units of 1,048,576 bytes
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-b'\fB\-b, \-\-bytes\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-b
+\fB\-b, \-\-bytes\fP
+.UE
 equivalent to '\-\-apparent\-size \fB\-\-block\-size\fR=\fI\,1'\/\fR
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-c'\fB\-c, \-\-total\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-c
+\fB\-c, \-\-total\fP
+.UE
 produce a grand total
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-D'\fB\-D, \-\-dereference\-args\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-D
+\fB\-D, \-\-dereference\-args\fP
+.UE
 dereference only symlinks that are listed on the command line
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-d'\fB\-d, \-\-max\-depth=\,N\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-d
+\fB\-d, \-\-max\-depth=\,N\fP
+.UE
 print the total for a directory (or file, with \fB\-\-all\fR)
 only if it is N or fewer levels below the command
 line argument;  \fB\-\-max\-depth\fR=\fI\,0\/\fR is the same as \fB\-\-summarize\fR
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du--files0-from'\fB\-\-files0\-from=F\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du--files0-from
+\fB\-\-files0\-from=F\fP
+.UE
 summarize device usage of the NUL\-terminated file names
 specified in file F;  if F is \-, read names from standard input
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-H'\fB\-H\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-H
+\fB\-H\fP
+.UE
 equivalent to \fB\-\-dereference\-args\fR (\fB\-D\fR)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-h'\fB\-h, \-\-human\-readable\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-h
+\fB\-h, \-\-human\-readable\fP
+.UE
 print sizes in human readable format (e.g., 1K 234M 2G)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du--inodes'\fB\-\-inodes\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du--inodes
+\fB\-\-inodes\fP
+.UE
 list inode usage information instead of block usage
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-k'\fB\-k\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-k
+\fB\-k\fP
+.UE
 like \fB\-\-block\-size\fR=\fI\,1K\/\fR
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-L'\fB\-L, \-\-dereference\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-L
+\fB\-L, \-\-dereference\fP
+.UE
 dereference all symbolic links
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-l'\fB\-l, \-\-count\-links\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-l
+\fB\-l, \-\-count\-links\fP
+.UE
 count sizes many times if hard linked
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-m'\fB\-m\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-m
+\fB\-m\fP
+.UE
 like \fB\-\-block\-size\fR=\fI\,1M\/\fR
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-P'\fB\-P, \-\-no\-dereference\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-P
+\fB\-P, \-\-no\-dereference\fP
+.UE
 don't follow any symbolic links (this is the default)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-S'\fB\-S, \-\-separate\-dirs\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-S
+\fB\-S, \-\-separate\-dirs\fP
+.UE
 for directories do not include size of subdirectories
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du--si'\fB\-\-si\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du--si
+\fB\-\-si\fP
+.UE
 like \fB\-h\fR, but use powers of 1000 not 1024
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-s'\fB\-s, \-\-summarize\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-s
+\fB\-s, \-\-summarize\fP
+.UE
 display only a total for each argument
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-t'\fB\-t, \-\-threshold=\,SIZE\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-t
+\fB\-t, \-\-threshold=\,SIZE\fP
+.UE
 exclude entries smaller than SIZE if positive,
 or entries greater than SIZE if negative
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du--time'\fB\-\-time\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du--time
+\fB\-\-time\fP
+.UE
 show time of the last modification of any file in the directory,
 or any of its subdirectories
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du--time'\fB\-\-time=WORD\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du--time
+\fB\-\-time=WORD\fP
+.UE
 show time as WORD instead of modification time:
 atime, access, use, ctime or status
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du--time-style'\fB\-\-time\-style=STYLE\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du--time-style
+\fB\-\-time\-style=STYLE\fP
+.UE
 time/date format with \fB\-\-time\fR; see TIME_STYLE below
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-X'\fB\-X, \-\-exclude\-from=\,FILE\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-X
+\fB\-X, \-\-exclude\-from=\,FILE\fP
+.UE
 exclude files that match any pattern in FILE
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du--exclude'\fB\-\-exclude=PATTERN\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du--exclude
+\fB\-\-exclude=PATTERN\fP
+.UE
 exclude files that match PATTERN
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#du-x'\fB\-x, \-\-one\-file\-system\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#du-x
+\fB\-x, \-\-one\-file\-system\fP
+.UE
 skip directories on different file systems
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/du#du--help'\fB\-\-help\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/du#du--help
+\fB\-\-help\fP
+.UE
 display this help and exit
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/du#du--version'\fB\-\-version\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/du#du--version
+\fB\-\-version\fP
+.UE
 output version information and exit
 .PP
 Display values are in units of the first available SIZE from \fB\-\-block\-size\fR,

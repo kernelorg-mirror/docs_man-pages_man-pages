@@ -18,70 +18,106 @@ Reformat NUMBER(s), or the numbers from standard input if none are specified.
 .PP
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--debug'\fB\-\-debug\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--debug
+\fB\-\-debug\fP
+.UE
 print warnings about invalid input
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt-d'\fB\-d, \-\-delimiter=\,X\fP\X'tty: link'\/\fR
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt-d
+\fB\-d, \-\-delimiter=\,X\fP
+.UE
 use X instead of whitespace for field delimiter
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--field'\fB\-\-field=FIELDS\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--field
+\fB\-\-field=FIELDS\fP
+.UE
 replace the numbers in these input fields (default=1);
 see FIELDS below for details
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--format'\fB\-\-format=FORMAT\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--format
+\fB\-\-format=FORMAT\fP
+.UE
 use printf style floating\-point FORMAT;
 see FORMAT below for details
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--from'\fB\-\-from=UNIT\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--from
+\fB\-\-from=UNIT\fP
+.UE
 auto\-scale input numbers to UNITs; default is 'none';
 see UNIT below for details
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--from-unit'\fB\-\-from\-unit=N\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--from-unit
+\fB\-\-from\-unit=N\fP
+.UE
 specify the input unit size (instead of the default 1)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--grouping'\fB\-\-grouping\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--grouping
+\fB\-\-grouping\fP
+.UE
 use locale\-defined grouping of digits, e.g. 1,000,000.
 This has no effect in the C/POSIX locale
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--header'\fB\-\-header[=N]\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--header
+\fB\-\-header[=N]\fP
+.UE
 print (without converting) the first N header lines;
 N defaults to 1 if not specified
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--invalid'\fB\-\-invalid=MODE\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--invalid
+\fB\-\-invalid=MODE\fP
+.UE
 failure mode for invalid numbers;
 MODE can be: abort (default), fail, warn, ignore
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--padding'\fB\-\-padding=N\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--padding
+\fB\-\-padding=N\fP
+.UE
 pad the output to N characters;
 positive N will right\-align, negative N will left\-align;
 padding is ignored if the output is wider than N;
 the default is to automatically pad if a whitespace is found
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--round'\fB\-\-round=METHOD\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--round
+\fB\-\-round=METHOD\fP
+.UE
 use METHOD for rounding when scaling; METHOD can be:
 up, down, from\-zero (default), towards\-zero, nearest
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--suffix'\fB\-\-suffix=SUFFIX\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--suffix
+\fB\-\-suffix=SUFFIX\fP
+.UE
 add SUFFIX to output numbers,
 and accept an optional SUFFIX in input numbers
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--unit-separator'\fB\-\-unit\-separator=SEP\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--unit-separator
+\fB\-\-unit\-separator=SEP\fP
+.UE
 insert SEP between number and unit on output,
 and accept an optional SEP in input numbers
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--to'\fB\-\-to=UNIT\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--to
+\fB\-\-to=UNIT\fP
+.UE
 auto\-scale output numbers to UNITs; see UNIT below
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--to-unit'\fB\-\-to\-unit=N\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt--to-unit
+\fB\-\-to\-unit=N\fP
+.UE
 the output unit size (instead of the default 1)
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt-z'\fB\-z, \-\-zero\-terminated\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/manual/coreutils.html#numfmt-z
+\fB\-z, \-\-zero\-terminated\fP
+.UE
 line delimiter is NUL, not newline
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/numfmt#numfmt--help'\fB\-\-help\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/numfmt#numfmt--help
+\fB\-\-help\fP
+.UE
 display this help and exit
 .TP
-\X'tty: link https://www.gnu.org/software/coreutils/numfmt#numfmt--version'\fB\-\-version\fP\X'tty: link'
+.UR https://www.gnu.org/software/coreutils/numfmt#numfmt--version
+\fB\-\-version\fP
+.UE
 output version information and exit
 .SS "UNIT options:"
 .TP
