@@ -137,7 +137,7 @@ including the null bytes;
 the size of each
 .I inotify_event
 structure is thus
-.IR "sizeof(struct inotify_event)+size" .
+.IR sizeof(struct\~inotify_event)\~+\~event.len .
 .P
 The behavior when the buffer given to
 .BR read (2)
