@@ -54,25 +54,9 @@ See
 See
 .BR sys_bus (5).
 .TP
-.I /sys/class
-This subdirectory contains a single layer of further subdirectories
-for each of the device classes that have been registered on the system
-(e.g., terminals, network devices, block devices, graphics devices,
-sound devices, and so on).
-Inside each of these subdirectories are symbolic links for each of the
-devices in this class.
-These symbolic links refer to entries in the
-.I /sys/devices
-directory.
-.TP
-.I /sys/class/net
-Each of the entries in this directory is a symbolic link
-representing one of the real or virtual networking devices
-that are visible in the network namespace of the process
-that is accessing the directory.
-Each of these symbolic links refers to entries in the
-.I /sys/devices
-directory.
+.I /sys/class/
+See
+.BR sys_class (5).
 .TP
 .I /sys/dev
 This directory contains two subdirectories
