@@ -9,8 +9,6 @@
 .SH SYNOPSIS
 .I /sys/dev/
 .SH DESCRIPTION
-.TP
-.I /sys/dev
 This directory contains two subdirectories
 .I block/
 and
@@ -24,16 +22,16 @@ Each symbolic link points to the
 .B sysfs
 directory for a device.
 The symbolic links inside
-.I /sys/dev
+.I /sys/dev/
 thus provide an easy way to look up the
 .B sysfs
 interface using the device IDs returned by a call to
 .BR stat (2)
 (or similar).
-.IP
+.P
 The following shell session shows an example from
-.IR /sys/dev :
-.IP
+.IR /sys/dev/ :
+.P
 .in +4n
 .EX
 .RB $ " stat \-c \[dq]%t %T\[dq] /dev/null" ;
