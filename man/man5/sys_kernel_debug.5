@@ -1,0 +1,28 @@
+.\" Copyright 2017, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH sys_kernel_debug 5 (date) "Linux man-pages (unreleased)"
+.SH NAME
+/sys/kernel/debug/ \- debugging
+.SH SYNOPSIS
+.I /sys/kernel/debug/
+.SH DESCRIPTION
+.TP
+.I /sys/kernel/debug/tracing
+Mount point for the
+.I tracefs
+filesystem used by the kernel's
+.I ftrace
+facility.
+(For information on
+.IR ftrace ,
+see the kernel source file
+.IR Documentation/trace/ftrace.rst .)
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.6.0.
+.SH SEE ALSO
+.BR sys_kernel (5)
