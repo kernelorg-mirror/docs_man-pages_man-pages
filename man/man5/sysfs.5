@@ -70,22 +70,9 @@ See
 See
 .BR sys_firmware (5).
 .TP
-.I /sys/fs
-This directory contains subdirectories for some filesystems.
-A filesystem will have a subdirectory here only if it chose
-to explicitly create the subdirectory.
-.TP
-.I /sys/fs/cgroup
-This directory conventionally is used as a mount point for a
-.BR tmpfs (5)
-filesystem containing mount points for
-.BR cgroups (7)
-filesystems.
-.TP
-.I /sys/fs/smackfs
-The directory contains configuration files for the SMACK LSM.
-See the kernel source file
-.IR Documentation/admin\-guide/LSM/Smack.rst .
+.I /sys/fs/
+See
+.BR sys_fs (5).
 .TP
 .I /sys/hypervisor
 [To be documented]

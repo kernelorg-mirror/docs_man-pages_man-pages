@@ -1,0 +1,32 @@
+.\" Copyright 2017, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH sys_fs 5 (date) "Linux man-pages (unreleased)"
+.SH NAME
+/sys/fs/ \- filesystems
+.SH SYNOPSIS
+.I /sys/fs/
+.SH DESCRIPTION
+This directory contains subdirectories for some filesystems.
+A filesystem will have a subdirectory here only if it chose
+to explicitly create the subdirectory.
+.TP
+.I /sys/fs/cgroup
+This directory conventionally is used as a mount point for a
+.BR tmpfs (5)
+filesystem containing mount points for
+.BR cgroups (7)
+filesystems.
+.TP
+.I /sys/fs/smackfs
+The directory contains configuration files for the SMACK LSM.
+See the kernel source file
+.IR Documentation/admin\-guide/LSM/Smack.rst .
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.6.0.
+.SH SEE ALSO
+.BR sysfs (5)
