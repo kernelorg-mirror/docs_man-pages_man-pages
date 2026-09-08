@@ -1,0 +1,31 @@
+.\" Copyright 2017, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH sys_bus 5 (date) "Linux man-pages (unreleased)"
+.SH NAME
+/sys/bus/ \- system buses
+.SH SYNOPSIS
+.I /sys/bus/
+.SH DESCRIPTION
+This directory contains one subdirectory for each of the bus types
+in the kernel.
+Inside each of these directories are two subdirectories:
+.RS
+.TP
+.I devices
+This subdirectory contains symbolic links to entries in
+.I /sys/devices
+that correspond to the devices discovered on this bus.
+.TP
+.I drivers
+This subdirectory contains one subdirectory for each device driver
+that is loaded on this bus.
+.RE
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.6.0.
+.SH SEE ALSO
+.BR sysfs (5)
