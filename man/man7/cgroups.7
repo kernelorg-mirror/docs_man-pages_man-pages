@@ -1026,7 +1026,9 @@ the resources that are distributed into the delegated subtree.
 .P
 See also the discussion of the
 .I /sys/kernel/cgroup/delegate
-file in NOTES for information about further delegatable files in cgroups v2.
+file in
+.BR sys_kernel_cgroup (5)
+for information about further delegatable files in cgroups v2.
 .P
 After the aforementioned steps have been performed,
 the delegatee can create child cgroups within the delegated subtree
@@ -1794,62 +1796,8 @@ This pathname is relative to the mount point of the hierarchy.
 .RE
 .\"
 .SS /sys/kernel/cgroup files
-.TP
-.IR /sys/kernel/cgroup/delegate " (since Linux 4.15)"
-.\" commit 01ee6cfb1483fe57c9cbd8e73817dfbf9bacffd3
-This file exports a list of the cgroups v2 files
-(one per line) that are delegatable
-(i.e., whose ownership should be changed to the user ID of the delegatee).
-In the future, the set of delegatable files may change or grow,
-and this file provides a way for the kernel to inform
-user-space applications of which files must be delegated.
-As at Linux 4.15, one sees the following when inspecting this file:
-.IP
-.in +4n
-.EX
-.RB $ " cat /sys/kernel/cgroup/delegate"
-cgroup.procs
-cgroup.subtree_control
-cgroup.threads
-.EE
-.in
-.TP
-.IR /sys/kernel/cgroup/features " (since Linux 4.15)"
-.\" commit 5f2e673405b742be64e7c3604ed4ed3ac14f35ce
-Over time, the set of cgroups v2 features that are provided by the
-kernel may change or grow,
-or some features may not be enabled by default.
-This file provides a way for user-space applications to discover what
-features the running kernel supports and has enabled.
-Features are listed one per line:
-.IP
-.in +4n
-.EX
-.RB $ " cat /sys/kernel/cgroup/features"
-nsdelegate
-memory_localevents
-.EE
-.in
-.IP
-The entries that can appear in this file are:
-.RS
-.TP
-.IR memory_localevents " (since Linux 5.2)"
-The kernel supports the
-.I memory_localevents
-mount option.
-.TP
-.IR nsdelegate " (since Linux 4.15)"
-The kernel supports the
-.I nsdelegate
-mount option.
-.TP
-.IR memory_recursiveprot " (since Linux 5.7)"
-.\" commit 8a931f801340c2be10552c7b5622d5f4852f3a36
-The kernel supports the
-.I memory_recursiveprot
-mount option.
-.RE
+See
+.BR sys_kernel_cgroup (5).
 .SH SEE ALSO
 .BR prlimit (1),
 .BR systemd (1),
