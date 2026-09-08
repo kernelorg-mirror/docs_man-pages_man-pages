@@ -1,0 +1,30 @@
+.\" Copyright 2017, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH sys_kernel_mm 5 (date) "Linux man-pages (unreleased)"
+.SH NAME
+/sys/kernel/mm/ \- information about memory management
+.SH SYNOPSIS
+.I /sys/kernel/mm/
+.SH DESCRIPTION
+This subdirectory contains various files and subdirectories that provide
+information about the kernel's memory management subsystem.
+.TP
+.I /sys/kernel/mm/hugepages
+This subdirectory contains one subdirectory for each of the
+huge page sizes that the system supports.
+The subdirectory name indicates the huge page size (e.g.,
+.IR hugepages\-2048kB ).
+Within each of these subdirectories is a set of files
+that can be used to view and (in some cases) change settings
+associated with that huge page size.
+For further information, see the kernel source file
+.IR Documentation/admin\-guide/mm/hugetlbpage.rst .
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.6.0.
+.SH SEE ALSO
+.BR sys_kernel (5)

@@ -1,0 +1,21 @@
+.\" Copyright 2017, Michael Kerrisk <mtk.manpages@gmail.com>
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH sys_block 5 (date) "Linux man-pages (unreleased)"
+.SH NAME
+/sys/block/ \- block devices
+.SH SYNOPSIS
+.I /sys/block/
+.SH DESCRIPTION
+This subdirectory contains one symbolic link for each block device
+that has been discovered on the system.
+The symbolic links point to corresponding directories under
+.IR /sys/devices/ .
+.SH STANDARDS
+Linux.
+.SH HISTORY
+Linux 2.6.0.
+.SH SEE ALSO
+.BR sysfs (5)
