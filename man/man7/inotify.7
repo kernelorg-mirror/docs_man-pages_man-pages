@@ -560,25 +560,8 @@ event for
 .RE
 .SH FILES
 .SS /proc interfaces
-The following interfaces can be used to limit the amount of
-kernel memory consumed by inotify:
-.TP
-.I /proc/sys/fs/inotify/max_queued_events
-The value in this file is used when an application calls
-.BR inotify_init (2)
-to set an upper limit on the number of events that can be
-queued to the corresponding inotify instance.
-Events in excess of this limit are dropped, but an
-.B IN_Q_OVERFLOW
-event is always generated.
-.TP
-.I /proc/sys/fs/inotify/max_user_instances
-This specifies an upper limit on the number of inotify instances
-that can be created per real user ID.
-.TP
-.I /proc/sys/fs/inotify/max_user_watches
-This specifies an upper limit on the number of watches
-that can be created per real user ID.
+See
+.BR proc_sys_fs_inotify (5).
 .SH STANDARDS
 Linux.
 .SH HISTORY

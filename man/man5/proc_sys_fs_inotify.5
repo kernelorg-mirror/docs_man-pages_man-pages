@@ -12,10 +12,26 @@
 .I /proc/sys/fs/inotify/
 .SH DESCRIPTION
 This directory contains files
-.IR max_queued_events ", " max_user_instances ", and " max_user_watches ,
 that can be used to limit the amount of kernel memory consumed by the
 .BR inotify (7)
 interface.
+.TP
+.I /proc/sys/fs/inotify/max_queued_events
+The value in this file is used when an application calls
+.BR inotify_init (2)
+to set an upper limit on the number of events that can be
+queued to the corresponding inotify instance.
+Events in excess of this limit are dropped, but an
+.B IN_Q_OVERFLOW
+event is always generated.
+.TP
+.I /proc/sys/fs/inotify/max_user_instances
+This specifies an upper limit on the number of inotify instances
+that can be created per real user ID.
+.TP
+.I /proc/sys/fs/inotify/max_user_watches
+This specifies an upper limit on the number of watches
+that can be created per real user ID.
 .SH HISTORY
 Linux 2.6.13.
 .SH SEE ALSO
