@@ -196,13 +196,8 @@ and the system needs to prune the inode list instead of allocating more;
 since Linux 2.4, this field is a dummy value (always zero).
 .TP
 .IR /proc/sys/fs/inotify/ " (since Linux 2.6.13)"
-This directory contains files
-.IR max_queued_events ", " max_user_instances ", and " max_user_watches ,
-that can be used to limit the amount of kernel memory consumed by the
-.I inotify
-interface.
-For further details, see
-.BR inotify (7).
+See
+.BR proc_sys_fs_inotify (5).
 .TP
 .I /proc/sys/fs/lease\-break\-time
 This file specifies the grace period that the kernel grants to a process
