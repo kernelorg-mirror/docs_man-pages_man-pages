@@ -244,6 +244,43 @@ SMB3 (since Linux 3.17)
 .IP \[bu]
 Btrfs (since Linux 4.16)
 .\" commit f27451f229966874a8793995b8e6b74326d125df
+.SS Writing zeroes in file space
+Specifying the
+.B FALLOC_FL_WRITE_ZEROES
+flag (available since Linux 6.17)
+.\" commit 7bd43cc79cab3850f34da0a31d5b042b701590ef
+in
+.I mode
+physically zeros space in the byte range starting at
+.I offset
+and continuing for
+.I size
+bytes.
+Within the specified range,
+blocks are preallocated for the regions that span the holes
+in the file.
+After a successful call,
+subsequent reads from this range will return zeros and
+subsequent writes to that range do not require further
+changes to the file mapping metadata.
+.P
+Zeroing is done within the filesystem.
+The filesystem may use a hardware-accelerated zeroing command
+or may submit regular writes.
+The behavior depends on the filesystem design and the
+available hardware.
+.P
+No other flags may be specified in
+.I mode
+in conjunction with
+.BR FALLOC_FL_WRITE_ZEROES .
+.P
+Not all filesystems support
+.BR FALLOC_FL_WRITE_ZEROES ;
+if a filesystem doesn't support the operation, an error is returned.
+The operation is supported only in ext4 (only for extent-based files)
+since Linux 6.17.
+.\" commit f4265b8d32c49ff95711e6fef7d05245a2905b30
 .SS Increasing file space
 Specifying the
 .B FALLOC_FL_INSERT_RANGE
@@ -385,6 +422,7 @@ or
 is
 .BR FALLOC_FL_COLLAPSE_RANGE ,
 .BR FALLOC_FL_ZERO_RANGE ,
+.BR FALLOC_FL_WRITE_ZEROES ,
 or
 .BR FALLOC_FL_INSERT_RANGE ,
 but the file referred to by
