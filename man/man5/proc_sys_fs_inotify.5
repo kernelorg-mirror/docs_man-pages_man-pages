@@ -11,14 +11,13 @@
 .SH SYNOPSIS
 .I /proc/sys/fs/inotify/
 .SH DESCRIPTION
-.TP
-.IR /proc/sys/fs/inotify/ " (since Linux 2.6.13)"
 This directory contains files
 .IR max_queued_events ", " max_user_instances ", and " max_user_watches ,
 that can be used to limit the amount of kernel memory consumed by the
-.I inotify
+.BR inotify (7)
 interface.
-For further details, see
-.BR inotify (7).
+.SH HISTORY
+Linux 2.6.13.
 .SH SEE ALSO
-.BR proc_sys_fs (5)
+.BR proc_sys_fs (5),
+.BR inotify (7)
