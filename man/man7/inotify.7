@@ -574,13 +574,15 @@ for further details.
 .SH STANDARDS
 Linux.
 .SH HISTORY
-Inotify was merged into Linux 2.6.13.
-The required library interfaces were added in glibc 2.4.
-.RB ( IN_DONT_FOLLOW ,
-.BR IN_MASK_ADD ,
-and
+Linux 2.6.13,
+glibc 2.4.
+.TP
+.B IN_DONT_FOLLOW
+.TQ
+.B IN_MASK_ADD
+.TQ
 .B IN_ONLYDIR
-were added in glibc 2.5.)
+glibc 2.5.
 .SH NOTES
 Inotify file descriptors can be monitored using
 .BR select (2),
