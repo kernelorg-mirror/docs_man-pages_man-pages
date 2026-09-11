@@ -62,15 +62,6 @@ but can be used from user space.
 .\" in addition to that given in
 .\" .BR outb (9).
 .P
-You must compile with
-.B \-O
-or
-.B \-O2
-or similar.
-The functions
-are defined as inline macros, and will not be substituted in without
-optimization enabled, causing unresolved references at link time.
-.P
 You use
 .BR ioperm (2)
 or alternatively
