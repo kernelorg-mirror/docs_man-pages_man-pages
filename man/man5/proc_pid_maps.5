@@ -16,7 +16,10 @@ See
 .BR mmap (2)
 for some further information about memory mappings.
 .IP
-Permission to access this file is governed by a ptrace access mode
+Permission to access this file is governed by
+.B CAP_PERFMON
+(since Linux 6.15)
+or a ptrace access mode
 .B PTRACE_MODE_READ_FSCREDS
 check;
 see

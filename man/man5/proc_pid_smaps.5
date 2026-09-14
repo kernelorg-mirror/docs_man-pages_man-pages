@@ -16,6 +16,16 @@ This file shows memory consumption for each of the process's mappings.
 .BR pmap (1)
 command displays similar information,
 in a form that may be easier for parsing.)
+.IP
+Permission to access this file is governed by
+.B CAP_PERFMON
+(since Linux 6.15)
+or a ptrace access mode
+.B PTRACE_MODE_READ_FSCREDS
+check;
+see
+.BR ptrace (2).
+.IP
 For each mapping there is a series of lines such as the following:
 .IP
 .in +4n

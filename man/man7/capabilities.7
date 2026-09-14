@@ -283,7 +283,14 @@ Employ various performance-monitoring mechanisms, including:
 call
 .BR perf_event_open (2);
 .IP \[bu]
-employ various BPF operations that have performance implications.
+employ various BPF operations that have performance implications;
+.IP \[bu]
+read the contents of
+.IR /proc/ pid /maps,
+.IR /proc/ pid /smaps,
+and
+.IR /proc/ pid /smaps_rollup
+for all processes.
 .RE
 .PD
 .IP
