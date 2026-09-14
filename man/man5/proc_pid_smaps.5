@@ -7,7 +7,7 @@
 .\"
 .TH proc_pid_smaps 5 (date) "Linux man-pages (unreleased)"
 .SH NAME
-/proc/pid/smaps \- size of mapped memory regions
+/proc/pid/smaps, /proc/pid/smaps_rollup \- size of mapped memory regions
 .SH DESCRIPTION
 .TP
 .IR /proc/ pid /smaps " (since Linux 2.6.14)"
@@ -125,5 +125,10 @@ The
 file is present only if the
 .B CONFIG_PROC_PAGE_MONITOR
 kernel configuration option is enabled.
+.TP
+.IR /proc/ pid /smaps_rollup " (since Linux 4.14)"
+This file is similar to
+.IR /proc/ pid /smaps ,
+except all mappings are merged into a single synthetic entry.
 .SH SEE ALSO
 .BR proc (5)
