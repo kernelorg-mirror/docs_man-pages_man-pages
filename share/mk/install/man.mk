@@ -36,13 +36,6 @@ $(foreach s, $(MANSECTIONS),                                                  \
 _manintropages ::= $(foreach s, $(MANSECTIONS), $(_man$(s)intropage))
 _manpages ::= $(_manintropages) $(foreach s, $(MANSECTIONS), $(_man$(s)pages))
 
-_manintropages_rm ::= $(addsuffix -rm, $(wildcard $(_manintropages)))
-$(foreach s, $(MANSECTIONS),                                                  \
-	$(eval _man$(s)pages_rm ::=                                            \
-		$(addsuffix -rm,                                              \
-			$(subst :,\:,                                         \
-				$(wildcard $(_man$(s)pages))))))
-
 
 $(foreach s, $(MANSECTIONS),                                                  \
 	$(eval $(_man$(s)pages) $(_man$(s)intropage):                         \
@@ -74,15 +67,6 @@ $(foreach s, $(MANSECTIONS),                                                  \
 	$(eval install-man$(s): $(_man$(s)pages);))
 .PHONY: install-man
 install-man: install-manintro $(foreach s, $(MANSECTIONS), install-man$(s));
-
-.PHONY: uninstall-manintro
-uninstall-manintro: $(_manintropages_rm);
-$(foreach s, $(MANSECTIONS),                                                  \
-	$(eval .PHONY: uninstall-man$(s)))
-$(foreach s, $(MANSECTIONS),                                                  \
-	$(eval uninstall-man$(s): $(_man$(s)pages_rm);))
-.PHONY: uninstall-man
-uninstall-man: uninstall-manintro $(foreach s, $(MANSECTIONS), uninstall-man$(s));
 
 
 endif  # include guard

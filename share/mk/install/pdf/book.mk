@@ -15,7 +15,6 @@ _pdfdir ::= $(DESTDIR)$(pdfdir)
 
 
 _pdf_book    ::= $(patsubst $(_PDFDIR)/%, $(_pdfdir)/%, $(_PDF_BOOK))
-_pdf_book_rm ::= $(addsuffix -rm, $(wildcard $(_pdf_book)))
 
 
 $(_pdf_book): $(_pdfdir)/%: $(_PDFDIR)/% $(MK) | $$(@D)/
@@ -25,9 +24,6 @@ $(_pdf_book): $(_pdfdir)/%: $(_PDFDIR)/% $(MK) | $$(@D)/
 
 .PHONY: install-pdf-book
 install-pdf-book: $(_pdf_book);
-
-.PHONY: uninstall-pdf-book
-uninstall-pdf-book: $(_pdf_book_rm);
 
 
 endif  # include guard

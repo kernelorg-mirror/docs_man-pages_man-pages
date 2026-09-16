@@ -53,12 +53,6 @@ Description
            -  DESTDIR
            -  prefix
 
-       Uninstall
-           You can uninstall the pages with the following command (but
-           see the "Caveats" section below):
-
-               $ sudo make uninstall
-
        Targets
            There are targets for more granular control, such as
            'install-man3'.  See the help to know all of them:
@@ -117,18 +111,6 @@ Standards
        <man3type/>.
 
 Caveats
-   Uninstall
-       You can uninstall the pages.  However, take into account that it
-       will only uninstall pages that exist in the repository.  This
-       means that if you installed the manual pages from source from an
-       older version of the repository with 'make install', and some
-       page was [re]moved later, it won't be uninstalled.  You should
-       probably install with a prefix of prefix=/opt/local/man-pages to
-       be able to nuke the directory later with
-       'rm -r /opt/local/man-pages'.  However, you'll need to modify
-       your $MANPATH to be able to use those manual pages as if they
-       were in a system path.
-
    Version and last-modified date
        If you're an end user or a distributor, make sure you do this
        (install) from a tarball, and not from the git repository.  The

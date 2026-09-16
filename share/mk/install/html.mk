@@ -17,7 +17,6 @@ _htmldir ::= $(DESTDIR)$(htmldir)
 
 
 _htmlpages    ::= $(patsubst $(_MANDIR)/%, $(_htmldir)/%, $(_HTMLMAN))
-_htmlpages_rm ::= $(addsuffix -rm, $(wildcard $(_htmlpages)))
 
 
 $(_htmlpages): $(_htmldir)/%: $(_MANDIR)/% $(MK) | $$(@D)/
@@ -27,9 +26,6 @@ $(_htmlpages): $(_htmldir)/%: $(_MANDIR)/% $(MK) | $$(@D)/
 
 .PHONY: install-html
 install-html: $(_htmlpages);
-
-.PHONY: uninstall-html
-uninstall-html: $(_htmlpages_rm);
 
 
 endif  # include guard

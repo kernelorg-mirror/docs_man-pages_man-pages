@@ -17,7 +17,6 @@ _bindir ::= $(DESTDIR)$(bindir)
 
 _bin_sh ::= $(patsubst $(SRCBINDIR)/%, $(_bindir)/%, $(BIN_sh))
 _bin    ::= $(_bin_sh)
-_bin_rm ::= $(addsuffix -rm, $(wildcard $(_bin)))
 
 
 $(_bin_sh): $(_bindir)/%: $(SRCBINDIR)/%
@@ -31,9 +30,6 @@ $(_bin):
 
 .PHONY: install-bin
 install-bin: $(_bin);
-
-.PHONY: uninstall-bin
-uninstall-bin: $(_bin_rm);
 
 
 endif  # include guard

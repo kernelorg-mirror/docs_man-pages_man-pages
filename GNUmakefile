@@ -62,7 +62,6 @@ help:
 	$(info	$(INFO_)	install-all		Install everything)
 	$(info	$(INFO_)	lint			Lint the source code)
 	$(info	$(INFO_)	nothing			Do nothing; useful for debugging)
-	$(info	$(INFO_)	uninstall		Uninstall everything (might leave traces))
 	$(info	)
 
 
