@@ -16,13 +16,13 @@ Standard C library
 .fi
 .SH DESCRIPTION
 .BR ioperm ()
-sets the port access permission bits for the calling thread for
+sets the calling thread's access permission for
 .I num
-bits starting from port address
+ports starting from port address
 .IR from .
 If
 .I turn_on
-is nonzero, then permission for the specified bits is enabled;
+is nonzero, then permission for the specified ports is enabled;
 otherwise it is disabled.
 If
 .I turn_on
