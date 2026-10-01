@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -Eeufo pipefail;
+
+git merge-base HEAD "$1" \
+| xargs -I{} git rev-list {}.."$1" \
+| tac \
+| while read -r c; do
+	git rebase "$c";
+done;
