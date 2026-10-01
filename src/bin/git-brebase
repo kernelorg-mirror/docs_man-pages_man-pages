@@ -1,0 +1,75 @@
+#!/bin/bash
+# Copyright 2026, Alejandro Colomar <alx@kernel.org>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+set -Eeufo pipefail;
+shopt -s lastpipe;
+
+if test $# -lt 1; then
+	>&2 printf '%s\n' "$(basename "$0"): error: Too few arguments."
+	exit 1;
+fi;
+
+if test $# -gt 1; then
+	>&2 printf '%s\n' "$(basename "$0"): error: Too many arguments."
+	exit 1;
+fi;
+
+tgt="$(git rev-list -1 "$1")";
+
+## Try a regular rebase.
+if
+	git rebase "$tgt" >/dev/null 2>/dev/null;
+	test $? -eq 0;
+then
+	echo 'Successfully rebased.';
+	exit 0;
+else
+	git rebase --abort >/dev/null 2>/dev/null;
+
+	git merge-base HEAD "$tgt" \
+	| xargs -I{} git rev-list {}.."$tgt" \
+	| wc -l \
+	| xargs -I{} printf '%s' "{} commits left to test in the target branch";
+	printf '%s' " (trying $tgt)";
+	echo ' [conflict]';
+fi;
+
+## Bisect.
+while
+	git merge-base HEAD "$tgt" \
+	| xargs -I{} git rev-list {}.."$tgt" \
+	| wc -l \
+	| read -r n;
+
+	test "$n" -gt 1;
+do
+	echo "($n + 2) / 2" \
+	| bc \
+	| read -r i;
+
+	git merge-base HEAD "$tgt" \
+	| xargs -I{} git rev-list {}.."$tgt" \
+	| sed "$i!d" \
+	| read -r mid;
+
+	expr "$n" - 1 \
+	| xargs -I{} printf '%s' "{} commits left to test in the target branch";
+	printf '%s' " (trying $mid)";
+
+	if
+		git rebase "$mid" >/dev/null 2>/dev/null;
+		test $? -eq 0;
+	then
+		echo ' [ok]';
+	else
+		echo ' [conflict]';
+
+		tgt="$(git rev-list -1 "$mid")";
+		git rebase --abort >/dev/null 2>/dev/null;
+	fi;
+done;
+
+## Perform the conflicting rebase
+echo "The conflict is at $tgt; about to rebase now.";
+git rebase "$tgt";
