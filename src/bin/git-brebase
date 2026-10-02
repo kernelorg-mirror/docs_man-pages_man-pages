@@ -30,7 +30,7 @@ else
 	git merge-base HEAD "$tgt" \
 	| xargs -I{} git rev-list {}.."$tgt" \
 	| wc -l \
-	| xargs -I{} printf '%s' "{} commits left to test in the target branch";
+	| xargs -I{} printf '%s' "{} revisions left to test";
 	printf '%s' " (trying $tgt)";
 	echo ' [conflict]';
 fi;
@@ -54,7 +54,7 @@ do
 	| read -r mid;
 
 	expr "$n" - 1 \
-	| xargs -I{} printf '%s' "{} commits left to test in the target branch";
+	| xargs -I{} printf '%s' "{} revisions left to test";
 	printf '%s' " (trying $mid)";
 
 	if
@@ -71,5 +71,6 @@ do
 done;
 
 ## Perform the conflicting rebase
-echo "The conflict is at $tgt; about to rebase now.";
+git log -1 --pretty=reference "$tgt" \
+| xargs -I{} echo "First conflict: {}.";
 git rebase "$tgt";
