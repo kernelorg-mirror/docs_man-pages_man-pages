@@ -26,53 +26,43 @@ then
 	echo 'Successfully rebased.';
 	exit 0;
 else
+	echo 'Rebase: conflict';
 	git rebase --abort >/dev/null 2>/dev/null;
-
-	git merge-base HEAD "$tgt" \
-	| xargs -I{} git rev-list {}.."$tgt" \
-	| wc -l \
-	| xargs -I{} printf '%s' "{} revisions left to test";
-	printf '%s' " (trying $tgt)";
-	echo ' [conflict]';
 fi;
 
 ## Bisect.
+git rev-parse --abbrev-ref HEAD \
+| read -r branch;
+git bisect start >/dev/null;
+git bisect bad "$tgt" >/dev/null;
+git merge-base HEAD "$tgt" \
+| xargs -I{} git bisect good {};
+
 while
-	git merge-base HEAD "$tgt" \
-	| xargs -I{} git rev-list {}.."$tgt" \
+	git bisect visualize --oneline \
 	| wc -l \
-	| read -r n;
-
-	test "$n" -gt 1;
+	| xargs -I{} test {} -gt 1;
 do
-	echo "($n + 2) / 2" \
-	| bc \
-	| read -r i;
-
-	git merge-base HEAD "$tgt" \
-	| xargs -I{} git rev-list {}.."$tgt" \
-	| sed "$i!d" \
-	| read -r mid;
-
-	expr "$n" - 1 \
-	| xargs -I{} printf '%s' "{} revisions left to test";
-	printf '%s' " (trying $mid)";
+	git rev-list -1 HEAD \
+	| read -r tgt;
+	git switch "$branch" >/dev/null 2>/dev/null;
 
 	if
-		git rebase "$mid" >/dev/null 2>/dev/null;
+		git rebase "$tgt" >/dev/null 2>/dev/null;
 		test $? -eq 0;
 	then
-		echo ' [ok]';
+		echo 'Rebase: success';
+		git bisect good "$tgt";
 	else
-		echo ' [conflict]';
-
-		git rev-list -1 "$mid" \
-		| read -r tgt;
+		echo 'Rebase: conflict';
 		git rebase --abort >/dev/null 2>/dev/null;
+		git bisect bad "$tgt";
 	fi;
 done;
 
+git rev-list -1 bisect/bad \
+| read -r tgt;
+git bisect reset >/dev/null 2>/dev/null;
+
 ## Perform the conflicting rebase
-git log -1 --pretty=reference "$tgt" \
-| xargs -I{} echo "First conflict: {}.";
 git rebase "$tgt";
