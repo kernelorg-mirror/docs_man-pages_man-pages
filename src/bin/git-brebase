@@ -15,7 +15,8 @@ if test $# -gt 1; then
 	exit 1;
 fi;
 
-tgt="$(git rev-list -1 "$1")";
+git rev-list -1 "$1" \
+| read -r tgt;
 
 ## Try a regular rebase.
 if
@@ -65,7 +66,8 @@ do
 	else
 		echo ' [conflict]';
 
-		tgt="$(git rev-list -1 "$mid")";
+		git rev-list -1 "$mid" \
+		| read -r tgt;
 		git rebase --abort >/dev/null 2>/dev/null;
 	fi;
 done;
