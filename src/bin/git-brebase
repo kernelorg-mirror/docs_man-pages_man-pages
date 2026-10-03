@@ -42,17 +42,20 @@ git rev-list -1 "$1" \
 | read -r tgt;
 
 # Try a regular rebase.
-if
-	# shellcheck disable=SC2086  # gropts may hold multiple options
-	git rebase $gropts "$tgt" >/dev/null 2>/dev/null;
-	test $? -eq 0;
-then
-	echo 'Successfully rebased.';
-	exit 0;
-else
-	echo 'Rebase: conflict';
-	git rebase --abort >/dev/null;
-fi;
+while true; do  # once
+	if
+		# shellcheck disable=SC2086  # gropts may hold multiple options
+		git rebase $gropts "$tgt" >/dev/null 2>/dev/null;
+		test $? -eq 0;
+	then
+		echo 'Successfully rebased.';
+		exit 0;
+	else
+		echo 'Rebase: conflict';
+		git rebase --abort >/dev/null;
+		break;
+	fi;
+done;
 
 # Bisect.
 # shellcheck disable=SC2248  # gbopts may hold multiple options
