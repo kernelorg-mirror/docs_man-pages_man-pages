@@ -57,8 +57,8 @@ do
 done;
 
 git rev-list -1 bisect/bad \
-| read -r tgt;
+| read -r bad;
 git bisect reset >/dev/null 2>/dev/null;
 
 ## Perform the conflicting rebase
-git rebase "$tgt";
+git rebase "$bad";
