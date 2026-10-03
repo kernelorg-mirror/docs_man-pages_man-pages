@@ -33,9 +33,7 @@ else
 fi;
 
 ## Bisect.
-git rev-parse --abbrev-ref HEAD \
-| read -r branch;
-git bisect start >/dev/null;
+git bisect start --no-checkout >/dev/null;
 git bisect bad "$tgt" >/dev/null;
 git merge-base HEAD "$tgt" \
 | xargs -I{} git bisect good {};
@@ -45,20 +43,16 @@ while
 	| wc -l \
 	| xargs -I{} test {} -gt 1;
 do
-	git rev-list -1 HEAD \
-	| read -r tgt;
-	git switch "$branch" >/dev/null 2>/dev/null;
-
 	if
-		git rebase "$tgt" >/dev/null 2>/dev/null;
+		git rebase BISECT_HEAD >/dev/null 2>/dev/null;
 		test $? -eq 0;
 	then
 		echo 'Rebase: success';
-		git bisect good "$tgt";
+		git bisect good BISECT_HEAD;
 	else
 		echo 'Rebase: conflict';
 		git rebase --abort >/dev/null;
-		git bisect bad "$tgt";
+		git bisect bad BISECT_HEAD;
 	fi;
 done;
 
