@@ -13,6 +13,8 @@ err()
 
 fp='';
 other='';
+pre='';
+post='';
 while test $# -ge 1; do
 	case "$1" in
 	--first-parent)
@@ -48,142 +50,111 @@ if test $# -gt 1; then
 fi;
 git rev-list -1 "$1" \
 | read -r tgt;
-
-# Try the target first.
-while true; do  # once
-	if test -v pre; then
-		printf '%s' 'Pre-rebase exec: ';
-		if
-			$pre;
-			x="$?";
-			test "$x" -eq 0;
-		then
-			echo 'success';
-		else
-			echo "failure ($x)";
-			break;
-		fi;
-	fi;
-
-	git rev-list -1 HEAD \
-	| read -r old_head;
-	printf '%s' 'Rebase: ';
-	# shellcheck disable=SC2086  # gropts may hold multiple options
-	if git rebase $gropts "$tgt" >/dev/null 2>/dev/null; then
-		echo 'success';
-	else
-		echo 'conflict';
-		git rebase --abort >/dev/null;
-		break;
-	fi;
-
-	if test -v post; then
-		printf '%s' 'Post-rebase exec: ';
-		if
-			$post;
-			x="$?";
-			test "$x" -eq 0;
-		then
-			echo 'success';
-		else
-			echo "failure ($x)";
-			git reset --hard "$old_head";
-			break;
-		fi;
-	fi;
-	exit 0;
-done;
-
-# Bisect.
 git rev-parse --abbrev-ref HEAD \
 | read -r branch;
-# shellcheck disable=SC2248  # gbopts may hold multiple options
-git bisect start $gbopts >/dev/null;
-git bisect bad "$tgt" >/dev/null;
-git merge-base HEAD "$tgt" \
-| xargs -I{} git bisect good {};
 
-while
-	git bisect visualize --oneline \
-	| wc -l \
-	| xargs -I{} test {} -gt 1;
-do
+# Set up the callback script for 'git rebase run'.
+mktemp \
+| read -r callback;
+cat >"$callback" <<__EOF__
+#!/bin/bash
+
+	set -Eeufo pipefail;
+	shopt -s lastpipe;
+
 	git rev-list -1 HEAD \
 	| read -r bisect_head;
 
-	if test -v pre; then
+	if test -n '$pre'; then
 		printf '%s' 'Pre-rebase exec: ';
+		pre='$pre';
 		if
-			$pre;
-			x="$?";
+			\$pre;
+			x="\$?";
 			true;
 		then
-			case "$x" in
+			case "\$x" in
 			0)
 				echo 'success';
 				;;
 			125)
 				echo 'skip';
-				git bisect skip "$bisect_head";
-				continue;
+				git checkout --detach "\$bisect_head" 2>/dev/null;
+				exit 125;
 				;;
 			*)
-				echo "failure ($x)";
-				git bisect bad "$bisect_head";
-				continue;
+				echo "failure (\$x)";
+				git checkout --detach "\$bisect_head" 2>/dev/null;
+				exit "\$x";
 				;;
 			esac;
 		fi;
 	fi;
 
-	git switch "$branch" >/dev/null 2>/dev/null;
+	git switch '$branch' >/dev/null 2>/dev/null;
 	git rev-list -1 HEAD \
 	| read -r old_head;
 	printf '%s' 'Rebase: ';
-	# shellcheck disable=SC2086  # gropts may hold multiple options
-	if git rebase $gropts "$bisect_head" >/dev/null 2>/dev/null; then
+	if git rebase $gropts "\$bisect_head" >/dev/null 2>/dev/null; then
 		echo 'success';
 	else
 		echo 'conflict';
 		git rebase --abort >/dev/null;
-		git bisect bad "$bisect_head";
-		continue;
+		git checkout --detach "\$bisect_head" 2>/dev/null;
+		exit 1;
 	fi;
 
-	if test -v post; then
+	if test -n '$post'; then
 		printf '%s' 'Post-rebase exec: ';
+		post='$post';
 		if
-			$post;
-			x="$?";
+			\$post;
+			x="\$?";
 			true;
 		then
-			case "$x" in
+			case "\$x" in
 			0)
 				echo 'success';
 				;;
 			125)
 				echo 'skip';
-				git reset --hard "$old_head";
-				git bisect skip "$bisect_head";
-				continue;
+				git reset --hard "\$old_head";
+				git checkout --detach "\$bisect_head" 2>/dev/null;
+				exit 125;
 				;;
 			*)
-				echo "failure ($x)";
-				git reset --hard "$old_head";
-				git bisect bad "$bisect_head";
-				continue;
+				echo "failure (\$x)";
+				git reset --hard "\$old_head";
+				git checkout --detach "\$bisect_head" 2>/dev/null;
+				exit "\$x";
 				;;
 			esac;
 		fi;
 	fi;
-	git bisect good "$bisect_head";
-done;
+	git checkout --detach "\$bisect_head" 2>/dev/null;
+	exit 0;
+__EOF__
+chmod +x "$callback";
 
+# Try the target first.
+git checkout --detach "$tgt" 2>/dev/null;
+if "$callback"; then
+	exit 0;
+fi;
+
+# Bisect.
+# shellcheck disable=SC2248  # gbopts may hold multiple options
+git bisect start $gbopts >/dev/null;
+git bisect bad "$tgt" >/dev/null;
+git merge-base "$branch" "$tgt" \
+| xargs -I{} git bisect good {};
+git bisect run "$callback";
 git rev-list -1 bisect/bad \
 | read -r bad;
 git bisect reset >/dev/null 2>/dev/null;
 
 # Perform the conflicting rebase
+git switch "$branch";
 # shellcheck disable=SC2086  # gropts may hold multiple options
 git rebase $gropts "$bad";
 if test -v post; then
