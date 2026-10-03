@@ -43,11 +43,8 @@ git rev-list -1 "$1" \
 
 # Try a regular rebase.
 while true; do  # once
-	if
-		# shellcheck disable=SC2086  # gropts may hold multiple options
-		git rebase $gropts "$tgt" >/dev/null 2>/dev/null;
-		test $? -eq 0;
-	then
+	# shellcheck disable=SC2086  # gropts may hold multiple options
+	if git rebase $gropts "$tgt" >/dev/null 2>/dev/null; then
 		echo 'Successfully rebased.';
 		exit 0;
 	else
@@ -69,11 +66,8 @@ while
 	| wc -l \
 	| xargs -I{} test {} -gt 1;
 do
-	if
-		# shellcheck disable=SC2086  # gropts may hold multiple options
-		git rebase $gropts BISECT_HEAD >/dev/null 2>/dev/null;
-		test $? -eq 0;
-	then
+	# shellcheck disable=SC2086  # gropts may hold multiple options
+	if git rebase $gropts BISECT_HEAD >/dev/null 2>/dev/null; then
 		echo 'Rebase: success';
 		git bisect good BISECT_HEAD;
 	else
