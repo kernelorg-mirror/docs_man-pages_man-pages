@@ -50,8 +50,16 @@ if test $# -gt 1; then
 fi;
 git rev-list -1 "$1" \
 | read -r tgt;
-git rev-parse --abbrev-ref HEAD \
+
+mktemp \
 | read -r branch;
+{
+	git rev-parse --abbrev-ref HEAD;
+	git rev-list -1 HEAD;
+} \
+| sed '/^HEAD$/d' \
+| sed '1!d' \
+>"$branch";
 
 # Set up the callback script for 'git rebase run'.
 mktemp \
@@ -91,7 +99,8 @@ cat >"$callback" <<__EOF__
 		fi;
 	fi;
 
-	git switch '$branch' >/dev/null 2>/dev/null;
+	cat '$branch' \
+	| xargs -I{} git checkout {} >/dev/null 2>/dev/null;
 	git rev-list -1 HEAD \
 	| read -r old_head;
 	printf '%s' 'Rebase: ';
@@ -103,6 +112,13 @@ cat >"$callback" <<__EOF__
 		git checkout --detach "\$bisect_head" 2>/dev/null;
 		exit 1;
 	fi;
+	{
+		git rev-parse --abbrev-ref HEAD;
+		git rev-list -1 HEAD;
+	} \
+	| sed '/^HEAD$/d' \
+	| sed '1!d' \
+	>'$branch';
 
 	if test -n '$post'; then
 		printf '%s' 'Post-rebase exec: ';
@@ -146,7 +162,8 @@ fi;
 # shellcheck disable=SC2248  # gbopts may hold multiple options
 git bisect start $gbopts >/dev/null;
 git bisect bad "$tgt" >/dev/null;
-git merge-base "$branch" "$tgt" \
+cat "$branch" \
+| xargs -I{} git merge-base {} "$tgt" \
 | xargs -I{} git bisect good {};
 git bisect run "$callback";
 git rev-list -1 bisect/bad \
@@ -154,7 +171,8 @@ git rev-list -1 bisect/bad \
 git bisect reset >/dev/null 2>/dev/null;
 
 # Perform the conflicting rebase
-git switch "$branch";
+cat "$branch" \
+| xargs -I{} git checkout {};
 # shellcheck disable=SC2086  # gropts may hold multiple options
 git rebase $gropts "$bad";
 if test -v post; then
