@@ -11,6 +11,22 @@ err()
 	exit 1;
 }
 
+# Defaults:
+fp='';
+
+while test $# -ge 1; do
+	case "$1" in
+	--first-parent)
+		fp='--first-parent';
+		;;
+	*)
+		break;
+		;;
+	esac;
+	shift;
+done;
+gbopts="$fp";
+
 if test $# -lt 1; then
 	err 'Too few arguments.';
 fi;
@@ -33,7 +49,8 @@ else
 fi;
 
 # Bisect.
-git bisect start --no-checkout >/dev/null;
+# shellcheck disable=SC2248  # gbopts may hold multiple options
+git bisect start --no-checkout $gbopts >/dev/null;
 git bisect bad "$tgt" >/dev/null;
 git merge-base HEAD "$tgt" \
 | xargs -I{} git bisect good {};
