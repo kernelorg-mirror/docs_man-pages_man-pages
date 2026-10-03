@@ -23,6 +23,11 @@ while test $# -ge 1; do
 		| sed 's/--pre-exec=//' \
 		| read -r pre;
 		;;
+	--post-exec=*)
+		echo "$1" \
+		| sed 's/--post-exec=//' \
+		| read -r post;
+		;;
 	-*)
 		other="$other $1";
 		;;
@@ -60,13 +65,31 @@ while true; do  # once
 		fi;
 	fi;
 
+	git rev-list -1 HEAD \
+	| read -r old_head;
+	printf '%s' 'Rebase: ';
 	# shellcheck disable=SC2086  # gropts may hold multiple options
 	if git rebase $gropts "$tgt" >/dev/null 2>/dev/null; then
-		echo 'Successfully rebased.';
+		echo 'success';
 	else
-		echo 'Rebase: conflict';
+		echo 'conflict';
 		git rebase --abort >/dev/null;
 		break;
+	fi;
+
+	if test -v post; then
+		printf '%s' 'Post-rebase exec: ';
+		if
+			$post;
+			x="$?";
+			test "$x" -eq 0;
+		then
+			echo 'success';
+		else
+			echo "failure ($x)";
+			git reset --hard "$old_head";
+			break;
+		fi;
 	fi;
 	exit 0;
 done;
@@ -114,17 +137,46 @@ do
 	fi;
 
 	git switch "$branch" >/dev/null 2>/dev/null;
+	git rev-list -1 HEAD \
+	| read -r old_head;
 	printf '%s' 'Rebase: ';
 	# shellcheck disable=SC2086  # gropts may hold multiple options
 	if git rebase $gropts "$bisect_head" >/dev/null 2>/dev/null; then
 		echo 'success';
-		git bisect good "$bisect_head";
 	else
 		echo 'conflict';
 		git rebase --abort >/dev/null;
 		git bisect bad "$bisect_head";
 		continue;
 	fi;
+
+	if test -v post; then
+		printf '%s' 'Post-rebase exec: ';
+		if
+			$post;
+			x="$?";
+			true;
+		then
+			case "$x" in
+			0)
+				echo 'success';
+				;;
+			125)
+				echo 'skip';
+				git reset --hard "$old_head";
+				git bisect skip "$bisect_head";
+				continue;
+				;;
+			*)
+				echo "failure ($x)";
+				git reset --hard "$old_head";
+				git bisect bad "$bisect_head";
+				continue;
+				;;
+			esac;
+		fi;
+	fi;
+	git bisect good "$bisect_head";
 done;
 
 git rev-list -1 bisect/bad \
@@ -134,3 +186,7 @@ git bisect reset >/dev/null 2>/dev/null;
 # Perform the conflicting rebase
 # shellcheck disable=SC2086  # gropts may hold multiple options
 git rebase $gropts "$bad";
+if test -v post; then
+	echo 'Running post-rebase exec.';
+	$post;
+fi;
