@@ -28,7 +28,7 @@ done;
 gbopts="$fp";
 
 if test $# -lt 1; then
-	err 'Too few arguments.';
+	err 'Missing target commit.';
 fi;
 if test $# -gt 1; then
 	err 'Too many arguments.';
