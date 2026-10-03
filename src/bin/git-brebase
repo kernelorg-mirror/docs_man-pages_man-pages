@@ -5,16 +5,18 @@
 set -Eeufo pipefail;
 shopt -s lastpipe;
 
+err()
+{
+	>&2 printf '%s\n' "$(basename "$0"): error: $*";
+	exit 1;
+}
+
 if test $# -lt 1; then
-	>&2 printf '%s\n' "$(basename "$0"): error: Too few arguments."
-	exit 1;
+	err 'Too few arguments.';
 fi;
-
 if test $# -gt 1; then
-	>&2 printf '%s\n' "$(basename "$0"): error: Too many arguments."
-	exit 1;
+	err 'Too many arguments.';
 fi;
-
 git rev-list -1 "$1" \
 | read -r tgt;
 
