@@ -27,7 +27,7 @@ then
 	exit 0;
 else
 	echo 'Rebase: conflict';
-	git rebase --abort >/dev/null 2>/dev/null;
+	git rebase --abort >/dev/null;
 fi;
 
 ## Bisect.
@@ -55,7 +55,7 @@ do
 		git bisect good "$tgt";
 	else
 		echo 'Rebase: conflict';
-		git rebase --abort >/dev/null 2>/dev/null;
+		git rebase --abort >/dev/null;
 		git bisect bad "$tgt";
 	fi;
 done;
