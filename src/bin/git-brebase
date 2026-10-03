@@ -11,14 +11,17 @@ err()
 	exit 1;
 }
 
-# Defaults:
 fp='';
 other='';
-
 while test $# -ge 1; do
 	case "$1" in
 	--first-parent)
 		fp='--first-parent';
+		;;
+	--pre-exec=*)
+		echo "$1" \
+		| sed 's/--pre-exec=//' \
+		| read -r pre;
 		;;
 	-*)
 		other="$other $1";
@@ -41,22 +44,38 @@ fi;
 git rev-list -1 "$1" \
 | read -r tgt;
 
-# Try a regular rebase.
+# Try the target first.
 while true; do  # once
+	if test -v pre; then
+		printf '%s' 'Pre-rebase exec: ';
+		if
+			$pre;
+			x="$?";
+			test "$x" -eq 0;
+		then
+			echo 'success';
+		else
+			echo "failure ($x)";
+			break;
+		fi;
+	fi;
+
 	# shellcheck disable=SC2086  # gropts may hold multiple options
 	if git rebase $gropts "$tgt" >/dev/null 2>/dev/null; then
 		echo 'Successfully rebased.';
-		exit 0;
 	else
 		echo 'Rebase: conflict';
 		git rebase --abort >/dev/null;
 		break;
 	fi;
+	exit 0;
 done;
 
 # Bisect.
+git rev-parse --abbrev-ref HEAD \
+| read -r branch;
 # shellcheck disable=SC2248  # gbopts may hold multiple options
-git bisect start --no-checkout $gbopts >/dev/null;
+git bisect start $gbopts >/dev/null;
 git bisect bad "$tgt" >/dev/null;
 git merge-base HEAD "$tgt" \
 | xargs -I{} git bisect good {};
@@ -66,14 +85,45 @@ while
 	| wc -l \
 	| xargs -I{} test {} -gt 1;
 do
+	git rev-list -1 HEAD \
+	| read -r bisect_head;
+
+	if test -v pre; then
+		printf '%s' 'Pre-rebase exec: ';
+		if
+			$pre;
+			x="$?";
+			true;
+		then
+			case "$x" in
+			0)
+				echo 'success';
+				;;
+			125)
+				echo 'skip';
+				git bisect skip "$bisect_head";
+				continue;
+				;;
+			*)
+				echo "failure ($x)";
+				git bisect bad "$bisect_head";
+				continue;
+				;;
+			esac;
+		fi;
+	fi;
+
+	git switch "$branch" >/dev/null 2>/dev/null;
+	printf '%s' 'Rebase: ';
 	# shellcheck disable=SC2086  # gropts may hold multiple options
-	if git rebase $gropts BISECT_HEAD >/dev/null 2>/dev/null; then
-		echo 'Rebase: success';
-		git bisect good BISECT_HEAD;
+	if git rebase $gropts "$bisect_head" >/dev/null 2>/dev/null; then
+		echo 'success';
+		git bisect good "$bisect_head";
 	else
-		echo 'Rebase: conflict';
+		echo 'conflict';
 		git rebase --abort >/dev/null;
-		git bisect bad BISECT_HEAD;
+		git bisect bad "$bisect_head";
+		continue;
 	fi;
 done;
 
