@@ -13,11 +13,15 @@ err()
 
 # Defaults:
 fp='';
+other='';
 
 while test $# -ge 1; do
 	case "$1" in
 	--first-parent)
 		fp='--first-parent';
+		;;
+	-*)
+		other="$other $1";
 		;;
 	*)
 		break;
@@ -26,6 +30,7 @@ while test $# -ge 1; do
 	shift;
 done;
 gbopts="$fp";
+gropts="$other";
 
 if test $# -lt 1; then
 	err 'Missing target commit.';
@@ -38,7 +43,8 @@ git rev-list -1 "$1" \
 
 # Try a regular rebase.
 if
-	git rebase "$tgt" >/dev/null 2>/dev/null;
+	# shellcheck disable=SC2086  # gropts may hold multiple options
+	git rebase $gropts "$tgt" >/dev/null 2>/dev/null;
 	test $? -eq 0;
 then
 	echo 'Successfully rebased.';
@@ -61,7 +67,8 @@ while
 	| xargs -I{} test {} -gt 1;
 do
 	if
-		git rebase BISECT_HEAD >/dev/null 2>/dev/null;
+		# shellcheck disable=SC2086  # gropts may hold multiple options
+		git rebase $gropts BISECT_HEAD >/dev/null 2>/dev/null;
 		test $? -eq 0;
 	then
 		echo 'Rebase: success';
@@ -78,4 +85,5 @@ git rev-list -1 bisect/bad \
 git bisect reset >/dev/null 2>/dev/null;
 
 # Perform the conflicting rebase
-git rebase "$bad";
+# shellcheck disable=SC2086  # gropts may hold multiple options
+git rebase $gropts "$bad";
