@@ -99,8 +99,7 @@ cat >"$dir/callback" <<__EOF__
 		fi;
 	fi;
 
-	cat '$dir/head-name' \
-	| xargs -I{} git checkout {} >/dev/null 2>/dev/null;
+	xargs git checkout <'$dir/head-name' >/dev/null 2>/dev/null;
 	git rev-list -1 HEAD \
 	| read -r old_head;
 	printf '%s' 'Rebase: ';
