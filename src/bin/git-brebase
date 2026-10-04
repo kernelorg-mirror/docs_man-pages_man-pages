@@ -17,7 +17,7 @@ mkdir "$dir";
 trap "rm -rf '$dir'" EXIT;
 
 fp='';
-other='';
+touch "$dir/git-rebase-options";
 while test $# -ge 1; do
 	case "$1" in
 	--first-parent)
@@ -30,7 +30,7 @@ while test $# -ge 1; do
 		echo "$1" | sed 's/--post-exec=//' >"$dir/post-exec";
 		;;
 	-*)
-		other="$other $1";
+		echo "$1" >>"$dir/git-rebase-options";
 		;;
 	*)
 		break;
@@ -39,7 +39,6 @@ while test $# -ge 1; do
 	shift;
 done;
 gbopts="$fp";
-gropts="$other";
 
 if test $# -lt 1; then
 	err 'Missing target commit.';
@@ -95,8 +94,8 @@ cat >"$dir/callback" <<__EOF__
 	xargs git checkout <"\$dir/head-name" >/dev/null 2>/dev/null;
 	git rev-list -1 HEAD >"\$dir/good-head";
 	printf '%s' 'Rebase: ';
-	cat "\$dir/bisect-head" \
-	| if xargs git rebase $gropts >/dev/null 2>/dev/null; then
+	cat "\$dir/git-rebase-options" "\$dir/bisect-head" \
+	| if xargs git rebase >/dev/null 2>/dev/null; then
 		echo 'success';
 	else
 		echo 'conflict';
@@ -160,8 +159,7 @@ git bisect reset >/dev/null 2>/dev/null;
 
 # Perform the conflicting rebase
 xargs git checkout <"$dir/head-name";
-# shellcheck disable=SC2086  # gropts may hold multiple options
-xargs git rebase $gropts <"$dir/bisect-bad";
+cat "$dir/git-rebase-options" "$dir/bisect-bad" | xargs git rebase;
 if test -e "$dir/post-exec"; then
 	echo 'Running post-rebase exec.';
 	bash "$dir/post-exec";
