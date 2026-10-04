@@ -48,8 +48,6 @@ fi;
 if test $# -gt 1; then
 	err 'Too many arguments.';
 fi;
-git rev-list -1 "$1" \
-| read -r tgt;
 git rev-parse --git-dir \
 | sed 's,$,/bisect-rebase,' \
 | read -r dir;
@@ -57,6 +55,7 @@ mkdir "$dir";
 # shellcheck disable=SC2064  # we want expansion now
 trap "rm -rf '$dir'" EXIT;
 
+git rev-list -1 "$1" >"$dir/onto";
 {
 	git rev-parse --abbrev-ref HEAD;
 	git rev-list -1 HEAD;
@@ -155,7 +154,7 @@ __EOF__
 chmod +x "$dir/callback";
 
 # Try the target first.
-git checkout --detach "$tgt" 2>/dev/null;
+xargs git checkout --detach <"$dir/onto" 2>/dev/null;
 if "$dir/callback"; then
 	exit 0;
 fi;
@@ -163,9 +162,9 @@ fi;
 # Bisect.
 # shellcheck disable=SC2248  # gbopts may hold multiple options
 git bisect start $gbopts >/dev/null;
-git bisect bad "$tgt" >/dev/null;
-cat "$dir/branch" \
-| xargs -I{} git merge-base {} "$tgt" \
+xargs git bisect bad <"$dir/onto" >/dev/null;
+cat "$dir/branch" "$dir/onto" \
+| xargs git merge-base \
 | xargs -I{} git bisect good {};
 git bisect run "$dir/callback";
 git rev-list -1 bisect/bad \
