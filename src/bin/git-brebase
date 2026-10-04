@@ -55,8 +55,7 @@ git rev-list -1 "$1" >"$dir/onto";
 | sed '1!d' \
 >"$dir/head-name";
 
-# Set up the callback script for 'git rebase run'.
-cat >"$dir/callback" <<__EOF__
+cat >"$dir/git-bisect-run-callback" <<__EOF__
 #!/bin/bash
 
 	set -Eeufo pipefail;
@@ -139,11 +138,11 @@ cat >"$dir/callback" <<__EOF__
 	xargs git checkout --detach <"\$dir/bisect-head" 2>/dev/null;
 	exit 0;
 __EOF__
-chmod +x "$dir/callback";
+chmod +x "$dir/git-bisect-run-callback";
 
 # Try the target first.
 xargs git checkout --detach <"$dir/onto" 2>/dev/null;
-if "$dir/callback"; then
+if "$dir/git-bisect-run-callback"; then
 	exit 0;
 fi;
 
@@ -151,7 +150,7 @@ fi;
 xargs git bisect start <"$dir/git-bisect-options" >/dev/null;
 xargs git bisect bad <"$dir/onto" >/dev/null;
 cat "$dir/head-name" "$dir/onto" | xargs git merge-base | xargs git bisect good;
-git bisect run "$dir/callback";
+git bisect run "$dir/git-bisect-run-callback";
 git rev-list -1 bisect/bad >"$dir/bisect-bad";
 git bisect reset >/dev/null 2>/dev/null;
 
