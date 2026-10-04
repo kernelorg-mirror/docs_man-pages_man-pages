@@ -11,24 +11,25 @@ err()
 	exit 1;
 }
 
+git rev-parse --git-dir \
+| sed 's,$,/bisect-rebase,' \
+| read -r dir;
+mkdir "$dir";
+# shellcheck disable=SC2064  # we want expansion now
+trap "rm -rf '$dir'" EXIT;
+
 fp='';
 other='';
-pre='';
-post='';
 while test $# -ge 1; do
 	case "$1" in
 	--first-parent)
 		fp='--first-parent';
 		;;
 	--pre-exec=*)
-		echo "$1" \
-		| sed 's/--pre-exec=//' \
-		| read -r pre;
+		echo "$1" | sed 's/--pre-exec=//' >"$dir/pre-exec";
 		;;
 	--post-exec=*)
-		echo "$1" \
-		| sed 's/--post-exec=//' \
-		| read -r post;
+		echo "$1" | sed 's/--post-exec=//' >"$dir/post-exec";
 		;;
 	-*)
 		other="$other $1";
@@ -48,12 +49,6 @@ fi;
 if test $# -gt 1; then
 	err 'Too many arguments.';
 fi;
-git rev-parse --git-dir \
-| sed 's,$,/bisect-rebase,' \
-| read -r dir;
-mkdir "$dir";
-# shellcheck disable=SC2064  # we want expansion now
-trap "rm -rf '$dir'" EXIT;
 
 git rev-list -1 "$1" >"$dir/onto";
 {
@@ -73,11 +68,10 @@ cat >"$dir/callback" <<__EOF__
 
 	git rev-list -1 HEAD >'$dir/bisect-head';
 
-	if test -n '$pre'; then
+	if test -e '$dir/pre-exec'; then
 		printf '%s' 'Pre-rebase exec: ';
-		pre='$pre';
 		if
-			\$pre;
+			bash '$dir/pre-exec';
 			x="\$?";
 			true;
 		then
@@ -120,11 +114,10 @@ cat >"$dir/callback" <<__EOF__
 	| sed '1!d' \
 	>'$dir/head-name';
 
-	if test -n '$post'; then
+	if test -e '$dir/post-exec'; then
 		printf '%s' 'Post-rebase exec: ';
-		post='$post';
 		if
-			\$post;
+			bash '$dir/post-exec';
 			x="\$?";
 			true;
 		then
@@ -175,7 +168,7 @@ cat "$dir/head-name" \
 | xargs -I{} git checkout {};
 # shellcheck disable=SC2086  # gropts may hold multiple options
 git rebase $gropts "$bad";
-if test -v post; then
+if test -e "$dir/post-exec"; then
 	echo 'Running post-rebase exec.';
-	$post;
+	bash "$dir/post-exec";
 fi;
