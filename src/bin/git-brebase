@@ -11,9 +11,7 @@ err()
 	exit 1;
 }
 
-git rev-parse --git-dir \
-| sed 's,$,/bisect-rebase,' \
-| read -r dir;
+git rev-parse --git-dir | sed 's,$,/bisect-rebase,' | read -r dir;
 mkdir "$dir";
 # shellcheck disable=SC2064  # we want expansion now
 trap "rm -rf '$dir'" EXIT;
@@ -154,9 +152,7 @@ fi;
 # shellcheck disable=SC2248  # gbopts may hold multiple options
 git bisect start $gbopts >/dev/null;
 xargs git bisect bad <"$dir/onto" >/dev/null;
-cat "$dir/head-name" "$dir/onto" \
-| xargs git merge-base \
-| xargs -I{} git bisect good {};
+cat "$dir/head-name" "$dir/onto" | xargs git merge-base | xargs git bisect good;
 git bisect run "$dir/callback";
 git rev-list -1 bisect/bad >"$dir/bisect-bad";
 git bisect reset >/dev/null 2>/dev/null;
