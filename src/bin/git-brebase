@@ -94,8 +94,7 @@ cat >"$dir/callback" <<__EOF__
 	fi;
 
 	xargs git checkout <'$dir/head-name' >/dev/null 2>/dev/null;
-	git rev-list -1 HEAD \
-	| read -r old_head;
+	git rev-list -1 HEAD >'$dir/good-head';
 	printf '%s' 'Rebase: ';
 	cat '$dir/bisect-head' \
 	| if xargs git rebase $gropts >/dev/null 2>/dev/null; then
@@ -127,13 +126,13 @@ cat >"$dir/callback" <<__EOF__
 				;;
 			125)
 				echo 'skip';
-				git reset --hard "\$old_head";
+				xargs git reset --hard <'$dir/good-head';
 				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 				exit 125;
 				;;
 			*)
 				echo "failure (\$x)";
-				git reset --hard "\$old_head";
+				xargs git reset --hard <'$dir/good-head';
 				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 				exit "\$x";
 				;;
