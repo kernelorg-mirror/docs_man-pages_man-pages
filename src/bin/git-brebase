@@ -72,19 +72,10 @@ cat >"$dir/git-bisect-run-callback" <<__EOF__
 			x="\$?";
 			true;
 		then
-			case "\$x" in
-			0)
-				echo 'success';
-				;;
-			125)
-				echo 'skip';
-				exit 125;
-				;;
-			*)
-				echo "failure (\$x)";
+			echo "exit status: \$x";
+			if test "\$x" -ne 0; then
 				exit "\$x";
-				;;
-			esac;
+			fi;
 		fi;
 	fi;
 
@@ -107,21 +98,11 @@ cat >"$dir/git-bisect-run-callback" <<__EOF__
 			x="\$?";
 			true;
 		then
-			case "\$x" in
-			0)
-				echo 'success';
-				;;
-			125)
-				echo 'skip';
-				xargs git reset --hard <"\$dir/good-head";
-				exit 125;
-				;;
-			*)
-				echo "failure (\$x)";
+			echo "exit status: \$x";
+			if test "\$x" -ne 0; then
 				xargs git reset --hard <"\$dir/good-head";
 				exit "\$x";
-				;;
-			esac;
+			fi;
 		fi;
 	fi;
 
