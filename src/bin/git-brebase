@@ -64,12 +64,13 @@ cat >"$dir/callback" <<__EOF__
 	set -Eeufo pipefail;
 	shopt -s lastpipe;
 
-	git rev-list -1 HEAD >'$dir/bisect-head';
+	git rev-parse --git-dir | sed 's,$,/bisect-rebase,' | read -r dir;
+	git rev-list -1 HEAD >"\$dir/bisect-head";
 
-	if test -e '$dir/pre-exec'; then
+	if test -e "\$dir/pre-exec"; then
 		printf '%s' 'Pre-rebase exec: ';
 		if
-			bash '$dir/pre-exec';
+			bash "\$dir/pre-exec";
 			x="\$?";
 			true;
 		then
@@ -79,28 +80,28 @@ cat >"$dir/callback" <<__EOF__
 				;;
 			125)
 				echo 'skip';
-				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
+				xargs git checkout --detach <"\$dir/bisect-head" 2>/dev/null;
 				exit 125;
 				;;
 			*)
 				echo "failure (\$x)";
-				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
+				xargs git checkout --detach <"\$dir/bisect-head" 2>/dev/null;
 				exit "\$x";
 				;;
 			esac;
 		fi;
 	fi;
 
-	xargs git checkout <'$dir/head-name' >/dev/null 2>/dev/null;
-	git rev-list -1 HEAD >'$dir/good-head';
+	xargs git checkout <"\$dir/head-name" >/dev/null 2>/dev/null;
+	git rev-list -1 HEAD >"\$dir/good-head";
 	printf '%s' 'Rebase: ';
-	cat '$dir/bisect-head' \
+	cat "\$dir/bisect-head" \
 	| if xargs git rebase $gropts >/dev/null 2>/dev/null; then
 		echo 'success';
 	else
 		echo 'conflict';
 		git rebase --abort >/dev/null;
-		xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
+		xargs git checkout --detach <"\$dir/bisect-head" 2>/dev/null;
 		exit 1;
 	fi;
 	{
@@ -109,12 +110,12 @@ cat >"$dir/callback" <<__EOF__
 	} \
 	| sed '/^HEAD$/d' \
 	| sed '1!d' \
-	>'$dir/head-name';
+	>"\$dir/head-name";
 
-	if test -e '$dir/post-exec'; then
+	if test -e "\$dir/post-exec"; then
 		printf '%s' 'Post-rebase exec: ';
 		if
-			bash '$dir/post-exec';
+			bash "\$dir/post-exec";
 			x="\$?";
 			true;
 		then
@@ -124,20 +125,20 @@ cat >"$dir/callback" <<__EOF__
 				;;
 			125)
 				echo 'skip';
-				xargs git reset --hard <'$dir/good-head';
-				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
+				xargs git reset --hard <"\$dir/good-head";
+				xargs git checkout --detach <"\$dir/bisect-head" 2>/dev/null;
 				exit 125;
 				;;
 			*)
 				echo "failure (\$x)";
-				xargs git reset --hard <'$dir/good-head';
-				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
+				xargs git reset --hard <"\$dir/good-head";
+				xargs git checkout --detach <"\$dir/bisect-head" 2>/dev/null;
 				exit "\$x";
 				;;
 			esac;
 		fi;
 	fi;
-	xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
+	xargs git checkout --detach <"\$dir/bisect-head" 2>/dev/null;
 	exit 0;
 __EOF__
 chmod +x "$dir/callback";
