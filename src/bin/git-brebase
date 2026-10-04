@@ -71,8 +71,7 @@ cat >"$dir/callback" <<__EOF__
 	set -Eeufo pipefail;
 	shopt -s lastpipe;
 
-	git rev-list -1 HEAD \
-	| read -r bisect_head;
+	git rev-list -1 HEAD >'$dir/bisect-head';
 
 	if test -n '$pre'; then
 		printf '%s' 'Pre-rebase exec: ';
@@ -88,12 +87,12 @@ cat >"$dir/callback" <<__EOF__
 				;;
 			125)
 				echo 'skip';
-				git checkout --detach "\$bisect_head" 2>/dev/null;
+				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 				exit 125;
 				;;
 			*)
 				echo "failure (\$x)";
-				git checkout --detach "\$bisect_head" 2>/dev/null;
+				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 				exit "\$x";
 				;;
 			esac;
@@ -105,12 +104,13 @@ cat >"$dir/callback" <<__EOF__
 	git rev-list -1 HEAD \
 	| read -r old_head;
 	printf '%s' 'Rebase: ';
-	if git rebase $gropts "\$bisect_head" >/dev/null 2>/dev/null; then
+	cat '$dir/bisect-head' \
+	| if xargs git rebase $gropts >/dev/null 2>/dev/null; then
 		echo 'success';
 	else
 		echo 'conflict';
 		git rebase --abort >/dev/null;
-		git checkout --detach "\$bisect_head" 2>/dev/null;
+		xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 		exit 1;
 	fi;
 	{
@@ -136,19 +136,19 @@ cat >"$dir/callback" <<__EOF__
 			125)
 				echo 'skip';
 				git reset --hard "\$old_head";
-				git checkout --detach "\$bisect_head" 2>/dev/null;
+				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 				exit 125;
 				;;
 			*)
 				echo "failure (\$x)";
 				git reset --hard "\$old_head";
-				git checkout --detach "\$bisect_head" 2>/dev/null;
+				xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 				exit "\$x";
 				;;
 			esac;
 		fi;
 	fi;
-	git checkout --detach "\$bisect_head" 2>/dev/null;
+	xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null;
 	exit 0;
 __EOF__
 chmod +x "$dir/callback";
