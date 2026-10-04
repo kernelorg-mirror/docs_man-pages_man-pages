@@ -50,21 +50,23 @@ if test $# -gt 1; then
 fi;
 git rev-list -1 "$1" \
 | read -r tgt;
+git rev-parse --git-dir \
+| sed 's,$,/bisect-rebase,' \
+| read -r dir;
+mkdir "$dir";
+# shellcheck disable=SC2064  # we want expansion now
+trap "rm -rf '$dir'" EXIT;
 
-mktemp \
-| read -r branch;
 {
 	git rev-parse --abbrev-ref HEAD;
 	git rev-list -1 HEAD;
 } \
 | sed '/^HEAD$/d' \
 | sed '1!d' \
->"$branch";
+>"$dir/branch";
 
 # Set up the callback script for 'git rebase run'.
-mktemp \
-| read -r callback;
-cat >"$callback" <<__EOF__
+cat >"$dir/callback" <<__EOF__
 #!/bin/bash
 
 	set -Eeufo pipefail;
@@ -99,7 +101,7 @@ cat >"$callback" <<__EOF__
 		fi;
 	fi;
 
-	cat '$branch' \
+	cat '$dir/branch' \
 	| xargs -I{} git checkout {} >/dev/null 2>/dev/null;
 	git rev-list -1 HEAD \
 	| read -r old_head;
@@ -118,7 +120,7 @@ cat >"$callback" <<__EOF__
 	} \
 	| sed '/^HEAD$/d' \
 	| sed '1!d' \
-	>'$branch';
+	>'$dir/branch';
 
 	if test -n '$post'; then
 		printf '%s' 'Post-rebase exec: ';
@@ -150,11 +152,11 @@ cat >"$callback" <<__EOF__
 	git checkout --detach "\$bisect_head" 2>/dev/null;
 	exit 0;
 __EOF__
-chmod +x "$callback";
+chmod +x "$dir/callback";
 
 # Try the target first.
 git checkout --detach "$tgt" 2>/dev/null;
-if "$callback"; then
+if "$dir/callback"; then
 	exit 0;
 fi;
 
@@ -162,16 +164,16 @@ fi;
 # shellcheck disable=SC2248  # gbopts may hold multiple options
 git bisect start $gbopts >/dev/null;
 git bisect bad "$tgt" >/dev/null;
-cat "$branch" \
+cat "$dir/branch" \
 | xargs -I{} git merge-base {} "$tgt" \
 | xargs -I{} git bisect good {};
-git bisect run "$callback";
+git bisect run "$dir/callback";
 git rev-list -1 bisect/bad \
 | read -r bad;
 git bisect reset >/dev/null 2>/dev/null;
 
 # Perform the conflicting rebase
-cat "$branch" \
+cat "$dir/branch" \
 | xargs -I{} git checkout {};
 # shellcheck disable=SC2086  # gropts may hold multiple options
 git rebase $gropts "$bad";
