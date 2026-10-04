@@ -99,13 +99,6 @@ cat >"$dir/git-bisect-run-callback" <<__EOF__
 		git rebase --abort >/dev/null;
 		exit 1;
 	fi;
-	{
-		git rev-parse --abbrev-ref HEAD;
-		git rev-list -1 HEAD;
-	} \
-	| sed '/^HEAD$/d' \
-	| sed '1!d' \
-	>"\$dir/head-name";
 
 	if test -e "\$dir/post-exec"; then
 		printf '%s' 'Post-rebase exec: ';
@@ -131,6 +124,14 @@ cat >"$dir/git-bisect-run-callback" <<__EOF__
 			esac;
 		fi;
 	fi;
+
+	{
+		git rev-parse --abbrev-ref HEAD;
+		git rev-list -1 HEAD;
+	} \
+	| sed '/^HEAD$/d' \
+	| sed '1!d' \
+	>"\$dir/head-name";
 	exit 0;
 __EOF__
 chmod +x "$dir/git-bisect-run-callback";
