@@ -62,7 +62,7 @@ git rev-list -1 "$1" >"$dir/onto";
 } \
 | sed '/^HEAD$/d' \
 | sed '1!d' \
->"$dir/branch";
+>"$dir/head-name";
 
 # Set up the callback script for 'git rebase run'.
 cat >"$dir/callback" <<__EOF__
@@ -100,7 +100,7 @@ cat >"$dir/callback" <<__EOF__
 		fi;
 	fi;
 
-	cat '$dir/branch' \
+	cat '$dir/head-name' \
 	| xargs -I{} git checkout {} >/dev/null 2>/dev/null;
 	git rev-list -1 HEAD \
 	| read -r old_head;
@@ -119,7 +119,7 @@ cat >"$dir/callback" <<__EOF__
 	} \
 	| sed '/^HEAD$/d' \
 	| sed '1!d' \
-	>'$dir/branch';
+	>'$dir/head-name';
 
 	if test -n '$post'; then
 		printf '%s' 'Post-rebase exec: ';
@@ -163,7 +163,7 @@ fi;
 # shellcheck disable=SC2248  # gbopts may hold multiple options
 git bisect start $gbopts >/dev/null;
 xargs git bisect bad <"$dir/onto" >/dev/null;
-cat "$dir/branch" "$dir/onto" \
+cat "$dir/head-name" "$dir/onto" \
 | xargs git merge-base \
 | xargs -I{} git bisect good {};
 git bisect run "$dir/callback";
@@ -172,7 +172,7 @@ git rev-list -1 bisect/bad \
 git bisect reset >/dev/null 2>/dev/null;
 
 # Perform the conflicting rebase
-cat "$dir/branch" \
+cat "$dir/head-name" \
 | xargs -I{} git checkout {};
 # shellcheck disable=SC2086  # gropts may hold multiple options
 git rebase $gropts "$bad";
