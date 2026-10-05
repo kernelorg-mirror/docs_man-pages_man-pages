@@ -55,34 +55,34 @@ git rev-list -1 "$1" >"$dir/onto";
 | sed '1!d' \
 >"$dir/head-name";
 
-cat >"$dir/git-bisect-run-callback" <<__EOF__
+cat >"$dir/git-bisect-run-callback" <<'__EOF__'
 #!/bin/bash
 
 	set -Eeufo pipefail;
 	shopt -s lastpipe;
 
 	git rev-parse --git-dir | sed 's,$,/bisect-rebase,' | read -r dir;
-	trap "xargs git checkout --detach <'\$dir/bisect-head' 2>/dev/null" EXIT;
-	git rev-list -1 HEAD >"\$dir/bisect-head";
+	trap "xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null" EXIT;
+	git rev-list -1 HEAD >"$dir/bisect-head";
 
-	if test -e "\$dir/pre-exec"; then
+	if test -e "$dir/pre-exec"; then
 		printf '%s' 'Pre-rebase exec: ';
 		if
-			bash "\$dir/pre-exec";
-			x="\$?";
+			bash "$dir/pre-exec";
+			x="$?";
 			true;
 		then
-			echo "exit status: \$x";
-			if test "\$x" -ne 0; then
-				exit "\$x";
+			echo "exit status: $x";
+			if test "$x" -ne 0; then
+				exit "$x";
 			fi;
 		fi;
 	fi;
 
-	xargs git checkout <"\$dir/head-name" >/dev/null 2>/dev/null;
-	git rev-list -1 HEAD >"\$dir/good-head";
+	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
+	git rev-list -1 HEAD >"$dir/good-head";
 	printf '%s' 'Rebase: ';
-	cat "\$dir/git-rebase-options" "\$dir/bisect-head" \
+	cat "$dir/git-rebase-options" "$dir/bisect-head" \
 	| if xargs git rebase >/dev/null 2>/dev/null; then
 		echo 'success';
 	else
@@ -91,17 +91,17 @@ cat >"$dir/git-bisect-run-callback" <<__EOF__
 		exit 1;
 	fi;
 
-	if test -e "\$dir/post-exec"; then
+	if test -e "$dir/post-exec"; then
 		printf '%s' 'Post-rebase exec: ';
 		if
-			bash "\$dir/post-exec";
-			x="\$?";
+			bash "$dir/post-exec";
+			x="$?";
 			true;
 		then
-			echo "exit status: \$x";
-			if test "\$x" -ne 0; then
-				xargs git reset --hard <"\$dir/good-head";
-				exit "\$x";
+			echo "exit status: $x";
+			if test "$x" -ne 0; then
+				xargs git reset --hard <"$dir/good-head";
+				exit "$x";
 			fi;
 		fi;
 	fi;
@@ -112,7 +112,7 @@ cat >"$dir/git-bisect-run-callback" <<__EOF__
 	} \
 	| sed '/^HEAD$/d' \
 	| sed '1!d' \
-	>"\$dir/head-name";
+	>"$dir/head-name";
 	exit 0;
 __EOF__
 chmod +x "$dir/git-bisect-run-callback";
