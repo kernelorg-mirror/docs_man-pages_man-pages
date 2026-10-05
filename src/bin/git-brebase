@@ -11,7 +11,7 @@ err()
 	exit 1;
 }
 
-git rev-parse --git-dir | sed 's,$,/bisect-rebase,' | read -r dir;
+git rev-parse --git-path bisect-rebase | read -r dir;
 mkdir "$dir";
 # shellcheck disable=SC2064  # we want expansion now
 trap "rm -rf '$dir'" EXIT;
