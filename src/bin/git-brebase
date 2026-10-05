@@ -120,6 +120,7 @@ chmod +x "$dir/git-bisect-run-callback";
 # Try the target first.
 xargs git checkout --detach <"$dir/onto" 2>/dev/null;
 if "$dir/git-bisect-run-callback"; then
+	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
 	exit 0;
 fi;
 
