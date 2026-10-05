@@ -46,10 +46,10 @@ if test $# -gt 1; then
 	err 'Too many arguments.';
 fi;
 
-git rev-list -1 "$1" >"$dir/onto";
+git rev-parse "$1" >"$dir/onto";
 {
 	git rev-parse --abbrev-ref HEAD;
-	git rev-list -1 HEAD;
+	git rev-parse HEAD;
 } \
 | sed '/^HEAD$/d' \
 | sed '1!d' \
@@ -63,7 +63,7 @@ cat >"$dir/git-bisect-run-callback" <<'__EOF__'
 
 	git rev-parse --git-dir | sed 's,$,/bisect-rebase,' | read -r dir;
 	trap "xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null" EXIT;
-	git rev-list -1 HEAD >"$dir/bisect-head";
+	git rev-parse HEAD >"$dir/bisect-head";
 
 	if test -e "$dir/pre-exec"; then
 		printf '%s' 'Pre-rebase exec: ';
@@ -80,7 +80,7 @@ cat >"$dir/git-bisect-run-callback" <<'__EOF__'
 	fi;
 
 	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
-	git rev-list -1 HEAD >"$dir/good-head";
+	git rev-parse HEAD >"$dir/good-head";
 	printf '%s' 'Rebase: ';
 	cat "$dir/git-rebase-options" "$dir/bisect-head" \
 	| if xargs git rebase >/dev/null 2>/dev/null; then
@@ -108,7 +108,7 @@ cat >"$dir/git-bisect-run-callback" <<'__EOF__'
 
 	{
 		git rev-parse --abbrev-ref HEAD;
-		git rev-list -1 HEAD;
+		git rev-parse HEAD;
 	} \
 	| sed '/^HEAD$/d' \
 	| sed '1!d' \
@@ -128,7 +128,7 @@ xargs git bisect start <"$dir/git-bisect-options" >/dev/null;
 xargs git bisect bad <"$dir/onto" >/dev/null;
 cat "$dir/head-name" "$dir/onto" | xargs git merge-base | xargs git bisect good;
 git bisect run "$dir/git-bisect-run-callback";
-git rev-list -1 bisect/bad >"$dir/bisect-bad";
+git rev-parse bisect/bad >"$dir/bisect-bad";
 git bisect reset >/dev/null 2>/dev/null;
 
 # Perform the conflicting rebase
