@@ -43,25 +43,20 @@ if test $# -lt 1; then
 	git rev-parse '@{u}';
 else
 	git rev-parse --verify "$1";
-	shift;
 fi >"$dir/onto";
+test $# -lt 1 || shift;
 
 if test $# -lt 1; then
-	{
-		git rev-parse --abbrev-ref HEAD;
-		git rev-parse HEAD;
-	} \
-	| sed '/^HEAD$/d' \
-	| sed '1!d';
+	git rev-parse --abbrev-ref HEAD;
+	git rev-parse HEAD;
 else
-	{
-		git rev-parse --verify --symbolic "$1";
-		git rev-parse --verify "$1";
-	} \
-	| sed '/^HEAD$/d' \
-	| sed '1!d';
-	shift;
-fi >"$dir/head-name";
+	git rev-parse --verify --symbolic "$1";
+	git rev-parse --verify "$1";
+fi \
+| sed '/^HEAD$/d' \
+| sed '1!d' \
+>"$dir/head-name";
+test $# -lt 1 || shift;
 
 if test $# -gt 0; then
 	err 'Too many arguments.';
