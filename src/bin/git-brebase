@@ -46,17 +46,26 @@ else
 	shift;
 fi >"$dir/onto";
 
+if test $# -lt 1; then
+	{
+		git rev-parse --abbrev-ref HEAD;
+		git rev-parse HEAD;
+	} \
+	| sed '/^HEAD$/d' \
+	| sed '1!d';
+else
+	{
+		git rev-parse --verify --symbolic "$1";
+		git rev-parse --verify "$1";
+	} \
+	| sed '/^HEAD$/d' \
+	| sed '1!d';
+	shift;
+fi >"$dir/head-name";
+
 if test $# -gt 0; then
 	err 'Too many arguments.';
 fi;
-
-{
-	git rev-parse --abbrev-ref HEAD;
-	git rev-parse HEAD;
-} \
-| sed '/^HEAD$/d' \
-| sed '1!d' \
->"$dir/head-name";
 
 cat >"$dir/git-bisect-run-callback" <<'__EOF__'
 #!/bin/bash
