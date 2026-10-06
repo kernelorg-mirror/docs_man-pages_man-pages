@@ -40,10 +40,11 @@ while test $# -ge 1; do
 done;
 
 if test $# -lt 1; then
-	err 'Missing target commit.';
-fi;
-git rev-parse --verify "$1" >"$dir/onto";
-shift;
+	git rev-parse '@{u}';
+else
+	git rev-parse --verify "$1";
+	shift;
+fi >"$dir/onto";
 
 if test $# -gt 0; then
 	err 'Too many arguments.';
