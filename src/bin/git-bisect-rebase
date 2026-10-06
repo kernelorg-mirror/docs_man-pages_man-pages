@@ -29,6 +29,9 @@ while test $# -ge 1; do
 	--first-parent)
 		echo "$1" >>"$dir/git-bisect-options";
 		;;
+	--onto=*)
+		err "$1: Unsupported option.";
+		;;
 	-*)
 		echo "$1" >>"$dir/git-rebase-options";
 		;;
