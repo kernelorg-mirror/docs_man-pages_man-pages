@@ -42,11 +42,13 @@ done;
 if test $# -lt 1; then
 	err 'Missing target commit.';
 fi;
-if test $# -gt 1; then
+git rev-parse --verify "$1" >"$dir/onto";
+shift;
+
+if test $# -gt 0; then
 	err 'Too many arguments.';
 fi;
 
-git rev-parse --verify "$1" >"$dir/onto";
 {
 	git rev-parse --abbrev-ref HEAD;
 	git rev-parse HEAD;
