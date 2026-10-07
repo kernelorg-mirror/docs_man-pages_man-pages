@@ -35,6 +35,9 @@ while test $# -ge 1; do
 	--onto=* | --keep-base)
 		err "$1: Unsupported option.";
 		;;
+	-i | --interactive)
+		err "$1: Unsupported option.";
+		;;
 	-*)
 		echo "$1" >>"$dir/git-rebase-options";
 		;;
