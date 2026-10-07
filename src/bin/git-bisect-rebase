@@ -35,6 +35,9 @@ while test $# -ge 1; do
 	--onto=* | --keep-base)
 		err "$1: Unsupported option.";
 		;;
+	--root)
+		err "$1: Unsupported option.";
+		;;
 	-i | --interactive)
 		err "$1: Unsupported option.";
 		;;
