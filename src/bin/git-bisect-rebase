@@ -16,6 +16,40 @@ mkdir "$dir";
 # shellcheck disable=SC2064  # we want expansion now
 trap "rm -rf '$dir'" EXIT;
 
+git rev-parse --parseopt --stuck-long --keep-dashdash -- "$@" >"$dir/parseopt" <<-'__EOF__';
+	git bisect-rebase [OPTION ...] [UPSTREAM [BRANCH]]
+
+	Rebase BRANCH on top of the first conflicting commit from UPSTREAM.
+	--
+	pre-exec!=cmd	Run <cmd> before every git-rebase(1) operation.
+	post-exec!=cmd	Run <cmd> after every git-rebase(1) operation.
+	x,exec=cmd		See git-rebase(1).
+	r,rebase-merges?	See git-rebase(1).
+	apply!*			^
+	empty!*=		^
+	keep-empty*		^
+	reapply-cherry-picks*	^
+	allow-empty-message*	^
+	m,merge!*		^
+	s,strategy!*=		^
+	X,strategy-option!*=	^
+	rerere-autoupdate*	^
+	S,gpg-sign*?		^
+	q,quiet!*		^
+	v,verbose!*		^
+	stat!*			^
+	n,no-stat!*		^
+	verify*			^
+	C!*=			^
+	no-ff!*			^
+	f,force-rebase!*	^
+	ignore-whitespace*	^
+	update-refs*		^
+	first-parent!		See git-bisect(1).
+__EOF__
+# shellcheck disable=SC2312  # If it fails, touch(1) --below-- will also fail.
+eval "$(cat "$dir/parseopt")";
+
 touch "$dir/git-bisect-options";
 touch "$dir/git-rebase-options";
 while test $# -ge 1; do
@@ -29,23 +63,15 @@ while test $# -ge 1; do
 	--first-parent)
 		echo "$1" >>"$dir/git-bisect-options";
 		;;
-	--continue | --skip | --abort | --quit | --edit-todo | --show-current-patch)
-		err "$1: Unsupported option.";
-		;;
-	--onto=* | --keep-base)
-		err "$1: Unsupported option.";
-		;;
-	--root)
-		err "$1: Unsupported option.";
-		;;
-	-i | --interactive)
-		err "$1: Unsupported option.";
+	--)
+		shift;
+		break;
 		;;
 	-*)
 		echo "$1" >>"$dir/git-rebase-options";
 		;;
 	*)
-		break;
+		exit 1;  # Unreachable
 		;;
 	esac;
 	shift;
