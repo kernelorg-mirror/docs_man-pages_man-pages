@@ -29,7 +29,7 @@ while test $# -ge 1; do
 	--first-parent)
 		echo "$1" >>"$dir/git-bisect-options";
 		;;
-	--onto=*)
+	--onto=* | --keep-base)
 		err "$1: Unsupported option.";
 		;;
 	-*)
