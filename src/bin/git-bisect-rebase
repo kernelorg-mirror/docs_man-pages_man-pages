@@ -29,6 +29,9 @@ while test $# -ge 1; do
 	--first-parent)
 		echo "$1" >>"$dir/git-bisect-options";
 		;;
+	--continue | --skip | --abort | --quit | --edit-todo | --show-current-patch)
+		err "$1: Unsupported option.";
+		;;
 	--onto=* | --keep-base)
 		err "$1: Unsupported option.";
 		;;
