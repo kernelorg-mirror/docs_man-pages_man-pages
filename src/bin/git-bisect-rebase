@@ -34,6 +34,14 @@ while test $# -ge 1; do
 		git-bisect-rebase--continue;
 		exit 0;
 		;;
+	--quit)
+		test -d "$dir/" || err 'Not in a bisect-rebase operation?';
+		if test -d "$git_dir/rebase-merge"; then
+			err 'You must finish the current rebase operation.';
+		fi;
+		rm -rf "$dir";
+		exit 0;
+		;;
 	*)
 		break;
 		;;
@@ -53,6 +61,7 @@ cat <<-'__EOF__' |
 	 Mode options
 	abort!		Abort the bisect-rebase operation and reset HEAD to the original <branch>.
 	continue!	Restart the bisect-rebase process after having resolved a particular rebase.
+	quit!		Abort the bisect-rebase operation but HEAD is not reset.
 
 	 Options
 	pre-exec!=cmd	Run <cmd> before every git-rebase(1) operation.
@@ -91,7 +100,7 @@ touch "$dir/git-bisect-options";
 touch "$dir/git-rebase-options";
 while test $# -ge 1; do
 	case "$1" in
-	--abort | --continue)
+	--abort | --continue | --quit)
 		err "$1 is incompatible with other arguments.";
 		;;
 	--)
