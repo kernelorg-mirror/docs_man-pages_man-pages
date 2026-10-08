@@ -135,3 +135,4 @@ git rev-parse HEAD >"$dir/orig-head";
 trap - EXIT;
 
 git-bisect-rebase--continue;
+exit 0;
