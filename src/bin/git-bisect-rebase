@@ -99,11 +99,13 @@ test $# -lt 1 || shift;
 if test $# -gt 0; then
 	err 'Too many arguments.';
 fi;
+trap - EXIT;
 
 # Try the target first.
 xargs git checkout --detach <"$dir/onto" 2>/dev/null;
 if git-bisect-rebase--callback; then
 	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
+	rm -rf "$dir";
 	exit 0;
 fi;
 
