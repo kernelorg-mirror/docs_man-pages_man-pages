@@ -100,71 +100,9 @@ if test $# -gt 0; then
 	err 'Too many arguments.';
 fi;
 
-cat >"$dir/git-bisect-run-callback" <<'__EOF__'
-#!/bin/bash
-
-	set -Eeufo pipefail;
-	shopt -s lastpipe;
-
-	git rev-parse --git-dir | sed 's,$,/bisect-rebase,' | read -r dir;
-	trap "xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null" EXIT;
-	git rev-parse HEAD >"$dir/bisect-head";
-
-	if test -e "$dir/pre-exec"; then
-		printf '%s' 'Pre-rebase exec: ';
-		if
-			bash "$dir/pre-exec";
-			x="$?";
-			true;
-		then
-			echo "exit status: $x";
-			if test "$x" -ne 0; then
-				exit "$x";
-			fi;
-		fi;
-	fi;
-
-	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
-	git rev-parse HEAD >"$dir/good-head";
-	printf '%s' 'Rebase: ';
-	cat "$dir/git-rebase-options" "$dir/bisect-head" \
-	| if xargs git rebase >/dev/null 2>/dev/null; then
-		echo 'success';
-	else
-		echo 'conflict';
-		git rebase --abort >/dev/null;
-		exit 1;
-	fi;
-
-	if test -e "$dir/post-exec"; then
-		printf '%s' 'Post-rebase exec: ';
-		if
-			bash "$dir/post-exec";
-			x="$?";
-			true;
-		then
-			echo "exit status: $x";
-			if test "$x" -ne 0; then
-				xargs git reset --hard <"$dir/good-head";
-				exit "$x";
-			fi;
-		fi;
-	fi;
-
-	{
-		git rev-parse --abbrev-ref HEAD;
-		git rev-parse HEAD;
-	} \
-	| sed '/^HEAD$/d' \
-	| sed '1!d' \
-	>"$dir/head-name";
-	exit 0;
-__EOF__
-chmod +x "$dir/git-bisect-run-callback";
-
 # Try the target first.
 xargs git checkout --detach <"$dir/onto" 2>/dev/null;
-if "$dir/git-bisect-run-callback"; then
+if git-bisect-rebase--callback; then
 	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
 	exit 0;
 fi;
@@ -173,7 +111,7 @@ fi;
 xargs git bisect start <"$dir/git-bisect-options" >/dev/null;
 xargs git bisect bad <"$dir/onto" >/dev/null;
 cat "$dir/head-name" "$dir/onto" | xargs git merge-base | xargs git bisect good;
-git bisect run "$dir/git-bisect-run-callback";
+git bisect run git-bisect-rebase--callback;
 git rev-parse bisect/bad >"$dir/bisect-bad";
 git bisect reset >/dev/null 2>/dev/null;
 
