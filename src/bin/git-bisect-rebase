@@ -16,7 +16,8 @@ mkdir "$dir";
 # shellcheck disable=SC2064  # we want expansion now
 trap "rm -rf '$dir'" EXIT;
 
-git rev-parse --parseopt --stuck-long --keep-dashdash -- "$@" >"$dir/parseopt" <<-'__EOF__';
+# shellcheck disable=SC2312  # False positive: <https://github.com/koalaman/shellcheck/issues/3554>
+cat <<-'__EOF__' |
 	git bisect-rebase [OPTION ...] [UPSTREAM [BRANCH]]
 
 	Rebase BRANCH on top of the first conflicting commit from UPSTREAM.
@@ -47,8 +48,7 @@ git rev-parse --parseopt --stuck-long --keep-dashdash -- "$@" >"$dir/parseopt" <
 	update-refs*		^
 	first-parent!		See git-bisect(1).
 __EOF__
-# shellcheck disable=SC2312  # If it fails, touch(1) --below-- will also fail.
-eval "$(cat "$dir/parseopt")";
+eval "$(git rev-parse --parseopt --stuck-long --keep-dashdash -- "$@" || echo exit $?)";
 
 touch "$dir/git-bisect-options";
 touch "$dir/git-rebase-options";
