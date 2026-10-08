@@ -24,8 +24,10 @@ cat <<-'__EOF__' |
 	--
 	pre-exec!=cmd	Run <cmd> before every git-rebase(1) operation.
 	post-exec!=cmd	Run <cmd> after every git-rebase(1) operation.
+
+	 git-rebase(1) options
 	x,exec=cmd		See git-rebase(1).
-	r,rebase-merges?	See git-rebase(1).
+	r,rebase-merges?	^
 	apply!*			^
 	empty!*=		^
 	keep-empty*		^
@@ -46,6 +48,8 @@ cat <<-'__EOF__' |
 	f,force-rebase!*	^
 	ignore-whitespace*	^
 	update-refs*		^
+
+	 git-bisect(1) options
 	first-parent!		See git-bisect(1).
 __EOF__
 eval "$(git rev-parse --parseopt --stuck-long --keep-dashdash -- "$@" || echo exit $?)";
