@@ -12,6 +12,25 @@ err()
 }
 
 git rev-parse --git-path bisect-rebase | read -r dir;
+
+while test $# -ge 1; do
+	case "$1" in
+	--abort)
+		test -d "$dir/" || err 'Not in a bisect-rebase operation?';
+		set +e;
+		git rebase --abort >/dev/null 2>/dev/null;
+		git bisect reset >/dev/null 2>/dev/null;
+		xargs git checkout <"$dir/head-name";
+		xargs git reset --hard <"$dir/orig-head";
+		rm -rf "$dir";
+		exit 0;
+		;;
+	*)
+		break;
+		;;
+	esac;
+done;
+
 mkdir "$dir";
 # shellcheck disable=SC2064  # we want expansion now
 trap "rm -rf '$dir'" EXIT;
@@ -22,6 +41,10 @@ cat <<-'__EOF__' |
 
 	Rebase BRANCH on top of the first conflicting commit from UPSTREAM.
 	--
+	 Mode options
+	abort!		Abort the bisect-rebase operation and reset HEAD to the original BRANCH.
+
+	 Options
 	pre-exec!=cmd	Run <cmd> before every git-rebase(1) operation.
 	post-exec!=cmd	Run <cmd> after every git-rebase(1) operation.
 
@@ -58,6 +81,9 @@ touch "$dir/git-bisect-options";
 touch "$dir/git-rebase-options";
 while test $# -ge 1; do
 	case "$1" in
+	--abort)
+		err "$1 is incompatible with other arguments.";
+		;;
 	--)
 		shift;
 		break;
@@ -103,6 +129,9 @@ test $# -lt 1 || shift;
 if test $# -gt 0; then
 	err 'Too many arguments.';
 fi;
+
+git rev-parse HEAD >"$dir/orig-head";
+
 trap - EXIT;
 
 # Try the target first.
