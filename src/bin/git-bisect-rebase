@@ -54,6 +54,10 @@ touch "$dir/git-bisect-options";
 touch "$dir/git-rebase-options";
 while test $# -ge 1; do
 	case "$1" in
+	--)
+		shift;
+		break;
+		;;
 	--pre-exec=*)
 		echo "$1" | sed 's/--pre-exec=//' >"$dir/pre-exec";
 		;;
@@ -62,10 +66,6 @@ while test $# -ge 1; do
 		;;
 	--first-parent)
 		echo "$1" >>"$dir/git-bisect-options";
-		;;
-	--)
-		shift;
-		break;
 		;;
 	-*)
 		echo "$1" >>"$dir/git-rebase-options";
