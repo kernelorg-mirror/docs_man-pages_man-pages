@@ -5,7 +5,7 @@
 set -Eeufo pipefail;
 shopt -s lastpipe;
 
-git rev-parse --git-dir | sed 's,$,/bisect-rebase,' | read -r dir;
+git rev-parse --git-path bisect-rebase | read -r dir;
 # shellcheck disable=SC2064  # we want expansion now
 trap "xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null" EXIT;
 git rev-parse HEAD >"$dir/bisect-head";
