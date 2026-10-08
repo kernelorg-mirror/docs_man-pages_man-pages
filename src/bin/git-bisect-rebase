@@ -37,12 +37,12 @@ trap "rm -rf '$dir'" EXIT;
 
 # shellcheck disable=SC2312  # False positive: <https://github.com/koalaman/shellcheck/issues/3554>
 cat <<-'__EOF__' |
-	git bisect-rebase [OPTION ...] [UPSTREAM [BRANCH]]
+	git bisect-rebase [<option> ...] [<upstream> [<branch>]]
 
-	Rebase BRANCH on top of the first conflicting commit from UPSTREAM.
+	Rebase <branch> on top of the first conflicting commit from <upstream>.
 	--
 	 Mode options
-	abort!		Abort the bisect-rebase operation and reset HEAD to the original BRANCH.
+	abort!		Abort the bisect-rebase operation and reset HEAD to the original <branch>.
 
 	 Options
 	pre-exec!=cmd	Run <cmd> before every git-rebase(1) operation.
