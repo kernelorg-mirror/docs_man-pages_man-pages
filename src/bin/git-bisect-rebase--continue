@@ -36,3 +36,5 @@ if test -e "$dir/post-exec"; then
 	echo 'Running post-rebase exec.';
 	bash "$dir/post-exec";
 fi;
+
+exit 0;
