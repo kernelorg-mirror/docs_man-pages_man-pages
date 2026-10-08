@@ -134,26 +134,4 @@ git rev-parse HEAD >"$dir/orig-head";
 
 trap - EXIT;
 
-# Try the target first.
-xargs git checkout --detach <"$dir/onto" 2>/dev/null;
-if git-bisect-rebase--callback; then
-	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
-	rm -rf "$dir";
-	exit 0;
-fi;
-
-# Bisect.
-xargs git bisect start <"$dir/git-bisect-options" >/dev/null;
-xargs git bisect bad <"$dir/onto" >/dev/null;
-cat "$dir/head-name" "$dir/onto" | xargs git merge-base | xargs git bisect good;
-git bisect run git-bisect-rebase--callback;
-git rev-parse bisect/bad >"$dir/bisect-bad";
-git bisect reset >/dev/null 2>/dev/null;
-
-# Perform the conflicting rebase
-xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
-cat "$dir/git-rebase-options" "$dir/bisect-bad" | xargs git rebase;
-if test -e "$dir/post-exec"; then
-	echo 'Running post-rebase exec.';
-	bash "$dir/post-exec";
-fi;
+git-bisect-rebase--continue;
