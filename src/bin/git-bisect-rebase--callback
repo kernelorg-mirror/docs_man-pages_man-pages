@@ -6,7 +6,7 @@ set -Eeufo pipefail;
 shopt -s lastpipe;
 
 git rev-parse --git-path bisect-rebase | read -r dir;
-# shellcheck disable=SC2064  # we want expansion now
+readonly dir;
 trap "xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null" EXIT;
 git rev-parse HEAD >"$dir/bisect-head";
 
@@ -24,7 +24,6 @@ trap - ERR;
 
 if test -e "$dir/post-exec"; then
 	cat <(printf '%s' 'Executing (post-rebase): ') "$dir/post-exec";
-	# shellcheck disable=SC2064  # we want expansion now
 	trap "xargs git reset --hard <'$dir/good-head';" ERR;
 	bash "$dir/post-exec";
 	trap - ERR;
