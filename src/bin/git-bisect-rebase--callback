@@ -7,7 +7,7 @@ shopt -s lastpipe;
 
 git rev-parse --git-path bisect-rebase | read -r dir;
 readonly dir;
-trap "xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null" EXIT;
+trap 'xargs git checkout --detach <"$dir/bisect-head" 2>/dev/null;' EXIT;
 git rev-parse HEAD >"$dir/bisect-head";
 
 if test -e "$dir/pre-exec"; then
@@ -24,7 +24,7 @@ trap - ERR;
 
 if test -e "$dir/post-exec"; then
 	cat <(printf '%s' 'Executing (post-rebase): ') "$dir/post-exec";
-	trap "xargs git reset --hard <'$dir/good-head';" ERR;
+	trap 'xargs git reset --hard <"$dir/good-head";' ERR;
 	bash "$dir/post-exec";
 	trap - ERR;
 fi;

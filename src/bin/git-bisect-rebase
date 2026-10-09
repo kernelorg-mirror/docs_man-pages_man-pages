@@ -49,8 +49,7 @@ while test $# -ge 1; do
 done;
 
 mkdir "$dir";
-# shellcheck disable=SC2064  # we want expansion now
-trap "rm -rf '$dir'" EXIT;
+trap 'rm -rf "$dir";' EXIT;
 
 # shellcheck disable=SC2312  # False positive: <https://github.com/koalaman/shellcheck/issues/3554>
 cat <<-'__EOF__' |
