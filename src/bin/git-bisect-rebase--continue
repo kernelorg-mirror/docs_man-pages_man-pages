@@ -29,7 +29,7 @@ xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
 readarray -t git_rebase_options <"$dir/git-rebase-options";
 xargs git rebase "${git_rebase_options[@]}" <"$dir/bisect-bad";
 if test -e "$dir/post-exec"; then
-	echo 'Running post-rebase exec.';
+	cat <(printf '%s' 'Executing (post-rebase): ') "$dir/post-exec";
 	bash "$dir/post-exec";
 fi;
 

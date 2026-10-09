@@ -11,17 +11,8 @@ trap "xargs git checkout --detach <'$dir/bisect-head' 2>/dev/null" EXIT;
 git rev-parse HEAD >"$dir/bisect-head";
 
 if test -e "$dir/pre-exec"; then
-	printf '%s' 'Pre-rebase exec: ';
-	if
-		bash "$dir/pre-exec";
-		x="$?";
-		true;
-	then
-		echo "exit status: $x";
-		if test "$x" -ne 0; then
-			exit "$x";
-		fi;
-	fi;
+	cat <(printf '%s' 'Executing (pre-rebase): ') "$dir/pre-exec";
+	bash "$dir/pre-exec";
 fi;
 
 xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
@@ -34,17 +25,14 @@ cat "$dir/bisect-head" \
 fi;
 
 if test -e "$dir/post-exec"; then
-	printf '%s' 'Post-rebase exec: ';
+	cat <(printf '%s' 'Executing (post-rebase): ') "$dir/post-exec";
 	if
 		bash "$dir/post-exec";
 		x="$?";
-		true;
+		test "$x" -ne 0;
 	then
-		echo "exit status: $x";
-		if test "$x" -ne 0; then
-			xargs git reset --hard <"$dir/good-head";
-			exit "$x";
-		fi;
+		xargs git reset --hard <"$dir/good-head";
+		exit "$x";
 	fi;
 fi;
 
