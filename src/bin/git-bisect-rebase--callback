@@ -27,8 +27,9 @@ fi;
 xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
 git rev-parse HEAD >"$dir/good-head";
 printf '%s' 'Rebase: ';
-cat "$dir/git-rebase-options" "$dir/bisect-head" \
-| if xargs git rebase >/dev/null 2>/dev/null; then
+readarray -t git_rebase_options <"$dir/git-rebase-options";
+cat "$dir/bisect-head" \
+| if xargs git rebase "${git_rebase_options[@]}" >/dev/null 2>/dev/null; then
 	echo 'success';
 else
 	echo 'conflict';
