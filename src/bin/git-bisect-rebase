@@ -108,9 +108,13 @@ while test $# -ge 1; do
 		;;
 	--pre-exec=*)
 		printf '%s\n' "$1" | sed 's/--pre-exec=//' >"$dir/pre-exec";
+		printf '%s\n' "$1" | wc -l | xargs test 1 -eq \
+		|| err '--pre-exec: commands cannot contain newlines.';
 		;;
 	--post-exec=*)
 		printf '%s\n' "$1" | sed 's/--post-exec=//' >"$dir/post-exec";
+		printf '%s\n' "$1" | wc -l | xargs test 1 -eq \
+		|| err '--post-exec: commands cannot contain newlines.';
 		;;
 	--first-parent)
 		printf '%s\n' "$1" >>"$dir/git-bisect-options";
