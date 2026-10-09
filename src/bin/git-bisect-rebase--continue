@@ -6,8 +6,6 @@ set -Eeufo pipefail;
 shopt -s lastpipe;
 
 git rev-parse --git-path bisect-rebase | read -r dir;
-
-# Try the target first.
 xargs git checkout --detach <"$dir/onto" 2>/dev/null;
 if git-bisect-rebase--callback; then
 	xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
@@ -15,7 +13,6 @@ if git-bisect-rebase--callback; then
 	exit 0;
 fi;
 
-# Bisect.
 readarray -t git_bisect_options <"$dir/git-bisect-options";
 git bisect start "${git_bisect_options[@]}" >/dev/null;
 xargs git bisect bad <"$dir/onto" >/dev/null;
@@ -24,7 +21,6 @@ git bisect run git-bisect-rebase--callback;
 git rev-parse bisect/bad >"$dir/bisect-bad";
 git bisect reset >/dev/null 2>/dev/null;
 
-# Perform the conflicting rebase
 xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
 readarray -t git_rebase_options <"$dir/git-rebase-options";
 xargs git rebase "${git_rebase_options[@]}" <"$dir/bisect-bad";
