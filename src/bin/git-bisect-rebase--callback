@@ -26,13 +26,9 @@ fi;
 
 xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
 git rev-parse HEAD >"$dir/good-head";
-printf '%s' 'Rebase: ';
 readarray -t git_rebase_options <"$dir/git-rebase-options";
 cat "$dir/bisect-head" \
-| if xargs git rebase --no-stat "${git_rebase_options[@]}"; then
-	echo 'Rebase: success';
-else
-	echo 'conflict';
+| if ! xargs git rebase --no-stat "${git_rebase_options[@]}"; then
 	git rebase --abort >/dev/null;
 	exit 1;
 fi;
