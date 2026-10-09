@@ -29,7 +29,7 @@ git rev-parse HEAD >"$dir/good-head";
 printf '%s' 'Rebase: ';
 readarray -t git_rebase_options <"$dir/git-rebase-options";
 cat "$dir/bisect-head" \
-| if xargs git rebase --quiet "${git_rebase_options[@]}"; then
+| if xargs git rebase --no-stat "${git_rebase_options[@]}"; then
 	echo 'Rebase: success';
 else
 	echo 'conflict';
