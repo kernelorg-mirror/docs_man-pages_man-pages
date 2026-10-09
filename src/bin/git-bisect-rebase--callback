@@ -26,14 +26,10 @@ fi;
 
 if test -e "$dir/post-exec"; then
 	cat <(printf '%s' 'Executing (post-rebase): ') "$dir/post-exec";
-	if
-		bash "$dir/post-exec";
-		x="$?";
-		test "$x" -ne 0;
-	then
-		xargs git reset --hard <"$dir/good-head";
-		exit "$x";
-	fi;
+	# shellcheck disable=SC2064  # we want expansion now
+	trap "xargs git reset --hard <'$dir/good-head';" ERR;
+	bash "$dir/post-exec";
+	trap - ERR;
 fi;
 
 {
