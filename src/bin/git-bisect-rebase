@@ -128,11 +128,7 @@ while test $# -ge 1; do
 	shift;
 done;
 
-if test $# -eq 0; then
-	git rev-parse --verify '@{u}';
-else
-	git rev-parse --verify "$1";
-fi >"$dir/onto";
+git rev-parse --default '@{u}' --verify "${@:1:1}" >"$dir/onto";
 test $# -eq 0 || shift;
 
 if test $# -eq 0; then
