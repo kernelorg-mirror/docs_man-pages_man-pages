@@ -154,6 +154,7 @@ Algorithm for rebasing a branch 'x' on top of 'master'.
 .in +4n
 .EX
 git bisect\-rebase master x;
+#	if no conflicts, done
 #	loop:
 #	resolve conflicts
 git rebase \-\-continue;
@@ -170,12 +171,15 @@ with two childs 'B' and 'C'.
 .EX
 #	loop:
 git bisect\-rebase master A;
+#	if no conflicts, goto children
 git rebase \-\-abort;
 git bisect\-rebase \-\-quit;
+#	children:
 git bisect\-rebase A B;
 #	follow algorithm for single branch with master=A and x=B
 git bisect\-rebase A C;
 #	follow algorithm for single branch with master=A and x=C
+#	if 'goto children' above, done
 git tag tmpA;
 git bisect\-rebase master A;
 #	resolve conflicts
