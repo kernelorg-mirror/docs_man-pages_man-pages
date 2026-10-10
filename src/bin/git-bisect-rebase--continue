@@ -18,7 +18,7 @@ git bisect start "${git_bisect_options[@]}" >/dev/null;
 xargs git bisect bad <"$dir/onto" >/dev/null;
 cat "$dir/head-name" "$dir/onto" | xargs git merge-base | xargs git bisect good;
 git bisect run git-bisect-rebase--callback;
-git rev-parse bisect/bad >"$dir/bisect-bad";
+git rev-parse --verify bisect/bad >"$dir/bisect-bad";
 git bisect reset >/dev/null 2>/dev/null;
 
 xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;

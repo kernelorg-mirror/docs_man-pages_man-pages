@@ -8,7 +8,7 @@ shopt -s lastpipe;
 git rev-parse --git-path bisect-rebase | read -r dir;
 readonly dir;
 trap 'xargs git checkout --detach <"$dir/bisect-head" 2>/dev/null;' EXIT;
-git rev-parse HEAD >"$dir/bisect-head";
+git rev-parse --verify HEAD >"$dir/bisect-head";
 
 if test -e "$dir/pre-exec"; then
 	cat <(printf '%s' 'Executing (pre-rebase): ') "$dir/pre-exec";
@@ -16,7 +16,7 @@ if test -e "$dir/pre-exec"; then
 fi;
 
 xargs git checkout <"$dir/head-name" >/dev/null 2>/dev/null;
-git rev-parse HEAD >"$dir/good-head";
+git rev-parse --verify HEAD >"$dir/good-head";
 readarray -t git_rebase_options <"$dir/git-rebase-options";
 trap 'git rebase --abort >/dev/null;' ERR;
 xargs git rebase --no-stat "${git_rebase_options[@]}" <"$dir/bisect-head";
@@ -30,8 +30,8 @@ if test -e "$dir/post-exec"; then
 fi;
 
 {
-	git rev-parse --abbrev-ref HEAD;
-	git rev-parse HEAD;
+	git rev-parse --verify --abbrev-ref HEAD;
+	git rev-parse --verify HEAD;
 } \
 | sed '/^HEAD$/d' \
 | sed '1!d' \

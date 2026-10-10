@@ -129,15 +129,15 @@ while test $# -ge 1; do
 done;
 
 if test $# -eq 0; then
-	git rev-parse '@{u}';
+	git rev-parse --verify '@{u}';
 else
 	git rev-parse --verify "$1";
 fi >"$dir/onto";
 test $# -eq 0 || shift;
 
 if test $# -eq 0; then
-	git rev-parse --abbrev-ref HEAD;
-	git rev-parse HEAD;
+	git rev-parse --verify --abbrev-ref HEAD;
+	git rev-parse --verify HEAD;
 else
 	git rev-parse --verify --symbolic "$1";
 	git rev-parse --verify "$1";
@@ -149,5 +149,5 @@ test $# -eq 0 || shift;
 
 test $# -eq 0 || err 'Too many arguments.';
 
-xargs git rev-parse <"$dir/head-name" >"$dir/orig-head";
+xargs git rev-parse --verify <"$dir/head-name" >"$dir/orig-head";
 exec git-bisect-rebase--continue;
