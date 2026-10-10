@@ -149,5 +149,5 @@ test $# -eq 0 || shift;
 
 test $# -eq 0 || err 'Too many arguments.';
 
-git rev-parse HEAD >"$dir/orig-head";
+xargs git rev-parse <"$dir/head-name" >"$dir/orig-head";
 exec git-bisect-rebase--continue;
