@@ -17,7 +17,7 @@ git rev-parse --git-path bisect-rebase | read -r dir;
 while test $# -ge 1; do
 	case "$1" in
 	--abort)
-		test -d "$dir/" || err 'Not in a bisect-rebase operation?';
+		test -d "$dir/" || err 'no bisect-rebase in progress';
 		set +e;
 		git rebase --abort >/dev/null 2>/dev/null;
 		git bisect reset >/dev/null 2>/dev/null;
