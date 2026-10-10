@@ -152,7 +152,4 @@ if test $# -gt 0; then
 fi;
 
 git rev-parse HEAD >"$dir/orig-head";
-
-trap - EXIT;
-
 exec git-bisect-rebase--continue;
