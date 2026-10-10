@@ -29,5 +29,4 @@ if test -e "$dir/post-exec"; then
 	bash "$dir/post-exec";
 fi;
 
-git-bisect-rebase--continue;
-exit 0;
+exec git-bisect-rebase--continue;

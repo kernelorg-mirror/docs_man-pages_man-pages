@@ -31,8 +31,7 @@ while test $# -ge 1; do
 		if test -d "$git_dir/rebase-merge"; then
 			err 'You must finish the current rebase operation.';
 		fi;
-		git-bisect-rebase--continue;
-		exit 0;
+		exec git-bisect-rebase--continue;
 		;;
 	--quit)
 		test -d "$dir/" || err 'Not in a bisect-rebase operation?';
@@ -156,5 +155,4 @@ git rev-parse HEAD >"$dir/orig-head";
 
 trap - EXIT;
 
-git-bisect-rebase--continue;
-exit 0;
+exec git-bisect-rebase--continue;
