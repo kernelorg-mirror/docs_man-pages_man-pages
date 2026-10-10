@@ -128,14 +128,14 @@ while test $# -ge 1; do
 	shift;
 done;
 
-if test $# -lt 1; then
+if test $# -eq 0; then
 	git rev-parse '@{u}';
 else
 	git rev-parse --verify "$1";
 fi >"$dir/onto";
-test $# -lt 1 || shift;
+test $# -eq 0 || shift;
 
-if test $# -lt 1; then
+if test $# -eq 0; then
 	git rev-parse --abbrev-ref HEAD;
 	git rev-parse HEAD;
 else
@@ -145,7 +145,7 @@ fi \
 | sed '/^HEAD$/d' \
 | sed '1!d' \
 >"$dir/head-name";
-test $# -lt 1 || shift;
+test $# -eq 0 || shift;
 
 test $# -eq 0 || err 'Too many arguments.';
 
