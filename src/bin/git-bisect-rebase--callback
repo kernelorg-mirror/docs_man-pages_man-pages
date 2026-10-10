@@ -7,8 +7,8 @@ shopt -s lastpipe;
 
 git rev-parse --git-path bisect-rebase | read -r dir;
 readonly dir;
-trap 'xargs git checkout --detach <"$dir/bisect-head" 2>/dev/null;' EXIT;
 git rev-parse --verify HEAD >"$dir/bisect-head";
+trap 'xargs git checkout --detach <"$dir/bisect-head" 2>/dev/null;' EXIT;
 
 if test -e "$dir/pre-exec"; then
 	cat <(printf '%s' 'Executing (pre-rebase): ') "$dir/pre-exec";
