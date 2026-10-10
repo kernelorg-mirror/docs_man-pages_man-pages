@@ -15,8 +15,8 @@ Standard C library
 .nf
 .B "#include <sys/mount.h>"
 .P
-.BI "int mount(const char *" source ", const char *" target ,
-.BI "          const char *" filesystemtype ", unsigned long " mountflags ,
+.BI "int mount(const char *_Nullable " source ", const char *" target ,
+.BI "          const char *_Nullable " filesystemtype ", unsigned long " mountflags ,
 .BI "          const void *_Nullable " data );
 .fi
 .SH DESCRIPTION
