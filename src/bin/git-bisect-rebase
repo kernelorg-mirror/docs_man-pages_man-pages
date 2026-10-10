@@ -147,9 +147,7 @@ fi \
 >"$dir/head-name";
 test $# -lt 1 || shift;
 
-if test $# -gt 0; then
-	err 'Too many arguments.';
-fi;
+test $# -eq 0 || err 'Too many arguments.';
 
 git rev-parse HEAD >"$dir/orig-head";
 exec git-bisect-rebase--continue;
