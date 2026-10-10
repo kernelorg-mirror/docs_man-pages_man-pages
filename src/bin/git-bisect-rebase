@@ -62,13 +62,11 @@ cat <<-'__EOF__' |
 	continue!	Restart the bisect-rebase process after having resolved a particular rebase.
 	quit!		Abort the bisect-rebase operation but HEAD is not reset.
 
-	 Options
-	pre-exec!=cmd	Run <cmd> before every git-rebase(1) operation.
-	post-exec!=cmd	Run <cmd> after every git-rebase(1) operation.
+	 git-bisect(1) options
+	first-parent!		See git-bisect(1).
 
 	 git-rebase(1) options
-	x,exec=cmd		See git-rebase(1).
-	r,rebase-merges?	^
+	r,rebase-merges?	See git-rebase(1).
 	apply!*			^
 	empty!*=		^
 	keep-empty*		^
@@ -89,9 +87,11 @@ cat <<-'__EOF__' |
 	f,force-rebase!*	^
 	ignore-whitespace*	^
 	update-refs*		^
+	x,exec=cmd		See git-rebase(1).
 
-	 git-bisect(1) options
-	first-parent!		See git-bisect(1).
+	 Other options
+	pre-exec!=cmd	Run <cmd> before every git-rebase(1) operation.
+	post-exec!=cmd	Run <cmd> after every git-rebase(1) operation.
 __EOF__
 eval "$(git rev-parse --parseopt --stuck-long --keep-dashdash -- "$@" || echo exit $?)";
 
