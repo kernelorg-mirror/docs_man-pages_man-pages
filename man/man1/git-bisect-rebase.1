@@ -1,0 +1,194 @@
+.\" Copyright, the authors of the Linux man-pages project
+.\"
+.\" SPDX-License-Identifier: Linux-man-pages-copyleft
+.\"
+.TH git\-bisect\-rebase 1 (date) "Linux man-pages (unreleased)"
+.SH NAME
+git\-bisect\-rebase \- Rebase a branch bisecting to find conflicting commits
+.SH SYNOPSIS
+.SY git\~bisect\-rebase
+.RI [ option\~ .\|.\|.\&]
+.RI [ upstream
+.RI [ branch ]]
+.YS
+.SY git\~bisect\-rebase
+.RI [ \-\-abort | \-\-continue | \-\-quit ]
+.YS
+.SH DESCRIPTION
+.BR \%git\-bisect\-rebase (1)
+rebases
+.I branch
+on top of
+.I \%upstream
+progressively,
+stopping at each commit from
+.I \%upstream
+which introduces a conflict.
+.P
+It uses
+.BR \%git\-bisect (1)
+to find the conflicts efficiently,
+and
+.BR \%git\-rebase (1)
+to perform the rebase operations.
+.SH PARAMETERS
+.I \%upstream
+and
+.I branch
+are interpreted as if by
+.BR \%git-rebase (1).
+.SH OPTIONS
+.SS Mode options
+.TP
+.B \-\-abort
+Abort the bisect-rebase operation
+and reset HEAD to the original
+.IR branch .
+.TP
+.B \-\-continue
+Restart the bisect-rebase process
+after having resolved a rebase conflict.
+.TP
+.B \-\-quit
+Abort the bisect-rebase operation,
+but HEAD is not reset.
+.SS git\-bisect(1) options
+The following options are interpreted as if by
+.BR \%git\-bisect (1).
+.TP
+.B \-\-first\-parent
+.SS git-rebase(1) options
+The following options are interpreted as if by
+.BR \%git\-rebase (1).
+.TP
+.BR \-\-rebase\-merges [=\f[I]arg\f[]]
+.TQ
+.B \-r
+.TQ
+.B \-\-no\-rebase\-merges
+.TQ
+.B \-\-apply
+.TQ
+.BR \-\-empty =\f[I]arg\f[]
+.TQ
+.BR \-\- [ no\- ] keep\-empty
+.TQ
+.BR \-\- [ no\- ] reapply\-cherry\-picks
+.TQ
+.BR \-\- [ no\- ] allow\-empty\-message
+.TQ
+.B \-\-merge
+.TQ
+.B \-m
+.TQ
+.BR \-\-strategy =\f[I]arg\f[]
+.TQ
+.BI \-s \~\f[I]arg\f[]
+.TQ
+.BR \-\-strategy\-option =\f[I]arg\f[]
+.TQ
+.BI \-X \~arg
+.TQ
+.BR \-\- [ no\- ] rerere\-autoupdate
+.TQ
+.BR \-\-gpg\-sign [=\f[I]arg\f[]]
+.TQ
+.BI \-S arg
+.TQ
+.B \-\-no\-gpg\-sign
+.TQ
+.B \-\-quiet
+.TQ
+.B \-q
+.TQ
+.B \-\-verbose
+.TQ
+.B \-v
+.TQ
+.BR \-\- [ no\- ] stat
+.TQ
+.B \-n
+.TQ
+.BR \-\- [ no\- ] verify
+.TQ
+.BI \-C arg
+.TQ
+.B \-\-no\-ff
+.TQ
+.B \-\-force\-rebase
+.TQ
+.B \-f
+.TQ
+.BR \-\- [ no\- ] ignore\-whitespace
+.TQ
+.BR \-\- [ no\- ] update\-refs
+.TQ
+.BR \-\-exec =\f[I]arg\f[]
+.TQ
+.BI \-x \~arg
+.SS Other options
+.TP
+.BR \-\-pre\-exec =\f[I]cmd\f[]
+Run
+.I cmd
+at the target commit found by
+.BR git-bisect (1),
+before every
+.BR git-rebase (1)
+operation.
+The exit code will be interpreted as if by
+.IR git\~bisect\~run\~cmd .
+.TP
+.BR \-\-post\-exec =\f[I]cmd\f[]
+Run
+.I cmd
+after a
+.BR git-rebase (1)
+operation finishes successfully.
+The exit code will be interpreted as if by
+.IR git\~bisect\~run\~cmd .
+.SH EXAMPLES
+.SS Rebasing a single branch
+Algorithm for rebasing a branch 'x' on top of 'master'.
+.P
+.in +4n
+.EX
+git bisect\-rebase master x;
+#	loop:
+#	resolve conflicts
+git rebase \-\-continue;
+git bisect\-rebase \-\-continue;
+#	.\|.\|.\& rinse and repeat (goto loop)
+.EE
+.in
+.SS Rebasing a tree of branches
+Algorithm for rebasing a tree of branches on top of 'master'.
+Consider a branch 'A',
+with two childs 'B' and 'C'.
+.P
+.in +4x
+.EX
+#	loop:
+git bisect\-rebase master A;
+git rebase \-\-abort;
+git bisect\-rebase \-\-quit;
+git bisect\-rebase A B;
+#	follow algorithm for single branch with master=A and x=B
+git bisect\-rebase A C;
+#	follow algorithm for single branch with master=A and x=C
+git tag tmpA;
+git bisect\-rebase master A;
+#	resolve conflicts
+git rebase \-\-continue;
+git bisect\-rebase \-\-quit;
+git rebase \-\-onto A tmpA B;
+#	resolve conflicts, if any
+git rebase \-\-onto A tmpA C;
+#	resolve conflicts, if any
+git tag \-d tmpA;
+#	.\|.\|.\& rinse and repeat (goto loop)
+.EE
+.in
+.SH SEE ALSO
+.BR git-bisect (1),
+.BR git-rebase (1)
