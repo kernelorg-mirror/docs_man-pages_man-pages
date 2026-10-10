@@ -27,14 +27,14 @@ while test $# -ge 1; do
 		exit 0;
 		;;
 	--continue)
-		test -d "$dir/" || err 'Not in a bisect-rebase operation?';
+		test -d "$dir/" || err 'no bisect-rebase in progress';
 		if test -d "$git_dir/rebase-merge"; then
 			err 'You must finish the current rebase operation.';
 		fi;
 		exec git-bisect-rebase--continue;
 		;;
 	--quit)
-		test -d "$dir/" || err 'Not in a bisect-rebase operation?';
+		test -d "$dir/" || err 'no bisect-rebase in progress';
 		if test -d "$git_dir/rebase-merge"; then
 			err 'You must finish the current rebase operation.';
 		fi;
