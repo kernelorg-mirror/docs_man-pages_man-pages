@@ -167,7 +167,7 @@ and the request should be reattempted later.
 The remote system returned something that
 was "not possible" during a protocol exchange.
 .TP
-.B EX_OSFILE
+.B EX_NOPERM
 You did not have sufficient permission to perform the operation.
 This is not intended for file system problems,
 which should use
