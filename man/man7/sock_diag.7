@@ -180,8 +180,8 @@ structure:
 .in +4n
 .EX
 struct unix_diag_vfs {
-    __u32 udiag_vfs_dev;
     __u32 udiag_vfs_ino;
+    __u32 udiag_vfs_dev;
 };
 .EE
 .in
@@ -189,11 +189,11 @@ struct unix_diag_vfs {
 The fields of this structure are as follows:
 .RS
 .TP
-.I udiag_vfs_dev
-The device number of the corresponding on-disk socket inode.
-.TP
 .I udiag_vfs_ino
 The inode number of the corresponding on-disk socket inode.
+.TP
+.I udiag_vfs_dev
+The device number of the corresponding on-disk socket inode.
 .RE
 .TP
 .B UDIAG_SHOW_PEER
