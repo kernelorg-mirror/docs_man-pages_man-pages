@@ -276,7 +276,8 @@ as the level.
 .B SO_PASSCRED
 Enabling this socket option causes receipt of the credentials of
 the sending process in an
-.B SCM_CREDENTIALS ancillary
+.B SCM_CREDENTIALS
+ancillary
 message in each subsequently received message.
 The returned credentials are those specified by the sender using
 .BR SCM_CREDENTIALS ,
