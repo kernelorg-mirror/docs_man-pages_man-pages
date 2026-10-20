@@ -16,6 +16,7 @@ endif
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --no-builtin-variables
 MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --silent
 
 
 ifndef srcdir
@@ -66,5 +67,4 @@ help:
 
 
 .DELETE_ON_ERROR:
-.SILENT:
 FORCE:
