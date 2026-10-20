@@ -109,6 +109,10 @@ but not a % suffix.
 Disables swap.
 Remounts must respect the original settings.
 By default swap is enabled.
+.IP
+.\" commit 01106e140835ff94fdef79d66f166b87b0c89824
+.B noswap
+is not available while within an unprivileged user namespace.
 .TP
 .BR mode =\f[I]mode\f[]
 Set initial permissions of the root directory.
