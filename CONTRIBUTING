@@ -11,7 +11,7 @@ Description
        To send an email to the project, send it to Alejandro and CC the
        mailing list:
 
-           To: Alejandro Colomar <alx@kernel.org>
+           To: Alejandro Colomar <alx+linux-man@kernel.org>
            Cc: <linux-man@vger.kernel.org>
 
 Files

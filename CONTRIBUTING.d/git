@@ -20,7 +20,7 @@ Description
     git-format-patch(1)
 	Send patches to the right addresses.
 
-		$ git config --local format.to 'Alejandro Colomar <alx@kernel.org>';
+		$ git config --local format.to 'Alejandro Colomar <alx+linux-man@kernel.org>';
 		$ git config --local format.cc '<linux-man@vger.kernel.org>';
 
 	Generate patch sets as a thread.
