@@ -1,5 +1,5 @@
 .\" Man page generated from reStructuredText
-.\" by the Docutils 0.22.4 manpage writer.
+.\" by the Docutils 0.23 manpage writer.
 .
 .
 .nr rst2man-indent-level 0
@@ -28,7 +28,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "BPF-HELPERS" "7" "2025-10-27" "Linux v7.0"
+.TH "BPF-HELPERS" "7" "2026-08-17" "Linux v7.3"
 .SH Name
 BPF-HELPERS \- list of eBPF helper functions
 .\" Copyright (C) All BPF authors and contributors from 2014 to present.
@@ -1428,9 +1428,35 @@ L2 type as Ethernet.
 .IP \(bu 2
 \fBBPF_F_ADJ_ROOM_DECAP_L3_IPV4\fP,
 \fBBPF_F_ADJ_ROOM_DECAP_L3_IPV6\fP:
-Indicate the new IP header version after decapsulating the outer
-IP header. Used when the inner and outer IP versions are different.
+Indicate the new IP header version after decapsulating the
+outer IP header. Used when the inner and outer IP versions
+are different. These flags only trigger a protocol change
+without clearing any tunnel\-specific GSO flags.
+.IP \(bu 2
+\fBBPF_F_ADJ_ROOM_DECAP_L4_GRE\fP:
+Clear GRE tunnel GSO flags (SKB_GSO_GRE and SKB_GSO_GRE_CSUM)
+when decapsulating a GRE tunnel.
+.IP \(bu 2
+\fBBPF_F_ADJ_ROOM_DECAP_L4_UDP\fP:
+Clear UDP tunnel GSO flags (SKB_GSO_UDP_TUNNEL and
+SKB_GSO_UDP_TUNNEL_CSUM) when decapsulating a UDP tunnel.
+.IP \(bu 2
+\fBBPF_F_ADJ_ROOM_DECAP_IPXIP4\fP:
+Clear IPIP/SIT tunnel GSO flag (SKB_GSO_IPXIP4) when decapsulating
+a tunnel with an outer IPv4 header (IPv4\-in\-IPv4 or IPv6\-in\-IPv4).
+.IP \(bu 2
+\fBBPF_F_ADJ_ROOM_DECAP_IPXIP6\fP:
+Clear IPv6 encapsulation tunnel GSO flag (SKB_GSO_IPXIP6) when
+decapsulating a tunnel with an outer IPv6 header (IPv6\-in\-IPv6
+or IPv4\-in\-IPv6).
 .UNINDENT
+.sp
+When using the decapsulation flags above, the skb\->encapsulation
+flag is automatically cleared if all tunnel\-specific GSO flags
+(SKB_GSO_UDP_TUNNEL, SKB_GSO_UDP_TUNNEL_CSUM, SKB_GSO_GRE,
+SKB_GSO_GRE_CSUM, SKB_GSO_IPXIP4, SKB_GSO_IPXIP6) have been
+removed from the packet. This handles cases where all tunnel
+layers have been decapsulated.
 .sp
 A call to this helper is susceptible to change the underlying
 packet buffer. Therefore, at load time, all checks on pointers
@@ -2040,6 +2066,49 @@ case, \fIparams\fP\->dmac and \fIparams\fP\->smac are not set either.
 Use the mark present in \fIparams\fP\->mark for the fib lookup.
 This option should not be used with BPF_FIB_LOOKUP_DIRECT,
 as it only has meaning for full lookups.
+.TP
+.B \fBBPF_FIB_LOOKUP_VLAN\fP
+If the fib lookup resolves to a VLAN device whose
+parent is a real (non\-VLAN) device, set
+\fIparams\fP\->h_vlan_proto and \fIparams\fP\->h_vlan_TCI from
+the VLAN device and replace \fIparams\fP\->ifindex with the
+parent\(aqs ifindex. \fIparams\fP\->h_vlan_TCI carries the VID
+only, with PCP and DEI bits zero; a consumer wanting to
+set egress priority writes PCP itself. \fIparams\fP\->smac is
+the VLAN device\(aqs own address, which can differ from the
+parent\(aqs. Only the immediate parent is resolved; if it
+is itself a VLAN device (QinQ) or in another namespace,
+the egress cannot be reduced to a physical device plus
+one tag and the lookup returns
+\fBBPF_FIB_LKUP_RET_VLAN_FAILURE\fP with \fIparams\fP\->ifindex
+left at the input. To obtain the VLAN device\(aqs own
+ifindex, repeat the lookup without
+\fBBPF_FIB_LOOKUP_VLAN\fP, re\-initializing \fIparams\fP
+first: output fields overwrite the inputs they share
+storage with. The swap and the vlan fields
+are written only on success; other output fields keep
+the helper\(aqs existing behaviour, so a frag\-needed result
+still reports the route mtu in \fIparams\fP\->mtu_result.
+This flag is only valid for XDP programs; tc programs
+receive \-EINVAL since they can redirect to the VLAN
+device directly.
+.TP
+.B \fBBPF_FIB_LOOKUP_VLAN_INPUT\fP
+Treat \fIparams\fP\->h_vlan_proto and \fIparams\fP\->h_vlan_TCI
+as an input VLAN tag and run the lookup as if ingress
+had happened on the VLAN subinterface carrying that tag
+on \fIparams\fP\->ifindex. The VID is the low 12 bits of
+\fIparams\fP\->h_vlan_TCI; \fIparams\fP\->h_vlan_proto must be
+ETH_P_8021Q or ETH_P_8021AD in network byte order, else
+\fB\-EINVAL\fP\&. If \fIparams\fP\->ifindex is itself a VLAN
+device, its inner (QinQ) subinterface is matched; for a
+bond or team, pass the master\(aqs ifindex. An unmatched
+tag, a down device, or one in another namespace returns
+\fBBPF_FIB_LKUP_RET_NOT_FWDED\fP, mirroring real ingress.
+A VID of 0 is looked up literally, so do not set this
+flag for priority\-tagged frames. Cannot be combined with
+\fBBPF_FIB_LOOKUP_TBID\fP or \fBBPF_FIB_LOOKUP_OUTPUT\fP
+(returns \fB\-EINVAL\fP).
 .UNINDENT
 .sp
 \fIctx\fP is either \fBstruct xdp_md\fP for XDP programs or
@@ -3491,7 +3560,9 @@ Nothing. Always succeeds.
 .B Description
 Discard reserved ring buffer sample, pointed to by \fIdata\fP\&.
 If \fBBPF_RB_NO_WAKEUP\fP is specified in \fIflags\fP, no notification
-of new data availability is sent.
+of new data availability is sent. Discarded records remain in
+the ring buffer until consumed by user space, so a later submit
+using adaptive wakeup might not wake up the consumer.
 If \fBBPF_RB_FORCE_WAKEUP\fP is specified in \fIflags\fP, notification
 of new data availability is sent unconditionally.
 If \fB0\fP is specified in \fIflags\fP, an adaptive notification
@@ -3518,6 +3589,8 @@ exactly is queries is determined by \fIflags\fP:
 \fBBPF_RB_CONS_POS\fP: Consumer position (can wrap around).
 .IP \(bu 2
 \fBBPF_RB_PROD_POS\fP: Producer(s) position (can wrap around).
+.IP \(bu 2
+\fBBPF_RB_OVERWRITE_POS\fP: Overwrite position (can wrap around).
 .UNINDENT
 .sp
 Data returned is just a momentary snapshot of actual values
@@ -4002,17 +4075,19 @@ A pointer pointing to the kernel percpu variable on this cpu.
 .B Description
 Redirect the packet to another net device of index \fIifindex\fP\&.
 This helper is somewhat similar to \fBbpf_redirect\fP(), except
-that the redirection happens to the \fIifindex\fP\(aq peer device and
-the netns switch takes place from ingress to ingress without
-going through the CPU\(aqs backlog queue.
+that the redirection happens to the \fIifindex\fP\(aq peer device. If
+\fIflags\fP is 0, the netns switch takes place from ingress to
+ingress without going through the CPU\(aqs backlog queue. If the
+\fBBPF_F_EGRESS\fP flag is provided then redirection happens in
+the egress direction of the peer device.
 .sp
 \fIskb\fP\fB\->mark\fP and \fIskb\fP\fB\->tstamp\fP are not cleared during
 the netns switch.
 .sp
-The \fIflags\fP argument is reserved and must be 0. The helper is
-currently only supported for tc BPF program types at the
-ingress hook and for veth and netkit target device types. The
-peer device must reside in a different network namespace.
+If the \fIflags\fP argument is 0, the helper is currently only
+supported for tc BPF program types at the ingress hook and for
+veth and netkit target device types. The peer device must reside
+in a different network namespace.
 .TP
 .B Return
 The helper returns \fBTC_ACT_REDIRECT\fP on success or
