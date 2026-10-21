@@ -14,13 +14,13 @@ Standard C library
 .nf
 .B #include <sys/xattr.h>
 .P
-.BR "int setxattr(" "size_t size;"
+.BR int\~setxattr( size_t\~size;
 .BI "              const char *" path ", const char *" name ,
 .BI "              const void " value [ size "], size_t " size ", int " flags );
-.BR "int lsetxattr(" "size_t size;"
+.BR int\~lsetxattr( size_t\~size;
 .BI "              const char *" path ", const char *" name ,
 .BI "              const void " value [ size "], size_t " size ", int " flags );
-.BR "int fsetxattr(" "size_t size;"
+.BR int\~fsetxattr( size_t\~size;
 .BI "              int " fd ", const char *" name ,
 .BI "              const void " value [ size "], size_t " size ", int " flags );
 .fi
