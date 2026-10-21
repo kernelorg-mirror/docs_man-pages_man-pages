@@ -1,69 +1,30 @@
-==================== Changes in man-pages-6.20 ====================
+==================== Changes in man-pages-?.?? ====================
 
-Released: 2026-10-21, Dongo
+Released: ????-??-??, ??Location??
+
 
 New and rewritten pages
 -----------------------
-
-man1/
-	git-bisect-rebase.1
-
-man2type/
-	file_attr.2type
-
-man5/
-	proc_sys_fs_inotify.5			(split from proc_sys_fs(5))
-	sys_block.5				(previously, sysfs(5))
-	sys_bus.5				(previously, sysfs(5))
-	sys_class.5				(previously, sysfs(5))
-	sys_class_net.5				(previously, sysfs(5))
-	sys_dev.5				(previously, sysfs(5))
-	sys_devices.5				(previously, sysfs(5))
-	sys_firmware.5				(previously, sysfs(5))
-	sys_fs.5				(previously, sysfs(5))
-	sys_fs_cgroup.5				(previously, sysfs(5))
-	sys_fs_smackfs.5			(previously, sysfs(5))
-	sys_hypervisor.5			(previously, sysfs(5))
-	sys_kernel.5				(previously, sysfs(5))
-	sys_kernel_cgroup.5			(previously, sysfs(5))
-	sys_kernel_debug.5			(previously, sysfs(5))
-	sys_kernel_mm.5				(previously, sysfs(5))
-	sys_module.5				(previously, sysfs(5))
-	sys_power.5				(previously, sysfs(5))
-	sysfs.5					(split into many pages)
 
 
 Newly documented interfaces in existing pages
 ---------------------------------------------
 
-man1/
-	diffman-git.1
-		--
-
-man2/
-	fallocate.2
-		FALLOC_FL_WRITE_ZEROES
-
-man*/
-	landlock*.?
-		LANDLOCK_ADD_RULE_QUIET
-
 
 New and changed links
 ---------------------
 
-man5/
-	proc_pid_smaps_rollup.5			(proc_pid_smaps(5))
+
+Removed pages
+-------------
+
+
+Removed links
+-------------
 
 
 Global changes
 --------------
-
--  share/mk/
-   -  Improve portability to systems without gcc(1).
-   -  Allow printing the commands with make(1)'s --no-silent.
--  src/bin/
-   -  git-bisect-rebase: Add program.
 
 
 Changes to individual files
