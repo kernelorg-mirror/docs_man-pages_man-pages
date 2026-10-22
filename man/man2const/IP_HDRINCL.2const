@@ -2,9 +2,9 @@
 .\"
 .\" SPDX-License-Identifier: Linux-man-pages-copyleft
 .\"
-.TH IPPROTO_IP 2const (date) "Linux man-pages (unreleased)"
+.TH IP_HDRINCL 2const (date) "Linux man-pages (unreleased)"
 .SH NAME
-IPPROTO_IP
+IP_HDRINCL
 \-
 include a user-supplied IP header
 .SH LIBRARY
