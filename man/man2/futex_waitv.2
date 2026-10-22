@@ -15,7 +15,7 @@ Standard C library
 .B #include <unistd.h>
 .B #include <time.h>
 .P
-.BR long\~syscall( unsigned\~int\~n;
+.B long\~syscall(
 .BI "             SYS_futex_waitv, struct\~futex_waitv\~" waiters [ n ],
 .BI "             unsigned\~int\~" n ", unsigned\~int\~" flags ,
 .BI "             const\~struct\~timespec\~*_Nullable\~" timeout ", clockid_t\~" clockid );

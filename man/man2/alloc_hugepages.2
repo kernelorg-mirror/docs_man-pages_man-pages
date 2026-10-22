@@ -8,7 +8,7 @@
 alloc_hugepages, free_hugepages \- allocate or free huge pages
 .SH SYNOPSIS
 .nf
-.BR void\~*syscall( size_t\~size;
+.B void\~*syscall(
 .BI "              SYS_alloc_hugepages, int " key ,
 .BI "              void " addr [ size "], size_t " size ,
 .BI "              int " prot ", int " flag );

@@ -16,7 +16,7 @@ Standard C library
 .BR "#include <sys/syscall.h>" "     /* Definition of " SYS_* " constants */"
 .B #include <unistd.h>
 .P
-.BR int\~syscall( unsigned\~long\~size;
+.B int\~syscall(
 .B  "            SYS_init_module,"
 .BI "            void " module_image [ size "], unsigned long " size ,
 .BI "            const char *" param_values );

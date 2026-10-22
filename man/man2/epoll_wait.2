@@ -15,14 +15,14 @@ Standard C library
 .nf
 .B #include <sys/epoll.h>
 .P
-.BR int\~epoll_wait( int\~n;
+.B int\~epoll_wait(
 .BI "               int " epfd ", struct epoll_event " events [ n "], int " n ,
 .BI "               int " timeout );
-.BR int\~epoll_pwait( int\~n;
+.B int\~epoll_pwait(
 .BI "               int " epfd ", struct epoll_event " events [ n "], int " n ,
 .BI "               int " timeout ,
 .BI "               const sigset_t *_Nullable " sigmask );
-.BR int\~epoll_pwait2( int\~n;
+.B int\~epoll_pwait2(
 .BI "               int " epfd ", struct epoll_event " events [ n "], int " n ,
 .BI "               const struct timespec *_Nullable " timeout ,
 .BI "               const sigset_t *_Nullable " sigmask );

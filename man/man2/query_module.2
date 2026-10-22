@@ -10,7 +10,7 @@ query_module \- query the kernel for various bits pertaining to modules
 .nf
 .B #include <linux/module.h>
 .P
-.BR [[deprecated]]\~int\~query_module( size_t\~bufsize;
+.B [[deprecated]]\~int\~query_module(
 .BI "                                const char *" name ", int " which ,
 .BI "                                void " buf [ bufsize "], size_t " bufsize ,
 .BI "                                size_t *" ret );

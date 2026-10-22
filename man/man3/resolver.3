@@ -28,25 +28,25 @@ Resolver library
 .P
 .BI "void res_nclose(res_state " statep );
 .P
-.BR int\~res_nquery( int\~anslen;
+.B int\~res_nquery(
 .BI "           res_state " statep ,
 .BI "           const char *" dname ,
 .BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
-.BR int\~res_nsearch( int\~anslen;
+.B int\~res_nsearch(
 .BI "           res_state " statep ,
 .BI "           const char *" dname ,
 .BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
-.BR int\~res_nquerydomain( int\~anslen;
+.B int\~res_nquerydomain(
 .BI "           res_state " statep ,
 .BI "           const char *" name ", const char *" domain ,
 .BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
-.BR int\~res_nmkquery( int\~datalen,\~int\~buflen;
+.B int\~res_nmkquery(
 .BI "           res_state " statep ", int " op ,
 .BI "           const char *" dname ,
 .BI "           int " class ", int " type ,
@@ -54,18 +54,18 @@ Resolver library
 .BI "           const unsigned char *" newrr ,
 .BI "           unsigned char " buf [ buflen "], int " buflen );
 .P
-.BR int\~res_nsend( int\~msglen,\~int\~anslen;
+.B int\~res_nsend(
 .BI "           res_state " statep ,
 .BI "           const unsigned char " msg [ msglen "], int " msglen ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
-.BR int\~dn_comp( int\~length;
+.B int\~dn_comp(
 .BI "           const char *" exp_dn ,
 .BI "           unsigned char " comp_dn [ length "], int " length ,
 .BI "           unsigned char **" dnptrs ,
 .BI "           unsigned char **" lastdnptr );
 .P
-.BR int\~dn_expand( int\~length;
+.B int\~dn_expand(
 .BI "           const unsigned char *" msg ,
 .BI "           const unsigned char *" eomorig ,
 .BI "           const unsigned char *" comp_dn ,
@@ -76,25 +76,25 @@ Resolver library
 .B [[deprecated]] int res_init(void);
 .P
 .B [[deprecated]]
-.BR int\~res_query( int\~anslen;
+.B int\~res_query(
 .BI "           const char *" dname ,
 .BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .B [[deprecated]]
-.BR int\~res_search( int\~anslen;
+.B int\~res_search(
 .BI "           const char *" dname ,
 .BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .B [[deprecated]]
-.BR int\~res_querydomain( int\~anslen;
+.B int\~res_querydomain(
 .BI "           const char *" name ", const char *" domain ,
 .BI "           int " class ", int " type ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .P
 .B [[deprecated]]
-.BR int\~res_mkquery( int\~datalen,\~int\~buflen;
+.B int\~res_mkquery(
 .BI "           int " op ,
 .BI "           const char *" dname ,
 .BI "           int " class ", int " type ,
@@ -103,7 +103,7 @@ Resolver library
 .BI "           unsigned char " buf [ buflen "], int " buflen );
 .P
 .B [[deprecated]]
-.BR int\~res_send( int\~msglen,\~int\~anslen;
+.B int\~res_send(
 .BI "           const unsigned char " msg [ msglen "], int " msglen ,
 .BI "           unsigned char " answer [ anslen "], int " anslen );
 .fi

@@ -15,11 +15,11 @@ Standard C library
 .nf
 .B #include <stdio.h>
 .P
-.BR size_t\~fread( size_t\~size,\~size_t\~n;
+.B size_t\~fread(
 .BI "             void " ptr "[restrict " size " * " n ],
 .BI "             size_t " size ", size_t " n ,
 .BI "             FILE *restrict " stream );
-.BR size_t\~fwrite( size_t\~size,\~size_t\~n;
+.B size_t\~fwrite(
 .BI "             const void " ptr "[restrict " size " * " n ],
 .BI "             size_t " size ", size_t " n ,
 .BI "             FILE *restrict " stream );

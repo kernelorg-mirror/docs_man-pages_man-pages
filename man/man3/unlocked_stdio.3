@@ -29,16 +29,16 @@ Standard C library
 .BI "int fgetc_unlocked(FILE *" stream );
 .BI "int fputc_unlocked(int " c ", FILE *" stream );
 .P
-.BR size_t\~fread_unlocked( size_t\~size,\~size_t\~n;
+.B size_t\~fread_unlocked(
 .BI "                      void " ptr "[restrict " size " * " n ],
 .BI "                      size_t " size ", size_t " n ,
 .BI "                      FILE *restrict " stream );
-.BR size_t\~fwrite_unlocked( size_t\~size,\~size_t\~n;
+.B size_t\~fwrite_unlocked(
 .BI "                      const void " ptr "[restrict " size " * " n ],
 .BI "                      size_t " size ", size_t " n ,
 .BI "                      FILE *restrict " stream );
 .P
-.BR char\~*fgets_unlocked( int\~n;
+.B char\~*fgets_unlocked(
 .BI "                      char " s "[restrict " n "], int " n \
 ", FILE *restrict " stream );
 .BI "int fputs_unlocked(const char *restrict " s ", FILE *restrict " stream );
@@ -53,7 +53,7 @@ Standard C library
 .BI "wint_t putwc_unlocked(wchar_t " wc ", FILE *" stream );
 .BI "wint_t putwchar_unlocked(wchar_t " wc );
 .P
-.BR wchar_t\~*fgetws_unlocked( int\~n;
+.B wchar_t\~*fgetws_unlocked(
 .BI "                      wchar_t " ws "[restrict " n "], int " n ,
 .BI "                      FILE *restrict " stream );
 .BI "int fputws_unlocked(const wchar_t *restrict " ws ,

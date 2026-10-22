@@ -14,18 +14,18 @@ Standard C library
 .nf
 .B #include <netdb.h>
 .P
-.BR int\~getnetent_r( size_t\~size;
+.B int\~getnetent_r(
 .BI "                struct netent *restrict " result_buf ,
 .BI "                char " buf "[restrict " size "], size_t " size ,
 .BI "                struct netent **restrict " result ,
 .BI "                int *restrict " h_errnop );
-.BR int\~getnetbyname_r( size_t\~size;
+.B int\~getnetbyname_r(
 .BI "                const char *restrict " name ,
 .BI "                struct netent *restrict " result_buf ,
 .BI "                char " buf "[restrict " size "], size_t " size ,
 .BI "                struct netent **restrict " result ,
 .BI "                int *restrict " h_errnop );
-.BR int\~getnetbyaddr_r( size_t\~size;
+.B int\~getnetbyaddr_r(
 .BI "                uint32_t " net ", int " type ,
 .BI "                struct netent *restrict " result_buf ,
 .BI "                char " buf "[restrict " size "], size_t " size ,

@@ -14,17 +14,17 @@ Standard C library
 .nf
 .B #include <netdb.h>
 .P
-.BR int\~getservent_r( size_t\~size;
+.B int\~getservent_r(
 .BI "                 struct servent *restrict " result_buf ,
 .BI "                 char " buf "[restrict " size "], size_t " size ,
 .BI "                 struct servent **restrict " result );
-.BR int\~getservbyname_r( size_t\~size;
+.B int\~getservbyname_r(
 .BI "                 const char *restrict " name ,
 .BI "                 const char *restrict " proto ,
 .BI "                 struct servent *restrict " result_buf ,
 .BI "                 char " buf "[restrict " size "], size_t " size ,
 .BI "                 struct servent **restrict " result );
-.BR int\~getservbyport_r( size_t\~size;
+.B int\~getservbyport_r(
 .BI "                 int " port ,
 .BI "                 const char *restrict " proto ,
 .BI "                 struct servent *restrict " result_buf ,

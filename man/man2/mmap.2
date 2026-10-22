@@ -15,11 +15,11 @@ Standard C library
 .nf
 .B #include <sys/mman.h>
 .P
-.BR void\~*mmap( size_t\~length;
+.B void\~*mmap(
 .BI "           void " addr [ length "], size_t " length \
 ", int " prot ", int " flags ,
 .BI "           int " fd ", off_t " offset );
-.BR int\~munmap( size_t\~length;
+.B int\~munmap(
 .BI "           void " addr [ length "], size_t " length );
 .fi
 .P

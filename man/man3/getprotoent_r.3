@@ -14,16 +14,16 @@ Standard C library
 .nf
 .B #include <netdb.h>
 .P
-.BR int\~getprotoent_r( size_t\~size;
+.B int\~getprotoent_r(
 .BI "                  struct protoent *restrict " result_buf ,
 .BI "                  char " buf "[restrict " size "], size_t " size ,
 .BI "                  struct protoent **restrict " result );
-.BR int\~getprotobyname_r( size_t\~size;
+.B int\~getprotobyname_r(
 .BI "                  const char *restrict " name ,
 .BI "                  struct protoent *restrict " result_buf ,
 .BI "                  char " buf "[restrict " size "], size_t " size ,
 .BI "                  struct protoent **restrict " result );
-.BR int\~getprotobynumber_r( size_t\~size;
+.B int\~getprotobynumber_r(
 .BI "                  int " proto ,
 .BI "                  struct protoent *restrict " result_buf ,
 .BI "                  char " buf "[restrict " size "], size_t " size ,
