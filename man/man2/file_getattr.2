@@ -16,7 +16,7 @@ file_getattr \- get filesystem file attributes
 .nf
 .B long\~syscall(SYS_file_getattr,
 .BI "             int " dirfd ", const char *" path ,
-.BI "             struct file_attr *" fattr ", size_t " size ,
+.BI "             struct file_attr *" fattr ", sizeof(struct file_attr),"
 .BI "             unsigned int " flags );
 .fi
 .SH DESCRIPTION
@@ -45,9 +45,7 @@ This structure will be filled with file attributes.
 This structure is described in
 .BR file_attr (2type).
 .P
-The
-.I size
-argument specifies the size of the structure pointed to by
+The size argument specifies the size of the structure pointed to by
 .IR fattr .
 The size indicates the version of the structure in use,
 and should always be specified as
@@ -86,8 +84,7 @@ is set to indicate the error.
 .SH ERRORS
 .TP
 .B E2BIG
-.I size
-is too big (larger than
+The size is too big (larger than
 .BR PAGE_SIZE ).
 .TP
 .B EACCES
@@ -125,8 +122,7 @@ Unknown flags specified in
 .IR flags .
 .TP
 .B EINVAL
-.I size
-is smaller than
+The size is smaller than
 .BR FILE_ATTR_SIZE_VER0 .
 .TP
 .B ELOOP
@@ -169,23 +165,18 @@ The filesystem does not support getting attributes on this type of inode.
 Linux 6.17.
 .SH NOTES
 This system call is designed to be extensible.
-The
-.I size
-argument allows user-space applications to indicate
+The size argument allows user-space applications to indicate
 which version of the
 .I file_attr
 structure they are using,
 enabling the kernel to support both old and new versions
 of the structure simultaneously.
 .P
-If
-.I size
+If the size
 is smaller than the structure size the kernel expects,
-only the fields that fit within
-.I size
+only the fields that fit within the size
 will be filled in.
-If
-.I size
+If the size
 is larger than the kernel's structure size,
 the extra bytes are zeroed.
 .SH EXAMPLES
