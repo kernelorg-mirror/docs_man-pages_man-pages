@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Copyright, the authors of the Linux man-pages project
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+exec man -l "$@";
