@@ -93,9 +93,9 @@ esac \
 	0)  cat "$new";       ;;
 	*)  git show "$new";  ;;
 	esac \
-	| man /dev/stdin \
+	| lman /dev/stdin \
 	| diff -F'^[^ ]' --label "$old" --label "$new" "${opts[@]}" \
-		<(git show "$old" | man /dev/stdin) \
+		<(git show "$old" | lman /dev/stdin) \
 		/dev/stdin \
 	|| true;
 done;
