@@ -14,9 +14,9 @@ Standard C library
 .nf
 .B #include <stdlib.h>
 .P
-.BI "unsigned long strtoul(const char *restrict " nptr ,
+.BI "unsigned long strtoul(const char *restrict " s ,
 .BI "                      char **_Nullable restrict " endptr ", int " base );
-.BI "unsigned long long strtoull(const char *restrict " nptr ,
+.BI "unsigned long long strtoull(const char *restrict " s ,
 .BI "                      char **_Nullable restrict " endptr ", int " base );
 .fi
 .P
@@ -35,7 +35,7 @@ The
 .BR strtoul ()
 function converts the initial part of the string
 in
-.I nptr
+.I s
 to an
 .I "unsigned long"
 value according to the
@@ -86,12 +86,12 @@ If there were no digits at
 all,
 .BR strtoul ()
 stores the original value of
-.I nptr
+.I s
 in
 .I *endptr
 (and returns 0).
 In particular, if
-.I *nptr
+.I *s
 is not \[aq]\[rs]0\[aq] but
 .I **endptr
 is \[aq]\[rs]0\[aq] on return, the entire string is valid.
@@ -172,7 +172,7 @@ BSD also has
 .P
 .in +4n
 .EX
-.BI "u_quad_t strtouq(const char *" nptr ", char **" endptr ", int " base );
+.BI "u_quad_t strtouq(const char *" s ", char **" endptr ", int " base );
 .EE
 .in
 .P

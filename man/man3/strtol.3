@@ -15,9 +15,9 @@ Standard C library
 .nf
 .B #include <stdlib.h>
 .P
-.BI "long strtol(const char *restrict " nptr ,
+.BI "long strtol(const char *restrict " s ,
 .BI "            char **_Nullable restrict " endptr ", int " base );
-.BI "long long strtoll(const char *restrict " nptr ,
+.BI "long long strtoll(const char *restrict " s ,
 .BI "            char **_Nullable restrict " endptr ", int " base );
 .fi
 .P
@@ -36,7 +36,7 @@ The
 .BR strtol ()
 function converts the initial part of the string
 in
-.I nptr
+.I s
 to a long integer value according to the given
 .IR base ,
 which must be between 2 and 36 inclusive, or be the special value 0.
@@ -82,12 +82,12 @@ If there were no digits at
 all,
 .BR strtol ()
 stores the original value of
-.I nptr
+.I s
 in
 .I *endptr
 (and returns 0).
 In particular, if
-.I *nptr
+.I *s
 is not \[aq]\[rs]0\[aq] but
 .I **endptr
 is \[aq]\[rs]0\[aq] on return, the entire string is valid.
@@ -172,7 +172,7 @@ BSD also has
 .P
 .in +4n
 .EX
-.BI "quad_t strtoq(const char *" nptr ", char **" endptr ", int " base );
+.BI "quad_t strtoq(const char *" s ", char **" endptr ", int " base );
 .EE
 .in
 .P
